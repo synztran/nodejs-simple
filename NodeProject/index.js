@@ -1,14 +1,10 @@
 //NOTE
 // If you change anything in index.js that you must re-run in cmd
 
-
 /*Call for using express*/
-var User = require('./migrations/CreateUsersTable.js');
-var Account = require('./migrations/CreateAccountTable.js');
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
-
 mongoose.connect('mongodb://localhost:27017/testmongodb');
 
 // Create object
@@ -57,7 +53,11 @@ app.get("/success", function(req,res){
 	res.render("successPage");
 });
 
-
+// -----------------====VALIDATE
+var validateEmail = function(email) {
+    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email)
+};
 
 // -----------------=====Define REST Application
 
@@ -71,17 +71,17 @@ app.post("/person", async(req, res) =>{
 	}
 });
 
+app.get("/people", async (req, res) => {
+        try {
+            var result = await Account.find().exec();
+            res.send(result);
+        } catch (err) {
+            res.status(500).send(err);
+
+        }
+    });
 
 
-app.get("/people", async(req, res) =>{
-	try{
-		var result = await Account.find().exec();
-		res.send(result);
-	}catch(err){
-		res.status(500).send(err);
-
-	}
-});
 app.get("/person/:id", async(req, res) =>{
 	try{
 		var account = await Account.findById(res.params.id).exec();
@@ -134,9 +134,47 @@ app.post("/signup", function(req,res){
 })
 
 /*-------------STRUCTURE SCHEMA----------------*/
+var userSchema = mongoose.Schema({
+     name: {
+            firstName: String,
+        	lastName: String
+    },
+     email: String,
+     profilePicture: Buffer,
+     created: { 
+        type: Date,
+        default: Date.now
+     }
+ });
 
+var accountSchema = mongoose.Schema({
+	email: {
+		type: String,
+		lowercase: true,
+		required: 'Email address is required',
+		validate: [validateEmail, 'Please fill a valid email address'],
+		match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+		// validate: {
+		// 	validator: function(email){
+		// 		var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+		// 		return emailRegex.test(email.text);
+		// 	},
+		// 	message: 'Email handle must have @'
+		// }
+	},
+	password: String
+})
+const User = mongoose.model('User', userSchema);
+const Account = mongoose.model('Account', accountSchema);
 
-
+/*-----------------EXPORT-----------------------*/
+// exports.user = User;
+// exports.account = Account;
+module.exports = {
+	app: express(),
+	Account
+}
+/*----------------------------------------------*/
 /*---------------------------------------------*/
 
 /*--------------------MONGO DB-----------------*/
