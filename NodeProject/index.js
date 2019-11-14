@@ -5,7 +5,12 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
+const moment = require('moment');
+var date = new Date();
+
 mongoose.connect('mongodb://localhost:27017/testmongodb');
+
+
 
 // Create object
 var app = express();
@@ -35,12 +40,10 @@ app.listen(3000);
 
 // ----=======meaning/define page url
 app.get("/", function(req, res)  {
-
     res.render("homePage");
 });
 
 app.get("/test", function(req, res)  {
-
     res.render("testPage");
 });
 
@@ -63,18 +66,48 @@ var validateEmail = function(email) {
 
 app.post("/person", async(req, res) =>{
 	try{
-		var account = new Account(req.body);
-		var result = await account.save();
-		res.send(result);
+		var check = await Account.find({email : req.body.email}, async (err, docs) =>{
+				if(docs.length){
+					res.status(400).send({
+						error: 400,
+						message: "email already exists"
+					})
+				}
+				else{
+					var account = new Account(req.body);
+					var result = await account.save();
+					res.send(result);
+				}
+		}).exec();
+		
+		
 	}catch(err) {
 		res.status(500).send(err);
 	}
 });
 
+app.post("/signup", function(req,res){
+	var email = req.body.email;
+	var password = req.body.password;
+
+	var data = {
+		"email": email,
+		"password": password
+	}
+
+	db.collection('users').insertOne(data, function(err,collection){
+		if(err) throw err;
+		console.log("successfully");
+	});
+	return res.redirect('success');
+})
+
+
 app.get("/people", async (req, res) => {
         try {
             var result = await Account.find().exec();
             res.send(result);
+            console.log(result);
         } catch (err) {
             res.status(500).send(err);
 
@@ -82,9 +115,11 @@ app.get("/people", async (req, res) => {
     });
 
 
+
 app.get("/person/:id", async(req, res) =>{
+	console.log(req.params);
 	try{
-		var account = await Account.findById(res.params.id).exec();
+		var account = await Account.findById(req.params.id).exec();
 		res.send(account);
 	}catch(err){
 		res.status(500).send(err);
@@ -101,6 +136,37 @@ app.put("/person/:id", async(req, res) =>{
 
 	}catch(err){
 		console.log(err);
+		res.status(200).send(err);
+	}
+});
+
+app.get("/created", async(req, res) =>{
+	// console.log(moment().local());
+	var date = new Date();
+	console.log(date);
+	
+	var datecreated = req.body.created;
+	var todayStart = new Date(datecreated);
+
+	var todayEnd = new Date(datecreated);
+	todayEnd.setHours(30);
+	todayEnd.setMinutes(59);
+	todayEnd.setSeconds(59);
+	todayEnd.setMilliseconds(999);
+
+	console.log("start " + todayStart.toISOString());
+	console.log("end " + todayEnd.toISOString());
+		
+	try{
+		// var account = await Account.find({"created": ISODate(datecreated)}).exec();
+		var result = await Account.find( {created: {$gte: (todayStart), $lte: todayEnd} });
+		res.send({
+			"date": req.body,
+			"startDate": todayStart,
+			"endDate" : todayEnd,
+			"count": result.length,
+			result});
+	}catch(err){
 		res.status(200).send(err);
 	}
 });
@@ -143,7 +209,7 @@ var userSchema = mongoose.Schema({
      profilePicture: Buffer,
      created: { 
         type: Date,
-        default: Date.now
+        default: (new Date()).toJSON().slice(0, 19).replace(/[-T]/g, ':')
      }
  });
 
@@ -162,7 +228,13 @@ var accountSchema = mongoose.Schema({
 		// 	message: 'Email handle must have @'
 		// }
 	},
-	password: String
+	password: String,
+	created: 
+	{ 
+        type: Date,
+        default: 
+        new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds())) 
+     }
 })
 const User = mongoose.model('User', userSchema);
 const Account = mongoose.model('Account', accountSchema);
@@ -174,6 +246,7 @@ module.exports = {
 	app: express(),
 	Account
 }
+
 /*----------------------------------------------*/
 /*---------------------------------------------*/
 
