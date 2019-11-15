@@ -5,11 +5,9 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
-const moment = require('moment');
-var date = new Date();
-
+var bcrypt = require("bcryptjs");
 mongoose.connect('mongodb://localhost:27017/testmongodb');
-
+var date = new Date();
 
 
 // Create object
@@ -198,7 +196,39 @@ app.post("/signup", function(req,res){
 	});
 	return res.redirect('success');
 })
+app.post("/login", async(req, res) =>{
+	try{
+		var account = await Account.findOne({ email: req.body.email}).exec();
+		console.log(req.body.email);
+		if(!account) {
+			return res.status(400).send({message: "The user does not exist "});
+		}
+		// account.comparePassword(req.body.password, (err, match) =>{
+		// 	if(!match){
+		// 		return res.status(400).send({
+		// 			message: "The password is invalid"
+		// 		});
+		// 	}
+		// });
+		if(!bcrypt.compareSync(req.body.password, account.password)){
+			return res.status(400).send({message: "The password is not correct"});
+		}
+		res.send({message: "The email & password combination is correct!"});
+	}catch(err){
+		res.status(500).send(err);
+	}
+});
 
+app.post("/register", async(req,res) =>{
+	try{
+		req.body.password = bcrypt.hashSync(req.body.password, 10);
+		var account = new Account(req.body);
+		var result = await account.save();
+		res.send(result);
+	}catch(err){
+		res.status(500).send(err)
+	}
+})
 /*-------------STRUCTURE SCHEMA----------------*/
 var userSchema = mongoose.Schema({
      name: {
