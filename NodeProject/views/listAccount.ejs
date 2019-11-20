@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <% include header%>
+    <h1 style="text-align: center;">Hi! Server is up & running</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
+                <% include sidebar%>
+            </div>
+            <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
+                <div class="col-md-6">
+                    <p class="pull-right visible-xs">
+                        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+                    </p>
+                        
+                        
+                </div>
+                <% include listAccount %>
+            <!-- </div> -->
+        </div>
+        <!-- </div> -->
+    </div>
+    <div class="footer" style="text-align: center;">
+        <% include footer%>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>
