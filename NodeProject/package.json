@@ -5,19 +5,23 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
-    "ejs": "^2.7.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^2.7.2",
     "express": "^4.17.1",
+    "git": "^0.1.5",
+    "http": "0.0.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.27",
     "mongodb": "^3.3.3",
-    "mongoose": "^5.7.8"
+    "mongoose": "^5.7.8",
+    "npm-git-install": "^0.3.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

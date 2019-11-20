@@ -5,14 +5,23 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
+var http = require('http');
+const uri = "'mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'}"
+var port = process.env.PORT || 5000;
+var router = express.Router();
 var bcrypt = require("bcryptjs");
-mongoose.connect('mongodb://localhost:27017/testmongodb');
+// mongoose.connect('mongodb://cluster0-u7ysm.mongodb.net:27017/testmongodb');
+mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
 var date = new Date();
 
 
 // Create object
 var app = express();
+var server = http.Server(app)
 var db = mongoose.connection;
+
+
+
 
 // Check connection of db
 db.on('error', console.log.bind(console, "connection error")); 
@@ -34,7 +43,14 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 
 // working on port 3000
-app.listen(3000);
+// app.listen(3000);
+server.listen(port, function(){
+	console.log("Example app listening on port !");
+})
+// http.createServer(function(req,res){
+// 	res.writeHead(200, {"Content-Type": "text/plain"})
+// 	// res.end("Hello World\n")
+// }).listen(port)
 
 // ----=======meaning/define page url
 app.get("/", function(req, res)  {
@@ -62,27 +78,7 @@ var validateEmail = function(email) {
 
 // -----------------=====Define REST Application
 
-app.post("/person", async(req, res) =>{
-	try{
-		var check = await Account.find({email : req.body.email}, async (err, docs) =>{
-				if(docs.length){
-					res.status(400).send({
-						error: 400,
-						message: "email already exists"
-					})
-				}
-				else{
-					var account = new Account(req.body);
-					var result = await account.save();
-					res.send(result);
-				}
-		}).exec();
-		
-		
-	}catch(err) {
-		res.status(500).send(err);
-	}
-});
+
 
 app.post("/signup", function(req,res){
 	var email = req.body.email;
@@ -126,6 +122,8 @@ app.get("/person/:id", async(req, res) =>{
 
 app.put("/person/:id", async(req, res) =>{
 	try{
+		console.log(req.params);
+		console.log(req.body);
 		var account = await Account.findById(req.params
 			.id).exec();
 		account.set(req.body);
@@ -139,15 +137,11 @@ app.put("/person/:id", async(req, res) =>{
 });
 
 app.get("/created", async(req, res) =>{
-	// console.log(moment().local());
 	var date = new Date();
-	console.log(date);
-	
 	var datecreated = req.body.created;
 	var todayStart = new Date(datecreated);
-
 	var todayEnd = new Date(datecreated);
-	todayEnd.setHours(30);
+	todayEnd.setHours(23);
 	todayEnd.setMinutes(59);
 	todayEnd.setSeconds(59);
 	todayEnd.setMilliseconds(999);
@@ -161,7 +155,7 @@ app.get("/created", async(req, res) =>{
 		res.send({
 			"date": req.body,
 			"startDate": todayStart,
-			"endDate" : todayEnd,
+			"endDate" : todayEnd,	
 			"count": result.length,
 			result});
 	}catch(err){
@@ -197,23 +191,28 @@ app.post("/signup", function(req,res){
 	return res.redirect('success');
 })
 app.post("/login", async(req, res) =>{
+	console.log(req.body);
 	try{
 		var account = await Account.findOne({ email: req.body.email}).exec();
-		console.log(req.body.email);
+		// console.log(req.body.email);
 		if(!account) {
-			return res.status(400).send({message: "The user does not exist "});
+			return res.status(400).send({
+				status: "error",
+				message: "The user does not exist "
+			});
 		}
-		// account.comparePassword(req.body.password, (err, match) =>{
-		// 	if(!match){
-		// 		return res.status(400).send({
-		// 			message: "The password is invalid"
-		// 		});
-		// 	}
-		// });
+		
 		if(!bcrypt.compareSync(req.body.password, account.password)){
-			return res.status(400).send({message: "The password is not correct"});
+			return res.status(400).send({
+				status: "error",
+				message: "The password is not correct"
+			});
 		}
-		res.send({message: "The email & password combination is correct!"});
+		// res.send({
+		// 	status: "success",
+		// 	message: "The email & password combination is correct!"
+		// });
+		 res.redirect('success');
 	}catch(err){
 		res.status(500).send(err);
 	}
@@ -221,14 +220,25 @@ app.post("/login", async(req, res) =>{
 
 app.post("/register", async(req,res) =>{
 	try{
-		req.body.password = bcrypt.hashSync(req.body.password, 10);
-		var account = new Account(req.body);
-		var result = await account.save();
-		res.send(result);
+		var check = await Account.find({email: req.body.email}, async(err,docs)=>{
+			if(docs.length){
+				res.status(400).send({
+					code: 400,
+					message: "email already exists"
+				})
+			}else{
+				req.body.password = bcrypt.hashSync(req.body.password, 10);
+				var account = new Account(req.body);
+				var result = await account.save();
+				res.send(result);
+			}
+		}).exec();
 	}catch(err){
 		res.status(500).send(err)
 	}
 })
+
+
 /*-------------STRUCTURE SCHEMA----------------*/
 var userSchema = mongoose.Schema({
      name: {
