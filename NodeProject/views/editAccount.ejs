@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>EditPage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <% include header%>
+    <h1 style="text-align: center;">Hi! Server is up & running</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
+            </div>
+            <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
+            <div class="col-md-6">
+                <p class="pull-right visible-xs">
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+                </p>
+                <h1>
+                    <%= title %>
+                </h1>
+                <form action='/account/edit/<%=account._id%>' method="post">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" value='<%=account.email%>' disabled>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div className="input-group mb-3">
+                        <div className="custom-file">
+                            <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+                            <label className="custom-file-label" htmlFor="inputGroupFile01">
+                                Choose file
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                </form>
+            </div>
+            <!-- </div> -->
+        </div>
+        <!-- </div> -->
+    </div>
+    <div class="footer" style="text-align: center;">
+        <% include footer%>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script type="text/javascript">
+   $(document).ready(function() {
+    $('.btn-submit').on('click', function(e){
+         e.preventDefault();
+        const id = $(this).attr('data-id');
+        console.log(id);
+        $.ajax({
+            type: 'POST',
+            url: '/saveImage/' ,
+            success: function(res){
+                alert('updating');
+                window.location.href = '/list';
+            },
+            error: function(err){
+                console.log(err);
+            },
+            dataType: "json"
+        })
+    })
+});
+</script>
+
+</html>

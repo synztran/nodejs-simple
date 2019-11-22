@@ -1,38 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Homepage</title>
+    <title>User List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 </head>
 
 <body>
-    <% include header%>
-    <h1 style="text-align: center;">Hi! Server is up & running</h1>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
-                <% include sidebar%>
-            </div>
-            <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
-                <div class="col-md-6">
-                    <p class="pull-right visible-xs">
-                        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-                    </p>
-                        
-                        
-                </div>
-                <% include listAccount %>
-            <!-- </div> -->
-        </div>
-        <!-- </div> -->
-    </div>
-    <div class="footer" style="text-align: center;">
-        <% include footer%>
-    </div>
+    <h1>User List</h1>
+    <!-- <img src="1435.jpg"> -->
+    <% if(listAccount!= null) { %>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th> picture</th>
+                <th> id</th>
+                <th> email</th>
+                <th> created</th>
+                <th> password</th>
+                <th></th>
+            </tr>
+        </thead>
+        <% listAccount.forEach(function(item){ %>
+        <tr>
+            <td>
+                <img style="width: 120px;height: 120px" src="docs/<%= item.picture %>">
+            </td>
+            <td>
+                <%= item._id %>
+            </td>
+            <td>
+                <%= item.email %>
+            </td>
+            <td>
+                <%= (item.created).toLocaleString() %>
+            </td>
+            <td>
+                <%= item.password %>
+            </td>
+            <td><a href="#" class="btn-delete" data-id='<%=item._id %>'><i class="fas fa-trash"></i></a></td>
+            <td><a href="/account/edit/<%=item._id%>" class="btn-edit" data-id='<%=item._id %>'><i class="fas fa-edit"></i></a></td>
+
+        </tr>
+        <%    }) %>
+    </table>
+    <% } %>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- <script type="text/javascript" src="/js/listAccount.js"></script> -->
+<script type="text/javascript">
+$(document).ready(function() {
+    
+    $('.btn-delete').on('click', function(e) {
+        e.preventDefault();
+        const id = $(this).attr('data-id');
+        console.log(id);
+        $.ajax({
+            type: 'DELETE',
+            url: '/delete/' + id,
+            success: function(res) {
+                alert('deleting');
+                location.reload();
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
+    })
+});
+</script>
 
 </html>

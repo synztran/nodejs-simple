@@ -1,27 +1,26 @@
-const http = require('http'),
-mongoClient = require('mongodb').MongoClient;
+var jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+const { window } = new JSDOM();
+const { document } = (new JSDOM('')).window;
+global.document = document;
 
-http.createServer(function (req,res) {
-
-    mongoClient.connect('mongodb://127.0.0.1:27017/nodedb', function(err, db) {
-        if (err) throw err;
-        var products = db.collection('products');
-        products.find({}).toArray(function (err,results) {
-            if (err) throw err;
-            data = '<table border="1" style="border-collapse:collapse" cellspacing="5" cellpadding="15">';
-            data += '<tr><th>Name</th><th>Price</th><th>Category</th></tr>';
-            results.forEach(function (row) {
-                data += '<tr>';
-                data += '<td>' + row.name + '</td>';
-                data += '<td>' + row.price + '</td>';
-                data += '<td>' + row.category + '</td>';
-                data += '</tr>';
-            });
-            data += '</table>';
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.end(data);
+var $ = jQuery = require('jquery')(window);
+$(document).ready(function() {
+	
+    $('.btn-delete').on('click', function(e) {
+        e.preventDefault();
+        const id = $(this).attr('data-id');
+        console.log(id);
+        $.ajax({
+            type: 'DELETE',
+            url: '/delete/' + id,
+            success: function(res) {
+                alert('deleting');
+                // location.reload();
+            },
+            error: function(err) {
+                console.log(err);
+            }
         })
-        db.close();
-    });
-
-}).listen(8000);
+    })
+});
