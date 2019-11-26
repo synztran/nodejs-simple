@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <form action="/register" method="post">
+    <form action="/register" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -24,6 +24,14 @@
         <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <div className="input-group mb-3">
+            <div className="custom-file">
+                <input type="file" id="picture" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+                <label className="custom-file-label" htmlFor="inputGroupFile01">
+                    Choose file
+                </label>
+            </div>
         </div>
         <button type="submit" id="btn-submit" class="btn btn-primary">Submit</button>
     </form>

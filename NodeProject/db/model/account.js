@@ -8,6 +8,7 @@ var validateEmail = function(email) {
 
 var accountSchema = mongoose.Schema({
     email: {
+        // required: true,
         type: String,
         lowercase: true,
         required: 'Email address is required',
@@ -21,14 +22,18 @@ var accountSchema = mongoose.Schema({
         // 	message: 'Email handle must have @'
         // }
     },
-    password: String,
+    password: {
+        type: String,
+        // required: true
+    },
     created: {
         type: Date,
         default: new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()))
     },
     picture:{
-    	data: Buffer,
-    	type: String,
+    	// data: Buffer,
+        type: String,
+        // required: true
         
     }
 })

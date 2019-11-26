@@ -44,6 +44,7 @@ app.use(bodyParser.urlencoded({
 // app.use(express.static('docs'));
 app.use('/docs', express.static('docs'))
 app.use('/js', express.static('lib/js'))
+app.use('/css', express.static('lib/css'))
 
 // using libary ejs, ejs create html then back to browser
 app.set("view engine", "ejs");
@@ -60,19 +61,6 @@ app.use('/', routes);
 server.listen(port, function(){
 	console.log("Example app listening on port !" + port);
 })
-
-
- 
-
-
-
-
-
-
-
-
-
-
 /*-----------------EXPORT-----------------------*/
 // exports.user = User;
 // exports.account = Account;

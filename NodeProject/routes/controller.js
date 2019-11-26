@@ -4,19 +4,38 @@ var req = require('request');
 var bcrypt = require("bcryptjs");
 var fs = require('fs');
 const multer = require('multer');
-var path = require('path');
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, 'docs/upload/');
+    },
+    filename: function(req, file, cb){
+        cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname)
+    }
+});
+var mongoose = require('mongoose');
+var db = mongoose.connection;
+const fileFilter = (req, file, cb)=>{
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg'){
+        cb(null, false);
+    }else{
+        cb(null, true);
+    }
+}
+
+const upload = multer({
+    storage: storage, 
+    limits: {
+        fileSize: 1024*1024*5
+    }
+});
 
 
 // var imgPath = 'docs/img_1435.JPG';
-
 var Account = require('./../db/model/account');
 var Image = require('./../db/model/image');
 example = require('./../lib/js/listAccount.js')
 
-
 // init
-
-
 router.get("/", function(req, res) {
     res.render("homePage");
 });
@@ -25,9 +44,9 @@ router.get("/test", function(req, res) {
     res.render("testPage");
 });
 
-router.get("/signup", function(req, res) {
-    res.render("registerPage");
-});
+// router.get("/signup", function(req, res) {
+//     res.render("registerPage");
+// });
 
 router.get("/success", function(req, res) {
 
@@ -43,7 +62,7 @@ router.post("/signup", function(req, res) {
         "password": password
     }
 
-    db.collection('users').insertOne(data, function(err, collection) {
+    db.collection('accounts').insertOne(data, function(err, collection) {
         if (err) throw err;
         console.log("successfully");
     });
@@ -52,23 +71,7 @@ router.post("/signup", function(req, res) {
 
 router.get('/list', function(req, res) {
 
-    // gfs.files.find({}).toArray((err, files)=>{
-    //     if(!files || files.length === 0){
-    //         res.render('listAccount', {files: false});
-    //     }else{
-    //         files.map(file =>{
-    //             if(
-    //                 file.contentType === 'image/jpeg' ||
-    //                 file.contentType === 'image/png'
-    //             ){
-    //                 file.isImage = true;
-    //             }else{
-    //                 file.isImage = false;
-    //             }
-    //         });
-    //         res.render('listAccount', {files: file});
-    //     }
-    // });
+  
 
 
     Account.find({}, function(err, docs) {
@@ -156,28 +159,11 @@ router.get("/account/edit/:id", async (req, res) => {
 });
 
 
-// router.post('/add_picture', upload.single('uploaded_file'), function(req, res) {
 
-//     console.log(req.body);
-//     console.log(req.file);
-//     Account(req.file.path).save(function(err, data) {
-//         if (err) throw err;
-//         res.json(data);
-//     })
-// })
-
-// req.get({ url: '/account/edit/:id', encoding: 'binary' }, function(err, response, body) {
-//     fs.writeFile("./docs/", body, 'binary', function(err) {
-//         if (err)
-//             console.log(err);
-//         else
-//             console.log("The file was saved!");
-//     });
-// });
 
 
 // update db to mongo
-router.post("/account/edit/:id", async (req, res) => {
+router.post("/account/edit/:id", upload.single('picture') ,async (req, res) => {
     console.log(req.body);
     console.log(req.file);
     try {
@@ -241,21 +227,21 @@ router.get("/created", async (req, res) => {
 // -----------------------------------
 /*---------------------------------------------*/
 
-router.post("/signup", function(req, res) {
-    var email = req.body.email;
-    var password = req.body.password;
+// router.post("/signup", function(req, res) {
+//     var email = req.body.email;
+//     var password = req.body.password;
 
-    var data = {
-        "email": email,
-        "password": password
-    }
+//     var data = {
+//         "email": email,
+//         "password": password
+//     }
 
-    db.collection('users').insertOne(data, function(err, collection) {
-        if (err) throw err;
-        console.log("successfully");
-    });
-    return res.redirect('success');
-})
+//     db.collection('accounts').insertOne(data, function(err, collection) {
+//         if (err) throw err;
+//         console.log("successfully");
+//     });
+//     return res.redirect('success');
+// })
 router.post("/login", async (req, res) => {
     console.log(req.body);
     try {
@@ -281,19 +267,27 @@ router.post("/login", async (req, res) => {
     }
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", upload.single('picture'),  (req, res) => {
+    console.log(req.file)
+    console.log(req.body);
+    const account = new Account({
+        email: req.body.email,
+        password: req.body.password,
+        picture: req.file.path
+    });
     try {
-        var check = await Account.find({ email: req.body.email }, async (err, docs) => {
+        var check =  Account.find({ email: req.body.email }, async (err, docs) => {
             if (docs.length) {
                 res.status(400).send({
                     code: 400,
                     message: "email already exists"
                 })
             } else {
-                // req.body.password = bcrypt.hashSync(req.body.password, 10);
+                req.body.password = bcrypt.hashSync(req.body.password, 10);
                 // req.body.picture = fs.readFileSync(req.files.userPhoto.path)
-                var account = new Account(req.body);
-                var result = await account.save();
+                // var account = new Account({email: req.body.email, password : req.body.password, picture : req.file.path});
+                var account = new Account(req.body,req.file);
+                var result =  account.save();
                 res.send(result);
                 // return res.redirect('success')
             }
@@ -302,82 +296,4 @@ router.post("/register", async (req, res) => {
         res.status(500).send(err)
     }
 })
-
-
-// var a = new Image;
-// a.img.data = fs.readFileSync(imgPath);
-// a.img.contentType = 'image/png';
-// a.save(function(err, a){
-//     if(err) throw err;
-//     console.error('save img to mongo');
-//     router.get('/add', function(req, res, next){
-//         Image.findById(a, function(err, doc){
-//             if(err) return next(err);
-//             res.contentType(doc.img.contentType);
-//             res.send(doc.img.data);
-//         });
-//     });
-// });
-
-// router.get('/docs/:filename', (req, res) => {
-//     gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-//         // Check if the input is a valid image or not
-//         if (!file || file.length === 0) {
-//             return res.status(404).json({
-//                 err: 'No file exists'
-//             });
-//         }
-
-//         // If the file exists then check whether it is an image
-//         if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
-//             // Read output to browser
-//             const readstream = gfs.createReadStream(file.filename);
-//             readstream.pipe(res);
-//         } else {
-//             res.status(404).json({
-//                 err: 'Not an image'
-//             });
-//         }
-//     });
-// });
-
-
-const getExtension = file => {
-    if (file.mimetype == "image/jpeg")
-        ext = ".jpeg"
-    else
-        ext = ".png"
-    return ext;
-}
-
-var storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, path.join(__dirname, '../docs/upload'))
-    },
-    filename: function(req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + getExtension(file))
-    }
-})
-var upload = multer({ storage: storage })
-
-router.post('/saveImage/', upload.single('file'), (req, res, next) => {
-    if (req.file && req.file.mimetype != 'image/jpeg' && req.file.mimetype != 'image/png')
-        return res.json({
-            status: 1,
-            message: "Please Choose JPG or PNG images"
-        })
-    if (req.file) {
-        let image = "/images/" + req.file.filename
-        res.json({
-            status: 0,
-            message: "Successfully saved",
-            path: image
-        })
-    }
-})
-
-
-
-
-
 module.exports = router;
