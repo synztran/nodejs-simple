@@ -26,7 +26,8 @@ const upload = multer({
     storage: storage, 
     limits: {
         fileSize: 1024*1024*5
-    }
+    },
+    // fileFilter: fileFilter
 });
 
 
@@ -44,13 +45,14 @@ router.get("/test", function(req, res) {
     res.render("testPage");
 });
 
-// router.get("/signup", function(req, res) {
-//     res.render("registerPage");
-// });
+router.get("/signup", function(req, res) {
+    res.render("registerPage");
+});
 
 router.get("/success", function(req, res) {
 
     res.render("successPage");
+   
 });
 
 router.post("/signup", function(req, res) {
@@ -262,6 +264,7 @@ router.post("/login", async (req, res) => {
         }
 
         res.redirect('success');
+        
     } catch (err) {
         res.status(500).send(err);
     }
@@ -270,11 +273,11 @@ router.post("/login", async (req, res) => {
 router.post("/register", upload.single('picture'),  (req, res) => {
     console.log(req.file)
     console.log(req.body);
-    const account = new Account({
-        email: req.body.email,
-        password: req.body.password,
-        picture: req.file.path
-    });
+    // const account = new Account({
+    //     email: req.body.email,
+    //     password: bcrypt.hashSync(req.body.password, 10),
+    //     picture: req.file.path
+    // });
     try {
         var check =  Account.find({ email: req.body.email }, async (err, docs) => {
             if (docs.length) {
@@ -286,11 +289,19 @@ router.post("/register", upload.single('picture'),  (req, res) => {
                 req.body.password = bcrypt.hashSync(req.body.password, 10);
                 // req.body.picture = fs.readFileSync(req.files.userPhoto.path)
                 // var account = new Account({email: req.body.email, password : req.body.password, picture : req.file.path});
-                var account = new Account(req.body,req.file);
+                var account = new Account({
+                    email: req.body.email,
+                    password: req.body.password,
+                    picture: {
+                        path: req.file.path,
+                        size: req.file.size
+                    }
+                });
                 var result =  account.save();
-                res.send(result);
-                // return res.redirect('success')
+                // res.send(result);
+                res.redirect('/');
             }
+            
         }).exec();
     } catch (err) {
         res.status(500).send(err)

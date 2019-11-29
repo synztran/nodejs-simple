@@ -45,6 +45,7 @@ app.use(bodyParser.urlencoded({
 app.use('/docs', express.static('docs'))
 app.use('/js', express.static('lib/js'))
 app.use('/css', express.static('lib/css'))
+app.use('/docs/upload', express.static('docs/upload'))
 
 // using libary ejs, ejs create html then back to browser
 app.set("view engine", "ejs");

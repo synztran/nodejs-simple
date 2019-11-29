@@ -32,7 +32,13 @@ var accountSchema = mongoose.Schema({
     },
     picture:{
     	// data: Buffer,
-        type: String,
+        path: {
+            type: String
+        },
+        size: {
+            type: Number
+        },
+        
         // required: true
         
     }
