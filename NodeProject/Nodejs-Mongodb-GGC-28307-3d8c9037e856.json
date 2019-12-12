@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "nodejs-mongodb-ggc-28307",
+  "private_key_id": "3d8c9037e8568a682cb3f713386a8ca33a305157",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC2DL3GEQEZPfbY\n3dIONFcoGBfVebSoqrDJqIHfjzjtE8mD+rwUOyi45+IzfdIjqR5U5HpNq/S/eGZB\nER720XhxGL5f9i97Vl85zhsG2vCcJM6Xidxb+EhkEP+ou1R1FlcbjMI/+dGR2SAS\nfPVCD28g/4xQ9R2BTNmAMS2cVksxoNL5jdqHkMi6yl4j6lwFN0287/P1uVTCRnYI\nEzpaF1XutC1jPKhEfreJkXPSainXUCW0WuYSmiHUv2sfANqxEfF8wxbw33EkARWO\nyZ/MLLBgWFff+/mQnT2lQxzIK7vMWQZDsFApLXOQ/HfiEd8CHg74LuGsflccRck3\nSPeV/vOdAgMBAAECggEAIHc6OsHaj81YoclBRi44YtqVGYl4WeIC4BuweZV5ofH2\n7JYBB5ybQQp9cRBdsuVclugeFY72eVT361+pxXuKvqSagtONGTJIji7+6+SMp1P7\nEdRQm4g2JL5RUZ6Cy9S9mRirpawgHyH5EcL+HBdTiq94LxHffqkdWrqqdyh+hW1q\n7lh6X8Gnlh+LbC6ANe9aNW3U88jQR+8INUoi7Tu6cjBWGDtMrl9Z1LcIq5iLQ+C+\nHiTBT/VNTajnYUrVqlFa757n8s4aSvo9nY3IxefS1Q/NA5t1jQKuCXCbLsSjO8mp\ncZh1F9WwZxM3DaYn3EjfZxIS3vHzsES7Y83oQxaFgQKBgQDwpKF+/zIT83RZcwgN\n1UDFgQ6G+BdouD4NbsY2v4TJI77/J4VD4EKvSpNMUJq2GXwFw3ySdHaqgQw1nFEP\nTv558WbW+/FpA5PMKYwgA9IhqrbTwNTCJLvIHxBe9a3l9wLpuwuNeXOZetI/lcXk\nAtsYKuo+4kqrsZMED8ikusd13QKBgQDBquAkMt445Vz4xTZdB07r7DGg/6ccncRI\n60HRB+mdCUdV2D4q9MbPU+ci0Ruw7mwBYz3cW64ZonCAE9aN11kl7npugi+ZNFCU\nbmXv78R09AVUbaVVtDlFKHrbXLgTyirx77EhyTzXj9ZvbseYEfZXNl+tZtx9YZlb\nuxUJpKX4wQKBgCnGWqbCRH5EKDGTD5XfLGRc+BmkHeQ2/8azMUO10aZdRz3iLXdQ\nCiOGDbYU1BbCq84QVqLSBvuodWclIMlIjFK8/n5ZtFnnnhO2LrYsE6F2klCGTCj7\n2YFvKxdhDPQ8AkxzBRllORUuxir1pCnl+QTkBlAuVoohxITS/KDkL9YdAoGAPFWA\nqKZURsNl2HaP/iFlu+gEehTLOgYIfXMVOQrPA8Y9PAg3Lei9+x83dchRaSiN60zA\nm+LP9Vp+09faUqwRMNj/uWfDbmY26FcQWNSIjqrq8ieKh42y/dGjnK1hB4FHKcIz\nm8P2uW0tL+ACPGT0Kq1c10ehT0pVnZdF8ZAiyMECgYAZSmy/sg7VIavvDwe4tMdD\nsxKK0nCagSA/6YwqpWGdMB0EFEqR1ttceb8vihAt3NjQrs/aHuyPXDCN9puYHgjc\nMQpp30bbmpATLSIcXyU/b44Vs9DIpSjWcpRXdXd92DAOubKtLLk3blpPKwiTU4rz\nOee2UqGg3w6MJMOhiGp9FA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "nodejs-cloud-storage@nodejs-mongodb-ggc-28307.iam.gserviceaccount.com",
+  "client_id": "111149244876122829011",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nodejs-cloud-storage%40nodejs-mongodb-ggc-28307.iam.gserviceaccount.com"
+}

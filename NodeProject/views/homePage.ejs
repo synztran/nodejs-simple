@@ -8,18 +8,30 @@
 </head>
 
 <body>
-    <% include header%>
+    <!-- <% include header%> -->
     <h1 style="text-align: center;">Hi! Server is up & running</h1>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
-                <% include sidebar%>
+                <!-- <% include sidebar%> -->
             </div>
             <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
             <div class="col-md-6">
-                <p class="pull-right visible-xs">
-                    <button type="button" class="btn btn-primary btn-xs btn-move-list" data-toggle="offcanvas">LIST ACCOUNT</button>
-                </p>
+                <div class="row">
+                    <!-- <p class="pull-right visible-xs">
+                        <button type="button" class="btn btn-primary btn-xs btn-move-list" data-toggle="offcanvas">LIST ACCOUNT</button>
+                    </p>
+                    <p class="pull-right visible-xs">
+                        <button type="button" class="btn btn-primary btn-xs btn-move-list-created" data-toggle="offcanvas">LIST CREATED</button>
+                    </p>
+                    <p class="pull-right visible-xs">
+                        <button type="button" class="btn btn-primary btn-xs btn-profile" data-toggle="offcanvas">PROFILE</button>
+                    </p>
+                    <p class="pull-right visible-xs">
+                            <button type="button" class="btn btn-primary btn-xs btn-move-token" data-toggle="offcanvas">LOG OUT</button>
+                    </p> -->
+                   
+                </div>
                 <% include loginPage %>
             </div>
            
@@ -35,9 +47,41 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script type="text/javascript">
-    $(document).on('click', '.btn-move-list', function(e){
-        e.preventDefault();
-        window.location.href = './list' 
-    })
+    // $(document).on('click', '.btn-move-list', function(e){
+    //     e.preventDefault();
+    //     window.location.href = './list' 
+    // })
+    // $(document).on('click', '.btn-profile', function(e){
+    //     e.preventDefault();
+    //     window.location.href = './profile' 
+    // })
+    
+    // $('.btn-move-list-created').on('click', function(e){
+    //      e.preventDefault();
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: '/created' ,
+    //         headers: {
+    //             // 'Authorization':'Basic xxxxxxxxxxxxx',
+    //             'x-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNudHQuaG9uZ2hhaUBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNTc1OTYyMjM2LCJleHAiOjE1NzU5NjMxMzZ9.V6lhLY3io1Mlk47C_slg-ye5CFhqHmaNcAPnmPlZZMw',
+    //             // 'Content-Type':'application/json'
+    //         },
+    //         success: function(res){
+    //             alert('updating');
+    //             window.location.href = '/profile';
+    //         },
+    //         error: function(err){
+    //             console.log(err);
+    //         },
+    //         dataType: "json"
+    //     })
+    // })
+    // $('.btn-move-token').on('click', function(e){
+    //      e.preventDefault();
+    //     var x = document.cookie;
+    //     document.cookie = "x-token = ; expires = Thu, 01 Jan 1970 00:00:00 GMT "
+        
+    // })
+    
 </script>
 </html>
