@@ -1,14 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var req = require('request');
-var bcrypt = require("bcryptjs");
-var fs = require('fs');
-var readline = require('readline');
-var jwt = require('jsonwebtoken');
+const express = require('express');
+const router = express.Router();
+const req = require('request');
+const bcrypt = require("bcryptjs");
+const fs = require('fs');
+const readline = require('readline');
+const jwt = require('jsonwebtoken');
 const reqHeader = require('request');
+// const fileuploader = require('fileuploader');
 const config = require('./../lib/comon/config');
 const utils = require('./../lib/comon/utils');
-var cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser'); 
 router.use(cookieParser());
 // var token = jwt.sign({foo: 'bar'}, 'shhhhh');
 const tokenList = {};
@@ -114,8 +115,7 @@ router.get('/main', TokenCheckMiddleware, function(req, res){
 const loginRequired = async(req, res, next) =>{
     console.log(req.body);
     if (req.body) {
-        // res.setHeader(
-        // )
+       
       next();
     } else {
       return res.status(401).json({ message: 'Unauthorized user!' });
@@ -144,7 +144,7 @@ router.post("/signup", function(req, res) {
     return res.redirect('success');
 })
 
-router.get('/list',PinCheckMiddleware, function(req, res) {
+router.get('/list' ,function(req, res) {
     Account.find({}, function(err, docs) {
         res.render('listAccount', {
             "listAccount": docs
@@ -321,7 +321,10 @@ router.post("/login", async (req, res, next) => {
     }
 });
 router.post("/register", upload.single('picture'),  (req, res) => {
-    console.log(req.file)
+    console.log(req.file);
+
+    // console.log(req);
+    // console.log(req.body.fileuploader-list-picture);
     console.log(req.body);
     try {
         var check =  Account.find({ email: req.body.email }, async (err, docs) => {
@@ -349,7 +352,6 @@ router.post("/register", upload.single('picture'),  (req, res) => {
         res.status(500).send(err)
     }
 })
-
 router.post('/refresh_token', async(req, res) =>{
     const {refreshToken} = req.body;
     if((refreshToken) && (refreshToken in tokenList)){
@@ -376,35 +378,6 @@ router.post('/refresh_token', async(req, res) =>{
     }
 });
 
-router.post('/token/reject', function(req, res, next){
-    var refresh
-})
-
-// const TokenCheckMiddleware = async (req, res, next) => {
-//     // Lấy thông tin mã token được đính kèm trong request
-//     const token = req.cookies['x-token'];
-//     // decode token
-//     if (token) {
-//       // Xác thực mã token và kiểm tra thời gian hết hạn của mã
-//       try {
-//         const decoded = await utils.verifyJwtToken(token, config.secret);
-//         // Lưu thông tin giãi mã được vào đối tượng req, dùng cho các xử lý ở sau
-//         req.decoded = decoded;
-//         next();
-//       } catch (err) {
-//         // Giải mã gặp lỗi: Không đúng, hết hạn...
-//         console.error(err.message);
-//         return res.status(401).json({
-//           message: 'Unauthorized access.',
-//         });
-//       }
-//     } else {
-//       // Không tìm thấy token trong request
-//       return res.status(403).send({
-//         message: 'No token provided.',
-//       });
-//     }
-// }
 
 router.get('/profile',TokenCheckMiddleware, (req, res) => {
     
@@ -440,6 +413,5 @@ router.get("/created",PinCheckMiddleware, async (req, res) => {
     }
 });
 
-console.log(tokenList);
 
 module.exports = router;

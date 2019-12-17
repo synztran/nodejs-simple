@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
@@ -14,47 +15,73 @@
     <h1>User List</h1>
     <!-- <img src="1435.jpg"> -->
     <% if(listAccount!= null) { %>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th> picture</th>
-                <th> id</th>
-                <th> email</th>
-                <th> created</th>
-                <th> password</th>
-                <th></th>
-            </tr>
-        </thead>
-        <% listAccount.forEach(function(item){ %>
-        <tr>
-            <td style="width: 120px; height: 120px;">
-                <a id="single_image" href="<%= item.picture.path %>"><img style="max-width: 100%;width: 100px;height: 100px; object-fit: cover;" src="<%= item.picture.path %>"></a>
-            </td>
-            <td>
-                <%= item._id %>
-            </td>
-            <td>
-                <%= item.email %>
-            </td>
-            <td>
-                <%= (item.created).toLocaleString() %>
-            </td>
-            <td>
-                <%= item.password %>
-            </td>
-            <td><a href="#" class="btn-delete" data-id='<%=item._id %>'><i class="fas fa-trash"></i></a>&nbsp;<a href="/account/edit/<%=item._id%>" class="btn-edit" data-id='<%=item._id %>'><i class="fas fa-edit"></i></a></td>
-
-        </tr>
-        <%    }) %>
-    </table>
+    <div class="box-body table-responsive no-padding">
+        <div id="tableContainer">
+            <table id="data-table-list-account" class="table table-hover" id="dataTables1">
+                <thead>
+                    <tr>
+                        <th> picture</th>
+                        <th> id</th>
+                        <th> email</th>
+                        <th> created</th>
+                        <th> password</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <!-- <tbody></tbody> -->
+                <% listAccount.forEach(function(item){ %>
+                <tr>
+                    <td style="width: 120px; height: 120px;">
+                        <a id="single_image" href="<%= item.picture.path %>" data-fancybox="html5-video"><img style="max-width: 100%;width: 100px;height: 100px; object-fit: cover;" src="<%= item.picture.path %>"></a>
+                        
+                    </td>
+                    <td>
+                        <%= item._id %>
+                    </td>
+                    <td>
+                        <%= item.email %>
+                    </td>
+                    <td>
+                        <%= (item.created).toLocaleString() %>
+                    </td>
+                    <td>
+                        <%= item.password %>
+                    </td>
+                    <td><a href="#" class="btn-delete" data-id='<%=item._id %>'><i class="fas fa-trash"></i></a>&nbsp;<a href="/account/edit/<%=item._id%>" class="btn-edit" data-id='<%=item._id %>'><i class="fas fa-edit"></i></a></td>
+                    
+                </tr>
+                <%    }) %>
+            </table>
+        </div>
+    </div>
     <% } %>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- <script src="js/listAccount.js"></script> -->
 <script type="text/javascript">
 $(document).ready(function() {
-    
+    $('#data-table-list-account').dataTable({
+        "aoColumns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+            ],
+            "language": {
+                searchPlaceholder: 'Search...',
+                sSearch: ''
+            },
+            "columnDefs":[
+                {"targets": 0, "orderable": false},
+                {"targets": 5, "orderable": false},
+               
+            ],
+    });
     $('.btn-delete').on('click', function(e) {
         e.preventDefault();
         const id = $(this).attr('data-id');
@@ -71,7 +98,15 @@ $(document).ready(function() {
             }
         })
     });
-    $("a#single_image").fancybox();
+    $("a#single_image").fancybox({
+        iframe:{
+                preload: false,
+
+        },
+        
+    });
+
+    
 });
 </script>
 

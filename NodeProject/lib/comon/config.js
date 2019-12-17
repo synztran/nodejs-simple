@@ -1,6 +1,6 @@
 module.exports = {
-    "secret": "s0me-secr3t-goes-here",
-    "refreshTokenSecret": "some-s3cret-refre2h-token",
+    "secret": "1511061069",
+    "refreshTokenSecret": "1511061069",
     "admin": "asd@gmail.com",
     "passcode": "11041997",
     "port": 3000,

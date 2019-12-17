@@ -25,6 +25,11 @@ var app = express();
 var server = http.Server(app)
 var db = mongoose.connection;
 
+del = function(req, res){
+	res.clearCookie('x-token');
+	res.clearCookie('x-refresh-token');
+	res.redirect('/');
+}
 
 
 
@@ -39,6 +44,7 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ 
     extended: true
 })); 
+// app.use(express.cookieParser());
 // set static data for public folder to Application Server
 // app.use(express.static('public'));
 // app.use(express.static('docs'));
@@ -52,6 +58,7 @@ app.set("view engine", "ejs");
 
 // url of view folder to Application Server
 app.set("views", "./views");
+app.get('/del', del);
 
 app.use('/', routes);
 
