@@ -1,13 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html {
+    height: 100%;
+  }
+  body {
+    min-height: 100%;
+  }
 .table-hover thead tr th{
     text-align: center;
     text-transform: uppercase;
+    border: 1px solid #dee2e6;
+    
 }
 table.table-hover tbody tr td {
     vertical-align: middle;
+    text-align: center;
+    border-left: 1px solid #dee2e6;
 }
 table.table-hover tbody tr td:not(:first-child) {
     border: 1px solid #dee2e6;
 }
 table.table-hover tbody tr td:first-child {
     border-bottom: 1px solid #dee2e6;
+}
+
+table.table-hover tbody tr td:last-child{
+    text-align: center;
+}
+#tb-container-listaccount{
+    margin: 0 auto 5% auto;
+    width: 80%;
+}
+.tb-responsive-listaccount{
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+i{
+    vertical-align: middle;
+}
+a > i{
+    margin: auto 0;
+}
+.btn > div {
+    display: flex;
+    width: 35px;
+    height: 35px;
+    align-items: center;
+    justify-content: center;
+}
+.text-middle{
+    text-align: center;
+}
+.row-listcreated{
+    width: 72%;
+    margin:0 auto;
+}
+.mainpg-row > .col-md-2{
+    word-break: break-all!important;
+}
+.mainpg-row p{
+    padding:0
+}
+.col-md-9{
+    display: flex;
+}
+@media (max-width:960px){
+    .col-sm-3{
+        display: none
+    }
+    .col-md-9{
+        display: flex;
+    }
 }

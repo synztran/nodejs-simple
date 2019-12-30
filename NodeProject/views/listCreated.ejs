@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Created List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/css/datepicker/dist/datepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+    <h1 class="text-middle">Created List</h1>
+    <!-- <img src="1435.jpg"> -->
+    <form id="form-submit">
+        <div class="row row-listcreated">
+            <p>Date: <input type="text" id="datepicker"></p>
+            <button type="submit" class="btn-primary btn-datepicker">Submit</button>
+        </div>
+    </form>
+        <div class="box-body table-responsive no-padding">
+            <div id="tableContainer">
+                <table id="data-table-list-created" class="table table-hover" id="dataTables1">
+                    <thead>
+                        <tr>
+                            <th> picture</th>
+                            <th> id</th>
+                            <th> email</th>
+                            <th> created</th>
+                            <th> password</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    
+                </table>
+            </div>
+        </div>    
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="js/datepicker/dist/datepicker.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#data-table-list-account').dataTable({
+        "aoColumns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+            ],
+            "language": {
+                searchPlaceholder: 'Search...',
+                sSearch: ''
+            },
+            "columnDefs":[
+                {"targets": 0, "orderable": false},
+                {"targets": 5, "orderable": false},
+               
+            ],
+    });
+    $('.btn-delete').on('click', function(e) {
+        e.preventDefault();
+        const id = $(this).attr('data-id');
+        console.log(id);
+        $.ajax({
+            type: 'DELETE',
+            url: '/delete/' + id,
+            success: function(res) {
+                alert('deleting');
+                location.reload();
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
+    });
+    $('.btn-datepicker').on('click', function(e) {
+        e.preventDefault();
+        // const date = ($('#datepicker').val()).split("/").reverse().join("-");
+        const date = formatDate($('#datepicker').val())
+        var param = {'created': date};
+        console.log(JSON.stringify(param));
+        console.log(date);
+        $.ajax({
+            type: 'POST',
+            url: '/created',
+            // dataType: "json",
+            contentType: 'application/x-www-form-urlencoded',
+            data: {created: date},
+            success: function(res, docs) {
+                // console.log(res);
+                // console.log(res.result);
+                
+               
+                if ($.fn.DataTable.isDataTable('#data-table-list-created')) {
+                    $('#data-table-list-created').DataTable().destroy();
+                }
+                $("#data-table-list-created tbody").empty();
+                $.each(res.result, function(i, data) {
+                    console.log(data);
+                    var value = data;
+                $("#data-table-list-created tbody").append("<tr>" +
+                    "<td style='width:120px;height: 120px;'>\ <a id='single_image' href='"+value.picture.path+"' data-fancybox='html5-video'><image src='"+value.picture.path+"' style='max-width: 100%;width: 120px;height: 120px; object-fit: cover;'></a>\</td>" +
+                    "<td> '"+ value._id+"'</td>" +
+                    "<td>" + value.email + "</td>" +
+                    "<td>" + value.created + "</td>" +
+                    "<td>" + value.password + "</td>" +
+                    "<td style='width:80px'> \
+                        <a href='#' class='btn btn-primary btn-icon btn-delete' data-uid='" + value._id + "'>\
+                            <div><i class='fa fa-list'></i></div>\
+                        </a> " +
+                    " <a href='#' class='btn btn-primary btn-icon btn-edit' data-uid='" + value._id + "'>\
+                            <div><i class='fa fa-plus'></i></div>\
+                    </a>" +
+                    "</td>" +
+                    "</tr>");  
+                })   
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
+
+    });
+    $("a#single_image").fancybox({
+        iframe:{
+                preload: false,
+        },
+    });
+
+    $("#datepicker").datepicker();
+    function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+$('#data-table-list-created').dataTable({
+    // "ajax": {"url": '/created', 'dataSrc': ''},
+        "aoColumns": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+            ],
+            "language": {
+                searchPlaceholder: 'Search...',
+                sSearch: ''
+            },
+            "columnDefs":[
+                {"targets": 0, "orderable": false},
+                {"targets": 5, "orderable": false},
+                {"width": "200px" , "targets":4},
+               
+            ],
+    });
+    
+});
+</script>
+
+</html>
+

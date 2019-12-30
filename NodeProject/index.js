@@ -2,33 +2,37 @@
 // If you change anything in index.js that you must re-run in cmd
 
 /*Call for using express*/
-var express = require("express");
-var bodyParser = require("body-parser");
-var mongoose = require('mongoose');
-var http = require('http');
-var fs = require('fs');
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
+const http = require('http');
+const fs = require('fs');
+
 const uri = "'mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'}"
 var port = process.env.PORT || 5000;
 const methodOverride = require('method-override');
 
 // var router = express.Router();
-var Database = require('./db/database');
-var routes = require('./routes/controller');
-var bcrypt = require("bcryptjs");
+const Database = require('./db/database');
+const routes = require('./routes/controller');
+const bcrypt = require("bcryptjs");
 // mongoose.connect('mongodb://localhost:27017/testmongodb');
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
 // var date = new Date();
 
 
 // Create object
-var app = express();
-var server = http.Server(app)
-var db = mongoose.connection;
+const app = express();
+const server = http.Server(app);
+const io = require('socket.io')(server);
+const db = mongoose.connection;
 
 del = function(req, res){
 	res.clearCookie('x-token');
 	res.clearCookie('x-refresh-token');
-	res.redirect('/');
+	res.clearCookie('x-email');
+	res.clearCookie('io');
+	res.redirect('/signin');
 }
 
 
@@ -51,6 +55,7 @@ app.use(bodyParser.urlencoded({
 app.use('/docs', express.static('docs'))
 app.use('/js', express.static('lib/js'))
 app.use('/css', express.static('lib/css'))
+app.use('/io', express.static('lib'))
 app.use('/docs/upload', express.static('docs/upload'))
 
 // using libary ejs, ejs create html then back to browser
@@ -61,6 +66,98 @@ app.set("views", "./views");
 app.get('/del', del);
 
 app.use('/', routes);
+
+// io.emit('some event', {someProperty: 'some value', otherProperty: 'other value'});
+
+var numUsers = 0;
+
+io.on('connection', function(socket){
+	console.log(socket.id)
+	var online = 0;
+	function GetCookieValue() {
+		var regex = /%40/gi;
+		var found = socket.handshake.headers.cookie.split(';').filter(c => c.trim().split("=")[0] === 'x-email');
+		return found.length > 0 ? found[0].split("=")[1].replace(regex, '@') : null;
+	}
+	io.emit('this', {will: 'be received by everyone'});
+	socket.on('private message', function(from, msg){
+		console.log('Received private msg ', from, 'saying', msg);
+	})
+
+	// socket.on('new', function(data){
+	io.emit('news', {name : GetCookieValue()});
+		// io.emit('news', data);
+	// })
+	
+	// console.log(GetCookieValue() +' connected');
+	var addedUser = false;
+	// socket receive from 1 client
+	socket.on('load user name', function(username){
+		if(addedUser) return false;
+		++ numUsers;
+		addedUser = true;
+		console.log('user name: ' + username);
+		socket.broadcast.emit('load user name', {
+			username: GetCookieValue()
+		})
+	})
+	socket.on('my other event', function(data){
+		console.log(data);
+	})
+	socket.on('send_message', function(text) {
+		console.log(socket.username);
+		// gửi tin nhắn tới các client đang kết nối socket
+		// ngoại trừ client đang kết nối (gửi tin nhắn)
+		socket.broadcast.emit('receive_message', {
+			username: socket.username,
+			text: text
+		});
+	});
+	socket.on('user_join', function(username) {
+		if (addedUser)
+			return false;
+		socket.username = username;
+		console.log('user_join: '+ socket.username);
+
+		++ numUsers;
+		addedUser = true;
+		// báo cho client đang join phòng thành công
+		socket.emit('login', {
+			numberUsers: numUsers
+		});
+		// báo cho client khác biết có người mới join vào phòng
+		socket.broadcast.emit('new_user_join', {
+			username: socket.username,
+			numUsers: numUsers
+		});
+	});
+	socket.on('disconnect', function(){
+		var username = GetCookieValue();
+		// console.log('user disconnect');
+		io.emit('disconnect', username + ' disconnected');
+	})
+	socket.on('typing', function(data){
+		var username = GetCookieValue();
+		// io.emit('typing', username);
+		socket.broadcast.emit('typing', data, username)
+	})
+	socket.on('chat message', function(msg){
+		// console.log('message: ' + msg);
+		// console.log(GetCookieValue());
+		var username = GetCookieValue();
+		var id = socket.id
+		console.log("sedingmsg from " + id + ": " + msg);
+		// var regex = /%40/gi;
+		// var username = namebfrp.replace(regex,'@')
+		io.emit('chat message', msg, username, id);
+	})
+	socket.on('count', function(){
+		online = online +1;
+		console.log(online)
+		io.emit('count', online)
+	})
+});
+
 
 
 

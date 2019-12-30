@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Main Page</title>
+    <link rel="stylesheet" href="css/style.css">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
@@ -16,21 +19,24 @@
                 <% include sidebar%>
             </div>
             <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
-            <div class="col-md-6">
-                <div class="row">
-                    <p class="pull-right visible-xs">
+            <div class="col-md-9">
+                <!-- <div class="row mainpg-row"> -->
+                    <p class="col-md-2 pull-right visible-xs">
                         <button type="button" class="btn btn-primary btn-xs btn-move-list" data-toggle="offcanvas">LIST ACCOUNT</button>
                     </p>
-                    <p class="pull-right visible-xs">
+                    <p class="col-md-2 pull-right visible-xs">
                         <button type="button" class="btn btn-primary btn-xs btn-move-list-created" data-toggle="offcanvas">LIST CREATED</button>
                     </p>
-                    <p class="pull-right visible-xs">
+                    <p class="col-md-2 pull-right visible-xs">
                         <button type="button" class="btn btn-primary btn-xs btn-profile" data-toggle="offcanvas">PROFILE</button>
                     </p>
-                    <p class="pull-right visible-xs">
+                    <p class="col-md-2 pull-right visible-xs">
+                        <button type="button" class="btn btn-primary btn-xs btn-move-messenger" data-toggle="offcanvas">MESSENGER</button>
+                    </p>
+                    <p class="col-md-2 pull-right visible-xs">
                         <button type="button" class="btn btn-primary btn-xs btn-move-token" data-toggle="offcanvas">LOG OUT</button>
                     </p>
-                </div>
+                <!-- </div> -->
                 
             </div>
             <!-- </div> -->
@@ -72,22 +78,11 @@ $(document).ready(function() {
     })
     $('.btn-move-list-created').on('click', function(e){
          e.preventDefault();
-        $.ajax({
-            type: 'GET',
-            url: '/created' ,
-            headers: {
-                // 'Authorization':'Basic xxxxxxxxxxxxx',
-                'x-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNudHQuaG9uZ2hhaUBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNTc1OTYyMjM2LCJleHAiOjE1NzU5NjMxMzZ9.V6lhLY3io1Mlk47C_slg-ye5CFhqHmaNcAPnmPlZZMw',
-                // 'Content-Type':'application/json'
-            },
-            success: function(res){
-                alert('updating');
-                window.location.href = '/profile';
-            },
-            error: function(err){
-                console.log(err);
-            },
-        })
+        window.location.href= './listcreated'
+    })
+    $('.btn-move-messenger').on('click', function(e){
+         e.preventDefault();
+        window.location.href= './messenger'
     })
      $('.btn-move-token').on('click', function(e){
          e.preventDefault();
@@ -99,7 +94,7 @@ $(document).ready(function() {
             url: '/del',
             success: function(res){
                 alert('success')
-                window.location.href = '/profile';
+                window.location.href = '/signin';
             },
             error: function(err){
                 console.log(err);

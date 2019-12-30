@@ -6,7 +6,6 @@ const fs = require('fs');
 const readline = require('readline');
 const jwt = require('jsonwebtoken');
 const reqHeader = require('request');
-// const fileuploader = require('fileuploader');
 const config = require('./../lib/comon/config');
 const utils = require('./../lib/comon/utils');
 const cookieParser = require('cookie-parser'); 
@@ -97,7 +96,7 @@ function callback(error, response, body) {
 //     console.log(info);
 // })
 // init
-router.get("/", function(req, res) {
+router.get("/signin", function(req, res) {
     res.render("homePage");
 });
 
@@ -108,9 +107,21 @@ router.get("/test", function(req, res) {
 router.get("/signup", function(req, res) {
     res.render("registerPage");
 });
-router.get('/main', TokenCheckMiddleware, function(req, res){
+
+router.get('/', TokenCheckMiddleware, function(req, res){
     res.render('mainPage');
 });
+
+router.get('/messenger', TokenCheckMiddleware, function(req, res){
+    res.render('messengerPage');
+})
+
+router.get('/listcreated', function(req,res){
+    res.render('listCreated',{
+        // 'listCreated' : ''
+    });
+})
+
 
 const loginRequired = async(req, res, next) =>{
     console.log(req.body);
@@ -128,6 +139,7 @@ router.get("/success",loginRequired, function(req, res) {
     res.render("successPage");
    
 });
+
 router.post("/signup", function(req, res) {
     var email = req.body.email;
     var password = req.body.password;
@@ -156,6 +168,7 @@ router.get('/list' ,function(req, res) {
     // }
 
 });
+
 router.delete("/delete/:id", async (req, res) => {
     try {
         var result = await Account.deleteOne({ _id: req.params.id }).exec();
@@ -190,6 +203,7 @@ router.get("/people", async (req, res) => {
     }
     console.log(resultArray);
 });
+
 router.get("/person/:id", async (req, res) => {
     console.log(req.params);
     try {
@@ -313,8 +327,9 @@ router.post("/login", async (req, res, next) => {
         }
             res.cookie('x-token', response.token);
             res.cookie('x-refresh-token', response.refreshToken);
+            res.cookie('x-email', user.email);
             // res.send(token);
-            res.redirect('./main');
+            res.redirect('./');
         
     } catch (err) {
         res.status(500).send(err);
@@ -385,8 +400,8 @@ router.get('/profile',TokenCheckMiddleware, (req, res) => {
 })
 
 
-router.get("/created",PinCheckMiddleware, async (req, res) => {
-    var date = new Date();
+router.post("/created", async (req, res) => {
+    console.log(req.body);
     var datecreated = req.body.created;
     var todayStart = new Date(datecreated);
     var todayEnd = new Date(datecreated);
@@ -399,15 +414,30 @@ router.get("/created",PinCheckMiddleware, async (req, res) => {
     console.log("end " + todayEnd.toISOString());
 
     try {
-        var result = await Account.find({ created: { $gte: (todayStart), $lte: todayEnd } });
-        res.send({
-            "date": req.body,
-            "startDate": todayStart,
-            "endDate": todayEnd,
-            "count": result.length,
-            result,
-
-        });
+        if(datecreated){
+            var result = await Account.find({ created: { $gte: (todayStart), $lte: todayEnd } }, function(err,docs){
+                // res.render('listCreated', {
+                //     'listCreated': docs
+                // })
+            });
+            console.log(result);
+            res.send({
+                "date": req.body,
+                "startDate": todayStart,
+                "endDate": todayEnd,
+                "count": result.length,
+                result,
+            });
+           
+        }else{
+            // res.render('/listCreated');
+            Account.find({}, function(err, docs) {
+                res.render('listCreated', {
+                    "listCreated": docs
+                });
+            });
+        }
+       
     } catch (err) {
         res.status(200).send(err);
     }

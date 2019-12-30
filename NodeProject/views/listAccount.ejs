@@ -2,8 +2,8 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User List</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css">
@@ -12,11 +12,11 @@
 </head>
 
 <body>
-    <h1>User List</h1>
+    <h1 class="text-middle">User List</h1>
     <!-- <img src="1435.jpg"> -->
     <% if(listAccount!= null) { %>
-    <div class="box-body table-responsive no-padding">
-        <div id="tableContainer">
+    <div class="box-body table-responsive no-padding tb-responsive-listaccount">
+        <div id="tableContainer tb-container-listaccount">
             <table id="data-table-list-account" class="table table-hover" id="dataTables1">
                 <thead>
                     <tr>
@@ -24,7 +24,7 @@
                         <th> id</th>
                         <th> email</th>
                         <th> created</th>
-                        <th> password</th>
+                        <!-- <th> password</th> -->
                         <th></th>
                     </tr>
                 </thead>
@@ -32,7 +32,7 @@
                 <% listAccount.forEach(function(item){ %>
                 <tr>
                     <td style="width: 120px; height: 120px;">
-                        <a id="single_image" href="<%= item.picture.path %>" data-fancybox="html5-video"><img style="max-width: 100%;width: 100px;height: 100px; object-fit: cover;" src="<%= item.picture.path %>"></a>
+                        <a id="single_image" href="<%= item.picture.path %>" data-fancybox="html5-video"><img style="max-width: 100%;width: 120px;height: 120px; object-fit: cover;" src="<%= item.picture.path %>"></a>
                         
                     </td>
                     <td>
@@ -44,10 +44,10 @@
                     <td>
                         <%= (item.created).toLocaleString() %>
                     </td>
-                    <td>
+                    <!-- <td>
                         <%= item.password %>
-                    </td>
-                    <td><a href="#" class="btn-delete" data-id='<%=item._id %>'><i class="fas fa-trash"></i></a>&nbsp;<a href="/account/edit/<%=item._id%>" class="btn-edit" data-id='<%=item._id %>'><i class="fas fa-edit"></i></a></td>
+                    </td> -->
+                    <td><a href="#" class="btn btn-danger btn-delete" data-id='<%=item._id %>'><div><i class="fas fa-trash"></i></div></a>&nbsp;<a href="/account/edit/<%=item._id%>" class="btn btn-primary btn-edit" data-id='<%=item._id %>'><div><i class="fas fa-edit"></i></div></a></td>
                     
                 </tr>
                 <%    }) %>
@@ -69,7 +69,7 @@ $(document).ready(function() {
                 null,
                 null,
                 null,
-                null,
+                // null,
                 null,
             ],
             "language": {
@@ -78,7 +78,7 @@ $(document).ready(function() {
             },
             "columnDefs":[
                 {"targets": 0, "orderable": false},
-                {"targets": 5, "orderable": false},
+                {"targets": 4, "orderable": false},
                
             ],
     });
