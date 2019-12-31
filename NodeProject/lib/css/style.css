@@ -69,10 +69,10 @@ a > i{
     display: flex;
 }
 @media (max-width:960px){
-    .col-sm-3{
+    /* .col-sm-3{
         display: none
     }
     .col-md-9{
         display: flex;
-    }
+    } */
 }

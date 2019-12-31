@@ -51,6 +51,12 @@ form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 
 .text-center{
         text-align: center;
 }
+.text-rigt{
+        text-align: right;
+}
+.text-left{
+        text-align: left;
+}
 .rainbow-text{
 background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
   -webkit-background-clip: text;
@@ -60,11 +66,7 @@ background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, 
         height: 90vh;
 }
 
-@media (max-width: 767px){
-        /* .sub{
-                display: none;
-        } */
-}
+
 @media (min-width: 230px){
         .sub{
                 flex: 0 0 33.333333%;
@@ -78,7 +80,7 @@ background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, 
 .message-content{
         color: #d7dadc;
         border: 1px solid #343536;
-        background-color: #343536;
+        /* background-color: #343536; */
         max-width: max-content;
         border-radius: 0 5px 5px;
         padding: .3125em .625em;
@@ -165,14 +167,12 @@ background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, 
 }
 
 .message-info{
-        color: #dedadc
+        color: #dedadc;
+        margin-bottom: 2%
 }
 .message-info > span > img{
         width: 28px;
         height: 28px;
-}
-.message-user-avt{
-
 }
 .message-user-name{
         padding:0 0 0 2%
@@ -183,5 +183,21 @@ background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, 
 }
 
 .message-container{
-        margin-bottom: 1%;
+        margin: 2% 0;
+        width: 100%;
+}
+/* .message-info {
+        text-align: right;
+} */
+.float-right{
+        float: right;
+}
+.float-left{
+        float: left;
+}
+.bgc-right{
+        background-color: #1a1a1c;
+}
+.bgc-left{
+        background-color: #343536;  
 }

@@ -26,6 +26,7 @@ const app = express();
 const server = http.Server(app);
 const io = require('socket.io')(server);
 const db = mongoose.connection;
+var date = new Date();
 
 del = function(req, res){
 	res.clearCookie('x-token');
@@ -72,6 +73,7 @@ app.use('/', routes);
 var numUsers = 0;
 
 io.on('connection', function(socket){
+	// socket.emit('chat message', { datetime: new Date().getTime() });
 	console.log(socket.id)
 	var online = 0;
 	function GetCookieValue() {
@@ -84,12 +86,9 @@ io.on('connection', function(socket){
 		console.log('Received private msg ', from, 'saying', msg);
 	})
 
-	// socket.on('new', function(data){
 	io.emit('news', {name : GetCookieValue()});
-		// io.emit('news', data);
-	// })
 	
-	// console.log(GetCookieValue() +' connected');
+	
 	var addedUser = false;
 	// socket receive from 1 client
 	socket.on('load user name', function(username){
@@ -101,9 +100,11 @@ io.on('connection', function(socket){
 			username: GetCookieValue()
 		})
 	})
+
 	socket.on('my other event', function(data){
 		console.log(data);
 	})
+
 	socket.on('send_message', function(text) {
 		console.log(socket.username);
 		// gửi tin nhắn tới các client đang kết nối socket
@@ -113,6 +114,7 @@ io.on('connection', function(socket){
 			text: text
 		});
 	});
+
 	socket.on('user_join', function(username) {
 		if (addedUser)
 			return false;
@@ -131,31 +133,40 @@ io.on('connection', function(socket){
 			numUsers: numUsers
 		});
 	});
+
 	socket.on('disconnect', function(){
 		var username = GetCookieValue();
 		// console.log('user disconnect');
 		io.emit('disconnect', username + ' disconnected');
 	})
+
 	socket.on('typing', function(data){
 		var username = GetCookieValue();
 		// io.emit('typing', username);
 		socket.broadcast.emit('typing', data, username)
 	})
+
+	
+	
 	socket.on('chat message', function(msg){
 		// console.log('message: ' + msg);
 		// console.log(GetCookieValue());
+		
 		var username = GetCookieValue();
-		var id = socket.id
+		var id = socket.id 
 		console.log("sedingmsg from " + id + ": " + msg);
+		// socket.emit('datetime', { datetime: new Date()});
 		// var regex = /%40/gi;
 		// var username = namebfrp.replace(regex,'@')
-		io.emit('chat message', msg, username, id);
+		io.emit('chat message', msg, username, id, {datetime: new Date().getTime()});
 	})
+
 	socket.on('count', function(){
 		online = online +1;
 		console.log(online)
 		io.emit('count', online)
 	})
+
 });
 
 

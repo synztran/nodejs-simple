@@ -37,6 +37,7 @@
                 <ul id="messages"></ul> 
                 <ul id="catch-user"></ul>
                 <ul id="typing-state"></ul>
+                <ul id="datetime"></ul>
                 <form action="">
                     <input id="m" autocomplete="off" placeholder="Type something" /><button>Send</button>
                 </form>
@@ -51,6 +52,7 @@
             
             var socket = io();
             var time = (new Date());
+            console.log(time);
             var a = time.toString();
             var h = (time.getHours() < 10 ? '0' : '') + time.getHours();
             var m = (time.getMinutes() < 10 ? '0' : '') +  time.getMinutes();
@@ -81,17 +83,107 @@
                 return false;
             });
 
-            socket.on('chat message', function(msg, username, id){
-                    var  still = false
-                    console.log(socket.io.engine.id)
+            // socket.on('datetime', function (data) {
+            //     console.log(data['datetime']);
+            //     console.log(data['datetime'].toString())
+            //     var opz = new Date(Date.UTC(data['datetime'].toString()));
+            //     console.log(opz)
+                // var ftime = data['datetime'].toString();
+
+
+                // function msToTime(duration) {
+                //     var milliseconds = parseInt((duration % 1000) / 100),
+                //         seconds = Math.floor((duration / 1000) % 60),
+                //         minutes = Math.floor((duration / (1000 * 60)) % 60),
+                //         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+                //     hours = (hours < 10) ? "0" + hours : hours;
+                //     minutes = (minutes < 10) ? "0" + minutes : minutes;
+                //     seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+                //     return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+                // }
+
+                // console.log(msToTime(ftime))
+                // var time = msToTime(ftime);
+                // console.log(time);
+                // var h = (time.getHours() < 10 ? '0' : '') + time.getHours();
+                // var m = (time.getMinutes() < 10 ? '0' : '') +  time.getMinutes();
+                // var s = (time.getSeconds() < 10 ? '0' : '') + time.getSeconds();
+                // var curtime = h + ":" + m
+                // var b = (curtime.toString()).match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/);
+                // if (b.length > 1) { // If time format correct
+                //     b = b.slice(1); // Remove full string match value
+                //     b[5] = +b[0] < 12 ? ' AM ' : ' PM '; // Set AM/PM
+                //     b[0] = +b[0] % 12 || 12; // Adjust hours
+                // }
+                // var cvtime = b.join('');
+                // console.log(cvtime);
+            //     document.getElementById('datetime').innerHTML +=
+            //     '<li>' + time +'</li>'
+
+            // });
+
+            socket.on('chat message', function(msg, username, id, data){
+                // (new Date(registed_at.seconds*1000).toLocaleString())
+                    console.log(data['datetime']);
+                    console.log(new Date(data['datetime']).toLocaleString())
+                    console.log(data['datetime'].toString());
+                    var ftime = (new Date(data['datetime']).toLocaleString());
+                    // var maybe = ftime.toUTCString();
+                    console.log(ftime);
+                    var timesend = ftime.split(',')[1];
+                    console.log(timesend);
+
+                    // var a = ftime.toString();
+                    // console.log(a);
+                    // var h = (a.getHours() < 10 ? '0' : '') + a.getHours();
+                    // var m = (a.getMinutes() < 10 ? '0' : '') +  a.getMinutes();
+                    // var s = (a.getSeconds() < 10 ? '0' : '') + a.getSeconds();
+                    // console.log(a)
+                    // console.log(h)
+                    // console.log(m)
+                    // console.log(s)
+                    // var curtime = h + ":" + m
+                    // var b = (curtime.toString()).match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/);
+                    // if (b.length > 1) { // If time format correct
+                    //     b = b.slice(1); // Remove full string match value
+                    //     b[5] = +b[0] < 12 ? ' AM ' : ' PM '; // Set AM/PM
+                    //     b[0] = +b[0] % 12 || 12; // Adjust hours
+                    // }
+                    // var cvtime = b.join('');
+                    
+
+
+                    // function msToTime(duration) {
+                    //     var milliseconds = parseInt((duration % 1000) / 100),
+                    //         seconds = Math.floor((duration / 1000) % 60),
+                    //         minutes = Math.floor((duration / (1000 * 60)) % 60),
+                    //         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+                    //     hours = (hours < 10) ? "0" + hours : hours;
+                    //     minutes = (minutes < 10) ? "0" + minutes : minutes;
+                    //     seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+                    //     return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+                    // }
+
+                    // console.log(msToTime(ftime))
+                    // var fntime = msToTime(ftime);
+
+
+
+                    // console.log(data['datetime']);
+                    // id session
+                    console.log("session " + socket.io.engine.id)
                     console.log(id);console.log(username);
-                    if(socket.io.engine.id = id && still == false){
+                    if(socket.io.engine.id == id){
                         document.getElementById('messages').innerHTML += 
-                        '<div class="message-container"><li class="message-info"><span class="message-user-avt"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + cvtime +'</span></li><li class="message-content">' + msg + '</li></div>';
-                        still = true
+                        '<div class="message-container  float-left"><li class="message-info text-left"><span class="message-user-avt"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + timesend +'</span></li><li class="message-content bgc-left float-left">' + msg + '</li></div>';
                     }else{
-                        document.getElementById('messages').innerHTML += '<li class="message-content"><strong>'+ username +'</strong>'+  '&nbsp;'+ cvtime + ' : ' + msg + '</li>'
-                        still = false
+                        // document.getElementById('messages').innerHTML += '<li class="message-content"><strong>'+ username +'</strong>'+  '&nbsp;'+ cvtime + ' : ' + msg + '</li>'
+                        document.getElementById('messages').innerHTML += 
+                        '<div class="message-container  float-right"><li class="message-info text-right"><span class="message-user-avt"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + timesend +'</span></li><li class="message-content bgc-right float-right">' + msg + '</li></div>';
                     }
 
                     
