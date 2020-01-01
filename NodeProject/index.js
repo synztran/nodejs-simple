@@ -15,6 +15,7 @@ const methodOverride = require('method-override');
 // var router = express.Router();
 const Database = require('./db/database');
 const routes = require('./routes/controller');
+const proutes = require('./routes/pcontroller');
 const bcrypt = require("bcryptjs");
 // mongoose.connect('mongodb://localhost:27017/testmongodb');
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
@@ -59,6 +60,7 @@ app.use('/css', express.static('lib/css'))
 app.use('/io', express.static('lib'))
 app.use('/docs/upload', express.static('docs/upload'))
 
+
 // using libary ejs, ejs create html then back to browser
 app.set("view engine", "ejs");
 
@@ -67,6 +69,7 @@ app.set("views", "./views");
 app.get('/del', del);
 
 app.use('/', routes);
+app.use('/p', proutes);
 
 // io.emit('some event', {someProperty: 'some value', otherProperty: 'other value'});
 
@@ -158,7 +161,7 @@ io.on('connection', function(socket){
 		// socket.emit('datetime', { datetime: new Date()});
 		// var regex = /%40/gi;
 		// var username = namebfrp.replace(regex,'@')
-		io.emit('chat message', msg, username, id, {datetime: new Date().getTime()});
+		io.emit('chat message', msg, username, id, {datetime: new Date()});
 	})
 
 	socket.on('count', function(){

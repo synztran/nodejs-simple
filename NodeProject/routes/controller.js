@@ -121,6 +121,11 @@ router.get('/listcreated', function(req,res){
         // 'listCreated' : ''
     });
 })
+router.get('/landingpage', function(req,res){
+    res.render('index',{
+        // 'listCreated' : ''
+    });
+})
 
 
 const loginRequired = async(req, res, next) =>{

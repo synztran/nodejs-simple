@@ -127,15 +127,19 @@
             socket.on('chat message', function(msg, username, id, data){
                 // (new Date(registed_at.seconds*1000).toLocaleString())
                     console.log(data['datetime']);
-                    console.log(new Date(data['datetime']).toLocaleString())
+                    console.log(new Date(data['datetime']).toLocaleTimeString())
                     console.log(data['datetime'].toString());
-                    var ftime = (new Date(data['datetime']).toLocaleString());
+                    var ftime = (new Date(data['datetime']).toLocaleTimeString());
                     // var maybe = ftime.toUTCString();
                     console.log(ftime);
-                    var timesend = ftime.split(',')[1];
-                    console.log(timesend);
 
-                    // var a = ftime.toString();
+                    var  y = new Date();
+                    var make = y.toLocaleTimeString();
+                    console.log(make)
+
+
+
+                    // var a = make.toString();
                     // console.log(a);
                     // var h = (a.getHours() < 10 ? '0' : '') + a.getHours();
                     // var m = (a.getMinutes() < 10 ? '0' : '') +  a.getMinutes();
@@ -179,11 +183,11 @@
                     console.log(id);console.log(username);
                     if(socket.io.engine.id == id){
                         document.getElementById('messages').innerHTML += 
-                        '<div class="message-container  float-left"><li class="message-info text-left"><span class="message-user-avt"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + timesend +'</span></li><li class="message-content bgc-left float-left">' + msg + '</li></div>';
+                        '<div class="message-container  float-left"><li class="message-info text-left"><span class="message-user-avt"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-left float-left">' + msg + '</li></div>';
                     }else{
                         // document.getElementById('messages').innerHTML += '<li class="message-content"><strong>'+ username +'</strong>'+  '&nbsp;'+ cvtime + ' : ' + msg + '</li>'
                         document.getElementById('messages').innerHTML += 
-                        '<div class="message-container  float-right"><li class="message-info text-right"><span class="message-user-avt"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + timesend +'</span></li><li class="message-content bgc-right float-right">' + msg + '</li></div>';
+                        '<div class="message-container  float-right"><li class="message-info text-right"><span class="message-user-avt"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-right float-right">' + msg + '</li></div>';
                     }
 
                     
