@@ -121,6 +121,11 @@ router.get('/listcreated', function(req,res){
         // 'listCreated' : ''
     });
 })
+// router.get('/landingpage', function(req,res){
+//     res.render('index',{
+//         // 'listCreated' : ''
+//     });
+// })
 
 
 const loginRequired = async(req, res, next) =>{
@@ -282,6 +287,9 @@ router.post("/account/edit/:id", upload.single('picture') ,async (req, res) => {
 router.post("/login", async (req, res, next) => {
     try {
         var account = await Account.findOne({ email: req.body.email }).exec();
+        var active =  await Account.findOne({ $and:[{email: req.body.email}, {active: true}]});
+       
+        
         if (!account) {
             return res.status(400).send({
                 status: "error",
@@ -294,6 +302,13 @@ router.post("/login", async (req, res, next) => {
                 message: "The password is not correct"
             });
         }
+        if(!active){
+            return res.status(400).send({
+                status: "error",
+                message: "Please active your account"
+            })
+        }
+        
         const user = {
             "email": req.body.email,
             "password": req.body.password
@@ -356,7 +371,8 @@ router.post("/register", upload.single('picture'),  (req, res) => {
                     picture: {
                         path: req.file.path,
                         size: req.file.size
-                    }
+                    },
+                    active: false
                 });
                 var result =  account.save();
                 res.send(result);

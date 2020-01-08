@@ -15,6 +15,7 @@ const methodOverride = require('method-override');
 // var router = express.Router();
 const Database = require('./db/database');
 const routes = require('./routes/controller');
+const proutes = require('./routes/pcontroller');
 const bcrypt = require("bcryptjs");
 // mongoose.connect('mongodb://localhost:27017/testmongodb');
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
@@ -33,7 +34,7 @@ del = function(req, res){
 	res.clearCookie('x-refresh-token');
 	res.clearCookie('x-email');
 	res.clearCookie('io');
-	res.redirect('/signin');
+	res.redirect('/api/signin');
 }
 
 
@@ -53,11 +54,12 @@ app.use(bodyParser.urlencoded({
 // set static data for public folder to Application Server
 // app.use(express.static('public'));
 // app.use(express.static('docs'));
-app.use('/docs', express.static('docs'))
-app.use('/js', express.static('lib/js'))
-app.use('/css', express.static('lib/css'))
-app.use('/io', express.static('lib'))
-app.use('/docs/upload', express.static('docs/upload'))
+app.use('/api/docs', express.static('docs'))
+app.use('/api/js', express.static('lib/js'))
+app.use('/api/css', express.static('lib/css'))
+app.use('/api/io', express.static('lib'))
+app.use('/api/docs/upload', express.static('docs/upload'))
+
 
 // using libary ejs, ejs create html then back to browser
 app.set("view engine", "ejs");
@@ -66,14 +68,18 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 app.get('/del', del);
 
-app.use('/', routes);
+app.use('/api', routes);
+app.use('/', proutes);
 
 // io.emit('some event', {someProperty: 'some value', otherProperty: 'other value'});
 
 var numUsers = 0;
+var rooms = ['abc123'];
 
 io.on('connection', function(socket){
 	// socket.emit('chat message', { datetime: new Date().getTime() });
+	var cli = io.of('/api/messenger').clients();
+	console.log(cli);
 	console.log(socket.id)
 	var online = 0;
 	function GetCookieValue() {
@@ -81,10 +87,11 @@ io.on('connection', function(socket){
 		var found = socket.handshake.headers.cookie.split(';').filter(c => c.trim().split("=")[0] === 'x-email');
 		return found.length > 0 ? found[0].split("=")[1].replace(regex, '@') : null;
 	}
+
 	io.emit('this', {will: 'be received by everyone'});
 	socket.on('private message', function(from, msg){
 		console.log('Received private msg ', from, 'saying', msg);
-	})
+	});
 
 	io.emit('news', {name : GetCookieValue()});
 	
@@ -99,11 +106,11 @@ io.on('connection', function(socket){
 		socket.broadcast.emit('load user name', {
 			username: GetCookieValue()
 		})
-	})
+	});
 
 	socket.on('my other event', function(data){
 		console.log(data);
-	})
+	});
 
 	socket.on('send_message', function(text) {
 		console.log(socket.username);
@@ -115,36 +122,22 @@ io.on('connection', function(socket){
 		});
 	});
 
-	socket.on('user_join', function(username) {
-		if (addedUser)
-			return false;
-		socket.username = username;
-		console.log('user_join: '+ socket.username);
-
-		++ numUsers;
-		addedUser = true;
-		// báo cho client đang join phòng thành công
-		socket.emit('login', {
-			numberUsers: numUsers
-		});
-		// báo cho client khác biết có người mới join vào phòng
-		socket.broadcast.emit('new_user_join', {
-			username: socket.username,
-			numUsers: numUsers
-		});
+	socket.on('join_room', room => {
+		socket.join(room);
 	});
 
 	socket.on('disconnect', function(){
 		var username = GetCookieValue();
 		// console.log('user disconnect');
 		io.emit('disconnect', username + ' disconnected');
-	})
+	});
 
-	socket.on('typing', function(data){
+	socket.on('typing', ({data, room}) =>{
 		var username = GetCookieValue();
 		// io.emit('typing', username);
-		socket.broadcast.emit('typing', data, username)
-	})
+		// socket.broadcast.emit('typing', data, username)
+		socket.to(room).emit('typing', data, room, username)
+	});
 
 	
 	
@@ -158,8 +151,20 @@ io.on('connection', function(socket){
 		// socket.emit('datetime', { datetime: new Date()});
 		// var regex = /%40/gi;
 		// var username = namebfrp.replace(regex,'@')
-		io.emit('chat message', msg, username, id, {datetime: new Date().getTime()});
-	})
+		io.emit('chat message', msg, username, id, {datetime: new Date()});
+	});
+
+	// socket.on('chat message', ({room, message})=>{
+	// 	var username = GetCookieValue();
+	// 	var id = socket.id 
+	// 	socket.to(room).emit('chat message',{
+			
+	// 		message,
+	// 		name: username,
+	// 		id: id,
+	// 		time: {datetime: new Date()}
+	// 	});
+	// });
 
 	socket.on('count', function(){
 		online = online +1;

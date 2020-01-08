@@ -1,0 +1,46 @@
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.hidden{
+    display: none;
+  }
+  .nav-customize li{
+    display: inline;
+  }
+.form-group{
+    margin-bottom: 5%;
+}
+.form-group label{
+    color: #6b3792
+}
+.form-group input{
+    color: black;
+    -webkit-text-fill-color: black;
+    transition: background-color 5000s ease-in-out 0s;
+    margin:0;
+    padding: 0;
+    height: 4rem;
+    border-bottom: 1px solid #6b3792;
+    width: 100%;
+}
+.form-group label{
+    text-align: left;
+}
+a.register:hover{
+    font-size: 16px;
+    font-weight: bold;
+    color: #6b3792;
+}
+.button-login button{
+    width: 100%;
+    background-color: #6b3792;
+    color:white;
+    border:0
+}
+.button-login button:hover{
+    background-color: #db97ce;
+    font-size: 16px;
+    font-weight: bold;
+}
