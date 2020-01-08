@@ -88,7 +88,7 @@ background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, 
         transition: all .3s;
         font-size: 13px;
         line-height: 15px;
-        margin-left: 54px;
+        /* margin-left: 5%; */
 }
 .catch-user-content{
         color: white;
@@ -168,7 +168,7 @@ background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, 
 
 .message-info{
         color: #dedadc;
-        margin-bottom: 2%
+        margin-bottom: 0%
 }
 .message-info > span > img{
         width: 28px;
@@ -197,7 +197,9 @@ background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, 
 }
 .bgc-right{
         background-color: #1a1a1c;
+        margin-right: 1%;
 }
 .bgc-left{
-        background-color: #343536;  
+        background-color: #343536;
+        margin-left: 5%;
 }

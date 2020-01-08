@@ -53,7 +53,11 @@ example = require('./../lib/js/listAccount.js')
 
 
 
+<<<<<<< HEAD
 router.get("/p/landingpage", function(req, res) {
+=======
+router.get("/", function(req, res) {
+>>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
     res.render("index");
 });
 

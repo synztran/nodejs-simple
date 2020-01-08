@@ -41,6 +41,9 @@ var accountSchema = mongoose.Schema({
         
         // required: true
         
+    },
+    active:{
+        type: Boolean 
     }
 })
 let Account = mongoose.model('Account', accountSchema);

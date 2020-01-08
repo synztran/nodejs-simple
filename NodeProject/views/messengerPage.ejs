@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Socket.IO chat</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/sample.css">
+        <link rel="stylesheet" href="/api/css/sample.css">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
@@ -25,11 +25,11 @@
                 </nav>
                 <div class="list-member">
                     <span class="list-member-info">
-                        <span class="mini-member-info"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
-                        <span class="mini-member-info"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
-                        <span class="mini-member-info"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
-                        <span class="mini-member-info"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
-                        <span class="mini-member-info"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span></span>
+                        <span class="mini-member-info"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
+                        <span class="mini-member-info"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
+                        <span class="mini-member-info"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
+                        <span class="mini-member-info"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
+                        <span class="mini-member-info"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span></span>
                       
                     </span>
                     <span class="sample-text">This is the start of a beautiful thing. Say something nice, or share a cat fact.</span>
@@ -46,29 +46,30 @@
     </body>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     
     <script>
         $(function(){
             
             var socket = io();
-            var time = (new Date());
-            console.log(time);
-            var a = time.toString();
-            var h = (time.getHours() < 10 ? '0' : '') + time.getHours();
-            var m = (time.getMinutes() < 10 ? '0' : '') +  time.getMinutes();
-            var s = (time.getSeconds() < 10 ? '0' : '') + time.getSeconds();
-            console.log(a)
-            console.log(h)
-            console.log(m)
-            console.log(s)
-            var curtime = h + ":" + m
-            var b = (curtime.toString()).match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/);
-            if (b.length > 1) { // If time format correct
-                b = b.slice(1); // Remove full string match value
-                b[5] = +b[0] < 12 ? ' AM ' : ' PM '; // Set AM/PM
-                b[0] = +b[0] % 12 || 12; // Adjust hours
-            }
-            var cvtime = b.join('');
+            // var time = (new Date());
+            // console.log(time);
+            // var a = time.toString();
+            // var h = (time.getHours() < 10 ? '0' : '') + time.getHours();
+            // var m = (time.getMinutes() < 10 ? '0' : '') +  time.getMinutes();
+            // var s = (time.getSeconds() < 10 ? '0' : '') + time.getSeconds();
+            // console.log(a)
+            // console.log(h)
+            // console.log(m)
+            // console.log(s)
+            // var curtime = h + ":" + m
+            // var b = (curtime.toString()).match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/);
+            // if (b.length > 1) { // If time format correct
+            //     b = b.slice(1); // Remove full string match value
+            //     b[5] = +b[0] < 12 ? ' AM ' : ' PM '; // Set AM/PM
+            //     b[0] = +b[0] % 12 || 12; // Adjust hours
+            // }
+            // var cvtime = b.join('');
             
             $("#messages").stop().animate({ scrollTop: $("#messages")[0].scrollHeight}, 1000);
             $('form').submit(function(e){
@@ -183,11 +184,19 @@
                     console.log(id);console.log(username);
                     if(socket.io.engine.id == id){
                         document.getElementById('messages').innerHTML += 
+<<<<<<< HEAD
                         '<div class="message-container  float-left"><li class="message-info text-left"><span class="message-user-avt"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-left float-left">' + msg + '</li></div>';
                     }else{
                         // document.getElementById('messages').innerHTML += '<li class="message-content"><strong>'+ username +'</strong>'+  '&nbsp;'+ cvtime + ' : ' + msg + '</li>'
                         document.getElementById('messages').innerHTML += 
                         '<div class="message-container  float-right"><li class="message-info text-right"><span class="message-user-avt"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-right float-right">' + msg + '</li></div>';
+=======
+                        '<div class="message-container  float-left"><li class="message-info text-left"><span class="message-user-avt"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-left float-left">' + msg + '</li></div>';
+                    }else{
+                        // document.getElementById('messages').innerHTML += '<li class="message-content"><strong>'+ username +'</strong>'+  '&nbsp;'+ cvtime + ' : ' + msg + '</li>'
+                        document.getElementById('messages').innerHTML += 
+                        '<div class="message-container  float-right"><li class="message-info text-right"><span class="message-user-avt"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-right float-right">' + msg + '</li></div>';
+>>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
                     }
 
                     

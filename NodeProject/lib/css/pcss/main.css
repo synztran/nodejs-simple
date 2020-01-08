@@ -2063,7 +2063,11 @@ body.menu-is-open {
   background-color: transparent;
   position: relative;
   display: table;
+<<<<<<< HEAD
   background-image: url('/docs/pimg/57328243_2304828816436296_8782805694087247789_n.jpg');
+=======
+  background-image: url('/api/docs/pimg/57328243_2304828816436296_8782805694087247789_n.jpg');
+>>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
   background-repeat:no-repeat;
 }
 
@@ -2165,7 +2169,11 @@ body.menu-is-open {
   width: 9rem;
   border-radius: 50%;
   background-color: #793ea5;
+<<<<<<< HEAD
   background-image: url(/docs/pimg/icons/icon-play.svg);
+=======
+  background-image: url(/api/docs/pimg/icons/icon-play.svg);
+>>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
   background-repeat: no-repeat;
   background-position: 55% center;
   background-size: 24px 27px;
@@ -3013,7 +3021,11 @@ html.no-csstransitions .home-content__main {
   height: 100%;
   opacity: .3;
   background-color: rgba(0, 0, 0, 0.9);
+<<<<<<< HEAD
   background-image: url(/docs/pimg/pattern.jpg);
+=======
+  background-image: url(/api/docs/pimg/pattern.jpg);
+>>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
   background-size: 760px 380px;
 }
 
@@ -3399,7 +3411,11 @@ html.no-csstransitions .home-content__main {
   padding-bottom: 21rem;
   text-align: center;
   position: relative;
+<<<<<<< HEAD
   background-image: url(/docs/pimg/e6.5.jpg);
+=======
+  background-image: url(/api/docs/pimg/e6.5.jpg);
+>>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -3421,7 +3437,11 @@ html.no-csstransitions .home-content__main {
   height: 4.5rem;
   width: 4.5rem;
   background-color: transparent;
+<<<<<<< HEAD
   background-image: url(/docs/pimg/icons/icon-quote.svg);
+=======
+  background-image: url(/api/docs/pimg/icons/icon-quote.svg);
+>>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -3884,7 +3904,11 @@ footer a {
   display: block;
   height: 16px;
   width: 12px;
+<<<<<<< HEAD
   background-image: url(/docs/pimg/icons/icon-up.svg);
+=======
+  background-image: url(/api/docs/pimg/icons/icon-up.svg);
+>>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -4065,4 +4089,7 @@ footer a {
     bottom: 16.4rem;
   }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
