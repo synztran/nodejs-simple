@@ -69,13 +69,10 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 app.get('/del', del);
 
-<<<<<<< HEAD
-app.use('/', routes);
-app.use('/p', proutes);
-=======
+
 app.use('/api', routes);
 app.use('/', proutes);
->>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
+
 
 // io.emit('some event', {someProperty: 'some value', otherProperty: 'other value'});
 
@@ -158,9 +155,7 @@ io.on('connection', function(socket){
 		// var regex = /%40/gi;
 		// var username = namebfrp.replace(regex,'@')
 		io.emit('chat message', msg, username, id, {datetime: new Date()});
-<<<<<<< HEAD
-	})
-=======
+
 	});
 
 	// socket.on('chat message', ({room, message})=>{
@@ -174,7 +169,7 @@ io.on('connection', function(socket){
 	// 		time: {datetime: new Date()}
 	// 	});
 	// });
->>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
+
 
 	socket.on('count', function(){
 		online = online +1;

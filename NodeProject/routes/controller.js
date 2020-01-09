@@ -121,19 +121,13 @@ router.get('/listcreated', function(req,res){
         // 'listCreated' : ''
     });
 })
-<<<<<<< HEAD
-router.get('/landingpage', function(req,res){
-    res.render('index',{
-        // 'listCreated' : ''
-    });
-})
-=======
+
 // router.get('/landingpage', function(req,res){
 //     res.render('index',{
 //         // 'listCreated' : ''
 //     });
 // })
->>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
+
 
 
 const loginRequired = async(req, res, next) =>{

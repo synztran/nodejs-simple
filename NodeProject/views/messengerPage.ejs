@@ -184,19 +184,13 @@
                     console.log(id);console.log(username);
                     if(socket.io.engine.id == id){
                         document.getElementById('messages').innerHTML += 
-<<<<<<< HEAD
-                        '<div class="message-container  float-left"><li class="message-info text-left"><span class="message-user-avt"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-left float-left">' + msg + '</li></div>';
-                    }else{
-                        // document.getElementById('messages').innerHTML += '<li class="message-content"><strong>'+ username +'</strong>'+  '&nbsp;'+ cvtime + ' : ' + msg + '</li>'
-                        document.getElementById('messages').innerHTML += 
-                        '<div class="message-container  float-right"><li class="message-info text-right"><span class="message-user-avt"><img src="/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-right float-right">' + msg + '</li></div>';
-=======
+
                         '<div class="message-container  float-left"><li class="message-info text-left"><span class="message-user-avt"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-left float-left">' + msg + '</li></div>';
                     }else{
                         // document.getElementById('messages').innerHTML += '<li class="message-content"><strong>'+ username +'</strong>'+  '&nbsp;'+ cvtime + ' : ' + msg + '</li>'
                         document.getElementById('messages').innerHTML += 
                         '<div class="message-container  float-right"><li class="message-info text-right"><span class="message-user-avt"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-right float-right">' + msg + '</li></div>';
->>>>>>> 7ee5d615b158b44a92ceaa2f57885105920bb303
+
                     }
 
                     
