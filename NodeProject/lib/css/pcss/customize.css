@@ -44,3 +44,10 @@ a.register:hover{
     font-size: 16px;
     font-weight: bold;
 }
+.form-group input::placeholder { /* Chrome/Opera/Safari */
+    color: pink;
+}
+
+input::-webkit-input-placeholder {
+    opacity: 0.5; /*Change the opacity between 0 and 1*/
+}
