@@ -28,7 +28,7 @@
 .form-group label{
     text-align: left;
 }
-a.register:hover{
+a.btn-register:hover{
     font-size: 16px;
     font-weight: bold;
     color: #6b3792;
@@ -51,3 +51,6 @@ a.register:hover{
 input::-webkit-input-placeholder {
     opacity: 0.5; /*Change the opacity between 0 and 1*/
 }
+/* #form-register{
+    display: none;
+} */

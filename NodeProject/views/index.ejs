@@ -163,8 +163,15 @@
 
                 <a href="#0"><i class="fas fa-ticket-alt"></i><span>Raffle</span></a>
             </li>
+
             <li>
+                
+                <% if(user!= null) { %>
+                <a id="login" href="#"><i class="fas fa-user"></i><span><%= user %></span></a>
+                <% } else { %>
+               
                 <a id="login" href="#"><i class="fas fa-user"></i><span>Signin</span></a>
+               <% } %>
             </li>
             <li>
                 <a href="#0"><i class="fas fa-images"></i><span>Gallery</span></a>
@@ -662,30 +669,50 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
          $(function(){
-
-            var formLogin = $('#form-login > form').clone()[0]
+            
+            var formLogin = $('.swal2-container').clone()[0]
                 $('#form-login').remove();
-            $('#login').on('click', function(e){
-                e.preventDefault();
-               
-                Swal.fire({
-                    title: 'Hi!',
-                    showConfirmButton: false,
-                    html: "<form action='/api/login' method='post'><div class='form-group'><label for='email'>Email address</label><input type='email' name='email' autocomplete='off' class='form-control' id='email' aria-describedby='emailHelp' placeholder='Enter email'></div><div class='form-group'><label for='password'>Password</label><input type='password' name='password' class='form-control' id='password' placeholder='Password'></div><div class='form-group'><small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small></br></br><a class='register' href='./signup'>Click here to signup</a></div></br><div><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Submit</button></div>                        </form>"
-                    }) 
-
-            });
-
+       
             $('.home-social #login').on('click', function(e){
                 e.preventDefault();
-                var formLogin = $('#form-login > form').clone()[0]
-                $('#form-login').remove();
+                // var formLogin = $('#form-login > form').clone()[0]
+                
+
+
                 Swal.fire({
                     title: 'Hi!',
                     showConfirmButton: false,
-                    html: "<form action='/api/login' method='post'><div class='form-group'><label for='email'>Email address</label><input type='email' name='email' autocomplete='off' class='form-control' id='email' aria-describedby='emailHelp' placeholder='Enter email'></div><div class='form-group'><label for='password'>Password</label><input type='password' name='password' class='form-control' id='password' placeholder='Password'></div><div class='form-group'><small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small></br></br><a class='register' href='./signup'>Click here to signup</a></div></br><div class='button-login'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Submit</button></div>                        </form>"
-                }) 
+                    html: "<form action='./login' method='post'><div class='form-group'><label for='email'>Email address</label><input type='email' name='email' autocomplete='off' class='form-control' id='email' aria-describedby='emailHelp' placeholder='Enter email'></div><div class='form-group'><label for='password'>Password</label><input type='password' name='password' class='form-control' id='password' placeholder='Password'></div><div class='form-group'><small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small></br></br><a class='btn-register' href='#'>Click here to signup</a></div></br><div class='button-login'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Login</button></div></form>"
+                })
+                $(document).on('click', '.btn-register', function(e){
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Register now!',
+                        showConfirmButton: false,
+                        html: "<form id='form-register' action='./register' method='POST' ><div class='form-group'><label for='email'>Email address</label><input type='email' name='email' class='form-control' id='email' aria-describedbsy='emailHelp' placeholder='Enter email'></div><div class='form-group'><label for='password'>Password</label><input type='password' name='password' class='form-control' id='password' placeholder='Password'></div><button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Register</button></form>"
+                    })
+
+                    
+                })
+
+
+
+                
             });
+
+            // $('.btn-register').on('click', function(e){
+            //     e.preventDefault();
+            //     console.log(1);
+            //     this.close();
+            //     formLogin.remove();
+            //     Swal.fire({
+            //         title: 'Register now!',
+            //         showConfirmButton: false,
+            //         html: "<form action='./register' method='POST' enctype='multipart/form-data'><div class='form-group'><label for='email'>Email address</label><input type='email' name='email' class='form-control' id='email' aria-describedby='emailHelp' placeholder='Enter email'><small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small></div><div class='form-group'><label for='password'>Password</label><input type='password' name='password' class='form-control' id='password' placeholder='Password'></div><div className='input-group mb-3'><div className='custom-file'><input type='file' accept=''.jpg, .jpeg, .png' id='picture' name='picture' className='custom-file-input' id='inputGroupFile01' aria-describedby='inputGroupFileAddon01' /></div></div><button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Submit</button></form>"
+            //     })
+            // })
+
+            
         })
     </script>
 

@@ -45,6 +45,7 @@ const upload = multer({
 });
 // var imgPath = 'docs/img_1435.JPG';
 var Account = require('./../db/model/account');
+var AdmAccount = require('./../db/model/accadmin');
 var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
@@ -109,7 +110,13 @@ router.get("/signup", function(req, res) {
 });
 
 router.get('/', TokenCheckMiddleware, function(req, res){
-    res.render('mainPage');
+    const uemail = req.cookies['x-email'];
+    console.log(uemail);
+    res.render('mainPage'
+    ,{
+        user:  uemail  
+    }
+    );
 });
 
 router.get('/messenger', TokenCheckMiddleware, function(req, res){
@@ -288,8 +295,8 @@ router.post("/account/edit/:id", upload.single('picture') ,async (req, res) => {
 
 router.post("/login", async (req, res, next) => {
     try {
-        var account = await Account.findOne({ email: req.body.email }).exec();
-        var active =  await Account.findOne({ $and:[{email: req.body.email}, {active: true}]});
+        var account = await AdmAccount.findOne({ email: req.body.email }).exec();
+        var active =  await AdmAccount.findOne({ $and:[{email: req.body.email}, {active: true}]});
        
         
         if (!account) {
@@ -359,7 +366,7 @@ router.post("/register", upload.single('picture'),  (req, res) => {
     // console.log(req.body.fileuploader-list-picture);
     console.log(req.body);
     try {
-        var check =  Account.find({ email: req.body.email }, async (err, docs) => {
+        var check =  AdmAccount.find({ email: req.body.email }, async (err, docs) => {
             if (docs.length) {
                 res.status(400).json({
                     code: 400,
@@ -367,7 +374,7 @@ router.post("/register", upload.single('picture'),  (req, res) => {
                 })
             } else {
                 req.body.password = bcrypt.hashSync(req.body.password, 10);
-                var account = new Account({
+                var account = new AdmAccount({
                     email: req.body.email,
                     password: req.body.password,
                     picture: {
@@ -377,8 +384,8 @@ router.post("/register", upload.single('picture'),  (req, res) => {
                     active: false
                 });
                 var result =  account.save();
-                res.send(result);
-                // res.redirect('/');
+                // res.send(result);
+                res.redirect('/');
             }
         }).exec();
     } catch (err) {

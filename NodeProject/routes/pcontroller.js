@@ -55,8 +55,112 @@ example = require('./../lib/js/listAccount.js')
 
 
 router.get("/", function(req, res) {
+    const uemail = req.cookies['x-email'];
+    res.render('index'
+    ,{
+        user:  uemail  
+    })
+});
 
-    res.render("index");
+router.post("/register", async (req, res) => {
+    
+
+    // console.log(req);
+    // console.log(req.body.fileuploader-list-picture);
+    console.log(req.body);
+    try {
+        var check =  await  Account.find({ email: req.body.email }, async (err, docs) => {
+            if (docs.length) {
+                res.status(400).json({
+                    code: 400,
+                    message: "email already exists"
+                })
+            } else {
+                req.body.password = bcrypt.hashSync(req.body.password, 10);
+                var account = await new Account({
+                    email: req.body.email,
+                    password: req.body.password,
+                    // picture: {
+                    //     path: req.file.path,
+                    //     size: req.file.size
+                    // },
+                    active: false
+                });
+                var result =  account.save();
+                // res.send(result);
+                res.redirect('/');
+            }
+        }).exec();
+    } catch (err) {
+        res.status(500).send(err)
+    }
+})
+
+router.post("/login", async (req, res, next) => {
+    try {
+        var account = await Account.findOne({ email: req.body.email }).exec();
+        var active =  await Account.findOne({ $and:[{email: req.body.email}, {active: true}]});
+       
+        
+        if (!account) {
+            return res.status(400).send({
+                status: "error",
+                message: "The user does not exist "
+            });
+        }
+        if (!bcrypt.compareSync(req.body.password, account.password)) {
+            return res.status(400).send({
+                status: "error",
+                message: "The password is not correct"
+            });
+        }
+        if(!active){
+            return res.status(400).send({
+                status: "error",
+                message: "Please active your account"
+            })
+        }
+        
+        const user = {
+            "email": req.body.email,
+            "password": req.body.password
+        }
+        const token = jwt.sign(user, config.secret, {
+            expiresIn: config.tokenLife,
+        });
+        const refreshToken = jwt.sign(user, config.refreshTokenSecret, {
+            expiresIn: config.refreshTokenLife
+        });
+        tokenList[refreshToken] = user;
+        const response = {
+            token,
+            refreshToken,
+        }
+        var check =  userToken.find({ email: req.body.email }, async (err, docs) => {
+            if (docs.length) {
+                // userToken.set(req.body);
+                db.collection('usertokens').updateOne({email: req.body.email}, {$set:{token: response.token, refreshToken: response.refreshToken}})
+            } else {
+                var accToken = new userToken({
+                    email: req.body.email,
+                    token: response.token,
+                    refreshToken: response.refreshToken
+                });
+                var result =  accToken.save();
+            }
+        }).exec();
+       
+            res.cookie('x-token', response.token);
+            res.cookie('x-refresh-token', response.refreshToken);
+            res.cookie('x-email', user.email);
+            // res.send(token);
+           
+            res.redirect('/');
+            
+        
+    } catch (err) {
+        res.status(500).send(err);
+    }
 });
 
 

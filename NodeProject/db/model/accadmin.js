@@ -6,7 +6,7 @@ var validateEmail = function(email) {
     return re.test(email)
 };
 
-var accountSchema = mongoose.Schema({
+var admaccountSchema = mongoose.Schema({
     email: {
         // required: true,
         type: String,
@@ -30,10 +30,21 @@ var accountSchema = mongoose.Schema({
         type: Date,
         default: new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()))
     },
-    
+    picture:{
+    	// data: Buffer,
+        path: {
+            type: String
+        },
+        size: {
+            type: Number
+        },
+        
+        // required: true
+        
+    },
     active:{
         type: Boolean 
     }
 })
-let Account = mongoose.model('Account', accountSchema);
-module.exports = Account;
+let AdmAccount = mongoose.model('AdmAccount', admaccountSchema);
+module.exports = AdmAccount;
