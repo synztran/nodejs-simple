@@ -51,6 +51,42 @@ a.btn-register:hover{
 input::-webkit-input-placeholder {
     opacity: 0.5; /*Change the opacity between 0 and 1*/
 }
+.form-info{
+    display: flex;
+}
+.form-info .col-md-12{
+    margin: 0!important;
+    padding: 0!important;
+}
+.form-info > .row > .col-md-8{
+    display: grid;
+    width: 80%;
+}
+.form-info > .row > .col-md-8 > .col-md-2{
+    display: inline-flex;
+}
+
+.form-info > .row > .col-md-8 > form > .col-md-2{
+    display: inline-flex;
+    width: 100%
+}
+.form-info > .row > .col-md-8 > .col-md-2 > label{
+    width: 100%;
+    margin:auto 0;
+}
+.form-info > .row > .col-md-8 > form > .col-md-2 > label{
+    width: 100%;
+    margin:auto 0;
+}
+.button-submit-changepw{
+    display: flex;
+}
+/*.form-info .col-md-2{
+    padding-left: 0;
+}
+.form-info .col-md-4{
+    padding-right: 0;
+}*/
 /* #form-register{
     display: none;
 } */
