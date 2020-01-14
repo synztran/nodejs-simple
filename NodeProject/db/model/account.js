@@ -26,6 +26,18 @@ var accountSchema = mongoose.Schema({
         type: String,
         // required: true
     },
+    fname:{
+        type: String
+    },
+    lname:{
+        type: String
+    },
+    b_date:{
+        type: Date,
+    },
+    address:{
+        type: String
+    },
     created: {
         type: Date,
         default: new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()))

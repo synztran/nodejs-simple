@@ -82,8 +82,33 @@ var rooms = ['abc123'];
 io.on('connection', function(socket){
 	// socket.emit('chat message', { datetime: new Date().getTime() });
 	var cli = io.of('/api/messenger').clients();
-	console.log(cli);
-	console.log(socket.id)
+	// console.log(cli);
+	// console.log(socket.id)
+	// console.log(io.sockets.adapter.rooms);
+	// console.log(socket.adapter.rooms);
+	socket.on('get_rooms',function(){
+		var room_list = {};
+		var rooms = io.nsps['/messenger'].adapter.rooms;
+  
+		for (var room in rooms){
+		  if (!rooms[room].hasOwnProperty(room)) {
+				  console.log(rooms[room]);
+				  room_list[room] = Object.keys(rooms[room]).length;
+			  }
+		}
+		console.log(room_list);
+		socket.emit('rooms_list',room_list);
+	  });
+
+	socket.on('getRoom', function(){
+		var listroom = io.sockets.adapter.rooms;
+		console.log(listroom)
+		console.log(io.sockets.adapter.rooms)
+		
+		io.emit('getRoom', listroom)
+		
+	})
+
 	var online = 0;
 	function GetCookieValue() {
 		var regex = /%40/gi;
@@ -150,7 +175,7 @@ io.on('connection', function(socket){
 		
 		var username = GetCookieValue();
 		var id = socket.id 
-		console.log("sedingmsg from " + id + ": " + msg);
+		console.log("seding msg from " + id + ": " + msg);
 		// socket.emit('datetime', { datetime: new Date()});
 		// var regex = /%40/gi;
 		// var username = namebfrp.replace(regex,'@')

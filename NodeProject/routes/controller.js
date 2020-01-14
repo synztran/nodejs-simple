@@ -123,6 +123,10 @@ router.get('/messenger', TokenCheckMiddleware, function(req, res){
     res.render('messengerPage');
 })
 
+router.get('/list-room', TokenCheckMiddleware, function(req, res){
+    res.render('listroomPage');
+})
+
 router.get('/listcreated', function(req,res){
     res.render('listCreated',{
         // 'listCreated' : ''

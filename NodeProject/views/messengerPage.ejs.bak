@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Socket.IO chat</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="/api/css/sample.css">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+    </head>
+    <body oncontextmenu="return false">
+        <div class="row customize-row">
+            <div class="col-md-4 sub">
+                <ul id="list"></ul>
+            </div>
+            <div class="col-md-8 main">
+                <nav class="box-chat">
+                        <span class="info-box-chat">
+                            <span class="user-name">Title box chat</span>
+                            <span class="count-member">number of member</span>
+                        </span>
+                        <span class="config-box-chat"><i class="fa fa-cog"></i></span>
+                </nav>
+                <div class="list-member">
+                    <span class="list-member-info">
+                        <span class="mini-member-info"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
+                        <span class="mini-member-info"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
+                        <span class="mini-member-info"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
+                        <span class="mini-member-info"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span>,</span>
+                        <span class="mini-member-info"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"> <span>synztran</span></span>
+                      
+                    </span>
+                    <span class="sample-text">This is the start of a beautiful thing. Say something nice, or share a cat fact.</span>
+                </div>
+                <ul id="messages"></ul> 
+                <ul id="catch-user"></ul>
+                <ul id="typing-state"></ul>
+                <ul id="datetime"></ul>
+                <form action="">
+                    <input id="m" autocomplete="off" placeholder="Type something" /><button>Send</button>
+                </form>
+            </div>
+        </div>
+    </body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    
+    <script>
+        $(function(){
+            
+            var socket = io();
+            // var time = (new Date());
+            // console.log(time);
+            // var a = time.toString();
+            // var h = (time.getHours() < 10 ? '0' : '') + time.getHours();
+            // var m = (time.getMinutes() < 10 ? '0' : '') +  time.getMinutes();
+            // var s = (time.getSeconds() < 10 ? '0' : '') + time.getSeconds();
+            // console.log(a)
+            // console.log(h)
+            // console.log(m)
+            // console.log(s)
+            // var curtime = h + ":" + m
+            // var b = (curtime.toString()).match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/);
+            // if (b.length > 1) { // If time format correct
+            //     b = b.slice(1); // Remove full string match value
+            //     b[5] = +b[0] < 12 ? ' AM ' : ' PM '; // Set AM/PM
+            //     b[0] = +b[0] % 12 || 12; // Adjust hours
+            // }
+            // var cvtime = b.join('');
+            
+            $("#messages").stop().animate({ scrollTop: $("#messages")[0].scrollHeight}, 1000);
+            $('form').submit(function(e){
+                e.preventDefault();
+                if($('#m').val() == ''){
+                    
+                }else{
+                    socket.emit('chat message', $('#m').val());
+                    $("#messages").stop().animate({ scrollTop: $("#messages")[0].scrollHeight}, 1000);
+                }
+                $('#m').val('');
+                return false;
+            });
+
+            // socket.on('datetime', function (data) {
+            //     console.log(data['datetime']);
+            //     console.log(data['datetime'].toString())
+            //     var opz = new Date(Date.UTC(data['datetime'].toString()));
+            //     console.log(opz)
+                // var ftime = data['datetime'].toString();
+
+
+                // function msToTime(duration) {
+                //     var milliseconds = parseInt((duration % 1000) / 100),
+                //         seconds = Math.floor((duration / 1000) % 60),
+                //         minutes = Math.floor((duration / (1000 * 60)) % 60),
+                //         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+                //     hours = (hours < 10) ? "0" + hours : hours;
+                //     minutes = (minutes < 10) ? "0" + minutes : minutes;
+                //     seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+                //     return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+                // }
+
+                // console.log(msToTime(ftime))
+                // var time = msToTime(ftime);
+                // console.log(time);
+                // var h = (time.getHours() < 10 ? '0' : '') + time.getHours();
+                // var m = (time.getMinutes() < 10 ? '0' : '') +  time.getMinutes();
+                // var s = (time.getSeconds() < 10 ? '0' : '') + time.getSeconds();
+                // var curtime = h + ":" + m
+                // var b = (curtime.toString()).match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/);
+                // if (b.length > 1) { // If time format correct
+                //     b = b.slice(1); // Remove full string match value
+                //     b[5] = +b[0] < 12 ? ' AM ' : ' PM '; // Set AM/PM
+                //     b[0] = +b[0] % 12 || 12; // Adjust hours
+                // }
+                // var cvtime = b.join('');
+                // console.log(cvtime);
+            //     document.getElementById('datetime').innerHTML +=
+            //     '<li>' + time +'</li>'
+
+            // });
+
+            socket.on('chat message', function(msg, username, id, data){
+                // (new Date(registed_at.seconds*1000).toLocaleString())
+                    console.log(data['datetime']);
+                    console.log(new Date(data['datetime']).toLocaleTimeString())
+                    console.log(data['datetime'].toString());
+                    var ftime = (new Date(data['datetime']).toLocaleTimeString());
+                    // var maybe = ftime.toUTCString();
+                    console.log(ftime);
+
+                    var  y = new Date();
+                    var make = y.toLocaleTimeString();
+                    console.log(make)
+
+
+
+                    // var a = make.toString();
+                    // console.log(a);
+                    // var h = (a.getHours() < 10 ? '0' : '') + a.getHours();
+                    // var m = (a.getMinutes() < 10 ? '0' : '') +  a.getMinutes();
+                    // var s = (a.getSeconds() < 10 ? '0' : '') + a.getSeconds();
+                    // console.log(a)
+                    // console.log(h)
+                    // console.log(m)
+                    // console.log(s)
+                    // var curtime = h + ":" + m
+                    // var b = (curtime.toString()).match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/);
+                    // if (b.length > 1) { // If time format correct
+                    //     b = b.slice(1); // Remove full string match value
+                    //     b[5] = +b[0] < 12 ? ' AM ' : ' PM '; // Set AM/PM
+                    //     b[0] = +b[0] % 12 || 12; // Adjust hours
+                    // }
+                    // var cvtime = b.join('');
+                    
+
+
+                    // function msToTime(duration) {
+                    //     var milliseconds = parseInt((duration % 1000) / 100),
+                    //         seconds = Math.floor((duration / 1000) % 60),
+                    //         minutes = Math.floor((duration / (1000 * 60)) % 60),
+                    //         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+                    //     hours = (hours < 10) ? "0" + hours : hours;
+                    //     minutes = (minutes < 10) ? "0" + minutes : minutes;
+                    //     seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+                    //     return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+                    // }
+
+                    // console.log(msToTime(ftime))
+                    // var fntime = msToTime(ftime);
+
+
+
+                    // console.log(data['datetime']);
+                    // id session
+                    console.log("session " + socket.io.engine.id)
+                    console.log(id);console.log(username);
+                    if(socket.io.engine.id == id){
+                        document.getElementById('messages').innerHTML += 
+
+                        '<div class="message-container  float-left"><li class="message-info text-left"><span class="message-user-avt"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-left float-left">' + msg + '</li></div>';
+                    }else{
+                        // document.getElementById('messages').innerHTML += '<li class="message-content"><strong>'+ username +'</strong>'+  '&nbsp;'+ cvtime + ' : ' + msg + '</li>'
+                        document.getElementById('messages').innerHTML += 
+                        '<div class="message-container  float-right"><li class="message-info text-right"><span class="message-user-avt"><img src="/api/docs/upload/2019-11-29T10-16-45.708Z45408661864_922eed5824_o.jpg"/></span><span class="message-user-name"><strong>' + username +'</strong></span><span class="message-time">' + ftime +'</span></li><li class="message-content bgc-right float-right">' + msg + '</li></div>';
+
+                    }
+
+                    
+
+                    
+
+
+                    $("#messages").stop().animate({ scrollTop: $("#messages")[0].scrollHeight}, 1000);
+                 
+                    window.scrollTo(0, document.body.scrollHeight);
+            });
+
+            socket.on('news', function(data){
+                console.log(data);
+                // $('#catch-user').append($('<li>')).text(data['hello'] + ' joined');
+                document.getElementById('catch-user').innerHTML += '<li class="catch-user-content"><strong>'+ data['name'] + ' joined' +'</strong></li>'
+                    window.scrollTo(0, document.body.scrollHeight);
+                setTimeout(() => {
+                    $('#catch-user').hide();
+                }, 3000);
+            });
+
+            // socket.on('connect', ()=>{
+            //     console.log(socket.id, socket.io.engine.id, socket.json.id)
+            
+            // })
+            // socket.on('disconnect', function(data){
+            //     // document.getElementById('typing-state').innerHTML += '<li><strong>'+ data['hello'] + ' joined' +'</strong></li>'
+            //     // console.log(data);
+            //      document.getElementById('typing-state').innerHTML += '<li><strong>'+ data+'</strong></li>'
+            //     setTimeout(() => {
+            //         $('#typing-state').hide();
+            //     }, 4000);
+            // })
+            
+            socket.on('load user name',function(data){
+                io.emit('load user name', data);
+                console.log(data);
+                $('#catch-user').append($('<li>')).text(data);
+                    // window.scrollTo(0, document.body.scrollHeight);
+            });
+
+            var timeout;
+            function timeoutFunc(){
+                socket.emit("typing", false);
+            }
+
+            socket.on('typing', function(data, username){
+                console.log({data, username});
+                if(data){
+                    document.getElementById('typing-state').innerHTML = '<p><em>' + username + ' is typing...</em></p>'
+                }else{
+                    document.getElementById('typing-state').innerHTML = ''
+                }
+            });
+
+            document.getElementById('m').addEventListener('keyup',function(){
+                socket.emit('typing', 'aaaa');
+                clearTimeout(timeout)
+                timeout = setTimeout(timeoutFunc, 250)
+            })
+
+            socket.on('count', function(data, online){
+                console.log(data);
+                console.log(online);
+                document.getElementById('list').innerHTML = '<li><strong>'+ data+ online +'</strong></li>'
+            })
+            
+
+        });
+    </script>
+</html>
