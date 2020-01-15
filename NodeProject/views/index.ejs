@@ -664,6 +664,7 @@
                     showConfirmButton: false,
                     width: '600px',
                     // background: '#fff url(/api/docs/background/UIBkAT.jpg) no-repeat' ,
+                    
                     backdrop: `
                         rgba(0,0,123,0.4)
                         url("/api/docs/background/UIBkAT.jpg")
@@ -671,7 +672,7 @@
                         no-repeat
                     `,
                     heightAuto: true,
-                    html: "<div  class='form-group form-info'><div class='row'><div  class='col-md-8'>   <div  class='col-md-2'>      <label >email:</label> <input id='email' type='email' value='"+ GetEmailCookieValue() +"' disabled/>   </div>     <div  class='col-md-2'>      <label >first name:</label> <input id='email' type='email' value='"+ GetEmailCookieValue() +"' disabled/>   </div>  <div  class='col-md-2'>      <label >last name:</label> <input id='email' type='email' value='"+ GetEmailCookieValue() +"' disabled/>   </div>    <form action='/updatepassword' method='POST'>        <div  class='col-md-2'>          <label >password:</label>   <input id='password' type='password' value='' /> </div>           <div style='display:inline-flex' class='col-md-2'>          <label >confirm password:</label>   <input id='confirm-password' type='password' value='' />            </div><div class='button-submit-changepw'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Change</button></div></form><div class='col-md-4'><div class='button-logout'><button type='submit' id='btn-logout' class='btn btn-primary btn-login'>Logout</button></div></div> </div></div></div>"
+                    html: "<div  class='form-group form-info'><div class='row'><div  class='col-md-8'>   <div  class='col-md-2'>      <label >email:</label> <input id='email' type='email' value='"+ GetEmailCookieValue() +"' disabled/>   </div>     <div  class='col-md-2'>      <label >first name:</label> <input id='email' type='email' value='"+ GetEmailCookieValue() +"' disabled/>   </div>  <div  class='col-md-2'>      <label >last name:</label> <input id='email' type='email' value='"+ GetEmailCookieValue() +"' disabled/>   </div>    <form id='updatepassword' >        <div  class='col-md-2'>          <label >current password:</label>   <input id='currentpw' name='currentpw' type='password' value='' /> </div>           <div style='display:inline-flex' class='col-md-2'>          <label >new password:</label>   <input id='newpw' name='newpw' type='password' value='' />            </div><div class='button-submit-changepw'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Change</button></div></form><div class='col-md-4'><div class='button-logout'><button type='submit' id='btn-logout' class='btn btn-primary btn-login'>Logout</button></div></div> </div></div></div>"
                 })
                 $('#btn-logout').on('click', function(e) {
                     e.preventDefault();
@@ -704,6 +705,52 @@
                         }
                     })
                 })
+
+                $('#updatepassword').submit(function(e){
+                    e.preventDefault();
+                    const curpw = $('#currentpw').val();
+                    const newpw = $('#newpw').val();
+                    const uemail = $('#email').val();
+                    console.log(curpw, newpw, uemail);
+                    if(newpw == '' || curpw == ''){
+                        
+                    }else{
+                        $.ajax({
+                                type: 'POST',
+                                url: '/updatepassword',
+                                data:{uemail: uemail, currentpw: curpw, newpw: newpw },
+                                success: function(res) {
+                                     
+                                    window.location.href = '/'
+                                },
+                                error: function(err) {
+                                    console.log(err);
+                                    console.log(err.responseJSON['message'])
+                                    if(err.status == 400){
+                                        
+                                        const Toast = Swal.mixin({
+                                            position: 'top-end',
+                                            toast: true,
+                                            // icon: 'error',
+                                            // title: 'The password is not correct',
+                                            showConfirmButton: false,
+                                            timerProgressBar: true,
+                                            timer: 1500,
+                                            onOpen: (toast) => {
+                                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                            }
+                                        })
+
+                                        Toast.fire({
+                                            icon: 'error',
+                                            title: 'The password is not correct'
+                                        })
+                                    }
+                                },
+                            })
+                    }                  
+                })
             } else {
                 Swal.fire({
                     title: 'Hi!',
@@ -716,7 +763,7 @@
                         title: 'Register now!',
                         showConfirmButton: false,
                         width: '600px',
-                        html: "<form id='form-register' action='./register' method='POST' ><div class='form-group'><label for='email'>Email address</label><input type='email' name='email' class='form-control' id='email' aria-describedbsy='emailHelp' placeholder='Enter email'></div><div class='form-group'><label for='password'>Password</label><input type='password' name='password' class='form-control' id='password' placeholder='Password'></div><button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Register</button><div><a class='btn-loginform' href='#'>Click here to signup</a></div></form><small id='emailHelp' class='form-text text-muted'>Ideally, you should register your email with paypal email</small>"
+                        html: "<form id='form-register' action='./register' method='POST' ><div class='form-group row'><div class='col-md-6'><div class='col-md-4'><label for='fname'>First name</label><input required type='text' name='fname' class='form-control' id='fnam' aria-describedbsy='fnamelHelp' placeholder='Enter first name'></div>  <div class='col-md-4'><label for='lname'>Last name</label><input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' placeholder='Enter last name'></div></div></div>    <div class='form-group row'><div class='col-md-6'><div class='col-md-4'><label for='email'>Email</label><input type='email' name='email' class='form-control' id='email' placeholder='Enter email'></div>  <div class='col-md-4'><label for='password'>Password</label><input type='password' name='password' class='form-control' id='password' placeholder='Password'></div></div></div> <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Register</button><div><a class='btn-loginform' href='#'>Click here to signup</a></div></form><small id='Help' class='form-text text-muted'>Ideally, you should register your email with paypal email</small>"
                     })
                     $(document).on('click', '.btn-loginform', function(e){
                         e.preventDefault();
@@ -745,7 +792,7 @@
                     showConfirmButton: false,
                     width: '600px',
                     heightAuto: true,
-                    html: "<div  class='form-group form-info'><div class='row'><div  class='col-md-8'>   <div  class='col-md-2'>      <label >email:</label> <input id='email' type='email' value='aaa@gmail.com' disabled/>   </div>    <form action='/updatepassword' method='POST'>        <div  class='col-md-2'>          <label >password:</label>   <input id='password' type='password' value='' /> </div>           <div style='display:inline-flex' class='col-md-2'>          <label >confirm password:</label>   <input id='confirm-password' type='password' value='' />            </div><div class='button-submit-changepw'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Change</button></div></form><div class='col-md-4'><div class='button-logout'><button type='submit' id='btn-logout' class='btn btn-primary btn-login'>Logout</button></div></div> </div></div></div>"
+                    html: "<div  class='form-group form-info'><div class='row'><div  class='col-md-8'>   <div  class='col-md-2'>      <label >email:</label> <input id='email' type='email' value='aaa@gmail.com' disabled/>   </div>    <form action='/updatepassword' method='POST'>        <div  class='col-md-2'>          <label >current password:</label>   <input id='currentpw' type='password' value='' /> </div>           <div style='display:inline-flex' class='col-md-2'>          <label >new password:</label>   <input id='newpw' type='password' value='' />            </div><div class='button-submit-changepw'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Change</button></div></form><div class='col-md-4'><div class='button-logout'><button type='submit' id='btn-logout' class='btn btn-primary btn-login'>Logout</button></div></div> </div></div></div>"
                 })
                 $('#btn-logout').on('click', function(e) {
                     e.preventDefault();
@@ -772,6 +819,7 @@
                         }
                     })
                 })
+                
         })
 
         // $('.btn-register').on('click', function(e){

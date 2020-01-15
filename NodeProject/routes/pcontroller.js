@@ -78,6 +78,8 @@ router.post("/register", async (req, res) => {
             } else {
                 req.body.password = bcrypt.hashSync(req.body.password, 10);
                 var account = await new Account({
+                    fname: req.body.fname,
+                    lname: req.body.lname,
                     email: req.body.email,
                     password: req.body.password,
                     // picture: {
@@ -162,6 +164,31 @@ router.post("/login", async (req, res, next) => {
         res.status(500).send(err);
     }
 });
+
+
+router.post('/updatepassword', async(req, res)=>{
+    // console.log(req.body);
+    const uemail = req.cookies['x-email'];
+    // console.log(uemail)
+    try{
+        var account = await Account.findOne({email: uemail}).exec();
+        // console.log(account);
+        if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
+            return res.status(400).send({
+                status: "error",
+                message: "The password is not correct"
+            });
+        }
+        req.body.newpw = bcrypt.hashSync(req.body.newpw, 10);
+        account.set({password: req.body.newpw});
+        var result = await account.save();
+        res.send(result)
+
+    }catch(err){
+        res.status(500).send(err);
+
+    }
+})
 
 
 
