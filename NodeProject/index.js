@@ -33,8 +33,12 @@ del = function(req, res){
 	res.clearCookie('x-token');
 	res.clearCookie('x-refresh-token');
 	res.clearCookie('x-email');
+	res.clearCookie('x-fname');
+	res.clearCookie('x-lname');
 	res.clearCookie('io');
+	// res.clearCookie();
 	res.redirect('/api/signin');
+	
 }
 
 

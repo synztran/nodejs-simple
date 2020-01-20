@@ -110,11 +110,12 @@ router.get("/signup", function(req, res) {
 });
 
 router.get('/', TokenCheckMiddleware, function(req, res){
-    const uemail = req.cookies['x-email'];
-    console.log(uemail);
+    const fname = req.cookies['x-fname'];
+    const lname = req.cookies['x-lname'];
     res.render('mainPage'
     ,{
-        user:  uemail  
+        fname:  fname,
+        lname: lname  
     }
     );
 });
@@ -175,7 +176,7 @@ router.post("/signup", function(req, res) {
 })
 
 router.get('/list' ,function(req, res) {
-    Account.find({}, function(err, docs) {
+    AdmAccount.find({}, function(err, docs) {
         res.render('listAccount', {
             "listAccount": docs
         });
@@ -301,7 +302,6 @@ router.post("/login", async (req, res, next) => {
     try {
         var account = await AdmAccount.findOne({ email: req.body.email }).exec();
         var active =  await AdmAccount.findOne({ $and:[{email: req.body.email}, {active: true}]});
-       
         
         if (!account) {
             return res.status(400).send({
@@ -350,12 +350,12 @@ router.post("/login", async (req, res, next) => {
                 var result =  accToken.save();
             }
         }).exec();
-        if(req.body.email === config.admin){
-            res.setHeader('role', 'admin');
-        }
+      
             res.cookie('x-token', response.token);
             res.cookie('x-refresh-token', response.refreshToken);
             res.cookie('x-email', user.email);
+            res.cookie('x-fname', account.fname);
+            res.cookie('x-lname', account.lname);
             // res.send(token);
             res.redirect('./');
         
@@ -379,13 +379,14 @@ router.post("/register", upload.single('picture'),  (req, res) => {
             } else {
                 req.body.password = bcrypt.hashSync(req.body.password, 10);
                 var account = new AdmAccount({
+                    fname: req.body.fname,
+                    lname: req.body.lname,
                     email: req.body.email,
                     password: req.body.password,
                     picture: {
                         path: req.file.path,
                         size: req.file.size
                     },
-                    active: false
                 });
                 var result =  account.save();
                 // res.send(result);

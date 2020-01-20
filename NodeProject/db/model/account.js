@@ -44,7 +44,12 @@ var accountSchema = mongoose.Schema({
     },
     
     active:{
-        type: Boolean 
+        type: Boolean,
+        default: false
+    },
+    actived_date:{
+        type:Date,
+        default: null
     }
 })
 let Account = mongoose.model('Account', accountSchema);

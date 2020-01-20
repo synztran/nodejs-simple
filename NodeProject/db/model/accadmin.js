@@ -26,6 +26,14 @@ var admaccountSchema = mongoose.Schema({
         type: String,
         // required: true
     },
+    fname:{
+        type: String,
+        max: 60
+    },
+    lname:{
+        type: String,
+        max: 60
+    },
     created: {
         type: Date,
         default: new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()))
@@ -43,7 +51,8 @@ var admaccountSchema = mongoose.Schema({
         
     },
     active:{
-        type: Boolean 
+        type: Boolean,
+        default: false
     }
 })
 let AdmAccount = mongoose.model('AdmAccount', admaccountSchema);

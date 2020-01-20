@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/style.css">
 </head>
 
 <body>
@@ -19,7 +19,7 @@
         <div id="tableContainer tb-container-listaccount">
             <table id="data-table-list-account" class="table table-hover" id="dataTables1">
                 <thead>
-                    <tr>
+                    <tr >
                         <th> picture</th>
                         <th> id</th>
                         <th> email</th>
@@ -30,7 +30,7 @@
                 </thead>
                 <!-- <tbody></tbody> -->
                 <% listAccount.forEach(function(item){ %>
-                <tr>
+                <tr class="align-middle">
                     <td style="width: 120px; height: 120px;">
                         <a id="single_image" href="<%= item.picture.path %>" data-fancybox="html5-video"><img style="max-width: 100%;width: 120px;height: 120px; object-fit: cover;" src="<%= item.picture.path %>"></a>
                         

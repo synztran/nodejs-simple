@@ -76,3 +76,7 @@ a > i{
         display: flex;
     } */
 }
+tr.align-middle > td:not(:first-child){
+    vertical-align: middle;
+    margin:auto 0;
+}
