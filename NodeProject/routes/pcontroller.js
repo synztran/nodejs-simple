@@ -6,6 +6,7 @@ const fs = require('fs');
 const readline = require('readline');
 const jwt = require('jsonwebtoken');
 const reqHeader = require('request');
+const nodemailer = require('nodemailer');
 const config = require('./../lib/comon/config');
 const utils = require('./../lib/comon/utils');
 const cookieParser = require('cookie-parser'); 
@@ -62,7 +63,7 @@ router.get("/", function(req, res) {
     })
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", async (req, res, next) => {
     
 
     // console.log(req);
@@ -89,8 +90,33 @@ router.post("/register", async (req, res) => {
                     active: false
                 });
                 var result =  account.save();
+                var transporter = nodemailer.createTransport({
+                    service: 'Gmail',
+                    auth:{
+                        user: 'noobassembly@gmail.com',
+                        pass: '123456Ban'
+                    }
+                });
+                var mainOptions = {
+                    from: 'NoobTeam',
+                    to: req.body.email,
+                    subject: 'Active account',
+                    text: 'You received mess from ' + req.body.email,
+                    html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Thanks for your register!!!</b><p>Click to link below to actived your account. Thanks</p>'
+                }
+
+                transporter.sendMail(mainOptions, function(err, info){
+                    console.log(info)
+                    if(err) {
+                        console.log(err);
+                        res.redirect('/');
+                    }else {console.log('Mess sent: ' + info.response);
+                    res.redirect('/');
+                }
+                })
                 // res.send(result);
-                res.redirect('/');
+
+                // res.redirect('/');
             }
         }).exec();
     } catch (err) {
