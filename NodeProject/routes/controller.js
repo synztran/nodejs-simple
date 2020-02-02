@@ -133,15 +133,6 @@ router.get('/listcreated', function(req,res){
         // 'listCreated' : ''
     });
 })
-
-// router.get('/landingpage', function(req,res){
-//     res.render('index',{
-//         // 'listCreated' : ''
-//     });
-// })
-
-
-
 const loginRequired = async(req, res, next) =>{
     console.log(req.body);
     if (req.body) {
@@ -181,14 +172,11 @@ router.get('/list' ,function(req, res) {
             "listAccount": docs
         });
     });
-    // Account.find({}), function(er, docs){
-    //     if(err) res.json(err);
-    //     else res.render('homePage', {Accounts: docs})
-    // }
+    
 
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     try {
         var result = await Account.deleteOne({ _id: req.params.id }).exec();
         res.send(result);
@@ -232,6 +220,9 @@ router.get("/person/:id", async (req, res) => {
         res.status(500).send(err);
     }
 });
+
+
+
 /*------------------For mobile-------------------*/
 router.put("/account/edit/:id", async (req, res) => {
     try {
@@ -252,7 +243,6 @@ router.put("/account/edit/:id", async (req, res) => {
 // load db on form
 router.get("/account/edit/:id", async (req, res) => {
     try {
-
         Account.findById(req.params
             .id,
             function(err, account) {
@@ -337,19 +327,19 @@ router.post("/login", async (req, res, next) => {
             token,
             refreshToken,
         }
-        var check =  userToken.find({ email: req.body.email }, async (err, docs) => {
-            if (docs.length) {
-                // userToken.set(req.body);
-                db.collection('usertokens').updateOne({email: req.body.email}, {$set:{token: response.token, refreshToken: response.refreshToken}})
-            } else {
-                var accToken = new userToken({
-                    email: req.body.email,
-                    token: response.token,
-                    refreshToken: response.refreshToken
-                });
-                var result =  accToken.save();
-            }
-        }).exec();
+        // var check =  userToken.find({ email: req.body.email }, async (err, docs) => {
+        //     if (docs.length) {
+        //         // userToken.set(req.body);
+        //         db.collection('usertokens').updateOne({email: req.body.email}, {$set:{token: response.token, refreshToken: response.refreshToken}})
+        //     } else {
+        //         var accToken = new userToken({
+        //             email: req.body.email,
+        //             token: response.token,
+        //             refreshToken: response.refreshToken
+        //         });
+        //         var result =  accToken.save();
+        //     }
+        // }).exec();
       
             res.cookie('x-token', response.token);
             res.cookie('x-refresh-token', response.refreshToken);
@@ -387,6 +377,7 @@ router.post("/register", upload.single('picture'),  (req, res) => {
                         path: req.file.path,
                         size: req.file.size
                     },
+                    active: true
                 });
                 var result =  account.save();
                 // res.send(result);

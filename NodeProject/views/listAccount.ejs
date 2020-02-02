@@ -47,7 +47,7 @@
                     <!-- <td>
                         <%= item.password %>
                     </td> -->
-                    <td><a href="#" class="btn btn-danger btn-delete" data-id='<%=item._id %>'><div><i class="fas fa-trash"></i></div></a>&nbsp;<a href="/account/edit/<%=item._id%>" class="btn btn-primary btn-edit" data-id='<%=item._id %>'><div><i class="fas fa-edit"></i></div></a></td>
+                    <td><a href="#" class="btn btn-danger btn-delete" data-id='<%=item._id %>'><div><i class="fas fa-trash"></i></div></a>&nbsp;<a href="account/edit/<%=item._id%>" class="btn btn-primary btn-edit" data-id='<%=item._id %>'><div><i class="fas fa-edit"></i></div></a></td>
                     
                 </tr>
                 <%    }) %>
@@ -88,7 +88,7 @@ $(document).ready(function() {
         console.log(id);
         $.ajax({
             type: 'DELETE',
-            url: '/delete/' + id,
+            url: ' delete/' + id,
             success: function(res) {
                 alert('deleting');
                 location.reload();

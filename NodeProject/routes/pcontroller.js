@@ -9,7 +9,7 @@ const reqHeader = require('request');
 const nodemailer = require('nodemailer');
 const config = require('./../lib/comon/config');
 const utils = require('./../lib/comon/utils');
-const cookieParser = require('cookie-parser'); 
+const cookieParser = require('cookie-parser');
 router.use(cookieParser());
 // var token = jwt.sign({foo: 'bar'}, 'shhhhh');
 const tokenList = {};
@@ -20,27 +20,27 @@ const tokenList = {};
 
 const multer = require('multer');
 const storage = multer.diskStorage({
-    destination: function(req, file, cb){
+    destination: function(req, file, cb) {
         cb(null, 'docs/upload/');
     },
-    filename: function(req, file, cb){
+    filename: function(req, file, cb) {
         cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname)
     }
 });
 var mongoose = require('mongoose');
 var db = mongoose.connection;
-const fileFilter = (req, file, cb)=>{
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg'){
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
         cb(null, false);
-    }else{
+    } else {
         cb(null, true);
     }
 }
 
 const upload = multer({
-    storage: storage, 
+    storage: storage,
     limits: {
-        fileSize: 1024*1024*5
+        fileSize: 1024 * 1024 * 5
     },
     // fileFilter: fileFilter
 });
@@ -57,20 +57,19 @@ example = require('./../lib/js/listAccount.js')
 
 router.get("/", function(req, res) {
     const uemail = req.cookies['x-email'];
-    res.render('index'
-    ,{
-        user:  uemail  
+    res.render('index', {
+        user: uemail
     })
 });
 
 router.post("/register", async (req, res, next) => {
-    
+
 
     // console.log(req);
     // console.log(req.body.fileuploader-list-picture);
     console.log(req.body);
     try {
-        var check =  await  Account.find({ email: req.body.email }, async (err, docs) => {
+        var check = await Account.find({ email: req.body.email }, async (err, docs) => {
             if (docs.length) {
                 res.status(400).json({
                     code: 400,
@@ -89,30 +88,66 @@ router.post("/register", async (req, res, next) => {
                     // },
                     active: false
                 });
-                var result =  account.save();
+                var result = account.save();
+
+
+                const user = {
+                    "email": req.body.email,
+                    "password": req.body.password
+                }
+                const token = jwt.sign(user, config.secret, {
+                    expiresIn: config.tokenLife,
+                });
+                const refreshToken = jwt.sign(user, config.refreshTokenSecret, {
+                    expiresIn: config.refreshTokenLife
+                });
+                tokenList[refreshToken] = user;
+                const response = {
+                    token,
+                    refreshToken,
+                }
+
+
+                var checkToken = userToken.find({ email: req.body.email }, async (err, docs) => {
+                    if (docs.length) {
+                        // userToken.set(req.body);
+                        // db.collection('usertokens').updateOne({ email: req.body.email }, { $set: { token: response.token, refreshToken: response.refreshToken } })
+                    } else {
+                        var accToken = new userToken({
+                            email: req.body.email,
+                            token: response.token,
+                            refreshToken: response.refreshToken
+                        });
+                        var result = accToken.save();
+                    }
+                }).exec();
+
+
                 var transporter = nodemailer.createTransport({
                     service: 'Gmail',
-                    auth:{
+                    auth: {
                         user: 'noobassembly@gmail.com',
                         pass: '123456Ban'
                     }
                 });
+                var link = "http://"+req.get('host')+"/verify?id="+response.token
                 var mainOptions = {
                     from: 'NoobTeam',
                     to: req.body.email,
                     subject: 'Active account',
                     text: 'You received mess from ' + req.body.email,
-                    html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Thanks for your register!!!</b><p>Click to link below to actived your account. Thanks</p>'
+                    html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Thanks for your register!!!</b><p><a href='+link+'>Click here to active your account</a></p>'
                 }
 
-                transporter.sendMail(mainOptions, function(err, info){
+                transporter.sendMail(mainOptions, function(err, info) {
                     console.log(info)
-                    if(err) {
+                    if (err) {
                         console.log(err);
                         res.redirect('/');
-                    }else {console.log('Mess sent: ' + info.response);
-                    res.redirect('/');
-                }
+                    } else {
+                        console.log('Mess sent: ' + info.response);
+                        res.redirect('/');
+                    }
                 })
                 // res.send(result);
 
@@ -127,9 +162,10 @@ router.post("/register", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
     try {
         var account = await Account.findOne({ email: req.body.email }).exec();
-        var active =  await Account.findOne({ $and:[{email: req.body.email}, {active: true}]});
-       
-        
+        var active = await Account.findOne({ $and: [{ email: req.body.email }, { active: true }] });
+
+        console.log(account);
+
         if (!account) {
             return res.status(400).send({
                 status: "error",
@@ -142,13 +178,13 @@ router.post("/login", async (req, res, next) => {
                 message: "The password is not correct"
             });
         }
-        if(!active){
+        if (!active) {
             return res.status(400).send({
                 status: "error",
                 message: "Please active your account"
             })
         }
-        
+
         const user = {
             "email": req.body.email,
             "password": req.body.password
@@ -164,40 +200,57 @@ router.post("/login", async (req, res, next) => {
             token,
             refreshToken,
         }
-        var check =  userToken.find({ email: req.body.email }, async (err, docs) => {
+        var check = userToken.find({ email: req.body.email }, async (err, docs) => {
             if (docs.length) {
                 // userToken.set(req.body);
-                db.collection('usertokens').updateOne({email: req.body.email}, {$set:{token: response.token, refreshToken: response.refreshToken}})
+                db.collection('usertokens').updateOne({ email: req.body.email }, { $set: { token: response.token, refreshToken: response.refreshToken } })
             } else {
                 var accToken = new userToken({
                     email: req.body.email,
                     token: response.token,
                     refreshToken: response.refreshToken
                 });
-                var result =  accToken.save();
+                var result = accToken.save();
             }
         }).exec();
-       
-            res.cookie('x-token', response.token);
-            res.cookie('x-refresh-token', response.refreshToken);
-            res.cookie('x-email', user.email);
-            // res.send(token);
-           
-            res.redirect('/');
-            
-        
+
+        res.cookie('x-token', response.token);
+        res.cookie('x-refresh-token', response.refreshToken);
+        res.cookie('x-email', user.email);
+        // res.send(token);
+
+        res.redirect('/');
+
+
     } catch (err) {
         res.status(500).send(err);
     }
 });
 
+router.get('/verify', async(req, res) =>{
+    console.log(req.query['id']);
+    try{
+        var checkToken = await userToken.findOne({token: req.query['id']}).exec();
+        var checkActive = await Account.findOne({email: checkToken['email']})
+        if(checkToken && checkActive['active'] == false){
+            db.collection('accounts').updateOne({ email: checkToken['email'] }, { $set: { active: true } })
 
-router.post('/updatepassword', async(req, res)=>{
+            res.redirect('/');
+        }else{
+            res.redirect('/');
+        }
+    }catch(err){
+        res.status(500).send(err);
+    }
+});
+
+
+router.post('/updatepassword', async (req, res) => {
     // console.log(req.body);
     const uemail = req.cookies['x-email'];
     // console.log(uemail)
-    try{
-        var account = await Account.findOne({email: uemail}).exec();
+    try {
+        var account = await Account.findOne({ email: uemail }).exec();
         // console.log(account);
         if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
             return res.status(400).send({
@@ -206,11 +259,11 @@ router.post('/updatepassword', async(req, res)=>{
             });
         }
         req.body.newpw = bcrypt.hashSync(req.body.newpw, 10);
-        account.set({password: req.body.newpw});
+        account.set({ password: req.body.newpw });
         var result = await account.save();
         res.send(result)
 
-    }catch(err){
+    } catch (err) {
         res.status(500).send(err);
 
     }
