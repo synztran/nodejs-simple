@@ -10,9 +10,12 @@ const nodemailer = require('nodemailer');
 const config = require('./../lib/comon/config');
 const utils = require('./../lib/comon/utils');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 router.use(cookieParser());
 // var token = jwt.sign({foo: 'bar'}, 'shhhhh');
 const tokenList = {};
+
+
 
 // jwt.sign({foo: 'bar'}, privateKey, {algorithm: 'RS256'}, function(err, token){
 //     console.log(token)
@@ -49,17 +52,27 @@ var Account = require('./../db/model/account');
 var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
-example = require('./../lib/js/listAccount.js')
 
 
 
 
 
 router.get("/", function(req, res) {
-    const uemail = req.cookies['x-email'];
-    res.render('index', {
-        user: uemail
-    })
+
+    // console.log(req.session)
+    if(req.session.User == null){
+        res.render('index', {
+            user: null
+        })
+    }else{
+        console.log(req.session.User['email'])
+        const uemail = req.session.User['email'];
+        res.render('index', {
+            user: uemail
+        })
+    }
+    
+    
 });
 
 router.post("/register", async (req, res, next) => {
@@ -164,7 +177,7 @@ router.post("/login", async (req, res, next) => {
         var account = await Account.findOne({ email: req.body.email }).exec();
         var active = await Account.findOne({ $and: [{ email: req.body.email }, { active: true }] });
 
-        console.log(account);
+        // console.log(account);
 
         if (!account) {
             return res.status(400).send({
@@ -216,7 +229,12 @@ router.post("/login", async (req, res, next) => {
 
         res.cookie('x-token', response.token);
         res.cookie('x-refresh-token', response.refreshToken);
-        res.cookie('x-email', user.email);
+        req.session.User = {
+            email: account['email'],
+            fname: account['fname'],
+            lname: account['lname'],
+            id : account['_id']
+        }
         // res.send(token);
 
         res.redirect('/');
@@ -226,6 +244,21 @@ router.post("/login", async (req, res, next) => {
         res.status(500).send(err);
     }
 });
+
+router.get('/get_session', (req, res) => {
+    //check session
+    if(req.session.User){
+        return res.status(200).json({status: 'success', session: req.session.User})
+    }
+    return res.status(200).json({status: 'error', session: 'No session', code: 200})
+})
+
+router.get('/clear_session', (req, res)=>{
+
+    req.session.destroy(function(err){
+        return res.status(200).json({status: 'success', session: 'cannot access session here'})
+    })
+})
 
 router.get('/verify', async(req, res) =>{
     console.log(req.query['id']);

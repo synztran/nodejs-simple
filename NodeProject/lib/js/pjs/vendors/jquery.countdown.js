@@ -3,7 +3,7 @@
 
   $(document).ready(function() {
 
-    $('.js-timer').countdown('2020/01/18', function(event) {
+    $('.js-timer').countdown('2020/03/05', function(event) {
 
       var $this = $(this).html(event.strftime(''
         + '<div class="u-timer__section"><strong class="u-timer__amount">%D</strong> <em class="u-timer__period">days</em></div>'

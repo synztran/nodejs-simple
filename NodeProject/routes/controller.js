@@ -9,6 +9,7 @@ const reqHeader = require('request');
 const config = require('./../lib/comon/config');
 const utils = require('./../lib/comon/utils');
 const cookieParser = require('cookie-parser'); 
+const session = require('express-session');
 router.use(cookieParser());
 // var token = jwt.sign({foo: 'bar'}, 'shhhhh');
 const tokenList = {};
@@ -49,7 +50,7 @@ var AdmAccount = require('./../db/model/accadmin');
 var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
-example = require('./../lib/js/listAccount.js')
+// example = require('./../lib/js/listAccount.js')
 
 
 const PinCheckMiddleware = async (req, res, next) => {
@@ -110,14 +111,16 @@ router.get("/signup", function(req, res) {
 });
 
 router.get('/', TokenCheckMiddleware, function(req, res){
-    const fname = req.cookies['x-fname'];
-    const lname = req.cookies['x-lname'];
-    res.render('mainPage'
-    ,{
-        fname:  fname,
-        lname: lname  
+    if(!req.session.Admin){
+
+    }else{
+        var admin = req.session.Admin
+        res.render('mainPage',{
+            fname:  admin['fname'],
+            lname: admin['lname']
+        });
     }
-    );
+    
 });
 
 router.get('/messenger', TokenCheckMiddleware, function(req, res){
@@ -342,10 +345,18 @@ router.post("/login", async (req, res, next) => {
         // }).exec();
       
             res.cookie('x-token', response.token);
-            res.cookie('x-refresh-token', response.refreshToken);
-            res.cookie('x-email', user.email);
-            res.cookie('x-fname', account.fname);
-            res.cookie('x-lname', account.lname);
+            req.session.Admin = {
+                email: account['email'],
+                fname: account['fname'],
+                lname: account['lname'],
+                id : account['_id']
+            }
+            console.log(req.session.Admin)
+            // res.cookie('x-refresh-token', response.refreshToken);
+            // res.cookie('x-email', user.email);
+            // res.cookie('x-fname', account.fname);
+            // res.cookie('x-lname', account.lname);
+
             // res.send(token);
             res.redirect('./');
         

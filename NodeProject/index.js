@@ -6,6 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const http = require('http');
+const session = require('express-session');
 const fs = require('fs');
 
 const uri = "'mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'}"
@@ -54,6 +55,12 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ 
     extended: true
 })); 
+
+app.use(session({
+    resave: true, 
+    saveUninitialized: true, 
+    secret: '11041997', 
+    cookie: { maxAge: 60000 }}));
 // app.use(express.cookieParser());
 // set static data for public folder to Application Server
 // app.use(express.static('public'));
