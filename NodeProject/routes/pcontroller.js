@@ -75,6 +75,10 @@ router.get("/", function(req, res) {
     
 });
 
+router.get('/register', async( req, res) =>{
+    res.render("product/registerPage");
+})
+
 router.post("/register", async (req, res, next) => {
 
 
