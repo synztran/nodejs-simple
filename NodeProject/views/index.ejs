@@ -54,8 +54,8 @@
                 <ul class="header-nav__list">
                     <div id="form-login" class="hidden">
                     </div>
-                    <li><a class="smoothscroll" href="#home" title="home">RAFFLE</a></li>
-                    <li><a class="smoothscroll" href="#shop" title="about">SHOP</a></li>
+                    <li><a class="smoothscroll" href="#home" title="home">Proxy Group Buy</a></li>
+                    <li><a class="smoothscroll" href="#shop" title="about">Group Buy</a></li>
                     <li><a class="smoothscroll" href="#services" title="services">SERVICES</a></li>
                     <li><a class="smoothscroll" href="#gallery" title="works">GALLERY</a></li>
                     <li><a class="smoothscroll" href="#aboutus" title="aboutus">ABOUT US</a></li>
@@ -71,7 +71,7 @@
                         <i class="fas fa-user"></i>LOGIN</a>
                         <% } %>
                     </li>
-                    <li><a class="smoothscroll" href="#cart" title="cart"><i class="fas fa-shopping-cart"></i>Cart(0)</a></li>
+                    <!-- <li><a class="smoothscroll" href="#cart" title="cart"><i class="fas fa-shopping-cart"></i>Cart(0)</a></li> -->
                 </ul>
                 <p>Perspiciatis hic praesentium nesciunt. Et neque a dolorum <a href='#0'>voluptatem</a> porro iusto sequi veritatis libero enim. Iusto id suscipit veritatis neque reprehenderit.</p>
                 <ul class="header-nav__social">
@@ -154,9 +154,6 @@
         </div> <!-- end home-content -->
         <ul class="home-social">
             <li>
-                <a href="#0"><i class="fas fa-ticket-alt"></i><span>Raffle</span></a>
-            </li>
-            <li>
                 <% if(user!= null) { %>
                 <a id="login" href="#"><i class="fas fa-user"></i><span>
                         <%= user %></span></a>
@@ -165,8 +162,19 @@
                 <% } %>
             </li>
             <li>
+                <a href="#0"><i class="fas fa-flag"></i><span>ProxyGB</span></a>
+            </li>
+            
+            <li>
+                <a href="#0">  <i class="fas fa-users"></i><span>GroupBuy</span></a>
+            </li>
+
+            <li>
                 <a href="#0"><i class="fas fa-images"></i><span>Gallery</span></a>
             </li>
+
+            
+          
             <!-- <li>
                 <a href="#0"><i class="fab fa-behance" aria-hidden="true"></i><span>Behance</span></a>
             </li>
@@ -779,28 +787,9 @@
                         Swal.fire({
                             title: 'Hi!',
                             showConfirmButton: false,
-                            html: "<form action='./login' method='post'><div class='form-group'><label for='email'>Email address</label><input required type='email' name='email' autocomplete='off' class='form-control' id='email' aria-describedby='emailHelp' placeholder='Enter email'></div><div class='form-group'><label for='password'>Password</label><input type='password' required name='password' class='form-control' id='password' placeholder='Password'></div><div class='form-group'><small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small></br></br><a class='btn-register' href='#'>Click here to signup</a></div></br><div class='button-login'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Login</button></div></form>"
+                            html: "<form action='./login' method='post'><div class='form-group'><label for='email'>Email address</label><input required type='email' name='email' autocomplete='off' class='form-control' id='email' aria-describedby='emailHelp' placeholder='Enter email'></div><div class='form-group'><label for='password'>Password</label><input type='password' required name='password' class='form-control' id='password' placeholder='Password'></div><div class='form-group'><small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small></br></br><a class='btn-register' href='./account'>Click here to signup</a></div></br><div class='button-login'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Login</button></div></form>"
                         })
-                        $(document).on('click', '.btn-register', function(e) {
-                            e.preventDefault();
-                            Swal.fire({
-                                title: 'Register now!',
-                                showConfirmButton: false,
-                                width: '600px',
-                                html: "<form id='form-register' action='./register' method='POST' ><div class='form-group row'><div class='col-md-6'><div class='col-md-4'><label for='fname'>First name</label><input required type='text' name='fname' class='form-control' id='fnam' aria-describedbsy='fnamelHelp' placeholder='Enter first name'></div>  <div class='col-md-4'><label for='lname'>Last name</label><input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' placeholder='Enter last name'></div></div></div>    <div class='form-group row'><div class='col-md-6'><div class='col-md-4'><label for='email'>Email</label><input required type='email' name='email' class='form-control' id='email' placeholder='Enter email'></div>  <div class='col-md-4'><label for='password'>Password</label><input required type='password' name='password' class='form-control' id='password' placeholder='Password'></div></div></div><div class='row'>          <div class='col-md-4'></div>            <div class='form-group col-md-4'>              <div class='g-recaptcha' data-sitekey='" + ggcaptchasitekey + "'></div>            </div>          </div>        </div> <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Register</button><div><a class='btn-loginform' href='#'>Click here to login</a></div></form><small id='Help' class='form-text text-muted'>Ideally, you should register your email with paypal email</small>"
-                            })
-                            
-                            $(document).on('click', '.btn-loginform', function(e) {
-                                e.preventDefault();
-                                Swal.fire({
-                                    title: 'Hi!',
-                                    showConfirmButton: false,
-
-                                    // width: '1200px',
-                                    html: "<form action='./login' method='post'><div class='form-group'><label for='email'>Email address</label><input  required type='email' name='email' autocomplete='off' class='form-control' id='email' aria-describedby='emailHelp' placeholder='Enter email'></div><div class='form-group'><label for='password'>Password</label><input  required type='password' name='password' class='form-control' id='password' placeholder='Password'></div><div class='form-group'><small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small></br></br><a class='btn-register' href='#'>Click here to signup</a></div></br><div class='button-login'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Login</button></div></form>"
-                                })
-                            })
-                        })
+                        
                     }
 
                 });
@@ -817,5 +806,4 @@
 
     })
     </script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
 </body>

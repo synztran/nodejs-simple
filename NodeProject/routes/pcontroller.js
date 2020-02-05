@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const req = require('request');
+const request = require('request');
 const bcrypt = require("bcryptjs");
 const fs = require('fs');
 const readline = require('readline');
@@ -52,12 +52,13 @@ var Account = require('./../db/model/account');
 var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
+var SessionCheckMiddleware = require('./../lib/check/checksession');
 
 
 
 
 
-router.get("/", function(req, res) {
+router.get("/" ,function(req, res) {
 
     // console.log(req.session)
     if(req.session.User == null){
@@ -65,51 +66,84 @@ router.get("/", function(req, res) {
             user: null
         })
     }else{
-        console.log(req.session.User['email'])
         const uemail = req.session.User['email'];
         res.render('index', {
-            user: uemail
+            user: uemail 
         })
     }
-    
+});
+
+router.get('/account', async( req, res) =>{
+    if(req.session.User == null){
+        res.render("product/registerPage");
+    }else{
+        console.log(req.session.User);
+        const uemail = req.session.User['email'];
+        res.render('index', {
+            user: uemail 
+        })
+    }
+})
+
+router.get('/proxygb', async(req, res)=>{
+    if(req.session.User == null){
+        res.render("product/proxyPage");
+    }else{
+        console.log(req.session.User);
+        // const uemail = req.session.User['email'];
+        // res.render('index', {
+        //     user: uemail 
+        // })
+    }
+})
+
+router.post('/captcha', async(req, res)=>{
     
 });
 
-router.get('/register', async( req, res) =>{
-    res.render("product/registerPage");
-})
-
-router.post("/register", async (req, res, next) => {
+router.post("/account", async (req, res, next) => {
 
 
     // console.log(req);
     // console.log(req.body.fileuploader-list-picture);
     console.log(req.body);
     try {
-        var check = await Account.find({ email: req.body.email }, async (err, docs) => {
+        var check = await Account.find({ email: (req.body.email).toLowerCase() }, async (err, docs) => {
             if (docs.length) {
                 res.status(400).json({
                     code: 400,
                     message: "email already exists"
                 })
             } else {
+                if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
+                    return res.json({"responseError": "Please select captcha first"});
+                }
+
+                // const secretKey = config.secretKey;
+                
+                // const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress
+            
+                // request(verificationURL, function(error, response, body){
+                //     body = JSON.parse(body);
+                //     if(body.success !== undefined && !body.success){
+                //         return res.json({"responseError": "Failed captcha verification"});
+                //     }
+                //     res.json({"responseSuccess": "Success"});
+                // });
+
                 req.body.password = bcrypt.hashSync(req.body.password, 10);
                 var account = await new Account({
                     fname: req.body.fname,
                     lname: req.body.lname,
-                    email: req.body.email,
+                    email: (req.body.email).toLowerCase(),
                     password: req.body.password,
-                    // picture: {
-                    //     path: req.file.path,
-                    //     size: req.file.size
-                    // },
                     active: false
                 });
                 var result = account.save();
 
 
                 const user = {
-                    "email": req.body.email,
+                    "email": (req.body.email).toLowerCase(),
                     "password": req.body.password
                 }
                 const token = jwt.sign(user, config.secret, {
@@ -125,13 +159,13 @@ router.post("/register", async (req, res, next) => {
                 }
 
 
-                var checkToken = userToken.find({ email: req.body.email }, async (err, docs) => {
+                var checkToken = userToken.find({ email: (req.body.email.toLowerCase()) }, async (err, docs) => {
                     if (docs.length) {
                         // userToken.set(req.body);
                         // db.collection('usertokens').updateOne({ email: req.body.email }, { $set: { token: response.token, refreshToken: response.refreshToken } })
                     } else {
                         var accToken = new userToken({
-                            email: req.body.email,
+                            email: (req.body.email).toLowerCase(),
                             token: response.token,
                             refreshToken: response.refreshToken
                         });
@@ -150,9 +184,9 @@ router.post("/register", async (req, res, next) => {
                 var link = "http://"+req.get('host')+"/verify?id="+response.token
                 var mainOptions = {
                     from: 'NoobTeam',
-                    to: req.body.email,
+                    to: (req.body.email).toLowerCase(),
                     subject: 'Active account',
-                    text: 'You received mess from ' + req.body.email,
+                    text: 'You received mess from ' + (req.body.email).toLowerCase(),
                     html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Thanks for your register!!!</b><p><a href='+link+'>Click here to active your account</a></p>'
                 }
 
@@ -178,8 +212,8 @@ router.post("/register", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
     try {
-        var account = await Account.findOne({ email: req.body.email }).exec();
-        var active = await Account.findOne({ $and: [{ email: req.body.email }, { active: true }] });
+        var account = await Account.findOne({ email: (req.body.email).toLowerCase() }).exec();
+        var active = await Account.findOne({ $and: [{ email: (req.body.email).toLowerCase() }, { active: true }] });
 
         // console.log(account);
 
@@ -203,7 +237,7 @@ router.post("/login", async (req, res, next) => {
         }
 
         const user = {
-            "email": req.body.email,
+            "email": (req.body.email).toLowerCase(),
             "password": req.body.password
         }
         const token = jwt.sign(user, config.secret, {
@@ -217,13 +251,13 @@ router.post("/login", async (req, res, next) => {
             token,
             refreshToken,
         }
-        var check = userToken.find({ email: req.body.email }, async (err, docs) => {
+        var check = userToken.find({ email: (req.body.email).toLowerCase() }, async (err, docs) => {
             if (docs.length) {
                 // userToken.set(req.body);
                 db.collection('usertokens').updateOne({ email: req.body.email }, { $set: { token: response.token, refreshToken: response.refreshToken } })
             } else {
                 var accToken = new userToken({
-                    email: req.body.email,
+                    email: (req.body.email).toLowerCase(),
                     token: response.token,
                     refreshToken: response.refreshToken
                 });
@@ -269,8 +303,10 @@ router.get('/verify', async(req, res) =>{
     try{
         var checkToken = await userToken.findOne({token: req.query['id']}).exec();
         var checkActive = await Account.findOne({email: checkToken['email']})
+        console.log(checkToken);
+        console.log(checkActive)
         if(checkToken && checkActive['active'] == false){
-            db.collection('accounts').updateOne({ email: checkToken['email'] }, { $set: { active: true } })
+            db.collection('accounts').updateOne({ email: (checkToken['email']).toLowerCase() }, { $set: { active: true } })
 
             res.redirect('/');
         }else{
