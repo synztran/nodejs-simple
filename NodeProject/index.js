@@ -72,6 +72,7 @@ app.use('/api/css', express.static('lib/css'))
 app.use('/api/io', express.static('lib'))
 app.use('/api/docs/upload', express.static('docs/upload'))
 app.use('/product/img', express.static('docs/pimg'))
+app.use('/product/css', express.static('lib/css/pcss'))
 
 
 
