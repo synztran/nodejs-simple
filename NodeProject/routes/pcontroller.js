@@ -51,6 +51,8 @@ const upload = multer({
 var Account = require('./../db/model/account');
 var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
+var Tracking = require('./../db/model/tracking');
+var Product  = require('./../db/model/product');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
 var SessionCheckMiddleware = require('./../lib/check/checksession');
 
@@ -79,10 +81,16 @@ router.get('/account', async( req, res) =>{
     }else{
         console.log(req.session.User);
         const uemail = req.session.User['email'];
-        res.render('index', {
+        res.render('product/accountPage', {
             user: uemail 
         })
+
+        
     }
+})
+
+router.get('/chucnang', async(req, res)=>{
+    res.render('product/accountPage');
 })
 
 router.get('/proxygb', async(req, res)=>{
@@ -108,16 +116,16 @@ router.post("/account", async (req, res, next) => {
     // console.log(req.body.fileuploader-list-picture);
     console.log(req.body);
     try {
-        var check = await Account.find({ email: (req.body.email).toLowerCase() }, async (err, docs) => {
+        var check = await Account.find({ email: req.body.email }, async (err, docs) => {
             if (docs.length) {
                 res.status(400).json({
                     code: 400,
                     message: "email already exists"
                 })
             } else {
-                if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
-                    return res.json({"responseError": "Please select captcha first"});
-                }
+                // if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
+                //     return res.json({"responseError": "Please select captcha first"});
+                // }
 
                 // const secretKey = config.secretKey;
                 
@@ -135,7 +143,7 @@ router.post("/account", async (req, res, next) => {
                 var account = await new Account({
                     fname: req.body.fname,
                     lname: req.body.lname,
-                    email: (req.body.email).toLowerCase(),
+                    email: (req.body.email),
                     password: req.body.password,
                     active: false
                 });
@@ -143,7 +151,7 @@ router.post("/account", async (req, res, next) => {
 
 
                 const user = {
-                    "email": (req.body.email).toLowerCase(),
+                    "email": (req.body.email),
                     "password": req.body.password
                 }
                 const token = jwt.sign(user, config.secret, {
@@ -159,13 +167,13 @@ router.post("/account", async (req, res, next) => {
                 }
 
 
-                var checkToken = userToken.find({ email: (req.body.email.toLowerCase()) }, async (err, docs) => {
+                var checkToken = userToken.find({ email: req.body.email }, async (err, docs) => {
                     if (docs.length) {
                         // userToken.set(req.body);
                         // db.collection('usertokens').updateOne({ email: req.body.email }, { $set: { token: response.token, refreshToken: response.refreshToken } })
                     } else {
                         var accToken = new userToken({
-                            email: (req.body.email).toLowerCase(),
+                            email: (req.body.email),
                             token: response.token,
                             refreshToken: response.refreshToken
                         });
@@ -184,9 +192,9 @@ router.post("/account", async (req, res, next) => {
                 var link = "http://"+req.get('host')+"/verify?id="+response.token
                 var mainOptions = {
                     from: 'NoobTeam',
-                    to: (req.body.email).toLowerCase(),
+                    to: (req.body.email),
                     subject: 'Active account',
-                    text: 'You received mess from ' + (req.body.email).toLowerCase(),
+                    text: 'You received mess from ' + (req.body.email),
                     html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Thanks for your register!!!</b><p><a href='+link+'>Click here to active your account</a></p>'
                 }
 
@@ -339,6 +347,30 @@ router.post('/updatepassword', async (req, res) => {
     } catch (err) {
         res.status(500).send(err);
 
+    }
+})
+
+router.post('/history', async(req, res)=>{
+    try{
+        var account = await Account.findOne({_id: req.body.id}).exec();
+        console.log(account);
+        var checkTracking = await Tracking.find({email: account['email']}).exec();
+        console.log(checkTracking);
+        res.send(checkTracking);
+
+    }catch(err){
+        res.status(500).send(err);
+    }
+})
+
+router.post('/joingb', async(req, res)=>{
+    try{
+        var account = await Account.findOne({email: req.body.email}).exec();
+        console.log(account);
+        
+
+    }catch(err){
+        res.status(500).send(err);
     }
 })
 

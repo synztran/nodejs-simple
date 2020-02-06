@@ -47,6 +47,7 @@ const upload = multer({
 // var imgPath = 'docs/img_1435.JPG';
 var Account = require('./../db/model/account');
 var AdmAccount = require('./../db/model/accadmin');
+var Product  = require('./../db/model/product');
 var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
@@ -136,18 +137,9 @@ router.get('/listcreated', function(req,res){
         // 'listCreated' : ''
     });
 })
-const loginRequired = async(req, res, next) =>{
-    console.log(req.body);
-    if (req.body) {
-       
-      next();
-    } else {
-      return res.status(401).json({ message: 'Unauthorized user!' });
-    }
-  };
-// router.use(loginRequired);
 
-router.get("/success",loginRequired, function(req, res) {
+
+router.get("/success", function(req, res) {
 
     res.render("successPage");
    
@@ -364,6 +356,7 @@ router.post("/login", async (req, res, next) => {
         res.status(500).send(err);
     }
 });
+
 router.post("/register", upload.single('picture'),  (req, res) => {
     console.log(req.file);
 
@@ -399,6 +392,7 @@ router.post("/register", upload.single('picture'),  (req, res) => {
         res.status(500).send(err)
     }
 })
+
 router.post('/refresh_token', async(req, res) =>{
     const {refreshToken} = req.body;
     if((refreshToken) && (refreshToken in tokenList)){
@@ -474,6 +468,23 @@ router.post("/created", async (req, res) => {
         res.status(200).send(err);
     }
 });
+
+router.post('/product/add', async(req, res)=>{
+    try{
+        var product = new Product({
+            product_id : req.body.productid,
+            product_name : req.body.productname,
+            category : req.body.category,
+            status_gb : req.body.status,
+            color : req.body.color,
+
+        });
+        var result = product.save();
+        res.send(product)
+    }catch(err){
+        res.status(500).send(err);
+    }
+})
 
 
 module.exports = router;

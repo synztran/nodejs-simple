@@ -8,17 +8,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- ============= -->
 
+    <!-- font -->
+    <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
+    <!-- ============ -->
+
     <!-- <link rel="stylesheet" href="/api/css/pcss/base.css"> -->
     <!-- <link rel="stylesheet" href="/api/css/pcss/vendor.css"> -->
     <link rel="stylesheet" href="/api/css/pcss/main.css">
     <link rel="stylesheet" href="/api/css/pcss/customize.css">
+    <link rel="stylesheet" type="text/css" href="/product/css/accountpage/style.css">
     <!-- font-->
+
     <!-- ============= -->
 
     <!-- script
     ================================================== -->
     <script src="/api/js/pjs/modernizr.js"></script>
-    <title>NoobKey | Sign Up</title>
+    <title>NoobKey |  Account Page</title>
     <style>
     *{
         margin: 0;
@@ -47,7 +53,6 @@
     .bg-dark{
         background-color: transparent!important;
         /* clip-path: polygon(50% 0%, 100% 0, 100% 61%, 30% 86%, 0 52%, 0 0); */
-
     }
     
     .before-breadcrumb {
@@ -73,7 +78,7 @@
     .container{
         /* margin: 0;
         padding: 0; */
-        height: 90%;
+        /* height: 90%; */
     }
     .row:first-child > .col-md-12{
         display: flex;
@@ -141,62 +146,32 @@
           <li class="breadcrumb-item active" aria-current="page">Data</li>
         </ol>
     </nav>
-    <div class="container">
-        <div class="row">
-            <div style="height: 100%;padding-top: 0%;" class="col-md-6">
-                <form style="background-color: #ffffff;padding: 5%;" id='form-register' action='./account' method='POST' >
-                    <div class='form-group row'>
-                        <div class='col-md-12'>
-                            <div class='col-md-6'>
-                                <label for='fname'>First name</label>
-                                <input required type='text' name='fname' class='form-control' id='fnam' aria-describedbsy='fnamelHelp' placeholder='Enter first name'>
-                            </div>  
-                            <div class='col-md-6'>
-                                <label for='lname'>Last name</label>
-                                <input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' placeholder='Enter last name'>
-                            </div>
-                        </div>
-                    </div>    
-                    <div class='form-group row'>
-                        <div class='col-md-12'>
-                            <div class='form-group col-md-12'>
-                                <label for='email'>Email</label>
-                                <input required type='email' name='email' class='form-control' id='email' placeholder='Enter email'>
-                                <small id='Help' class='form-text text-muted'>
-                                    Ideally, you should register your email with paypal email
-                                </small>
-                            </div>  
-                            <div class='form-group col-md-12'>
-                                <label 
-                                for='password'>Password</label>
-                                <input required type='password' name='password' class='form-control' id='password' placeholder='Password'>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div class=' row'>                     
-                        <div class='form-group col-md-12'>              
-                            <div class='col-md-12 g-recaptcha' data-sitekey='6Lcti9UUAAAAADIUivaJtXit0OKia78-EQIbnDkc'>
-                            </div>            
-                        </div>          
-                    </div> 
-                           
-                    <div class=" col-md-12">
-                        <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Register</button>
-                        <!-- <button type='submit' id='btn-login' class='btn btn-primary btn-submit'>Register</button> -->
-                    </div>
-                
-                <!-- <div class="center">
-                    <a class='btn-loginform' href='#'>Click here to login</a>
-                </div> -->
-            </form>
-            
-            </div>
-            <div style="background-color: transparent;height: 100%;" class="col-md-6">
-                
-            </div>
-        </div>
+    <!-- This is a reverse engineering of the "Hyperspace"
+     design from HTML5 Up! https://html5up.net/hyperspace -->
+
+<main class="main">
+  <div class="col-md-4">
+    <sidebar class="sidebar">
+      <nav class="nav">
+        
+        <ul>
+          <li class="active"><a href="#"><i class="fas fa-user"></i>Details</a></li>
+          <li><a href="#">Who We Are</a></li>
+          <li><a href="#"><i class="fas fa-shipping-fast"></i>Tracking</a></li>
+          <li><a href="#"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+        </ul>
+      </nav>
+    </sidebar>
+  </div>
+  <div class="col-md-8">
+    <div class="title-li">
+      <p>user details</p>
     </div>
+      <article class="container">
+        
+      </article>
+  </div>
+  </main>
     <div class="footer-register center">
     </div>
         

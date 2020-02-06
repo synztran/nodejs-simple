@@ -6,7 +6,7 @@ var validateEmail = function(email) {
     return re.test(email)
 };
 
-var accountSchema = mongoose.Schema({
+var providerSchema = mongoose.Schema({
     email: {
         // required: true,
         type: String,
@@ -22,9 +22,8 @@ var accountSchema = mongoose.Schema({
         // 	message: 'Email handle must have @'
         // }
     },
-    password: {
-        type: String,
-        // required: true
+    password:{
+        type: String
     },
     fname:{
         type: String
@@ -32,13 +31,7 @@ var accountSchema = mongoose.Schema({
     lname:{
         type: String
     },
-    birth_date:{
-        type: Date,
-    },
-    address:{
-        type: String
-    },
-    zip_code:{
+    nationnal:{
         type: String
     },
     phone_area_code:{
@@ -47,18 +40,18 @@ var accountSchema = mongoose.Schema({
     phone_number:{
         type: String
     },
-    created: {
+    date_join:{
         type: Date,
         default: new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()))
+    },
+    number_hostproxy:{
+        type: Number
     },
     active:{
         type: Boolean,
         default: false
-    },
-    actived_date:{
-        type:Date,
-        default: null
     }
+    
 })
-let Account = mongoose.model('Account', accountSchema);
-module.exports = Account;
+let Provider = mongoose.model('Provider', providerSchema);
+module.exports = Provider;
