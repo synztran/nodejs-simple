@@ -7,26 +7,23 @@
     <!-- css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- ============= -->
-
     <!-- font -->
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
     <!-- ============ -->
-
     <!-- <link rel="stylesheet" href="/api/css/pcss/base.css"> -->
     <!-- <link rel="stylesheet" href="/api/css/pcss/vendor.css"> -->
     <link rel="stylesheet" href="/api/css/pcss/main.css">
-    <link rel="stylesheet" href="/api/css/pcss/customize.css">
+    <link rel="stylesheet" href="/api/css/custom-fixed.css">
+    <!-- <link rel="stylesheet" href="/api/css/pcss/customize.css"> -->
     <link rel="stylesheet" type="text/css" href="/product/css/accountpage/style.css">
     <!-- font-->
-
     <!-- ============= -->
-
     <!-- script
     ================================================== -->
     <script src="/api/js/pjs/modernizr.js"></script>
-    <title>NoobKey |  Account Page</title>
+    <title>NoobKey | Account Page</title>
     <style>
-    *{
+        *{
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -110,79 +107,171 @@
         </div>
     </div>
     <!-- <header class="top"> -->
-        
-        <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
-            <div class="container">
-              <a href="#" class="navbar-brand">
+    <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a href="#" class="navbar-brand">
                 <!-- Logo Image -->
                 <img src="https://res.cloudinary.com/mhmd/image/upload/v1557368579/logo_iqjuay.png" width="45" alt="" class="d-inline-block align-middle mr-2">
                 <!-- Logo Text -->
                 <span class="text-uppercase font-weight-bold">Company</span>
-              </a>
-          
-              <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
-          
-              <div id="navbarSupportedContent" class="collapse navbar-collapse">
+            </a>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                    <a href="./" class="nav-link">Home         
-                        <span class="sr-only">(current)</span>
-                    </a>
-                  </li>
-                  
-                  <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li>
-                  <li class="nav-item"><a href="#" class="nav-link">Group Buy</a></li>
-                  <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
-                  <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                    <li class="nav-item">
+                        <a href="./" class="nav-link">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Group Buy</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
                 </ul>
-              </div>
             </div>
-        </nav>
+        </div>
+    </nav>
     <!-- </header> -->
     <nav class="before-breadcrumb" aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item"><a href="#">Library</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Data</li>
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Library</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data</li>
         </ol>
     </nav>
     <!-- This is a reverse engineering of the "Hyperspace"
      design from HTML5 Up! https://html5up.net/hyperspace -->
-
-<main class="main">
-  <div class="col-md-4">
-    <sidebar class="sidebar">
-      <nav class="nav">
-        
-        <ul>
-          <li class="active"><a href="#"><i class="fas fa-user"></i>Details</a></li>
-          <li><a href="#">Who We Are</a></li>
-          <li><a href="#"><i class="fas fa-shipping-fast"></i>Tracking</a></li>
-          <li><a href="#"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
-        </ul>
-      </nav>
-    </sidebar>
-  </div>
-  <div class="col-md-8">
-    <div class="title-li">
-      <p>user details</p>
-    </div>
-      <article class="container">
-        
-      </article>
-  </div>
-  </main>
+    <main class="main row">
+        <div style="height: 75vh;" class="col-md-4">
+            <sidebar class="sidebar">
+                <nav class="nav">
+                    <ul>
+                        <li class="active">
+                            <a href="">
+                                <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="shape" height="60" width="240" />
+                                    <div class="text">Details<i class="fas fa-user"></i></div>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#">
+                                <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="shape" height="60" width="240" />
+                                    <div class="text">ZACH SAUCIER</div>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="shape" height="60" width="240" />
+                                    <div class="text">Tracking<i class="fas fa-shipping-fast"></i></div>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="shape" height="60" width="240" />
+                                    <div class="text">Logout<i class="fas fa-sign-out-alt"></i></div>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </sidebar>
+        </div>
+        <div style="height: 100vh;" class="col-md-8">
+            <div class="title-li">
+                <p>user details</p>
+            </div>
+            <article class="container">
+                <form style="background-color: rgba(54, 58, 64, 0.5); ;padding: 5%;" id='form-register' action='./account' method='POST'>
+                    <div class='form-group row'>
+                        <div class='col-md-12'>
+                            <div class='col-md-6'>
+                                <label for='fname'>First name</label>
+                                <input required type='text' name='fname' class='form-control' id='fnam' aria-describedbsy='fnamelHelp' placeholder='Enter first name'>
+                            </div>
+                            <div class='col-md-6'>
+                                <label for='lname'>Last name</label>
+                                <input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' placeholder='Enter last name'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='form-group row'>
+                        <div class='col-md-12 d-flex'>
+                            <div class='col-md-6'>
+                                <label for='email'>Email</label>
+                                <input required type='email' name='email' class='form-control' id='email' placeholder='Enter email'>
+                                <small id='Help' class='form-text'>
+                                    Ideally, you should register your email with paypal email
+                                </small>
+                            </div>
+                            <div class='col-md-6'>
+                                <label for='password'>DoB</label>
+                                <input required type='password' name='password' class='form-control' id='password' placeholder='Password'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='form-group row'>
+                        <div class='col-md-12 d-flex'>
+                            <div class='col-md-6'>
+                                <label for='paypal'>Paypal</label>
+                                <input required type='email' name='paypal' class='form-control' id='paypal' aria-describedbsy='paypalHelp' placeholder='Enter paypal'>
+                            </div>
+                            <div class='col-md-6'>
+                                <label for='lname'>Facebook URL</label>
+                                <input required type='text' name='fburl' class='form-control' id='fburl' aria-describedbsy='fburlHelp' placeholder='Enter facebook url'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='form-group row'>
+                        <div class='col-md-12 d-flex'>
+                            <div class='form-group col-md-6'>
+                                <label for='pnumber'>Phone number</label>
+                                <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'>
+                                <small id='Help' class='form-text'>
+                                    Please! Make sure your phone number is correct
+                                </small>
+                            </div>
+                            <div class='form-group col-md-6'>
+                                    
+                                            <input type="checkbox" aria-label="Checkbox for following text input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-md-12">
+                        <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Register</button>
+                        <!-- <button type='submit' id='btn-login' class='btn btn-primary btn-submit'>Register</button> -->
+                    </div>
+                    <!-- <div class="center">
+          <a class='btn-loginform' href='#'>Click here to login</a>
+      </div> -->
+                </form>
+            </article>
+        </div>
+    </main>
     <div class="footer-register center">
     </div>
-        
-    
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="/api/js/pjs/main.js"></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
-    
-</script>
-</html>
+// $(document).ready(function() {
+$('#pnumber').on('input', function() {
+    this.value = this.value
+        .replace(/[^\d]/g, ''); // numbers and decimals only
 
+});
+// })
+// $('.text').on('click',function(e){
+//   e.preventDefault();
+//   window.location = '/'
+// })
+</script>
+
+</html>

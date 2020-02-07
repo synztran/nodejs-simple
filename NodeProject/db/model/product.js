@@ -26,7 +26,16 @@ var productSchema = mongoose.Schema({
     },
     price:{
         type: Number
-    }
+    },
+    pic_profile:{
+        path: {
+            type: String
+        },
+        size: {
+            type: Number
+        },
+    },
+    pic_list: []
 })
 let Product = mongoose.model('Product', productSchema);
 module.exports = Product;
