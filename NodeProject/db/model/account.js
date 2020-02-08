@@ -58,6 +58,10 @@ var accountSchema = mongoose.Schema({
     actived_date:{
         type:Date,
         default: null
+    },
+    get_noti:{
+        type: Boolean,
+        default: false
     }
 })
 let Account = mongoose.model('Account', accountSchema);

@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- ============= -->
     <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
     <!-- ============ -->
     <!-- <link rel="stylesheet" href="/api/css/pcss/base.css"> -->
     <!-- <link rel="stylesheet" href="/api/css/pcss/vendor.css"> -->
+    <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css">
     <link rel="stylesheet" href="/api/css/pcss/main.css">
     <link rel="stylesheet" href="/api/css/custom-fixed.css">
     <!-- <link rel="stylesheet" href="/api/css/pcss/customize.css"> -->
@@ -29,6 +31,7 @@
         box-sizing: border-box;
     }
     html, body{
+        font-family: "Montserrat", sans-serif !important;
         height: 100%;
         width: 100%;
         background-image: url('/api/docs/background/UIBkAT.jpg');
@@ -149,23 +152,21 @@
                         <li class="active">
                             <a href="">
                                 <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
-                                    <rect class="shape" height="60" width="240" />
+                                    <rect class="shape" height="60" width="100%" />
                                     <div class="text">Details<i class="fas fa-user"></i></div>
                                 </svg>
                             </a>
                         </li>
                         <li class="">
-                            <a href="#">
-                                <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
-                                    <rect class="shape" height="60" width="240" />
-                                    <div class="text">ZACH SAUCIER</div>
-                                </svg>
-                            </a>
+                            <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
+                                <rect class="shape" height="60" width="100%" />
+                                <div class="text">ZACH SAUCIER</div>
+                            </svg>
                         </li>
                         <li>
                             <a href="#">
                                 <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
-                                    <rect class="shape" height="60" width="240" />
+                                    <rect class="shape" height="60" width="100%" />
                                     <div class="text">Tracking<i class="fas fa-shipping-fast"></i></div>
                                 </svg>
                             </a>
@@ -173,7 +174,7 @@
                         <li>
                             <a href="#">
                                 <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
-                                    <rect class="shape" height="60" width="240" />
+                                    <rect class="shape" height="60" width="100%" />
                                     <div class="text">Logout<i class="fas fa-sign-out-alt"></i></div>
                                 </svg>
                             </a>
@@ -187,61 +188,66 @@
                 <p>user details</p>
             </div>
             <article class="container">
-                <form style="background-color: rgba(54, 58, 64, 0.5); ;padding: 5%;" id='form-register' action='./account' method='POST'>
-                    <div class='form-group row'>
-                        <div class='col-md-12'>
-                            <div class='col-md-6'>
-                                <label for='fname'>First name</label>
-                                <input required type='text' name='fname' class='form-control' id='fnam' aria-describedbsy='fnamelHelp' placeholder='Enter first name'>
+                <form style="padding: 0;" id='form-register' autocomplete="off" action='./account' method='POST'>
+                    <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-user-info">
+                        <div class="title-container-user-info col-md-12">
+                            <b>INFOMATION</b>
+                        </div>
+                        <div class='form-group row'>
+                            <div class='col-md-12 d-flex'>
+                                <div class='col-md-6'>
+                                    <label for='fname'>First name</label>
+                                    <input required type='text' name='fname' class='form-control' id='fnam' aria-describedbsy='fnamelHelp' placeholder='Enter first name'>
+                                </div>
+                                <div class='col-md-6'>
+                                    <label for='lname'>Last name</label>
+                                    <input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' placeholder='Enter last name'>
+                                </div>
                             </div>
-                            <div class='col-md-6'>
-                                <label for='lname'>Last name</label>
-                                <input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' placeholder='Enter last name'>
+                        </div>
+                        <div class='form-group row'>
+                            <div class='col-md-12 d-flex'>
+                                <div class='col-md-6'>
+                                    <label for='email'>Email</label>
+                                    <input required type='email' name='email' class='form-control' id='email' placeholder='Enter email'>
+                                    <small id='Help' class='form-text'>
+                                        Ideally, you should register your email with paypal email
+                                    </small>
+                                </div>
+                                <div class='col-md-6'>
+                                    <label for='password'>DoB</label>
+                                    <input style="width: 100%" id="datepicker" class="span2" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class='form-group row'>
+                            <div class='col-md-12 d-flex'>
+                                <div class='col-md-6'>
+                                    <label for='paypal'>Paypal</label>
+                                    <input required type='email' name='paypal' class='form-control' id='paypal' aria-describedbsy='paypalHelp' placeholder='Enter paypal'>
+                                </div>
+                                <div class='col-md-6'>
+                                    <label for='lname'>Facebook URL</label>
+                                    <input required type='text' name='fburl' class='form-control' id='fburl' aria-describedbsy='fburlHelp' placeholder='Enter facebook url'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='form-group row'>
+                            <div class='col-md-12 d-flex'>
+                                <div class='form-group col-md-6'>
+                                    <label for='pnumber'>Phone number</label>
+                                    <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'>
+                                    <small id='Help' class='form-text'>
+                                        Please! Make sure your phone number is correct
+                                    </small>
+                                </div>
+                                <div class='form-group col-md-6 checkbox-noti'>
+                                    <input class="checkbox" type="checkbox" aria-label="Get notifications about new Group Buy"><span>Get notifications about Group Buy</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class='form-group row'>
-                        <div class='col-md-12 d-flex'>
-                            <div class='col-md-6'>
-                                <label for='email'>Email</label>
-                                <input required type='email' name='email' class='form-control' id='email' placeholder='Enter email'>
-                                <small id='Help' class='form-text'>
-                                    Ideally, you should register your email with paypal email
-                                </small>
-                            </div>
-                            <div class='col-md-6'>
-                                <label for='password'>DoB</label>
-                                <input required type='password' name='password' class='form-control' id='password' placeholder='Password'>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='form-group row'>
-                        <div class='col-md-12 d-flex'>
-                            <div class='col-md-6'>
-                                <label for='paypal'>Paypal</label>
-                                <input required type='email' name='paypal' class='form-control' id='paypal' aria-describedbsy='paypalHelp' placeholder='Enter paypal'>
-                            </div>
-                            <div class='col-md-6'>
-                                <label for='lname'>Facebook URL</label>
-                                <input required type='text' name='fburl' class='form-control' id='fburl' aria-describedbsy='fburlHelp' placeholder='Enter facebook url'>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='form-group row'>
-                        <div class='col-md-12 d-flex'>
-                            <div class='form-group col-md-6'>
-                                <label for='pnumber'>Phone number</label>
-                                <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'>
-                                <small id='Help' class='form-text'>
-                                    Please! Make sure your phone number is correct
-                                </small>
-                            </div>
-                            <div class='form-group col-md-6'>
-                                    
-                                            <input type="checkbox" aria-label="Checkbox for following text input">
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class=" col-md-12">
                         <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Register</button>
                         <!-- <button type='submit' id='btn-login' class='btn btn-primary btn-submit'>Register</button> -->
@@ -259,19 +265,45 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="/api/js/pjs/main.js"></script>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="/api/js/datepicker/dist/datepicker.js"></script>
 <script>
-// $(document).ready(function() {
-$('#pnumber').on('input', function() {
-    this.value = this.value
-        .replace(/[^\d]/g, ''); // numbers and decimals only
+$(document).ready(function() {
+    $('#pnumber').on('input', function() {
+        this.value = this.value
+            .replace(/[^\d]/g, ''); // numbers and decimals only
 
+    });
+
+    $('#datepicker').datepicker();
+
+
+    $('#datepicker').on('click', function(e) {
+        e.preventDefault();
+        // const date = ($('#datepicker').val()).split("/").reverse().join("-");
+        const date = formatDate($('#datepicker').val())
+        // var param = {'created': date};
+        // console.log(JSON.stringify(param));
+        console.log(date);
+    });
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+})
+$('input.checkbox').click(function() {
+
+    // alert("Checkbox state (method 2) = " + $('input.checkbox').is(':checked'));
 });
-// })
-// $('.text').on('click',function(e){
-//   e.preventDefault();
-//   window.location = '/'
-// })
 </script>
 
 </html>

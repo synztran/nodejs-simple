@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-/* html {
-	 font-family: Arial;
-	 font-size: 16px;
-	 background: #5e42a6;
-} */
+html, label, b {
+	 font-family: "Montserrat", sans-serif !important;
+	
+} 
+body{
+	color: #212529 !important;
+}
 .main{
     top:5%;
     position: relative;
@@ -82,6 +84,7 @@
 .container {
     /* background-color: rgba(54, 58, 64, 0.5); */
 	 display: block;
+	 padding-left: 0;
 	 /* flex-direction: column; */
 	 /* align-items: center; */
 	 /* justify-content: center; */
@@ -119,7 +122,7 @@
 	transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
   }
   .text{
-	font-family: 'Roboto Condensed';
+	/*font-family: 'Roboto Condensed';*/
 	font-size: 16px;
 	line-height: 32px;
 	letter-spacing: 4px;
@@ -166,4 +169,23 @@
   }
   .col-md-6 small{
 	  color: white
+  }
+  .checkbox-noti{
+  	margin: auto 0;
+  	color: white;
+  	
+  }
+  .checkbox-noti input{
+  	height: auto;
+  	width: 5%
+  }
+  .checkbox-noti span{
+  	margin-left: 1%;
+  	font-size: 14px;
+  	font-weight: bold;
+  }
+  .title-container-user-info b{
+  	font-size: 22px;
+  	font-weight: bold;
+	color: white
   }
