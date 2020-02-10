@@ -123,9 +123,9 @@ router.post("/account", async (req, res, next) => {
                     message: "email already exists"
                 })
             } else {
-                // if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
-                //     return res.json({"responseError": "Please select captcha first"});
-                // }
+                if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
+                    return res.json({"responseError": "Please select captcha first"});
+                }
 
                 // const secretKey = config.secretKey;
                 
@@ -374,7 +374,9 @@ router.post('/joingb', async(req, res)=>{
     }
 })
 
-
+router.get('*',function(req, res){
+    res.status(404).render('404Page')
+})
 
 
 

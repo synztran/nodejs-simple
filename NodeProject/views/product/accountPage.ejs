@@ -6,20 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css">
+    <link rel="stylesheet" href="/api/css/pcss/main.css">
+    <link rel="stylesheet" href="/api/css/custom-fixed.css">
+    <link rel="stylesheet" href="/product/css/accountpage/style.css">
+    <link rel="stylesheet" href="/package/intl-tel-input-master/build/css/intlTelInput.css">
     <!-- ============= -->
     <!-- font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
     <!-- ============ -->
-    <!-- <link rel="stylesheet" href="/api/css/pcss/base.css"> -->
-    <!-- <link rel="stylesheet" href="/api/css/pcss/vendor.css"> -->
-    <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css">
-    <link rel="stylesheet" href="/api/css/pcss/main.css">
-    <link rel="stylesheet" href="/api/css/custom-fixed.css">
-    <!-- <link rel="stylesheet" href="/api/css/pcss/customize.css"> -->
-    <link rel="stylesheet" type="text/css" href="/product/css/accountpage/style.css">
-    <!-- font-->
-    <!-- ============= -->
     <!-- script
     ================================================== -->
     <script src="/api/js/pjs/modernizr.js"></script>
@@ -185,7 +181,8 @@
         </div>
         <div style="height: 100vh;" class="col-md-8">
             <div class="title-li">
-                <p>user details</p>
+                <p style="">user details</p>
+                <hr>
             </div>
             <article class="container">
                 <form style="padding: 0;" id='form-register' autocomplete="off" action='./account' method='POST'>
@@ -236,7 +233,8 @@
                             <div class='col-md-12 d-flex'>
                                 <div class='form-group col-md-6'>
                                     <label for='pnumber'>Phone number</label>
-                                    <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'>
+                                    <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
+                                    <input name="pnumber" type="tel" id="pnumber">
                                     <small id='Help' class='form-text'>
                                         Please! Make sure your phone number is correct
                                     </small>
@@ -247,8 +245,34 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class=" col-md-12">
+                    <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-address-default flip-form">
+                        <div class="title-container-user-info col-md-12">
+                            <b>ADDRESS SHIPPING <span><i class="fas fa-pencil-alt"></i>(Edit address)</span></b>
+                        </div>
+                        <div class='form-group row'>
+                        </div>
+                        <div class='form-group row'>
+                        </div>
+                        <div class='form-group row'>
+                        </div>
+                        <div class='form-group row'>
+                        </div>
+                    </div>
+                    <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-password-change flip-form">
+                        <div class="title-container-user-info col-md-12">
+                            <b>PASSWORD CHANGE</b>
+                        </div>
+                        <div class='form-group row'>
+                                <label class='col-md-4 '>current password:</label> 
+                                <input class='col-md-8' id='currentpw' required name='currentpw' type='password' value='' /> 
+                            
+                                <label class='col-md-4'>new password:</label> 
+                                <input class='col-md-8' required id='newpw' name='newpw' type='password' value='' /> 
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-12 flip-form">
                         <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Register</button>
                         <!-- <button type='submit' id='btn-login' class='btn btn-primary btn-submit'>Register</button> -->
                     </div>
@@ -266,8 +290,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="/api/js/pjs/main.js"></script>
 <script src="/api/js/datepicker/dist/datepicker.js"></script>
+<script src="/package/intl-tel-input-master/build/js/intlTelInput.js"></script>
 <script>
 $(document).ready(function() {
+    var input = document.querySelector("#pnumber");
+    window.intlTelInput(input, {
+        utilsScript: "/package/intl-tel-input-master/build/js/utils.js"
+    });
     $('#pnumber').on('input', function() {
         this.value = this.value
             .replace(/[^\d]/g, ''); // numbers and decimals only
@@ -300,10 +329,6 @@ $(document).ready(function() {
         return [year, month, day].join('-');
     }
 })
-$('input.checkbox').click(function() {
-
-    // alert("Checkbox state (method 2) = " + $('input.checkbox').is(':checked'));
-});
 </script>
 
 </html>
