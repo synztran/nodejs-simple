@@ -11,7 +11,7 @@ body{
     position: relative;
     height: 100%;
     display: flex;
-    margin: 0 10%;
+    margin: 0 15%;
 }
  .sidebar {
      /* position: fixed; */
@@ -192,13 +192,13 @@ body{
 	  color: white;
   }
 
-  .col-md-6 label{
+  .col-md-6 label, .col-md-4 label{
 	  font-size: 18px;
 	  font-weight: bold;
 	  color:wheat;
 	  margin:0
   }
-  .col-md-6 input{
+  .col-md-6 input, .col-md-8 input{
 	  background: transparent;
 	  border-bottom: 1px solid whitesmoke;
 	  padding: 0;
@@ -206,7 +206,7 @@ body{
 	  margin: 0;
 	  height: 5rem;
   }
-  .col-md-6 input:focus{
+  .col-md-6 input:focus, .col-md-8 input:hover{
 	  background-color: transparent;
 	  outline: none;
 	  box-shadow: none;
@@ -233,6 +233,9 @@ body{
   	font-weight: bold;
 	color: white
   }
+  .title-container-user-info a{
+     text-decoration: none;
+  }
   .title-container-user-info span{
   	padding-left: 1%
   }
@@ -246,6 +249,8 @@ body{
 .flip-form{
 	margin-top: 5%
 }
+
+
   /*-----------------Animation------------------*/
   @keyframes KITTAnim {
    0% {

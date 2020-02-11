@@ -35,11 +35,17 @@ var accountSchema = mongoose.Schema({
     birth_date:{
         type: Date,
     },
-    address:{
-        type: String
-    },
-    zip_code:{
-        type: String
+    shipping_at:{
+        address:{
+            type: String
+        },
+        city:{
+            type: String
+
+        },
+        zip_code:{
+            type: String
+        },    
     },
     phone_area_code:{
         type: String
@@ -62,6 +68,19 @@ var accountSchema = mongoose.Schema({
     get_noti:{
         type: Boolean,
         default: false
+    },
+    paypal:{
+        type: String,
+        default: null,
+        lowercase: true,
+        required: 'Email address is required',
+        validate: [validateEmail, 'Please fill a valid email address'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+    },
+    fb_url:{
+        type: String,
+        default: null,
+        lowercase: true
     }
 })
 let Account = mongoose.model('Account', accountSchema);

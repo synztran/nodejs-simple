@@ -112,8 +112,9 @@ router.get("/signup", function(req, res) {
 });
 
 router.get('/', TokenCheckMiddleware, function(req, res){
+    console.log(req.session.Admin);
     if(!req.session.Admin){
-
+        res.redirect('api/signin')
     }else{
         var admin = req.session.Admin
         res.render('mainPage',{

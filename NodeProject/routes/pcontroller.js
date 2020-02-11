@@ -281,7 +281,7 @@ router.post("/login", async (req, res, next) => {
             lname: account['lname'],
             id : account['_id']
         }
-        // res.send(token);
+        // return res.status(200).json({status: 'success'})
 
         res.redirect('/');
 
@@ -324,6 +324,57 @@ router.get('/verify', async(req, res) =>{
         res.status(500).send(err);
     }
 });
+
+router.post('/updateaccount', async(req, res)=>{
+    const uemail = req.session.User['email'];
+    console.log(uemail);
+    console.log(req.body)
+    try{
+        var account = await Account.findOne({ email: uemail }).exec();
+
+        
+        // if(!account){
+        //     return res.status(400).send({
+        //         status: "error",
+        //         message: "The user does not exist "
+        //     });
+        // }
+
+        // if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
+        //     return res.status(400).send({
+        //         status: "error",
+        //         message: "The password is not correct"
+        //     });
+        // }
+
+        // if(req.body.currentpw == '' & req.body.newpw == ''){
+        //     db.collection('accounts').updateOne({ 
+        //         email: account.email 
+        //     }, 
+        //         { $set: 
+        //             { 
+        //                 fname: req.body.fname, 
+        //                 lname: req.body.lname,
+        //                 birth_date: req.body.dob,
+        //                 paypal: req.body.paypal,
+        //                 fb_url: req.body.fburl, 
+        //             } 
+        //         })
+        // }else{
+        //     req.body.newpw = bcrypt.hashSync(req.body.newpw, 10);
+        //     account.set({ password: req.body.newpw });
+        //     var result = await account.save();
+        //     res.send(result)
+
+        // }
+
+        
+
+    }catch(err){
+        res.status(500).send(err);
+    }
+
+})
 
 
 router.post('/updatepassword', async (req, res) => {
