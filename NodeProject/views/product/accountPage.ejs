@@ -6,20 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css">
+    <link rel="stylesheet" href="/api/css/pcss/main.css">
+    <link rel="stylesheet" href="/api/css/custom-fixed.css">
+    <link rel="stylesheet" href="/product/css/accountpage/style.css">
+    <link rel="stylesheet" href="/package/intl-tel-input-master/build/css/intlTelInput.css">
     <!-- ============= -->
     <!-- font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
     <!-- ============ -->
-    <!-- <link rel="stylesheet" href="/api/css/pcss/base.css"> -->
-    <!-- <link rel="stylesheet" href="/api/css/pcss/vendor.css"> -->
-    <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css">
-    <link rel="stylesheet" href="/api/css/pcss/main.css">
-    <link rel="stylesheet" href="/api/css/custom-fixed.css">
-    <!-- <link rel="stylesheet" href="/api/css/pcss/customize.css"> -->
-    <link rel="stylesheet" type="text/css" href="/product/css/accountpage/style.css">
-    <!-- font-->
-    <!-- ============= -->
     <!-- script
     ================================================== -->
     <script src="/api/js/pjs/modernizr.js"></script>
@@ -63,9 +59,9 @@
         background-image: url('/api/docs/background/UIBkAT.jpg');
         background-repeat: no-repeat;
         filter: brightness(150%);
-        -webkit-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
+        /* -webkit-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
         -moz-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
-        box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
+        box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79); */
     }
     .breadcrumb{
         max-width: 70%;
@@ -75,11 +71,7 @@
         
         
     }
-    .container{
-        /* margin: 0;
-        padding: 0; */
-        /* height: 90%; */
-    }
+    
     .row:first-child > .col-md-12{
         display: flex;
     }
@@ -95,6 +87,51 @@
     .footer-register{
         height: 10%;
     }
+    @import "compass/css3";
+    .seperator-wrapper {
+  width: 100%;
+}
+.seperator-wrapper .seperator {
+  width: 70%;
+  margin: 0 auto;
+  height: 5px;
+  animation: rotate 3s infinite linear;
+  -webkit-animation: rotate 3s infinite linear;
+}
+@-webkit-keyframes rotate {
+  from {
+    background-position: -3000px;
+  }
+  to {
+    background-position: 0px;
+  }
+}
+@keyframes rotate {
+  from {
+    background-position: -3000px;
+  }
+  to {
+    background-position: 0px;
+  }
+}
+.gradient {
+  background: #30ff90;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #30ff90), color-stop(25%, #ed2ded), color-stop(50%, #c99826), color-stop(75%, #30ffe6), color-stop(100%, #30ff90));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* IE10+ */
+  background: linear-gradient(to right, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30ff90', endColorstr='#30ff90',GradientType=1);
+  /* IE6-9 */
+}
     
     </style>
 </head>
@@ -110,6 +147,8 @@
         </div>
     </div>
     <!-- <header class="top"> -->
+        
+          
     <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
         <div class="container">
             <a href="#" class="navbar-brand">
@@ -135,6 +174,7 @@
         </div>
     </nav>
     <!-- </header> -->
+   
     <nav class="before-breadcrumb" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -142,6 +182,10 @@
             <li class="breadcrumb-item active" aria-current="page">Data</li>
         </ol>
     </nav>
+    <section style="position: relative; top:1%" class="seperator-wrapper">
+        <div class="seperator gradient">
+        </div>
+    </section>
     <!-- This is a reverse engineering of the "Hyperspace"
      design from HTML5 Up! https://html5up.net/hyperspace -->
     <main class="main row">
@@ -185,7 +229,8 @@
         </div>
         <div style="height: 100vh;" class="col-md-8">
             <div class="title-li">
-                <p>user details</p>
+                <p style="">user details</p>
+                <hr>
             </div>
             <article class="container">
                 <form style="padding: 0;" id='form-register' autocomplete="off" action='./account' method='POST'>
@@ -197,7 +242,7 @@
                             <div class='col-md-12 d-flex'>
                                 <div class='col-md-6'>
                                     <label for='fname'>First name</label>
-                                    <input required type='text' name='fname' class='form-control' id='fnam' aria-describedbsy='fnamelHelp' placeholder='Enter first name'>
+                                    <input required type='text' name='fname' class='form-control' id='fname' aria-describedbsy='fnamelHelp' placeholder='Enter first name'>
                                 </div>
                                 <div class='col-md-6'>
                                     <label for='lname'>Last name</label>
@@ -216,7 +261,7 @@
                                 </div>
                                 <div class='col-md-6'>
                                     <label for='password'>DoB</label>
-                                    <input style="width: 100%" id="datepicker" class="span2" type="text">
+                                    <input style="width: 100%" id="datepicker" class="span2" type="text" name="dob">
                                 </div>
                             </div>
                         </div>
@@ -236,7 +281,8 @@
                             <div class='col-md-12 d-flex'>
                                 <div class='form-group col-md-6'>
                                     <label for='pnumber'>Phone number</label>
-                                    <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'>
+                                    <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
+                                    <input name="pnumber" type="tel" id="pnumber">
                                     <small id='Help' class='form-text'>
                                         Please! Make sure your phone number is correct
                                     </small>
@@ -247,8 +293,50 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class=" col-md-12">
+                    <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-address-default flip-form">
+                        <div class="title-container-user-info col-md-12">
+                            <b>ADDRESS SHIPPING <a href="#"><span><i class="fas fa-pencil-alt"></i>(Edit address)</span></a></b>
+                        </div>
+                        <div class="form-group d-flex">
+                            <div class='form-group col-md-6'>
+                                <label for="">Name:</label>
+                                <div></div>
+                                <label for="">Mail:</label>
+                                <div></div>
+                                <label for="">Phone:</label>
+                                <div></div>
+                            </div>
+                            <div class='form-group col-md-6'>
+                                <label for="">Address:</label>
+                                <div></div>
+                                <label for="">City:</label>
+                                <div></div>
+                                <label for="">Zip code:</label>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                        </div>
+                        
+                    </div>
+                    <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-password-change flip-form">
+                        <div class="title-container-user-info col-md-12">
+                            <b>PASSWORD CHANGE</b>
+                        </div>
+                        <div class='form-group'>
+                            <div class="form-group row">
+                                <label class='col-md-3 margin-ver '>current password:</label> 
+                                <input class='col-md-9' id='currentpw' required name='currentpw' type='password' value='' /> 
+                            </div>
+                            <div class="form-group row">
+                                <label class='col-md-3 margin-ver'>new password:</label> 
+                                <input class='col-md-9' required id='newpw' name='newpw' type='password' value='' /> 
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-12 flip-form">
                         <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Register</button>
                         <!-- <button type='submit' id='btn-login' class='btn btn-primary btn-submit'>Register</button> -->
                     </div>
@@ -266,8 +354,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="/api/js/pjs/main.js"></script>
 <script src="/api/js/datepicker/dist/datepicker.js"></script>
+<script src="/package/intl-tel-input-master/build/js/intlTelInput.js"></script>
 <script>
 $(document).ready(function() {
+    var input = document.querySelector("#pnumber");
+    window.intlTelInput(input, {
+        utilsScript: "/package/intl-tel-input-master/build/js/utils.js"
+    });
     $('#pnumber').on('input', function() {
         this.value = this.value
             .replace(/[^\d]/g, ''); // numbers and decimals only
@@ -300,10 +393,6 @@ $(document).ready(function() {
         return [year, month, day].join('-');
     }
 })
-$('input.checkbox').click(function() {
-
-    // alert("Checkbox state (method 2) = " + $('input.checkbox').is(':checked'));
-});
 </script>
 
 </html>

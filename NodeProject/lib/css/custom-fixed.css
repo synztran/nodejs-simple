@@ -1,3 +1,9 @@
 .d-flex{
     display: flex;
 }
+.margin-ver{
+    margin: auto 0;
+}
+.margin-hor{
+    margin: 0 auto
+}

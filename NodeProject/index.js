@@ -61,7 +61,7 @@ app.use(session({
     resave: true, 
     saveUninitialized: true, 
     secret: config.secret, 
-    cookie: { maxAge: 60000 }}));
+    cookie: { maxAge: 1800 }}));
 // app.use(express.cookieParser());
 // set static data for public folder to Application Server
 // app.use(express.static('public'));
@@ -69,7 +69,8 @@ app.use(session({
 app.use('/api/docs', express.static('docs'))
 app.use('/api/js', express.static('lib/js'))
 app.use('/api/css', express.static('lib/css'))
-app.use('/api/io', express.static('lib'))
+// app.use('/api/io', express.static('lib'))
+app.use('/package', express.static('lib'))
 app.use('/api/docs/upload', express.static('docs/upload'))
 app.use('/product/img', express.static('docs/pimg'))
 app.use('/product/css', express.static('lib/css/pcss'))
