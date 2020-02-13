@@ -51,23 +51,38 @@ var accountSchema = mongoose.Schema({
     },
     shipping_at: 
     // [addressSchema],
-    {
-        address:{
-            type: String
-        },
-        city:{
-            type: String
+    [
+        {
+            address: {
+                type: String
+            },
+            city:{
+                type: String
+            },
+            zip_code:{
+                type: String
+            }
+        }
+    ],
+    // {
+    //     address:{
+    //         type: String
+    //     },
+    //     city:{
+    //         type: String
 
-        },
-        zip_code:{
-            type: String
-        },    
+    //     },
+    //     zip_code:{
+    //         type: String
+    //     },    
         
-    },
+    // },
     phone_area_code:{
-        type: String
+        type: String,
+        default: null
     },
     phone_number:{
+        default: null,
         type: String
     },
     created: {
@@ -90,9 +105,9 @@ var accountSchema = mongoose.Schema({
         type: String,
         default: null,
         lowercase: true,
-        required: 'Email address is required',
-        validate: [validateEmail, 'Please fill a valid email address'],
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+        // required: 'Email address is required',
+        // validate: [validateEmail, 'Please fill a valid email address'],
+        // match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     fb_url:{
         type: String,

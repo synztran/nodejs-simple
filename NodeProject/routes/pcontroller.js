@@ -117,15 +117,16 @@ router.post("/account", async (req, res, next) => {
     console.log(req.body);
     try {
         var check = await Account.find({ email: req.body.email }, async (err, docs) => {
+            console.log(check);
             if (docs.length) {
                 res.status(400).json({
                     code: 400,
                     message: "email already exists"
                 })
             } else {
-                if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
-                    return res.json({"responseError": "Please select captcha first"});
-                }
+                // if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
+                //     return res.json({"responseError": "Please select captcha first"});
+                // }
 
                 // const secretKey = config.secretKey;
                 
@@ -327,16 +328,18 @@ router.get('/verify', async(req, res) =>{
 
 router.post('/updateaccount', async(req, res)=>{
     // const uemail = req.session.User['email'];
-    const uemail = 'harawex990@hiwave.org'
+    const uemail = 'rapsunl231@gmail.com'
     console.log(uemail);
     try{
         
         var account = await Account.findOne({ email: uemail }).exec();
 
-        console.log(account)
+        // console.log(account)
         console.log(req.body)
 
-        console.log(account.shipping_at);
+        // console.log(account.shipping_at);
+        // console.log(account.shipping_at[0]);
+        // console.log(account.shipping_at[0].address);
         // console.log(account.shipping_at[0]['address'])
         // console.log(account.shipping_at[0].address)
         if(!account){
@@ -346,12 +349,7 @@ router.post('/updateaccount', async(req, res)=>{
             });
         }
 
-        // if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
-        //     return res.status(400).send({
-        //         status: "error",
-        //         message: "The password is not correct"
-        //     });
-        // }
+       
 
         if(req.body.currentpw == '' & req.body.newpw == ''){
             console.log(uemail)
@@ -366,16 +364,27 @@ router.post('/updateaccount', async(req, res)=>{
                         birth_date: req.body.dob,
                         paypal: req.body.paypal,
                         fb_url: req.body.fburl,
-                        shipping_at:{
-                            address: req.body.address,
-                            city: req.body.city,
-                            zip_code: req.body.zipcode
-                        }
+                        // shipping_at:[{
+                        //     address: req.body.address,
+                        //     city: req.body.city,
+                        //     zip_code: req.body.zipcode
+                        // }
+                        phone_area_code: req.body.phonearea,
+                        phone_number: req.body.phonenum,
+                        get_noti: req.body.get_noti
+                            
+                        
                     } 
                 })
 
                 res.status(200).status('ok')
         }else{
+             if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
+                return res.status(400).send({
+                    status: "error",
+                    message: "The password is not correct"
+                });
+            }
             req.body.newpw = bcrypt.hashSync(req.body.newpw, 10);
             account.set({ password: req.body.newpw });
             var result = await account.save();
