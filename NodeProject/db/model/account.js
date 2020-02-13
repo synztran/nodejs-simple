@@ -6,6 +6,20 @@ var validateEmail = function(email) {
     return re.test(email)
 };
 
+
+var addressSchema = mongoose.Schema({
+    address:{
+        type: String
+    },
+    city:{
+        type: String
+
+    },
+    zip_code:{
+        type: String
+    } 
+});
+
 var accountSchema = mongoose.Schema({
     email: {
         // required: true,
@@ -35,7 +49,9 @@ var accountSchema = mongoose.Schema({
     birth_date:{
         type: Date,
     },
-    shipping_at:{
+    shipping_at: 
+    // [addressSchema],
+    {
         address:{
             type: String
         },
@@ -46,6 +62,7 @@ var accountSchema = mongoose.Schema({
         zip_code:{
             type: String
         },    
+        
     },
     phone_area_code:{
         type: String

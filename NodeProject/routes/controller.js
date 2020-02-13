@@ -471,6 +471,7 @@ router.post("/created", async (req, res) => {
 });
 
 router.post('/product/add', async(req, res)=>{
+    console.log(req.body)
     try{
         var product = new Product({
             product_id : req.body.productid,
