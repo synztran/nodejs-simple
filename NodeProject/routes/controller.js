@@ -48,6 +48,7 @@ const upload = multer({
 var Account = require('./../db/model/account');
 var AdmAccount = require('./../db/model/accadmin');
 var Product  = require('./../db/model/product');
+var Category = require('./../db/model/category');
 var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
@@ -488,5 +489,93 @@ router.post('/product/add', async(req, res)=>{
     }
 })
 
+router.post('/category/add', async(req, res)=>{
+    console.log(req.body)
+    try{
+
+        var check =  await Category.find({ category_id: req.body.catid }, async (err, docs) => {
+            if (docs.length) {
+                res.status(400).json({
+                    code: 400,
+                    message: "category id already exists"
+                })
+            } else {
+                var category = new Category({
+                    category_id : req.body.catid,
+                    category_name: req.body.catname,
+                    color: req.body.color,
+                    date_start: req.body.date_start,
+                    date_end: req.body.date_end,
+                    date_payment: req.body.date_payment,
+                    min_price: req.body.min_price,
+                    max_price: req.body.max_price
+        
+        
+                })
+                var result = category.save();
+                res.send(result);
+        
+            }
+        }).exec();
+    }catch(err){
+        res.status(500).send(err);
+    }
+})
+
+// router.get("/category/edit/:id", async (req, res) => {
+//     try {
+//         Category.findById(req.params
+//             .id,
+//             function(err, account) {
+//                 res.render('editAccount', {
+//                     title: 'Edit Account',
+//                     account: account
+//                 });
+//             });
+//     } catch (err) {
+//         console.log(err);
+//         res.status(200).send(err);
+//     }
+// });
+
+// update db to mongo
+// , upload.single('picture') 
+router.post("/category/edit/:id",async (req, res) => {
+    console.log(req.body);
+    // console.log(req.file);
+    try {
+        var check = await Category.findById(req.params
+            .id).exec();
+            console.log(check)
+        if (!check) {
+            return res.status(400).send({
+                status: "error",
+                message: "The category id does not exist "
+            });
+        }
+
+        check.set({
+            // category_id : req.body.catid,
+            category_name: req.body.catname,
+            status_gb: req.body.status,
+            color: req.body.color,
+            date_start: req.body.date_start,
+            date_end: req.body.date_end,
+            date_payment: req.body.date_payment,
+            min_price: req.body.min_price,
+            max_price: req.body.max_price
+        });
+
+       
+        var result = await check.save();
+        res.status(200).send(result)
+        // return res.redirect('/list');
+
+
+    } catch (err) {
+        console.log(err);
+        res.status(200).send(err);
+    }
+});
 
 module.exports = router;

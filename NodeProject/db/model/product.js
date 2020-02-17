@@ -10,32 +10,28 @@ var productSchema = mongoose.Schema({
     product_name:{
         type: String
     },
-    category:{
+    category_id:{
         type: String
     },
-    status_gb:{
+    outstock:{
         type: Boolean,
         default: false
     },
     color: [],
-    date_start:{
-        type: Date
-    },
-    date_end:{
-        type: Date
-    },
     price:{
         type: Number
     },
-    pic_profile:{
-        path: {
-            type: String
-        },
-        size: {
-            type: Number
-        },
-    },
-    pic_list: []
+    pic_list: [
+        {
+            path: {
+                type: String
+            },
+            size: {
+                type: Number
+            },
+            
+        }
+    ],
 })
 let Product = mongoose.model('Product', productSchema);
 module.exports = Product;

@@ -17,8 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS
     ================================================== -->
-   
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="#">
     <link rel="stylesheet" href="#">
     <link rel="stylesheet" href="#">
@@ -34,133 +33,1005 @@
     <link rel="icon" href="./../favicon.ico" type="image/x-icon">
 </head>
 <style>
-/* Generals resets and unimportant stuff */
+    /* Generals resets and unimportant stuff */
 * {
     margin: 0px;
     padding: 0px;
 }
 
-body {
-    background: #eaebec;
-    font-family: "Open Sans", sans-serif;
+html, body{
+        font-family: "Montserrat", sans-serif !important;
+        height: 100%;
+        width: 100%;
+        background-image: url('/api/docs/background/UIBkAT.jpg');
+        background-repeat: no-repeat;
+    }
+    nav.navbar{
+        z-index: 1;
+        position: sticky;
+        top: 0;
+        background-image: url('/api/docs/background/UIBkAT.jpg');
+        background-repeat: no-repeat;
+        /* clip-path: polygon(0 13%, 99% 24%, 100% 92%, 17% 86%); */
+
+    }
+    .bg-dark{
+        background-color: transparent!important;
+        /* clip-path: polygon(50% 0%, 100% 0, 100% 61%, 30% 86%, 0 52%, 0 0); */
+    }
+    
+    .before-breadcrumb {
+        opacity: 0.91;
+        position: relative;
+        top: 1%;
+        background-color: rgba(54, 58, 64, 0.3);
+        background-image: url('/api/docs/background/UIBkAT.jpg');
+        background-repeat: no-repeat;
+        filter: brightness(150%);
+        /* -webkit-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
+        -moz-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
+        box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79); */
+    }
+    .breadcrumb{
+        max-width: 70%;
+        margin:0 auto;
+        background-image: url('/api/docs/background/UIBkAT.jpg');
+        background-repeat: no-repeat;
+        
+        
+    }
+    
+    .row:first-child > .col-md-12{
+        display: flex;
+    }
+    .row{
+        height: 100%;
+        position: relative;
+        top: 5%;
+    }
+    .btn-submit{
+        border-radius: 50px;
+        min-width: 160px;
+    }
+    .footer-register{
+        height: 10%;
+    }
+    @import "compass/css3";
+    .seperator-wrapper {
+  width: 100%;
 }
+
+    .seperator-wrapper .seperator {
+  width: 70%;
+  margin: 0 auto;
+  height: 5px;
+  animation: rotate 3s infinite linear;
+  -webkit-animation: rotate 3s infinite linear;
+}
+@-webkit-keyframes rotate {
+  from {
+    background-position: -3000px;
+  }
+  to {
+    background-position: 0px;
+  }
+}
+@keyframes rotate {
+  from {
+    background-position: -3000px;
+  }
+  to {
+    background-position: 0px;
+  }
+}
+.gradient {
+  background: #30ff90;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #30ff90), color-stop(25%, #ed2ded), color-stop(50%, #c99826), color-stop(75%, #30ffe6), color-stop(100%, #30ff90));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* IE10+ */
+  background: linear-gradient(to right, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30ff90', endColorstr='#30ff90',GradientType=1);
+  /* IE6-9 */
+}
+
+
+
+/* ===================================================================
+ * # preloader - (_preloader-dots.scss)
+ *
+ * ------------------------------------------------------------------- */
+ #preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #151515;
+  z-index: 800;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.no-js #preloader,
+.oldie #preloader {
+  display: none;
+}
+
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  display: inline-block;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -ms-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}
+
+#loader > div {
+  content: "";
+  background: #FFFFFF;
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+}
+
+#loader > div:nth-of-type(1) {
+  left: 15px;
+}
+
+#loader > div:nth-of-type(3) {
+  left: -15px;
+}
+
+/* dots jump */
+.dots-jump > div {
+  -webkit-animation: dots-jump 1.2s infinite ease;
+  animation: dots-jump 1.2s infinite ease;
+  animation-delay: 0.2s;
+}
+
+.dots-jump > div:nth-of-type(1) {
+  animation-delay: 0.4s;
+}
+
+.dots-jump > div:nth-of-type(3) {
+  animation-delay: 0s;
+}
+
+@-webkit-keyframes dots-jump {
+  0% {
+    top: 0;
+  }
+
+  40% {
+    top: -6px;
+  }
+
+  80% {
+    top: 0;
+  }
+
+}
+
+@keyframes dots-jump {
+  0% {
+    top: 0;
+  }
+
+  40% {
+    top: -6px;
+  }
+
+  80% {
+    top: 0;
+  }
+
+}
+
+/* dots fade */
+.dots-fade > div {
+  -webkit-animation: dots-fade 1.6s infinite ease;
+  animation: dots-fade 1.6s infinite ease;
+  animation-delay: 0.4s;
+}
+
+.dots-fade > div:nth-of-type(1) {
+  animation-delay: 0.8s;
+}
+
+.dots-fade > div:nth-of-type(3) {
+  animation-delay: 0s;
+}
+
+@-webkit-keyframes dots-fade {
+  0% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.2;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+}
+
+@keyframes dots-fade {
+  0% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.2;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+}
+
+/* dots pulse */
+.dots-pulse > div {
+  -webkit-animation: dots-pulse 1.2s infinite ease;
+  animation: dots-pulse 1.2s infinite ease;
+  animation-delay: 0.2s;
+}
+
+.dots-pulse > div:nth-of-type(1) {
+  animation-delay: 0.4s;
+}
+
+.dots-pulse > div:nth-of-type(3) {
+  animation-delay: 0s;
+}
+
+@-webkit-keyframes dots-pulse {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  40% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.3);
+  }
+
+  80% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+}
+
+@keyframes dots-pulse {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  40% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.3);
+  }
+
+  80% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+}
+
+/* sidebar */
+.main{
+    top:5%;
+    position: relative;
+    height: 100%;
+    display: flex;
+    /* margin: 0 15%; */
+    margin: 0%;
+}
+ .sidebar {
+     /* position: fixed; */
+     position: absolute;
+     /* width: 25%; */
+     width: 100%;
+	 /* height: 100vh; */
+	 height: 100%;
+     /* background: #312450; */
+     /* background-color: rgba(54, 58, 64, 0.3); */
+
+     font-size: 0.65em;
+}
+ .nav {
+	 position: relative;
+	 margin: 0 15%;
+	 text-align: right;
+	 /* top: 32%; */
+	 /* transform: translateY(-50%); */
+     font-weight: bold;
+     background-color: rgba(54, 58, 64, 0.5);
+}
+ .nav ul {
+     list-style: none;
+	 width: 80%;
+	 margin-bottom: 0;
+}
+ .nav ul li {
+	 position: relative;
+	 /* margin: 3.2em 0; */
+}
+ .nav ul li a {
+	 /* line-height: 5em; */
+	 /* text-transform: uppercase; */
+	 text-decoration: none;
+	 letter-spacing: 0.2em;
+     /* color: rgba(255, 255, 255, 0.35); */
+     /* color: wheat; */
+     color: rgba(61,38,61,0.79);
+     display: block;
+     font-size: 16px;
+	 transition: all ease-out 300ms;
+}
+ .nav ul li.active a {
+	 /* color: white; */
+}
+.nav ul li:not(.active)a {
+	/* color: white; */
+}
+ .nav ul li:not(.active)::after {
+	 opacity: 0.2;
+}
+ .nav ul li:not(.active):hover a {
+     /* color: rgba(255, 255, 255, 0.75); */
+     /* color: rgba(61,38,61,0.79); */
+     color: wheat
+     
+}
+ .nav ul li::after {
+	 /* content: '';
+	 position: absolute;
+	 width: 100%;
+	 height: 0.2em;
+	 background: black;
+	 left: 0;
+	 bottom: 0;
+	 background-image: linear-gradient(to right, #5e42a6, #b74e91); */
+}
+
+.container {
+    /* background-color: rgba(54, 58, 64, 0.5); */
+	 display: block;
+	 padding-left: 0;
+	 /* flex-direction: column; */
+	 /* align-items: center; */
+	 /* justify-content: center; */
+	 height: 100%;
+}
+ 
+.dashboard-title{
+    font-size: 16px;
+    color: wheat;
+    font-weight: bold;
+}
+.title-li{
+
+}
+.title-li p{
+    line-height: 1;
+    font-size: 32px;
+    text-transform: uppercase;
+    margin-bottom:0rem;
+    color: wheat;
+    font-weight: bolder;
+	letter-spacing: 3px;
+}
+.title-li > hr{
+	display:block;
+	  margin-top:0 ;
+	  height:15px;
+	  width:105px;
+	  border:none;
+	  border-radius: 3px;
+	  border-left:15px solid #f00000;
+	  border-right:15px solid #300000;
+	  animation: KITTAnim 1s infinite ease-in-out alternate;
+}
+.title-li > hr:before{
+	position: relative;
+	bottom: 2px;
+	content:" ";
+  display:inline-block;
+  width:15px;
+  height:15px;
+  border-left:15px solid #c00000;
+  border-right:15px solid #600000;
+  animation: KITTAnimBefore 1s infinite ease-in-out alternate;
+ }
+ .title-li > hr:after{
+ 	position: relative;
+	bottom: 2px;
+	content:" ";
+  display:inline-block;
+  width:15px;
+  height:15px;
+  border-left:15px solid #300000;
+  background-color:#300000;
+  border-right:15px solid #300000;
+  animation: KITTAnimAfter 1s infinite ease-in-out alternate;
+ }
+/* .title-li > hr:nth-child(even){
+	animation: KARRAnim 1s infinite ease-in-out alternate;
+}
+.title-li > hr:nth-child(even):after{
+	 animation: KARRAnimAfter 1s infinite ease-in-out alternate;
+}
+.title-li > hr:nth-child(even):before{
+	 animation: KARRAnimBefore 1s infinite ease-in-out alternate;
+} */
+.shape {
+	stroke-dasharray: 140 540;
+	/* stroke-dashoffset: -316; */
+	/* stroke-dashoffset: 208.5%; */
+	stroke-dashoffset: -180.5%;
+	stroke-width: 8px;
+	fill: transparent;
+	/* stroke: rgba(61,38,61,0.79); */
+	stroke: wheat;
+	/* background: -webkit-linear-gradient(-86deg, #EEF85B 5%, #7AEC8D 53%, #09E5C3 91%); */
+	border-bottom: 5px solid black;
+	transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
+  }
+  .text{
+	/*font-family: 'Roboto Condensed';*/
+	font-size: 16px;
+	line-height: 32px;
+	letter-spacing: 4px;
+	color: wheat;
+	top: -48px;
+	position: relative;
+  }
+  /* .active:hover .shape {
+	stroke-width: 2px;
+	stroke-dashoffset: 0;
+	stroke-dasharray: 760;
+  } */
+  li:not(.active):hover .shape {
+	stroke-width: 2px;
+	stroke-dashoffset: 0;
+	
+	stroke-dasharray: 760;
+  }
+  li:not(.active):hover .text{
+	color: white;
+  }
+  li.active .text{
+	  color: white;
+  }
+
+  /* amimation */
+  
+  /*-----------------Animation------------------*/
+  @keyframes KITTAnim {
+   0% {
+      background-color:#300000;
+      border-left:15px solid #f00000;
+      border-right:15px solid #300000;
+   }
+   10% {
+      background-color:#300000;
+      border-left:15px solid #f00000;
+      border-right:15px solid #300000;
+   }
+   20% {
+      background-color:#300000;
+      border-left:15px solid #c00000;
+      border-right:15px solid #300000;
+   }
+   30% {
+      background-color:#300000;
+      border-left:15px solid #a00000;
+      border-right:15px solid #300000;
+   }
+   40% {
+      background-color:#300000;
+      border-left:15px solid #600000;
+      border-right:15px solid #300000;
+   }
+   50% {
+      background-color:#600000;
+      border-left:15px solid #300000;
+      border-right:15px solid #300000;
+   }
+   60% {
+      background-color:#a00000;
+      border-left:15px solid #300000;
+      border-right:15px solid #600000;
+   }
+   70% {
+      background-color:#c00000;
+      border-left:15px solid #300000;
+      border-right:15px solid #a00000;
+   }
+   80% {
+      background-color:#f00000;
+      border-left:15px solid #300000;
+      border-right:15px solid #c00000;
+   }
+   90% {
+      background-color:#c00000;
+      border-left:15px solid #300000;
+      border-right:15px solid #f00000;
+   }
+   100% {
+      background-color:#c00000;
+      border-left:15px solid #300000;
+      border-right:15px solid #f00000;
+   }
+}
+
+@keyframes KITTAnimBefore {
+   0% {
+      background-color:#a00000;
+      border-left:15px solid #c00000;
+      border-right:15px solid #600000;
+   }
+   10% {
+      background-color:#a00000;
+      border-left:15px solid #c00000;
+      border-right:15px solid #600000;
+   }
+   20% {
+      background-color:#c00000;
+      border-left:15px solid #f00000;
+      border-right:15px solid #a00000;
+   }
+   30% {
+      background-color:#f00000;
+      border-left:15px solid #c00000;
+      border-right:15px solid #c00000;
+   }
+   40% {
+      background-color:#c00000;
+      border-left:15px solid #a00000;
+      border-right:15px solid #f00000;
+   }
+   50% {
+      background-color:#a00000;
+      border-left:15px solid #600000;
+      border-right:15px solid #c00000;
+   }
+   60% {
+      background-color:#600000;
+      border-left:15px solid #300000;
+      border-right:15px solid #a00000;
+   }
+   70% {
+      background-color:#300000;
+      border-left:15px solid #300000;
+      border-right:15px solid #600000;
+   }
+   80% {
+      background-color:#300000;
+      border-left:15px solid #300000;
+      border-right:15px solid #300000;
+   }
+   90% {
+      background-color:#300000;
+      border-left:15px solid #300000;
+      border-right:15px solid #300000;
+   }
+   100% {
+      background-color:#300000;
+      border-left:15px solid #300000;
+      border-right:15px solid #300000;
+   }
+}
+
+@keyframes KITTAnimAfter {
+   0% {
+      background-color:#300000;
+      border-left:15px solid #300000;
+      border-right:15px solid #300000;
+   }
+   10% {
+      background-color:#300000;
+      border-left:15px solid #300000;
+      border-right:15px solid #300000;
+   }
+   20% {
+      background-color:#300000;
+      border-left:15px solid #600000;
+      border-right:15px solid #300000;
+   }
+   30% {
+      background-color:#600000;
+      border-left:15px solid #a00000;
+      border-right:15px solid #300000;
+   }
+   40% {
+      background-color:#a00000;
+      border-left:15px solid #c00000;
+      border-right:15px solid #600000;
+   }
+   50% {
+      background-color:#c00000;
+      border-left:15px solid #f00000;
+      border-right:15px solid #a00000;
+   }
+   60% {
+      background-color:#f00000;
+      border-left:15px solid #c00000;
+      border-right:15px solid #c00000;
+   }
+   70% {
+      background-color:#c00000;
+      border-left:15px solid #a00000;
+      border-right:15px solid #f00000;
+   }
+   80% {
+      background-color:#a00000;
+      border-left:15px solid #600000;
+      border-right:15px solid #c00000;
+   }
+   90% {
+      background-color:#600000;
+      border-left:15px solid #300000;
+      border-right:15px solid #a00000;
+   }
+   100% {
+      background-color:#600000;
+      border-left:15px solid #300000;
+      border-right:15px solid #a00000;
+   }
+}
+
 </style>
 
-<body class="preloading">
-    <div id="preload" class="preload-container text-center">
+<body id="top">
+    <!-- <div id="preload" class="preload-container text-center">
         <span class="glyphicon glyphicon-repeat preload-icon rotating"></span>
+    </div> -->
+    <div id="preloader">
+        <div id="loader" class="dots-jump">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-
-	<div class="make-3D-space">
-                <div class="product-card">
-                    <div class="product-front">
-                        <div class="shadow"></div>
-                        <img style="width: 100%;
+    <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <!-- Logo Image -->
+                <img src="https://res.cloudinary.com/mhmd/image/upload/v1557368579/logo_iqjuay.png" width="45" alt="" class="d-inline-block align-middle mr-2">
+                <!-- Logo Text -->
+                <span class="text-uppercase font-weight-bold">Company</span>
+            </a>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="./" class="nav-link">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Group Buy</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- </header> -->
+    <nav class="before-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Library</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+    </nav>
+    <section style="position: relative; top:1%" class="seperator-wrapper">
+        <div class="seperator gradient">
+        </div>
+    </section>
+    <!-- Breakcum-->
+    <main class="main row">
+        <div style="height: 75vh;" class="col-md-3">
+            <sidebar class="sidebar">
+                <nav class="nav">
+                    <ul>
+                        <li class="active">
+                            <a href="">
+                                <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="shape" height="60" width="100%" />
+                                    <div class="text">Details<i class="fas fa-user"></i></div>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="">
+                            <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
+                                <rect class="shape" height="60" width="100%" />
+                                <div class="text">ZACH SAUCIER</div>
+                            </svg>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="shape" height="60" width="100%" />
+                                    <div class="text">Tracking<i class="fas fa-shipping-fast"></i></div>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <svg height="60" width="240" xmlns="http://www.w3.org/2000/svg">
+                                    <rect class="shape" height="60" width="100%" />
+                                    <div class="text">Logout<i class="fas fa-sign-out-alt"></i></div>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </sidebar>
+        </div>
+        <div style="height: 100vh;" class="col-md-9">
+            <div class="title-li">
+                <p style="">user details</p>
+                <hr>
+            </div>
+            <article class="row">
+              <!-- <div class="row"> -->
+                <div class="col-sm-6 col-md-4 col-product">
+                    <div class="make-3D-space">
+                        <div class="product-card">
+                            <div class="product-front">
+                                <div class="shadow"></div>
+                                <img style="width: 100%;
                 height: 100%;
                 object-fit: cover;" src="product/img/e6.5.jpg" alt="" />
-                        <div class="image_overlay"></div>
-                        <div class="view_details">View details</div>
-                        <div class="stats">
-                            <div class="stats-container">
-                                <span class="product_price">$39</span>
-                                <span class="product_name">Adidas Originals</span>
-                                <p class="fake-text">Men's running shirt</p>
-                                <div class="product-options">
-                                    <strong>SIZES</strong>
-                                    <span>XS, S, M, L, XL, XXL</span>
-                                    <strong>COLORS</strong>
-                                    <div class="colors">
-                                        <div class="c-blue"><span></span></div>
-                                        <div class="c-red"><span></span></div>
-                                        <div class="c-white"><span></span></div>
-                                        <div class="c-green"><span></span></div>
+                                <div class="image_overlay"></div>
+                                <div class="view_details">View details</div>
+                                <div class="stats">
+                                    <div class="stats-container">
+                                        <span class="product_price">$39</span>
+                                        <span class="product_name">Adidas Originals</span>
+                                        <p class="fake-text">Men's running shirt</p>
+                                        <div class="product-options">
+                                            <strong>SIZES</strong>
+                                            <span>XS, S, M, L, XL, XXL</span>
+                                            <strong>COLORS</strong>
+                                            <div class="colors">
+                                                <div class="c-blue"><span></span></div>
+                                                <div class="c-red"><span></span></div>
+                                                <div class="c-white"><span></span></div>
+                                                <div class="c-green"><span></span></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="product-back">
-                        <div class="shadow"></div>
-                        <div class="carousel">
-                            <ul>
-                                <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large.png" alt="" /></li>
-                                <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large2.png" alt="" /></li>
-                                <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large3.png" alt="" /></li>
-                            </ul>
-                            <div class="arrows-perspective">
-                                <div class="carouselPrev">
-                                    <div class="y"></div>
-                                    <div class="x"></div>
+                            <div class="product-back">
+                                <div class="shadow"></div>
+                                <div class="carousel">
+                                    <ul>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large.png" alt="" /></li>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large2.png" alt="" /></li>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large3.png" alt="" /></li>
+                                    </ul>
+                                    <div class="arrows-perspective">
+                                        <div class="carouselPrev">
+                                            <div class="y"></div>
+                                            <div class="x"></div>
+                                        </div>
+                                        <div class="carouselNext">
+                                            <div class="y"></div>
+                                            <div class="x"></div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="carouselNext">
-                                    <div class="y"></div>
-                                    <div class="x"></div>
+                                <div class="flip-back">
+                                    <div class="cy"></div>
+                                    <div class="cx"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="flip-back">
-                            <div class="cy"></div>
-                            <div class="cx"></div>
-                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="make-3D-space">
-                <div class="product-card">
-                    <div class="product-front">
-                        <div class="shadow"></div>
-                        <img style="width: 100%;
+                  </div>
+                  <div class="col-sm-6 col-md-4 col-product">
+                    <div class="make-3D-space">
+                        <div class="product-card">
+                            <div class="product-front">
+                                <div class="shadow"></div>
+                                <img style="width: 100%;
                 height: 100%;
                 object-fit: cover;" src="product/img/e6.5.jpg" alt="" />
-                        <div class="image_overlay"></div>
-                        <div class="view_details">View details</div>
-                        <div class="stats">
-                            <div class="stats-container">
-                                <span class="product_price">$39</span>
-                                <span class="product_name">Adidas Originals</span>
-                                <p class="fake-text">Men's running shirt</p>
-                                <div class="product-options">
-                                    <strong>SIZES</strong>
-                                    <span>XS, S, M, L, XL, XXL</span>
-                                    <strong>COLORS</strong>
-                                    <div class="colors">
-                                        <div class="c-blue"><span></span></div>
-                                        <div class="c-red"><span></span></div>
-                                        <div class="c-white"><span></span></div>
-                                        <div class="c-green"><span></span></div>
+                                <div class="image_overlay"></div>
+                                <div class="view_details">View details</div>
+                                <div class="stats">
+                                    <div class="stats-container">
+                                        <span class="product_price">$39</span>
+                                        <span class="product_name">Adidas Originals</span>
+                                        <p class="fake-text">Men's running shirt</p>
+                                        <div class="product-options">
+                                            <strong>SIZES</strong>
+                                            <span>XS, S, M, L, XL, XXL</span>
+                                            <strong>COLORS</strong>
+                                            <div class="colors">
+                                                <div class="c-blue"><span></span></div>
+                                                <div class="c-red"><span></span></div>
+                                                <div class="c-white"><span></span></div>
+                                                <div class="c-green"><span></span></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="product-back">
-                        <div class="shadow"></div>
-                        <div class="carousel">
-                            <ul>
-                                <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large.png" alt="" /></li>
-                                <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large2.png" alt="" /></li>
-                                <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large3.png" alt="" /></li>
-                            </ul>
-                            <div class="arrows-perspective">
-                                <div class="carouselPrev">
-                                    <div class="y"></div>
-                                    <div class="x"></div>
+                            <div class="product-back">
+                                <div class="shadow"></div>
+                                <div class="carousel">
+                                    <ul>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large.png" alt="" /></li>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large2.png" alt="" /></li>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large3.png" alt="" /></li>
+                                    </ul>
+                                    <div class="arrows-perspective">
+                                        <div class="carouselPrev">
+                                            <div class="y"></div>
+                                            <div class="x"></div>
+                                        </div>
+                                        <div class="carouselNext">
+                                            <div class="y"></div>
+                                            <div class="x"></div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="carouselNext">
-                                    <div class="y"></div>
-                                    <div class="x"></div>
+                                <div class="flip-back">
+                                    <div class="cy"></div>
+                                    <div class="cx"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="flip-back">
-                            <div class="cy"></div>
-                            <div class="cx"></div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-4 col-product">
+                    <div class="make-3D-space">
+                        <div class="product-card">
+                            <div class="product-front">
+                                <div class="shadow"></div>
+                                <img style="width: 100%;
+                height: 100%;
+                object-fit: cover;" src="product/img/e6.5.jpg" alt="" />
+                                <div class="image_overlay"></div>
+                                <div class="view_details">View details</div>
+                                <div class="stats">
+                                    <div class="stats-container">
+                                        <span class="product_price">$39</span>
+                                        <span class="product_name">Adidas Originals</span>
+                                        <p class="fake-text">Men's running shirt</p>
+                                        <div class="product-options">
+                                            <strong>SIZES</strong>
+                                            <span>XS, S, M, L, XL, XXL</span>
+                                            <strong>COLORS</strong>
+                                            <div class="colors">
+                                                <div class="c-blue"><span></span></div>
+                                                <div class="c-red"><span></span></div>
+                                                <div class="c-white"><span></span></div>
+                                                <div class="c-green"><span></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-back">
+                                <div class="shadow"></div>
+                                <div class="carousel">
+                                    <ul>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large.png" alt="" /></li>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large2.png" alt="" /></li>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large3.png" alt="" /></li>
+                                    </ul>
+                                    <div class="arrows-perspective">
+                                        <div class="carouselPrev">
+                                            <div class="y"></div>
+                                            <div class="x"></div>
+                                        </div>
+                                        <div class="carouselNext">
+                                            <div class="y"></div>
+                                            <div class="x"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-back">
+                                    <div class="cy"></div>
+                                    <div class="cx"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-    
+                  </div>
+                  <div class="col-sm-6 col-md-4 col-product">
+                    <div class="make-3D-space">
+                        <div class="product-card">
+                            <div class="product-front">
+                                <div class="shadow"></div>
+                                <img style="width: 100%;
+                height: 100%;
+                object-fit: cover;" src="product/img/e6.5.jpg" alt="" />
+                                <div class="image_overlay"></div>
+                                <div class="view_details">View details</div>
+                                <div class="stats">
+                                    <div class="stats-container">
+                                        <span class="product_price">$39</span>
+                                        <span class="product_name">Adidas Originals</span>
+                                        <p class="fake-text">Men's running shirt</p>
+                                        <div class="product-options">
+                                            <strong>SIZES</strong>
+                                            <span>XS, S, M, L, XL, XXL</span>
+                                            <strong>COLORS</strong>
+                                            <div class="colors">
+                                                <div class="c-blue"><span></span></div>
+                                                <div class="c-red"><span></span></div>
+                                                <div class="c-white"><span></span></div>
+                                                <div class="c-green"><span></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-back">
+                                <div class="shadow"></div>
+                                <div class="carousel">
+                                    <ul>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large.png" alt="" /></li>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large2.png" alt="" /></li>
+                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large3.png" alt="" /></li>
+                                    </ul>
+                                    <div class="arrows-perspective">
+                                        <div class="carouselPrev">
+                                            <div class="y"></div>
+                                            <div class="x"></div>
+                                        </div>
+                                        <div class="carouselNext">
+                                            <div class="y"></div>
+                                            <div class="x"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-back">
+                                    <div class="cy"></div>
+                                    <div class="cx"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                <!-- </div> -->
+                
+            </article>
+        </div>
+    </main>
+    <!-- main-->
+    <div class="footer-register center">
+    </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
@@ -176,7 +1047,7 @@ $(document).ready(function() {
         $('div.carouselNext, div.carouselPrev').removeClass('visible');
     });
 
-    
+
 
     // Flip card to the back side
     $('.view_details').click(function() {
@@ -270,11 +1141,11 @@ $(document).ready(function() {
     });
 
     $(window).load(function() {
-    $('body').removeClass('preloading');
-    $('#preload').delay(1000).fadeOut('fast');
-});
+        $('body').removeClass('preloading');
+        $('#preload').delay(1000).fadeOut('fast');
+    });
 });
 </script>
-<!-- <script src="/api/js/pjs/main.js"></script> -->
+<script src="/api/js/pjs/main.js"></script>
 
 </html>
