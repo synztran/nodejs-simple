@@ -54,7 +54,7 @@
                     <div id="form-login" class="hidden">
                     </div>
                     <li><a class="smoothscroll" href="#home" title="home">Proxy Group Buy</a></li>
-                    <li><a class="smoothscroll" href="#shop" title="about">Group Buy</a></li>
+                    <li><a class="" href="/account" title="about">Group Buy</a></li>
                     <li><a class="smoothscroll" href="#services" title="services">SERVICES</a></li>
                     <li><a class="smoothscroll" href="#gallery" title="works">GALLERY</a></li>
                     <li><a class="smoothscroll" href="#aboutus" title="aboutus">ABOUT US</a></li>
@@ -646,7 +646,7 @@
         var x = document.cookie;
         console.log(x);
         const ggcaptchasitekey = '6Lcti9UUAAAAADIUivaJtXit0OKia78-EQIbnDkc';
-        fetch('/get_session')
+        fetch('/get_cookie')
             .then(function(response) {
 
                 if (!response.ok) {
@@ -660,8 +660,8 @@
                 console.log(responseAsJson);
 
                 var user = responseAsJson;
-                // console.log(user);
-                console.log(user.session['email'])
+                console.log(user);
+                // console.log(user.session['email'])
 
                 var formLogin = $('.swal2-container').clone()[0]
                 $('#form-login').remove();
@@ -715,7 +715,7 @@
                                     // })
                                     $.ajax({
                                         tpye: 'GET',
-                                        url: '/clear_session',
+                                        url: '/del',
                                         success: function(res) {
                                             window.location.href = '/'
                                         },

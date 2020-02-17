@@ -7,6 +7,10 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const http = require('http');
 const session = require('express-session');
+const redis = require('redis');
+const redisStore = require('connect-redis')(session);
+const client  = redis.createClient();
+const livereload = require('connect-livereload');
 const config = require('./lib/comon/config');
 const fs = require('fs');
 
@@ -34,9 +38,8 @@ var date = new Date();
 del = function(req, res){
 	res.clearCookie('x-token');
 	res.clearCookie('x-refresh-token');
-	res.clearCookie('x-email');
-	res.clearCookie('x-fname');
-	res.clearCookie('x-lname');
+	res.clearCookie('uemail');
+	res.clearCookie('uid');
 	res.clearCookie('io');
 	// res.clearCookie();
 	res.redirect('/api/signin');
@@ -58,10 +61,20 @@ app.use(bodyParser.urlencoded({
 })); 
 
 app.use(session({
-    resave: true, 
-    saveUninitialized: true, 
+	saveUninitialized: false, 
+	name: "mycookie",
+	resave: false,
     secret: config.secret, 
-    cookie: { maxAge: 1800 }}));
+    cookie: { 
+		secure: false,
+		maxAge: 18000 
+	},
+	store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl : 260}),
+
+}));
+
+
+// app.use(livereload())
 // app.use(express.cookieParser());
 // set static data for public folder to Application Server
 // app.use(express.static('public'));
@@ -97,10 +110,7 @@ var rooms = ['abc123'];
 io.on('connection', function(socket){
 	// socket.emit('chat message', { datetime: new Date().getTime() });
 	var cli = io.of('/api/messenger').clients();
-	// console.log(cli);
-	// console.log(socket.id)
-	// console.log(io.sockets.adapter.rooms);
-	// console.log(socket.adapter.rooms);
+	
 	socket.on('get_rooms',function(){
 		var room_list = {};
 		var rooms = io.nsps['/messenger'].adapter.rooms;

@@ -11,6 +11,8 @@ const config = require('./../lib/comon/config');
 const utils = require('./../lib/comon/utils');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const livereload = require('connect-livereload');
+const app = express();
 router.use(cookieParser());
 // var token = jwt.sign({foo: 'bar'}, 'shhhhh');
 const tokenList = {};
@@ -56,40 +58,163 @@ var Product  = require('./../db/model/product');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
 var SessionCheckMiddleware = require('./../lib/check/checksession');
 
+app.use(session({
+	saveUninitialized: true, 
+	name: "mycookie",
+	resave: true,
+    secret: config.secret, 
+    cookie: { 
+		secure: false,
+		maxAge: 1800 
+	}
+}));
+app.use(livereload())
 
+router.post("/login", async (req, res, next) => {
+    try {
+        var account = await Account.findOne({ email: (req.body.email).toLowerCase() }).exec();
+        var active = await Account.findOne({ $and: [{ email: (req.body.email).toLowerCase() }, { active: true }] });
+
+        // console.log(account);
+
+        if (!account) {
+            return res.status(400).send({
+                status: "error",
+                message: "The user does not exist "
+            });
+        }
+        if (!bcrypt.compareSync(req.body.password, account.password)) {
+            return res.status(400).send({
+                status: "error",
+                message: "The password is not correct"
+            });
+        }
+        if (!active) {
+            return res.status(400).send({
+                status: "error",
+                message: "Please active your account"
+            })
+        }
+
+        const user = {
+            "email": (req.body.email).toLowerCase(),
+            "password": req.body.password
+        }
+        const token = jwt.sign(user, config.secret, {
+            expiresIn: config.tokenLife,
+        });
+        const refreshToken = jwt.sign(user, config.refreshTokenSecret, {
+            expiresIn: config.refreshTokenLife
+        });
+        tokenList[refreshToken] = user;
+        const response = {
+            token,
+            refreshToken,
+        }
+        var check = userToken.find({ email: (req.body.email).toLowerCase() }, async (err, docs) => {
+            if (docs.length) {
+                // userToken.set(req.body);
+                db.collection('usertokens').updateOne({ email: req.body.email }, { $set: { token: response.token, refreshToken: response.refreshToken } })
+            } else {
+                var accToken = new userToken({
+                    email: (req.body.email).toLowerCase(),
+                    token: response.token,
+                    refreshToken: response.refreshToken
+                });
+                var result = accToken.save();
+            }
+        }).exec();
+
+        res.cookie('x-token', response.token, {maxAge: 600000});
+        res.cookie('uid', account._id, {maxAge: 600000})
+        res.cookie('uemail', account.email, {maxAge: 600000})
+        res.cookie('x-refresh-token', response.refreshToken, {maxAge: 600000});
+
+        req.session.User = {
+            email: account['email'],
+            fname: account['fname'],
+            lname: account['lname'],
+            id : account['_id']
+        }
+
+        req.session.save(function(err) {
+            // session saved
+            if(!err) {
+                //Data get lost here
+                res.redirect("/");
+            }
+          })
+        // return res.status(200).json({status: 'success'})
+        // res.redirect('/');
+        // setTimeout(() => res.redirect('/'), 1000)
+
+
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
 
 
 
 router.get("/" ,function(req, res) {
 
-    // console.log(req.session)
-    if(req.session.User == null){
+    // console.log(req.session.User)
+    // console.log(req.cookies)
+    // if(req.session.User == null){
+    //     res.render('index', {
+    //         user: null
+    //     })
+    // }else{
+    //     const uemail = req.session.User['email'];
+    //     res.render('index', {
+    //         user: uemail 
+    //     })
+    // }
+
+    if(req.cookies['uid'] == null){
         res.render('index', {
             user: null
         })
     }else{
-        const uemail = req.session.User['email'];
+        // const uemail = req.cookies.id['email'];
         res.render('index', {
-            user: uemail 
+            user: req.cookies['uemail']
         })
     }
 });
 
 router.get('/account', async( req, res) =>{
-    if(req.session.User == null){
+    // console.log(req.session.User)
+    // console.log(req.cookies)
+    // if(req.session.User == null){
+    //     res.render("product/registerPage");
+    // }else{
+    //     console.log(req.session.User);
+    //     const uemail = req.session.User['email'];
+
+    //     var check = Account.findOne({email: uemail})
+    //     // console.log(check);
+    //     res.render('product/accountPage', {
+    //         user: check.email
+    //     }) 
+    // }                                             
+    console.log(req.cookies['uemail'])
+    if(req.cookies['uid'] == null){
         res.render("product/registerPage");
     }else{
-        console.log(req.session.User);
-        const uemail = req.session.User['email'];
+        // console.log(req.session.User);
+        // const uemail = req.session.User['email'];
+        var account = await Account.findOne({email: req.cookies['uemail']}).exec();
+        console.log(account);
+        console.log(account.fname)
         res.render('product/accountPage', {
-            user: uemail 
-        })
-
-        
+            user: account
+        }) 
     }
 })
 
 router.get('/chucnang', async(req, res)=>{
+    console.log(req.session.User)
     res.render('product/accountPage');
 })
 
@@ -219,83 +344,39 @@ router.post("/account", async (req, res, next) => {
     }
 })
 
-router.post("/login", async (req, res, next) => {
-    try {
-        var account = await Account.findOne({ email: (req.body.email).toLowerCase() }).exec();
-        var active = await Account.findOne({ $and: [{ email: (req.body.email).toLowerCase() }, { active: true }] });
 
-        // console.log(account);
-
-        if (!account) {
-            return res.status(400).send({
-                status: "error",
-                message: "The user does not exist "
-            });
-        }
-        if (!bcrypt.compareSync(req.body.password, account.password)) {
-            return res.status(400).send({
-                status: "error",
-                message: "The password is not correct"
-            });
-        }
-        if (!active) {
-            return res.status(400).send({
-                status: "error",
-                message: "Please active your account"
-            })
-        }
-
-        const user = {
-            "email": (req.body.email).toLowerCase(),
-            "password": req.body.password
-        }
-        const token = jwt.sign(user, config.secret, {
-            expiresIn: config.tokenLife,
-        });
-        const refreshToken = jwt.sign(user, config.refreshTokenSecret, {
-            expiresIn: config.refreshTokenLife
-        });
-        tokenList[refreshToken] = user;
-        const response = {
-            token,
-            refreshToken,
-        }
-        var check = userToken.find({ email: (req.body.email).toLowerCase() }, async (err, docs) => {
-            if (docs.length) {
-                // userToken.set(req.body);
-                db.collection('usertokens').updateOne({ email: req.body.email }, { $set: { token: response.token, refreshToken: response.refreshToken } })
-            } else {
-                var accToken = new userToken({
-                    email: (req.body.email).toLowerCase(),
-                    token: response.token,
-                    refreshToken: response.refreshToken
-                });
-                var result = accToken.save();
-            }
-        }).exec();
-
-        res.cookie('x-token', response.token);
-        res.cookie('x-refresh-token', response.refreshToken);
-        req.session.User = {
-            email: account['email'],
-            fname: account['fname'],
-            lname: account['lname'],
-            id : account['_id']
-        }
-        // return res.status(200).json({status: 'success'})
-
-        res.redirect('/');
-
-
-    } catch (err) {
-        res.status(500).send(err);
-    }
-});
 
 router.get('/get_session', (req, res) => {
     //check session
     if(req.session.User){
         return res.status(200).json({status: 'success', session: req.session.User})
+    }
+    return res.status(200).json({status: 'error', session: 'No session', code: 200})
+})
+
+router.get('/get_noti', async(req, res)=>{
+    var account = await Account.findOne({email: req.cookies['uemail']}).exec();
+    return res.status(200).json({
+        status: 'success',
+        noti : {
+          get_noti:  account.get_noti
+        }
+    })
+});
+
+router.get('/get_cookie', async(req, res) =>{
+    if(req.cookies['uid']){
+        var account = await Account.findOne({email: req.cookies['uemail']}).exec();
+        console.log(account)
+        return res.status(200).json({
+            status: 'success',
+            session: {
+                id : account._id,
+                email: account.email,
+                fname: account.fname,
+                lname: account.lname
+            }
+        })
     }
     return res.status(200).json({status: 'error', session: 'No session', code: 200})
 })
@@ -328,6 +409,7 @@ router.get('/verify', async(req, res) =>{
 
 router.post('/updateaccount', async(req, res)=>{
     // const uemail = req.session.User['email'];
+    console.log(req.body)
     const uemail = 'rapsunl231@gmail.com'
     console.log(uemail);
     try{
@@ -351,46 +433,46 @@ router.post('/updateaccount', async(req, res)=>{
 
        
 
-        if(req.body.currentpw == '' & req.body.newpw == ''){
-            console.log(uemail)
-            console.log("1")
-            db.collection('accounts').updateOne({ 
-                email: uemail 
-            }, 
-                { $set: 
-                    { 
-                        fname: req.body.fname, 
-                        lname: req.body.lname,
-                        birth_date: req.body.dob,
-                        paypal: req.body.paypal,
-                        fb_url: req.body.fburl,
-                        // shipping_at:[{
-                        //     address: req.body.address,
-                        //     city: req.body.city,
-                        //     zip_code: req.body.zipcode
-                        // }
-                        phone_area_code: req.body.phonearea,
-                        phone_number: req.body.phonenum,
-                        get_noti: req.body.get_noti
+        // if(req.body.currentpw == '' & req.body.newpw == ''){
+        //     console.log(uemail)
+        //     console.log("1")
+        //     db.collection('accounts').updateOne({ 
+        //         email: uemail 
+        //     }, 
+        //         { $set: 
+        //             { 
+        //                 fname: req.body.fname, 
+        //                 lname: req.body.lname,
+        //                 birth_date: req.body.dob,
+        //                 paypal: req.body.paypal,
+        //                 fb_url: req.body.fburl,
+        //                 // shipping_at:[{
+        //                 //     address: req.body.address,
+        //                 //     city: req.body.city,
+        //                 //     zip_code: req.body.zipcode
+        //                 // }
+        //                 phone_area_code: req.body.phonearea,
+        //                 phone_number: req.body.phonenum,
+        //                 get_noti: req.body.get_noti
                             
                         
-                    } 
-                })
+        //             } 
+        //         })
 
-                res.status(200).status('ok')
-        }else{
-             if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
-                return res.status(400).send({
-                    status: "error",
-                    message: "The password is not correct"
-                });
-            }
-            req.body.newpw = bcrypt.hashSync(req.body.newpw, 10);
-            account.set({ password: req.body.newpw });
-            var result = await account.save();
-            res.send(result)
+        //         res.status(200).status('ok')
+        // }else{
+        //      if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
+        //         return res.status(400).send({
+        //             status: "error",
+        //             message: "The password is not correct"
+        //         });
+        //     }
+        //     req.body.newpw = bcrypt.hashSync(req.body.newpw, 10);
+        //     account.set({ password: req.body.newpw });
+        //     var result = await account.save();
+        //     res.send(result)
 
-        }
+        // }
 
         
 
