@@ -475,10 +475,10 @@ router.post('/product/add', async(req, res)=>{
     console.log(req.body)
     try{
         var product = new Product({
-            product_id : req.body.productid,
-            product_name : req.body.productname,
-            category : req.body.category,
-            status_gb : req.body.status,
+            product_id : req.body.product_id,
+            product_name : req.body.product_name,
+            category_id : req.body.category_id,
+            price: req.body.price,
             color : req.body.color,
 
         });
@@ -488,6 +488,53 @@ router.post('/product/add', async(req, res)=>{
         res.status(500).send(err);
     }
 })
+
+router.post("/product/edit/:id",async (req, res) => {
+    console.log(req.body);
+    // console.log(req.file);
+    try {
+        var check = await Product.findById(req.params
+            .id).exec();
+            console.log(check)
+        if (!check) {
+            return res.status(400).send({
+                status: "error",
+                message: "The category id does not exist "
+            });
+        }
+
+        check.set({
+            // product_id : req.body.product_id,
+            product_name : req.body.product_name,
+            // category_id : req.body.category_id,
+            price: req.body.price,
+            outstock: req.body.outstock,
+            color : req.body.color,
+        });
+
+       
+        var result = await check.save();
+        res.status(200).send(result)
+        // return res.redirect('/list');
+
+
+    } catch (err) {
+        console.log(err);
+        res.status(200).send(err);
+    }
+});
+// product have been deleted when deleting category
+router.delete('/product/delete/:id', async (req, res) => {
+    console.log(req.params.id)
+    try {
+        var deleteProduct = await Product.deleteOne({ _id: req.params.id }).exec();
+
+        res.status(200).send(deleteProduct);
+
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
 
 router.post('/category/add', async(req, res)=>{
     console.log(req.body)
@@ -555,7 +602,6 @@ router.post("/category/edit/:id",async (req, res) => {
         }
 
         check.set({
-            // category_id : req.body.catid,
             category_name: req.body.catname,
             status_gb: req.body.status,
             color: req.body.color,
@@ -575,6 +621,29 @@ router.post("/category/edit/:id",async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(200).send(err);
+    }
+});
+// product have been deleted when deleting category
+router.delete('/category/delete/:id', async (req, res) => {
+    console.log(req.params.id)
+    try {
+        // var deleteCategory = await Category.deleteOne({ _id: req.params.id }).exec();
+        var checkCategory = await Category.findById(req.params.id).exec();
+        console.log(checkCategory)
+        console.log(checkCategory.category_id)
+        var checkProduct = await Product.find({category_id: checkCategory.category_id}).exec();
+        console.log(checkProduct)
+
+
+        var deleteCategory = await Category.deleteOne({ _id: req.params.id }).exec();
+        var deleteProduct = await Product.deleteMany({category_id: checkCategory.category_id}).exec();
+
+        res.send({deleteCategory, deleteProduct});
+        // res.write(deleteCategory);
+        // res.write(deleteProduct);
+
+    } catch (err) {
+        res.status(500).send(err);
     }
 });
 
