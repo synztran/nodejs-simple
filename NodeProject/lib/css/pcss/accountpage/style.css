@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 html, label, b {
-	 font-family: "Montserrat", sans-serif !important;
+    font-family: "Montserrat", sans-serif !important;
+    /* min-height: 100%; */
 	
 } 
-body{
-	color: #212529 !important;
+html, body{
+   color: #212529 !important;
+   min-height: 100%!important;
+   box-sizing: border-box;
 }
+
 .main{
     top:5%;
     position: relative;
@@ -597,4 +601,25 @@ body{
       border-left:15px solid #333300;
       border-right:15px solid #808000;
    }
+}
+
+
+@media (max-width: 767px) {
+   .sidebar> .tabs{
+      display: flex;
+   }
+   .sidebar > .nav{
+      display: none;
+   }
+   .main > .col-md-4{
+      padding: 0;
+      height: 10vh!important;
+   }
+   .main > .col-md-8{
+      padding: 0;
+   }
+   .row > .col-md-12{
+      display: block!important;
+   } 
+   
 }
