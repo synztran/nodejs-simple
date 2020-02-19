@@ -7,3 +7,16 @@
 .margin-hor{
     margin: 0 auto
 }
+
+@media (max-width: 767px) {
+    html, body{
+        /* height: 100%; */
+        /* width: 100%; */
+        /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+        background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+         background-attachment: fixed;
+        background-size: cover; 
+    }
+}
