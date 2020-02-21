@@ -2065,8 +2065,9 @@ body.menu-is-open {
   display: table;
 
   background-image: url('/api/docs/pimg/57328243_2304828816436296_8782805694087247789_n.jpg');
-
+  background-position: center;
   background-repeat:no-repeat;
+  background-size: cover;
 }
 
 .s-home::before {
