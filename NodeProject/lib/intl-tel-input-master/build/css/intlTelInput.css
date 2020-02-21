@@ -22,7 +22,7 @@
     right: 0;
     padding: 1px; }
   .iti__selected-flag {
-    z-index: 0;
+    z-index: 1;
     position: relative;
     display: flex;
     align-items: center;
