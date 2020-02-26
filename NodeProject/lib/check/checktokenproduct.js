@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 const utils = require('./../comon/utils'); 
 const config = require('./../comon/config');
-const TokenCheckMiddleware = async (req, res, next) => {
+const TokenUserCheckMiddleware = async (req, res, next) => {
     // Lấy thông tin mã token được đính kèm trong request
     const token = req.cookies['x-token'];
     // decode token
@@ -19,17 +19,17 @@ const TokenCheckMiddleware = async (req, res, next) => {
         // return res.status(401).json({
         //   message: 'Unauthorized access.',
         // });
-        return res.redirect('/api/signin');
+        return res.redirect('/');
       }
     } else {
       // Không tìm thấy token trong request
     //  return  res.status(403).send({
     //     message: 'No token provided.',
     //   });
-        return res.redirect('/api/signin');
+        return res.redirect('/');
       
 
 
     }
 }
-module.exports = TokenCheckMiddleware;
+module.exports = TokenUserCheckMiddleware;

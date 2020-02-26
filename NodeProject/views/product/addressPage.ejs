@@ -206,123 +206,62 @@
         <div style="height: 75vh;" class="col-md-4">
             <% include ./../navbar%>
         </div>
+        <% if(listAddress!= null) { %>
         <div style="" class="col-md-8">
             <div class="title-li">
-                <p style="">address details</p>
+                <p>address details</p>
                 <hr>
             </div>
+            
             <article class="container">
-                <form style="padding: 0;" id='form-register' autocomplete="off" action='./account' method='POST'>
-                    <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-user-info">
-                        <div class="title-container-user-info col-md-12">
-                            <b>INFOMATION</b>
-                        </div>
-                        <div class='form-group row'>
-                            <div class='col-md-12 d-flex'>
-                                <div class='col-md-6'>
-                                    <div class="d-flex">
-                                        <label for='fname'>First name</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
-                                    </div>
-                                    <input required type='text' name='fname' class='form-control' id='fname' aria-describedbsy='fnamelHelp' value='' placeholder='Enter first name'>
-                                </div>
-                                <div class='col-md-6'>
-                                    <div class="d-flex">
-                                        <label for='lname'>Last name</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
-                                    </div>
-                                    <input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' value='' placeholder='Enter last name'>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='form-group row'>
-                            <div class='col-md-12 d-flex'>
-                                <div class='col-md-6'>
-                                    <label for='companyname'>Company Name</label>
-                                    <input required type='text' name='companyname' class='form-control' id='companyname' aria-describedbsy='companynameHelp' value='' placeholder='Enter company name'>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class='form-group row'>
-                            <div class='col-md-12 d-flex'>
-                                <div class='col-md-6'>
-                                    <div class="d-flex">
-                                        <label for='email'>Email</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
-                                    </div>
-                                    <input autocomplete="off" disabled required type='email' name='email' class='form-control' id='email' value='' >
-                                    <small id='Help' class='form-text'>
-                                        Ideally, you should register your email with paypal email
-                                    </small>
-                                </div>
-                                <div class='col-md-6'>
-                                    <div class="d-flex">
-                                        <label for='pnumber'>Phone number</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
-                                    </div>
-                                    <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
-                                    <input name="pnumber" type="tel" value='' id="pnumber">
-                                    <small id='Help' class='form-text'>
-                                        Please! Make sure your phone number is correct
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='form-group row'>
-                            <div class='col-md-12'>
-                                <div class='form-group col-md-12'>
-                                    <div class="d-flex">
-                                        <label for='pnumber'>Address</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
-                                    </div>
-                                    <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
-                                    <input name="address" type="text" value='' id="address">
-                                    
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class='form-group row'>
-                            <div class='col-md-12 d-flex'>
-                                <div class='form-group col-md-6'>
-                                    <!-- <label for='country'>Country</label> -->
-                                    <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
-                                    <% include ./../countrySelect%> 
-                                    
-                                </div>
-                                <div class='form-group col-md-6'>
-                                    <div class="d-flex">
-                                        <label for='country'>Town/ City</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
-                                    </div>
-                                    <input required type='text' name='towncity' class='form-control' id='towncity'>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='form-group row'>
-                            <div class='col-md-12 d-flex'>
-                                <div class='form-group col-md-6'>
-                                    <div class="d-flex">
-                                        <label for='country'>Post Code</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
-                                    </div>
-                                    <input id="zipcode" name="zipcode" type="text" inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$">
-                                </div>
-                            </div>
-                        </div>
-                        <div class='form-group row'>
-                            <div class='col-md-12 d-flex'>
-                                <div class='form-group col-md-6 checkbox-noti'>
-                                    <input class="checkbox" value="TRUE" name="get_noti" type="checkbox" id="checkbox-notification" aria-label="Get notifications about new Group Buy"><span>Set as default address</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 flip-form">
-                            <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Update</button>
-                            <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Cancel</button>
-                        </div>
-                    </div>
-                    
-                    
-                </form>
-
+                <% listAddress.forEach(function(item){%>
+                    <% for (var key in item.shipping_at){%>
                     <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-address-default flip-form">
                         <div class="title-container-user-info col-md-12">
-                            <b>ADDRESS SHIPPING <a href="#"><span><i class="fas fa-pencil-alt"></i>(Edit address)</span></a></b>
+                            <b>ADDRESS SHIPPING 
+                                <!-- <a href="#"><span><i class="fas fa-pencil-alt"></i>(Edit address)</span></a> -->
+                                <a for="<%= item.shipping_at[key].toJSON().id %>" data-toggle="collapse" href="#<%= item.shipping_at[key].toJSON().id %>" aria-expanded="true" aria-controls="<%= item.shipping_at[key].toJSON().id %>" class=""><span><i class="fas fa-pencil-alt"></i>(Edit address)</span></a>
+                            </b>
+                        </div>
+                        
+                        <div class="form-group d-flex shipping-info">
+                            <div class='form-group col-md-6 '>
+                                <label for="">Name: <span><%= item.shipping_at[key].fname %> <%= item.shipping_at[key].lname %></span></label>
+                                <div></div>
+                                <label for="">Mail: <span><%= item.email %></span></label>
+                                <div></div>
+                                <label for="">Phone: <span><%= item.shipping_at[key].phone_number %></span></label>
+                                <div></div>
+                            </div>
+                            
+                            <div class='form-group col-md-6'>
+                                <label for="">Address: <span><%= item.shipping_at[key].address %></span></label>
+                                <div></div>
+                                <label for="">City: <span><%= item.shipping_at[key].city %></span></label>
+                                <div></div>
+                                <label for="">Post code: <span><%= item.shipping_at[key].zip_code %></span></label>
+                                <!-- <label for="">Post code: <span><%= item._id %></span></label>
+                                <div></div>
+                                <label for="">Post code: <span><%= item.shipping_at[key].toJSON().id %></span></label>
+                                <div></div> -->
+                            </div>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    <%    } %>
+                <!-- }) -->
+                
+
+                
+<!-- 
+                    <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-address-default flip-form">
+                        <div class="title-container-user-info col-md-12">
+                            <b>ADDRESS SHIPPING 
+                               
+                                <a for="collapseOne" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class=""><span><i class="fas fa-pencil-alt"></i>(Edit address)</span></a>
+                            </b>
                         </div>
                         <div class="form-group d-flex shipping-info">
                             <div class='form-group col-md-6 '>
@@ -338,19 +277,134 @@
                                 <div></div>
                                 <label for="">City: <span></span></label>
                                 <div></div>
-                                <label for="">Zip code: <span></span></label>
+                                <label for="">Post code: <span></span></label>
                                 <div></div>
                             </div>
                         </div>
                         <div class="form-group">
-
+                            <div id="collapse1" class="collapse">
+                                <textarea class="form-control" rows="4"></textarea>
+                            </div>
                         </div>
                         
+                    </div> -->
+                    <div class="form-group flip-form">
+                        <a for="collapseOne" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="btn btn-primary">+ addInfo</a>
+                        <div id="collapseOne" class="34534">
+                            <form style="padding: 0;" id='form-register' autocomplete="off" action='./account' method='POST'>
+                                <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-user-info">
+                                    <div class="title-container-user-info col-md-12">
+                                        <b>INFOMATION</b>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <div class='col-md-12 d-flex'>
+                                            <div class='col-md-6'>
+                                                <div class="d-flex">
+                                                    <label for='fname'>First name</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
+                                                </div>
+                                                <input required type='text' name='fname' class='form-control' id='fname' aria-describedbsy='fnamelHelp' value='' placeholder='Enter first name'>
+                                            </div>
+                                            <div class='col-md-6'>
+                                                <div class="d-flex">
+                                                    <label for='lname'>Last name</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
+                                                </div>
+                                                <input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' value='' placeholder='Enter last name'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <div class='col-md-12 d-flex'>
+                                            <div class='col-md-6'>
+                                                <label for='companyname'>Company Name</label>
+                                                <input required type='text' name='companyname' class='form-control' id='companyname' aria-describedbsy='companynameHelp' value='' placeholder='Enter company name'>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <div class='col-md-12 d-flex'>
+                                            <div class='col-md-6'>
+                                                <div class="d-flex">
+                                                    <label for='email'>Email</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
+                                                </div>
+                                                <input autocomplete="off" disabled required type='email' name='email' class='form-control' id='email' value='' >
+                                                <small id='Help' class='form-text'>
+                                                    Ideally, you should register your email with paypal email
+                                                </small>
+                                            </div>
+                                            <div class='col-md-6'>
+                                                <div class="d-flex">
+                                                    <label for='pnumber'>Phone number</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
+                                                </div>
+                                                <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
+                                                <input name="pnumber" type="tel" value='' id="pnumber">
+                                                <small id='Help' class='form-text'>
+                                                    Please! Make sure your phone number is correct
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <div class='col-md-12'>
+                                            <div class='form-group col-md-12'>
+                                                <div class="d-flex">
+                                                    <label for='pnumber'>Address</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
+                                                </div>
+                                                <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
+                                                <input name="address" type="text" value='' id="address">
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <div class='col-md-12 d-flex'>
+                                            <div class='form-group col-md-6'>
+                                                <!-- <label for='country'>Country</label> -->
+                                                <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
+                                                <% include ./../countrySelect%> 
+                                                
+                                            </div>
+                                            <div class='form-group col-md-6'>
+                                                <div class="d-flex">
+                                                    <label for='country'>Town/ City</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
+                                                </div>
+                                                <input required type='text' name='towncity' class='form-control' id='towncity'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <div class='col-md-12 d-flex'>
+                                            <div class='form-group col-md-6'>
+                                                <div class="d-flex">
+                                                    <label for='country'>Post Code</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
+                                                </div>
+                                                <input id="zipcode" name="zipcode" type="text" inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <div class='col-md-12 d-flex'>
+                                            <div class='form-group col-md-6 checkbox-noti'>
+                                                <input class="checkbox" value="TRUE" name="get_noti" type="checkbox" id="checkbox-notification" aria-label="Get notifications about new Group Buy"><span>Set as default address</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 flip-form">
+                                        <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Update</button>
+                                        <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Cancel</button>
+                                    </div>
+                                </div>
+                                
+                                
+                            </form>
+                        </div>
                     </div>
                     
-                    
+                    <%    }) %>
             </article>
         </div>
+        <% } %>
     </main>
     <div class="footer-register center">
     </div>

@@ -227,9 +227,11 @@ html, body{
   }
   .checkbox-noti input{
   	height: auto;
-  	width: 5%
+     width: 5%;
+     height: 17px
   }
   .checkbox-noti span{
+     vertical-align: top;
   	margin-left: 1%;
   	font-size: 14px;
   	font-weight: bold;

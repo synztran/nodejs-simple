@@ -53,6 +53,31 @@ var accountSchema = mongoose.Schema({
     // [addressSchema],
     [
         {
+            fname:{
+                default: null, 
+                type: String
+            },
+            lname:{
+                default: null, 
+                type: String
+            },
+            comname:{
+                default: null, 
+                type: String
+            },
+            email:{
+                default: null, 
+                type: String,
+                lowercase: true,
+            },
+            town_city:{
+                default: null, 
+                type: String
+            },
+            phone_number:{
+                default: null,  
+                type: String
+            },
             address: {
                 type: String
             },
@@ -61,6 +86,9 @@ var accountSchema = mongoose.Schema({
             },
             zip_code:{
                 type: String
+            },
+            _id:{ 
+                type: Number,
             }
         }
     ],

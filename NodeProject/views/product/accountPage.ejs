@@ -212,7 +212,7 @@
                 <hr>
             </div>
             <article class="container">
-                <form style="padding: 0;" id='form-register' autocomplete="off" action='./account' method='POST'>
+                <form style="padding: 0;" id='form-register' autocomplete="off" action='./updateaccount' method='POST'>
                     <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-user-info">
                         <div class="title-container-user-info col-md-12">
                             <b>INFOMATION</b>
@@ -240,7 +240,7 @@
                                 </div>
                                 <div class='col-md-6'>
                                     <label for='password'>DoB</label>
-                                    <input style="width: 100%" value='<%= user.birth_date%>' id="datepicker" class="span2" type="text" name="dob">
+                                    <input style="width: 100%" value='<%= (user.birth_date).toLocaleDateString()%>' id="datepicker" class="span2" type="text" name="dob">
                                 </div>
                             </div>
                         </div>
@@ -267,7 +267,7 @@
                                     </small>
                                 </div>
                                 <div class='form-group col-md-6 checkbox-noti'>
-                                    <input class="checkbox" value="TRUE" name="get_noti" type="checkbox" id="checkbox-notification" aria-label="Get notifications about new Group Buy"><span>Get notifications about Group Buy</span>
+                                    <input class="checkbox" data-val="true" and value="true" name="get_noti" type="checkbox" id="checkbox-notification" aria-label="Get notifications about new Group Buy"><span>Get notifications about Group Buy</span>
                                 </div>
                             </div>
                         </div>
@@ -290,7 +290,7 @@
                                 <div></div>
                                 <label for="">City: <span><%= user.shipping_at[0].city%></span></label>
                                 <div></div>
-                                <label for="">Zip code: <span><%= user.shipping_at[0].zip_code%></span></label>
+                                <label for="">Post code: <span><%= user.shipping_at[0].zip_code%></span></label>
                                 <div></div>
                             </div>
                         </div>
@@ -303,11 +303,7 @@
                         <div class="title-container-user-info col-md-12">
                             <b>PASSWORD CHANGE</b><span>(keep both empty if you dont wanna change password)</span>
                         </div>
-<<<<<<< HEAD
-                        <div class='form-group'>
-=======
                         <!-- <div class='form-group'>
->>>>>>> 4f85bcf0a528a7baa37d49a4d6a94346c8ae8b1c
                             <div class="form-group col-md-12">
                                 <label class='col-md-3 margin-ver '>current password:</label> 
                                 <input class='col-md-9' id='currentpw' required name='currentpw' type='password' value='' /> 
@@ -322,12 +318,12 @@
                             <div class='col-md-6'>
                                 <label for='paypal'>current password:</label>
                                 <!-- <label class='col-md-3 margin-ver '>current password:</label>  -->
-                                <input class='col-md-9' id='currentpw' required name='currentpw' type='password' value='' /> 
+                                <input class='col-md-9' id='currentpw'  name='currentpw' type='password' value='' /> 
                             </div>
                             <div class='col-md-6'>
                                 <label for='paypal'>new password:</label>
                                 <!-- <label class='col-md-3 margin-ver'>new password:</label>  -->
-                                <input class='col-md-9' required id='newpw' name='newpw' type='password' value='' /> 
+                                <input class='col-md-9'  id='newpw' name='newpw' type='password' value='' /> 
                             </div>
                         </div>
                     </div>
@@ -352,6 +348,14 @@
 <script src="/package/intl-tel-input-master/build/js/intlTelInput.js"></script>
 <script>
 $(document).ready(function() {
+
+    function setValueToTrue(cb){
+        if(cb.checked){
+            cb.value = "true"
+        }else{
+            cb.value = "false"
+        }
+    }
     var input = document.querySelector("#pnumber");
     window.intlTelInput(input, {
         utilsScript: "/package/intl-tel-input-master/build/js/utils.js"
@@ -379,6 +383,7 @@ $(document).ready(function() {
 
                 var user = responseAsJson;
                 console.log(user);
+                console.log(user.noti['get_noti'])
                 
                 $('#checkbox-notification').prop('checked', user.noti['get_noti']);
 

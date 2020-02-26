@@ -56,6 +56,7 @@ var userToken = require('./../db/model/token');
 var Tracking = require('./../db/model/tracking');
 var Product  = require('./../db/model/product');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
+var TokenUserCheckMiddleware = require('./../lib/check/checktokenproduct.js')
 var SessionCheckMiddleware = require('./../lib/check/checksession');
 
 app.use(session({
@@ -65,7 +66,7 @@ app.use(session({
     secret: config.secret, 
     cookie: { 
 		secure: false,
-		maxAge: 1800 
+		maxAge: 18000
 	}
 }));
 app.use(livereload())
@@ -125,10 +126,10 @@ router.post("/login", async (req, res, next) => {
             }
         }).exec();
 
-        res.cookie('x-token', response.token, {maxAge: 600000});
-        res.cookie('uid', account._id, {maxAge: 600000})
-        res.cookie('uemail', account.email, {maxAge: 600000})
-        res.cookie('x-refresh-token', response.refreshToken, {maxAge: 600000});
+        res.cookie('x-token', response.token, {maxAge: 6000000});
+        // res.cookie('uid', account._id, {maxAge: 6000000})
+        // res.cookie('uemail', account.email, {maxAge: 6000000})
+        res.cookie('x-refresh-token', response.refreshToken, {maxAge: 6000000});
 
         req.session.User = {
             email: account['email'],
@@ -156,8 +157,8 @@ router.post("/login", async (req, res, next) => {
 
 
 
-router.get("/" ,function(req, res) {
-
+router.get("/", function(req, res) {
+    // console.log(req.decoded['email'])
     // console.log(req.session.User)
     // console.log(req.cookies)
     // if(req.session.User == null){
@@ -171,19 +172,33 @@ router.get("/" ,function(req, res) {
     //     })
     // }
 
-    if(req.cookies['uid'] == null){
+    if(req.cookies['x-token'] == null){
         res.render('index', {
             user: null
         })
     }else{
         // const uemail = req.cookies.id['email'];
         res.render('index', {
-            user: req.cookies['uemail']
+            user: req.session.User['email']
         })
     }
+
+    // if(req.decoded == null){
+    //     res.render('index', {
+    //         user: req.decoded['email']
+    //     })
+    // }else{
+    //     res.render('index',{
+    //         user: null
+    //     })
+    // }
 });
 
-router.get('/account', async( req, res) =>{
+router.get('/dangky', async(req, res)=>{
+    res.render("product/registerPage");
+})
+
+router.get('/account', TokenUserCheckMiddleware, async( req, res) =>{
     // console.log(req.session.User)
     // console.log(req.cookies)
     // if(req.session.User == null){
@@ -199,14 +214,15 @@ router.get('/account', async( req, res) =>{
     //     }) 
     // }                                             
     console.log(req.cookies['uemail'])
-    if(req.cookies['uid'] == null){
+    if(req.cookies['x-token'] == null){
         res.render("product/registerPage");
     }else{
+        console.log(req.decoded)
         // console.log(req.session.User);
         // const uemail = req.session.User['email'];
-        var account = await Account.findOne({email: req.cookies['uemail']}).exec();
-        console.log(account);
-        console.log(account.fname)
+        var account = await Account.findOne({email: req.decoded['email']}).exec();
+        // console.log(account);
+        // console.log(account.fname)
         res.render('product/accountPage', {
             user: account
         }) 
@@ -216,6 +232,19 @@ router.get('/account', async( req, res) =>{
 router.get('/chucnang', async(req, res)=>{
     console.log(req.session.User)
     res.render('product/accountPage');
+
+    
+})
+
+router.get('/address', async(req, res)=>{
+    // res.render('product/addressPage');
+    console.log(req.session.User['email']);
+    Account.find({email: req.session.User['email']}, function(err, docs){
+        console.log(docs);
+        res.render('product/addressPage',{
+            "listAddress": docs
+        })
+    })
 })
 
 router.get('/proxygb', async(req, res)=>{
@@ -354,8 +383,11 @@ router.get('/get_session', (req, res) => {
     return res.status(200).json({status: 'error', session: 'No session', code: 200})
 })
 
-router.get('/get_noti', async(req, res)=>{
-    var account = await Account.findOne({email: req.cookies['uemail']}).exec();
+router.get('/get_noti', TokenUserCheckMiddleware, async(req, res)=>{
+    // console.log(req.session.User);
+    // console.log(req.decoded);
+    var account = await Account.findOne({email: req.decoded['email']}).exec();
+    // console.log(account)
     return res.status(200).json({
         status: 'success',
         noti : {
@@ -364,10 +396,11 @@ router.get('/get_noti', async(req, res)=>{
     })
 });
 
-router.get('/get_cookie', async(req, res) =>{
-    if(req.cookies['uid']){
-        var account = await Account.findOne({email: req.cookies['uemail']}).exec();
-        console.log(account)
+router.get('/get_cookie' ,async(req, res) =>{
+    
+        if(req.cookies['x-token']){
+        var account = await Account.findOne({email: req.session.User['email']}).exec();
+        // console.log(account)
         return res.status(200).json({
             status: 'success',
             session: {
@@ -407,22 +440,21 @@ router.get('/verify', async(req, res) =>{
     }
 });
 
-router.post('/updateaccount', async(req, res)=>{
+router.post('/updateaccount', TokenUserCheckMiddleware ,async(req, res)=>{
     // const uemail = req.session.User['email'];
     console.log(req.body)
-    const uemail = 'rapsunl231@gmail.com'
+    const uemail = req.decoded['email']
     console.log(uemail);
     try{
         
         var account = await Account.findOne({ email: uemail }).exec();
 
         // console.log(account)
-        console.log(req.body)
 
         // console.log(account.shipping_at);
-        // console.log(account.shipping_at[0]);
+        console.log(account.shipping_at[0]);
         // console.log(account.shipping_at[0].address);
-        // console.log(account.shipping_at[0]['address'])
+        console.log(account.shipping_at[0]['address'])
         // console.log(account.shipping_at[0].address)
         if(!account){
             return res.status(400).send({
@@ -431,11 +463,11 @@ router.post('/updateaccount', async(req, res)=>{
             });
         }
 
+        
+
        
 
         // if(req.body.currentpw == '' & req.body.newpw == ''){
-        //     console.log(uemail)
-        //     console.log("1")
         //     db.collection('accounts').updateOne({ 
         //         email: uemail 
         //     }, 
@@ -451,15 +483,16 @@ router.post('/updateaccount', async(req, res)=>{
         //                 //     city: req.body.city,
         //                 //     zip_code: req.body.zipcode
         //                 // }
-        //                 phone_area_code: req.body.phonearea,
-        //                 phone_number: req.body.phonenum,
+        //                 // phone_area_code: req.body.phonearea,
+        //                 phone_number: req.body.pnumber,
         //                 get_noti: req.body.get_noti
                             
                         
         //             } 
         //         })
 
-        //         res.status(200).status('ok')
+        //         // res.status(200).status('ok')
+        //         res.redirect('/account');
         // }else{
         //      if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
         //         return res.status(400).send({
@@ -470,7 +503,8 @@ router.post('/updateaccount', async(req, res)=>{
         //     req.body.newpw = bcrypt.hashSync(req.body.newpw, 10);
         //     account.set({ password: req.body.newpw });
         //     var result = await account.save();
-        //     res.send(result)
+        //     // res.send(result)
+        //     res.redirect('/account')
 
         // }
 
@@ -482,6 +516,47 @@ router.post('/updateaccount', async(req, res)=>{
 
 })
 
+router.post('/addaddress', async(req, res)=>{
+
+    var uemail = 'rapsunl231@gmail.com'
+    try{
+        // await Account.findByIdAndUpdate(req.params.id,
+        // {
+        //     $push: {
+        //         shipping_at:[{
+        //                     address: req.body.address,
+        //                     city: req.body.city,
+        //                     zip_code: req.body.zipcode
+        //         }]
+        //     }
+        // }).exec();
+        
+        db.collection('accounts').update({
+            email: uemail
+        },{
+            $addToSet: {
+                shipping_at:{
+                    id: new mongoose.Types.ObjectId(),
+                    lname: req.body.lname,
+                    fname: req.body.fname,
+                    address: req.body.address,
+                    city: req.body.city,
+                    zip_code: req.body.zipcode
+        }
+            }
+        })
+
+        res.status(200).status('ok')
+        // console.log(account);
+        
+        
+            
+
+
+    }catch(err){
+        res.status(500).send(err);
+    }
+})
 
 router.post('/updatepassword', async (req, res) => {
     // console.log(req.body);
