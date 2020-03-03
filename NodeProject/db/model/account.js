@@ -87,9 +87,7 @@ var accountSchema = mongoose.Schema({
             zip_code:{
                 type: String
             },
-            _id:{ 
-                type: Number,
-            }
+            
         }
     ],
     // {

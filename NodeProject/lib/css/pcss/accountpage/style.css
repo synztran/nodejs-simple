@@ -260,6 +260,9 @@ html, body{
 .flip-form{
 	margin-top: 5%
 }
+.flip-box{
+   margin-top: 1%;
+}
 .col-md-6 input:disabled{
    background-color: transparent;
 }

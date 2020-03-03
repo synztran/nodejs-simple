@@ -66,7 +66,7 @@ app.use(session({
     secret: config.secret, 
     cookie: { 
 		secure: false,
-		maxAge: 18000
+		maxAge: 180000
 	}
 }));
 app.use(livereload())
@@ -172,7 +172,12 @@ router.get("/", function(req, res) {
     //     })
     // }
 
-    if(req.cookies['x-token'] == null){
+    // if(req.cookies['x-token'] == null){
+    //     res.render('index', {
+    //         user: null
+    //     })
+    // }
+    if(req.session.User == null){
         res.render('index', {
             user: null
         })
@@ -238,13 +243,49 @@ router.get('/chucnang', async(req, res)=>{
 
 router.get('/address', async(req, res)=>{
     // res.render('product/addressPage');
-    console.log(req.session.User['email']);
-    Account.find({email: req.session.User['email']}, function(err, docs){
-        console.log(docs);
-        res.render('product/addressPage',{
-            "listAddress": docs
+
+    if(!req.session.User){
+        res.redirect('/')
+    }else{
+        console.log(req.session.User['email']);
+        Account.find({email: req.session.User['email']}, function(err, docs){
+            console.log(docs);
+            var address = docs[0].shipping_at;
+            // console.log(docs[0].shipping_at);
+            console.log(address)
+            if(address == null || address == "undefined" ){
+                console.log(1)
+                res.render('product/addressPage', {
+                    "listAddress": null
+                })
+            }else{
+                console.log(2)
+                res.render('product/addressPage',{
+                    "listAddress": docs
+                })
+            }
         })
-    })
+        // var address = await Account.findOne({email: req.session.User['email']}).exec();
+        // console.log(address);
+       
+        // console.log(address.shipping_at.length);
+        // console.log(JSON.stringify(address))
+        // var addressL = address.shipping_at.length;
+        // var toJson = JSON.stringify(address)
+        // if(addressL = 0){
+        //     console.log(1)
+        //     res.render('product/addressPage', {
+        //         "listAddress": null
+        //     })
+        // }else{
+        //     console.log(2)
+        //     res.render('product/addressPage',{
+        //         "listAddress": await toJson
+        //     })
+        // }
+
+    }
+    
 })
 
 router.get('/proxygb', async(req, res)=>{
@@ -398,7 +439,7 @@ router.get('/get_noti', TokenUserCheckMiddleware, async(req, res)=>{
 
 router.get('/get_cookie' ,async(req, res) =>{
     
-        if(req.cookies['x-token']){
+        if(req.cookies['x-token'] && req.session.User){
         var account = await Account.findOne({email: req.session.User['email']}).exec();
         // console.log(account)
         return res.status(200).json({
@@ -516,43 +557,77 @@ router.post('/updateaccount', TokenUserCheckMiddleware ,async(req, res)=>{
 
 })
 
-router.post('/addaddress', async(req, res)=>{
+router.post('/addaddress', TokenUserCheckMiddleware, async(req, res)=>{
 
-    var uemail = 'rapsunl231@gmail.com'
+    var email = req.decoded['email'];
+    console.log(email)
     try{
-        // await Account.findByIdAndUpdate(req.params.id,
-        // {
-        //     $push: {
-        //         shipping_at:[{
-        //                     address: req.body.address,
-        //                     city: req.body.city,
-        //                     zip_code: req.body.zipcode
-        //         }]
-        //     }
-        // }).exec();
+        
         
         db.collection('accounts').update({
-            email: uemail
+            email: email
         },{
             $addToSet: {
                 shipping_at:{
-                    id: new mongoose.Types.ObjectId(),
+                    _id: (new mongoose.Types.ObjectId()).toString(),
                     lname: req.body.lname,
                     fname: req.body.fname,
+                    cname: req.body.comname,
+                    phone_number: req.body.pnumber,
                     address: req.body.address,
-                    city: req.body.city,
-                    zip_code: req.body.zipcode
+                    city: req.body.country,
+                    town_city: req.body.towncity,
+                    zip_code: req.body.postcode
         }
             }
         })
 
-        res.status(200).status('ok')
+        // res.status(200).status('ok')
+        res.redirect('/address')
         // console.log(account);
         
         
             
 
 
+    }catch(err){
+        res.status(500).send(err);
+    }
+})
+
+router.delete('/delete-address/:id' , async(req, res)=>{
+    // console.log(req.decoded['email']);
+    var uemail = "rapsunl231@gmail.com"
+    console.log(req.params.id)
+    try{
+        // var address = await Account.findOne({email: req.decoded['email']}).exec();
+
+        // var address = Account.updateOne(
+        //     {email: uemail}, 
+        //     { "$pull" : 
+        //         {"shipping_at" : 
+        //             { 
+        //                 "id": req.params.id
+        //             }
+        //         }
+        //     }, 
+        //     {multi: true}, function(err, obj){
+
+        // })
+
+        var address = db.collection('accounts').update(
+            {
+                'email': uemail
+            },{
+                "$pull": {
+                    "shipping_at":{
+                        "_id": req.params.id
+                    }
+                }
+            });
+
+        res.send(address);
+        
     }catch(err){
         res.status(500).send(err);
     }

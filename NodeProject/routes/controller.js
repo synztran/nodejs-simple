@@ -175,7 +175,7 @@ router.get('/list' ,function(req, res) {
 
 router.delete('/delete/:id', async (req, res) => {
     try {
-        var result = await Account.deleteOne({ _id: req.params.id }).exec();
+        var result = await AdmAccount.deleteOne({ _id: req.params.id }).exec();
         res.send(result);
 
     } catch (err) {

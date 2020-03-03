@@ -274,24 +274,44 @@
                     </div>
                     <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-address-default flip-form">
                         <div class="title-container-user-info col-md-12">
-                            <b>ADDRESS SHIPPING <a href="#"><span><i class="fas fa-pencil-alt"></i>(Edit address)</span></a></b>
+                            <b>ADDRESS SHIPPING <a href="/address"><span><i class="fas fa-pencil-alt"></i>(Edit address)</span></a></b>
                         </div>
                         <div class="form-group d-flex shipping-info">
                             <div class='form-group col-md-6 '>
-                                <label for="">Name: <span><%= user.fname%> <%= user.lname%></span></label>
+                                <% if(user.shipping_at[0]) { %>
+                                <label for="">Name: <span><%= user.shipping_at[0].fname%> <%= user.shipping_at[0].lname%></span></label>
                                 <div></div>
-                                <label for="">Mail: <span><%= user.email%></span></label>
+                                <label for="">Mail: <span><%= user.shipping_at[0].email%></span></label>
                                 <div></div>
-                                <label for="">Phone: <span><%= user.phone_number%></span></label>
+                                <label for="">Phone: <span><%= user.shipping_at[0].phone_number%></span></label>
                                 <div></div>
+                                <% } else { %>
+                                <label for="">Name: <span></span></label>
+                                <div></div>
+                                <label for="">Mail: <span></span></label>
+                                <div></div>
+                                <label for="">Phone: <span></span></label>
+                                <div></div>
+                                <% } %>
                             </div>
                             <div class='form-group col-md-6'>
+                                <% if(user.shipping_at[0]) { %>
                                 <label for="">Address: <span><%= user.shipping_at[0].address%></span></label>
                                 <div></div>
                                 <label for="">City: <span><%= user.shipping_at[0].city%></span></label>
                                 <div></div>
                                 <label for="">Post code: <span><%= user.shipping_at[0].zip_code%></span></label>
                                 <div></div>
+
+                                <% } else { %>
+                                <label for="">Address: <span></span></label>
+                                <div></div>
+                                <label for="">City: <span></span></label>
+                                <div></div>
+                                <label for="">Post code: <span></span></label>
+                                <div></div>
+                                <% } %>
+                               
                             </div>
                         </div>
                         <div class="form-group">
