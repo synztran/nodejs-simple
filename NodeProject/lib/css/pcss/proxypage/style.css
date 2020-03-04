@@ -1,3 +1,16 @@
+
+.main{
+	margin:2% 3%!important;
+}
+.seperator-wrapper .seperator{
+	width: 85.5%!important
+}
+.breadcrumb{
+	max-width: 85.5%!important
+}
+.container{
+	max-width: 85.5%!important
+}
 /* --- Product Card ---- */
 #make-3D-space{
     position: relative;
@@ -437,7 +450,7 @@ div.shadow{
 /* .col-product:not(:nth-child(1)), .col-product:not(:nth-child(2)), .col-product:not(:nth-child(3)){
 	margin-top: 1%;
 } */
-.col-product:not(:first-child) + .col-product:not(:nth-child(2)) + .col-product:not(:nth-child(3)) {
+.col-product:not(:first-child) + .col-product:not(:nth-child(2)) + .col-product:not(:nth-child(3)) + .col-product:not(:nth-child(4)) {
 	margin-top: 1%;
 }
 .col-md-9 .row{

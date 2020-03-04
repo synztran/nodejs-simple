@@ -228,9 +228,10 @@
                             <div class='form-group col-md-6 '>
                                 <label for="">Name: <span><%= item.shipping_at[key].fname %> <%= item.shipping_at[key].lname %></span></label>
                                 <div></div>
-                                <label for="">Mail: <span><%= item.email %></span></label>
+                                <label for="">Mail: <span><%= item.shipping_at[key].email %></span></label>
                                 <div></div>
                                 <label for="">Phone: <span><%= item.shipping_at[key].phone_number %></span></label>
+                                <div></div>
                                 <label for="">Company name: <span><%= item.shipping_at[key].cname %></span></label>
                                 <div></div>
                             </div>
@@ -239,10 +240,11 @@
                                 <label for="">Address: <span><%= item.shipping_at[key].address %></span></label>
                                 <div></div>
                                 <label for="">Town/City: <span><%= item.shipping_at[key].town_city %></span></label>
+                                <div></div>
                                 <label for="">Country: <span><%= item.shipping_at[key].city %></span></label>
                                 <div></div>
                                 <label for="">Post code: <span><%= item.shipping_at[key].zip_code %></span></label>
-                                
+                                <div></div>
                                 <!-- <label for="">Post code: <span><%= item._id %></span></label>
                                 <div></div>
                                 <label for="">Post code: <span><%= item.shipping_at[key].toJSON().id %></span></label>
@@ -289,7 +291,7 @@
                                         <div class='col-md-12 d-flex'>
                                             <div class='col-md-6'>
                                                 <label for='companyname'>Company Name</label>
-                                                <input required type='text' name='comname' class='form-control' id='comname' aria-describedbsy='comnameHelp' value='' placeholder='Enter company name'>
+                                                <input required type='text' name='cname' class='form-control' id='cname' aria-describedbsy='cnameHelp' value='' placeholder='Enter company name'>
                                             </div>
                                             
                                         </div>
@@ -311,7 +313,7 @@
                                                 </div>
                                                 <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
                                                 <input type="hidden"  id="code" name ="code" value="1" >
-                                                <input name="pnumber" type="tel" value='' id="pnumber">
+                                                <input required name="pnumber" type="tel" value='' id="pnumber">
                                                 <small id='Help' class='form-text'>
                                                     Please! Make sure your phone number is correct
                                                 </small>
@@ -325,7 +327,7 @@
                                                     <label for='pnumber'>Address</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
                                                 </div>
                                                 <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
-                                                <input name="address" type="text" value='' id="address">
+                                                <input required name="address" type="text" value='' id="address">
                                                 
                                             </div>
                                             
@@ -353,7 +355,7 @@
                                                 <div class="d-flex">
                                                     <label for='country'>Post Code</label>&nbsp;<span style="color: red !important; display: inline; float: none;">*</span>
                                                 </div>
-                                                <input id="postcode" name="postcode" type="text" inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$">
+                                                <input required id="postcode" name="postcode" type="text" inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$">
                                             </div>
                                         </div>
                                     </div>

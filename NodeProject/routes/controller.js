@@ -240,7 +240,7 @@ router.put("/account/edit/:id", async (req, res) => {
 // load db on form
 router.get("/account/edit/:id", async (req, res) => {
     try {
-        Account.findById(req.params
+        AdmAccount.findById(req.params
             .id,
             function(err, account) {
                 res.render('editAccount', {

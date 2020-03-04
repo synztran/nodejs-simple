@@ -559,26 +559,27 @@ router.post('/updateaccount', TokenUserCheckMiddleware ,async(req, res)=>{
 
 router.post('/addaddress', TokenUserCheckMiddleware, async(req, res)=>{
 
-    var email = req.decoded['email'];
-    console.log(email)
+    var uemail = req.decoded['email'];
+    console.log(uemail)
     try{
         
         
         db.collection('accounts').update({
-            email: email
+            email: uemail
         },{
             $addToSet: {
                 shipping_at:{
                     _id: (new mongoose.Types.ObjectId()).toString(),
                     lname: req.body.lname,
                     fname: req.body.fname,
-                    cname: req.body.comname,
+                    cname: req.body.cname,
+                    email: (req.body.email).toLowerCase(),
                     phone_number: req.body.pnumber,
                     address: req.body.address,
                     city: req.body.country,
                     town_city: req.body.towncity,
                     zip_code: req.body.postcode
-        }
+                }
             }
         })
 

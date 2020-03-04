@@ -61,7 +61,7 @@ var accountSchema = mongoose.Schema({
                 default: null, 
                 type: String
             },
-            comname:{
+            cname:{
                 default: null, 
                 type: String
             },

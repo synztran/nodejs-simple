@@ -51,7 +51,7 @@ html, body{
         box-sizing: border-box;
     }
     nav.navbar{
-        z-index: 1;
+        z-index: 10;
         position: sticky;
         top: 0;
         background-image: url('/api/docs/background/UIBkAT.jpg');
@@ -205,19 +205,18 @@ html, body{
     </section>
     <!-- Breakcum-->
     <main class="main row">
-        <div style="height: 75vh;" class="col-md-3">
+        <div style="height: 75vh;" class="col-md-2">
             <sidebar class="sidebar">
-                <% include ./../navbar%>
             </sidebar>
         </div>
-        <div style="" class="col-md-9">
+        <div style="" class="col-md-10">
             <div class="title-li">
-                <p style="">user details</p>
+                <p style="">Product details</p>
                 <hr>
             </div>
             <article class="row">
               <!-- <div class="row"> -->
-                <div class="col-sm-6 col-md-4 col-product">
+                <div class="col-xs-6 col-sm-3 col-product">
                     <div class="make-3D-space">
                         <div class="product-card">
                             <div class="product-front">
@@ -273,7 +272,7 @@ html, body{
                         </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-product">
+                  <div class="col-xs-6 col-sm-3 col-product">
                     <div class="make-3D-space">
                         <div class="product-card">
                             <div class="product-front">
@@ -329,7 +328,7 @@ html, body{
                         </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-product">
+                  <div class="col-xs-6 col-sm-3 col-product">
                     <div class="make-3D-space">
                         <div class="product-card">
                             <div class="product-front">
@@ -385,7 +384,7 @@ html, body{
                         </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-4 col-product">
+                  <div class="col-xs-6 col-sm-3 col-product">
                     <div class="make-3D-space">
                         <div class="product-card">
                             <div class="product-front">
@@ -450,7 +449,9 @@ html, body{
     <div class="footer-register center">
     </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
 $(document).ready(function() {
 
