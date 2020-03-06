@@ -19,7 +19,7 @@
     ================================================== -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="#">
-    <link rel="stylesheet" href="#">
+    <link rel="stylesheet" href="/api/css/pcss/colorcode.css">
     <link rel="stylesheet" href="/api/css/effect/navbar.css">
     <link rel="stylesheet" href="api/css/effect/preloading.css">
     <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css">
@@ -214,36 +214,65 @@ html, body{
                 <p style="">Product details</p>
                 <hr>
             </div>
+            <% if(listCategory != null) { %> 
             <article class="row">
               <!-- <div class="row"> -->
-                <div class="col-xs-6 col-sm-3 col-product">
+                
+                    <% listCategory.forEach(function(item){%>
+                        
+                <div  class="col-xs-6 col-sm-3 col-product">
                     <div class="make-3D-space">
                         <div class="product-card">
                             <div class="product-front">
                                 <div class="shadow"></div>
                                 <img style="width: 100%;
                 height: 100%;
-                object-fit: cover;" src="product/img/e6.5.jpg" alt="" />
+                object-fit: cover;" src="/api/<%= item.pic_profile.path %>" alt="" />
                                 <div class="image_overlay"></div>
                                 <div class="view_details">View details</div>
+                                <% if(item.type == 0) { %>
                                 <div class="stats">
                                     <div class="stats-container">
-                                        <span class="product_price">$39</span>
-                                        <span class="product_name">Adidas Originals</span>
-                                        <p class="fake-text">Men's running shirt</p>
+                                        <span class="product_price"><%= item.min_price %>$ - <%= item.max_price %>$</span>
+                                        <span class="product_name"><%= item.category_name %></span>
+                                        <p style="margin-bottom: 0" class="fake-text">author name</p>
                                         <div class="product-options">
-                                            <strong>SIZES</strong>
+                                            <strong>Layout</strong>
                                             <span>XS, S, M, L, XL, XXL</span>
+                                            <strong>COLORS</strong>
+                                            <div class="colors">
+                                                <% for (var key in item.color){%>
+                                                <div class="c-<%=   item.color[key] %>"><span></span></div>
+                                                <%    } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } else if(item.type == 1) { %>
+                                <div class="stats">
+                                    <div class="stats-container">
+                                        <span class="product_price"><%= item.min_price %>$ - <%= item.max_price %>$</span>
+                                        <span class="product_name"><%= item.category_name %></span>
+                                        <p style="margin-bottom: 0" class="fake-text">author name</p>
+                                        <div class="product-options">
+                                            <strong>Profile</strong>
+                                            <span><%= item.profile %></span>
                                             <strong>COLORS</strong>
                                             <div class="colors">
                                                 <div class="c-blue"><span></span></div>
                                                 <div class="c-red"><span></span></div>
                                                 <div class="c-white"><span></span></div>
                                                 <div class="c-green"><span></span></div>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            <% } else { %>
+                                <div class="stats">     
+                                    
+                                </div>  
+                            <% } %>
                             </div>
                             <div class="product-back">
                                 <div class="shadow"></div>
@@ -272,177 +301,16 @@ html, body{
                         </div>
                     </div>
                   </div>
-                  <div class="col-xs-6 col-sm-3 col-product">
-                    <div class="make-3D-space">
-                        <div class="product-card">
-                            <div class="product-front">
-                                <div class="shadow"></div>
-                                <img style="width: 100%;
-                height: 100%;
-                object-fit: cover;" src="product/img/e6.5.jpg" alt="" />
-                                <div class="image_overlay"></div>
-                                <div class="view_details">View details</div>
-                                <div class="stats">
-                                    <div class="stats-container">
-                                        <span class="product_price">$39</span>
-                                        <span class="product_name">Adidas Originals</span>
-                                        <p class="fake-text">Men's running shirt</p>
-                                        <div class="product-options">
-                                            <strong>SIZES</strong>
-                                            <span>XS, S, M, L, XL, XXL</span>
-                                            <strong>COLORS</strong>
-                                            <div class="colors">
-                                                <div class="c-blue"><span></span></div>
-                                                <div class="c-red"><span></span></div>
-                                                <div class="c-white"><span></span></div>
-                                                <div class="c-green"><span></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-back">
-                                <div class="shadow"></div>
-                                <div class="carousel">
-                                    <ul>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large.png" alt="" /></li>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large2.png" alt="" /></li>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large3.png" alt="" /></li>
-                                    </ul>
-                                    <div class="arrows-perspective">
-                                        <div class="carouselPrev">
-                                            <div class="y"></div>
-                                            <div class="x"></div>
-                                        </div>
-                                        <div class="carouselNext">
-                                            <div class="y"></div>
-                                            <div class="x"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flip-back">
-                                    <div class="cy"></div>
-                                    <div class="cx"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-xs-6 col-sm-3 col-product">
-                    <div class="make-3D-space">
-                        <div class="product-card">
-                            <div class="product-front">
-                                <div class="shadow"></div>
-                                <img style="width: 100%;
-                height: 100%;
-                object-fit: cover;" src="product/img/e6.5.jpg" alt="" />
-                                <div class="image_overlay"></div>
-                                <div class="view_details">View details</div>
-                                <div class="stats">
-                                    <div class="stats-container">
-                                        <span class="product_price">$39</span>
-                                        <span class="product_name">Adidas Originals</span>
-                                        <p class="fake-text">Men's running shirt</p>
-                                        <div class="product-options">
-                                            <strong>SIZES</strong>
-                                            <span>XS, S, M, L, XL, XXL</span>
-                                            <strong>COLORS</strong>
-                                            <div class="colors">
-                                                <div class="c-blue"><span></span></div>
-                                                <div class="c-red"><span></span></div>
-                                                <div class="c-white"><span></span></div>
-                                                <div class="c-green"><span></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-back">
-                                <div class="shadow"></div>
-                                <div class="carousel">
-                                    <ul>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large.png" alt="" /></li>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large2.png" alt="" /></li>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large3.png" alt="" /></li>
-                                    </ul>
-                                    <div class="arrows-perspective">
-                                        <div class="carouselPrev">
-                                            <div class="y"></div>
-                                            <div class="x"></div>
-                                        </div>
-                                        <div class="carouselNext">
-                                            <div class="y"></div>
-                                            <div class="x"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flip-back">
-                                    <div class="cy"></div>
-                                    <div class="cx"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-xs-6 col-sm-3 col-product">
-                    <div class="make-3D-space">
-                        <div class="product-card">
-                            <div class="product-front">
-                                <div class="shadow"></div>
-                                <img style="width: 100%;
-                height: 100%;
-                object-fit: cover;" src="product/img/e6.5.jpg" alt="" />
-                                <div class="image_overlay"></div>
-                                <div class="view_details">View details</div>
-                                <div class="stats">
-                                    <div class="stats-container">
-                                        <span class="product_price">$39</span>
-                                        <span class="product_name">Adidas Originals</span>
-                                        <p class="fake-text">Men's running shirt</p>
-                                        <div class="product-options">
-                                            <strong>SIZES</strong>
-                                            <span>XS, S, M, L, XL, XXL</span>
-                                            <strong>COLORS</strong>
-                                            <div class="colors">
-                                                <div class="c-blue"><span></span></div>
-                                                <div class="c-red"><span></span></div>
-                                                <div class="c-white"><span></span></div>
-                                                <div class="c-green"><span></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-back">
-                                <div class="shadow"></div>
-                                <div class="carousel">
-                                    <ul>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large.png" alt="" /></li>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large2.png" alt="" /></li>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large3.png" alt="" /></li>
-                                    </ul>
-                                    <div class="arrows-perspective">
-                                        <div class="carouselPrev">
-                                            <div class="y"></div>
-                                            <div class="x"></div>
-                                        </div>
-                                        <div class="carouselNext">
-                                            <div class="y"></div>
-                                            <div class="x"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flip-back">
-                                    <div class="cy"></div>
-                                    <div class="cx"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
+                        
+                    <%    }) %>
+                
+                  
+                  
+                  
                 <!-- </div> -->
                 
             </article>
+            <% } %>
         </div>
     </main>
     <!-- main-->

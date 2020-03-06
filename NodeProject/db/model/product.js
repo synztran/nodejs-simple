@@ -5,7 +5,8 @@ var date = new Date();
 
 var productSchema = mongoose.Schema({
     product_id:{
-        type: String
+        type: String,
+        uppercase: true
     },
     product_name:{
         type: String

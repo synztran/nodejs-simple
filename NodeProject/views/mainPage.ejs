@@ -24,6 +24,12 @@
                         <button type="button" class="btn btn-primary btn-xs btn-move-list" data-toggle="offcanvas">LIST ACCOUNT</button>
                     </p>
                     <p class="col-md-2 pull-right visible-xs">
+                        <button type="button" class="btn btn-primary btn-xs btn-category-list" data-toggle="offcanvas">LIST CATEGORY</button>
+                    </p>
+                    <p class="col-md-2 pull-right visible-xs">
+                        <button type="button" class="btn btn-primary btn-xs btn-product-list" data-toggle="offcanvas">LIST PRODUCT</button>
+                    </p>
+                    <p class="col-md-2 pull-right visible-xs">
                         <button type="button" class="btn btn-primary btn-xs btn-move-list-created" data-toggle="offcanvas">LIST CREATED</button>
                     </p>
                     <p class="col-md-2 pull-right visible-xs">
@@ -82,6 +88,14 @@ $(document).ready(function() {
     $('.btn-move-list-created').on('click', function(e){
          e.preventDefault();
         window.location.href= '/api/listcreated'
+    })
+    $('.btn-product-list').on('click', function(e){
+         e.preventDefault();
+        window.location.href= '/api/productlist'
+    })
+    $('.btn-category-list').on('click', function(e){
+         e.preventDefault();
+        window.location.href= '/api/categorylist'
     })
     $('.btn-move-messenger').on('click', function(e){
          e.preventDefault();

@@ -376,7 +376,7 @@ router.post("/register", upload.single('picture'),  (req, res) => {
                 req.body.password = bcrypt.hashSync(req.body.password, 10);
                 var account = new AdmAccount({
                     fname: req.body.fname,
-                    lname: req.body.lname,
+                    lname: req.body.lname,                  
                     email: req.body.email,
                     password: req.body.password,
                     picture: {
@@ -471,19 +471,63 @@ router.post("/created", async (req, res) => {
     }
 });
 
+
+
+router.get('/product', async(req, res)=>{
+    // res.render('manager/categoryPage')
+
+    Product.find({}, function(err, docs) {
+        res.render('manager/product/productPage', {
+            "listProduct": docs
+        });
+    });
+})
+
+router.get('/product/add', async(req, res)=>{
+
+    Category.find({}, function(err, docs){
+        console.log(docs)
+        console.log(docs.length)
+        res.render('manager/product/addPage', {
+            title: "Add new PRODUCT",
+            "listCategoryID": docs
+        })
+    })
+
+    
+
+    // res.render('manager/product/addPage',{
+    //     title: "Add new PRODUCT"
+    // })
+})
+
 router.post('/product/add', async(req, res)=>{
     console.log(req.body)
+    console.log(req.body.pid)
     try{
-        var product = new Product({
-            product_id : req.body.product_id,
-            product_name : req.body.product_name,
-            category_id : req.body.category_id,
-            price: req.body.price,
-            color : req.body.color,
-
-        });
-        var result = product.save();
-        res.send(product)
+        
+        var check =  await Product.find({ product_id: (req.body.pid).toUpperCase() }, async (err, docs) => {
+            console.log(docs)
+            if (docs.length) {
+                res.status(400).json({
+                    code: 400,
+                    message: "product id already exists"
+                })
+            } else {
+                var product = new Product({
+                    product_id : req.body.pid,
+                    product_name : req.body.pname,
+                    category_id : req.body.catid,
+                    outstock: req.body.outstock,
+                    price: req.body.price,
+                    color : req.body.color,
+        
+                });
+                var result = product.save();
+                res.send(result);
+        
+            }
+        }).exec();
     }catch(err){
         res.status(500).send(err);
     }
@@ -536,8 +580,28 @@ router.delete('/product/delete/:id', async (req, res) => {
     }
 });
 
-router.post('/category/add', async(req, res)=>{
+router.get('/category', async(req, res)=>{
+    // res.render('manager/categoryPage')
+
+    Category.find({}, function(err, docs) {
+        
+        res.render('manager/category/categoryPage', {
+            "listCategory": docs
+        });
+    });
+})
+
+router.get('/category/add', async(req, res)=>{
+    res.render('manager/category/addPage',{
+        title: "Add new CATEGORY"
+    })
+})
+
+
+
+router.post('/category/add',upload.single('picture') ,async(req, res)=>{
     console.log(req.body)
+    console.log(req.file);
     try{
 
         var check =  await Category.find({ category_id: req.body.catid }, async (err, docs) => {
@@ -550,12 +614,20 @@ router.post('/category/add', async(req, res)=>{
                 var category = new Category({
                     category_id : req.body.catid,
                     category_name: req.body.catname,
+                    status_gb: req.body.status,
                     color: req.body.color,
+                    type: req.body.type,
+                    layout: req.body.layout,
+                    profile: req.body.profile,
                     date_start: req.body.date_start,
                     date_end: req.body.date_end,
                     date_payment: req.body.date_payment,
                     min_price: req.body.min_price,
-                    max_price: req.body.max_price
+                    max_price: req.body.max_price,
+                    pic_profile:{
+                        path: req.file.path,
+                        size: req.file.size
+                    }
         
         
                 })

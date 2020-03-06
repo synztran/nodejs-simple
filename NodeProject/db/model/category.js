@@ -2,10 +2,11 @@ var mongoose = require('mongoose');
 var date = new Date();
 
 // status: 0 = end | 1 = IC | 2 = GB
-
+// tyle: 0 = keeb | 1 = keycap | 2 = etc
 var categorySchema = mongoose.Schema({
     category_id:{
-        type: String
+        type: String,
+        uppercase: true,
     },
     category_name:{
         type: String
@@ -15,6 +16,15 @@ var categorySchema = mongoose.Schema({
         default: 1
     },
     color: [],
+    type:{
+        type: Number,
+    },
+    profile:{
+        type: String
+    },
+    layout:{
+        type: String
+    },
     date_start:{
         type: Date
     },

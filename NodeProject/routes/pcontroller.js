@@ -55,6 +55,7 @@ var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
 var Tracking = require('./../db/model/tracking');
 var Product  = require('./../db/model/product');
+var Category = require('./../db/model/category')
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
 var TokenUserCheckMiddleware = require('./../lib/check/checktokenproduct.js')
 var SessionCheckMiddleware = require('./../lib/check/checksession');
@@ -288,16 +289,24 @@ router.get('/address', async(req, res)=>{
     
 })
 
-router.get('/proxygb', async(req, res)=>{
-    if(req.session.User == null){
-        res.render("product/proxyPage");
-    }else{
-        console.log(req.session.User);
+router.get('/proxygb', (req, res)=>{
+    // if(req.session.User == null){
+    //     res.render("product/proxyPage");
+    // }else{
+        // console.log(req.session.User);
+        Category.find({}, function(err, docs) {
+            console.log(docs);
+            res.render("product/proxyPage", {
+                "listCategory": docs
+            });
+        });
+        
+        
         // const uemail = req.session.User['email'];
         // res.render('index', {
         //     user: uemail 
         // })
-    }
+    // }
 })
 
 router.post('/captcha', async(req, res)=>{
@@ -595,6 +604,8 @@ router.post('/addaddress', TokenUserCheckMiddleware, async(req, res)=>{
         res.status(500).send(err);
     }
 })
+
+
 
 router.delete('/delete-address/:id' , async(req, res)=>{
     // console.log(req.decoded['email']);

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Page | Product ADD</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css">
+</head>
+
+<body>
+    <% include ./../../header%>
+    <h1 style="text-align: center;">
+        <%= title %>
+    </h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
+            </div>
+            <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
+            <div class="col-md-6">
+                <!-- <p class="pull-right visible-xs">
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+                </p> -->
+                <form action='/api/product/add' method="post" >
+                    <div class="form-group">
+                        <label for="product_id">ID:</label>
+                        <input required type="text" name="pid" class="form-control" id="pid" aria-describedby="catidHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="product_name">Name:</label>
+                        <input required type="text" name="pname" class="form-control" id="pname" aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Category ID:</label>
+                        <select  class="form-control input-sm" style="margin-top:0px;" id="catid" name="catid">
+                            <% for (var key in listCategoryID){%>
+                            <option value="<%= listCategoryID[key].category_id %>">
+                                <%= listCategoryID[key].category_id %>
+                            </option>
+                            <%    } %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Outstock:</label>
+                        <select class="form-control" name="outstock">
+                            <option value="0">Instock</option>
+                            <option value="1">Outstock</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Color:</label>
+                        <button id="add">ADD</button>
+                        <div id="container">
+                        </div>
+                        <div id="boxes">
+                            <!-- POSITION -->
+                            <div class="position_value">
+                                <select class="form-control input-sm" style="margin-top:0px;" id="color" name="color">
+                                    <option value="red">Red</option>
+                                    <option value="green">Green</option>
+                                    <option value="blue">Blue</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Price:</label>
+                        <input required class="form-control" name="price" type="tel" id="price">
+                    </div>
+                    <!-- <div className="input-group mb-3">
+                            <div className="custom-file">
+                                <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+                                <label className="custom-file-label" htmlFor="inputGroupFile01">
+                                </label>
+                            </div>
+                        </div> -->
+                    <br>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                </form>
+            </div>
+            <!-- </div> -->
+        </div>
+        <!-- </div> -->
+    </div>
+    <div class="footer" style="text-align: center;">
+        <% include ./../../footer%>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="/api/js/datepicker/dist/datepicker.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#minprice , #maxprice').on('input', function() {
+        this.value = this.value
+            .replace(/[^\d]/g, ''); // numbers and decimals only
+
+    });
+    $('#datepicker').datepicker();
+    $('#datepicker1').datepicker();
+    $('#datepicker2').datepicker();
+
+    // $("#add").click(function() { //when user clicks add
+    //     let elem;
+
+    //     elem = $("#boxes .position_value").clone(); //create a clone of the element
+    //     $("#container").append(elem); //add the new element to the bottom
+    //     elem.show(); //show it 
+
+    // });
+    $(".position_value").hide();
+
+
+    $('#add').on('click', function(e) {
+        e.preventDefault();
+        let elem;
+
+        elem = $("#boxes .position_value").clone(); //create a clone of the element
+        $("#container").append(elem); //add the new element to the bottom
+        elem.show(); //show it 
+    })
+    $(".position_value").hide();
+
+    $("#color").val('');
+    // $('.btn-submit').on('click', function(e) {
+    //     e.preventDefault();
+    //     const id = $(this).attr('data-id');
+    //     console.log(id);
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/saveImage/',
+    //         success: function(res) {
+    //             alert('updating');
+    //             window.location.href = '/list';
+    //         },
+    //         error: function(err) {
+    //             console.log(err);
+    //         },
+    //         dataType: "json"
+    //     })
+    // })
+});
+</script>
+
+</html>
