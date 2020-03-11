@@ -200,7 +200,7 @@ router.get("/", function(req, res) {
     // }
 });
 
-router.get('/dangky', async(req, res)=>{
+router.get('/danvvgky', async(req, res)=>{
     res.render("product/registerPage");
 })
 
@@ -566,13 +566,13 @@ router.post('/updateaccount', TokenUserCheckMiddleware ,async(req, res)=>{
 
 })
 
+// ------------------------------------------ ADDRESS CONFIG-------------------------------------
+
 router.post('/addaddress', TokenUserCheckMiddleware, async(req, res)=>{
 
     var uemail = req.decoded['email'];
     console.log(uemail)
     try{
-        
-        
         db.collection('accounts').update({
             email: uemail
         },{
@@ -591,15 +591,9 @@ router.post('/addaddress', TokenUserCheckMiddleware, async(req, res)=>{
                 }
             }
         })
-
         // res.status(200).status('ok')
         res.redirect('/address')
-        // console.log(account);
-        
-        
-            
-
-
+       
     }catch(err){
         res.status(500).send(err);
     }
@@ -612,21 +606,6 @@ router.delete('/delete-address/:id' , async(req, res)=>{
     var uemail = "rapsunl231@gmail.com"
     console.log(req.params.id)
     try{
-        // var address = await Account.findOne({email: req.decoded['email']}).exec();
-
-        // var address = Account.updateOne(
-        //     {email: uemail}, 
-        //     { "$pull" : 
-        //         {"shipping_at" : 
-        //             { 
-        //                 "id": req.params.id
-        //             }
-        //         }
-        //     }, 
-        //     {multi: true}, function(err, obj){
-
-        // })
-
         var address = db.collection('accounts').update(
             {
                 'email': uemail
@@ -644,6 +623,8 @@ router.delete('/delete-address/:id' , async(req, res)=>{
         res.status(500).send(err);
     }
 })
+
+// ---------------------------------------------------------------------------------------------
 
 router.post('/updatepassword', async (req, res) => {
     // console.log(req.body);
@@ -692,6 +673,17 @@ router.post('/joingb', async(req, res)=>{
         res.status(500).send(err);
     }
 })
+
+// --------------------------------- PRODUCT CONFIG --------------------------------------------
+router.get('/proxygb/product/:id', async(req, res)=>{
+
+    try{
+
+    }catch(err){
+        res.status(400).send(err);
+    }
+})
+// ---------------------------------------------------------------------------------------------
 
 router.get('*',function(req, res){
     res.status(404).render('404Page')

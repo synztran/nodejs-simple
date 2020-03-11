@@ -27,7 +27,7 @@ const bcrypt = require("bcryptjs");
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
 // var date = new Date();
 
-
+mongoose.set('useFindAndModify', false);
 // Create object
 const app = express();
 const server = http.Server(app);
@@ -67,7 +67,7 @@ app.use(session({
     secret: config.secret, 
     cookie: { 
 		secure: false,
-		maxAge: 18000 
+		maxAge: 180000 
 	},
 	// store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl : 260}),
 
@@ -85,6 +85,7 @@ app.use('/api/css', express.static('lib/css'))
 // app.use('/api/io', express.static('lib'))
 app.use('/package', express.static('lib'))
 app.use('/api/docs/upload', express.static('docs/upload'))
+app.use('/api/docs/trash', express.static('docs/trash'))
 app.use('/product/img', express.static('docs/pimg'))
 app.use('/product/css', express.static('lib/css/pcss'))
 

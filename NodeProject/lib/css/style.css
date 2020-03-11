@@ -80,3 +80,13 @@ tr.align-middle > td:not(:first-child){
     vertical-align: middle;
     margin:auto 0;
 }
+
+.f-red{
+    color: red;
+}
+.f-blue{
+    color: blue
+}
+.f-green{
+    color: green
+}

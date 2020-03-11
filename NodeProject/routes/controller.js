@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const reqHeader = require('request');
 const config = require('./../lib/comon/config');
 const utils = require('./../lib/comon/utils');
-const cookieParser = require('cookie-parser'); 
+const cookieParser = require('cookie-parser');
 const session = require('express-session');
 router.use(cookieParser());
 // var token = jwt.sign({foo: 'bar'}, 'shhhhh');
@@ -20,34 +20,35 @@ const tokenList = {};
 
 const multer = require('multer');
 const storage = multer.diskStorage({
-    destination: function(req, file, cb){
+    destination: function(req, file, cb) {
         cb(null, 'docs/upload/');
     },
-    filename: function(req, file, cb){
+    filename: function(req, file, cb) {
         cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname)
     }
 });
 var mongoose = require('mongoose');
 var db = mongoose.connection;
-const fileFilter = (req, file, cb)=>{
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg'){
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
         cb(null, false);
-    }else{
+    } else {
         cb(null, true);
     }
 }
 
 const upload = multer({
-    storage: storage, 
+    storage: storage,
     limits: {
-        fileSize: 1024*1024*5
+        fileSize: 1024 * 1024 * 5
     },
     // fileFilter: fileFilter
 });
 // var imgPath = 'docs/img_1435.JPG';
 var Account = require('./../db/model/account');
 var AdmAccount = require('./../db/model/accadmin');
-var Product  = require('./../db/model/product');
+var Product = require('./../db/model/product');
+var Couter = require('./../db/model/couter')
 var Category = require('./../db/model/category');
 var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
@@ -60,37 +61,38 @@ const PinCheckMiddleware = async (req, res, next) => {
     const role = req.headers['role'];
     console.log(req)
     console.log(req.get('role'));
-   
+
     // console.log(config.admin);
     // console.log(passcode)
     if (role === "admin") {
-      try {
-        next();
-      } catch (err) {
-        console.error(err);
-        return res.status(401).json({
-          message: 'Unauthorized access.',
-        });
-      }
+        try {
+            next();
+        } catch (err) {
+            console.error(err);
+            return res.status(401).json({
+                message: 'Unauthorized access.',
+            });
+        }
     } else {
-      return res.status(403).send({
-        message: 'Only allow for admin role.',
-      });
+        return res.status(403).send({
+            message: 'Only allow for admin role.',
+        });
     }
 }
 
 const options = {
-    
+
     url: 'http://localhost:5000/profile',
     method: 'GET',
-    headers:{
+    headers: {
         'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTU3NjA2MDk2NSwiZXhwIjoxNTc2MDYxMDI1fQ.obUYFFsvscovK0uq5o-PX3OCNP7a0NOdGqrNqm0KBFs'
     }
 };
+
 function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
-      const info = JSON.parse(body);
-      console.log(info);
+        const info = JSON.parse(body);
+        console.log(info);
     }
 }
 // reqHeader(options, PinCheckMiddleware);
@@ -112,30 +114,30 @@ router.get("/signup", function(req, res) {
     res.render("registerPage");
 });
 
-router.get('/', TokenCheckMiddleware, function(req, res){
+router.get('/', TokenCheckMiddleware, function(req, res) {
     console.log(req.session.Admin);
-    if(!req.session.Admin){
+    if (!req.session.Admin) {
         res.redirect('api/signin')
-    }else{
+    } else {
         var admin = req.session.Admin
-        res.render('mainPage',{
-            fname:  admin['fname'],
+        res.render('mainPage', {
+            fname: admin['fname'],
             lname: admin['lname']
         });
     }
-    
+
 });
 
-router.get('/messenger', TokenCheckMiddleware, function(req, res){
+router.get('/messenger', TokenCheckMiddleware, function(req, res) {
     res.render('messengerPage');
 })
 
-router.get('/list-room', TokenCheckMiddleware, function(req, res){
+router.get('/list-room', TokenCheckMiddleware, function(req, res) {
     res.render('listroomPage');
 })
 
-router.get('/listcreated', function(req,res){
-    res.render('listCreated',{
+router.get('/listcreated', function(req, res) {
+    res.render('listCreated', {
         // 'listCreated' : ''
     });
 })
@@ -144,7 +146,7 @@ router.get('/listcreated', function(req,res){
 router.get("/success", function(req, res) {
 
     res.render("successPage");
-   
+
 });
 
 router.post("/signup", function(req, res) {
@@ -163,13 +165,28 @@ router.post("/signup", function(req, res) {
     return res.redirect('success');
 })
 
-router.get('/list' ,function(req, res) {
+router.get('/list', function(req, res) {
+    Couter.find({}, function(err, docs) {
+        console.log(docs);
+
+    });
     AdmAccount.find({}, function(err, docs) {
+        console.log(docs);
         res.render('listAccount', {
             "listAccount": docs
         });
     });
-    
+
+
+});
+
+
+router.get('/aaaz', function(req, res) {
+    Couter.find({}, function(err, docs) {
+        console.log(docs);
+
+    });
+
 
 });
 
@@ -254,7 +271,7 @@ router.get("/account/edit/:id", async (req, res) => {
     }
 });
 // update db to mongo
-router.post("/account/edit/:id", upload.single('picture') ,async (req, res) => {
+router.post("/account/edit/:id", upload.single('picture'), async (req, res) => {
     console.log(req.body);
     console.log(req.file);
     try {
@@ -288,8 +305,8 @@ router.post("/account/edit/:id", upload.single('picture') ,async (req, res) => {
 router.post("/login", async (req, res, next) => {
     try {
         var account = await AdmAccount.findOne({ email: req.body.email }).exec();
-        var active =  await AdmAccount.findOne({ $and:[{email: req.body.email}, {active: true}]});
-        
+        var active = await AdmAccount.findOne({ $and: [{ email: req.body.email }, { active: true }] });
+
         if (!account) {
             return res.status(400).send({
                 status: "error",
@@ -302,13 +319,13 @@ router.post("/login", async (req, res, next) => {
                 message: "The password is not correct"
             });
         }
-        if(!active){
+        if (!active) {
             return res.status(400).send({
                 status: "error",
                 message: "Please active your account"
             })
         }
-        
+
         const user = {
             "email": req.body.email,
             "password": req.body.password
@@ -337,36 +354,36 @@ router.post("/login", async (req, res, next) => {
         //         var result =  accToken.save();
         //     }
         // }).exec();
-      
-            res.cookie('x-token', response.token);
-            req.session.Admin = {
-                email: account['email'],
-                fname: account['fname'],
-                lname: account['lname'],
-                id : account['_id']
-            }
-            console.log(req.session.Admin)
-            // res.cookie('x-refresh-token', response.refreshToken);
-            // res.cookie('x-email', user.email);
-            // res.cookie('x-fname', account.fname);
-            // res.cookie('x-lname', account.lname);
 
-            // res.send(token);
-            res.redirect('./');
-        
+        res.cookie('x-token', response.token);
+        req.session.Admin = {
+            email: account['email'],
+            fname: account['fname'],
+            lname: account['lname'],
+            id: account['_id']
+        }
+        console.log(req.session.Admin)
+        // res.cookie('x-refresh-token', response.refreshToken);
+        // res.cookie('x-email', user.email);
+        // res.cookie('x-fname', account.fname);
+        // res.cookie('x-lname', account.lname);
+
+        // res.send(token);
+        res.redirect('./');
+
     } catch (err) {
         res.status(500).send(err);
     }
 });
 
-router.post("/register", upload.single('picture'),  (req, res) => {
+router.post("/register", upload.single('picture'), (req, res) => {
     console.log(req.file);
 
     // console.log(req);
     // console.log(req.body.fileuploader-list-picture);
     console.log(req.body);
     try {
-        var check =  AdmAccount.find({ email: req.body.email }, async (err, docs) => {
+        var check = AdmAccount.find({ email: req.body.email }, async (err, docs) => {
             if (docs.length) {
                 res.status(400).json({
                     code: 400,
@@ -376,7 +393,7 @@ router.post("/register", upload.single('picture'),  (req, res) => {
                 req.body.password = bcrypt.hashSync(req.body.password, 10);
                 var account = new AdmAccount({
                     fname: req.body.fname,
-                    lname: req.body.lname,                  
+                    lname: req.body.lname,
                     email: req.body.email,
                     password: req.body.password,
                     picture: {
@@ -385,7 +402,7 @@ router.post("/register", upload.single('picture'),  (req, res) => {
                     },
                     active: true
                 });
-                var result =  account.save();
+                var result = account.save();
                 // res.send(result);
                 res.redirect('/');
             }
@@ -395,10 +412,10 @@ router.post("/register", upload.single('picture'),  (req, res) => {
     }
 })
 
-router.post('/refresh_token', async(req, res) =>{
-    const {refreshToken} = req.body;
-    if((refreshToken) && (refreshToken in tokenList)){
-        try{
+router.post('/refresh_token', async (req, res) => {
+    const { refreshToken } = req.body;
+    if ((refreshToken) && (refreshToken in tokenList)) {
+        try {
             await utils.verifyJwtToken(refreshToken, config.refreshTokenSecret);
             const user = tokenList[refreshToken];
             const token = jwt.sign(user, config.secret, {
@@ -408,13 +425,13 @@ router.post('/refresh_token', async(req, res) =>{
                 token,
             }
             res.status(200).json(response);
-        }catch(err){
+        } catch (err) {
             console.log(err);
             res.status(403).json({
                 message: 'Invalid refresh token'
             });
         }
-    }else{
+    } else {
         res.status(400).json({
             message: 'Invalid request'
         });
@@ -422,8 +439,8 @@ router.post('/refresh_token', async(req, res) =>{
 });
 
 
-router.get('/profile',TokenCheckMiddleware, (req, res) => {
-    
+router.get('/profile', TokenCheckMiddleware, (req, res) => {
+
     res.json(req.decoded)
 })
 
@@ -442,8 +459,8 @@ router.post("/created", async (req, res) => {
     console.log("end " + todayEnd.toISOString());
 
     try {
-        if(datecreated){
-            var result = await Account.find({ created: { $gte: (todayStart), $lte: todayEnd } }, function(err,docs){
+        if (datecreated) {
+            var result = await Account.find({ created: { $gte: (todayStart), $lte: todayEnd } }, function(err, docs) {
                 // res.render('listCreated', {
                 //     'listCreated': docs
                 // })
@@ -456,8 +473,8 @@ router.post("/created", async (req, res) => {
                 "count": result.length,
                 result,
             });
-           
-        }else{
+
+        } else {
             // res.render('/listCreated');
             Account.find({}, function(err, docs) {
                 res.render('listCreated', {
@@ -465,7 +482,7 @@ router.post("/created", async (req, res) => {
                 });
             });
         }
-       
+
     } catch (err) {
         res.status(200).send(err);
     }
@@ -473,7 +490,7 @@ router.post("/created", async (req, res) => {
 
 
 
-router.get('/product', async(req, res)=>{
+router.get('/product', async (req, res) => {
     // res.render('manager/categoryPage')
 
     Product.find({}, function(err, docs) {
@@ -483,9 +500,9 @@ router.get('/product', async(req, res)=>{
     });
 })
 
-router.get('/product/add', async(req, res)=>{
+router.get('/product/add', async (req, res) => {
 
-    Category.find({}, function(err, docs){
+    Category.find({}, function(err, docs) {
         console.log(docs)
         console.log(docs.length)
         res.render('manager/product/addPage', {
@@ -494,19 +511,19 @@ router.get('/product/add', async(req, res)=>{
         })
     })
 
-    
+
 
     // res.render('manager/product/addPage',{
     //     title: "Add new PRODUCT"
     // })
 })
 
-router.post('/product/add', async(req, res)=>{
+router.post('/product/add', async (req, res) => {
     console.log(req.body)
     console.log(req.body.pid)
-    try{
-        
-        var check =  await Product.find({ product_id: (req.body.pid).toUpperCase() }, async (err, docs) => {
+    try {
+
+        var check = await Product.find({ product_id: (req.body.pid).toUpperCase() }, async (err, docs) => {
             console.log(docs)
             if (docs.length) {
                 res.status(400).json({
@@ -515,31 +532,31 @@ router.post('/product/add', async(req, res)=>{
                 })
             } else {
                 var product = new Product({
-                    product_id : req.body.pid,
-                    product_name : req.body.pname,
-                    category_id : req.body.catid,
+                    product_id: req.body.pid,
+                    product_name: req.body.pname,
+                    category_id: req.body.catid,
                     outstock: req.body.outstock,
                     price: req.body.price,
-                    color : req.body.color,
-        
+                    color: req.body.color,
+
                 });
                 var result = product.save();
                 res.send(result);
-        
+
             }
         }).exec();
-    }catch(err){
+    } catch (err) {
         res.status(500).send(err);
     }
 })
 
-router.post("/product/edit/:id",async (req, res) => {
+router.post("/product/edit/:id", async (req, res) => {
     console.log(req.body);
     // console.log(req.file);
     try {
         var check = await Product.findById(req.params
             .id).exec();
-            console.log(check)
+        console.log(check)
         if (!check) {
             return res.status(400).send({
                 status: "error",
@@ -549,14 +566,14 @@ router.post("/product/edit/:id",async (req, res) => {
 
         check.set({
             // product_id : req.body.product_id,
-            product_name : req.body.product_name,
+            product_name: req.body.product_name,
             // category_id : req.body.category_id,
             price: req.body.price,
             outstock: req.body.outstock,
-            color : req.body.color,
+            color: req.body.color,
         });
 
-       
+
         var result = await check.save();
         res.status(200).send(result)
         // return res.redirect('/list');
@@ -580,63 +597,129 @@ router.delete('/product/delete/:id', async (req, res) => {
     }
 });
 
-router.get('/category', async(req, res)=>{
+router.get('/category', async (req, res) => {
     // res.render('manager/categoryPage')
 
     Category.find({}, function(err, docs) {
-        
+
         res.render('manager/category/categoryPage', {
             "listCategory": docs
         });
     });
 })
 
-router.get('/category/add', async(req, res)=>{
-    res.render('manager/category/addPage',{
+router.get('/category/add', async (req, res) => {
+    res.render('manager/category/addPage', {
         title: "Add new CATEGORY"
     })
 })
 
 
 
-router.post('/category/add',upload.single('picture') ,async(req, res)=>{
-    console.log(req.body)
-    console.log(req.file);
-    try{
+router.get('/mounting', function(req, res){
+    res.render('tips/mountingPage')
+})
 
-        var check =  await Category.find({ category_id: req.body.catid }, async (err, docs) => {
+
+router.post('/category/add', upload.single('picture'), async (req, res) => {
+    console.log(req.body)
+    // console.log(req.file);
+    try {
+
+        var check = await Category.find({ category_id: req.body.catid }, async (err, docs) => {
             if (docs.length) {
                 res.status(400).json({
                     code: 400,
                     message: "category id already exists"
                 })
             } else {
-                var category = new Category({
-                    category_id : req.body.catid,
-                    category_name: req.body.catname,
-                    status_gb: req.body.status,
-                    color: req.body.color,
-                    type: req.body.type,
-                    layout: req.body.layout,
-                    profile: req.body.profile,
-                    date_start: req.body.date_start,
-                    date_end: req.body.date_end,
-                    date_payment: req.body.date_payment,
-                    min_price: req.body.min_price,
-                    max_price: req.body.max_price,
-                    pic_profile:{
-                        path: req.file.path,
-                        size: req.file.size
-                    }
-        
-        
-                })
-                var result = category.save();
-                res.send(result);
-        
+
+                var type = req.body.type;
+                // if type = keeb
+                if (type == 0) {
+                    Couter.findOne({ _id: "keeb" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+
+                        db.collection('categories').insertOne({
+                            category_id: "KEEB" + inc,
+                            category_name: req.body.catname,
+                            status_gb: req.body.status,
+                            k_color: req.body.k_color,
+                            type: req.body.type,
+                            k_layout: req.body.k_layout,
+                            k_degree: req.body.k_degree,
+                            k_mounting: req.body.k_mounting,
+                            // sale_type: req.body.sale_type,
+                            date_start: req.body.date_start,
+                            date_end: req.body.date_end,
+                            date_payment: req.body.date_payment,
+                            min_price: req.body.min_price,
+                            max_price: req.body.max_price,
+                            pic_profile: {
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
+
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "keeb"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                    // if type = keyset
+                } else if (type == 1) {
+                    console.log(2)
+                    Couter.findOne({ _id: "keyset" }, function(err, docs) {
+                        console.log(docs);
+                        //  console.log(docs[0].seq);
+                        console.log(docs['seq'])
+                        var inc = docs[0].seq + 1;
+                        console.log(inc)
+
+                        db.collection('categories').insertOne({
+                            category_id: "KSET" + inc,
+                            category_name: req.body.catname,
+                            status_gb: req.body.status,
+                            color: req.body.color,
+                            type: req.body.type,
+                            c_profile: req.body.profile,
+                            c_material: req.body.c_material,
+                            date_start: req.body.date_start,
+                            date_end: req.body.date_end,
+                            date_payment: req.body.date_payment,
+                            min_price: req.body.min_price,
+                            max_price: req.body.max_price,
+                            pic_profile: {
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
+
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "keyset"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                } else {
+                    
+                }
+
             }
+
         }).exec();
-    }catch(err){
+        res.redirect('/api/category')
+    } catch (err) {
         res.status(500).send(err);
     }
 })
@@ -659,13 +742,13 @@ router.post('/category/add',upload.single('picture') ,async(req, res)=>{
 
 // update db to mongo
 // , upload.single('picture') 
-router.post("/category/edit/:id",async (req, res) => {
+router.post("/category/edit/:id", async (req, res) => {
     console.log(req.body);
     // console.log(req.file);
     try {
         var check = await Category.findById(req.params
             .id).exec();
-            console.log(check)
+        console.log(check)
         if (!check) {
             return res.status(400).send({
                 status: "error",
@@ -684,7 +767,7 @@ router.post("/category/edit/:id",async (req, res) => {
             max_price: req.body.max_price
         });
 
-       
+
         var result = await check.save();
         res.status(200).send(result)
         // return res.redirect('/list');
@@ -703,14 +786,14 @@ router.delete('/category/delete/:id', async (req, res) => {
         var checkCategory = await Category.findById(req.params.id).exec();
         console.log(checkCategory)
         console.log(checkCategory.category_id)
-        var checkProduct = await Product.find({category_id: checkCategory.category_id}).exec();
+        var checkProduct = await Product.find({ category_id: checkCategory.category_id }).exec();
         console.log(checkProduct)
 
 
         var deleteCategory = await Category.deleteOne({ _id: req.params.id }).exec();
-        var deleteProduct = await Product.deleteMany({category_id: checkCategory.category_id}).exec();
+        var deleteProduct = await Product.deleteMany({ category_id: checkCategory.category_id }).exec();
 
-        res.send({deleteCategory, deleteProduct});
+        res.send({ deleteCategory, deleteProduct });
         // res.write(deleteCategory);
         // res.write(deleteProduct);
 
