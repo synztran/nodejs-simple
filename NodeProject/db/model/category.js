@@ -16,7 +16,7 @@ var categorySchema = mongoose.Schema({
     category_name:{
         type: String
     },
-    status_gb:{ // status: 0 = end | 1 = IC | 2 = GB
+    status_gb:{ // status: 0 = end | 1 = IC | 2 = live
         type: Number,
         default: 1
     },
@@ -39,7 +39,9 @@ var categorySchema = mongoose.Schema({
     // }
     ,
     flip:{
-        type: Boolean
+        // type: Boolean,
+        // default: false
+        type: Number
     },
     k_degree:[],
     k_mounting:[], 

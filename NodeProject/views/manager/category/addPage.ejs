@@ -24,12 +24,18 @@
     height: calc(1.5em + .75rem + 2px);
 }
 
-.selection >.select2-selection--multiple{
+.selection>.select2-selection--multiple {
     height: calc(2.25em + .75rem + 2px);
+}
+.selection>.select2-selection{
+    height: auto;
 }
 
 .selection>.select2-selection>.select2-selection__rendered {
     line-height: 36px
+}
+html{
+    overflow-x: hidden;
 }
 </style>
 
@@ -41,6 +47,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
+
             </div>
             <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
             <div class="col-md-6">
@@ -77,13 +84,13 @@
                         <div class="form-group">
                             <label for="email">Flip top&bot:</label>
                             <select class="form-control keeb-flip" name="flip">
-                                <option value="true"><span style="color: green">Yes! Flip it</span></option>
-                                <option value="false"><span style="color: red">NO!!!</span></option>
+                                <option value="1"><span style="color: green">Yes! Flip it</span></option>
+                                <option value="0"><span style="color: red">NO!!!</span></option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="">Keeb Layout:</label>
-                            <select class="form-control select2 multiple-select" name="k_degree[]" multiple="multiple">
+                            <select class="form-control select2 multiple-select select2-klayout" name="k_layout[]" multiple="multiple">
                                 <option value="tbd">TBD</option>
                                 <option value="40%">40%</option>
                                 <option value="50%">50%</option>
@@ -97,10 +104,9 @@
                                 <option value="etc">ETC</option>
                             </select>
                         </div>
-                        
                         <div class="form-group">
                             <label for="degree">Keeb Degree:</label>
-                            <select class="form-control select2 multiple-select"  name="k_degree[]" multiple="multiple">
+                            <select class="form-control select2 multiple-select select2-kdegree" name="k_degree[]" multiple="multiple">
                                 <option value="tbd">TBD</option>
                                 <option value="4">4°</option>
                                 <option value="4.5">4.5°</option>
@@ -126,7 +132,7 @@
                                 <option value="intergrated">Integrated plate</option>
                                 <option value="gasket">Gasket mount</option>
                             </select> -->
-                            <select class="form-control mounting-select select2" id="keeb-mounting" name="k_mounting[]" multiple="multiple">
+                            <select class="form-control select2" id="keeb-mounting" name="k_mounting[]" multiple="multiple">
                                 <option value="TBD">TBD</option>
                                 <option value="tray">Tray mount</option>
                                 <option value="top">Top mount</option>
@@ -139,7 +145,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Keeb Color:</label>
-                            <select class="form-control select2 multiple-select" name="k_color[]" multiple="multiple">
+                            <select class="form-control select2 multiple-select select2-kcolor" name="k_color[]" multiple="multiple">
                                 <option value="red">Red</option>
                                 <option value="green">Green</option>
                                 <option value="blue">Blue</option>
@@ -164,9 +170,7 @@
                             <!-- <button id="add-for-keyset-color">ADD</button>
                             <div id="keyset-color-container">
                             </div> -->
-                            
-                                <% include ./../../tips/resinColorSelect %>
-
+                            <% include ./../../tips/resinColorSelect %>
                             <!-- <div id="keyset-color-boxes">
                                 <div class="position_value">
                                     <select class="form-control input-sm" style="margin-top:0px;" id="color" name="code_color">
@@ -225,6 +229,25 @@
 $(document).ready(function() {
 
     $('.select2').select2();
+    $('#keeb-mounting').select2({
+        placeholder: "Select keeb mounting type"
+        // allowClear: true
+    })
+    // function formatState(state) {
+    //     if (!state.id) {
+    //         return state.text;
+    //     }
+    //     var baseUrl = "/user/pages/images/flags";
+    //     var $state = $(
+    //         '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
+    //     );
+    //     return $state;
+    // };
+
+    // $('.select2-kcolor').select2({
+    //     templateResult: formatState
+    // })
+
     var a = $('.layout').val();
     console.log(a);
 
