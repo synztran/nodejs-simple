@@ -16,6 +16,10 @@
 .text-right{
     text-align: right;
 }
+.text-center{
+    text-align: center;
+}
+
 
 
 .col-md-6 label, .col-md-4 label, .col-md-12 label{

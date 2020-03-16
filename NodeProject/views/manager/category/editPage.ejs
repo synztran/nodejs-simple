@@ -4,40 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Page | Category ADD</title>
+    <title>Admin Page | Category Edit</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css">
-    <link rel="stylesheet" type="text/css" href="/api/css/pcss/keysetcolorcode.css">
-    <% include ./../../tips/cssPackage%>
+    <link rel="stylesheet" type="text/css" href="api/css/custom-fixed.css">
 </head>
-<style type="text/css">
-.for-keeb,
-.for-keyset {
-    display: none;
-}
-
-.select2-container {
-    width: 100% !important
-}
-
-.selection>.select2-selection--single {
-    height: calc(1.5em + .75rem + 2px);
-}
-
-.selection >.select2-selection--multiple{
-    height: calc(2.25em + .75rem + 2px);
-}
-
-.selection>.select2-selection>.select2-selection__rendered {
-    line-height: 36px
-}
-</style>
 
 <body>
     <% include ./../../header%>
-    <h1 style="text-align: center;">
-        <%= title %>
-    </h1>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
@@ -47,7 +20,11 @@
                 <!-- <p class="pull-right visible-xs">
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
                 </p> -->
-                <form action='/api/category/add' method="post" enctype="multipart/form-data">
+                <h1 class="text-center">
+                    <%= title %>
+                </h1>
+                <% if(type == 0) { %>
+                        <form action='/api/category/add' method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="email">GB status:</label>
                         <select class="form-control" name="status">
@@ -75,6 +52,30 @@
                     <!-------------------------- for keeb ---------------------------->
                     <div class="for-keeb">
                         <div class="form-group">
+                            <label for="email">Keeb Layout:</label>
+                            <button id="add-for-keeb-layout">ADD</button>
+                            <div id="keeb-layout-container">
+                            </div>
+                            <div id="keeb-layout-boxes">
+                                <!-- POSITION -->
+                                <div class="position_value">
+                                    <select class="form-control input-sm" style="margin-top:0px;" id="layout" name="k_layout">
+                                        <option value="tbd">TBD</option>
+                                        <option value="40%">40%</option>
+                                        <option value="50%">50%</option>
+                                        <option value="60%">60%</option>
+                                        <option value="65%">65%</option>
+                                        <option value="75%">75%</option>
+                                        <option value="TKL">TKL</option>
+                                        <option value="Fullsize">Fullsize</option>
+                                        <option value="980">980</option>
+                                        <option value="1800">1800</option>
+                                        <option value="etc">ETC</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="email">Flip top&bot:</label>
                             <select class="form-control keeb-flip" name="flip">
                                 <option value="true"><span style="color: green">Yes! Flip it</span></option>
@@ -82,31 +83,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Keeb Layout:</label>
-                            <select class="form-control select2 multiple-select" name="k_degree[]" multiple="multiple">
-                                <option value="tbd">TBD</option>
-                                <option value="40%">40%</option>
-                                <option value="50%">50%</option>
-                                <option value="60%">60%</option>
-                                <option value="65%">65%</option>
-                                <option value="75%">75%</option>
-                                <option value="tkl">TKL</option>
-                                <option value="fs">Fullsize</option>
-                                <option value="980">980</option>
-                                <option value="1800">1800</option>
-                                <option value="etc">ETC</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
                             <label for="degree">Keeb Degree:</label>
-                            <select class="form-control select2 multiple-select"  name="k_degree[]" multiple="multiple">
+                            <select class="form-control" id="keeb-degree" name="k_degree">
                                 <option value="tbd">TBD</option>
                                 <option value="4">4°</option>
                                 <option value="4.5">4.5°</option>
                                 <option value="5">5°%</option>
-                                <option value="5.5">5.5°</option>
-                                <option value="6">6°</option>
+                                <option value="5.5">5.5°%</option>
+                                <option value="6">6°%</option>
                                 <option value="6.5">6.5°</option>
                                 <option value="7">7°</option>
                                 <option value="7.5">7.5°</option>
@@ -116,17 +100,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Keeb Mounting type:</label>
-                            <!--  <select class="form-control" id="keeb-mounting" name="k_mounting">
-                                <option value="TBD">TBD</option>
-                                <option value="tray">Tray mount</option>
-                                <option value="top">Top mount</option>
-                                <option value="bottom">Bottom mount</option>
-                                <option value="sandwich">Sandwich mount</option>
-                                <option value="plateless">Plateless mount</option>
-                                <option value="intergrated">Integrated plate</option>
-                                <option value="gasket">Gasket mount</option>
-                            </select> -->
-                            <select class="form-control mounting-select select2" id="keeb-mounting" name="k_mounting[]" multiple="multiple">
+                            <select class="form-control" id="keeb-mounting" name="k_mounting">
                                 <option value="TBD">TBD</option>
                                 <option value="tray">Tray mount</option>
                                 <option value="top">Top mount</option>
@@ -139,43 +113,19 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Keeb Color:</label>
-                            <select class="form-control select2 multiple-select" name="k_color[]" multiple="multiple">
-                                <option value="red">Red</option>
-                                <option value="green">Green</option>
-                                <option value="blue">Blue</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!---------------------------- for keyset ------------------------->
-                    <div class="for-keyset">
-                        <div class="form-group">
-                            <label for="email">Keyset Profile:</label>
-                            <select class="form-control select2" id="keeb-profile" name="profile">
-                                <option value="tbd">TBD</option>
-                                <option value="sa">SA</option>
-                                <option value="gmk">GMK</option>
-                                <option value="jtk">JTK</option>
-                                <option value="kat">KAT</option>
-                                <option value="etc">ETC</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Keyset Color:</label>
-                            <!-- <button id="add-for-keyset-color">ADD</button>
-                            <div id="keyset-color-container">
-                            </div> -->
-                            
-                                <% include ./../../tips/resinColorSelect %>
-
-                            <!-- <div id="keyset-color-boxes">
+                            <button id="add-for-keeb-color">ADD</button>
+                            <div id="keeb-color-container">
+                            </div>
+                            <div id="keeb-color-boxes">
+                                <!-- POSITION -->
                                 <div class="position_value">
-                                    <select class="form-control input-sm" style="margin-top:0px;" id="color" name="code_color">
+                                    <select class="form-control input-sm" style="margin-top:0px;" id="k-color" name="k_color">
                                         <option value="red">Red</option>
                                         <option value="green">Green</option>
                                         <option value="blue">Blue</option>
                                     </select>
                                 </div>
-                            </div> <-->
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -208,6 +158,98 @@
                     <br>
                     <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
                 </form>
+                <% } else if(type == 1) { %>
+                 
+                        <form action='/api/category/add' method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="email">GB status:</label>
+                        <select class="form-control" name="status">
+                            <option value="1">IC</option>
+                            <option value="2">Live</option>
+                            <option value="0">End</option>
+                        </select>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="email">ID:</label>
+                        <input disabled type="text" name="catid" class="form-control" id="catid" aria-describedby="catidHelp">
+                    </div> -->
+                    <div class="form-group">
+                        <label for="email">Name:</label>
+                        <input type="text" name="catname" class="form-control" id="catname" aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Category Type:</label>
+                        <select class="form-control category-type" name="type">
+                            <option value="0">Kit Keyboard</option>
+                            <option value="1">Keyset</option>
+                            <option value="2">Etc</option>
+                        </select>
+                    </div>
+                    <!---------------------------- for keyset ------------------------->
+                    <div class="for-keyset">
+                        <div class="form-group">
+                            <label for="email">Keyset Profile:</label>
+                            <select class="form-control" id="keeb-profile" name="profile">
+                                <option value="None">None</option>
+                                <option value="SA">SA</option>
+                                <option value="GMK">GMK</option>
+                                <option value="JTK">JTK</option>
+                                <option value="KAT">KAT</option>
+                                <option value="etc">etc</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Keyset Color:</label>
+                            <button id="add-for-keyset">ADD</button>
+                            <div id="keyset-container">
+                            </div>
+                            <div id="keyset-boxes">
+                                <div class="position_value">
+                                    <select class="form-control input-sm" style="margin-top:0px;" id="color" name="code_color">
+                                        <option value="red">Red</option>
+                                        <option value="green">Green</option>
+                                        <option value="blue">Blue</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Date start (mm/dd/yyyy):</label>
+                        <input style="width: 100%" id="datepicker" class="span2" type="text" name="date_start">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Date end (mm/dd/yyyy):</label>
+                        <input style="width: 100%" id="datepicker1" class="span2" type="text" name="date_end">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Date payment (mm/dd/yyyy):</label>
+                        <input style="width: 100%" id="datepicker2" class="span2" type="text" name="date_payment">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Min price:</label>
+                        <input class="form-control" name="min_price" type="tel" id="minprice">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Max price:</label>
+                        <input class="form-control" name="max_price" type="tel" id="maxprice">
+                    </div>
+                    <div className="input-group mb-3">
+                        <div className="custom-file">
+                            <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+                            <label className="custom-file-label" htmlFor="inputGroupFile01">
+                            </label>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                </form>
+                <% }else { %>
+
+                 
+
+                <% } %>
+                
             </div>
             <!-- </div> -->
         </div>
@@ -219,102 +261,25 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="/api/js/datepicker/dist/datepicker.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
-    $('.select2').select2();
-    var a = $('.layout').val();
-    console.log(a);
-
-    $('.layout').on('change', function() {
-        console.log(this.value);
-    })
-    $('.category-type').on('change', function() {
-        console.log(this.value);
-        if (this.value == 0) {
-            $('.for-keyset').hide()
-            $('.for-keeb').show();
-        } else if (this.value == 1) {
-            $('.for-keeb').hide()
-            $('.for-keyset').show()
-        } else {
-
-        }
-    });
-
-
-    $('#minprice , #maxprice, #k-degree').on('input', function() {
-        this.value = this.value
-            .replace(/[^\d]/g, ''); // numbers and decimals only
-
-    });
-    $('#datepicker').datepicker();
-    $('#datepicker1').datepicker();
-    $('#datepicker2').datepicker();
-
-    // $("#add").click(function() { //when user clicks add
-    //     let elem;
-
-    //     elem = $("#boxes .position_value").clone(); //create a clone of the element
-    //     $("#container").append(elem); //add the new element to the bottom
-    //     elem.show(); //show it 
-
-    // });
-    $(".position_value").hide();
-
-
-    $('#add-for-keeb-color').on('click', function(e) {
+    $('.btn-submit').on('click', function(e) {
         e.preventDefault();
-        let elem;
-
-        elem = $("#keeb-color-boxes .position_value").clone(); //create a clone of the element
-        $("#keeb-color-container").append(elem); //add the new element to the bottom
-        elem.show(); //show it 
+        const id = $(this).attr('data-id');
+        console.log(id);
+        $.ajax({
+            type: 'POST',
+            url: '/saveImage/',
+            success: function(res) {
+                alert('updating');
+                window.location.href = '/list';
+            },
+            error: function(err) {
+                console.log(err);
+            },
+            dataType: "json"
+        })
     })
-    $('#add-for-keeb-layout').on('click', function(e) {
-        e.preventDefault();
-        let elem;
-
-        elem = $("#keeb-layout-boxes .position_value").clone(); //create a clone of the element
-        $("#keeb-layout-container").append(elem); //add the new element to the bottom
-        elem.show(); //show it 
-    })
-    $('#add-for-keyset-color').on('click', function(e) {
-        e.preventDefault();
-        let elem;
-
-        elem = $("#keyset-color-boxes .position_value").clone(); //create a clone of the element
-        $("#keyset-color-container").append(elem); //add the new element to the bottom
-        elem.show(); //show it 
-    })
-    $(".position_value").hide();
-    $(".category-type").val('');
-    $("#color").val('');
-    $("#keeb-profile").val('');
-    $("#layout").val('');
-    $("#keeb-mounting").val('');
-    $('#keeb-degree').val('');
-    $(".keeb-flip").val('');
-    $(".select2").val('');
-    // $('.btn-submit').on('click', function(e) {
-    //     e.preventDefault();
-    //     const id = $(this).attr('data-id');
-    //     console.log(id);
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/saveImage/',
-    //         success: function(res) {
-    //             alert('updating');
-    //             window.location.href = '/list';
-    //         },
-    //         error: function(err) {
-    //             console.log(err);
-    //         },
-    //         dataType: "json"
-    //     })
-    // })
 });
 </script>
 

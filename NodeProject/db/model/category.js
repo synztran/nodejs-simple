@@ -22,8 +22,8 @@ var categorySchema = mongoose.Schema({
     },
     k_color: [],
     
-    c_code_color:[], // type: 0 = keeb | 1 = keycap | 2 = etc
-    type:{
+    c_code_color:[], 
+    type:{ // type: 0 = keeb | 1 = keycap | 2 = etc
         type: Number,
     },
     c_profile:{
@@ -38,14 +38,11 @@ var categorySchema = mongoose.Schema({
     //     default: null
     // }
     ,
-    k_degree:{
-        type: String,
-        default: null
+    flip:{
+        type: Boolean
     },
-    k_mounting:{
-        type: String,
-        default: null
-    }, 
+    k_degree:[],
+    k_mounting:[], 
     sale_type:[],
     date_start:{
         type: Date,

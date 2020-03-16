@@ -266,8 +266,7 @@ router.get("/account/edit/:id", async (req, res) => {
                 });
             });
     } catch (err) {
-        console.log(err);
-        res.status(200).send(err);
+        res.status(400).send(err);
     }
 });
 // update db to mongo
@@ -306,6 +305,7 @@ router.post("/login", async (req, res, next) => {
     try {
         var account = await AdmAccount.findOne({ email: req.body.email }).exec();
         var active = await AdmAccount.findOne({ $and: [{ email: req.body.email }, { active: true }] });
+        console.log(active)
 
         if (!account) {
             return res.status(400).send({
@@ -531,17 +531,7 @@ router.post('/product/add', async (req, res) => {
                     message: "product id already exists"
                 })
             } else {
-                var product = new Product({
-                    product_id: req.body.pid,
-                    product_name: req.body.pname,
-                    category_id: req.body.catid,
-                    outstock: req.body.outstock,
-                    price: req.body.price,
-                    color: req.body.color,
-
-                });
-                var result = product.save();
-                res.send(result);
+                
 
             }
         }).exec();
@@ -624,104 +614,102 @@ router.get('/mounting', function(req, res){
 router.post('/category/add', upload.single('picture'), async (req, res) => {
     console.log(req.body)
     // console.log(req.file);
-    try {
+    // try {
 
-        var check = await Category.find({ category_id: req.body.catid }, async (err, docs) => {
-            if (docs.length) {
-                res.status(400).json({
-                    code: 400,
-                    message: "category id already exists"
-                })
-            } else {
+    //     var check = await Category.find({ category_id: req.body.catid }, async (err, docs) => {
+    //         if (docs.length) {
+    //             res.status(400).json({
+    //                 code: 400,
+    //                 message: "category id already exists"
+    //             })
+    //         } else {
 
-                var type = req.body.type;
+    //             var type = req.body.type;
                 // if type = keeb
-                if (type == 0) {
-                    Couter.findOne({ _id: "keeb" }, function(err, docs) {
-                        console.log(docs);
-                        console.log(docs['seq'])
-                        var inc = docs['seq'] + 1;
-                        console.log("incc"+inc)
+                // if (type == 0) {
+                //     Couter.findOne({ _id: "keeb" }, function(err, docs) {
+                //         console.log(docs);
+                //         console.log(docs['seq'])
+                //         var inc = docs['seq'] + 1;
+                //         console.log("incc"+inc)
 
-                        db.collection('categories').insertOne({
-                            category_id: "KEEB" + inc,
-                            category_name: req.body.catname,
-                            status_gb: req.body.status,
-                            k_color: req.body.k_color,
-                            type: req.body.type,
-                            k_layout: req.body.k_layout,
-                            k_degree: req.body.k_degree,
-                            k_mounting: req.body.k_mounting,
-                            // sale_type: req.body.sale_type,
-                            date_start: req.body.date_start,
-                            date_end: req.body.date_end,
-                            date_payment: req.body.date_payment,
-                            min_price: req.body.min_price,
-                            max_price: req.body.max_price,
-                            pic_profile: {
-                                path: req.file.path,
-                                size: req.file.size
-                            }
-                        })
+                //         db.collection('categories').insertOne({
+                //             category_id: "KEEB" + inc,
+                //             category_name: req.body.catname,
+                //             status_gb: req.body.status,
+                //             k_color: req.body.k_color,
+                //             type: req.body.type,
+                //             k_layout:  req.body.k_layout,
+                //             k_degree: req.body.k_degree,
+                //             k_mounting: req.body.k_mounting,
+                //             date_start: req.body.date_start,
+                //             date_end: req.body.date_end,
+                //             date_payment: req.body.date_payment,
+                //             min_price: req.body.min_price,
+                //             max_price: req.body.max_price,
+                //             pic_profile: {
+                //                 path: req.file.path,
+                //                 size: req.file.size
+                //             }
+                //         })
 
-                    })
-                    db.collection("couters").findAndModify({
-                            _id: "keeb"
-                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+                //     })
+                //     db.collection("couters").findAndModify({
+                //             _id: "keeb"
+                //         }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
 
-                        function(err, docs) {
-                            console.log(docs);
-                        }
-                    )
+                //         function(err, docs) {
+                //             console.log(docs);
+                //         }
+                //     )
                     // if type = keyset
-                } else if (type == 1) {
-                    console.log(2)
-                    Couter.findOne({ _id: "keyset" }, function(err, docs) {
-                        console.log(docs);
-                        //  console.log(docs[0].seq);
-                        console.log(docs['seq'])
-                        var inc = docs[0].seq + 1;
-                        console.log(inc)
+        //         } else if (type == 1) {
+        //             console.log(2)
+        //             Couter.findOne({ _id: "keyset" }, function(err, docs) {
+        //                console.log(docs);
+        //                 console.log(docs['seq'])
+        //                 var inc = docs['seq'] + 1;
+        //                 console.log("incc"+inc)
 
-                        db.collection('categories').insertOne({
-                            category_id: "KSET" + inc,
-                            category_name: req.body.catname,
-                            status_gb: req.body.status,
-                            color: req.body.color,
-                            type: req.body.type,
-                            c_profile: req.body.profile,
-                            c_material: req.body.c_material,
-                            date_start: req.body.date_start,
-                            date_end: req.body.date_end,
-                            date_payment: req.body.date_payment,
-                            min_price: req.body.min_price,
-                            max_price: req.body.max_price,
-                            pic_profile: {
-                                path: req.file.path,
-                                size: req.file.size
-                            }
-                        })
+        //                 db.collection('categories').insertOne({
+        //                     category_id: "KSET" + inc,
+        //                     category_name: req.body.catname,
+        //                     status_gb: req.body.status,
+        //                     c_code_color: req.body.code_color,
+        //                     type: req.body.type,
+        //                     c_profile: req.body.profile,
+        //                     c_material: req.body.c_material,
+        //                     date_start: req.body.date_start,
+        //                     date_end: req.body.date_end,
+        //                     date_payment: req.body.date_payment,
+        //                     min_price: req.body.min_price,
+        //                     max_price: req.body.max_price,
+        //                     pic_profile: {
+        //                         path: req.file.path,
+        //                         size: req.file.size
+        //                     }
+        //                 })
 
-                    })
-                    db.collection("couters").findAndModify({
-                            _id: "keyset"
-                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+        //             })
+        //             db.collection("couters").findAndModify({
+        //                     _id: "keyset"
+        //                 }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
 
-                        function(err, docs) {
-                            console.log(docs);
-                        }
-                    )
-                } else {
-                    
-                }
-
-            }
-
-        }).exec();
-        res.redirect('/api/category')
-    } catch (err) {
-        res.status(500).send(err);
-    }
+        //                 function(err, docs) {
+        //                     console.log(docs);
+        //                 }
+        //             )
+        //         } else {
+        //         }
+        //     }
+        // }).exec();
+    //     setTimeout(function(){
+    //         res.redirect('/api/category');
+    //     }, 1500)
+        
+    // } catch (err) {
+    //     res.status(500).send(err);
+    // }
 })
 
 // router.get("/category/edit/:id", async (req, res) => {
@@ -742,6 +730,45 @@ router.post('/category/add', upload.single('picture'), async (req, res) => {
 
 // update db to mongo
 // , upload.single('picture') 
+
+router.get('/category/edit/:id', async(req, res)=>{
+    console.log(req.params.id)
+    try{
+        
+        // var unactive = await Category.findById(req.params.id);
+        // console.log(unactive)
+        
+        await Category.findById(req.params.id,function(err, docs){
+            console.log(docs.type);
+            var type = docs.type;
+            if(type == 0){
+                res.render('manager/category/editPage',{
+                    title: 'Edit Category : Keeb',
+                    category: docs,
+                    type: 0
+                })
+            }else if(type == 1){
+                res.render('manager/category/editPage',{
+                    title: 'Edit Category : Keyset',
+                    category: docs,
+                    type: 1
+                })
+            }else{
+
+            }
+            
+               
+        })
+        
+            // function(err, docs){
+            // console.log(docs);
+           
+        
+        // })
+    }catch(err){
+        res.status(400).send(err);
+    }
+})
 router.post("/category/edit/:id", async (req, res) => {
     console.log(req.body);
     // console.log(req.file);

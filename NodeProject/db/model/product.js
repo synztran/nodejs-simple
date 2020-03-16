@@ -18,29 +18,43 @@ var productSchema = mongoose.Schema({
         type: Number,
         default: null
     },
-    outstock:{
+    outstock:{  // 0 = outstock | 1 = instock
         type: Boolean,
         default: false
     },
     c_code_color:[],
-    c_kit_name:{
-        type: String,   
-    },
+    c_kit_name:[
+        {
+            path: {
+                type: String
+            },
+            size: {
+                type: Number
+            },
+            name:{
+                type: String
+            }
+            
+        }
+    ],
     k_top_color:{
         type: String
     },
-    k_material:{
+    k_top_material:{
         type: String
     },
     k_bot_color:{
         type: String
     },
+    k_bot_material:{
+        type: String
+    },
     k_plate_option:{
         type: String
     },
-    k_material:{
-        type: String
-    },
+    // k_material:{
+    //     type: String
+    // },
     price:{
         type: Number
     },
@@ -55,9 +69,11 @@ var productSchema = mongoose.Schema({
             
         }
     ],
-    note:{
+    specs:{
         type: String
     }
 })
+
+
 let Product = mongoose.model('Product', productSchema);
 module.exports = Product;

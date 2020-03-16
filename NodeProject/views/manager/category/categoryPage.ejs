@@ -65,11 +65,17 @@
                         <%= (item.date_payment).toLocaleString() %>
                     </td>
                     <td>
-                            <% for( var key in item.k_color){ %>
-                                    
-                                <span class="f-<%=item.k_color[key] %>" ><%= item.k_color[key] %></span>
-                                
-                            <% } %>
+                        <% if(item.type == 0){ %>
+                        <% for( var key in item.k_color){ %>
+                        <span class="f-<%=item.k_color[key] %>">
+                            <%= item.k_color[key] %></span>
+                        <% } %>
+                        <% }else{  %>
+                        <% for( var key in item.c_code_color){ %>
+                        <span class="f-<%=item.c_code_color[key] %>">
+                            <%= item.c_code_color[key] %></span>
+                        <% } %>
+                        <% } %>
                     </td>
                     <td>
                         <%= item.min_price %>$
@@ -82,7 +88,7 @@
                     </td> -->
                     <td><a href="#" class="btn btn-danger btn-delete" data-id='<%=item._id %>'>
                             <div><i class="fas fa-trash"></i></div>
-                        </a>&nbsp;<a href="account/edit/<%=item._id%>" class="btn btn-primary btn-edit" data-id='<%=item._id %>'>
+                        </a>&nbsp;<a href="category/edit/<%=item._id%>" class="btn btn-primary btn-edit" data-id='<%=item._id %>'>
                             <div><i class="fas fa-edit"></i></div>
                         </a></td>
                 </tr>

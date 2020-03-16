@@ -26,11 +26,7 @@
                 <form action='/api/product/add' method="post" >
                     <div class="form-group">
                         <label for="product_id">ID:</label>
-                        <input required type="text" name="pid" class="form-control" id="pid" aria-describedby="catidHelp">
-                    </div>
-                    <div class="form-group">
-                        <label for="product_name">Name:</label>
-                        <input required type="text" name="pname" class="form-control" id="pname" aria-describedby="catnameHelp">
+                        <input disabled type="text" name="pid" class="form-control" id="pid" aria-describedby="catidHelp">
                     </div>
                     <div class="form-group">
                         <label for="email">Category ID:</label>
@@ -43,13 +39,19 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="email">Outstock:</label>
-                        <select class="form-control" id="product-outstock" name="outstock">
-                            <option value="0">Instock</option>
-                            <option value="1">Outstock</option>
-                        </select>
+                        <label for="product_name">Name:</label>
+                        <input required type="text" name="pname" class="form-control" id="pname" aria-describedby="catnameHelp">
                     </div>
                     <div class="form-group">
+                        <label for="email">Outstock:</label>
+                        <select class="form-control" id="product-outstock" name="outstock">
+                            <option value="0">Outstock</option>
+                            <option value="1">Instock</option>
+                        </select>
+                    </div>
+                    <!---------------------------- for keeb ---------------------------->
+                <div class="for-keyset">
+                      <div class="form-group">
                         <label for="email">Color:</label>
                         <button id="add">ADD</button>
                         <div id="container">
@@ -68,7 +70,33 @@
                     <div class="form-group">
                         <label for="email">Price:</label>
                         <input required class="form-control" name="price" type="tel" id="price">
+                    </div>  
+                </div>
+                <!---------------------------- for keycap ---------------------------->
+                <div class="for-keeb">
+                     <div class="form-group">
+                        <label >Keyset Kit Color:</label>
+                        <button id="add">ADD</button>
+                        <div id="keyset-container">
+                        </div>
+                        <div id="keyset-boxes">
+                            <!-- POSITION -->
+                            <div class="position_value">
+                                <select class="form-control input-sm" style="margin-top:0px;" id="color" name="c_code_color">
+                                    <option value="red">Red</option>
+                                    <option value="green">Green</option>
+                                    <option value="blue">Blue</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
+                    <div class="form-group">
+                        <label for="email">Price:</label>
+                        <input required class="form-control" name="price" type="tel" id="price">
+                    </div>           
+                </div>
+                
+                    
                     <!-- <div className="input-group mb-3">
                             <div className="custom-file">
                                 <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
