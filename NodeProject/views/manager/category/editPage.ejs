@@ -17,8 +17,6 @@
             <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
             </div>
             <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
-            <% console.log(category) %>
-            <% console.log(type) %>
             <% if(category != null){ %>
             <div class="col-md-6">
                 <!-- <p class="pull-right visible-xs">
@@ -28,7 +26,7 @@
                     <%= title %>
                 </h1>
                 <% if(type == 0) { %>
-                <form action='/api/category/add' method="post" enctype="multipart/form-data">
+                <form action='/api/category/edit/<%=category._id%>' method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="email">GB status:</label>
                         <select class="form-control" name="status" id="status">
@@ -149,6 +147,7 @@
                     </div>
                     <br>
                     <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                     <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
                 </form>
                 <!-- form for keeb -->
                 <% } else if(type == 1) { %>
@@ -219,6 +218,7 @@
                     </div>
                     <br>
                     <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
                 </form>
                 <% }else { %>
                 <% } %>
@@ -250,22 +250,10 @@ $(document).ready(function() {
 
 
     // $('.k_layout').select2('val',[60%]);
-    $('.btn-submit').on('click', function(e) {
+    $('.btn-cancel').on('click', function(e) {
         e.preventDefault();
-        const id = $(this).attr('data-id');
-        console.log(id);
-        // $.ajax({
-        // type: 'POST',
-        // url: '/saveImage/',
-        // success: function(res) {
-        //     alert('updating');
-        //     window.location.href = '/list';
-        // },
-        // error: function(err) {
-        //     console.log(err);
-        // },
-        // dataType: "json"
-        // })
+        window.location.href = '/api/category';
+        
     })
 
 
