@@ -7,7 +7,37 @@
     <title>Admin Page | Product ADD</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css">
+    <% include ./../../tips/cssPackage%>
 </head>
+<style type="text/css">
+.for-keeb-top,
+.for-keyset,
+.for-keeb-bottom,
+.for-keeb-plate {
+    display: none;
+
+}
+
+.select2-container {
+    width: 100% !important
+}
+
+.selection>.select2-selection--single {
+    height: calc(1.5em + .75rem + 2px);
+}
+
+.selection>.select2-selection--multiple {
+    height: calc(2.25em + .75rem + 2px);
+}
+
+.selection>.select2-selection {
+    height: auto;
+}
+
+.selection>.select2-selection>.select2-selection__rendered {
+    line-height: 36px
+}
+</style>
 
 <body>
     <% include ./../../header%>
@@ -20,27 +50,25 @@
             </div>
             <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
             <div class="col-md-6">
-                <!-- <p class="pull-right visible-xs">
-                    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-                </p> -->
-                <form action='/api/product/add' method="post" >
-                    <div class="form-group">
+                <form action='/api/product/add' method="post">
+                    <!--  <div class="form-group">
                         <label for="product_id">ID:</label>
                         <input disabled type="text" name="pid" class="form-control" id="pid" aria-describedby="catidHelp">
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="email">Category ID:</label>
-                        <select  class="form-control input-sm" style="margin-top:0px;" id="catid" name="catid">
+                        <select class="form-control input-sm" style="margin-top:0px;" id="catid" name="catid">
                             <% for (var key in listCategoryID){%>
                             <option value="<%= listCategoryID[key].category_id %>">
-                                <%= listCategoryID[key].category_id %> - <%= listCategoryID[key].category_name %>
+                                <%= listCategoryID[key].category_id %> -
+                                <%= listCategoryID[key].category_name %>
                             </option>
                             <%    } %>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="product_name">Name:</label>
-                        <input required type="text" name="pname" class="form-control" id="pname" aria-describedby="catnameHelp">
+                        <input required type="text" name="pname" class="form-control" id="pname" aria-describedby="pnameHelp">
                     </div>
                     <div class="form-group">
                         <label for="email">Outstock:</label>
@@ -49,64 +77,182 @@
                             <option value="1">Instock</option>
                         </select>
                     </div>
-                    <!---------------------------- for keeb ---------------------------->
-                <div class="for-keyset">
-                      <div class="form-group">
-                        <label for="email">Color:</label>
-                        <button id="add">ADD</button>
-                        <div id="container">
+                    <div class="form-group">
+                        <label for="email">Keeb part:</label>
+                        <select class="form-control keeb-part" id="product-part" name="product_part">
+                            <option value="0">Keeb Top Case</option>
+                            <option value="1">Keeb Bot case </option>
+                            <option value="2">Keeb Plate </option>
+                            <option value="3">Keeb Frame</option>
+                            <option value="4">Keycap</option>
+                        </select>
+                    </div>
+                    <!-------------------------- for keeb top case ------------------------->
+                    <div class="for-keeb-top">
+                        <div class="form-group">
+                            <label for="email">Top Case Color:</label>
+                            <select class="form-control k-top-color" id="k-top-color" name="k_top_color">
+                                <option value="red">Red</option>
+                                <option value="green">Green</option>
+                                <option value="blue">Blue</option>
+                            </select>
                         </div>
-                        <div id="boxes">
-                            <!-- POSITION -->
-                            <div class="position_value">
-                                <select class="form-control input-sm" style="margin-top:0px;" id="color" name="color">
-                                    <option value="red">Red</option>
-                                    <option value="green">Green</option>
-                                    <option value="blue">Blue</option>
-                                </select>
+                        <div class="form-group">
+                            <label for="email">Top Case Material:</label>
+                            <select class="form-control k_top_material" id="k-top-material" name="k_top_material">
+                                <option value="red">Red</option>
+                                <option value="green">Green</option>
+                                <option value="blue">Blue</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Price:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input class="form-control" name="max_price" type="tel" value="" id="maxprice">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Price:</label>
-                        <input required class="form-control" name="price" type="tel" id="price">
-                    </div>  
-                </div>
-                <!---------------------------- for keycap ---------------------------->
-                <div class="for-keeb">
-                     <div class="form-group">
-                        <label >Keyset Kit Color:</label>
-                        <button id="add">ADD</button>
-                        <div id="keyset-container">
-                        </div>
-                        <div id="keyset-boxes">
-                            <!-- POSITION -->
-                            <div class="position_value">
-                                <select class="form-control input-sm" style="margin-top:0px;" id="color" name="c_code_color">
-                                    <option value="red">Red</option>
-                                    <option value="green">Green</option>
-                                    <option value="blue">Blue</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Price:</label>
-                        <input required class="form-control" name="price" type="tel" id="price">
-                    </div>           
-                </div>
-                
-                    
-                    <!-- <div className="input-group mb-3">
+                        <div className="input-group mb-3">
+                            <label>Image Profile:</label>
                             <div className="custom-file">
                                 <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
                                 <label className="custom-file-label" htmlFor="inputGroupFile01">
                                 </label>
                             </div>
-                        </div> -->
+                        </div>
+                    </div>
+                    <!-------------------------- for keeb bottom case ------------------------->
+                    <div class="for-keeb-bottom">
+                        <div class="form-group">
+                            <label for="email">Bottom Case Color:</label>
+                            <select class="form-control k-bot-color" id="k-bot-color" name="k_bot_color">
+                                <option value="red">Red</option>
+                                <option value="green">Green</option>
+                                <option value="blue">Blue</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Bottom Case Material:</label>
+                            <select class="form-control k-bot-material" id="k-bot-material" name="k_bot_material">
+                                <option value="red">Red</option>
+                                <option value="green">Green</option>
+                                <option value="blue">Blue</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Price:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input class="form-control" name="max_price" type="tel" value="" id="maxprice">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="input-group mb-3">
+                            <label>Image Profile:</label>
+                            <div className="custom-file">
+                                <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+                                <label className="custom-file-label" htmlFor="inputGroupFile01">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-------------------------- for keeb plate ------------------------->
+                    <div class="for-keeb-plate">
+                        <div class="form-group">
+                            <label for="email">Plate Material:</label>
+                            <select class="form-control k-plate-material" id="k-plate-material" name="k_plate_material">
+                                <option value="red">Red</option>
+                                <option value="green">Green</option>
+                                <option value="blue">Blue</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Plate Option:</label>
+                            <select class="form-control k-plate-option" id="k-plate-option" name="k_plate_option">
+                                <option value="red">Red</option>
+                                <option value="green">Green</option>
+                                <option value="blue">Blue</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Price:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input class="form-control" name="max_price" type="tel" value="" id="maxprice">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="input-group mb-3">
+                            <label>Image Profile:</label>
+                            <div className="custom-file">
+                                <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+                                <label className="custom-file-label" htmlFor="inputGroupFile01">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!---------------------------- for keycap ---------------------------->
+                    <div class="for-keyset">
+                        <div class="form-group">
+                            <label for="email">Keyset Profile:</label>
+                            <select class="form-control" id="c-profile" name="c_profile">
+                                <option value="tbd">TBD</option>
+                                <option value="sa">SA</option>
+                                <option value="gmk">GMK</option>
+                                <option value="jtk">JTK</option>
+                                <option value="kat">KAT</option>
+                                <option value="etc">etc</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Keyset Color:</label>
+                            <select class="form-control multiple-select select2" style="margin-top:0px;" id="c-code-color" name="c_code_color[]" multiple="multiple">
+                                <option class="c-n7" value="red">N7</option>
+                                <option class="c-l9" value="green">L9</option>
+                                <option class="c-v1" value="blue">V1</option>
+                                <option class="c-n7" value="red">Red</option>
+                                <option class="c-n7" value="green">Green</option>
+                                <option class="c-n7" value="blue">Blue</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Price:</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input class="form-control" name="max_price" type="tel" value="" id="maxprice">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="input-group mb-3">
+                            <label>Image Profile:</label>
+                            <div className="custom-file">
+                                <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+                                <label className="custom-file-label" htmlFor="inputGroupFile01">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <br>
                     <!-- <a href="#" target="popup" onclick="window.open('/api/mounting','name','width=1170,height=680')">Open page in new window</a> -->
                     <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-secondary btn-cancel">Cancel</button>
                 </form>
             </div>
             <!-- </div> -->
@@ -120,20 +266,57 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="/api/js/datepicker/dist/datepicker.js"></script>
+<% include ./../../tips/jsPackage %>
 <script type="text/javascript">
 $(document).ready(function() {
-
-    $('#catid').on('change', function(){
+    $('.select2').select2();
+    $('#catid').on('change', function() {
         console.log(this.value);
         var str = this.value;
-        var res = str.substring(0,4)
-        if(res == "KEEB"){
+        var res = str.substring(0, 4)
+        if (res == "KEEB") {
 
-        }else if(res == "KSET"){
+        } else if (res == "KSET") {
 
-        }else{
-            
+        } else {
+
         }
+
+    })
+
+    $('#product-part').on('change', function() {
+        console.log(this.value);
+        if (this.value == 0) {
+            $('.for-keyset').hide()
+            $('.for-keeb-bottom').hide()
+            $('.for-keeb-plate').hide()
+            $('.for-keeb-top').show();
+        } else if (this.value == 1) {
+            $('.for-keyset').hide()
+            $('.for-keeb-bottom').show()
+            $('.for-keeb-plate').hide()
+            $('.for-keeb-top').hide();
+        } else if (this.value == 2) {
+            $('.for-keyset').hide()
+            $('.for-keeb-bottom').hide()
+            $('.for-keeb-plate').show()
+            $('.for-keeb-top').hide();
+        } else if (this.value == 3) {
+            $('.for-keyset').hide()
+            $('.for-keeb-bottom').hide()
+            $('.for-keeb-plate').hide()
+            $('.for-keeb-top').hide();
+        } else {
+            $('.for-keyset').show()
+            $('.for-keeb-bottom').hide()
+            $('.for-keeb-plate').hide()
+            $('.for-keeb-top').hide();
+        }
+    });
+
+    $('.btn-cancel').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = '/api/product';
 
     })
 
@@ -168,8 +351,18 @@ $(document).ready(function() {
     $(".position_value").hide();
 
     $("#color").val('');
+    $("#product-part").val('');
     $("#product-outstock").val('');
     $("#catid").val('')
+    $("#k-plate-option").val('')
+    $("#k-plate-material").val('')
+    $("#k-top-color").val('')
+    $("#k-bot-color").val('')
+    $("#k-top-material").val('')
+    $("#k-bot-material").val('')
+    $("#c-profile").val('');
+
+
     // $('.btn-submit').on('click', function(e) {
     //     e.preventDefault();
     //     const id = $(this).attr('data-id');

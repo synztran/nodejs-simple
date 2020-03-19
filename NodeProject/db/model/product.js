@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var date = new Date();
 
-// product_accessory: 0 = Keeb Top Case | 1 = Keeb Bot case | 2 = Keeb Plate | 4 = keycap
+// product_accessory: 0 = Keeb Top Case | 1 = Keeb Bot case | 2 = Keeb Plate | 3 = Keeb Frame | 4 = keycap
 
 var productSchema = mongoose.Schema({
     product_id:{
@@ -14,7 +14,7 @@ var productSchema = mongoose.Schema({
     category_id:{
         type: String
     },
-    product_accessory:{
+    product_part:{
         type: Number,
         default: null
     },
@@ -23,20 +23,12 @@ var productSchema = mongoose.Schema({
         default: false
     },
     c_code_color:[],
-    c_kit_name:[
-        {
-            path: {
-                type: String
-            },
-            size: {
-                type: Number
-            },
-            name:{
-                type: String
-            }
-            
-        }
-    ],
+    c_profile:{
+        type: String
+    },
+    c_material:{
+        type: String
+    },
     k_top_color:{
         type: String
     },
@@ -52,11 +44,19 @@ var productSchema = mongoose.Schema({
     k_plate_option:{
         type: String
     },
-    // k_material:{
-    //     type: String
-    // },
+    k_plate_material:{
+        type: String
+    },
     price:{
         type: Number
+    },
+    pic_product:{
+        path: {
+            type: String
+        },
+        size: {
+            type: Number
+        }
     },
     pic_list: [
         {

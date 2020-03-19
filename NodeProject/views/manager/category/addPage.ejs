@@ -61,6 +61,7 @@ html {
                 <!-- <p class="pull-right visible-xs">
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
                 </p> -->
+                <!-- enctype="multipart/form-data" -->
                 <form action='/api/category/add' method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="email">GB status:</label>
@@ -210,12 +211,12 @@ html {
                         <input class="form-control" name="max_price" type="tel" id="maxprice">
                     </div>
                     <div className="input-group mb-3">
-                        <!-- <div className="custom-file">
+                        <div className="custom-file">
                             <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
                             <label className="custom-file-label" htmlFor="inputGroupFile01">
                             </label>
-                        </div> -->
-                        <input type="file" name="files" class="files" id="fileupp">
+                        </div>
+                        <!-- <input type="file" name="files" class="files" id="fileupp"> -->
                     </div>
                     <br>
                     <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
@@ -236,16 +237,17 @@ html {
 <script   src="/api/js/fileuploader/jquery.fileuploader.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    window.dataLayer = window.dataLayer || [];
-    window.dataStorage = window.dataStorage || {};
-    $('input#fileupp').fileuploader({
-        limit: 5,
-        // maxSize: 1024 * 1024 * 5,
-        // fileMaxSize: 1024 * 1024 * 5,
-        // extensions: ['jpg', 'jpeg', 'png'],
-        addMore: true,
-        inputNameBrackets: false
-    });
+    // window.dataLayer = window.dataLayer || [];
+    // window.dataStorage = window.dataStorage || {};
+    // $('input#fileupp').fileuploader({
+    //     limit: 1,
+    //     maxSize: 1024 * 1024 * 5,
+    //     fileMaxSize: 1024 * 1024 * 5,
+    //     extensions: ['jpg', 'jpeg', 'png'],
+    //     addMore: false,
+
+    //     // inputNameBrackets: false
+    // });
 
 
     $('.select2').select2();

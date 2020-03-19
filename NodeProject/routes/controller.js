@@ -49,6 +49,8 @@ const upload = multer({
 
 
 
+
+
 // var imgPath = 'docs/img_1435.JPG';
 var Account = require('./../db/model/account');
 var AdmAccount = require('./../db/model/accadmin');
@@ -579,21 +581,25 @@ router.get('/category', async (req, res) => {
     });
 })
 
-router.get('/category/add', function(req, res){
-    var c = __dirname+req.path.replace(/\//g, '\\');
-    
-    var z = path.resolve(c);
-    
-    var x = fs.existsSync(c)?res.sendFile(path.resolve(c)):(res.statusCode=404)
-    console.log("c")
-    console.log(c);
-    console.log("z")
-    console.log(z);
-    console.log("x")
-    console.log(x);
+router.get('/mounting', function(req, res){
+    res.render('tips/mountingPage')
+})
 
-    var m = fs.existsSync(c);
-    console.log(m)
+router.get('/category/add', function(req, res){
+    // var c = __dirname+req.path.replace(/\//g, '\\');
+    
+    // var z = path.resolve(c);
+    
+    // var x = fs.existsSync(c)?res.sendFile(path.resolve(c)):(res.statusCode=404)
+    // console.log("c")
+    // console.log(c);
+    // console.log("z")
+    // console.log(z);
+    // console.log("x")
+    // console.log(x);
+
+    // var m = fs.existsSync(c);
+    // console.log(m)
 
     res.render('manager/category/addPage', {
         title: "Add new CATEGORY"
@@ -602,121 +608,121 @@ router.get('/category/add', function(req, res){
 
 
 
-router.get('/mounting', function(req, res){
-    res.render('tips/mountingPage')
-})
+
 // upload.single('picture'),'
 
 
 
 
 
-router.post('/category/add',  async (req, res) => {
-    console.log(req.body);
+router.post('/category/add',upload.single('picture'), async(req, res)=>{
+    console.log((req.body));
+
     // console.log(res);
     // console.log(req.body)
     // console.log(req.file);
     try {
-        var uploader = fileuploader('files', { uploadDir: 'docs/upload/' }, req, res);
+        
+        var check = await Category.find({ category_id: req.body.catid }, async (err, docs) => {
+            if (docs.length) {
+                res.status(400).json({
+                    code: 400,
+                    message: "category id already exists"
+                })
+            } else {
 
-        console.log(uploader)
-        // console.log(req);
-        // console.log(res);/c
-        uploader.upload(function(data) {
-            console.log(data);
-            res.end(JSON.stringify(data, null, 4));
-        });
-        // var check = await Category.find({ category_id: req.body.catid }, async (err, docs) => {
-        //     if (docs.length) {
-        //         res.status(400).json({
-        //             code: 400,
-        //             message: "category id already exists"
-        //         })
-        //     } else {
-
-        //         var type = req.body.type;
+                var type = req.body.type;
                 // if type = keeb
-                // if (type == 0) {
-                //     Couter.findOne({ _id: "keeb" }, function(err, docs) {
-                //         console.log(docs);
-                //         console.log(docs['seq'])
-                //         var inc = docs['seq'] + 1;
-                //         console.log("incc"+inc)
+                if (type == 0) {
+                    Couter.findOne({ _id: "keeb" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
 
-                //         db.collection('categories').insertOne({
-                //             category_id: "KEEB" + inc,
-                //             category_name: req.body.catname,
-                //             status_gb: req.body.status,
-                //             k_color: req.body.k_color,
-                //             type: req.body.type,
-                //             flip: req.body.flip,
-                //             k_layout:  req.body.k_layout,
-                //             k_degree: req.body.k_degree,
-                //             k_mounting: req.body.k_mounting,
-                //             date_start: req.body.date_start,
-                //             date_end: req.body.date_end,
-                //             date_payment: req.body.date_payment,
-                //             min_price: req.body.min_price,
-                //             max_price: req.body.max_price,
-                //             pic_profile: {
-                //                 path: req.file.path,
-                //                 size: req.file.size
-                //             }
-                //         })
+                        // var uploader = fileuploader('files', { uploadDir: 'docs/upload/' }, req, res);
+                        // uploader.upload(function(data) {
+                        //     console.log(data.files);
+                        //     console.log(data.files[0].size)
+                        //     res.end(JSON.stringify(data, null, 4));
+                        // });
 
-                //     })
-                //     db.collection("couters").findAndModify({
-                //             _id: "keeb"
-                //         }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+                        db.collection('categories').insertOne({
+                            category_id: "KEEB" + inc,
+                            category_name: (req.body.catname),
+                            status_gb: (req.body.status),
+                            k_color: (req.body.k_color),
+                            type: (req.body.type),
+                            flip: (req.body.flip),
+                            k_layout:  (req.body.k_layout),
+                            k_degree: (req.body.k_degree),
+                            k_mounting: (req.body.k_mounting),
+                            date_start:(req.body.date_start),
+                            date_end: (req.body.date_end),
+                            date_payment: (req.body.date_payment),
+                            min_price: (req.body.min_price),
+                            max_price: (req.body.max_price),
+                            pic_profile: {
+                                // path: (data.files[0].file),
+                                // size: (data.files[0].size2)
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
 
-                //         function(err, docs) {
-                //             console.log(docs);
-                //         }
-                //     )
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "keeb"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
                     // if type = keyset
-        //         } else if (type == 1) {
-        //             console.log(2)
-        //             Couter.findOne({ _id: "keyset" }, function(err, docs) {
-        //                console.log(docs);
-        //                 console.log(docs['seq'])
-        //                 var inc = docs['seq'] + 1;
-        //                 console.log("incc"+inc)
+                } else if (type == 1) {
+                    console.log(2)
+                    Couter.findOne({ _id: "keyset" }, function(err, docs) {
+                       console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
 
-        //                 db.collection('categories').insertOne({
-        //                     category_id: "KSET" + inc,
-        //                     category_name: req.body.catname,
-        //                     status_gb: req.body.status,
-        //                     c_code_color: req.body.code_color,
-        //                     type: req.body.type,
-        //                     c_profile: req.body.profile,
-        //                     c_material: req.body.c_material,
-        //                     date_start: req.body.date_start,
-        //                     date_end: req.body.date_end,
-        //                     date_payment: req.body.date_payment,
-        //                     min_price: req.body.min_price,
-        //                     max_price: req.body.max_price,
-        //                     pic_profile: {
-        //                         path: req.file.path,
-        //                         size: req.file.size
-        //                     }
-        //                 })
+                        db.collection('categories').insertOne({
+                            category_id: "KSET" + inc,
+                            category_name: req.body.catname,
+                            status_gb: req.body.status,
+                            c_code_color: req.body.code_color,
+                            type: req.body.type,
+                            c_profile: req.body.profile,
+                            c_material: req.body.c_material,
+                            date_start: req.body.date_start,
+                            date_end: req.body.date_end,
+                            date_payment: req.body.date_payment,
+                            min_price: req.body.min_price,
+                            max_price: req.body.max_price,
+                            pic_profile: {
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
 
-        //             })
-        //             db.collection("couters").findAndModify({
-        //                     _id: "keyset"
-        //                 }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "keyset"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
 
-        //                 function(err, docs) {
-        //                     console.log(docs);
-        //                 }
-        //             )
-        //         } else {
-        //         }
-        //     }
-        // }).exec();
-        // setTimeout(function(){
-        //     res.redirect('/api/category');
-        // }, 1500)
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                } else {
+                }
+            }
+        }).exec();
+        setTimeout(function(){
+            res.redirect('/api/category');
+        }, 1500)
         
     } catch (err) {
         res.status(500).send(err);

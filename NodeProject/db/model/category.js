@@ -87,6 +87,9 @@ var categorySchema = mongoose.Schema({
             
         }
     ],
+    specs:{
+        type: String
+    }
     
 })
 
