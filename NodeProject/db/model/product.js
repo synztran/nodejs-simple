@@ -15,19 +15,19 @@ var productSchema = mongoose.Schema({
         type: String
     },
     product_part:{
+        // product_accessory: 0 = Keeb Top Case | 1 = Keeb Bot case | 2 = Keeb Plate | 3 = Keeb Frame | 4 = keycap
         type: Number,
         default: null
     },
     outstock:{  // 0 = outstock | 1 = instock
-        type: Boolean,
-        default: false
+        type: Number,
     },
     c_code_color:[],
     c_profile:{
         type: String
     },
-    c_material:{
-        type: String
+    c_material:{ // 0 = abs | 1 = pbt | 2 = pom | 3 = etc
+        type: Number
     },
     k_top_color:{
         type: String

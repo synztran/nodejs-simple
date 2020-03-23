@@ -20,13 +20,15 @@
             <table id="data-table-list-product" class="table table-hover" id="dataTables1">
                 <thead>
                     <tr>
-                        <th> list picture</th>
+                        <th> picture</th>
                         <th> category id</th>
-                        <th> product id</th>
-                        <th> product name</th>
+                        <th>  id</th>
+                        <th>  name</th>
+                        <th>  part</th>
                         <th> outstock</th>
-                        <th> color</th>
-                        <th> price</th>
+                        <th> material</th>
+                        <th> color / option</th>
+                        <th> price ($)</th>
                         <!-- <th> password</th> -->
                         <th></th>
                     </tr>
@@ -35,9 +37,18 @@
                 <% listProduct.forEach(function(item){ %>
                 <tr class="align-middle">
                     <td style="width: 120px; height: 120px;">
+                        <a id="single_image" href="<%= item.pic_product.path %>" data-fancybox="html5-video"><img style="max-width: 100%;width: 120px;height: 120px; object-fit: cover;" src="<%= item.pic_product.path %>"></a>
                     </td>
                     <td>
-                        <%= item.category_id %>
+                        <% listCategory.forEach(function(item2){ %>
+                        <% if(item.category_id == item2.category_id){ %>
+                                <%= item.category_id %> - <%= item2.category_name %>
+                        <%  }else{ %>
+
+                        <%  }   %>
+
+                        
+                        <% }) %>
                     </td>
                     <td>
                         <%= item.product_id %>
@@ -46,17 +57,66 @@
                         <%= item.product_name %>
                     </td>
                     <td>
-                        <%= item.outstock %>
+                        <% if(item.product_part == 0 ) { %>
+                        <span>Top Case</span>
+                        <% }else if(item.product_part == 1) { %>
+                        <span>Bottom Case</span>
+                        <% }else if(item.product_part == 2) { %>
+                        <span>Plate</span>
+                        <% }else if(item.product_part == 3) { %>
+                            <span>Frame</span>
+                        <% }else { %>
+                            <span>Keyset</span>
+                        <% } %>
                     </td>
                     <td>
-                        <%= item.color %>
+                        <% if(item.outstock == 0) {%>
+                        <i style="color: #dc3545" class="fas fa-exclamation-circle fa-2x">Sold out</i> 
+                        <% }else{ %>
+                           <i style="color: #28a745" class="fas fa-check fa-2x">Instock</i>
+                           <% }%>
+                    </td>
+                    <td>
+                         <% if(item.product_part == 0 ) { %>
+                        <%= item.k_top_material %>
+                        <% }else if(item.product_part == 1) { %>
+                        <%= item.k_bot_material %>
+                        <% }else if(item.product_part == 2) { %>
+                        <%= item.k_plate_material %>
+                        <% }else if(item.product_part == 3) { %>
+                            <%= item.k_frame_material %>
+                        <% }else { %>
+                        <% console.log(item.c_metatiral) %>
+                            <% if(item.c_material == 0) { %>
+                                    <span>ABS</span>
+                            <% }else if(item.c_material == 1) { %>
+                                     <span>PBT</span>
+                            <% }else if(item.c_material == 2) { %>
+                                         <span>POM</span>
+                            <% }else if(item.c_material == 3) { %>
+                                         <span>ETC</span>
+                            <% } %>
+                        <% } %>
+                    </td>
+                    <td>
+                         <% if(item.product_part == 0 ) { %>
+                        <%= item.k_top_color %>
+                        <% }else if(item.product_part == 1) { %>
+                        <%= item.k_bot_color %>
+                        <% }else if(item.product_part == 2) { %>
+                        <%= item.k_plate_option %>
+                        <% }else if(item.product_part == 3) { %>
+                            <%= item.k_frame_color %>
+                        <% }else if(item.product_part == 4) { %>
+                            <%= item.c_code_color %>
+                        <% } %>
                     </td>
                     <td>
                         <%= item.price %>
                     </td>
                     <td><a href="#" class="btn btn-danger btn-delete" data-id='<%=item._id %>'>
                             <div><i class="fas fa-trash"></i></div>
-                        </a>&nbsp;<a href="account/edit/<%=item._id%>" class="btn btn-primary btn-edit" data-id='<%=item._id %>'>
+                        </a>&nbsp;<a href="product/edit/<%=item._id%>" class="btn btn-primary btn-edit" data-id='<%=item._id %>'>
                             <div><i class="fas fa-edit"></i></div>
                         </a></td>
                 </tr>
@@ -78,6 +138,8 @@
 $(document).ready(function() {
     $('#data-table-list-product').dataTable({
         "aoColumns": [
+            null,
+            null,
             null,
             null,
             null,
@@ -121,7 +183,6 @@ $(document).ready(function() {
                     type: 'DELETE',
                     url: ' product/delete/' + id,
                     success: function(res) {
-                        alert('deleting');
                         location.reload();
                     },
                     error: function(err) {

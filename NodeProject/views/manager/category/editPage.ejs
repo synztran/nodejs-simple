@@ -143,13 +143,14 @@
                             <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
                             <label className="custom-file-label" htmlFor="inputGroupFile01">
                             </label>
+                            <img src="" id="profile-img-tag" width="200px" />
                         </div>
                     </div>
                     <br>
                     <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
-                     <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
                 </form>
-                <!-- form for keeb -->
+                <!------------------------------ form for keyset --------------------------->
                 <% } else if(type == 1) { %>
                 <form action='/api/category/add' method="post" enctype="multipart/form-data">
                     <div class="form-group">
@@ -162,19 +163,28 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Name:</label>
-                        <input type="text" name="catname" class="form-control" id="catname" aria-describedby="catnameHelp">
+                        <input type="text" name="catname" value="<%=category.category_name%>" class="form-control" id="catname" aria-describedby="catnameHelp">
                     </div>
                     <!---------------------------- for keyset ------------------------->
                     <div class="for-keyset">
                         <div class="form-group">
                             <label for="email">Keyset Profile:</label>
-                            <select class="form-control" id="keeb-profile" name="profile">
-                                <option value="None">None</option>
-                                <option value="SA">SA</option>
-                                <option value="GMK">GMK</option>
-                                <option value="JTK">JTK</option>
-                                <option value="KAT">KAT</option>
+                            <select class="form-control select2" id="c_profile" name="profile">
+                                <option value="tbd">TBD</option>
+                                <option value="sa">SA profile</option>
+                                <option value="cherry">Chery profile</option>
+                                <option value="oem">OEM profile</option>
+                                <option value="kat">KAT profile</option>
                                 <option value="etc">etc</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Keyset Material:</label>
+                            <select class="form-control multiple-select" style="margin-top:0px;" id="c_material" name="c_material">
+                                <option value="0">ABS</option>
+                                <option value="1">PBT</option>
+                                <option value="2">POM</option>
+                                <option value="3">ETC</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -183,37 +193,35 @@
                                 <option class="c-n7" value="red">N7</option>
                                 <option class="c-l9" value="green">L9</option>
                                 <option class="c-v1" value="blue">V1</option>
-                                <option class="c-n7" value="red">Red</option>
-                                <option class="c-n7" value="green">Green</option>
-                                <option class="c-n7" value="blue">Blue</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Date start (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker" class="span2" type="text" name="date_start">
+                        <input style="width: 100%" id="datepicker" value="<%= (category.date_start).toLocaleDateString()%>" class="span2" type="text" name="date_start">
                     </div>
                     <div class="form-group">
                         <label for="email">Date end (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker1" class="span2" type="text" name="date_end">
+                        <input style="width: 100%" id="datepicker1" value="<%= (category.date_end).toLocaleDateString()%>" class="span2" type="text" name="date_end">
                     </div>
                     <div class="form-group">
                         <label for="email">Date payment (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker2" class="span2" type="text" name="date_payment">
+                        <input style="width: 100%" id="datepicker2" value="<%= (category.date_payment).toLocaleDateString()%>" class="span2" type="text" name="date_payment">
                     </div>
                     <div class="form-group">
                         <label for="email">Min price:</label>
-                        <input class="form-control" name="min_price" type="tel" id="minprice">
+                        <input class="form-control" name="min_price" value="<%= category.min_price%>" type="tel" id="minprice">
                     </div>
                     <div class="form-group">
                         <label for="password">Max price:</label>
-                        <input class="form-control" name="max_price" type="tel" id="maxprice">
+                        <input class="form-control" name="max_price" value="<%= category.max_price%>" type="tel" id="maxprice">
                     </div>
                     <div className="input-group mb-3">
                         <div className="custom-file">
                             <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
                             <label className="custom-file-label" htmlFor="inputGroupFile01">
                             </label>
+                            <img src="" id="profile-img-tag" width="200px" />
                         </div>
                     </div>
                     <br>
@@ -253,7 +261,7 @@ $(document).ready(function() {
     $('.btn-cancel').on('click', function(e) {
         e.preventDefault();
         window.location.href = '/api/category';
-        
+
     })
 
 
@@ -264,29 +272,59 @@ $(document).ready(function() {
         return response.json();
     }).then(function(responseAsJson) {
         console.log(responseAsJson);
-
         var category_details = responseAsJson;
         var color = category_details.k_color;
+        console.log(color);
         var layout = category_details.k_layout;
         var degree = category_details.k_degree;
         var mounting = category_details.k_mounting;
+        var type = category_details.type;
+
+        var pic_path = category_details.pic_profile['path'];
+
+        var profile = category_details.c_profile;
+        var key_color = category_details.c_code_color;
+        var key_material = category_details.c_material
+        console.log(type)
+        console.log(profile);
+        console.log(key_color);
         console.log(category_details.flip)
         console.log(category_details.status_gb)
 
-
-        $('#keeb_flip').val(category_details.flip);
         $('#status').val(category_details.status_gb);
-        $('#k_color').val(color);
-        $('#k_color').trigger('change');
+        if (type == 0) {
+            $('#keeb_flip').val(category_details.flip);
 
-        $('#k_layout').val(layout);
-        $('#k_layout').trigger('change');
+            $('#k_color').val(color);
+            $('#k_color').trigger('change');
 
-        $('#k_degree').val(degree);
-        $('#k_degree').trigger('change');
+            $('#k_layout').val(layout);
+            $('#k_layout').trigger('change');
 
-        $('#k_mounting').val(mounting);
-        $('#k_mounting').trigger('change');
+            $('#k_degree').val(degree);
+            $('#k_degree').trigger('change');
+
+            $('#k_mounting').val(mounting);
+            $('#k_mounting').trigger('change');
+            $('#profile-img-tag').attr('src', '/api/' + pic_path)
+
+        } else if (type == 1) {
+            $('#c_profile').val(profile);
+            $('#c_profile').trigger('change');
+
+            $('#c_material').val(c_material);
+            $('#c_material').trigger('change');
+
+            $('#color').val(key_color);
+            $('#color').trigger('change');
+            $('#profile-img-tag').attr('src', '/api/' + pic_path)
+        } else {
+
+        }
+
+
+
+
 
 
     })

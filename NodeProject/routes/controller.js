@@ -477,13 +477,29 @@ router.get('/product', async (req, res) => {
     // res.render('manager/categoryPage')
 
     Product.find({}, function(err, docs) {
+        Category.find({}, function(err, docs2){
+
+       
+        console.log(docs);
+        console.log(docs2);
         res.render('manager/product/productPage', {
-            "listProduct": docs
+            "listProduct": docs,
+            "listCategory": docs2,
         });
+    });
     });
 })
 
-router.get('/product/add', async (req, res) => {
+router.get('/product/get/:id', async(req, res)=>{
+    console.log(req.params.id);
+    try{
+        var check = await Product.findById(req.params.id).exec()
+        res.send(check).status(200);
+    }catch(err){
+        res.send(err).status(404)
+    }
+})
+router.get('/product/add' ,async (req, res) => {
 
     Category.find({}, function(err, docs) {
         console.log(docs)
@@ -501,46 +517,365 @@ router.get('/product/add', async (req, res) => {
     // })
 })
 
-router.post('/product/add', async (req, res) => {
+router.post('/product/add', upload.single('picture') ,async (req, res) => {
     console.log(req.body)
-    console.log(req.body.pid)
+    // console.log(req.body.pid)
     try {
+                var part = req.body.p_part;
+                console.log(part)
+                if(part == 0){ //for top case
+                 await Couter.findOne({ _id: "p_top_case" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+                     
+                        db.collection('products').insertOne({
+                            product_id: "PTOP" + inc,
+                            product_name: (req.body.pname),
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            k_top_color: (req.body.top_color),
+                            k_top_material: (req.body.top_material),
+                            price: (req.body.top_case_price),
+                            pic_product: {
+                                
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
 
-        var check = await Product.find({ product_id: (req.body.pid).toUpperCase() }, async (err, docs) => {
-            console.log(docs)
-            if (docs.length) {
-                res.status(400).json({
-                    code: 400,
-                    message: "product id already exists"
-                })
-            } else {
-                
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_top_case"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
 
-            }
-        }).exec();
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                }else if(part == 1){ //for bot case
+                    await Couter.findOne({ _id: "p_bottom_case" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+                     
+                        db.collection('products').insertOne({
+                            product_id: "PBOT" + inc,
+                            product_name: (req.body.pname),
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            k_bot_color: (req.body.bot_color),
+                            k_bot_material: (req.body.bot_material),
+                            price: (req.body.top_case_price),
+                            pic_product: {
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
+
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_bottom_case"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                }else if(part == 2){ // for plate
+                    await Couter.findOne({ _id: "p_plate" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+                     
+                        db.collection('products').insertOne({
+                            product_id: "PLATE" + inc,
+                            product_name: (req.body.pname),
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            k_plate_option: (req.body.bot_price),
+                            k_plate_material: (req.body.plate_material),
+                            price: (req.body.plate_price),
+                            pic_product: {
+                                
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
+
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_plate"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                }else if(part == 3){ // for frame
+                    await Couter.findOne({ _id: "p_frame" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+                     
+                        db.collection('products').insertOne({
+                            product_id: "FRAME" + inc,
+                            product_name: (req.body.pname),
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            k_top_color: (req.body.top_color),
+                            k_top_material: (req.body.top_material),
+                            price: (req.body.top_case_price),
+                            pic_product: {
+                                
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
+
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_frame"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                }else { // keycap
+                    await Couter.findOne({ _id: "p_frame" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+                     
+                        db.collection('products').insertOne({
+                            product_id: "KEYSET" + inc,
+                            product_name: (req.body.pname),
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            c_code_color: (req.body.code_color),
+                            c_profile: (req.body.c_profile),
+                            c_material: (req.body.c_material),
+                            price: (req.body.c_price),
+                            pic_product: {
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
+
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_keycap"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                }
+                setTimeout(function(){
+                    res.redirect('/api/product');
+                }, 1500)
     } catch (err) {
         res.status(500).send(err);
     }
 })
 
+router.get('/product/edit/:id', function(req, res){
+    try{
+        
+        // var unactive = await Category.findById(req.params.id);
+        // console.log(unactive)
+        
+         Product.findById(req.params.id,function(err, docs){
+            console.log(docs);
+            console.log(docs.product_part);
+            var type = docs.product_part;
+            console.log(type)
+            if(type == 0){
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Keeb Top Case',
+                    "product": docs,
+                    type: 0
+                })
+            }else if(type == 1){
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Keeb Bot case',
+                    "product": docs,
+                    type: 1
+                })
+            }else if(type == 2){
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Keeb Plate',
+                    "product": docs,
+                    type: 2
+                })
+
+            }else if(type == 3){
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Keeb Frame',
+                    "product": docs,
+                    type: 3
+                })
+
+            }else{
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Keycap',
+                    "product": docs,
+                    type: 4
+                })
+            }
+            
+               
+        })
+            // function(err, docs){
+            // console.log(docs);
+        // })
+    }catch(err){
+        res.status(400).send(err);
+    }
+})
+
 router.post("/product/edit/:id", async (req, res) => {
     console.log(req.body);
-    // console.log(req.file);
+    console.log(req.file);
     try {
-        var check = await Product.findById(req.params
-            .id).exec();
-        console.log(check)
-        if (!check) {
-            return res.status(400).send({
-                status: "error",
-                message: "The category id does not exist "
-            });
+        var part = req.body.product_part
+        if(part == 0){ // top case
+            if(req.file == null){
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_top_color: req.body.top_color,
+                    k_top_material : req.body.top_material,
+                    price: req.body.price,
+                });
+            }else{
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_top_color: req.body.top_color,
+                    k_top_material : req.body.top_material,
+                    price: req.body.price,
+                    pic_product:{
+                        path: req.file.path,
+                        size: req.file.size
+                    }
+                });
+            }
+            
+
+        }else if(part == 1){ // for bot case
+            if(req.file == null){
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_bot_color: req.body.bot_color,
+                    k_bot_material : req.body.bot_material,
+                    price: req.body.price,
+                });
+            }else{
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_bot_color: req.body.bot_color,
+                    k_bot_material : req.body.bot_material,
+                    price: req.body.price,
+                    pic_product:{
+                        path: req.file.path,
+                        size: req.file.size
+                    }
+                });
+            }
+
+        }else if(part == 2) { // for plate
+            if(req.file == null){
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_plate_option: req.body.plate_option,
+                    k_plate_material : req.body.plate_material,
+                    price: req.body.price,
+                });
+            }else{
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_plate_option: req.body.plate_option,
+                    k_plate_material : req.body.plate_material,
+                    price: req.body.price,
+                    pic_product:{
+                        path: req.file.path,
+                        size: req.file.size
+                    }
+                });
+            }
+
+        }else if(part == 3){ // for frame
+            if(req.file == null){
+                // check.set({ 
+                //     product_name: req.body.product_name,
+                //     outstock: req.body.outstock,
+                //     k_plate_option: req.body.plate_option,
+                //     k_plate_material : req.body.plate_material,
+                //     price: req.body.price,
+                // });
+            }else{
+                // check.set({ 
+                //     product_name: req.body.product_name,
+                //     outstock: req.body.outstock,
+                //     k_plate_option: req.body.plate_option,
+                //     k_plate_material : req.body.plate_material,
+                //     price: req.body.price,
+                //     pic_product:{
+                //         path: req.file.path,
+                //         size: req.file.size
+                //     }
+                // });
+            }
+
+        }else if(part ==4){ // keycap
+            if(req.file == null){
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    c_code_color: req.body.code_color,
+                    c_profile : req.body.profile,
+                    c_material: req.body.material,
+                    price: req.body.price,
+                });
+            }else{
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    c_code_color: req.body.code_color,
+                    c_profile : req.body.profile,
+                    c_material: req.body.material,
+                    price: req.body.price,
+                    pic_product:{
+                        path: req.file.path,
+                        size: req.file.size
+                    }
+                });
+            }
+
+        }else{
+
         }
+        
 
         check.set({
-            // product_id : req.body.product_id,
             product_name: req.body.product_name,
-            // category_id : req.body.category_id,
             price: req.body.price,
             outstock: req.body.outstock,
             color: req.body.color,
@@ -611,12 +946,9 @@ router.get('/category/add', function(req, res){
 
 // upload.single('picture'),'
 
-
-
-
-
 router.post('/category/add',upload.single('picture'), async(req, res)=>{
     console.log((req.body));
+    
 
     // console.log(res);
     // console.log(req.body)
@@ -790,7 +1122,7 @@ router.get('/category/get/:id', async(req, res) =>{
         var check = await Category.findById(req.params.id).exec();
         res.send(check).status(200);
     }catch(err){
-
+        res.send(err).status(404)
     }
 })
 
@@ -806,30 +1138,85 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
             var type = check.type;
             // for keeb
             if(type == 0){
-                check.set({
-                    category_name: req.body.catname,
-                    status_gb: req.body.status,
-                    k_color: req.body.k_color,
-                    flip: req.body.flip,
-                    k_layout:  req.body.k_layout,
-                    k_degree: req.body.k_degree,
-                    k_mounting: req.body.k_mounting,
-                    date_start: req.body.date_start,
-                    date_end: req.body.date_end,
-                    date_payment: req.body.date_payment,
-                    min_price: req.body.min_price,
-                    max_price: req.body.max_price,
-                    pic_profile: {
-                        path: req.file.path,
-                        size: req.file.size
-                    }
-                });
+                if(req.file == null){
+                    check.set({
+                        category_name: req.body.catname,
+                        status_gb: req.body.status,
+                        k_color: req.body.k_color,
+                        flip: req.body.flip,
+                        k_layout:  req.body.k_layout,
+                        k_degree: req.body.k_degree,
+                        k_mounting: req.body.k_mounting,
+                        date_start: req.body.date_start,
+                        date_end: req.body.date_end,
+                        date_payment: req.body.date_payment,
+                        min_price: req.body.min_price,
+                        max_price: req.body.max_price,
+                    });
+                }else{
+                    check.set({
+                        category_name: req.body.catname,
+                        status_gb: req.body.status,
+                        k_color: req.body.k_color,
+                        flip: req.body.flip,
+                        k_layout:  req.body.k_layout,
+                        k_degree: req.body.k_degree,
+                        k_mounting: req.body.k_mounting,
+                        date_start: req.body.date_start,
+                        date_end: req.body.date_end,
+                        date_payment: req.body.date_payment,
+                        min_price: req.body.min_price,
+                        max_price: req.body.max_price,
+                        pic_profile: {
+                            path: req.file.path,
+                            size: req.file.size
+                        }
+                    });
+
+                }
+                
 
                 var result = await check.save();
                 // res.status(200).send(result)
                 return res.redirect('/api/category');
 
             }else if(type == 1){// for keyset
+                if(req.file == null){
+                    check.set({
+                        category_name: req.body.catname,
+                        status_gb: req.body.status,
+                        c_code_color: req.body.code_color,
+                        c_profile:  req.body.profile,
+                        c_material: req.body.c_material,
+                        date_start: req.body.date_start,
+                        date_end: req.body.date_end,
+                        date_payment: req.body.date_payment,
+                        min_price: req.body.min_price,
+                        max_price: req.body.max_price,
+                    });
+                }else{
+                    check.set({
+                        category_name: req.body.catname,
+                        status_gb: req.body.status,
+                        c_code_color: req.body.code_color,
+                        c_profile:  req.body.profile,
+                        c_material: req.body.c_material,
+                        date_start: req.body.date_start,
+                        date_end: req.body.date_end,
+                        date_payment: req.body.date_payment,
+                        min_price: req.body.min_price,
+                        max_price: req.body.max_price,
+                        pic_profile: {
+                            path: req.file.path,
+                            size: req.file.size
+                        }
+                    });
+                }
+                
+
+                var result = await check.save();
+                // res.status(200).send(result)
+                return res.redirect('/api/category');
 
             }else{
 
