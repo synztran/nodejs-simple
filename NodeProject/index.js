@@ -7,12 +7,15 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const http = require('http');
 const session = require('express-session');
+const fileuploader = require('./lib/fileuploader/fileuploader');
 // const redis = require('redis');
 // const redisStore = require('connect-redis')(session);
 // const client  = redis.createClient();
 const livereload = require('connect-livereload');
+// const fileuploader = require('fileuploader');
 const config = require('./lib/comon/config');
 const fs = require('fs');
+const path = require('path')
 
 const uri = "'mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'}"
 var port = process.env.PORT || 5000;
@@ -38,8 +41,8 @@ var date = new Date();
 del = function(req, res){
 	res.clearCookie('x-token');
 	res.clearCookie('x-refresh-token');
-	res.clearCookie('uemail');
-	res.clearCookie('uid');
+	// res.clearCookie('uemail');
+	// res.clearCookie('uid');
 	res.clearCookie('io');
 	// res.clearCookie();
 	res.redirect('/api/signin');
@@ -74,6 +77,10 @@ app.use(session({
 }));
 
 
+
+
+
+
 // app.use(livereload())
 // app.use(express.cookieParser());
 // set static data for public folder to Application Server
@@ -101,6 +108,9 @@ app.get('/del', del);
 
 app.use('/api', routes);
 app.use('/', proutes);
+
+
+
 
 
 // io.emit('some event', {someProperty: 'some value', otherProperty: 'other value'});

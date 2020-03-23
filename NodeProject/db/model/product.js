@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var date = new Date();
 
-// product_accessory: 0 = Keeb Top Case | 1 = Keeb Bot case | 2 = Keeb Plate | 4 = keycap
+// product_accessory: 0 = Keeb Top Case | 1 = Keeb Bot case | 2 = Keeb Plate | 3 = Keeb Frame | 4 = keycap
 
 var productSchema = mongoose.Schema({
     product_id:{
@@ -14,35 +14,49 @@ var productSchema = mongoose.Schema({
     category_id:{
         type: String
     },
-    product_accessory:{
+    product_part:{
+        // product_accessory: 0 = Keeb Top Case | 1 = Keeb Bot case | 2 = Keeb Plate | 3 = Keeb Frame | 4 = keycap
         type: Number,
         default: null
     },
-    outstock:{
-        type: Boolean,
-        default: false
+    outstock:{  // 0 = outstock | 1 = instock
+        type: Number,
     },
     c_code_color:[],
-    c_kit_name:{
-        type: String,   
+    c_profile:{
+        type: String
+    },
+    c_material:{ // 0 = abs | 1 = pbt | 2 = pom | 3 = etc
+        type: Number
     },
     k_top_color:{
         type: String
     },
-    k_material:{
+    k_top_material:{
         type: String
     },
     k_bot_color:{
         type: String
     },
+    k_bot_material:{
+        type: String
+    },
     k_plate_option:{
         type: String
     },
-    k_material:{
+    k_plate_material:{
         type: String
     },
     price:{
         type: Number
+    },
+    pic_product:{
+        path: {
+            type: String
+        },
+        size: {
+            type: Number
+        }
     },
     pic_list: [
         {
@@ -55,9 +69,11 @@ var productSchema = mongoose.Schema({
             
         }
     ],
-    note:{
+    specs:{
         type: String
     }
 })
+
+
 let Product = mongoose.model('Product', productSchema);
 module.exports = Product;

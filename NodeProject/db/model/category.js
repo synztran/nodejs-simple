@@ -16,14 +16,14 @@ var categorySchema = mongoose.Schema({
     category_name:{
         type: String
     },
-    status_gb:{ // status: 0 = end | 1 = IC | 2 = GB
+    status_gb:{ // status: 0 = end | 1 = IC | 2 = live
         type: Number,
         default: 1
     },
     k_color: [],
     
-    c_code_color:[], // type: 0 = keeb | 1 = keycap | 2 = etc
-    type:{
+    c_code_color:[], 
+    type:{ // type: 0 = keeb | 1 = keycap | 2 = etc
         type: Number,
     },
     c_profile:{
@@ -38,14 +38,13 @@ var categorySchema = mongoose.Schema({
     //     default: null
     // }
     ,
-    k_degree:{
-        type: String,
-        default: null
+    flip:{
+        // type: Boolean,
+        // default: false
+        type: Number
     },
-    k_mounting:{
-        type: String,
-        default: null
-    }, 
+    k_degree:[],
+    k_mounting:[], 
     sale_type:[],
     date_start:{
         type: Date,
@@ -88,6 +87,9 @@ var categorySchema = mongoose.Schema({
             
         }
     ],
+    specs:{
+        type: String
+    }
     
 })
 

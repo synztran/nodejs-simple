@@ -230,26 +230,47 @@ html, body{
                 height: 100%;
                 object-fit: cover;" src="/api/<%= item.pic_profile.path %>" alt="" />
                                 <div class="image_overlay"></div>
-                                <div class="view_details"><a href="">View details</a></div>
+                                <div class="view_details"><a href="">View details</a></div> 
+                                <!---------------- for keeb ------------>
                                 <% if(item.type == 0) { %>
                                 <div class="stats">
                                     <div class="stats-container">
                                         <span class="product_price"><%= item.min_price %>$ - <%= item.max_price %>$</span>
                                         <span class="product_name"><%= item.category_name %></span>
-                                        <p style="margin-bottom: 0" class="fake-text">author name</p>
-                                        <div class="product-options">
-                                            <strong>Layout</strong>
-                                            <span>XS, S, M, L, XL, XXL</span>
+                                        <p style="margin-bottom: 0" class="fake-text"> author - proxy name</p>
+                                        <div style="display: flex;" class="product-options">
+                                            <div style="padding: 0" class="col-md-6">
+                                                    <strong>Layout</strong>
+                                            <span><%= item.k_layout%></span>
+                                            <strong>Mounting</strong>
+                                            <span><%= item.k_mounting%></span>
                                             <strong>COLORS</strong>
                                             <div class="colors">
-                                                <% for (var key in item.color){%>
-                                                <div data-toggle="tooltip" title="<%= item.color[key] %>" class="c-<%=   item.color[key] %>"><span></span></div>
+                                                <% for (var key in item.k_color){%>
+                                                <div data-toggle="tooltip" title="<%= item.k_color[key] %>" class="c-<%=   item.k_color[key] %>"><span></span></div>
                                                 <%    } %>
                                                 
                                             </div>
+                                            </div>
+
+                                            <div style="padding: 0" class="col-md-6">
+                                                    <strong>Layout</strong>
+                                            <span><%= item.k_layout%></span>
+                                            <strong>Degree</strong>
+                                            <div style="display: flex;" class="proxy-keeb-degree">
+                                                <% for (var key in item.k_degree){%>
+                                                    <span><%= item.k_degree[key]%>°&nbsp</span>
+                                                <% } %>
+                                            </div>
+
+                                            <strong>Start - End</strong>
+                                            <span><%= (item.date_start).toLocaleDateString()%> - <%= (item.date_end).toLocaleDateString()%></span>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
+                                <!---------------- for keyset ------------>
                             <% } else if(item.type == 1) { %>
                                 <div class="stats">
                                     <div class="stats-container">
@@ -258,7 +279,7 @@ html, body{
                                         <p style="margin-bottom: 0" class="fake-text">author name</p>
                                         <div class="product-options">
                                             <strong>Profile</strong>
-                                            <span><%= item.profile %></span>
+                                            <span><%= item.c_profile %></span>
                                             <strong>COLORS</strong>
                                             <div class="colors">
                                                 <div class="c-blue"><span></span></div>

@@ -4,12 +4,14 @@ const req = require('request');
 const bcrypt = require("bcryptjs");
 const fs = require('fs');
 const readline = require('readline');
+const path = require('path')
 const jwt = require('jsonwebtoken');
 const reqHeader = require('request');
 const config = require('./../lib/comon/config');
 const utils = require('./../lib/comon/utils');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const fileuploader = require('./../lib/fileuploader/fileuploader');
 router.use(cookieParser());
 // var token = jwt.sign({foo: 'bar'}, 'shhhhh');
 const tokenList = {};
@@ -44,6 +46,11 @@ const upload = multer({
     },
     // fileFilter: fileFilter
 });
+
+
+
+
+
 // var imgPath = 'docs/img_1435.JPG';
 var Account = require('./../db/model/account');
 var AdmAccount = require('./../db/model/accadmin');
@@ -55,30 +62,6 @@ var userToken = require('./../db/model/token');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
 // example = require('./../lib/js/listAccount.js')
 
-
-const PinCheckMiddleware = async (req, res, next) => {
-    // const passcode = req.headers['x-passcode'];
-    const role = req.headers['role'];
-    console.log(req)
-    console.log(req.get('role'));
-
-    // console.log(config.admin);
-    // console.log(passcode)
-    if (role === "admin") {
-        try {
-            next();
-        } catch (err) {
-            console.error(err);
-            return res.status(401).json({
-                message: 'Unauthorized access.',
-            });
-        }
-    } else {
-        return res.status(403).send({
-            message: 'Only allow for admin role.',
-        });
-    }
-}
 
 const options = {
 
@@ -266,8 +249,7 @@ router.get("/account/edit/:id", async (req, res) => {
                 });
             });
     } catch (err) {
-        console.log(err);
-        res.status(200).send(err);
+        res.status(400).send(err);
     }
 });
 // update db to mongo
@@ -306,6 +288,7 @@ router.post("/login", async (req, res, next) => {
     try {
         var account = await AdmAccount.findOne({ email: req.body.email }).exec();
         var active = await AdmAccount.findOne({ $and: [{ email: req.body.email }, { active: true }] });
+        console.log(active)
 
         if (!account) {
             return res.status(400).send({
@@ -494,13 +477,29 @@ router.get('/product', async (req, res) => {
     // res.render('manager/categoryPage')
 
     Product.find({}, function(err, docs) {
+        Category.find({}, function(err, docs2){
+
+       
+        console.log(docs);
+        console.log(docs2);
         res.render('manager/product/productPage', {
-            "listProduct": docs
+            "listProduct": docs,
+            "listCategory": docs2,
         });
+    });
     });
 })
 
-router.get('/product/add', async (req, res) => {
+router.get('/product/get/:id', async(req, res)=>{
+    console.log(req.params.id);
+    try{
+        var check = await Product.findById(req.params.id).exec()
+        res.send(check).status(200);
+    }catch(err){
+        res.send(err).status(404)
+    }
+})
+router.get('/product/add' ,async (req, res) => {
 
     Category.find({}, function(err, docs) {
         console.log(docs)
@@ -518,56 +517,365 @@ router.get('/product/add', async (req, res) => {
     // })
 })
 
-router.post('/product/add', async (req, res) => {
+router.post('/product/add', upload.single('picture') ,async (req, res) => {
     console.log(req.body)
-    console.log(req.body.pid)
+    // console.log(req.body.pid)
     try {
+                var part = req.body.p_part;
+                console.log(part)
+                if(part == 0){ //for top case
+                 await Couter.findOne({ _id: "p_top_case" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+                     
+                        db.collection('products').insertOne({
+                            product_id: "PTOP" + inc,
+                            product_name: (req.body.pname),
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            k_top_color: (req.body.top_color),
+                            k_top_material: (req.body.top_material),
+                            price: (req.body.top_case_price),
+                            pic_product: {
+                                
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
 
-        var check = await Product.find({ product_id: (req.body.pid).toUpperCase() }, async (err, docs) => {
-            console.log(docs)
-            if (docs.length) {
-                res.status(400).json({
-                    code: 400,
-                    message: "product id already exists"
-                })
-            } else {
-                var product = new Product({
-                    product_id: req.body.pid,
-                    product_name: req.body.pname,
-                    category_id: req.body.catid,
-                    outstock: req.body.outstock,
-                    price: req.body.price,
-                    color: req.body.color,
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_top_case"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
 
-                });
-                var result = product.save();
-                res.send(result);
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                }else if(part == 1){ //for bot case
+                    await Couter.findOne({ _id: "p_bottom_case" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+                     
+                        db.collection('products').insertOne({
+                            product_id: "PBOT" + inc,
+                            product_name: (req.body.pname),
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            k_bot_color: (req.body.bot_color),
+                            k_bot_material: (req.body.bot_material),
+                            price: (req.body.top_case_price),
+                            pic_product: {
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
 
-            }
-        }).exec();
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_bottom_case"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                }else if(part == 2){ // for plate
+                    await Couter.findOne({ _id: "p_plate" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+                     
+                        db.collection('products').insertOne({
+                            product_id: "PLATE" + inc,
+                            product_name: (req.body.pname),
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            k_plate_option: (req.body.bot_price),
+                            k_plate_material: (req.body.plate_material),
+                            price: (req.body.plate_price),
+                            pic_product: {
+                                
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
+
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_plate"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                }else if(part == 3){ // for frame
+                    await Couter.findOne({ _id: "p_frame" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+                     
+                        db.collection('products').insertOne({
+                            product_id: "FRAME" + inc,
+                            product_name: (req.body.pname),
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            k_top_color: (req.body.top_color),
+                            k_top_material: (req.body.top_material),
+                            price: (req.body.top_case_price),
+                            pic_product: {
+                                
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
+
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_frame"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                }else { // keycap
+                    await Couter.findOne({ _id: "p_frame" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+                     
+                        db.collection('products').insertOne({
+                            product_id: "KEYSET" + inc,
+                            product_name: (req.body.pname),
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            c_code_color: (req.body.code_color),
+                            c_profile: (req.body.c_profile),
+                            c_material: (req.body.c_material),
+                            price: (req.body.c_price),
+                            pic_product: {
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
+
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_keycap"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                }
+                setTimeout(function(){
+                    res.redirect('/api/product');
+                }, 1500)
     } catch (err) {
         res.status(500).send(err);
     }
 })
 
+router.get('/product/edit/:id', function(req, res){
+    try{
+        
+        // var unactive = await Category.findById(req.params.id);
+        // console.log(unactive)
+        
+         Product.findById(req.params.id,function(err, docs){
+            console.log(docs);
+            console.log(docs.product_part);
+            var type = docs.product_part;
+            console.log(type)
+            if(type == 0){
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Keeb Top Case',
+                    "product": docs,
+                    type: 0
+                })
+            }else if(type == 1){
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Keeb Bot case',
+                    "product": docs,
+                    type: 1
+                })
+            }else if(type == 2){
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Keeb Plate',
+                    "product": docs,
+                    type: 2
+                })
+
+            }else if(type == 3){
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Keeb Frame',
+                    "product": docs,
+                    type: 3
+                })
+
+            }else{
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Keycap',
+                    "product": docs,
+                    type: 4
+                })
+            }
+            
+               
+        })
+            // function(err, docs){
+            // console.log(docs);
+        // })
+    }catch(err){
+        res.status(400).send(err);
+    }
+})
+
 router.post("/product/edit/:id", async (req, res) => {
     console.log(req.body);
-    // console.log(req.file);
+    console.log(req.file);
     try {
-        var check = await Product.findById(req.params
-            .id).exec();
-        console.log(check)
-        if (!check) {
-            return res.status(400).send({
-                status: "error",
-                message: "The category id does not exist "
-            });
+        var part = req.body.product_part
+        if(part == 0){ // top case
+            if(req.file == null){
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_top_color: req.body.top_color,
+                    k_top_material : req.body.top_material,
+                    price: req.body.price,
+                });
+            }else{
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_top_color: req.body.top_color,
+                    k_top_material : req.body.top_material,
+                    price: req.body.price,
+                    pic_product:{
+                        path: req.file.path,
+                        size: req.file.size
+                    }
+                });
+            }
+            
+
+        }else if(part == 1){ // for bot case
+            if(req.file == null){
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_bot_color: req.body.bot_color,
+                    k_bot_material : req.body.bot_material,
+                    price: req.body.price,
+                });
+            }else{
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_bot_color: req.body.bot_color,
+                    k_bot_material : req.body.bot_material,
+                    price: req.body.price,
+                    pic_product:{
+                        path: req.file.path,
+                        size: req.file.size
+                    }
+                });
+            }
+
+        }else if(part == 2) { // for plate
+            if(req.file == null){
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_plate_option: req.body.plate_option,
+                    k_plate_material : req.body.plate_material,
+                    price: req.body.price,
+                });
+            }else{
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    k_plate_option: req.body.plate_option,
+                    k_plate_material : req.body.plate_material,
+                    price: req.body.price,
+                    pic_product:{
+                        path: req.file.path,
+                        size: req.file.size
+                    }
+                });
+            }
+
+        }else if(part == 3){ // for frame
+            if(req.file == null){
+                // check.set({ 
+                //     product_name: req.body.product_name,
+                //     outstock: req.body.outstock,
+                //     k_plate_option: req.body.plate_option,
+                //     k_plate_material : req.body.plate_material,
+                //     price: req.body.price,
+                // });
+            }else{
+                // check.set({ 
+                //     product_name: req.body.product_name,
+                //     outstock: req.body.outstock,
+                //     k_plate_option: req.body.plate_option,
+                //     k_plate_material : req.body.plate_material,
+                //     price: req.body.price,
+                //     pic_product:{
+                //         path: req.file.path,
+                //         size: req.file.size
+                //     }
+                // });
+            }
+
+        }else if(part ==4){ // keycap
+            if(req.file == null){
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    c_code_color: req.body.code_color,
+                    c_profile : req.body.profile,
+                    c_material: req.body.material,
+                    price: req.body.price,
+                });
+            }else{
+                check.set({ 
+                    product_name: req.body.product_name,
+                    outstock: req.body.outstock,
+                    c_code_color: req.body.code_color,
+                    c_profile : req.body.profile,
+                    c_material: req.body.material,
+                    price: req.body.price,
+                    pic_product:{
+                        path: req.file.path,
+                        size: req.file.size
+                    }
+                });
+            }
+
+        }else{
+
         }
+        
 
         check.set({
-            // product_id : req.body.product_id,
             product_name: req.body.product_name,
-            // category_id : req.body.category_id,
             price: req.body.price,
             outstock: req.body.outstock,
             color: req.body.color,
@@ -608,7 +916,26 @@ router.get('/category', async (req, res) => {
     });
 })
 
-router.get('/category/add', async (req, res) => {
+router.get('/mounting', function(req, res){
+    res.render('tips/mountingPage')
+})
+
+router.get('/category/add', function(req, res){
+    // var c = __dirname+req.path.replace(/\//g, '\\');
+    
+    // var z = path.resolve(c);
+    
+    // var x = fs.existsSync(c)?res.sendFile(path.resolve(c)):(res.statusCode=404)
+    // console.log("c")
+    // console.log(c);
+    // console.log("z")
+    // console.log(z);
+    // console.log("x")
+    // console.log(x);
+
+    // var m = fs.existsSync(c);
+    // console.log(m)
+
     res.render('manager/category/addPage', {
         title: "Add new CATEGORY"
     })
@@ -616,16 +943,18 @@ router.get('/category/add', async (req, res) => {
 
 
 
-router.get('/mounting', function(req, res){
-    res.render('tips/mountingPage')
-})
 
+// upload.single('picture'),'
 
-router.post('/category/add', upload.single('picture'), async (req, res) => {
-    console.log(req.body)
+router.post('/category/add',upload.single('picture'), async(req, res)=>{
+    console.log((req.body));
+    
+
+    // console.log(res);
+    // console.log(req.body)
     // console.log(req.file);
     try {
-
+        
         var check = await Category.find({ category_id: req.body.catid }, async (err, docs) => {
             if (docs.length) {
                 res.status(400).json({
@@ -643,22 +972,31 @@ router.post('/category/add', upload.single('picture'), async (req, res) => {
                         var inc = docs['seq'] + 1;
                         console.log("incc"+inc)
 
+                        // var uploader = fileuploader('files', { uploadDir: 'docs/upload/' }, req, res);
+                        // uploader.upload(function(data) {
+                        //     console.log(data.files);
+                        //     console.log(data.files[0].size)
+                        //     res.end(JSON.stringify(data, null, 4));
+                        // });
+
                         db.collection('categories').insertOne({
                             category_id: "KEEB" + inc,
-                            category_name: req.body.catname,
-                            status_gb: req.body.status,
-                            k_color: req.body.k_color,
-                            type: req.body.type,
-                            k_layout: req.body.k_layout,
-                            k_degree: req.body.k_degree,
-                            k_mounting: req.body.k_mounting,
-                            // sale_type: req.body.sale_type,
-                            date_start: req.body.date_start,
-                            date_end: req.body.date_end,
-                            date_payment: req.body.date_payment,
-                            min_price: req.body.min_price,
-                            max_price: req.body.max_price,
+                            category_name: (req.body.catname),
+                            status_gb: (req.body.status),
+                            k_color: (req.body.k_color),
+                            type: (req.body.type),
+                            flip: (req.body.flip),
+                            k_layout:  (req.body.k_layout),
+                            k_degree: (req.body.k_degree),
+                            k_mounting: (req.body.k_mounting),
+                            date_start:(req.body.date_start),
+                            date_end: (req.body.date_end),
+                            date_payment: (req.body.date_payment),
+                            min_price: (req.body.min_price),
+                            max_price: (req.body.max_price),
                             pic_profile: {
+                                // path: (data.files[0].file),
+                                // size: (data.files[0].size2)
                                 path: req.file.path,
                                 size: req.file.size
                             }
@@ -677,17 +1015,16 @@ router.post('/category/add', upload.single('picture'), async (req, res) => {
                 } else if (type == 1) {
                     console.log(2)
                     Couter.findOne({ _id: "keyset" }, function(err, docs) {
-                        console.log(docs);
-                        //  console.log(docs[0].seq);
+                       console.log(docs);
                         console.log(docs['seq'])
-                        var inc = docs[0].seq + 1;
-                        console.log(inc)
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
 
                         db.collection('categories').insertOne({
                             category_id: "KSET" + inc,
                             category_name: req.body.catname,
                             status_gb: req.body.status,
-                            color: req.body.color,
+                            c_code_color: req.body.code_color,
                             type: req.body.type,
                             c_profile: req.body.profile,
                             c_material: req.body.c_material,
@@ -712,13 +1049,13 @@ router.post('/category/add', upload.single('picture'), async (req, res) => {
                         }
                     )
                 } else {
-                    
                 }
-
             }
-
         }).exec();
-        res.redirect('/api/category')
+        setTimeout(function(){
+            res.redirect('/api/category');
+        }, 1500)
+        
     } catch (err) {
         res.status(500).send(err);
     }
@@ -742,34 +1079,167 @@ router.post('/category/add', upload.single('picture'), async (req, res) => {
 
 // update db to mongo
 // , upload.single('picture') 
-router.post("/category/edit/:id", async (req, res) => {
+
+router.get('/category/edit/:id', async(req, res)=>{
+    // console.log(req.params.id)
+    try{
+        
+        // var unactive = await Category.findById(req.params.id);
+        // console.log(unactive)
+        
+        await Category.findById(req.params.id,function(err, docs){
+            // console.log(docs);
+            // console.log(docs.type);
+            var type = docs.type;
+            if(type == 0){
+                res.render('manager/category/editPage',{
+                    title: 'Edit Category : Keeb',
+                    "category": docs,
+                    type: 0
+                })
+            }else if(type == 1){
+                res.render('manager/category/editPage',{
+                    title: 'Edit Category : Keyset',
+                    "category": docs,
+                    type: 1
+                })
+            }else{
+
+            }
+            
+               
+        })
+            // function(err, docs){
+            // console.log(docs);
+        // })
+    }catch(err){
+        res.status(400).send(err);
+    }
+})
+
+router.get('/category/get/:id', async(req, res) =>{
+    try{
+        var check = await Category.findById(req.params.id).exec();
+        res.send(check).status(200);
+    }catch(err){
+        res.send(err).status(404)
+    }
+})
+
+router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
     console.log(req.body);
-    // console.log(req.file);
+    console.log(req.params.id)
+    console.log(req.file);
     try {
         var check = await Category.findById(req.params
             .id).exec();
-        console.log(check)
-        if (!check) {
-            return res.status(400).send({
-                status: "error",
-                message: "The category id does not exist "
-            });
-        }
 
-        check.set({
-            category_name: req.body.catname,
-            status_gb: req.body.status,
-            color: req.body.color,
-            date_start: req.body.date_start,
-            date_end: req.body.date_end,
-            date_payment: req.body.date_payment,
-            min_price: req.body.min_price,
-            max_price: req.body.max_price
-        });
+            console.log(check);
+            var type = check.type;
+            // for keeb
+            if(type == 0){
+                if(req.file == null){
+                    check.set({
+                        category_name: req.body.catname,
+                        status_gb: req.body.status,
+                        k_color: req.body.k_color,
+                        flip: req.body.flip,
+                        k_layout:  req.body.k_layout,
+                        k_degree: req.body.k_degree,
+                        k_mounting: req.body.k_mounting,
+                        date_start: req.body.date_start,
+                        date_end: req.body.date_end,
+                        date_payment: req.body.date_payment,
+                        min_price: req.body.min_price,
+                        max_price: req.body.max_price,
+                    });
+                }else{
+                    check.set({
+                        category_name: req.body.catname,
+                        status_gb: req.body.status,
+                        k_color: req.body.k_color,
+                        flip: req.body.flip,
+                        k_layout:  req.body.k_layout,
+                        k_degree: req.body.k_degree,
+                        k_mounting: req.body.k_mounting,
+                        date_start: req.body.date_start,
+                        date_end: req.body.date_end,
+                        date_payment: req.body.date_payment,
+                        min_price: req.body.min_price,
+                        max_price: req.body.max_price,
+                        pic_profile: {
+                            path: req.file.path,
+                            size: req.file.size
+                        }
+                    });
+
+                }
+                
+
+                var result = await check.save();
+                // res.status(200).send(result)
+                return res.redirect('/api/category');
+
+            }else if(type == 1){// for keyset
+                if(req.file == null){
+                    check.set({
+                        category_name: req.body.catname,
+                        status_gb: req.body.status,
+                        c_code_color: req.body.code_color,
+                        c_profile:  req.body.profile,
+                        c_material: req.body.c_material,
+                        date_start: req.body.date_start,
+                        date_end: req.body.date_end,
+                        date_payment: req.body.date_payment,
+                        min_price: req.body.min_price,
+                        max_price: req.body.max_price,
+                    });
+                }else{
+                    check.set({
+                        category_name: req.body.catname,
+                        status_gb: req.body.status,
+                        c_code_color: req.body.code_color,
+                        c_profile:  req.body.profile,
+                        c_material: req.body.c_material,
+                        date_start: req.body.date_start,
+                        date_end: req.body.date_end,
+                        date_payment: req.body.date_payment,
+                        min_price: req.body.min_price,
+                        max_price: req.body.max_price,
+                        pic_profile: {
+                            path: req.file.path,
+                            size: req.file.size
+                        }
+                    });
+                }
+                
+
+                var result = await check.save();
+                // res.status(200).send(result)
+                return res.redirect('/api/category');
+
+            }else{
+
+            }
+        // check.set({
+        //     category_name: req.body.catname,
+        //     status_gb: req.body.status,
+        //     k_color: req.body.k_color,
+        //     type: req.body.type,
+        //     flip: req.body.flip,
+        //     k_layout:  req.body.k_layout,
+        //                     k_degree: req.body.k_degree,
+        //                     k_mounting: req.body.k_mounting,
+        //     date_start: req.body.date_start,
+        //     date_end: req.body.date_end,
+        //     date_payment: req.body.date_payment,
+        //     min_price: req.body.min_price,
+        //     max_price: req.body.max_price
+        // });
 
 
-        var result = await check.save();
-        res.status(200).send(result)
+        // var result = await check.save();
+        // res.status(200).send(result)
         // return res.redirect('/list');
 
 

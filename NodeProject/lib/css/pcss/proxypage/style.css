@@ -119,7 +119,7 @@ div.product-card.flip180{
             transition: all 200ms ease-out;
 }
 .product-card.animate .stats-container{
-	top:272px;
+	top:250px;
 	-webkit-transition: all 200ms ease-out; 
        -moz-transition: all 200ms ease-out; 
          -o-transition: all 200ms ease-out; 
@@ -170,6 +170,7 @@ div.product-card.flip180{
 	font-size:14px ;
 	display:block ;
 	margin-bottom:8px ;
+	word-break: break-all;
 }
 .view_details{	
 	position:absolute;
