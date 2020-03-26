@@ -675,10 +675,27 @@ router.post('/joingb', async(req, res)=>{
 })
 
 // --------------------------------- PRODUCT CONFIG --------------------------------------------
-router.get('/proxygb/product/:id', async(req, res)=>{
+router.get('/proxygb/product/:id' , async(req, res)=>{
+    console.log(req.params.id);
+    try{   
+            Product.find({category_id: req.params.id}, function(err, docs){
+                console.log(docs);
+                if(docs[0]){
+                    Category.findOne({category_id: docs[0].category_id},function(err, docs2){
 
-    try{
-
+                        console.log(docs);
+                        console.log(docs2);
+                        res.render('product/detailsProductPage',{
+                            title: 'aaaa',
+                            "detailsProduct": docs,
+                            "Category": docs2,
+                        })
+                    })
+                    
+                }else{
+                    res.redirect('/404Page')
+                }
+            })
     }catch(err){
         res.status(400).send(err);
     }

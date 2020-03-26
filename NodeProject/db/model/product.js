@@ -11,7 +11,10 @@ var productSchema = mongoose.Schema({
     product_name:{
         type: String
     },
-    category_id:{
+    replace_product_name:{
+        type: String
+    },
+    category_id:{ 
         type: String
     },
     product_part:{

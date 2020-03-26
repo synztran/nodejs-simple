@@ -86,7 +86,6 @@
                         <% }else if(item.product_part == 3) { %>
                             <%= item.k_frame_material %>
                         <% }else { %>
-                        <% console.log(item.c_metatiral) %>
                             <% if(item.c_material == 0) { %>
                                     <span>ABS</span>
                             <% }else if(item.c_material == 1) { %>
@@ -156,6 +155,7 @@ $(document).ready(function() {
         "columnDefs": [
             { "targets": 0, "orderable": false },
             { "targets": 4, "orderable": false },
+            { "targets": 9, "orderable": false }
 
         ],
     });

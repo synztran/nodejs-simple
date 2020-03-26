@@ -9,7 +9,11 @@
     <!-- <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css"> -->
     <% include ./../../tips/cssPackage%>
 </head>
-
+<style type="text/css">
+    .dropdown-toggle::after{
+    display: none!important
+}
+</style>
 <body>
     <% include ./../../header%>
     <div class="container-fluid">
@@ -38,6 +42,18 @@
                     <div class="form-group">
                         <label for="email">Name:</label>
                         <input type="text" name="catname" class="form-control" value="<%=category.category_name%>" id="catname" aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Design by:</label>
+                        <input type="text" name="author" value="<%=category.author%>" class="form-control" id="author" aria-describedby="authorHelp">
+                    </div>
+                     <div class="form-group">
+                        <label for="email">Manufacturing:</label>
+                        <input type="text" name="manufacturing" value="<%= category.manufacturing %>" class="form-control" id="manufacturing" aria-describedby="manufacturingHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Proxy host:</label>
+                        <input type="text" name="host" value="<%=category.proxy_host%>" class="form-control" id="host" aria-describedby="hostHelp">
                     </div>
                     <!-------------------------- for keeb ---------------------------->
                     <div class="for-keeb">
@@ -101,6 +117,15 @@
                                 <option value="blue">Blue</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="">Keeb Plate Option:</label>
+                            <select class="form-control select2 multiple-select select2-kplate" id="keeb-plate" name="k_plate[]" multiple="multiple">
+                                <option value="full">Full Plate</option>
+                                <option value="half">Half Plate</option>
+                                <option value="none">None Plate</option>
+                                <option value="tbd">TBD</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Date start (mm/dd/yyyy):</label>
@@ -138,6 +163,10 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Specs:</label>
+                        <textarea id="specs" name="specs" type="text" class="form-control" placeholder="Content"></textarea>
+                    </div>
                     <div className="input-group mb-3">
                         <div className="custom-file">
                             <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
@@ -152,7 +181,7 @@
                 </form>
                 <!------------------------------ form for keyset --------------------------->
                 <% } else if(type == 1) { %>
-                <form action='/api/category/add' method="post" enctype="multipart/form-data">
+                <form action='/api/category/edit/<%=category._id%>' method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="email">GB status:</label>
                         <select class="form-control" name="status">
@@ -164,6 +193,18 @@
                     <div class="form-group">
                         <label for="email">Name:</label>
                         <input type="text" name="catname" value="<%=category.category_name%>" class="form-control" id="catname" aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Design by:</label>
+                        <input type="text" name="author" value="<%=category.author%>" class="form-control" id="author" aria-describedby="authorHelp">
+                    </div>
+                     <div class="form-group">
+                        <label for="email">Manufacturing:</label>
+                        <input type="text" name="manufacturing" value="<%= category.manufacturing %>" class="form-control" id="manufacturing" aria-describedby="manufacturingHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Proxy host:</label>
+                        <input type="text" name="host" value="<%=category.proxy_host%>" class="form-control" id="host" aria-describedby="hostHelp">
                     </div>
                     <!---------------------------- for keyset ------------------------->
                     <div class="for-keyset">
@@ -181,18 +222,18 @@
                         <div class="form-group">
                             <label for="email">Keyset Material:</label>
                             <select class="form-control multiple-select" style="margin-top:0px;" id="c_material" name="c_material">
-                                <option value="0">ABS</option>
-                                <option value="1">PBT</option>
-                                <option value="2">POM</option>
-                                <option value="3">ETC</option>
+                                <option value="abs">ABS</option>
+                                <option value="pbt">PBT</option>
+                                <option value="pom">POM</option>
+                                <option value="etc">ETC</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="email">Keyset Color:</label>
-                            <select class="form-control select2" style="margin-top:0px;" id="color" name="code_color[]" multiple="multiple">
-                                <option class="c-n7" value="red">N7</option>
-                                <option class="c-l9" value="green">L9</option>
-                                <option class="c-v1" value="blue">V1</option>
+                            <select class="form-control select2" style="margin-top:0px;" id="c_color" name="code_color[]" multiple="multiple">
+                                <option class="c-n7" value="n7">N7</option>
+                                <option class="c-l9" value="l9">L9</option>
+                                <option class="c-v1" value="v1">V1</option>
                             </select>
                         </div>
                     </div>
@@ -210,11 +251,31 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Min price:</label>
-                        <input class="form-control" name="min_price" value="<%= category.min_price%>" type="tel" id="minprice">
+                         <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input class="form-control" name="min_price" type="tel"  value="<%= category.min_price%>" id="minprice">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
                     </div>
                     <div class="form-group">
                         <label for="password">Max price:</label>
-                        <input class="form-control" name="max_price" value="<%= category.max_price%>" type="tel" id="maxprice">
+                         <div class="input-group m   b-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input class="form-control" name="max_price" type="tel" value="<%= category.max_price%>" id="maxprice">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Specs:</label>
+                        <textarea id="specs" name="specs"  type="text" class="form-control" placeholder="Content"></textarea>
                     </div>
                     <div className="input-group mb-3">
                         <div className="custom-file">
@@ -240,8 +301,8 @@
         <% include ./../../footer%>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
 <% include ./../../tips/jsPackage %>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -250,6 +311,10 @@ $(document).ready(function() {
 
     $('.select2').select2();
 
+    $('#specs').summernote({
+        tabsize: 2,
+        height:300
+    });
 
     // $('#k_color').select2("data", {k_color: [red]})
     $('#datepicker').datepicker();
@@ -278,25 +343,34 @@ $(document).ready(function() {
         var layout = category_details.k_layout;
         var degree = category_details.k_degree;
         var mounting = category_details.k_mounting;
+        var plate = category_details.k_plate_option;
         var type = category_details.type;
 
+
         var pic_path = category_details.pic_profile['path'];
+        var specs = category_details.specs;
 
         var profile = category_details.c_profile;
-        var key_color = category_details.c_code_color;
-        var key_material = category_details.c_material
+        var c_color = category_details.c_code_color;
+        var c_material = category_details.c_material
         console.log(type)
         console.log(profile);
-        console.log(key_color);
+        console.log(c_color);
+        console.log(specs);
         console.log(category_details.flip)
         console.log(category_details.status_gb)
 
         $('#status').val(category_details.status_gb);
+        $('#specs').summernote('code', specs);
+
         if (type == 0) {
             $('#keeb_flip').val(category_details.flip);
 
             $('#k_color').val(color);
             $('#k_color').trigger('change');
+
+            $('#keeb-plate').val(plate);
+            $('#keeb-plate').trigger('change');
 
             $('#k_layout').val(layout);
             $('#k_layout').trigger('change');
@@ -312,11 +386,14 @@ $(document).ready(function() {
             $('#c_profile').val(profile);
             $('#c_profile').trigger('change');
 
+
+            // $('#c_material').val(c_material)
             $('#c_material').val(c_material);
             $('#c_material').trigger('change');
 
-            $('#color').val(key_color);
-            $('#color').trigger('change');
+            $('#c_color').val(c_color);
+            $('#c_color').trigger('change');
+
             $('#profile-img-tag').attr('src', '/api/' + pic_path)
         } else {
 

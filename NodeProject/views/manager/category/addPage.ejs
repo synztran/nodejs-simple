@@ -9,11 +9,13 @@
     <link rel="stylesheet" type="text/css" href="/api/js/fileuploader/font/font-fileuploader.css">
     <!--  -->
     <!-- CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css"> -->
     <link rel="stylesheet" type="text/css" href="/api/css/pcss/keysetcolorcode.css">
-    <link rel="stylesheet" type="text/css" href="/api/js/fileuploader/jquery.fileuploader.min.css">
-    <% include ./../../tips/cssPackage%>
+    <!-- <link rel="stylesheet" type="text/css" href="/api/js/fileuploader/jquery.fileuploader.min.css"> -->
+      <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.css" rel="stylesheet"> -->
+    <% include ./../../tips/cssPackage %>
     <!--  -->
 </head>
 <style type="text/css">
@@ -44,6 +46,9 @@
 
 html {
     overflow-x: hidden;
+}
+.dropdown-toggle::after{
+    display: none!important
 }
 </style>
 
@@ -78,6 +83,18 @@ html {
                     <div class="form-group">
                         <label for="email">Name:</label>
                         <input type="text" name="catname" class="form-control" id="catname" aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Design by:</label>
+                        <input type="text" name="author" class="form-control" id="author" aria-describedby="authorHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Manufacturing:</label>
+                        <input type="text" name="manufacturing" class="form-control" id="manufacturing" aria-describedby="authorHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Proxy host:</label>
+                        <input type="text" name="host" class="form-control" id="host" aria-describedby="hostHelp">
                     </div>
                     <div class="form-group">
                         <label for="email">Category Type:</label>
@@ -159,17 +176,35 @@ html {
                                 <option value="blue">Blue</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="">Keeb Plate Option:</label>
+                            <select class="form-control select2 multiple-select select2-kplate" id="keeb-plate" name="k_plate[]" multiple="multiple">
+                                <option value="full">Full Plate</option>
+                                <option value="half">Half Plate</option>
+                                <option value="none">None Plate</option>
+                                <option value="tbd">TBD</option>
+                            </select>
+                        </div>
                     </div>
                     <!---------------------------- for keyset ------------------------->
                     <div class="for-keyset">
                         <div class="form-group">
                             <label for="email">Keyset Profile:</label>
-                            <select class="form-control select2" id="keeb-profile" name="profile">
+                            <select class="form-control select2" id="c-profile" name="profile">
                                 <option value="tbd">TBD</option>
                                 <option value="cherry">Cherry Profile</option>
                                 <option value="oem">OEM profile</option>
                                 <option value="sa">SA profile</option>
                                 <option value="kat">KAT profile</option>
+                                <option value="etc">ETC</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Keyset Material:</label>
+                            <select class="form-control multiple-select select2" style="margin-top:0px;" id="c-material" name="c_material">
+                                <option value="abs">ABS</option>
+                                <option value="pbt">PBT</option>
+                                <option value="pom">POM</option>
                                 <option value="etc">ETC</option>
                             </select>
                         </div>
@@ -226,6 +261,11 @@ html {
                                 </div>
                             </div>
                     </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Specs:</label>
+                        <textarea id="specs" name="specs" type="text" class="form-control" placeholder="Content"></textarea>
+                    </div>
+
                     <div className="input-group mb-3">
                         <div className="custom-file">
                             <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
@@ -237,6 +277,7 @@ html {
                     </div>
                     <br>
                     <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
                 </form>
             </div>
             <!-- </div> -->
@@ -247,12 +288,18 @@ html {
         <% include ./../../footer%>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 <script src="/api/js/datepicker/dist/datepicker.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-<script   src="/api/js/fileuploader/jquery.fileuploader.min.js"></script>
+<script src="/api/js/fileuploader/jquery.fileuploader.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> -->
+<% include ./../../tips/jsPackage %>
 <script type="text/javascript">
+     
 $(document).ready(function() {
     // window.dataLayer = window.dataLayer || [];
     // window.dataStorage = window.dataStorage || {};
@@ -265,6 +312,12 @@ $(document).ready(function() {
 
     //     // inputNameBrackets: false
     // });
+
+      $('.btn-cancel').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = '/api/category';
+
+    })
 
     function readURL(input){
         if(input.files && input.files[0]){
@@ -279,24 +332,16 @@ $(document).ready(function() {
         readURL(this);
     });
     $('.select2').select2();
+    $('#specs').summernote({
+        placeholder: 'Hello Bootstrap 4',
+        tabsize: 2,
+        height:300
+    });
+   
     $('#keeb-mounting').select2({
         placeholder: "Select keeb mounting type"
-        // allowClear: true
     })
-    // function formatState(state) {
-    //     if (!state.id) {
-    //         return state.text;
-    //     }
-    //     var baseUrl = "/user/pages/images/flags";
-    //     var $state = $(
-    //         '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
-    //     );
-    //     return $state;
-    // };
-
-    // $('.select2-kcolor').select2({
-    //     templateResult: formatState
-    // })
+   
 
     var a = $('.layout').val();
     console.log(a);
@@ -327,47 +372,15 @@ $(document).ready(function() {
     $('#datepicker1').datepicker();
     $('#datepicker2').datepicker();
 
-    // $("#add").click(function() { //when user clicks add
-    //     let elem;
-
-    //     elem = $("#boxes .position_value").clone(); //create a clone of the element
-    //     $("#container").append(elem); //add the new element to the bottom
-    //     elem.show(); //show it 
-
-    // });
-    $(".position_value").hide();
-
-
-    $('#add-for-keeb-color').on('click', function(e) {
-        e.preventDefault();
-        let elem;
-
-        elem = $("#keeb-color-boxes .position_value").clone(); //create a clone of the element
-        $("#keeb-color-container").append(elem); //add the new element to the bottom
-        elem.show(); //show it 
-    })
-    $('#add-for-keeb-layout').on('click', function(e) {
-        e.preventDefault();
-        let elem;
-
-        elem = $("#keeb-layout-boxes .position_value").clone(); //create a clone of the element
-        $("#keeb-layout-container").append(elem); //add the new element to the bottom
-        elem.show(); //show it 
-    })
-    $('#add-for-keyset-color').on('click', function(e) {
-        e.preventDefault();
-        let elem;
-
-        elem = $("#keyset-color-boxes .position_value").clone(); //create a clone of the element
-        $("#keyset-color-container").append(elem); //add the new element to the bottom
-        elem.show(); //show it 
-    })
     $(".position_value").hide();
     $(".category-type").val('');
     $("#color").val('');
     $("#keeb-profile").val('');
+    $('#c-profile').val('');
+    $('#c-material').val('');
     $("#layout").val('');
     $("#keeb-mounting").val('');
+    $("#keeb-plate").val('')
     $('#keeb-degree').val('');
     $(".keeb-flip").val('');
     $(".select2").val('');
