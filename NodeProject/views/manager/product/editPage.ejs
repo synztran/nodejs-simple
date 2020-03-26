@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Page | Product Edit</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css"> -->
+    <% include ./../../tips/cssPackage%>
+</head>
+
+<body>
+    <% include ./../../header%>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
+            </div>
+            <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
+            <% if(product != null){ %>
+            <div class="col-md-6">
+                <h1 class="text-center">
+                    <%= title %>
+                </h1>
+                
+                    <!----------------------- for top case ---------------------------->
+                    <% if(type == 0) { %>
+                    <form action='/api/product/edit/<%=product._id%>' method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="email">Category ID:</label>
+                        <input type="text" class="form-control" value="<%=product.category_id%>" disabled aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Name:</label>
+                        <input type="text" name="product_name" class="form-control" value="<%=product.product_name%>" id="catname" aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Outstock:</label>
+                        <select class="form-control" id="product_outstock" name="outstock">
+                            <option value="0">Outstock</option>
+                            <option value="1">Instock</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Top Case Color:</label>
+                        <select class="form-control k-top-color" id="k-top-color" name="top_color">
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Top Case Material:</label>
+                        <select class="form-control k_top_material" id="k-top-material" name="top_material">
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Price:</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input class="form-control" name="top_case_price" type="tel" value="" id="maxprice">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="input-group mb-3">
+                        <label>Image:</label>
+                        <div className="custom-file">
+                            <input type="file" name="picture" className="custom-file-input" id="topCaseInputImg" aria-describedby="inputGroupFileAddon01" />
+                            <label className="custom-file-label" htmlFor="inputGroupFile01">
+                                <img src="" id="topCase-img-tag" width="200px" />
+                        </div>
+                    </div>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                </form>
+                    <!------------------------- for bot case ----------------------------->
+                    <% } else if(type == 1) { %>
+                    <form action='/api/product/edit/<%=product._id%>' method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="email">Category ID:</label>
+                        <input type="text" class="form-control" value="<%=product.category_id%>" disabled aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Name:</label>
+                        <input type="text" name="product_name" class="form-control" value="<%=product.product_name%>" id="catname" aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Outstock:</label>
+                        <select class="form-control" id="product_outstock" name="outstock">
+                            <option value="0">Outstock</option>
+                            <option value="1">Instock</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Bottom Case Color:</label>
+                        <select class="form-control k-bot-color" id="k-bot-color" name="bot_color">
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Bottom Case Material:</label>
+                        <select class="form-control k-bot-material" id="k-bot-material" name="bot_material">
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Price:</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input class="form-control" name="bot_price" type="tel" value="" id="maxprice">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="input-group mb-3">
+                        <label>Image Profile:</label>
+                        <div className="custom-file">
+                            <input type="file" name="picture" className="custom-file-input" id="botCaseInputImg" aria-describedby="inputGroupFileAddon01" />
+                            <label className="custom-file-label" htmlFor="inputGroupFile01">
+                            </label>
+                            <img src="" id="botCase-img-tag" width="200px" />
+                        </div>
+                    </div>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                </form>
+                    <!------------------------- for plate -------------------------------->
+                    <% }else if(type == 2) { %>
+                    <form action='/api/product/edit/<%=product._id%>' method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="email">Category ID:</label>
+                        <input type="text" class="form-control" value="<%=product.category_id%>" disabled aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Name:</label>
+                        <input type="text" name="product_name" class="form-control" value="<%=product.product_name%>" id="catname" aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Outstock:</label>
+                        <select class="form-control" id="product_outstock" name="outstock">
+                            <option value="0">Outstock</option>
+                            <option value="1">Instock</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Plate Material:</label>
+                        <select class="form-control k-plate-material" id="k-plate-material" name="plate_material">
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Plate Option:</label>
+                        <select class="form-control k-plate-option" id="k-plate-option" name="plate_option">
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Price:</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input class="form-control" name="plate_price" type="tel" value="" id="maxprice">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="input-group mb-3">
+                        <label>Image Profile:</label>
+                        <div className="custom-file">
+                            <input type="file" name="picture" className="custom-file-input" id="plateInputImg" aria-describedby="inputGroupFileAddon01" />
+                            <label className="custom-file-label" htmlFor="inputGroupFile01">
+                            </label>
+                            <img src="" id="plate-img-tag" width="200px" />
+                        </div>
+                    </div>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                </form>
+                    <!------------------------- for frame -------------------------------->
+                    <% }else if(type == 3) { %>
+                    <!-- <div class="form-group">
+                        <label for="email">Plate Material:</label>
+                        <select class="form-control k-plate-material" id="k-plate-material" name="plate_material">
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Plate Option:</label>
+                        <select class="form-control k-plate-option" id="k-plate-option" name="plate_option">
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Price:</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input class="form-control" name="plate_price" type="tel" value="" id="maxprice">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="input-group mb-3">
+                        <label>Image Profile:</label>
+                        <div className="custom-file">
+                            <input type="file" name="picture" className="custom-file-input" id="frameInputImg" aria-describedby="inputGroupFileAddon01" />
+                            <label className="custom-file-label" htmlFor="inputGroupFile01">
+                            </label>
+                            <img src="" id="frame-img-tag" width="200px" />
+                        </div>
+                    </div> -->
+                    <!------------------------- for keyset -------------------------------->
+                    <% }else if(type == 4) { %>
+                    <form action='/api/product/edit/<%=product._id%>' method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="email">Category ID:</label>
+                        <input type="text" class="form-control" value="<%=product.category_id%>" disabled aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Name:</label>
+                        <input type="text" name="product_name" class="form-control" value="<%=product.product_name%>" id="catname" aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Surrogate Name:</label>
+                        <input type="text" name="replace_product_name" class="form-control" value="<%=product.replace_product_name%>" id="catname" aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Outstock:</label>
+                        <select class="form-control" id="product_outstock" name="outstock">
+                            <option value="0">Outstock</option>
+                            <option value="1">Instock</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Keyset Profile:</label>
+                        <select class="form-control select2" id="c_profile" name="c_profile">
+                            <option value="tbd">TBD</option>
+                            <option value="sa">SA profile</option>
+                            <option value="cherry">Cherry profile</option>
+                            <option value="oem">OEM profile</option>
+                            <option value="kat">KAT</option>
+                            <option value="etc">etc</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Keyset Color:</label>
+                        <select class="form-control multiple-select select2" style="margin-top:0px;" id="c_code_color" name="code_color[]" multiple="multiple">
+                            <option class="c-n7" value="red">N7</option>
+                            <option class="c-l9" value="green">L9</option>
+                            <option class="c-v1" value="blue">V1</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Keyset Material:</label>
+                        <select class="form-control multiple-select" style="margin-top:0px;" id="c_material" name="c_material">
+                            <option value="0">ABS</option>
+                            <option value="1">PBT</option>
+                            <option value="2">POM</option>
+                            <option value="3">ETC</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Price:</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input class="form-control" name="c_price" type="tel" value="<%= product.price%>" id="c-price">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="input-group mb-3">
+                        <div className="custom-file">
+                            <input type="file" name="picture" className="custom-file-input" id="keysetInputImg" aria-describedby="inputGroupFileAddon01" />
+                            <label className="custom-file-label" htmlFor="keysetInputImg">
+                            </label>
+                            <img src="/api/<%= product.pic_product.path %>" id="keyset-img-tag" width="200px" />
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                </form>
+                    <% }else{ %>
+
+                    <% } %>
+                    
+            </div>
+            <% } %>
+        </div>
+        <!-- </div> -->
+    </div>
+    <div class="footer" style="text-align: center;">
+        <% include ./../../footer%>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<% include ./../../tips/jsPackage %>
+<script type="text/javascript">
+$(document).ready(function() {
+    var url = (window.location).href;
+    console.log(url);
+    var res = url.split("/").pop();
+    console.log(res);
+    $('.select2').select2();
+
+
+    // $('#k_color').select2("data", {k_color: [red]})
+    $('#datepicker').datepicker();
+    $('#datepicker1').datepicker();
+    $('#datepicker2').datepicker();
+
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#keyset-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#keysetInputImg').change(function() {
+        readURL(this);
+    });
+
+    // $('.k_layout').select2('val',[60%]);
+    $('.btn-cancel').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = '/api/product';
+
+    })
+
+
+    fetch('/api/product/get/' + res).then(function(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json();
+    }).then(function(responseAsJson) {
+        console.log(responseAsJson);
+
+        var product_details = responseAsJson;
+        // var color = category_details.k_color;
+        // var layout = category_details.k_layout;
+        // var degree = category_details.k_degree;
+        var part = product_details.product_part
+        var outstock = product_details.outstock;
+        var color = product_details.c_code_color;
+        var profile = product_details.c_profile
+        var material = product_details.c_material
+        var pic_path = product_details.pic_product['path'];
+        // console.log(pic_path)
+        // console.log(color)
+        // console.log(profile);
+        // console.log(material);
+
+        $('#product_outstock').val(outstock);
+        $('#profile-img-tag').attr('src', '/api/' + pic_path);
+        if (part == 0) { // top case
+
+        } else if (part == 1) { // bot case
+
+        } else if (part == 2) { // plate
+
+        } else if (part == 3) { // frame
+
+        } else if (part == 4) { // keyset
+            $('#c_profile').val(profile);
+            $('#c_profile').trigger('change');
+            $('#c_material').val(material);
+
+            $('#c_code_color').val(color);
+            $('#c_code_color').trigger('change');
+        }
+
+        // $('#inputGroupFile01').val(pic_path);
+
+        // $('#k_layout').val(layout);
+        // $('#k_layout').trigger('change');
+
+        // $('#k_degree').val(degree);
+        // $('#k_degree').trigger('change');
+
+        // $('#k_mounting').val(mounting);
+        // $('#k_mounting').trigger('change');
+
+
+    })
+});
+</script>
+
+</html>
