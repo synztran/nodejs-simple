@@ -95,6 +95,7 @@ app.use('/api/docs/upload', express.static('docs/upload'))
 app.use('/api/docs/trash', express.static('docs/trash'))
 app.use('/product/img', express.static('docs/pimg'))
 app.use('/product/css', express.static('lib/css/pcss'))
+app.use('/nodemodules', express.static('node_modules'))
 
 
 

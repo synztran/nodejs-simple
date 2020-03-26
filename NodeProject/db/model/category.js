@@ -16,6 +16,16 @@ var categorySchema = mongoose.Schema({
     category_name:{
         type: String
     },
+    manufacturing:{
+        type: String
+    },
+    author:{
+        type: String
+        
+    },
+    proxy_host:{
+        type: String
+    },
     status_gb:{ // status: 0 = end | 1 = IC | 2 = live
         type: Number,
         default: 1
@@ -44,7 +54,8 @@ var categorySchema = mongoose.Schema({
         type: Number
     },
     k_degree:[],
-    k_mounting:[], 
+    k_mounting:[],
+    k_plate_option:[],
     sale_type:[],
     date_start:{
         type: Date,

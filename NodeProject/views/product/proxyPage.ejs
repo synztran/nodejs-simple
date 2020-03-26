@@ -149,7 +149,13 @@ html, body{
 
 
 
-
+.product-options > div:nth-child(2){
+    text-align: right;
+}
+.proxy-keeb-degree > span{
+    text-align: right;
+    width: 100%
+}
 
  
  
@@ -230,7 +236,7 @@ html, body{
                 height: 100%;
                 object-fit: cover;" src="/api/<%= item.pic_profile.path %>" alt="" />
                                 <div class="image_overlay"></div>
-                                <div class="view_details"><a href="">View details</a></div> 
+                                <div class="view_details"><a href="/proxygb/product/<%=item.category_id%>">View details</a></div> 
                                 <!---------------- for keeb ------------>
                                 <% if(item.type == 0) { %>
                                 <div class="stats">
@@ -254,17 +260,23 @@ html, body{
                                             </div>
 
                                             <div style="padding: 0" class="col-md-6">
-                                                    <strong>Layout</strong>
-                                            <span><%= item.k_layout%></span>
-                                            <strong>Degree</strong>
-                                            <div style="display: flex;" class="proxy-keeb-degree">
-                                                <% for (var key in item.k_degree){%>
-                                                    <span><%= item.k_degree[key]%>°&nbsp</span>
-                                                <% } %>
-                                            </div>
+                                                <strong>Layout</strong>
+                                                <span>
+                                                    <% for(var i in item.k_layout){ %>
+                                                        <%= item.k_layout[i]%>&nbsp;
+                                                    <% } %>   
+                                                </span>
+                                                <strong>Degree</strong>
+                                                    <div style="display: flex;" class="proxy-keeb-degree">
+                                                        <span>
+                                                            <% for (var key in item.k_degree){%>
+                                                                <%= item.k_degree[key]%>°&nbsp
+                                                            <% } %>
+                                                        </span>
+                                                    </div>
 
-                                            <strong>Start - End</strong>
-                                            <span><%= (item.date_start).toLocaleDateString()%> - <%= (item.date_end).toLocaleDateString()%></span>
+                                                <strong>Start - End</strong>
+                                                <span><%= (item.date_start).toLocaleDateString()%> - <%= (item.date_end).toLocaleDateString()%></span>
                                             </div>
                                             
                                         </div>
@@ -333,6 +345,8 @@ html, body{
                 <!-- </div> -->
                 
             </article>
+            <% }else{ %>
+            <% window.location.href = '/proxygb';  %>
             <% } %>
         </div>
     </main>
