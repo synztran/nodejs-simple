@@ -490,12 +490,26 @@ router.get('/product', async (req, res) => {
     });
 })
 
-router.get('/product/get/:id', async(req, res)=>{
+router.get('/product/getpid/:id', async(req, res)=>{
+    console.log("params"+req.params.id);
+    try{
+        // var check = await Product.findById(req.params.id).exec()
+        var check = await Product.findById(req.params.id, function(err, docs){
+            // console.log(docs[0]);
+        }).exec();
+        
+        res.send(check).status(200);
+    }catch(err){
+        res.send(err).status(404)
+    }
+})
+
+router.get('/product/getcid/:id', async(req, res)=>{
     console.log("params"+req.params.id);
     try{
         // var check = await Product.findById(req.params.id).exec()
         var check = await Product.find({category_id: req.params.id}, function(err, docs){
-            console.log(docs[0]);
+            // console.log(docs[0]);
         }).exec();
         
         res.send(check).status(200);
@@ -1124,8 +1138,20 @@ router.get('/category/edit/:id', async(req, res)=>{
 })
 
 router.get('/category/get/:id', async(req, res) =>{
+    
     try{
         var check = await Category.findById(req.params.id).exec();
+        res.send(check).status(200);
+    }catch(err){
+        res.send(err).status(404)
+    }
+})
+
+router.get('/category/getcid/:id', async(req, res) =>{
+    console.log("req.prams "+ req.params.id)
+    try{
+        var check = await Category.findOne({category_id: req.params.id}).exec();
+        console.log(check);
         res.send(check).status(200);
     }catch(err){
         res.send(err).status(404)

@@ -361,7 +361,7 @@ $(document).ready(function() {
     })
 
 
-    fetch('/api/product/get/' + res).then(function(response) {
+    fetch('/api/product/getpid/' + res).then(function(response) {
         if (!response.ok) {
             throw Error(response.statusText);
         }
@@ -380,7 +380,8 @@ $(document).ready(function() {
         var material = product_details.c_material
         var pic_path = product_details.pic_product['path'];
         // console.log(pic_path)
-        // console.log(color)
+        console.log("color" +color)
+        console.log(outstock)
         // console.log(profile);
         // console.log(material);
 
@@ -401,6 +402,7 @@ $(document).ready(function() {
 
             $('#c_code_color').val(color);
             $('#c_code_color').trigger('change');
+
         }
 
         // $('#inputGroupFile01').val(pic_path);

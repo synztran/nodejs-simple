@@ -67,7 +67,11 @@ html {
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
                 </p> -->
                 <!-- enctype="multipart/form-data" -->
+              
+                
                 <form action='/api/category/add' method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Build your own form!</legend>
                     <div class="form-group">
                         <label for="email">GB status:</label>
                         <select class="form-control" name="status">
@@ -278,6 +282,7 @@ html {
                     <br>
                     <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
                     <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                    </fieldset>
                 </form>
             </div>
             <!-- </div> -->
