@@ -200,7 +200,7 @@ router.get("/", function(req, res) {
     // }
 });
 
-router.get('/danvvgky', async(req, res)=>{
+router.get('/register', async(req, res)=>{
     res.render("product/registerPage");
 })
 
@@ -698,6 +698,34 @@ router.get('/proxygb/product/:id' , async(req, res)=>{
             })
     }catch(err){
         res.status(400).send(err);
+    }
+})
+
+router.get('/proxygb/payment/:id', async(req, res)=>{
+    console.log(req.params.id)
+    try{
+        Product.find({category_id: req.params.id}, function(err, docs){
+            if(docs[0]){
+                Category.findOne({category_id: docs[0].category_id},function(err, docs2){
+                    
+                    console.log(docs);
+                    console.log(docs2);
+                    res.render('product/joingbPage',{
+                        title: 'Payment',
+                        "Payment": docs,
+                        "Category": docs2,
+                    })
+                })
+
+            }else{
+                res.redirect('/404Page')
+            }
+           
+        })
+
+
+    }catch(err){
+        res.status(200).send(err);
     }
 })
 // ---------------------------------------------------------------------------------------------

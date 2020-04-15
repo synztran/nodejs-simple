@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NoobKey | Join Group Buy</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--===================== google fornt ===================================== -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <!--  -->
+    <!-- ==================== CSS ==============================================-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/package/lightslider/src/css/lightslider.css">
+    <link rel="stylesheet" href="/api/css/pcss/joingbpage/style.css">
+    <link rel="stylesheet" href="/api/css/pcss/joingbpage/border-effect.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css"> -->
+    <link rel="stylesheet" href="/api/css/effect/navbar.css">
+    <link rel="stylesheet" href="/api/css/effect/preloading.css">
+    <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css">
+    <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
+    <!--  -->
+    <!--==================== SCRIPT =========================================== -->
+    <script src="/api/js/pjs/modernizr.js"></script>
+    <% include ./../tips/cssPackage %>
+</head>
+<style type="text/css">
+/* Generals resets and unimportant stuff */
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    font-family: "Montserrat", sans-serif !important;
+    height: 100%;
+    width: 100%;
+    /*background-image: url('/api/docs/background/UIBkAT.jpg');*/
+    background-repeat: no-repeat;
+    background-color: transparent;
+    box-sizing: border-box;
+}
+
+nav.navbar {
+    z-index: 10;
+    position: sticky;
+    top: 0;
+    background-image: url('/api/docs/background/UIBkAT.jpg');
+    background-repeat: no-repeat;
+    /* clip-path: polygon(0 13%, 99% 24%, 100% 92%, 17% 86%); */
+
+}
+
+.bg-dark {
+    background-color: transparent !important;
+    /* clip-path: polygon(50% 0%, 100% 0, 100% 61%, 30% 86%, 0 52%, 0 0); */
+}
+
+.before-breadcrumb {
+    opacity: 0.91;
+    position: relative;
+    /*top: 1%;*/
+    background-color: rgba(54, 58, 64, 0.3);
+    background-image: url('/api/docs/background/UIBkAT.jpg');
+    background-repeat: no-repeat;
+    filter: brightness(150%);
+    /* -webkit-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
+        -moz-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
+        box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79); */
+}
+
+.breadcrumb {
+    max-width: 70%;
+    margin: 0 auto;
+    background-image: url('/api/docs/background/UIBkAT.jpg');
+    background-repeat: no-repeat;
+    background-color: transparent;
+
+}
+
+.row:first-child>.col-md-12 {
+    display: flex;
+}
+
+.row {
+    height: unset;
+    position: relative;
+    top: 5%;
+}
+
+.btn-submit {
+    /*border-radius: 50px;
+    min-width: 160px;*/
+}
+
+.footer-register {
+    height: 10%;
+}
+
+@import "compass/css3";
+
+.seperator-wrapper {
+    width: 100%;
+}
+
+.seperator-wrapper .seperator {
+    width: 100%;
+    margin: 0 auto;
+    height: 5px;
+    animation: rotate 3s infinite linear;
+    -webkit-animation: rotate 3s infinite linear;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        background-position: -3000px;
+    }
+
+    to {
+        background-position: 0px;
+    }
+}
+
+@keyframes rotate {
+    from {
+        background-position: -3000px;
+    }
+
+    to {
+        background-position: 0px;
+    }
+}
+
+.gradient {
+    background: #30ff90;
+    /* Old browsers */
+    background: -moz-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #30ff90), color-stop(25%, #ed2ded), color-stop(50%, #c99826), color-stop(75%, #30ffe6), color-stop(100%, #30ff90));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+    /* IE10+ */
+    background: linear-gradient(to right, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30ff90', endColorstr='#30ff90', GradientType=1);
+    /* IE6-9 */
+}
+
+ul.lSGallery>li>a>img {
+    width: 40px !important;
+    height: 30px !important
+}
+
+ul.lSGallery>li {
+    width: unset !important;
+    height: unset !important;
+}
+
+ul.item-details,
+ul.item-timeline {
+    list-style: none;
+}
+
+.w-50 {
+    width: 50%
+}
+
+.w-10 {
+    width: 10%;
+}
+
+.w-20 {
+    width: 20%;
+}
+
+.w-25 {
+    width: 25%;
+}
+
+.w-75 {
+    width: 75%;
+}
+
+.main {
+    margin: 2% 15% !important
+}
+</style>
+
+<body id="top">
+    <div id="preloader">
+        <div id="loader" class="dots-jump">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <!-- Logo Image -->
+                <img src="https://res.cloudinary.com/mhmd/image/upload/v1557368579/logo_iqjuay.png" width="45" alt="" class="d-inline-block align-middle mr-2">
+                <!-- Logo Text -->
+                <span class="text-uppercase font-weight-bold">Company</span>
+            </a>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+            <!--  <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="./" class="nav-link">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Group Buy</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                </ul>
+            </div> -->
+        </div>
+    </nav>
+    <!-- </header> -->
+    <!-- <nav class="before-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Library</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+    </nav> -->
+    <section style="position: relative;" class="seperator-wrapper">
+        <div class="seperator gradient">
+        </div>
+    </section>
+    <!-- Breakcum-->
+    <main class="main row">
+        <div class="col-md-12">
+            <!--  <div class="title-li">
+                <p style="">Product details</p>
+                <hr>
+            </div> -->
+            <article class="row">
+                <div class="col-md-9">
+                    <div class="form-group joingbpage-payment-product">
+                        <span class="img-product">
+                            <picture>
+                                <img style="width: 60px;height: 60px;object-fit: cover" class="responsive carousel-image img-zoomable" src="/api/<%=Category.pic_profile.path%>">
+                            </picture>
+                        </span>
+                        <h2>
+                            <%= Category.category_name %>
+                        </h2>
+                        <span>$
+                            <%= Category.min_price %> - $
+                            <%= Category.max_price %></span>
+                    </div>
+                    <div class="form-group joingbpage-list-product">
+                        <!-- <div class="form-group joingbpage-select-product" data-id="123" id="form_1">
+                            <h3>Select Product</h3>
+                            <hr>
+                            <div class="selected-product">
+                                <span class="img-product">
+                                    <picture>
+                                        <img style="width: 90px;height: 90px;object-fit: cover" class="responsive carousel-image img-zoomable" src="/api/<%=Category.pic_profile.path%>">
+                                    </picture>
+                                </span>
+                                <div class="form-margin-left w-100" id="anc123">
+                                    <label for="">Product Type:</label>
+                                    <select class="form-control select2 multiple-select select2-product" id="keeb-plate" name="product[]">
+                                        <% for(var i in Payment){ %>
+                                        <option value="<%= Payment[i].product_id %>" data-image="<%= Payment[i].pic_product.path %>">
+                                            <%= Payment[i].product_name  %> (
+                                            <%= Payment[i].price %>$)
+                                        </option>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <div class="form-quantity-select w-20">
+                                    <label for="quantity">Quantity:</label>
+                                  
+                                    <select class="form-control select2-quantity" style="margin-top:0px;" id="c-material" name="quantity">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="form-group joingbpage-button-addon">
+                        <div class="sketchy">
+                            <a href="#" id="addMore">Add more item</a>
+                        </div>
+                    </div>
+                </div><!-- end of col-md-9 -->
+                <div class="col-md-3 box-details">
+                    <!-- right -->
+                    <h2>Order details</h2>
+                    <hr>
+                    <div class="joingb-details-order form-group">
+                        <ul>
+                            <li class="quantity">
+                                <span class="text-details">Qantity</span>
+                                <span class="t-right">0</span>
+                            </li>
+                            <li>
+                                <span class="text-details">Subtotal</span>
+                                <span class="t-right">$0</span>
+                            </li>
+                            <li>
+                                <span class="text-details">Shipping & Handling</span>
+                                <span class="t-right">$0</span>
+                            </li>
+                            <li>
+                                <span class="text-details">Estimated Tax</span>
+                                <span class="t-right">$0.00</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <div class="joingb-details-order form-group">
+                        <ul>
+                            <li>
+                                <span class="text-details font-b">Total(USD)</span>
+                                <span class="t-right font-b">$0</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="button-payment">
+                        <button class="btn-secondary btn-lg" style="width: 100%">PLACE ORDER</button>
+                        <p class="t-center"><i class="fas fa-lock"></i>Secure Checkout</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+    <!-- main-->
+    <div class="footer-register center">
+    </div>
+</body>
+<% include ./../tips/jsPackage %>
+<!-- <script src="/nodemodules/zooming/build/zooming.min.js"></script> -->
+<script type="text/javascript" src="/package/lightslider/src/js/lightslider.js"></script>
+<script type="text/javascript" src="https://unpkg.com/zooming"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     new Zooming({
+    //     }).listen('.img-zoomable')
+    // })
+    new Zooming().listen('.img-zoomable')
+
+
+
+    var url = (window.location).href;
+    var a1 = window.location.hostname + ':5000'
+    console.log(a1)
+    var res = url.split("/").pop();
+    console.log(res);
+
+    $('.select2-product').val('');
+    // $('.select2-quantity').select2();
+
+
+    fetch('/api/product/getcid/' + res).then(function(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json();
+    }).then(function(responseAsJson) {
+        console.log(responseAsJson);
+        var product = responseAsJson;
+
+
+        var MaxInputs = 10; //maximum extra input boxes allowed
+        var InputsWrapper = $(".joingbpage-list-product .joingbpage-select-product"); //Input boxes wrapper ID
+        console.log(InputsWrapper);
+        var AddButton = $("#addMore"); //Add button ID
+
+        var x = (InputsWrapper.length); //initlal text box count
+        console.log(x);
+        var FieldCount = 1; //to keep track of text box added
+        var total = 0;
+        // var totalHaveChange = 0;
+        var sum = 0;
+
+        var dynamic = "";
+
+        for (var i in product) {
+            console.log()
+            dynamic += '<option  value="' + product[i].product_id + '" data-image="' + product[i].pic_product.path + '">' + product[i].product_name + " " + "(" + product[i].price + "$)" + '</option>'
+        }
+
+        var listquantity = "";
+
+        for (var count = 1; count <= 10; count++) {
+            listquantity += '<option value="' + count + '">' + count + '</option>'
+        }
+
+
+        fetch('/api/category/getcid/' + res).then(function(response2nd) {
+            if (!response2nd.ok) {
+                throw Error(response2nd.statusText);
+            }
+            return response2nd.json();
+        }).then(function(response2ndAsJson) {
+            console.log(response2ndAsJson);
+            var category = response2ndAsJson;
+            console.log(category.status_gb);
+            var status = category.status_gb;
+
+            var image = '/api/' + category.pic_profile.path;
+            console.log(image);
+
+            $('.joingbpage-list-product .image2nd-include .selected-product .img-product picture img').attr('src', image)
+
+            if (status == 0) {
+
+            } else {
+
+            }
+
+
+
+
+            //on add input button click
+            $(AddButton).click(function(e) {
+                // $('.joingb-details-order ul .quantity .t-right').html(1)
+
+                // alert('total = ' + total);
+
+                //max input box allowed
+                if (x <= MaxInputs) {
+
+                    FieldCount++; //text box added ncrement
+                    //add input box
+
+                    $('.joingbpage-list-product').append('<div class="form-group image2nd-include joingbpage-select-product" id="form_' + x + '">                            <h3>Select Product</h3>                            <hr><div class="selected-product"  >                            <span class="img-product">                                <picture>                                    <img style="width: 90px;height: 90px;object-fit: cover" class="responsive carousel-image img-zoomable2nd" src="' + image + '">                                </picture>                            </span>                            <div class="form-margin-left w-100">                                <label for="">Product Type:</label>                                <select style="font-weight: bold" data-id="'+x+'" class="form-control select2 multiple-select select2-product" name="product[]">                                  ' + dynamic + '  </select>                            </div>                            <div class="form-quantity-select w-20">                                <label for="quantity">Quantity:</label>                                 <select class="form-control select2-quantity" style="margin-top:0px;" id="quantity" name="quantity[]">                                       ' + listquantity + '                                     </select>                            </div>                        <a href="#" data-id="' + x + '" class="removeclass">Remove</a></div></div>');
+
+                    // disable auto select for select2
+
+                    $("#form_" + x + " .selected-product .w-100 .select2-product").val('');
+                    $("#form_" + x + " .selected-product .w-20 select.select2-quantity").each(function(){
+                         // $("#form_" + x + " .selected-product .w-20 select.select2-quantity").val();
+                         // alert(this.value);
+                         total += Number($(this).val())
+                         alert("total = "+ total)
+
+                    });
+                    $('.joingb-details-order ul .quantity .t-right').html(total);
+
+                    
+
+
+                    $(".joingbpage-list-product .joingbpage-select-product .selected-product .form-quantity-select select").on('change', function(e) {
+                        e.preventDefault();
+                        alert($(this).attr('data-id'));
+                        var totalHaveChange = 0;
+                        alert("Beforer = " + totalHaveChange)
+                        // $('select :selected').each(function() {
+                            totalHaveChange = Number($(this).val());
+                        // });
+                        // $("#sum").html(sum);
+                        alert("have change = " +totalHaveChange)
+                        alert("before total = " +total)
+                        sum = total-1+totalHaveChange;
+
+                        alert("total= "+total)
+                        alert("sum = "+ sum)
+                        $('.joingb-details-order ul .quantity .t-right').html(sum)
+                        total = sum;
+                        // total += sum;
+                        // var quan = this.value
+                        // alert(quan)
+
+                    })
+
+
+
+                     
+                  
+                    // $('.joingb-details-order ul .quantity .t-right').html(l)
+                    // alert(l); //giá trị quantity attr khi xóa
+
+
+                    // }
+                    x++; //text box increment
+                    // $('.joingb-details-order ul .quantity .t-right').html(x)
+                   
+                    $(".joingbpage-button-addon").show();
+
+
+
+                    // $('AddMoreFileBox').html("Add field");
+
+                    // Delete the "add"-link if there is 3 fields.
+                    if (x == 10) {
+                        $(".joingbpage-button-addon").hide();
+                        // $("#lineBreak").html("<br>");
+                    }
+                    $(".select2-product").select2({
+
+                        templateResult: function(idioma) {
+                            console.log($(this).parent())
+                            console.log(idioma);
+                            console.log(idioma.element)
+                            console.log($(idioma.element).data('image'));
+                            var x = $(idioma.element).data('image')
+                            var y = '/api/' + x;
+                            var href = a1 + '/api/' + x;
+                            console.log(href)
+
+                            var $span = $("<span style='font-weight: bold'><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
+
+                            return $span;
+                        },
+                        templateSelection: function(idioma) {
+                            console.log($(this).closest('.joingbpage-select-product').attr('id'))
+                            var x = $(idioma.element).data('image')
+                            console.log(idioma.id);
+                            var y = '/api/' + x;
+                            var href = a1 + '/api/' + x;
+                            // for (var i in product) {
+                            //     if (idioma.id == product[i].product_id) {
+                            //         $('.joingbpage-select-product .img-product picture img').attr("src", y)
+                            //     }
+                            // }
+
+                            var $span = $("<span style='font-weight: bold'><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
+                            return $span;
+                        }
+                    });
+
+                    // new Zooming().listen('.img-zoomable2nd')
+
+
+                    console.log("count" + FieldCount);
+
+
+                    // $('#form_1 .selected-product .form-quantity-select input').val()
+
+
+
+                    $('.select2-product').on('select2:select', function(e) {
+                        console.log(e);
+                        console.log(e.params)
+                        console.log(e.params.data);
+                        console.log(e.params.data['id']);
+                        var idioma = e.params.data['id'];
+                        var godfather = $(this).closest('.joingbpage-select-product').attr('id');
+                        console.log(godfather);
+                        for (var i in product) {
+                            if (idioma == product[i].product_id) {
+                                console.log(product[i].product_id);
+                                $("#" + godfather + " .selected-product .img-product picture img").attr("src", '/api/' + product[i].pic_product.path)
+
+                            }
+                        }
+
+
+                        console.log(this)
+                        console.log($(this).closest('.joingbpage-select-product').attr('id'))
+                        console.log($(this).parent('div').parent('div'));
+                        console.log($(this).parent('div').parent('div').attr('id'));
+                        var strChosen = $(this).attr('id');
+                        console.log(strChosen);
+                    })
+
+
+                }
+                return false;
+            });
+
+
+
+
+            // $(".joingbpage-list-product #form_" + x + " .selected-product ").on('click', function() {
+
+            //     var sample = $(".w20 select").val()
+            //     alert(sample);
+
+            //     $('.joingb-details-order ul .quantity .t-right').html(sum)
+
+            // })
+
+
+            // end of function
+
+            $(".joingbpage-list-product").on("click", ".removeclass", function(e) { //user click on remove text
+                var value = $(this).attr('data-id');
+                alert(value);
+                var l = $("#form_" + value + " .selected-product .w-20 select.select2-quantity").val();
+                alert(l); //giá trị quantity attr khi xóa
+
+                var k = $(".box-details .joingb-details-order ul li.quantity span.t-right").text();
+                alert(k); //sum hiện tại
+
+
+                $('.joingb-details-order ul .quantity .t-right').html(k - l)
+
+                // alert(sum)
+                // $("#form_" + value + " .selected-product .w-20 select.select2-quantity").change(function() {
+                //       var selectedCountry = $(this).children("option:selected").val();
+                //       alert("You have selected the country - " + selectedCountry);
+                //   });
+                // alert(value)
+                console.log(x)
+                if (x > 1) {
+                    console.log($(this).parent('div').parent('div'));
+                    $(this).parent('div').parent('div').remove(); //remove text box
+                    x--; //decrement textbox
+                    console.log("#form_" + value);
+
+
+
+                    // alert(sample);
+                    $(".joingbpage-button-addon").show();
+                    // $('.joingb-details-order ul .quantity .t-right').html(x)
+
+
+
+                    // $("#lineBreak").html("");
+
+                    // Adds the "add" link again when a field is removed.
+                    $('AddMoreFileBox').html("Add field");
+                }
+                return false;
+            })
+
+
+
+
+
+            $(".select2-product").select2({
+                templateResult: function(idioma) {
+                    console.log($(this).parent().prev())
+                    console.log(idioma);
+                    console.log($(idioma.element).data('image'));
+                    var x = $(idioma.element).data('image')
+                    var y = '/api/' + x;
+                    var href = a1 + '/api/' + x;
+                    console.log(href)
+
+                    var $span = $("<span><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
+
+                    return $span;
+                },
+                templateSelection: function(idioma) {
+                    console.log($(this).parent().prev().find('select option:selected').val());
+
+                    console.log($(this).parent())
+                    console.log(idioma.id)
+                    var x = $(idioma.element).data('image')
+                    console.log(x);
+                    var y = '/api/' + x;
+                    var href = a1 + '/api/' + x;
+                    // for (var i in product) {
+                    //     if (idioma.id == product[i].product_id) {
+                    //         $('.joingbpage-select-product .img-product picture img').attr("src", y)
+                    //     }
+                    // }
+
+                    var $span = $("<span><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
+                    return $span;
+                }
+            });
+
+
+            $('.select2-product').on('select2:select', function(e) {
+
+                console.log(e);
+                console.log(e.params)
+                console.log(e.params.data);
+                console.log(e.params.data['id']);
+                var idioma = e.params.data['id'];
+                var godfather = $(this).closest('.joingbpage-select-product').attr('id');
+                console.log(godfather);
+                for (var i in product) {
+                    if (idioma == product[i].product_id) {
+                        console.log(product[i].product_id);
+                        $("#" + godfather + " .selected-product .img-product picture img").attr("src", '/api/' + product[i].pic_product.path)
+
+
+                    }
+                }
+
+
+                console.log(this)
+                console.log($(this).closest('.joingbpage-select-product').attr('id'))
+                console.log($(this).parent('div').parent('div'));
+                console.log($(this).parent('div').parent('div').attr('id'));
+                var strChosen = $(this).attr('id');
+                console.log(strChosen);
+            })
+
+
+
+        })
+
+    })
+
+
+
+    fetch('/api/category/getcid/' + res).then(function(response2nd) {
+        if (!response2nd.ok) {
+            throw Error(response2nd.statusText);
+        }
+        return response2nd.json();
+    }).then(function(response2ndAsJson) {
+        console.log(response2ndAsJson);
+        var category = response2ndAsJson;
+        console.log(category.status_gb);
+        var status = category.status_gb;
+
+        var image = '/api/' + category.pic_profile.path;
+        console.log(image);
+
+        $('.joingbpage-list-product .image2nd-include .selected-product .img-product picture img').attr('src', image)
+
+        if (status == 0) {
+
+        } else {
+
+        }
+
+    })
+
+
+
+
+})
+</script>
+
+</html>

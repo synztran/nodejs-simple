@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title>NoobKey | Details Product</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <!--===================== google fornt ===================================== -->
@@ -263,8 +263,8 @@ ul.item-timeline {
                     <h1><b>
                             <%= Category.category_name %></b></h1>
                     <div class="form-group product-author-host">
-                        <span>Design by</span>&nbsp;<a href="#" style="color: red">
-                            <%= Category.author %></a> - <span>Host by</span>&nbsp;<a href="#"><%= Category.proxy_host%></a>
+                        <span>Design by</span>&nbsp;<a href="#" style="color: red;font-size: 22px">
+                            <%= Category.author %></a> - <span>Host by</span>&nbsp;<a style="font-size: 22px" href="#"><%= Category.proxy_host%></a>
                     </div>
                     <div class="form-group">
                         <a href="#">Shipping</a>&nbsp;<span>calculated at checkout.</span>
@@ -288,7 +288,7 @@ ul.item-timeline {
                         <div class="kit-option">
                             <form class="w-50">
                                 <div style="display: flex;  " class="form-group main-select">
-                                    <div class="form-group w-75">
+                                    <div class="form-group w-100">
                                         <label for="kit">Kit:</label>
                                         <select class="form-control select2" id="c-profile" name="profile">
                                             <% for( var i in detailsProduct){ %>
@@ -300,12 +300,13 @@ ul.item-timeline {
                                     </div>
                                     &nbsp;
                                 
-                                    <div class="form-group w-20">
+                                  <!--   <div class="form-group w-20">
                                         <label for="quantity">Quantity:</label>
                                         <input type="number" name="quantity" min="1" class="form-control" value="1" id="quantity" aria-describedby="quantity">
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <button type="submit" id="btn-add" class="btn btn-outline-success btn-lg btn-block btn-submit">Join group buy</button>
+                                
+                                <button type="submit" id="btn-add" class="btn btn-outline-success btn-lg btn-block btn-join" data-id="<%= Category.category_id %>">Join group buy</button>
                                 <button type="submit" id="btn-paypal" class="btn btn-warning btn-lg btn-block btn-cancel"> <span>Buy with
                                         <svg style="height: 18px; width: 63.4737px;" viewBox="0 0 67 19">
                                             <path d="M8.44.57H3.29a.718.718 0 0 0-.707.61L.502 14.517c-.041.263.16.5.425.5h2.458a.718.718 0 0 0 .707-.61l.561-3.597a.717.717 0 0 1 .706-.611h1.63c3.391 0 5.349-1.658 5.86-4.944.23-1.437.01-2.566-.657-3.357C11.461 1.029 10.162.57 8.44.57zm.594 4.87C8.752 7.308 7.34 7.308 5.976 7.308h-.777l.545-3.485a.43.43 0 0 1 .424-.366h.356c.93 0 1.807 0 2.26.535.27.32.353.794.25 1.45zm14.796-.06h-2.466a.43.43 0 0 0-.424.367l-.109.696-.172-.252c-.534-.783-1.724-1.044-2.912-1.044-2.725 0-5.052 2.084-5.505 5.008-.235 1.46.1 2.854.919 3.827.75.894 1.826 1.267 3.105 1.267 2.195 0 3.412-1.426 3.412-1.426l-.11.692a.432.432 0 0 0 .424.502h2.22a.718.718 0 0 0 .707-.61l1.333-8.526a.43.43 0 0 0-.423-.5zm-3.437 4.849c-.238 1.422-1.356 2.378-2.782 2.378-.716 0-1.288-.232-1.655-.672-.365-.436-.503-1.058-.387-1.75.222-1.41 1.359-2.397 2.763-2.397.7 0 1.269.235 1.644.678.375.448.524 1.073.417 1.763zM36.96 5.38h-2.478a.716.716 0 0 0-.592.318l-3.417 5.085-1.448-4.887a.719.719 0 0 0-.687-.515h-2.435a.433.433 0 0 0-.407.573l2.73 8.09-2.567 3.66a.434.434 0 0 0 .35.684h2.475a.712.712 0 0 0 .588-.31l8.24-12.016a.434.434 0 0 0-.352-.681z" style="fill: rgb(37, 59, 128);"></path>
@@ -377,7 +378,15 @@ $(document).ready(function() {
     //     new Zooming({
     //     }).listen('.img-zoomable')
     // })
-    // new Zooming().listen('.img-zoomable')
+    new Zooming().listen('.img-zoomable')
+
+
+    $('.btn-join').on('click', function(e){
+        e.preventDefault();
+        var id = $(this).attr('data-id');
+        console.log(id);
+        window.location.href = "/proxygb/payment/" + id;
+    })
     var url = (window.location).href;
     var res = url.split("/").pop();
     console.log(res);
@@ -458,7 +467,7 @@ $(document).ready(function() {
         console.log(category.status_gb);
         var status = category.status_gb;
 
-        if(status == 0){
+        if(status == 0 || status == 1){
           
                         $("#btn-add, #btn-paypal").attr("disabled", true)
         }else{

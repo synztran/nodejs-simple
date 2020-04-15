@@ -21,7 +21,7 @@ var categorySchema = mongoose.Schema({
     },
     author:{
         type: String
-        
+       
     },
     proxy_host:{
         type: String

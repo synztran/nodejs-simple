@@ -184,7 +184,7 @@
                 <form action='/api/category/edit/<%=category._id%>' method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="email">GB status:</label>
-                        <select class="form-control" name="status">
+                        <select class="form-control" name="status" id="status">
                             <option value="1">IC</option>
                             <option value="2">Live</option>
                             <option value="0">End</option>
@@ -289,7 +289,90 @@
                     <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
                     <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
                 </form>
-                <% }else { %>
+                <!------------------------------------ for switches -------------------------------->
+                <% }else if(type == 2) { %>
+                        <form action='/api/category/edit/<%=category._id%>' method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="email">GB status:</label>
+                        <select class="form-control" name="status" id="status">
+                            <option value="1">IC</option>
+                            <option value="2">Live</option>
+                            <option value="0">End</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Name:</label>
+                        <input type="text" name="catname" value="<%=category.category_name%>" class="form-control" id="catname" aria-describedby="catnameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Design by:</label>
+                        <input type="text" name="author" value="<%=category.author%>" class="form-control" id="author" aria-describedby="authorHelp">
+                    </div>
+                     <div class="form-group">
+                        <label for="email">Manufacturing:</label>
+                        <input type="text" name="manufacturing" value="<%= category.manufacturing %>" class="form-control" id="manufacturing" aria-describedby="manufacturingHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Proxy host:</label>
+                        <input type="text" name="host" value="<%=category.proxy_host%>" class="form-control" id="host" aria-describedby="hostHelp">
+                    </div>
+                    <!---------------------------- for keyset ------------------------->
+                    <div class="for-switches">
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Date start (mm/dd/yyyy):</label>
+                        <input style="width: 100%" id="datepicker" value="<%= (category.date_start).toLocaleDateString()%>" class="span2" type="text" name="date_start">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Date end (mm/dd/yyyy):</label>
+                        <input style="width: 100%" id="datepicker1" value="<%= (category.date_end).toLocaleDateString()%>" class="span2" type="text" name="date_end">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Date payment (mm/dd/yyyy):</label>
+                        <input style="width: 100%" id="datepicker2" value="<%= (category.date_payment).toLocaleDateString()%>" class="span2" type="text" name="date_payment">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Min price:</label>
+                         <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input class="form-control" name="min_price" type="tel"  value="<%= category.min_price%>" id="minprice">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Max price:</label>
+                         <div class="input-group m   b-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input class="form-control" name="max_price" type="tel" value="<%= category.max_price%>" id="maxprice">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Specs:</label>
+                        <textarea id="specs" name="specs"  type="text" class="form-control" placeholder="Content"></textarea>
+                    </div>
+                    <div className="input-group mb-3">
+                        <div className="custom-file">
+                            <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+                            <label className="custom-file-label" htmlFor="inputGroupFile01">
+                            </label>
+                            <img src="" id="profile-img-tag" width="200px" />
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                </form>
+
                 <% } %>
             </div>
             <% } %>
@@ -320,6 +403,20 @@ $(document).ready(function() {
     $('#datepicker').datepicker();
     $('#datepicker1').datepicker();
     $('#datepicker2').datepicker();
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                console.log(e.target.result)
+                $('#profile-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#inputGroupFile01').change(function() {
+        readURL(this);
+    });
 
 
     // $('.k_layout').select2('val',[60%]);
@@ -361,6 +458,7 @@ $(document).ready(function() {
         console.log(category_details.status_gb)
 
         $('#status').val(category_details.status_gb);
+        $('#status').trigger('change');
         $('#specs').summernote('code', specs);
 
         if (type == 0) {
@@ -395,7 +493,8 @@ $(document).ready(function() {
             $('#c_color').trigger('change');
 
             $('#profile-img-tag').attr('src', '/api/' + pic_path)
-        } else {
+        } else if(type == 2) {
+            $('#profile-img-tag').attr('src', '/api/' + pic_path)
 
         }
 

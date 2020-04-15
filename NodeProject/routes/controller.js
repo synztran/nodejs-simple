@@ -670,7 +670,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                             console.log(docs);
                         }
                     )
-                }else { // keycap
+                }else if(part == 4) { // keycap
                     await Couter.findOne({ _id: "p_keycap" }, function(err, docs) {
                         console.log(docs);
                         console.log(docs['seq'])
@@ -697,6 +697,36 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                     })
                     db.collection("couters").findAndModify({
                             _id: "p_keycap"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                } else if(part == 5){ // for swithces
+                    await Couter.findOne({ _id: "p_switches" }, function(err, docs) {
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc"+inc)
+                     
+                        db.collection('products').insertOne({
+                            product_id: "SWPACK" + inc,
+                            product_name: (req.body.pname),
+                            replace_product_name: req.body.replace_product_name,
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            price: (req.body.sw_price),
+                            pic_product: {
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
+
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_switches"
                         }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
 
                         function(err, docs) {
@@ -748,11 +778,17 @@ router.get('/product/edit/:id', function(req, res){
                     type: 3
                 })
 
-            }else{
+            }else if(type == 4){
                 res.render('manager/product/editPage',{
                     title: 'Edit Product : Keycap',
                     "product": docs,
                     type: 4
+                })
+            }else if(type == 5){
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Switches',
+                    "product": docs,
+                    type: 5
                 })
             }
             
@@ -850,7 +886,7 @@ router.post("/product/edit/:id", upload.single('picture'), async (req, res) => {
             }else{
             }
 
-        }else if(part ==4){ // keycap
+        }else if(part == 4){ // keycap
             console.log("for keycap")
             if(req.file == null){
                 check.set({ 
@@ -882,7 +918,30 @@ router.post("/product/edit/:id", upload.single('picture'), async (req, res) => {
             return res.redirect('/api/product');
           
 
-        }else{
+        }else if(part == 5){
+            console.log("for switches")
+            if(req.file == null){
+                check.set({ 
+                    product_name: req.body.product_name,
+                    replace_product_name: req.body.replace_product_name,
+                    outstock: req.body.outstock,
+                    price: req.body.sw_price,
+                });
+            }else{
+                check.set({ 
+                    product_name: req.body.product_name,
+                    replace_product_name: req.body.replace_product_name,
+                    outstock: req.body.outstock,
+                    price: req.body.sw_price,
+                    pic_product:{
+                        path: req.file.path,
+                        size: req.file.size
+                    }
+                });
+            }
+            var result = await check.save();
+            // res.status(200).send(result)
+            return res.redirect('/api/product');
 
         }
         
@@ -1029,7 +1088,6 @@ router.post('/category/add',upload.single('picture'), async(req, res)=>{
                     )
                     // if type = keyset
                 } else if (type == 1) {
-                    console.log(2)
                     Couter.findOne({ _id: "keyset" }, function(err, docs) {
                        console.log(docs);
                         console.log(docs['seq'])
@@ -1040,6 +1098,7 @@ router.post('/category/add',upload.single('picture'), async(req, res)=>{
                             category_id: "KSET" + inc,
                             category_name: req.body.catname,
                             author: req.body.author,
+                            manufacturing: req.body.manufacturing,
                             proxy_host: req.body.host,
                             status_gb: req.body.status,
                             c_code_color: req.body.code_color,
@@ -1068,7 +1127,44 @@ router.post('/category/add',upload.single('picture'), async(req, res)=>{
                             console.log(docs);
                         }
                     )
-                } else {
+                } else { //for etc
+                    Couter.findOne({ _id: "etc" }, function(err, docs) {
+                        console.log(docs);
+                         console.log(docs['seq'])
+                         var inc = docs['seq'] + 1;
+                         console.log("incc"+inc)
+ 
+                         db.collection('categories').insertOne({
+                             category_id: "ETC" + inc,
+                             category_name: req.body.catname,
+                             author: req.body.author,
+                             manufacturing: req.body.manufacturing,
+                             proxy_host: req.body.host,
+                             status_gb: req.body.status,
+                             type: req.body.type,
+                             date_start: req.body.date_start,
+                             date_end: req.body.date_end,
+                             date_payment: req.body.date_payment,
+                             min_price: req.body.min_price,
+                             max_price: req.body.max_price,
+                             specs: req.body.specs,
+                             pic_profile: {
+                                 path: req.file.path,
+                                 size: req.file.size
+                             }
+                             
+                         })
+ 
+                     })
+                     db.collection("couters").findAndModify({
+                             _id: "etc"
+                         }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+ 
+                         function(err, docs) {
+                             console.log(docs);
+                         }
+                     )
+
                 }
             }
         }).exec();
@@ -1124,6 +1220,11 @@ router.get('/category/edit/:id', async(req, res)=>{
                     type: 1
                 })
             }else{
+                res.render('manager/category/editPage',{
+                    title: 'Edit Category : ETC',
+                    "category": docs,
+                    type: 2
+                })
 
             }
             
@@ -1267,7 +1368,45 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
                 // res.status(200).send(result)
                 return res.redirect('/api/category');
 
-            }else{
+            }else if(type == 2){
+                if(req.file == null){
+                    check.set({
+                        category_name: req.body.catname,
+                        author: req.body.author,
+                        manufacturing: req.body.manufacturing,
+                        proxy_host: req.body.host,
+                        status_gb: req.body.status,
+                        date_start: req.body.date_start,
+                        date_end: req.body.date_end,
+                        date_payment: req.body.date_payment,
+                        min_price: req.body.min_price,
+                        max_price: req.body.max_price,
+                        specs: req.body.specs
+                    });
+                }else{
+                    check.set({
+                        category_name: req.body.catname,
+                        author: req.body.author,
+                        manufacturing: req.body.manufacturing,
+                        proxy_host: req.body.host,
+                        status_gb: req.body.status,
+                        date_start: req.body.date_start,
+                        date_end: req.body.date_end,
+                        date_payment: req.body.date_payment,
+                        min_price: req.body.min_price,
+                        max_price: req.body.max_price,
+                        specs: req.body.specs,
+                        pic_profile: {
+                            path: req.file.path,
+                            size: req.file.size
+                        }
+                    });
+                }
+                
+
+                var result = await check.save();
+                // res.status(200).send(result)
+                return res.redirect('/api/category');
 
             }
        
