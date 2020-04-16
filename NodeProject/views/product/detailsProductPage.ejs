@@ -275,11 +275,12 @@ ul.item-timeline {
                         <% }else if(Category.status_gb == 1) { %>
                         <span style="padding:0 0.5%;background-color: #ffc107; color: white"><b>On Interest Check</b></span>
                         <% }else{ %>
-                        <span style="padding:0 0.5%;background-color: #28A745; color: white"><b>Join Group Buy</b></span>
+                        <span style="padding:0 0.5%;background-color: #28A745; color: white"><b>Live Now</b></span>
                         <% } %>
                         <!-- <div > -->
                         <span class="product-details-price">
-
+                            <% for(j in detailsProduct) %>
+                            $<%=detailsProduct[0].price %> USD
                         </span>
                         <!-- </div> -->
                     </div>
@@ -410,7 +411,7 @@ $(document).ready(function() {
         // slideMargin: 0
     });
 
-    $('#c-profile').val('');
+    // $('#c-profile').val('');
 
 
     fetch('/api/product/getcid/' + res).then(function(response) {
