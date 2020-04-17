@@ -327,7 +327,7 @@ ul.item-timeline {
                                 <span class="text-details">Qantity:</span>
                                 <span class="t-right">0</span>
                             </li>
-                            <li>
+                            <li class="subtotal">
                                 <span class="text-details">Subtotal:</span>
                                 <span class="t-right">$0</span>
                             </li>
@@ -400,6 +400,9 @@ $(document).ready(function() {
         var product = responseAsJson;
 
 
+        // var price = product.price;
+        // alert(price);
+
         var MaxInputs = 10; //maximum extra input boxes allowed
         var InputsWrapper = $(".joingbpage-list-product .joingbpage-select-product"); //Input boxes wrapper ID
         console.log(InputsWrapper);
@@ -417,8 +420,8 @@ $(document).ready(function() {
         var dynamic = "";
 
         for (var i in product) {
-            console.log()
-            dynamic += '<option  value="' + product[i].product_id + '" data-image="' + product[i].pic_product.path + '">' + product[i].product_name + " " + "(" + product[i].price + "$)" + '</option>'
+            console.log(i);
+            dynamic += '<option data-price="' + product[i].price + '"  value="' + product[i].product_id + '" data-image="' + product[i].pic_product.path + '" data-id="' + (i) + '">' + product[i].product_name + " " + "(" + product[i].price + "$)" + '</option>'
         }
 
         var listquantity = "";
@@ -450,6 +453,7 @@ $(document).ready(function() {
 
             //on add input button click
             $(AddButton).click(function(e) {
+                pack++;
                 // $('.joingb-details-order ul .quantity .t-right').html(1)
 
                 // alert('x = ' + x);
@@ -463,116 +467,71 @@ $(document).ready(function() {
                     $('.joingbpage-list-product').append('<div class="form-group image2nd-include joingbpage-select-product" id="form_' + x + '">                            <h3>Select Product</h3>                            <hr><div class="selected-product"  >                            <span class="img-product">                                <picture>                                    <img style="width: 90px;height: 90px;object-fit: cover" class="responsive carousel-image img-zoomable2nd" src="' + image + '">                                </picture>                            </span>                            <div class="form-margin-left w-100">                                <label for="">Product Type:</label>                                <select style="font-weight: bold" data-id="' + x + '" class="form-control select2 multiple-select select2-product" name="product">                                  ' + dynamic + '  </select>                            </div>                            <div class="form-quantity-select w-20">                                <label for="quantity">Quantity:</label>                                 <select class="form-control select2-quantity" data-value="' + x + '" style="margin-top:0px;" id="quantity_' + x + '" name="quantity">                                       ' + listquantity + '                                     </select>                            </div>                        <a href="#" data-id="' + x + '" class="removeclass">Remove</a></div></div>');
 
                     // disable auto select for select2
-                    if (x < 1) {
-                        $('.joingbpage-select-product .selected-product a.removeclass').css('display', 'none')
-                    }
-                    $("#form_" + x + " .selected-product .w-100 .select2-product").val('');
-                    
-                    // $(".joingbpage-select-product .selected-product .w-20 .select2-quantity").each(function() {
-                    //     console.log(this)
-                    //     // $("#form_" + x + " .selected-product .w-20 select.select2-quantity").val();
-                    //     // alert(this.value);
-                    //     pack += Number($(this).val());
-                    //     total += Number($(this).val());
-                    //     // alert("total = " + total)
-                    //     // sum = total
-
-                    // });
-                    // $('.joingb-details-order ul .quantity .t-right').html(total);
-
-
-                    // $('select.select2-quantity').each(function() {
-                    //     // var p = $('<p class="option1">' + $('option:selected', this).text() + '</p>').appendTo('.colis');
-                    //     console.log(this.value);
-                    //     // total += Number($(this).val())
-                    //     $(this).change(function() {
-                    //         // p.text($('option:selected', this).text());
-                    //         console.log(this.value)
-                    //     });
-                    // });
-                    $('.joingb-details-order ul .pack .t-right').html(pack);
-
-
-
-
-                    $("#form_" + x + " .selected-product .w-20 select").on('change', function(e) {
-                        
-                        // console.log("x =" + x)
-                        //  for (var p = 0; p < x; p++) {
-                        //     console.log("p = " + p);
-                        //     temp = Number($(this).val());
-                        //     console.log("temp = " + temp)
-                        //     sum += temp
-
-                        // }
-
-                   
-                        console.log(this); //giá trị thay đổi của select
-                        console.log($(this).val());
-                        // sum += Number(temp);
-                        // console.log(sum)
-
-                        
-
-
-                    })
-                    $('.joingb-details-order ul .quantity .t-right').html(temp);
-
-
-                    // var presentValueQuantity = $('select.select2-quantity').val();
-                    // alert("present = " +presentValueQuantity);
-
-
-
-                    // $('select.select2-quantity').change(function(e) {
-                    //     e.preventDefault();
-                    //     // console.log(this)
-                    //     console.log($(this).attr('data-value'), this.value) // giá trị đã thay đổi
-
-                    // });
-
-
-
-                    // $(".joingbpage-list-product .joingbpage-select-product .selected-product .form-quantity-select select").on('change', function(e) {
-                    //     e.preventDefault();
-                    //     // alert($(this).attr('data-id'));
-                    //     var totalHaveChange = 0;
-                    //     console.log("Beforer = " + totalHaveChange)
-                    //     // $('select :selected').each(function() {
-                    //     totalHaveChange = Number($(this).val());
-                    //     // });
-                    //     // $("#sum").html(sum);
-                    //     console.log("have change = " + totalHaveChange)
-                    //     console.log("before total = " + total)
-                    //     sum = total - 1 + totalHaveChange;
-
-                    //     console.log("total= " + total)
-                    //     console.log("sum = " + sum)
-                    //     $('.joingb-details-order ul .quantity .t-right').html(sum)
-                    //     total = sum;
-                    //     // total += sum;
-                    //     // var quan = this.value
-                    //     // alert(quan)
-
-                    // })
-
-
-
-
-
-                    // $('.joingb-details-order ul .quantity .t-right').html(l)
-                    // alert(l); //giá trị quantity attr khi xóa
-
+                    // console.log("x = " + x);
+                    // for(var n=-1;n<x;n++){
+                    //     console.log();
 
                     // }
+
+                    $("#form_" + x + " .selected-product .w-100 .select2-product").val('');
+                    // $("#form_" + x + " .selected-product .w-20 select").val('');
+
+                    $("#form_" + x + " .selected-product .w-20 select").each(function() {
+                        // if($(this).value == null){
+                        //     return 0;
+                        // }
+                        console.log($(this).value)
+                        var subtotal = 0;
+                         for (var p = 0; p < x+1; p++) {
+                            console.log("p3rd = " + p);
+                            temp = Number($(this).val());
+                            console.log("temp3rd = " + temp)
+                            var e = Number($("#quantity_" + p).val());
+                            console.log("e3rd = " + e);
+                            subtotal += e
+                            console.log("subtotal3rd = " + subtotal);
+
+                        }
+
+                    //     // $("#form_" + x + " .selected-product .w-20 select.select2-quantity").val();
+                    //     // alert(this.value);
+                    //     // pack += Number($(this).val());
+                        $('.joingb-details-order ul .quantity .t-right').html(subtotal);
+
+                    });
+                    $('.joingb-details-order ul .pack .t-right').html(pack);
+                    $("#form_" + x + " .selected-product .w-20 select").on('change', function(e) {
+
+                        // console.log("x =" + x)
+                        var subtotal = 0; // 
+                        var totalprice = 0;
+                        for (var p = 0; p < x; p++) {
+                            console.log("p = " + p);
+                            temp = Number($(this).val()); //quantity have select
+                            console.log("temp = " + temp)
+                            var e = Number($("#quantity_" + p).val());
+                            console.log("e = " + e);
+                            subtotal += e
+                            console.log("subtotal = " + subtotal);
+                            // totalprice = subtotal * price
+                        }
+                        $('.joingb-details-order ul .quantity .t-right').html(subtotal);
+                    })
+
+                    if (x < 1) {
+                        $(".joingbpage-select-product .selected-product a.removeclass").css('visibility', 'hidden')
+                    } else {
+                        for (var c = 0; c < x; c++) {
+                            console.log(c);
+                            if (c < x) {
+                                $("#form_" + c + " .selected-product a.removeclass").css('visibility', 'hidden')
+                            }
+                        }
+                        // y = x-1;
+
+                    }
                     x++; //text box increment
-                    // $('.joingb-details-order ul .quantity .t-right').html(x)
-
                     $(".joingbpage-button-addon").show();
-
-
-
-                    // $('AddMoreFileBox').html("Add field");
 
                     // Delete the "add"-link if there is 3 fields.
                     if (x == 10) {
@@ -596,32 +555,42 @@ $(document).ready(function() {
                             return $span;
                         },
                         templateSelection: function(idioma) {
-                            console.log($(this).closest('.joingbpage-select-product').attr('id'))
+                            console.log(idioma);
+                            var idData = $(idioma.element).data('id');
+                            console.log(idData) // id
+                            console.log($(this).closest('div.joingbpage-select-product').attr('id'))
                             var x = $(idioma.element).data('image')
                             console.log(idioma.id);
                             var y = '/api/' + x;
                             var href = a1 + '/api/' + x;
+
                             // for (var i in product) {
                             //     if (idioma.id == product[i].product_id) {
                             //         $('.joingbpage-select-product .img-product picture img').attr("src", y)
                             //     }
                             // }
 
+
+
+
+
+
+                            // var ips = $("#form_"+ idData + ".selected-product .w-20 select").val();
+                            //     // totalPrice = priceData
+                            //     alert(ips)
+
+
                             var $span = $("<span style='font-weight: bold'><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
                             return $span;
                         }
                     });
-
-                    // new Zooming().listen('.img-zoomable2nd')
-
-
-
-
-                    // $('#form_1 .selected-product .form-quantity-select input').val()
-
-
-
-                    $('.select2-product').on('select2:select', function(e) {
+                    y = x - 1;
+                    // $('.select2-product').on('select2:select', function(e) {
+                        var subPrice = 0;
+                        var totalQuantity = 0;
+                        var totalPrice = 0;
+                    $("#form_" + y + " .selected-product .w-100").on('select2:select', function(e) {
+                      
                         console.log(e);
                         console.log(e.params)
                         console.log(e.params.data);
@@ -638,12 +607,95 @@ $(document).ready(function() {
                         }
 
 
-                        console.log(this)
+
+                        // Count sum
+                        // var subtotal = 0; 
+                        // var totalprice = 0;
+                        //  for (var p = 0; p < x; p++) {
+                        //     console.log("p = " + p);
+                        //     temp = Number($(this).val()); //quantity have select
+                        //     console.log("temp = " + temp)
+                        //     var e = Number($("#quantity_" + p).val());
+                        //     console.log("e = " + e);
+                        //     subtotal += e
+                        //     console.log("subtotal = " + subtotal);
+
+                        //     // totalprice = subtotal * price
+
+
+                        // }
+                        // $('.joingb-details-order ul .quantity .t-right').html(subtotal);
+
+                        console.log(this);
+                        
+                        for (var n1 = 0; n1 < x; n1++) {
+                            
+                            
+                            console.log(n1);
+                            // var idData = Number($(this).attr('data-id')); //data-id
+                            // console.log(idData);
+
+                            var quantityValue = Number($("#form_" + n1 + " .selected-product .w-20 select").val());
+                            console.log(quantityValue);
+
+                            totalQuantity += quantityValue;
+                            subPrice = product[n1].price;
+                            totalPrice = (totalQuantity * subPrice);
+                            $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
+
+
+
+                            // if (quantityValue == null) {
+                            //     return 0;
+                                
+                            //     // $("#form_" + n1 + " .selected-product .w-20 select").on('change', function() {
+                            //     //     var qSelect = Number($(this).val())
+                            //     //     console.log($(this).val()) //
+                            //     //     var totalPrice = 0;
+                            //     //     subPrice += qSelect * product[n1].price;
+
+                            //     //     $('.joingb-details-order ul .subtotal .t-right').html(subPrice + '$');
+                            //     // })
+                            //     // n1--;
+                            // } else {
+                            //     var totalPrice = 0;
+                            //     totalQuantity += quantityValue;
+                            //     subPrice += product[n1].price;
+                            //     totalPrice = totalQuantity * subPrice;
+                            //     $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
+
+                            // }
+
+                            
+
+                        }
+
+
+
+
+
+
+
                         console.log($(this).closest('.joingbpage-select-product').attr('id'))
                         console.log($(this).parent('div').parent('div'));
                         console.log($(this).parent('div').parent('div').attr('id'));
                         var strChosen = $(this).attr('id');
                         console.log(strChosen);
+                    })
+                    console.log(y);
+                    $("#form_" + y + " .selected-product .w-20 select").on('change', function() {
+                        console.log(totalPrice)
+
+                        for(var n2=0;n2<x;n2++){
+                            var qSelect = Number($(this).val())
+                                totalQuantity = qSelect;
+                                // subPrice = product[n2].price;
+                                totalPrice = totalQuantity * subPrice;
+
+                                $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
+
+                        }
+                               
                     })
 
 
@@ -652,51 +704,60 @@ $(document).ready(function() {
 
                 return false;
             }); //this is end of function Add
-
-
-
-
-            // $(".joingbpage-list-product #form_" + x + " .selected-product ").on('click', function() {
-
-            //     var sample = $(".w20 select").val()
-            //     alert(sample);
-
-            //     $('.joingb-details-order ul .quantity .t-right').html(sum)
-
-            // })
-
-
             // end of function
 
             $(".joingbpage-list-product").on("click", ".removeclass", function(e) { //user click on remove text
                 // var value = $(this).attr('data-id');
                 // alert(value);
-                alert('pack =' + pack);
-                alert('x = ' + x)
+
+                var idDel = $(this).attr('data-id');
+                console.log("this = " + idDel)
+                // alert('pack =' + pack);
+                // alert('x = ' + x)
                 // var l = $("#form_" + value + " .selected-product .w-20 select.select2-quantity").val();
                 // alert(l); //giá trị quantity attr khi xóa
                 pack = pack - 1
                 $('.joingb-details-order ul .pack .t-right').html(pack)
+
                 console.log(x)
                 if (x > 1) {
                     console.log($(this).parent('div').parent('div'));
                     $(this).parent('div').parent('div').remove(); //remove text box
+                    for (var p = -1; p < x; p++) {
+                        var subtotal = 0;
+                        for (var p = 0; p < x; p++) {
+                            if (p == idDel) {
+                                console.log("pingo")
+                            } else {
+                                console.log("p2nd = " + p);
+                                temp = Number($(this).val());
+                                console.log("temp2nd = " + temp)
+                                var e = Number($("#quantity_" + p).val());
+                                console.log("e2nd = " + e);
+                                subtotal += e
+                                console.log("subtotal2nd = " + subtotal);
+
+                            }
+                        }
+                        $('.joingb-details-order ul .quantity .t-right').html(subtotal);
+
+                    }
                     x--; //decrement textbox
-                    // console.log("#form_" + value);
-
-
 
                     // alert(sample);
                     $(".joingbpage-button-addon").show();
-                    // $('.joingb-details-order ul .quantity .t-right').html(x)
-
-
-
-                    // $("#lineBreak").html("");
-
                     // Adds the "add" link again when a field is removed.
                     $('AddMoreFileBox').html("Add field");
                 }
+                // x đã bị trừ 1 đơn vị
+                for (var u = 0; u < x; u++) {
+                    console.log(u);
+                    if (u = x - 1) {
+                        $("#form_" + u + " .selected-product a.removeclass").css('visibility', 'unset')
+                    }
+                }
+
+
                 return false;
             })
 
@@ -704,67 +765,67 @@ $(document).ready(function() {
 
 
 
-            $(".select2-product").select2({
-                templateResult: function(idioma) {
-                    console.log($(this).parent().prev())
-                    console.log(idioma);
-                    console.log($(idioma.element).data('image'));
-                    var x = $(idioma.element).data('image')
-                    var y = '/api/' + x;
-                    var href = a1 + '/api/' + x;
-                    console.log(href)
+            // $(".select2-product").select2({
+            //     templateResult: function(idioma) {
+            //         console.log($(this).parent().prev())
+            //         console.log(idioma);
+            //         console.log($(idioma.element).data('image'));
+            //         var x = $(idioma.element).data('image')
+            //         var y = '/api/' + x;
+            //         var href = a1 + '/api/' + x;
+            //         console.log(href)
 
-                    var $span = $("<span><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
+            //         var $span = $("<span><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
 
-                    return $span;
-                },
-                templateSelection: function(idioma) {
-                    console.log($(this).parent().prev().find('select option:selected').val());
+            //         return $span;
+            //     },
+            //     templateSelection: function(idioma) {
+            //         console.log($(this).parent().prev().find('select option:selected').val());
 
-                    console.log($(this).parent())
-                    console.log(idioma.id)
-                    var x = $(idioma.element).data('image')
-                    console.log(x);
-                    var y = '/api/' + x;
-                    var href = a1 + '/api/' + x;
-                    // for (var i in product) {
-                    //     if (idioma.id == product[i].product_id) {
-                    //         $('.joingbpage-select-product .img-product picture img').attr("src", y)
-                    //     }
-                    // }
+            //         console.log($(this).parent())
+            //         console.log(idioma.id)
+            //         var x = $(idioma.element).data('image')
+            //         console.log(x);
+            //         var y = '/api/' + x;
+            //         var href = a1 + '/api/' + x;
+            //         // for (var i in product) {
+            //         //     if (idioma.id == product[i].product_id) {
+            //         //         $('.joingbpage-select-product .img-product picture img').attr("src", y)
+            //         //     }
+            //         // }
 
-                    var $span = $("<span><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
-                    return $span;
-                }
-            });
-
-
-            $('.select2-product').on('select2:select', function(e) {
-
-                console.log(e);
-                console.log(e.params)
-                console.log(e.params.data);
-                console.log(e.params.data['id']);
-                var idioma = e.params.data['id'];
-                var godfather = $(this).closest('.joingbpage-select-product').attr('id');
-                console.log(godfather);
-                for (var i in product) {
-                    if (idioma == product[i].product_id) {
-                        console.log(product[i].product_id);
-                        $("#" + godfather + " .selected-product .img-product picture img").attr("src", '/api/' + product[i].pic_product.path)
+            //         var $span = $("<span><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
+            //         return $span;
+            //     }
+            // });
 
 
-                    }
-                }
+            // $('.select2-product').on('select2:select', function(e) {
+
+            //     console.log(e);
+            //     console.log(e.params)
+            //     console.log(e.params.data);
+            //     console.log(e.params.data['id']);
+            //     var idioma = e.params.data['id'];
+            //     var godfather = $(this).closest('.joingbpage-select-product').attr('id');
+            //     console.log(godfather);
+            //     for (var i in product) {
+            //         if (idioma == product[i].product_id) {
+            //             console.log(product[i].product_id);
+            //             $("#" + godfather + " .selected-product .img-product picture img").attr("src", '/api/' + product[i].pic_product.path)
 
 
-                console.log(this)
-                console.log($(this).closest('.joingbpage-select-product').attr('id'))
-                console.log($(this).parent('div').parent('div'));
-                console.log($(this).parent('div').parent('div').attr('id'));
-                var strChosen = $(this).attr('id');
-                console.log(strChosen);
-            })
+            //         }
+            //     }
+
+
+            //     console.log(this)
+            //     console.log($(this).closest('.joingbpage-select-product').attr('id'))
+            //     console.log($(this).parent('div').parent('div'));
+            //     console.log($(this).parent('div').parent('div').attr('id'));
+            //     var strChosen = $(this).attr('id');
+            //     console.log(strChosen);
+            // })
 
 
 
