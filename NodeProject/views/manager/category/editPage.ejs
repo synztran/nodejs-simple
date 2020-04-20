@@ -164,6 +164,27 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="password">Tax:</label>
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                                <input class="form-control" name="tax" type="tel" value="<%= category.tax %>" id="tax">
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Handle & Shipping:</label>
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input class="form-control" name="hns" type="tel" value="<%= category.hns %>" id="hns">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
                         <label class="form-control-label">Specs:</label>
                         <textarea id="specs" name="specs" type="text" class="form-control" placeholder="Content"></textarea>
                     </div>
@@ -273,6 +294,27 @@
                                 </div>
                             </div>
                     </div>
+                     <div class="form-group">
+                        <label for="password">Tax:</label>
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                                <input class="form-control" name="tax" type="tel" value="<%= category.tax %>" id="tax">
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Handle & Shipping:</label>
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input class="form-control" name="hns" type="tel" value="<%= category.hns %>" id="hns">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                    </div>
                     <div class="form-group">
                         <label class="form-control-label">Specs:</label>
                         <textarea id="specs" name="specs"  type="text" class="form-control" placeholder="Content"></textarea>
@@ -351,6 +393,27 @@
                                     <span class="input-group-text">$</span>
                                 </div>
                                 <input class="form-control" name="max_price" type="tel" value="<%= category.max_price%>" id="maxprice">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                    </div>
+                     <div class="form-group">
+                        <label for="password">Tax:</label>
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                                <input class="form-control" name="tax" type="tel" value="<%= category.tax %>" id="tax">
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Handle & Shipping:</label>
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input class="form-control" name="hns" type="tel" value="<%= category.hns %>" id="hns">
                                 <div class="input-group-append">
                                     <span class="input-group-text">.00</span>
                                 </div>
@@ -442,22 +505,17 @@ $(document).ready(function() {
         var mounting = category_details.k_mounting;
         var plate = category_details.k_plate_option;
         var type = category_details.type;
-
-
         var pic_path = category_details.pic_profile['path'];
         var specs = category_details.specs;
-
         var profile = category_details.c_profile;
         var c_color = category_details.c_code_color;
         var c_material = category_details.c_material
-        console.log(type)
-        console.log(profile);
-        console.log(c_color);
-        console.log(specs);
-        console.log(category_details.flip)
-        console.log(category_details.status_gb)
+        var tax = category_details.tax;
+        var hns = category_details.hns;
 
         $('#status').val(category_details.status_gb);
+        $('#tax').val(category_details.tax);
+        $('#hns').val(category_details.handle);
         $('#status').trigger('change');
         $('#specs').summernote('code', specs);
 

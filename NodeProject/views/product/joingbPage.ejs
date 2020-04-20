@@ -18,7 +18,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css"> -->
     <link rel="stylesheet" href="/api/css/effect/navbar.css">
     <link rel="stylesheet" href="/api/css/effect/preloading.css">
-    <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css"> -->
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
     <!--  -->
     <!--==================== SCRIPT =========================================== -->
@@ -210,29 +210,8 @@ ul.item-timeline {
                 <span class="text-uppercase font-weight-bold">Company</span>
             </a>
             <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
-            <!--  <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="./" class="nav-link">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Group Buy</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
-                </ul>
-            </div> -->
         </div>
     </nav>
-    <!-- </header> -->
-    <!-- <nav class="before-breadcrumb" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Library</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data</li>
-        </ol>
-    </nav> -->
     <section style="position: relative;" class="seperator-wrapper">
         <div class="seperator gradient">
         </div>
@@ -312,6 +291,30 @@ ul.item-timeline {
                             <a href="#" id="addMore">Add more item</a>
                         </div>
                     </div>
+                    <div class="form-group joingbpage-address-payment">
+                        <div class="col-md-6 payment-option">
+                            <h2>Paymnet Options</h2>
+                            <hr>
+                            <div class="form-group">
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6 shipping-address">
+                            <h2>Shipping Address</h2>
+                            <hr>
+                            <div class="form-group">
+                                <form>
+                                    <input type="radio" id="new_address" name="address" value="1">
+                                    <label for="male">Use a new address</label><br>
+
+
+                                    <input type="radio" id="already_address" name="address" value="2">
+                                    <label for="male">Shipping to this address</label><br>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div><!-- end of col-md-9 -->
                 <div class="col-md-3 box-details">
                     <!-- right -->
@@ -333,25 +336,39 @@ ul.item-timeline {
                             </li>
                             <li>
                                 <span class="text-details">Shipping & Handling:</span>
-                                <span class="t-right">$0</span>
+                                <span class="t-right">
+                                    <% if(Category.handle == 0 || Category.handle == null){ %>
+                                    Free
+                                    <% }else{ %>
+                                    $
+                                    <%= Category.handle %>
+                                    <%}%>
+                                </span>
                             </li>
                             <li>
                                 <span class="text-details">Estimated Tax:</span>
-                                <span class="t-right">$0.00</span>
+                                <span class="t-right">
+                                    <% if(Category.tax == 0 || Category.tax == null){ %>
+                                    Free
+                                    <% }else{ %>
+                                    $
+                                    <%= Category.tax %>
+                                    <%}%>
+                                </span>
                             </li>
                         </ul>
                     </div>
                     <hr>
                     <div class="joingb-details-order form-group">
                         <ul>
-                            <li>
+                            <li class="total">
                                 <span class="text-details font-b">Total(USD):</span>
                                 <span class="t-right font-b">$0</span>
                             </li>
                         </ul>
                     </div>
                     <div class="button-payment">
-                        <button class="btn-secondary btn-lg" style="width: 100%">PLACE ORDER</button>
+                        <button class="btn-secondary btn-lg" disabled style="width: 100%">PLACE ORDER</button>
                         <p class="t-center"><i class="fas fa-lock"></i>Secure Checkout</p>
                     </div>
                 </div>
@@ -411,7 +428,7 @@ $(document).ready(function() {
         var x = (InputsWrapper.length); //initlal text box count
         console.log("x = " + x);
         var FieldCount = 1; //to keep track of text box added
-        var total = 0;
+        // var total = 0;
         var temp = 0;
         // var totalHaveChange = 0;
         var sum = 0;
@@ -442,7 +459,8 @@ $(document).ready(function() {
             console.log(category.status_gb);
             var status = category.status_gb;
 
-            var image = '/api/' + category.pic_profile.path;
+            // var image = '/api/' + category.pic_profile.path;
+            var image = '/api/' + product[0].pic_product.path
             console.log(image);
 
             $('.joingbpage-list-product .image2nd-include .selected-product .img-product picture img').attr('src', image)
@@ -464,7 +482,7 @@ $(document).ready(function() {
                     FieldCount++; //text box added ncrement
                     //add input box
 
-                    $('.joingbpage-list-product').append('<div class="form-group image2nd-include joingbpage-select-product" id="form_' + x + '">                            <h3>Select Product</h3>                            <hr><div class="selected-product"  >                            <span class="img-product">                                <picture>                                    <img style="width: 90px;height: 90px;object-fit: cover" class="responsive carousel-image img-zoomable2nd" src="' + image + '">                                </picture>                            </span>                            <div class="form-margin-left w-100">                                <label for="">Product Type:</label>                                <select style="font-weight: bold" data-id="' + x + '" class="form-control select2 multiple-select select2-product" name="product">                                  ' + dynamic + '  </select>                            </div>                            <div class="form-quantity-select w-20">                                <label for="quantity">Quantity:</label>                                 <select class="form-control select2-quantity" data-value="' + x + '" style="margin-top:0px;" id="quantity_' + x + '" name="quantity">                                       ' + listquantity + '                                     </select>                            </div>                        <a href="#" data-id="' + x + '" class="removeclass">Remove</a></div></div>');
+                    $('.joingbpage-list-product').append('<div class="form-group image2nd-include joingbpage-select-product" id="form_' + x + '">                            <h3>Select Product</h3>                            <hr><div class="selected-product"  >                            <span class="img-product">                                <picture>                                    <img style="width: 90px;height: 90px;object-fit: cover" class="responsive carousel-image img-zoomable2nd" src="' + image + '">                                </picture>                            </span>                            <div class="form-margin-left w-100">                                <label for="">Product Type:</label>                                <select style="font-weight: bold" data-id="' + x + '" class="form-control select2 multiple-select select2-product" name="product" id="select_'+x+'">                                  ' + dynamic + '  </select>                            </div>                            <div class="form-quantity-select w-20">                                <label for="quantity">Quantity:</label>                                 <select class="form-control select2-quantity" data-value="' + x + '" style="margin-top:0px;" id="quantity_' + x + '" name="quantity">                                       ' + listquantity + '                                     </select>                            </div>                        <a href="#" data-id="' + x + '" class="removeclass">Remove</a></div></div>');
 
                     // disable auto select for select2
                     // console.log("x = " + x);
@@ -473,7 +491,7 @@ $(document).ready(function() {
 
                     // }
 
-                    $("#form_" + x + " .selected-product .w-100 .select2-product").val('');
+                    // $("#form_" + x + " .selected-product .w-100 .select2-product").val('');
                     // $("#form_" + x + " .selected-product .w-20 select").val('');
 
                     $("#form_" + x + " .selected-product .w-20 select").each(function() {
@@ -482,21 +500,26 @@ $(document).ready(function() {
                         // }
                         console.log($(this).value)
                         var subtotal = 0;
-                         for (var p = 0; p < x+1; p++) {
+                        var totalPrice = 0;
+
+                        for (var p = 0; p < x + 1; p++) {
+                            var priceSelect = Number($("#select_"+ p).find(':selected').data('price'));
                             console.log("p3rd = " + p);
                             temp = Number($(this).val());
                             console.log("temp3rd = " + temp)
                             var e = Number($("#quantity_" + p).val());
                             console.log("e3rd = " + e);
-                            subtotal += e
+                            subtotal = e
                             console.log("subtotal3rd = " + subtotal);
-
+                            totalPrice += subtotal * priceSelect
                         }
 
-                    //     // $("#form_" + x + " .selected-product .w-20 select.select2-quantity").val();
-                    //     // alert(this.value);
-                    //     // pack += Number($(this).val());
+                        //     // $("#form_" + x + " .selected-product .w-20 select.select2-quantity").val();
+                        //     // alert(this.value);
+                        //     // pack += Number($(this).val());
                         $('.joingb-details-order ul .quantity .t-right').html(subtotal);
+                        $('.joingb-details-order ul .subtotal .t-right').html(totalPrice);
+
 
                     });
                     $('.joingb-details-order ul .pack .t-right').html(pack);
@@ -570,11 +593,6 @@ $(document).ready(function() {
                             //     }
                             // }
 
-
-
-
-
-
                             // var ips = $("#form_"+ idData + ".selected-product .w-20 select").val();
                             //     // totalPrice = priceData
                             //     alert(ips)
@@ -586,14 +604,16 @@ $(document).ready(function() {
                     });
                     y = x - 1;
                     // $('.select2-product').on('select2:select', function(e) {
-                        var subPrice = 0;
+                      
+                    $("#form_" + y + " .selected-product .w-100").on('select2:select', function(e) {
                         var totalQuantity = 0;
                         var totalPrice = 0;
-                    $("#form_" + y + " .selected-product .w-100").on('select2:select', function(e) {
-                      
+
                         console.log(e);
                         console.log(e.params)
                         console.log(e.params.data);
+                        console.log($(e.params.data.element).data('price'));
+                        // var priceSelect = Number($(e.params.data.element).data('price'));
                         console.log(e.params.data['id']);
                         var idioma = e.params.data['id'];
                         var godfather = $(this).closest('.joingbpage-select-product').attr('id');
@@ -605,97 +625,44 @@ $(document).ready(function() {
 
                             }
                         }
+                       
 
-
-
-                        // Count sum
-                        // var subtotal = 0; 
-                        // var totalprice = 0;
-                        //  for (var p = 0; p < x; p++) {
-                        //     console.log("p = " + p);
-                        //     temp = Number($(this).val()); //quantity have select
-                        //     console.log("temp = " + temp)
-                        //     var e = Number($("#quantity_" + p).val());
-                        //     console.log("e = " + e);
-                        //     subtotal += e
-                        //     console.log("subtotal = " + subtotal);
-
-                        //     // totalprice = subtotal * price
-
-
-                        // }
-                        // $('.joingb-details-order ul .quantity .t-right').html(subtotal);
-
-                        console.log(this);
-                        
                         for (var n1 = 0; n1 < x; n1++) {
-                            
-                            
                             console.log(n1);
-                            // var idData = Number($(this).attr('data-id')); //data-id
-                            // console.log(idData);
-
+                            var priceSelect = Number($("#select_"+ n1).find(':selected').data('price'));
                             var quantityValue = Number($("#form_" + n1 + " .selected-product .w-20 select").val());
                             console.log(quantityValue);
 
-                            totalQuantity += quantityValue;
-                            subPrice = product[n1].price;
-                            totalPrice = (totalQuantity * subPrice);
-                            $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
-
-
-
-                            // if (quantityValue == null) {
-                            //     return 0;
-                                
-                            //     // $("#form_" + n1 + " .selected-product .w-20 select").on('change', function() {
-                            //     //     var qSelect = Number($(this).val())
-                            //     //     console.log($(this).val()) //
-                            //     //     var totalPrice = 0;
-                            //     //     subPrice += qSelect * product[n1].price;
-
-                            //     //     $('.joingb-details-order ul .subtotal .t-right').html(subPrice + '$');
-                            //     // })
-                            //     // n1--;
-                            // } else {
-                            //     var totalPrice = 0;
-                            //     totalQuantity += quantityValue;
-                            //     subPrice += product[n1].price;
-                            //     totalPrice = totalQuantity * subPrice;
-                            //     $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
-
-                            // }
-
+                            totalQuantity = quantityValue;
+                            totalPrice += (totalQuantity * priceSelect);
                             
-
                         }
+                        $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
+                            $('.joingb-details-order ul .total .t-right').html(totalPrice + '$');
 
-
-
-
-
-
-
-                        console.log($(this).closest('.joingbpage-select-product').attr('id'))
-                        console.log($(this).parent('div').parent('div'));
-                        console.log($(this).parent('div').parent('div').attr('id'));
-                        var strChosen = $(this).attr('id');
-                        console.log(strChosen);
+                        // console.log($(this).closest('.joingbpage-select-product').attr('id'))
+                        // console.log($(this).parent('div').parent('div'));
+                        // console.log($(this).parent('div').parent('div').attr('id'));
+                        // var strChosen = $(this).attr('id');
+                        // console.log(strChosen);
                     })
                     console.log(y);
                     $("#form_" + y + " .selected-product .w-20 select").on('change', function() {
-                        console.log(totalPrice)
+                        // console.log(totalPrice)
+                        // var totalQuantity = 0;
+                        var totalQuantity = 0;
+                        var totalPrice = 0;
+                        // console.log(priceSelect)
 
-                        for(var n2=0;n2<x;n2++){
-                            var qSelect = Number($(this).val())
-                                totalQuantity = qSelect;
-                                // subPrice = product[n2].price;
-                                totalPrice = totalQuantity * subPrice;
-
-                                $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
-
+                        for (var n2 = 0; n2 < x; n2++) {
+                            var priceSelect = Number($('#select_'+ n2).find(':selected').data('price'))
+                            var e = Number($("#quantity_" + n2).val());
+                            totalQuantity = e;
+                            // subPrice = product[n2].price;
+                            totalPrice += totalQuantity * priceSelect;
+                            $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
+                            $('.joingb-details-order ul .total .t-right').html(totalPrice + '$');
                         }
-                               
                     })
 
 
@@ -704,28 +671,25 @@ $(document).ready(function() {
 
                 return false;
             }); //this is end of function Add
-            // end of function
+
 
             $(".joingbpage-list-product").on("click", ".removeclass", function(e) { //user click on remove text
-                // var value = $(this).attr('data-id');
-                // alert(value);
-
                 var idDel = $(this).attr('data-id');
                 console.log("this = " + idDel)
-                // alert('pack =' + pack);
-                // alert('x = ' + x)
-                // var l = $("#form_" + value + " .selected-product .w-20 select.select2-quantity").val();
-                // alert(l); //giá trị quantity attr khi xóa
                 pack = pack - 1
                 $('.joingb-details-order ul .pack .t-right').html(pack)
-
-                console.log(x)
+                
+                // Number($('.select2-product').find(':selected').data('price'))
+                console.log(priceSelect)
+                
                 if (x > 1) {
                     console.log($(this).parent('div').parent('div'));
                     $(this).parent('div').parent('div').remove(); //remove text box
                     for (var p = -1; p < x; p++) {
                         var subtotal = 0;
+                        var totalPrice = 0;
                         for (var p = 0; p < x; p++) {
+                            var priceSelect = Number($('.selected-product .w-100 select#select_' + p).find(':selected').data('price'));
                             if (p == idDel) {
                                 console.log("pingo")
                             } else {
@@ -734,16 +698,20 @@ $(document).ready(function() {
                                 console.log("temp2nd = " + temp)
                                 var e = Number($("#quantity_" + p).val());
                                 console.log("e2nd = " + e);
-                                subtotal += e
+                                subtotal = e
                                 console.log("subtotal2nd = " + subtotal);
+
+                                totalPrice += subtotal * priceSelect
+
 
                             }
                         }
                         $('.joingb-details-order ul .quantity .t-right').html(subtotal);
+                        $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
 
                     }
+                   
                     x--; //decrement textbox
-
                     // alert(sample);
                     $(".joingbpage-button-addon").show();
                     // Adds the "add" link again when a field is removed.

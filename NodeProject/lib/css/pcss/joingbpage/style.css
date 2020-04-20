@@ -21,6 +21,8 @@ body{
 	box-shadow: 0 1px 3px rgba(0,0,0,.1);
 	border-radius: 4px;
 	height: 100%;
+	top:100px;
+	position: sticky;
 }
 .box-details h2{
 	margin-top: .5rem
@@ -116,6 +118,10 @@ body{
 .joingbpage-button-addon a:hover{
 	color: #000
 }
+.joingbpage-address-payment{
+	display: flex;
+}
+
 /*.joingb-details-order ul lis span.quantity{
 	flext-grow: 2;
 }*/

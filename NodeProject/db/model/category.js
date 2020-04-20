@@ -77,6 +77,14 @@ var categorySchema = mongoose.Schema({
         type: Number,
         default: null
     },
+    tax:{
+        type: Number,
+        default: null
+    },
+    handle:{
+        type: Number,
+        default: null
+    },
     pic_profile:
     {
         path: {

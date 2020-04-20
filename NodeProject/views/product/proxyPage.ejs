@@ -241,7 +241,15 @@ html, body{
                                 <% if(item.type == 0) { %>
                                 <div class="stats">
                                     <div class="stats-container">
-                                        <span class="product_price"><%= item.min_price %>$ - <%= item.max_price %>$</span>
+                                        <span class="product_price">
+                                            <% console.log(item.max_price) %>
+                                            <% if(item.max_price == null){%>
+                                                <%= item.min_price %>$
+                                            <% }else{ %>
+                                                <%= item.min_price %>$ - <%= item.max_price %>
+                                            <%} %>
+
+                                            $</span>
                                         <span class="product_name"><%= item.category_name %></span>
                                         <p style="margin-bottom: 0" class="fake-text"> <%=item.author %> - <%= item.proxy_host %></p>
                                         <div style="display: flex;" class="product-options">
@@ -286,7 +294,13 @@ html, body{
                             <% } else if(item.type == 1) { %>
                                 <div class="stats">
                                     <div class="stats-container">
-                                        <span class="product_price"><%= item.min_price %>$ - <%= item.max_price %>$</span>
+                                        <span class="product_price">
+                                            <% if(item.max_price == null){%>
+                                                <%= item.min_price %>$
+                                            <% }else{ %>
+                                                <%= item.min_price %>$ - <%= item.max_price %>
+                                            <%} %>
+                                        </span>
                                         <span class="product_name"><%= item.category_name %></span>
                                         <p style="margin-bottom: 0" class="fake-text"><%=item.author %> - <%= item.proxy_host %></p>
                                         <div class="product-options">
@@ -303,10 +317,17 @@ html, body{
                                         </div>
                                     </div>
                                 </div>
+                                <!-- for etc -->
                             <% } else if(item.type == 2) { %>
                                <div class="stats">
                                     <div class="stats-container">
-                                        <span class="product_price"><%= item.min_price %>$ - <%= item.max_price %>$</span>
+                                        <span class="product_price">
+                                             <% if(item.max_price == null){%>
+                                                <%= item.min_price %>$
+                                            <% }else{ %>
+                                                <%= item.min_price %>$ - <%= item.max_price %>
+                                            <%} %>
+                                        </span>
                                         <span class="product_name"><%= item.category_name %></span>
                                         <p style="margin-bottom: 0" class="fake-text"><%=item.author %> - <%= item.proxy_host %></p>
                                         <div class="product-options">

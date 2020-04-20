@@ -1068,6 +1068,8 @@ router.post('/category/add',upload.single('picture'), async(req, res)=>{
                             date_payment: (req.body.date_payment),
                             min_price: (req.body.min_price),
                             max_price: (req.body.max_price),
+                            tax: req.body.tax,
+                            handle: req.body.hns,
                             specs: req.body.specs,
                             pic_profile: {
                                 // path: (data.files[0].file),
@@ -1110,6 +1112,8 @@ router.post('/category/add',upload.single('picture'), async(req, res)=>{
                             date_payment: req.body.date_payment,
                             min_price: req.body.min_price,
                             max_price: req.body.max_price,
+                            tax: req.body.tax,
+                            handle: req.body.hns,
                             specs: req.body.specs,
                             pic_profile: {
                                 path: req.file.path,
@@ -1147,6 +1151,8 @@ router.post('/category/add',upload.single('picture'), async(req, res)=>{
                              date_payment: req.body.date_payment,
                              min_price: req.body.min_price,
                              max_price: req.body.max_price,
+                             tax: req.body.tax,
+                             handle: req.body.hns,
                              specs: req.body.specs,
                              pic_profile: {
                                  path: req.file.path,
@@ -1289,6 +1295,8 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
                         date_payment: req.body.date_payment,
                         min_price: req.body.min_price,
                         max_price: req.body.max_price,
+                        tax: req.body.tax,
+                        handle: req.body.hns,
                         specs: req.body.specs
                     });
                 }else{
@@ -1308,6 +1316,8 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
                         date_payment: req.body.date_payment,
                         min_price: req.body.min_price,
                         max_price: req.body.max_price,
+                        tax: req.body.tax,
+                        handle: req.body.hns,
                         specs: req.body.specs,
                         pic_profile: {
                             path: req.file.path,
@@ -1338,6 +1348,8 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
                         date_payment: req.body.date_payment,
                         min_price: req.body.min_price,
                         max_price: req.body.max_price,
+                        tax: req.body.tax,
+                        handle: req.body.hns,
                         specs: req.body.specs
                     });
                 }else{
@@ -1355,6 +1367,8 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
                         date_payment: req.body.date_payment,
                         min_price: req.body.min_price,
                         max_price: req.body.max_price,
+                        tax: req.body.tax,
+                        handle: req.body.hns,
                         specs: req.body.specs,
                         pic_profile: {
                             path: req.file.path,
@@ -1381,6 +1395,8 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
                         date_payment: req.body.date_payment,
                         min_price: req.body.min_price,
                         max_price: req.body.max_price,
+                        tax: req.body.tax,
+                        handle: req.body.hns,
                         specs: req.body.specs
                     });
                 }else{
@@ -1395,6 +1411,8 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
                         date_payment: req.body.date_payment,
                         min_price: req.body.min_price,
                         max_price: req.body.max_price,
+                        tax: req.body.tax,
+                        handle: req.body.hns,
                         specs: req.body.specs,
                         pic_profile: {
                             path: req.file.path,
