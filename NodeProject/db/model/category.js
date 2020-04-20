@@ -21,7 +21,7 @@ var categorySchema = mongoose.Schema({
     },
     author:{
         type: String
-        
+       
     },
     proxy_host:{
         type: String
@@ -74,6 +74,14 @@ var categorySchema = mongoose.Schema({
         default: null
     },
     max_price:{
+        type: Number,
+        default: null
+    },
+    tax:{
+        type: Number,
+        default: null
+    },
+    handle:{
         type: Number,
         default: null
     },

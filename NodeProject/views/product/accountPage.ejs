@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/api/css/custom-fixed.css">
     <link rel="stylesheet" href="/product/css/accountpage/style.css">
     <link rel="stylesheet" href="/package/intl-tel-input-master/build/css/intlTelInput.css">
-    <link rel="stylesheet" href="/api/css/effect/navbar.css"
+    <link rel="stylesheet" href="/api/css/effect/navbar.css">
     <!-- ============= -->
     <!-- font -->
     <link
@@ -240,7 +240,12 @@
                                 </div>
                                 <div class='col-md-6'>
                                     <label for='password'>DoB</label>
-                                    <input style="width: 100%" value='<%= (user.birth_date).toLocaleDateString()%>' id="datepicker" class="span2" type="text" name="dob">
+                                    <% if((user.birth_date) == null){%>
+                                        <input style="width: 100%" id="datepicker" class="span2" type="text" name="dob">
+                                    <% }else{ %>
+                                        <input style="width: 100%" value='<%= (user.birth_date).toLocaleDateString()%>' id="datepicker" class="span2" type="text" name="dob">
+                                    <% } %>
+                                    
                                 </div>
                             </div>
                         </div>

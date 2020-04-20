@@ -241,9 +241,17 @@ html, body{
                                 <% if(item.type == 0) { %>
                                 <div class="stats">
                                     <div class="stats-container">
-                                        <span class="product_price"><%= item.min_price %>$ - <%= item.max_price %>$</span>
+                                        <span class="product_price">
+                                            <% console.log(item.max_price) %>
+                                            <% if(item.max_price == null){%>
+                                                <%= item.min_price %>$
+                                            <% }else{ %>
+                                                <%= item.min_price %>$ - <%= item.max_price %>
+                                            <%} %>
+
+                                            $</span>
                                         <span class="product_name"><%= item.category_name %></span>
-                                        <p style="margin-bottom: 0" class="fake-text"> author - proxy name</p>
+                                        <p style="margin-bottom: 0" class="fake-text"> <%=item.author %> - <%= item.proxy_host %></p>
                                         <div style="display: flex;" class="product-options">
                                             <div style="padding: 0" class="col-md-6">
                                                     <strong>Layout</strong>
@@ -286,9 +294,15 @@ html, body{
                             <% } else if(item.type == 1) { %>
                                 <div class="stats">
                                     <div class="stats-container">
-                                        <span class="product_price"><%= item.min_price %>$ - <%= item.max_price %>$</span>
+                                        <span class="product_price">
+                                            <% if(item.max_price == null){%>
+                                                <%= item.min_price %>$
+                                            <% }else{ %>
+                                                <%= item.min_price %>$ - <%= item.max_price %>
+                                            <%} %>
+                                        </span>
                                         <span class="product_name"><%= item.category_name %></span>
-                                        <p style="margin-bottom: 0" class="fake-text">author name</p>
+                                        <p style="margin-bottom: 0" class="fake-text"><%=item.author %> - <%= item.proxy_host %></p>
                                         <div class="product-options">
                                             <strong>Profile</strong>
                                             <span><%= item.c_profile %></span>
@@ -303,10 +317,33 @@ html, body{
                                         </div>
                                     </div>
                                 </div>
-                            <% } else { %>
-                                <div class="stats">     
-                                    
-                                </div>  
+                                <!-- for etc -->
+                            <% } else if(item.type == 2) { %>
+                               <div class="stats">
+                                    <div class="stats-container">
+                                        <span class="product_price">
+                                             <% if(item.max_price == null){%>
+                                                <%= item.min_price %>$
+                                            <% }else{ %>
+                                                <%= item.min_price %>$ - <%= item.max_price %>
+                                            <%} %>
+                                        </span>
+                                        <span class="product_name"><%= item.category_name %></span>
+                                        <p style="margin-bottom: 0" class="fake-text"><%=item.author %> - <%= item.proxy_host %></p>
+                                        <div class="product-options">
+                                            <strong>Material</strong>
+                                            <span><%= item.c_profile %></span>
+                                            <strong>COLORS</strong>
+                                            <div class="colors">
+                                                <div class="c-blue"><span></span></div>
+                                                <div class="c-red"><span></span></div>
+                                                <div class="c-white"><span></span></div>
+                                                <div class="c-green"><span></span></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
                             <% } %>
                             </div>
                             <!-- <div class="product-back">
