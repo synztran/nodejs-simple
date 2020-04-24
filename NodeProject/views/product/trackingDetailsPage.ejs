@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css">
+    <link rel="stylesheet" href="/api/css/pcss/main.css">
+    <link rel="stylesheet" href="/api/css/custom-fixed.css">
+    <link rel="stylesheet" href="/product/css/accountpage/style.css">
+    <link rel="stylesheet" href="/product/css/trackingpage/style.css">
+    <link rel="stylesheet" href="/package/intl-tel-input-master/build/css/intlTelInput.css">
+    <link rel="stylesheet" href="/api/css/effect/navbar.css">
+    <link rel="stylesheet" href="/package/loading-bar/loading-bar.min.css">
+    <!-- ============= -->
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
+    <!-- ============ -->
+    <!-- script
+    ================================================== -->
+    <script src="/api/js/pjs/modernizr.js"></script>
+    <title>NoobKey | Address Update Page</title>
+    <style>
+        *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html, body{
+        font-family: "Montserrat", sans-serif !important;
+        /* height: 100%; */
+        width: 100%;
+        background-image: url('/api/docs/background/UIBkAT.jpg');
+        /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg'); */
+        /* background-position: center center; */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+    .center{
+        text-align: center;
+    }
+  
+    nav.navbar{
+        z-index: 1;
+        position: sticky;
+        top: 0;
+        background-image: url('/api/docs/background/UIBkAT.jpg');
+        background-repeat: no-repeat;
+        /* clip-path: polygon(0 13%, 99% 24%, 100% 92%, 17% 86%); */
+
+    }
+    .bg-dark{
+        background-color: transparent!important;
+        /* clip-path: polygon(50% 0%, 100% 0, 100% 61%, 30% 86%, 0 52%, 0 0); */
+    }
+    
+    .before-breadcrumb {
+        opacity: 0.91;
+        position: relative;
+        top: 1%;
+        background-color: rgba(54, 58, 64, 0.3);
+        background-image: url('/api/docs/background/UIBkAT.jpg');
+        background-repeat: no-repeat;
+        filter: brightness(150%);
+        /* -webkit-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
+        -moz-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
+        box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79); */
+    }
+    .breadcrumb{
+        max-width: 80%;
+        margin:0 auto;
+        background-image: url('/api/docs/background/UIBkAT.jpg');
+        background-repeat: no-repeat;
+        background-color: transparent!important;
+        
+    }
+    
+    .row:first-child > .col-md-12{
+        display: flex;
+    }
+    .row{
+        /* height: 100%; */
+        position: relative;
+        top: 5%;
+    }
+    .btn-submit{
+        border-radius: 50px;
+        min-width: 160px;
+    }
+    .footer-register{
+        height: 10%;
+    }
+    @import "compass/css3";
+    .seperator-wrapper {
+  width: 100%;
+}
+.seperator-wrapper .seperator {
+  width: 80%;
+  margin: 0 auto;
+  height: 5px;
+  animation: rotate 3s infinite linear;
+  -webkit-animation: rotate 3s infinite linear;
+}
+@-webkit-keyframes rotate {
+  from {
+    background-position: -3000px;
+  }
+  to {
+    background-position: 0px;
+  }
+}
+@keyframes rotate {
+  from {
+    background-position: -3000px;
+  }
+  to {
+    background-position: 0px;
+  }
+}
+.gradient {
+  background: #30ff90;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #30ff90), color-stop(25%, #ed2ded), color-stop(50%, #c99826), color-stop(75%, #30ffe6), color-stop(100%, #30ff90));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* IE10+ */
+  background: linear-gradient(to right, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30ff90', endColorstr='#30ff90',GradientType=1);
+  /* IE6-9 */
+}
+/*  */
+
+ 
+/*  */
+    </style>
+</head>
+
+<body id="top">
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader" class="dots-jump">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- <header class="top"> -->
+    <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <!-- Logo Image -->
+                <img src="https://res.cloudinary.com/mhmd/image/upload/v1557368579/logo_iqjuay.png" width="45" alt="" class="d-inline-block align-middle mr-2">
+                <!-- Logo Text -->
+                <span class="text-uppercase font-weight-bold">Company</span>
+            </a>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="./" class="nav-link">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Group Buy</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- </header> -->
+    <nav class="before-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Library</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+    </nav>
+    <section style="position: relative; top:1%" class="seperator-wrapper">
+        <div class="seperator gradient">
+        </div>
+    </section>
+    <!-- This is a reverse engineering of the "Hyperspace"
+     design from HTML5 Up! https://html5up.net/hyperspace -->
+    <main class="main row">
+        <!-- <div style="height: 75vh;" class="col-md-4">
+        </div> -->
+        <div style="" class="col-md-12">
+            <div class="title-li">
+                <p>your tracking</p>
+                <hr>
+            </div>
+            <article class="container">
+                <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-address-default flip-box">
+                    <div class="box-body table-responsive no-padding tb-responsive-listaccount">
+                        <div id="tableContainer tb-container-listaccount">
+                            <table id="data-table-list-tracking" class="table table-hover" id="dataTables1">
+                                <thead>
+                                    <tr>
+                                        <th> #Order</th>
+                                        <th> Payment Status</th>
+                                        <th> Expected Shipping Date</th>
+                                        <th> Total</th>
+                                        <th> Tracking </th>
+                                    </tr>
+                                </thead>
+                                <!-- <tbody></tbody> -->
+                                <% listTracking.forEach(function(item){ %>
+                                <tr class="align-middle">
+                                    <td style="">
+                                        
+                                            <% if(item.order_id < 10) { %>
+                                                <a id="order_id" href="#">#100<%-item.order_id %></a>
+                                            <% }else if(item.order_id < 100) { %>
+                                                <a id="order_id" href="#">#10<%-item.order_id %></a>
+                                            <% }else{ %>
+                                                <a id="order_id" href="#">#1<%-item.order_id %></a>
+                                            <% } %>
+                                            
+                                    </td>
+                                    <td class="t-left">
+                                        <% if(item.status_payment == true){ %>
+                                        Paid
+                                        <% }else if(item.status_payment == false){ %>
+                                        Pending
+                                        <% } %>
+                                    </td>
+                                    <td class="t-left">
+                                        <%= (item.date_receipt).toLocaleDateString() %>
+                                    </td>
+                                    <td class="t-left">
+                                        $ <%= item.total %>
+                                    </td>
+                                    <td style="height: 60px;" class="t-left">
+                                        <% if(item.tracking_number == null && item.status_payment == false){ %>
+                                            <div data-preset="rainbow" class="ldBar label-center" data-value="0"></div>
+                                        <% }else if(item.tracking_number == null && item.status_payment == true){ %>
+                                            <div data-preset="rainbow" class="ldBar label-center" data-value="50"></div>
+                                        <% }else if(item.tracking_number){ %>
+                                            <div data-preset="rainbow" class="ldBar label-center" data-value="100"></div>
+                                        <% } %>
+                                    </td>
+                                    <!-- <td>
+                        <%= item.password %>
+                    </td> -->
+                                </tr>
+                                <%    }) %>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group d-flex shipping-info">
+                            <div class='form-group col-md-6 '>
+                                
+                            </div>
+                            
+                            <div class='form-group col-md-6'>
+                               
+                            </div>
+                            
+                        </div> -->
+                </div>
+            </article>
+        </div>
+    </main>
+    <div class="footer-register center">
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="/api/js/pjs/main.js"></script>
+<script src="/api/js/datepicker/dist/datepicker.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="/package/intl-tel-input-master/build/js/intlTelInput.js"></script>
+<script src=/package/intl-tel-input-master/build/js/utils.js> </script> <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="/package/loading-bar/loading-bar.js"></script>
+<script>
+// var intlNumber = $("#pnumber").intlTelInput("getNumber"); // get full number eg +17024181234
+// var countryData = $("#pnumber").intlTelInput("getSelectedCountryData"); // get country data as obj;
+// var countryCode = countryData.dialCode;
+// $(document).ready(function() {
+// var input = document.querySelector("#pnumber");
+// window.intlTelInput(input, {
+//     utilsScript: "/package/intl-tel-input-master/build/js/utils.js"
+// });
+
+
+
+$('#pnumber').on('input', function() {
+    this.value = this.value
+        .replace(/[^\d]/g, ''); // numbers and decimals only
+
+});
+// $('#data-table-list-tracking').dataTable({
+//         "aoColumns": [
+//                 null,
+//                 null,
+//                 null,
+//                 null,
+//                 // null,
+//                 null,
+//             ],
+//             "language": {
+//                 searchPlaceholder: 'Search...',
+//                 sSearch: ''
+//             },
+//             "columnDefs":[
+//                 {"targets": 0, "orderable": false},
+//                 {"targets": 4, "orderable": false},
+
+//             ],
+//     });
+
+// $('#btn-submit').on('click', function(e){
+//     e.preventDefault();
+//         $("#pnumber").intlTelInput({
+
+// utilsScript: '/package/intl-tel-input-master/build/js/utils.js'
+// });
+// var intlNumber = $('#pnumber').intlTelInput("getNumber");
+// get full number eg +17024181234
+// var x =  $("#pnumber").intlTelInput({
+//     preferredCountries: ["us", "ca"],
+//     separateDialCode: true,
+//     initialCountry: ""
+// }).on('countrychange', function (e, countryData) {
+//     $("#code").val(($("#pnumber").intlTelInput("getSelectedCountryData").dialCode));
+
+// });;
+// $('#pnumber')
+// var countryData = input.intlTelInput("getSelectedCountryData"); // get country data as obj;
+// var countryCode = countryData.dialCode;
+
+// console.log(x)
+// console.log(countryData)
+// console.log(countryCode)
+// $.ajax({
+//     type: POST,
+//     url: '/addaddress',
+//     contentType: 'application/x-www-form-urlencoded',
+//     data:
+// })
+// })
+
+$('.btn-delete-address').on('click', function(e) {
+    e.preventDefault();
+
+    const id = $(this).attr('data-id');
+    console.log(id);
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        backdrop: `
+                        rgba(0,0,123,0.4)
+                        url("/api/docs/background/UIBkAT.jpg")
+                        left top
+                        no-repeat
+                    `,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/delete-address/' + id,
+                success: function(res) {
+                    // alert('deleting');
+                    location.reload();
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            })
+        }
+    })
+});
+
+
+// $('#checkbox-notification').prop('checked', true);
+
+fetch('/get_noti')
+    .then(function(response) {
+
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        // Read the response as json.
+        return response.json();
+    })
+    .then(function(responseAsJson) {
+        // Do stuff with the JSON
+        console.log(responseAsJson);
+
+        var user = responseAsJson;
+        console.log(user);
+
+        $('#checkbox-notification').prop('checked', user.noti['get_noti']);
+
+    })
+    .catch(function(error) {
+        console.log('Looks like there was a problem: \n', error);
+    });
+$('#datepicker').datepicker();
+
+
+$('#datepicker').on('click', function(e) {
+    e.preventDefault();
+    // const date = ($('#datepicker').val()).split("/").reverse().join("-");
+    const date = formatDate($('#datepicker').val())
+    // var param = {'created': date};
+    // console.log(JSON.stringify(param));
+    console.log(date);
+});
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+// })
+</script>
+
+</html>

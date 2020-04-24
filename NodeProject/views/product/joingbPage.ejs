@@ -13,11 +13,14 @@
     <!-- ==================== CSS ==============================================-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/package/lightslider/src/css/lightslider.css">
+    <link rel="stylesheet" href="/package/waitMe/waitMe.min.css">
     <link rel="stylesheet" href="/api/css/pcss/joingbpage/style.css">
     <link rel="stylesheet" href="/api/css/pcss/joingbpage/border-effect.css">
+    <link rel="stylesheet" href="/api/css/pcss/joingbpage/button-stuck.css">
     <!-- <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css"> -->
     <link rel="stylesheet" href="/api/css/effect/navbar.css">
     <link rel="stylesheet" href="/api/css/effect/preloading.css">
+    <link rel="stylesheet" href="/api/css/pcss/customize.css">
     <!-- <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css"> -->
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
     <!--  -->
@@ -191,6 +194,9 @@ ul.item-timeline {
 .main {
     margin: 2% 15% !important
 }
+.truck-button{
+    /*display: none;*/
+}
 </style>
 
 <body id="top">
@@ -292,25 +298,129 @@ ul.item-timeline {
                         </div>
                     </div>
                     <div class="form-group joingbpage-address-payment">
-                        <div class="col-md-6 payment-option">
+                        <div style="margin-right: 0.5%" class="col-md-6 payment-option">
                             <h2>Paymnet Options</h2>
                             <hr>
                             <div class="form-group">
-                                
+                                <div>
+                                    <input type="radio" id="momo" name="payment" value="momo"><span style="margin-left: 5%"><img src="/api/docs/trash/momo.jfif" style="width:64px;height: 64px"></span>
+                                    <label for="momo"></label>
+                                </div>
+                                <hr>
+                                <div>
+                                    <input type="radio" id="paypal" name="payment" value="paypal"><span style="margin-left: 5%"><img src="/api/docs/trash/paypal.png"></span>
+                                    <label for="paypal"></label>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 shipping-address">
+                        <div style="margin-left: 0.5%" class="col-md-6 shipping-address">
                             <h2>Shipping Address</h2>
                             <hr>
                             <div class="form-group">
-                                <form>
-                                    <input type="radio" id="new_address" name="address" value="1">
-                                    <label for="male">Use a new address</label><br>
-
-
-                                    <input type="radio" id="already_address" name="address" value="2">
-                                    <label for="male">Shipping to this address</label><br>
-                                    
+                                <input type="radio" id="new_address" name="address" value="new">
+                                <label for="new_address">Shipping to this address</label>
+                                <br>
+                                <form id="form_already_address">
+                                    <% if((User.shipping_at).length > 0) { %>
+                                    <div class="for-already-address">
+                                        <div class="form-group d-flex">
+                                            <label for='country' class="col-md-3">Country</label>
+                                            <div class="col-md-9">
+                                                <select style="" id="country" name="country" class="form-control">
+                                                    <option value="<%= User.shipping_at[0].city %>">
+                                                        <%= User.shipping_at[0].city %>
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='name' class="col-md-3">Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="name" name="customer_name" value="<%= User.shipping_at[0].fname %> <%= User.shipping_at[0].lname %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='address' class="col-md-3">Address</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="address" name="customer_address" value="<%= User.shipping_at[0].address %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='city' class="col-md-3">City</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="city" name="customer_city" value="<%= User.shipping_at[0].town_city %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='pcode' class="col-md-3">postal code</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" id="pcode" name="customer_postal_code" value="<%= User.shipping_at[0].zip_code %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='pnumber' class="col-md-3">phone</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" id="pnumber" name="customer_phone" value="<%= User.shipping_at[0].phone_number %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }else{ %>
+                                    <a href="/address">Click here to setup your shipping address </a>
+                                    <%   } %>
+                                </form>
+                                <hr style="margin-left: 5%">
+                                <input type="radio" id="already_address" name="address" value="already">
+                                <label for="already_address">Use a new address</label>
+                                <br>
+                                <form id="form_new_address">
+                                    <div class="for-new-address">
+                                        <div class="form-group d-flex">
+                                            <label for='newCountry' class="col-md-3">Country</label>
+                                            <div class="col-md-9">
+                                                <select style="" id="newCountry" name="country" class="form-control">
+                                                    <option value="Viet Nam">Việt Nam</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='newName' class="col-md-3">Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="newName" name="customer_name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='newAddress' class="col-md-3">Address</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="newAddress" name="customer_address">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='subAddress' class="col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="customer_address_sub" id="subAddress" placeholder="(option)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='newCity' class="col-md-3">City</label>
+                                            <div class="col-md-9">
+                                                <select style="" id="newCity" name="country" class="form-control">
+                                                    <% include ./../tips/selectCity %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='newPcode' class="col-md-3">postal code</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" id="newPcode" name="customer_postal_code" placeholder="VN(70000)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='newPnumber' class="col-md-3">phone</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" id="newPnumber" name="customer_phone">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -368,7 +478,22 @@ ul.item-timeline {
                         </ul>
                     </div>
                     <div class="button-payment">
-                        <button class="btn-secondary btn-lg" disabled style="width: 100%">PLACE ORDER</button>
+                        <!-- <button class="btn-secondary btn-lg truck-fake-button" style="width: 100%">PLACE ORDER</button> -->
+                        <button class="truck-button" id="2nd-truck-button">
+                            <span class="default">Complete Order</span>
+                            <span class="success">
+                                Order Placed
+                                <svg viewbox="0 0 12 10">
+                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                </svg>
+                            </span>
+                            <div class="truck">
+                                <div class="wheel"></div>
+                                <div class="back"></div>
+                                <div class="front"></div>
+                                <div class="box"></div>
+                            </div>
+                        </button>
                         <p class="t-center"><i class="fas fa-lock"></i>Secure Checkout</p>
                     </div>
                 </div>
@@ -383,8 +508,115 @@ ul.item-timeline {
 <!-- <script src="/nodemodules/zooming/build/zooming.min.js"></script> -->
 <script type="text/javascript" src="/package/lightslider/src/js/lightslider.js"></script>
 <script type="text/javascript" src="https://unpkg.com/zooming"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js"></script>
+<script type="text/javascript" src="/api/js/pjs/joingbPage/js.ejs"></script>
+<script type="text/javascript" src="/package/waitMe/waitMe.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+
+    $('.button-payment button.truck-button').attr('disabled', true);
+    $('.button-payment button.truck-button').css('cursor', 'no-drop');
+   var productOrder = 0;
+   var addressOrder;
+   var paymentOrder;
+   var a = document.getElementsByName('address');
+   var p = document.getElementsByName('payment');
+    $('.joingb-details-order ul li.pack .t-right').on('DOMSubtreeModified', function(e) {
+        productOrder = Number($('.joingb-details-order ul li.pack .t-right').text())
+        if(productOrder > 0){
+            // $('.button-payment button.truck-button').attr('disabled', 'false');
+
+        if(addressOrder && paymentOrder){
+                 $('.button-payment button.truck-button').attr('disabled', false);
+                 // document.getElementById("2nd-truck-button").disabled = false;
+                     $('.button-payment button.truck-button').css('cursor', 'pointer');
+        }else{
+
+        }
+     }else{
+
+     }
+    });
+    $('input[type=radio][name=address]').change(function() {
+       addressOrder = (this.value)
+        if(productOrder > 0){
+        if(addressOrder && paymentOrder){
+                 $('.button-payment button.truck-button').attr('disabled', false);
+                 $('.button-payment button.truck-button').css('cursor', 'pointer');
+        }else{
+
+        }
+     }else{
+
+     }
+        // alert(this.value)
+    });
+    $('input[type=radio][name=payment]').change(function() {
+       paymentOrder = (this.value)
+        if(productOrder > 0){
+        if(addressOrder && paymentOrder){
+                 $('.button-payment button.truck-button').attr('disabled', false);
+                     $('.button-payment button.truck-button').css('cursor', 'pointer');
+        }else{
+
+        }
+     }else{
+
+     }
+        // alert(this.value)
+    });
+    
+
+    $('.button-payment button.truck-button').on('click', function(e){
+        $('body').waitMe({
+            effect : 'roundBounce',
+            text: 'Please wait...',
+            waitTime: 3000
+        });
+    });
+    
+    // for (var i = 0, length = a.length; i < length; i++) {
+    //       if (a[i].checked) {
+    //         // do whatever you want with the checked radio
+    //         addressOrder = a[i].value;
+
+    //         // only one radio can be logically checked, don't check the rest
+    //         // break;
+    //       }
+    //     }
+    // for (var i = 0, length = p.length; i < length; i++) {
+    //       if (p[i].checked) {
+    //         // do whatever you want with the checked radio
+    //         paymentOrder = p[i].value;
+    //         // only one radio can be logically checked, don't check the rest
+    //         // break;
+    //       }
+    //     }
+    // console.log(productOrder)
+    // console.log(addressOrder)
+    // console.log(paymentOrder)
+    // if(productOrder > 0){
+    //     if(paymentOrder){
+    //         if(addressOrder){
+    //             $('.button-payment button.truck-button').attr('disabled', 'false');
+    //         }else{
+    //             return 0;
+    //         }
+
+    //     }else{
+    //         return 0;
+    //     }
+
+    // }else{
+    //     return 0;
+    // }
+
+    
+    
+   
+
+
+
 
     // document.addEventListener('DOMContentLoaded', function() {
     //     new Zooming({
@@ -392,7 +624,35 @@ $(document).ready(function() {
     // })
     new Zooming().listen('.img-zoomable')
 
+    $('#pnumber , #pcode').on('input', function() {
+        this.value = this.value
+            .replace(/[^\d]/g, ''); // numbers and decimals only
 
+    });
+
+    $('#form_new_address :input').prop('disabled', true);
+    $('#form_already_address :input').prop('readonly', true);
+    $('#form_new_address').css('display', 'none');
+    $('#form_already_address').css('display', 'none');
+
+    $("input[type='radio']").click(function() {
+        var radioValue = $("input[name='address']:checked").val();
+        if (radioValue == 'already') {
+            // alert("Your are a - " + radioValue);
+            $('#form_new_address :input').prop('disabled', false);
+            $('#form_new_address').css('display', 'block');
+            $('#form_already_address :input').prop('disabled', true);
+            $('#form_already_address').css('display', 'none');
+        } else if (radioValue == 'new') {
+            // $('#form_already_address :input').prop('disabled', false);
+            $('#form_already_address').css('display', 'block');
+
+
+            $('#form_new_address :input').prop('disabled', true);
+            $('#form_new_address').css('display', 'none');
+
+        }
+    });
 
 
 
@@ -482,7 +742,7 @@ $(document).ready(function() {
                     FieldCount++; //text box added ncrement
                     //add input box
 
-                    $('.joingbpage-list-product').append('<div class="form-group image2nd-include joingbpage-select-product" id="form_' + x + '">                            <h3>Select Product</h3>                            <hr><div class="selected-product"  >                            <span class="img-product">                                <picture>                                    <img style="width: 90px;height: 90px;object-fit: cover" class="responsive carousel-image img-zoomable2nd" src="' + image + '">                                </picture>                            </span>                            <div class="form-margin-left w-100">                                <label for="">Product Type:</label>                                <select style="font-weight: bold" data-id="' + x + '" class="form-control select2 multiple-select select2-product" name="product" id="select_'+x+'">                                  ' + dynamic + '  </select>                            </div>                            <div class="form-quantity-select w-20">                                <label for="quantity">Quantity:</label>                                 <select class="form-control select2-quantity" data-value="' + x + '" style="margin-top:0px;" id="quantity_' + x + '" name="quantity">                                       ' + listquantity + '                                     </select>                            </div>                        <a href="#" data-id="' + x + '" class="removeclass">Remove</a></div></div>');
+                    $('.joingbpage-list-product').append('<div class="form-group image2nd-include joingbpage-select-product" id="form_' + x + '">                            <h3>Select Product</h3>                            <hr><div class="selected-product"  >                            <span class="img-product">                                <picture>                                    <img style="width: 90px;height: 90px;object-fit: cover" class="responsive carousel-image img-zoomable2nd" src="' + image + '">                                </picture>                            </span>                            <div class="form-margin-left w-100">                                <label for="">Product Type:</label>                                <select style="font-weight: bold" data-id="' + x + '" class="form-control select2 multiple-select select2-product" name="product" id="select_' + x + '">                                  ' + dynamic + '  </select>                            </div>                            <div class="form-quantity-select w-20">                                <label for="quantity">Quantity:</label>                                 <select class="form-control select2-quantity" data-value="' + x + '" style="margin-top:0px;" id="quantity_' + x + '" name="quantity">                                       ' + listquantity + '                                     </select>                            </div>                        <a href="#" data-id="' + x + '" class="removeclass">Remove</a></div></div>');
 
                     // disable auto select for select2
                     // console.log("x = " + x);
@@ -503,13 +763,13 @@ $(document).ready(function() {
                         var totalPrice = 0;
 
                         for (var p = 0; p < x + 1; p++) {
-                            var priceSelect = Number($("#select_"+ p).find(':selected').data('price'));
+                            var priceSelect = Number($("#select_" + p).find(':selected').data('price'));
                             console.log("p3rd = " + p);
                             temp = Number($(this).val());
                             console.log("temp3rd = " + temp)
                             var e = Number($("#quantity_" + p).val());
                             console.log("e3rd = " + e);
-                            subtotal = e
+                            subtotal += e
                             console.log("subtotal3rd = " + subtotal);
                             totalPrice += subtotal * priceSelect
                         }
@@ -581,7 +841,7 @@ $(document).ready(function() {
                             console.log(idioma);
                             var idData = $(idioma.element).data('id');
                             console.log(idData) // id
-                            console.log($(this).closest('div.joingbpage-select-product').attr('id'))
+                            // console.log($(this).closest('div.joingbpage-select-product').attr('id'))
                             var x = $(idioma.element).data('image')
                             console.log(idioma.id);
                             var y = '/api/' + x;
@@ -604,7 +864,7 @@ $(document).ready(function() {
                     });
                     y = x - 1;
                     // $('.select2-product').on('select2:select', function(e) {
-                      
+
                     $("#form_" + y + " .selected-product .w-100").on('select2:select', function(e) {
                         var totalQuantity = 0;
                         var totalPrice = 0;
@@ -625,20 +885,20 @@ $(document).ready(function() {
 
                             }
                         }
-                       
+
 
                         for (var n1 = 0; n1 < x; n1++) {
                             console.log(n1);
-                            var priceSelect = Number($("#select_"+ n1).find(':selected').data('price'));
+                            var priceSelect = Number($("#select_" + n1).find(':selected').data('price'));
                             var quantityValue = Number($("#form_" + n1 + " .selected-product .w-20 select").val());
                             console.log(quantityValue);
 
                             totalQuantity = quantityValue;
                             totalPrice += (totalQuantity * priceSelect);
-                            
+
                         }
                         $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
-                            $('.joingb-details-order ul .total .t-right').html(totalPrice + '$');
+                        $('.joingb-details-order ul .total .t-right').html(totalPrice + '$');
 
                         // console.log($(this).closest('.joingbpage-select-product').attr('id'))
                         // console.log($(this).parent('div').parent('div'));
@@ -655,7 +915,7 @@ $(document).ready(function() {
                         // console.log(priceSelect)
 
                         for (var n2 = 0; n2 < x; n2++) {
-                            var priceSelect = Number($('#select_'+ n2).find(':selected').data('price'))
+                            var priceSelect = Number($('#select_' + n2).find(':selected').data('price'))
                             var e = Number($("#quantity_" + n2).val());
                             totalQuantity = e;
                             // subPrice = product[n2].price;
@@ -678,10 +938,10 @@ $(document).ready(function() {
                 console.log("this = " + idDel)
                 pack = pack - 1
                 $('.joingb-details-order ul .pack .t-right').html(pack)
-                
+
                 // Number($('.select2-product').find(':selected').data('price'))
                 console.log(priceSelect)
-                
+
                 if (x > 1) {
                     console.log($(this).parent('div').parent('div'));
                     $(this).parent('div').parent('div').remove(); //remove text box
@@ -710,7 +970,7 @@ $(document).ready(function() {
                         $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
 
                     }
-                   
+
                     x--; //decrement textbox
                     // alert(sample);
                     $(".joingbpage-button-addon").show();

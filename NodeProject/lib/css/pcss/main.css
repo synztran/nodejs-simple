@@ -746,6 +746,7 @@ select {
   background: rgba(255, 255, 255, 0.05);
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  box-shadow: unset;
 }
 
 .ss-custom-select {

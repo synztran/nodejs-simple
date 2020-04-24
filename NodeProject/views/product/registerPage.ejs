@@ -209,5 +209,14 @@
 <script>
     $('#datetimepicker').datetimepicker('show');
 </script>
+<script>
+    $(document).ready(function(){
+        $('#email').on('keypress', function(e) {
+            if (e.which == 32){
+                return false;
+            }
+        });
+    })
+</script>
 </html>
 

@@ -54,8 +54,9 @@ a.btn-loginform:hover{
 }
 
 input::-webkit-input-placeholder {
-    opacity: 0.5; /*Change the opacity between 0 and 1*/
+    opacity: 0.4; /*Change the opacity between 0 and 1*/
 }
+
 .form-info{
     display: flex;
 }
@@ -87,6 +88,12 @@ input::-webkit-input-placeholder {
     display: flex;
 }
 
+.form-control:focus{
+
+    box-shadow: unset !important;
+    border-color: #000 !important;
+    caret-color: black;
+}
 
 /*.form-info .col-md-2{
     padding-left: 0;

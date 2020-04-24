@@ -1,6 +1,9 @@
 body{
 	background-color: #f0f0f0!important
 }
+.form-group{
+	margin: 1rem 0!important;
+}
 .joingb-details-order ul{
    list-style: none;
 }
@@ -98,6 +101,9 @@ body{
 	/*height: 46px;*/
 	padding-left: 10px
 }
+.form-quantity-select select{
+	height: 46px;
+}
 .form-quantity-select input{
 	height: 48px;
 }
@@ -121,7 +127,54 @@ body{
 .joingbpage-address-payment{
 	display: flex;
 }
+.joingbpage-address-payment > .payment-option, .shipping-address{
+	height: 100%;   
+}
 
+.for-new-address label, .for-already-address label{
+	text-transform: uppercase;
+}
+.d-flex{
+	display: flex;
+}
+.for-new-address input, .for-already-address input{
+	width: 100%;
+	box-shadow: unset;
+	border: 0;
+	outline: none;
+	height: 2rem !important;
+}
+.payment-option input{
+	box-shadow: unset;
+	border: 0;
+	outline: none;
+	/*height: 2rem !important;*/
+}
+.for-new-address > div:nth-child(1) > label{
+	margin:auto 0;
+}
+.for-new-address > div:nth-child(5) > label{
+	margin:auto 0;
+}
+#new_address, #already_address, #momo, #paypal{
+	width: unset;
+	height: unset;
+}
+.shipping-address, .payment-option{
+	background-color: #fff;
+	padding: 2%
+}
+
+input:disabled{
+	background-color: transparent!important
+}
+.for-already-address, .for-new-address > .form-group > .col-md-3{
+	margin-bottom: unset;
+	margin: auto 0;
+}
+select{
+	display: unset;
+}
 /*.joingb-details-order ul lis span.quantity{
 	flext-grow: 2;
 }*/

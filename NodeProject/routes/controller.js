@@ -148,18 +148,26 @@ router.post("/signup", function(req, res) {
     return res.redirect('success');
 })
 
-router.get('/list', function(req, res) {
-    Couter.find({}, function(err, docs) {
-        console.log(docs);
+router.get('/list',TokenCheckMiddleware, function(req, res) {
+    // Couter.find({}, function(err, docs) {
+    //     console.log(docs);
 
-    });
-    AdmAccount.find({}, function(err, docs) {
-        console.log(docs);
-        res.render('listAccount', {
-            "listAccount": docs
+    // });
+    try{
+        AdmAccount.find({}, function(err, docs) {
+            console.log(docs);
+            res.render('listAccount', {
+                "listAccount": docs
+            });
+            res.status(200)
         });
-    });
 
+    }catch(err){
+        res.status(400).send(err);
+    }
+    
+  
+    
 
 });
 
@@ -520,7 +528,7 @@ router.get('/product/getcid/:id', async(req, res)=>{
 router.get('/product/add' ,async (req, res) => {
 
     Category.find({}, function(err, docs) {
-        console.log(docs)
+        // console.log(docs)
         console.log(docs.length)
         res.render('manager/product/addPage', {
             title: "Add new PRODUCT",
@@ -1255,10 +1263,10 @@ router.get('/category/get/:id', async(req, res) =>{
 })
 
 router.get('/category/getcid/:id', async(req, res) =>{
-    console.log("req.prams "+ req.params.id)
+    // console.log("req.prams "+ req.params.id)
     try{
         var check = await Category.findOne({category_id: req.params.id}).exec();
-        console.log(check);
+        // console.log(check);
         res.send(check).status(200);
     }catch(err){
         res.send(err).status(404)

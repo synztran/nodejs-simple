@@ -242,7 +242,7 @@ router.get('/chucnang', async(req, res)=>{
     
 })
 
-router.get('/address', async(req, res)=>{
+router.get('/account/address', async(req, res)=>{
     // res.render('product/addressPage');
 
     if(!req.session.User){
@@ -396,11 +396,11 @@ router.post("/account", async (req, res, next) => {
                 });
                 var link = "http://"+req.get('host')+"/verify?id="+response.token
                 var mainOptions = {
-                    from: 'NoobTeam',
+                    from: 'NoobAssembly',
                     to: (req.body.email),
-                    subject: 'Active account',
+                    subject: '[TheGBKeeb] Please confirm your email address',
                     text: 'You received mess from ' + (req.body.email),
-                    html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Thanks for your register!!!</b><p><a href='+link+'>Click here to active your account</a></p>'
+                    html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Hey ' + req.body.lname + ' ' + req.body.fname + ' !</b></p><p>Thanks for joining TheGBKeeb.<br>To finish registration, please click the button below to verify your account.</p><p><div><a style="background: #007bff;padding: 9px;width: 200px;color: #fff;text-decoration: none;display: inline-block;font-weight: bold;text-align: center;letter-spacing: 0.5px;border-radius: 4px;" href='+link+'>Verify email address</a></div><br><p>Once verified, you can join and get notification from TheGBKeeb. If you have any problems, please contact us: noobassembly@gmail.com</p></p>'
                 }
 
                 transporter.sendMail(mainOptions, function(err, info) {
@@ -650,6 +650,30 @@ router.post('/updatepassword', async (req, res) => {
     }
 })
 
+
+router.get('/account/tracking', function(req,res){
+    var email = 'rapsunl231@gmail.com'
+    try{
+        Tracking.find({email: email}, function(err, docs){
+            console.log(docs);
+            res.render('product/trackingPage',{
+                'listTracking' : docs
+            })
+        })
+    }catch(err){
+        res.status(400 ).send(err);
+    }
+})
+
+router.get('/order/:id', function(req, res){
+    try{
+
+    }catch(err){
+        res.status(400).send(err);
+    }
+})
+
+
 router.post('/history', async(req, res)=>{
     try{
         var account = await Account.findOne({_id: req.body.id}).exec();
@@ -679,12 +703,12 @@ router.get('/proxygb/product/:id' , async(req, res)=>{
     console.log(req.params.id);
     try{   
             Product.find({category_id: req.params.id}, function(err, docs){
-                console.log(docs);
+                // console.log(docs);
                 if(docs[0]){
                     Category.findOne({category_id: docs[0].category_id},function(err, docs2){
 
-                        console.log(docs);
-                        console.log(docs2);
+                        // console.log(docs);
+                        // console.log(docs2);
                         res.render('product/detailsProductPage',{
                             title: 'aaaa',
                             "detailsProduct": docs,
@@ -701,19 +725,24 @@ router.get('/proxygb/product/:id' , async(req, res)=>{
     }
 })
 
-router.get('/proxygb/payment/:id', async(req, res)=>{
-    console.log(req.params.id)
+router.get('/proxygb/payment/:id',TokenUserCheckMiddleware , async(req, res)=>{
+    // console.log(req.params.id)
+    console.log(req.decoded['email']);
     try{
-        Product.find({category_id: req.params.id}, function(err, docs){
+        Product.find({category_id: req.params.id}, function(errdocs, docs){
             if(docs[0]){
-                Category.findOne({category_id: docs[0].category_id},function(err, docs2){
+                Category.findOne({category_id: docs[0].category_id},function(errdocs2, docs2){
+                    Account.findOne({email: req.decoded['email']}, function(erruser, docs3){
+                        // console.log(user)
                     
-                    console.log(docs);
-                    console.log(docs2);
-                    res.render('product/joingbPage',{
-                        title: 'Payment',
-                        "Payment": docs,
-                        "Category": docs2,
+                    // console.log(docs);
+                    // console.log(docs2);
+                        res.render('product/joingbPage',{
+                            title: 'Payment',
+                            "User": docs3,
+                            "Payment": docs,
+                            "Category": docs2,
+                        })
                     })
                 })
 

@@ -7,25 +7,47 @@ var validateEmail = function(email) {
 };
 
 var trackingSchema = mongoose.Schema({
-    id:{
+    order_id:{
         type: String
     },
-    product_id:{
+    email:{
+        type: String,
+        lowercase: true,
+        required: 'Email address is required',
+        validate: [validateEmail, 'Please fill a valid email address'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+    },
+    category_id:{
+        type: String,
+        uppercase: true,
+    },
+    category_name:{
         type: String
     },
-    product_name:{
-        type: String
+    list_product:[
+        {
+            product_id:{
+                type: String
+            },
+            product_name:{
+                type: String
+            },
+        }
+    ],
+    payments:{ 
+        type: Number
     },
-    status_shipping:{
+    status_payment:{ // 0 : Pending || 1: paid
         type: Boolean,
         default: false
     },
-    status_paid:{
+    status_shipping:{ // 0: on hold || 1: Shipping || 2: Shipped
         type: Boolean,
         default: false
     },
     tracking_number: {
         type: String,
+        default: null
     },
     shipping_unit:{
         type: String

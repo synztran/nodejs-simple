@@ -264,7 +264,7 @@ ul.item-timeline {
                             <%= Category.category_name %></b></h1>
                     <div class="form-group product-author-host">
                         <span>Design by</span>&nbsp;<a href="#" style="color: red;font-size: 22px">
-                            <%= Category.author %></a> - <span>Host by</span>&nbsp;<a style="font-size: 22px" href="#"><%= Category.proxy_host%></a>
+                            <%= Category.author %></a> - <span>Host by</span>&nbsp;<%- Category.proxy_host%>
                     </div>
                     <div class="form-group">
                         <a href="#">Shipping</a>&nbsp;<span>calculated at checkout.</span>
