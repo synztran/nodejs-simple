@@ -286,7 +286,8 @@
 <script src="/api/js/datepicker/dist/datepicker.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="/package/intl-tel-input-master/build/js/intlTelInput.js"></script>
-<script src=/package/intl-tel-input-master/build/js/utils.js> </script> <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src=/package/intl-tel-input-master/build/js/utils.js> </script> 
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="/package/loading-bar/loading-bar.js"></script>
 <script>
 // var intlNumber = $("#pnumber").intlTelInput("getNumber"); // get full number eg +17024181234
@@ -305,25 +306,25 @@ $('#pnumber').on('input', function() {
         .replace(/[^\d]/g, ''); // numbers and decimals only
 
 });
-// $('#data-table-list-tracking').dataTable({
-//         "aoColumns": [
-//                 null,
-//                 null,
-//                 null,
-//                 null,
-//                 // null,
-//                 null,
-//             ],
-//             "language": {
-//                 searchPlaceholder: 'Search...',
-//                 sSearch: ''
-//             },
-//             "columnDefs":[
-//                 {"targets": 0, "orderable": false},
-//                 {"targets": 4, "orderable": false},
+$('#data-table-list-tracking').dataTable({
+        "aoColumns": [
+                null,
+                null,
+                null,
+                null,
+                // null,
+                null,
+            ],
+            "language": {
+                searchPlaceholder: 'Search...',
+                sSearch: ''
+            },
+            "columnDefs":[
+                {"targets": 0, "orderable": false},
+                {"targets": 4, "orderable": false},
 
-//             ],
-//     });
+            ],
+    });
 
 // $('#btn-submit').on('click', function(e){
 //     e.preventDefault();

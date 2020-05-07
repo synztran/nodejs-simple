@@ -70,9 +70,10 @@ app.use(session({
 		maxAge: 180000
 	}
 }));
-app.use(livereload())
+// app.use(livereload())
 
 router.post("/login", async (req, res, next) => {
+    console.log(req.ip);
     try {
         var account = await Account.findOne({ email: (req.body.email).toLowerCase() }).exec();
         var active = await Account.findOne({ $and: [{ email: (req.body.email).toLowerCase() }, { active: true }] });
@@ -295,7 +296,7 @@ router.get('/proxygb', (req, res)=>{
     // }else{
         // console.log(req.session.User);
         Category.find({}, function(err, docs) {
-            console.log(docs);
+            // console.log(docs);
             res.render("product/proxyPage", {
                 "listCategory": docs
             });
@@ -501,11 +502,8 @@ router.post('/updateaccount', TokenUserCheckMiddleware ,async(req, res)=>{
 
         // console.log(account)
 
-        // console.log(account.shipping_at);
-        console.log(account.shipping_at[0]);
-        // console.log(account.shipping_at[0].address);
-        console.log(account.shipping_at[0]['address'])
-        // console.log(account.shipping_at[0].address)
+        // console.log(account.shipping_at[0]);
+        // console.log(account.shipping_at[0]['address'])
         if(!account){
             return res.status(400).send({
                 status: "error",
@@ -517,46 +515,46 @@ router.post('/updateaccount', TokenUserCheckMiddleware ,async(req, res)=>{
 
        
 
-        // if(req.body.currentpw == '' & req.body.newpw == ''){
-        //     db.collection('accounts').updateOne({ 
-        //         email: uemail 
-        //     }, 
-        //         { $set: 
-        //             { 
-        //                 fname: req.body.fname, 
-        //                 lname: req.body.lname,
-        //                 birth_date: req.body.dob,
-        //                 paypal: req.body.paypal,
-        //                 fb_url: req.body.fburl,
-        //                 // shipping_at:[{
-        //                 //     address: req.body.address,
-        //                 //     city: req.body.city,
-        //                 //     zip_code: req.body.zipcode
-        //                 // }
-        //                 // phone_area_code: req.body.phonearea,
-        //                 phone_number: req.body.pnumber,
-        //                 get_noti: req.body.get_noti
+        if(req.body.currentpw == '' & req.body.newpw == ''){
+            db.collection('accounts').updateOne({ 
+                email: uemail 
+            }, 
+                { $set: 
+                    { 
+                        fname: req.body.fname, 
+                        lname: req.body.lname,
+                        birth_date: req.body.dob,
+                        paypal: req.body.paypal,
+                        fb_url: req.body.fburl,
+                        // shipping_at:[{
+                        //     address: req.body.address,
+                        //     city: req.body.city,
+                        //     zip_code: req.body.zipcode
+                        // }
+                        // phone_area_code: req.body.phonearea,
+                        phone_number: req.body.pnumber,
+                        get_noti: req.body.get_noti
                             
                         
-        //             } 
-        //         })
+                    } 
+                })
 
-        //         // res.status(200).status('ok')
-        //         res.redirect('/account');
-        // }else{
-        //      if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
-        //         return res.status(400).send({
-        //             status: "error",
-        //             message: "The password is not correct"
-        //         });
-        //     }
-        //     req.body.newpw = bcrypt.hashSync(req.body.newpw, 10);
-        //     account.set({ password: req.body.newpw });
-        //     var result = await account.save();
-        //     // res.send(result)
-        //     res.redirect('/account')
+                // res.status(200).status('ok')
+                res.redirect('/account');
+        }else{
+             if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
+                return res.status(400).send({
+                    status: "error",
+                    message: "The password is not correct"
+                });
+            }
+            req.body.newpw = bcrypt.hashSync(req.body.newpw, 10);
+            account.set({ password: req.body.newpw });
+            var result = await account.save();
+            // res.send(result)
+            res.redirect('/account')
 
-        // }
+        }
 
         
 
@@ -604,7 +602,7 @@ router.post('/addaddress', TokenUserCheckMiddleware, async(req, res)=>{
 router.delete('/delete-address/:id' , async(req, res)=>{
     // console.log(req.decoded['email']);
     var uemail = "rapsunl231@gmail.com"
-    console.log(req.params.id)
+    // console.log(req.params.id)
     try{
         var address = db.collection('accounts').update(
             {
@@ -687,20 +685,21 @@ router.post('/history', async(req, res)=>{
     }
 })
 
-router.post('/joingb', async(req, res)=>{
-    try{
-        var account = await Account.findOne({email: req.body.email}).exec();
-        console.log(account);
+router.post('/proxygb/payment/joingb', async(req, res)=>{
+    console.log(req.body)
+    // try{
+    //     var account = await Account.findOne({email: req.body.email}).exec();
+    //     console.log(account);
         
 
-    }catch(err){
-        res.status(500).send(err);
-    }
+    // }catch(err){
+    //     res.status(500).send(err);
+    // }
 })
 
 // --------------------------------- PRODUCT CONFIG --------------------------------------------
 router.get('/proxygb/product/:id' , async(req, res)=>{
-    console.log(req.params.id);
+    // console.log(req.params.id);
     try{   
             Product.find({category_id: req.params.id}, function(err, docs){
                 // console.log(docs);
@@ -727,7 +726,7 @@ router.get('/proxygb/product/:id' , async(req, res)=>{
 
 router.get('/proxygb/payment/:id',TokenUserCheckMiddleware , async(req, res)=>{
     // console.log(req.params.id)
-    console.log(req.decoded['email']);
+    // console.log(req.decoded['email']);
     try{
         Product.find({category_id: req.params.id}, function(errdocs, docs){
             if(docs[0]){

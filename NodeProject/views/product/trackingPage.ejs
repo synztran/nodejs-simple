@@ -206,7 +206,7 @@
                 <p>your tracking</p>
                 <hr>
             </div>
-            <article class="container">
+            <!-- <article class="container"> -->
                 <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-address-default flip-box">
                     <div class="box-body table-responsive no-padding tb-responsive-listaccount">
                         <div id="tableContainer tb-container-listaccount">
@@ -223,7 +223,7 @@
                                 <!-- <tbody></tbody> -->
                                 <% listTracking.forEach(function(item){ %>
                                 <tr class="align-middle">
-                                    <td style="">
+                                    <td >
                                         
                                             <% if(item.order_id < 10) { %>
                                                 <a id="order_id" href="/order/<%=item.order_id %>">#100<%-item.order_id %></a>
@@ -275,7 +275,7 @@
                             
                         </div> -->
                 </div>
-            </article>
+            <!-- </article> -->
         </div>
     </main>
     <div class="footer-register center">
@@ -306,25 +306,25 @@ $('#pnumber').on('input', function() {
         .replace(/[^\d]/g, ''); // numbers and decimals only
 
 });
-// $('#data-table-list-tracking').dataTable({
-//         "aoColumns": [
-//                 null,
-//                 null,
-//                 null,
-//                 null,
-//                 // null,
-//                 null,
-//             ],
-//             "language": {
-//                 searchPlaceholder: 'Search...',
-//                 sSearch: ''
-//             },
-//             "columnDefs":[
-//                 {"targets": 0, "orderable": false},
-//                 {"targets": 4, "orderable": false},
+$('#data-table-list-tracking').dataTable({
+        "aoColumns": [
+                null,
+                null,
+                null,
+                null,
+                // null,
+                null,
+            ],
+            "language": {
+                searchPlaceholder: 'Search...',
+                sSearch: ''
+            },
+            "columnDefs":[
+                {"targets": 0, "orderable": false},
+                {"targets": 4, "orderable": false},
 
-//             ],
-//     });
+            ],
+    });
 
 // $('#btn-submit').on('click', function(e){
 //     e.preventDefault();

@@ -499,7 +499,7 @@ router.get('/product', async (req, res) => {
 })
 
 router.get('/product/getpid/:id', async(req, res)=>{
-    console.log("params"+req.params.id);
+    // console.log("params"+req.params.id);
     try{
         // var check = await Product.findById(req.params.id).exec()
         var check = await Product.findById(req.params.id, function(err, docs){

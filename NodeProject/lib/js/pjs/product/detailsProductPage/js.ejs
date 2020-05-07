@@ -1,0 +1,104 @@
+$(document).ready(function() {
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     new Zooming({
+    //     }).listen('.img-zoomable')
+    // })
+    new Zooming().listen('.img-zoomable')
+
+
+    $('.btn-join').on('click', function(e){
+        e.preventDefault();
+        var id = $(this).attr('data-id');
+        console.log(id);
+        window.location.href = "/proxygb/payment/" + id;
+    })
+    var url = (window.location).href;
+    var res = url.split("/").pop();
+    console.log(res);
+    $('#lightSlider').lightSlider({
+        autoWidth: false,
+        gallery: true,
+        item: 1,
+        loop: true,
+        adaptiveHeight: true,
+        slideMargin: 0,
+        thumbItem: 9,
+        // enableDrag: false,
+
+        // gallery: true,
+        // item: 1,
+        // vertical: true,
+        // verticalHeight:295,
+        // vThumbWidth: 50,
+        // thumbItem: 9,
+        // thumbMargin: 4,
+        // slideMargin: 0
+    });
+
+    // $('#c-profile').val('');
+
+
+    fetch('/api/product/getcid/' + res).then(function(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json();
+    }).then(function(responseAsJson) {
+        console.log(responseAsJson);
+        var product = responseAsJson;
+
+        // for (var key in product) {
+        //     console.log(product[0]);
+        //     $('#c-profile').val(product[0].product_name)
+        //     $('#c-profile').trigger('change');
+        // }
+
+        // if()
+
+        $('#c-profile').on('change', function() {
+            // $('.product-details-price span').remove();
+            for (var i in product) {
+                if (this.value == product[i].product_id) {
+                    if (product[i].outstock == 1) {
+                        $('.product-details-price').html("$" + product[i].price + " USD")
+                        // $("#btn-add, #btn-paypal").attr("disabled", false)
+                        // $("#btn-paypal").attr("disabled", false)
+                    } else {
+                        $('.product-details-price').html("<span style='color: red'>Out stock</span>")
+
+                        // $("#btn-add").attr("disabled", true)
+                        // $("#btn-paypal").attr("disabled", true)
+                    }
+
+                }
+
+
+            }
+            // if(this.value == product[i].product_id){
+            //     console.log(product[i].product_id)
+            // }
+        })
+    })
+
+
+    fetch('/api/category/getcid/' + res).then(function(response2nd) {
+        if (!response2nd.ok) {
+            throw Error(response2nd.statusText);
+        }
+        return response2nd.json();
+    }).then(function(response2ndAsJson) {
+        console.log(response2ndAsJson);
+        var category = response2ndAsJson;
+        console.log(category.status_gb);
+        var status = category.status_gb;
+
+        if(status == 0 || status == 1){
+          
+                        $("#btn-add, #btn-paypal").attr("disabled", true)
+        }else{
+
+        }
+
+    })
+})

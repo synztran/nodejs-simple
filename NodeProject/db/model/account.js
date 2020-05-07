@@ -81,7 +81,7 @@ var accountSchema = mongoose.Schema({
             address: {
                 type: String
             },
-            city:{
+            country:{
                 type: String
             },
             zip_code:{

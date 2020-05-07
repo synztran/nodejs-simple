@@ -44,6 +44,7 @@ del = function(req, res){
 	// res.clearCookie('uemail');
 	// res.clearCookie('uid');
 	res.clearCookie('io');
+	req.session.destroy();
 	// res.clearCookie();
 	res.redirect('/api/signin');
 	
