@@ -5,7 +5,35 @@ $(document).ready(function() {
     //     }).listen('.img-zoomable')
     // })
     new Zooming().listen('.img-zoomable')
+    
+     var currentDataImage = $('#lightSlider li');
+     var currentImage = $('#lightSlider li img');
+     var currentImageSrc = $('#lightSlider li img').attr('src');
+     console.log(currentDataImage)
+     console.log(currentImage)
+     console.log(currentImageSrc)
+        
+    var imgElements = $('#lightSlider li img');
+    var imgLi = $('#lightSlider li');
+    console.log(imgLi);
+    console.log(imgLi.length)
+    var img, url, imageli;
+     
 
+    for (var i = 0; i < imgElements.length; i++) {   
+        img = imgElements[i];
+        console.log(img)
+        console.log(img.src); //already get src of img tag
+       // $('ul#lightSlider li').attr('data-thumb', img.src);
+        for(var j = 0;j < imgLi.length; j++){
+            //console.log(j);
+            imageli = imgLi[j];
+            console.log(imageli);
+            imageli.attr('data-thumb', img.src)
+        }
+        
+       
+    }
 
     $('.btn-join').on('click', function(e){
         e.preventDefault();

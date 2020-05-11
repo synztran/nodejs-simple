@@ -253,8 +253,8 @@ ul.item-timeline {
                                 <img src="http://sachinchoolur.github.io/lightslider/img/cS-1.jpg" />
                             </li> -->
                         <% for(var key in detailsProduct) {%>
-                        <li data-thumb="/api/<%= detailsProduct[key].pic_product.path %>">
-                            <img  style="width: 100%; height: 100%" src="/api/<%= detailsProduct[key].pic_product.path %>" />
+                        <li  data-thumb="/api/<%= detailsProduct[key].pic_product.path %>">
+                            <img  style="width: 100%; height: 100%" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= detailsProduct[key].pic_product.path %>" />
                         </li>
                         <% } %>
                     </ul>
@@ -350,11 +350,11 @@ ul.item-timeline {
                                 <span>
                                     <%= detailsProduct[j].product_name %> -
                                     <%= detailsProduct[j].replace_product_name %></span>
-                                <img class='img-zoomable' style="width: 100%" src="/api/<%= detailsProduct[j].pic_product.path %>">
+                                <img class='img-zoomable' style="width: 100%" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= detailsProduct[j].pic_product.path %>">
                                 <% }else{ %>
                                 <span>
                                     <%= detailsProduct[j].product_name %></span>
-                                <img class='img-zoomable' style="width: 100%" src="/api/<%= detailsProduct[j].pic_product.path %>">
+                                <img class='img-zoomable' style="width: 100%" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= detailsProduct[j].pic_product.path %>">
                                 <% } %>
                             </div>
                             <% } %>

@@ -234,7 +234,7 @@ html, body{
                                 <div class="shadow"></div>
                                 <img style="width: 100%;
                 height: 100%;
-                object-fit: cover;" src="/api/<%= item.pic_profile.path %>" alt="" />
+                object-fit: cover;" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" alt="" />
                                 <div class="image_overlay"></div>
                                 <div class="view_details"><a href="/proxygb/product/<%=item.category_id%>">View details</a></div> 
                                 <!---------------- for keeb ------------>

@@ -20,6 +20,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css"> -->
     <link rel="stylesheet" href="/api/css/effect/navbar.css">
     <link rel="stylesheet" href="/api/css/effect/preloading.css">
+    <link rel="stylesheet" href="/api/css/effect/radiobtn-effect/radiobtn-loading-time.css">
     <link rel="stylesheet" href="/api/css/pcss/customize.css">
     <!-- <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css"> -->
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
@@ -302,8 +303,8 @@ ul.item-timeline {
                             <div style="margin-right: 0.5%" class="col-md-6 payment-option">
                                 <h2>Paymnet Options</h2>
                                 <hr>
-                                <div class="form-group">
-                                    <div>
+                                <div class="form-group cntr">
+                                    <!-- <div>
                                         <input type="radio" id="momo" name="payment" value="momo"><span style="margin-left: 5%"><img src="/api/docs/trash/momo.jfif" style="width:64px;height: 64px"></span>
                                         <label for="momo"></label>
                                     </div>
@@ -311,16 +312,49 @@ ul.item-timeline {
                                     <div>
                                         <input type="radio" id="paypal" name="payment" value="paypal"><span style="margin-left: 5%"><img src="/api/docs/trash/paypal.png"></span>
                                         <label for="paypal"></label>
-                                    </div>
-                                </div>
+                                    </div> -->
+                                        <div class="row col-md-12">
+                                            <label for="momo" class="btn-radio">
+                                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                                            <input type="radio" id="momo" name="payment" value="momo">
+                                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                                <circle cx="10" cy="10" r="9"></circle>
+                                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                            </svg>
+                                            <span><img src="/api/docs/trash/momo.jfif"></span>
+                                            </label>
+                                        </div>
+                                        <hr style="margin-left: 5%">
+                                        <div class="row col-md-12">
+                                            <label for="paypal" class="btn-radio">
+                                            <!-- <input type="radio" id="rdo-2" name="radio-grp"> -->
+                                            <input type="radio" id="paypal" name="payment" value="paypal">
+                                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                                <circle cx="10" cy="10" r="9"></circle>
+                                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                            </svg>
+                                            <span><img src="/api/docs/trash/Paypal-icon.png"></span>
+                                            </label>
+                                        </div>
+                                      </div>
                             </div>
                             <div style="margin-left: 0.5%" class="col-md-6 shipping-address">
                                 <h2>Shipping Address</h2>
                                 <hr>
-                                <div class="form-group">
+                                <div class="form-group cntr">
+                                    <label for="already_address" class="btn-radio">
                                     <input type="radio" id="already_address" name="address" value="already"/>
+                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                        <circle cx="10" cy="10" r="9"></circle>
+                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                      </svg>
+                                      <span>Shipping to this address</span>
+                                    </label>
                                     
-                                    <label for="new_address">Shipping to this address</label>
+                                    <!-- <label for="new_address">Shipping to this address</label> -->
                                     <br>
                                     <!-- <form></form> -->
                                     <!-- <form id="form_already_address"> -->
@@ -372,8 +406,16 @@ ul.item-timeline {
                                         <%   } %>
                                     <!-- </form> -->
                                     <hr style="margin-left: 5%">
+                                    <label for="new_address" class="btn-radio">
                                     <input type="radio" id="new_address" name="address" value="new"/>
-                                    <label for="already_address">Use a new address</label>
+                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                        <circle cx="10" cy="10" r="9"></circle>
+                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                      </svg>
+                                      <span>Use a new address</span>
+                                    </label>
+                                    <!-- <label for="already_address">Use a new address</label> -->
                                     <br>
                                     <!-- <form id="form_new_address"> -->
                                         <div class="for-new-address">
