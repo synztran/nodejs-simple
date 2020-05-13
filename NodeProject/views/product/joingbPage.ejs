@@ -20,6 +20,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css"> -->
     <link rel="stylesheet" href="/api/css/effect/navbar.css">
     <link rel="stylesheet" href="/api/css/effect/preloading.css">
+    <link rel="stylesheet" href="/api/css/effect/radiobtn-effect/radiobtn-loading-time.css">
     <link rel="stylesheet" href="/api/css/pcss/customize.css">
     <!-- <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css"> -->
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
@@ -231,10 +232,10 @@ ul.item-timeline {
             </div> -->
             <article class="row">
                 <div class="col-md-9">
-                    <div class="form-group joingbpage-payment-product">
+                    <div style="border-radius: 4px" class="joingbpage-payment-product">
                         <span class="img-product">
                             <picture>
-                                <img style="width: 60px;height: 60px;object-fit: cover" class="responsive carousel-image img-zoomable" src="/api/<%=Category.pic_profile.path%>">
+                                <img style="width: 60px;height: 60px;object-fit: cover" class="responsive carousel-image img-zoomable" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%=Category.pic_profile.path%>">
                             </picture>
                         </span>
                         <h2>
@@ -302,8 +303,8 @@ ul.item-timeline {
                             <div style="margin-right: 0.5%" class="col-md-6 payment-option">
                                 <h2>Paymnet Options</h2>
                                 <hr>
-                                <div class="form-group">
-                                    <div>
+                                <div class="form-group cntr">
+                                    <!-- <div>
                                         <input type="radio" id="momo" name="payment" value="momo"><span style="margin-left: 5%"><img src="/api/docs/trash/momo.jfif" style="width:64px;height: 64px"></span>
                                         <label for="momo"></label>
                                     </div>
@@ -311,16 +312,49 @@ ul.item-timeline {
                                     <div>
                                         <input type="radio" id="paypal" name="payment" value="paypal"><span style="margin-left: 5%"><img src="/api/docs/trash/paypal.png"></span>
                                         <label for="paypal"></label>
-                                    </div>
-                                </div>
+                                    </div> -->
+                                        <div class="row col-md-12">
+                                            <label for="momo" class="btn-radio">
+                                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                                            <input type="radio" id="momo" name="payment" value="momo">
+                                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                                <circle cx="10" cy="10" r="9"></circle>
+                                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                            </svg>
+                                            <span><img src="/api/docs/trash/momo.jfif"></span>
+                                            </label>
+                                        </div>
+                                        <hr style="margin-left: 5%">
+                                        <div class="row col-md-12">
+                                            <label for="paypal" class="btn-radio">
+                                            <!-- <input type="radio" id="rdo-2" name="radio-grp"> -->
+                                            <input type="radio" id="paypal" name="payment" value="paypal">
+                                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                                <circle cx="10" cy="10" r="9"></circle>
+                                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                            </svg>
+                                            <span><img src="/api/docs/trash/Paypal-icon.png"></span>
+                                            </label>
+                                        </div>
+                                      </div>
                             </div>
                             <div style="margin-left: 0.5%" class="col-md-6 shipping-address">
                                 <h2>Shipping Address</h2>
                                 <hr>
-                                <div class="form-group">
+                                <div class="form-group cntr">
+                                    <label for="already_address" class="btn-radio">
                                     <input type="radio" id="already_address" name="address" value="already"/>
+                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                        <circle cx="10" cy="10" r="9"></circle>
+                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                      </svg>
+                                      <span>Shipping to this address</span>
+                                    </label>
                                     
-                                    <label for="new_address">Shipping to this address</label>
+                                    <!-- <label for="new_address">Shipping to this address</label> -->
                                     <br>
                                     <!-- <form></form> -->
                                     <!-- <form id="form_already_address"> -->
@@ -372,8 +406,16 @@ ul.item-timeline {
                                         <%   } %>
                                     <!-- </form> -->
                                     <hr style="margin-left: 5%">
+                                    <label for="new_address" class="btn-radio">
                                     <input type="radio" id="new_address" name="address" value="new"/>
-                                    <label for="already_address">Use a new address</label>
+                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                        <circle cx="10" cy="10" r="9"></circle>
+                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                      </svg>
+                                      <span>Use a new address</span>
+                                    </label>
+                                    <!-- <label for="already_address">Use a new address</label> -->
                                     <br>
                                     <!-- <form id="form_new_address"> -->
                                         <div class="for-new-address">
@@ -432,41 +474,39 @@ ul.item-timeline {
                 </div><!-- end of col-md-9 -->
                 <div class="col-md-3 box-details">
                     <!-- right -->
-                    <h2>Order details</h2>
+                    <h2 class="t-center">Order details</h2>
                     <hr>
                     <div class="joingb-details-order form-group">
                         <ul>
                             <li class="pack">
-                                <span class="text-details">Pack:</span>
+                                <span class="text-details"><strong>Pack:</strong></span>
                                 <span class="t-right">0</span>
                             </li>
                             <li class="quantity">
-                                <span class="text-details">Qantity:</span>
+                                <span class="text-details"><strong>Qantity:</strong></span>
                                 <span class="t-right">0</span>
                             </li>
                             <li class="subtotal">
-                                <span class="text-details">Subtotal:</span>
-                                <span class="t-right">$0</span>
+                                <span class="text-details"><strong>Subtotal:</strong></span>
+                                <span class="t-right">0$</span>
                             </li>
                             <li>
-                                <span class="text-details">Shipping & Handling:</span>
+                                <span class="text-details"><strong>Shipping & Handling:</strong></span>
                                 <span class="t-right">
                                     <% if(Category.handle == 0 || Category.handle == null){ %>
                                     Free
                                     <% }else{ %>
-                                    $
-                                    <%= Category.handle %>
+                                    <%= Category.handle %>$
                                     <%}%>
                                 </span>
                             </li>
                             <li>
-                                <span class="text-details">Estimated Tax:</span>
+                                <span class="text-details"><strong>Estimated Tax:</strong></span>
                                 <span class="t-right">
                                     <% if(Category.tax == 0 || Category.tax == null){ %>
                                     Free
                                     <% }else{ %>
-                                    $
-                                    <%= Category.tax %>
+                                    <%= Category.tax %>$
                                     <%}%>
                                 </span>
                             </li>
@@ -476,8 +516,8 @@ ul.item-timeline {
                     <div class="joingb-details-order form-group">
                         <ul>
                             <li class="total">
-                                <span class="text-details font-b">Total(USD):</span>
-                                <span class="t-right font-b">$0</span>
+                                <span class="text-details font-b"><strong>Total(USD):</strong></span>
+                                <span class="t-right font-b">0$</span>
                             </li>
                         </ul>
                     </div>
@@ -653,7 +693,7 @@ fetch('/api/product/getcid/' + res).then(function(response) {
     var dynamic = "";
     for (var i in product) {
         console.log(i);
-        dynamic += '<option data-price="' + product[i].price + '"  value="' + product[i].product_id + '" data-image="' + product[i].pic_product.path + '" data-id="' + (i) + '">' + product[i].product_name + " " + "(" + product[i].price + "$)" + '</option>'
+        dynamic += '<option data-price="' + product[i].price + '"  value="' + product[i].product_id + '"  data-image="' + product[i].pic_product.path + '" data-id="' + (i) + '">' + product[i].product_name + " " + "(" + product[i].price + "$)" + '</option>'
     }
     var listquantity = "";
     for (var count = 1; count <= 10; count++) {
@@ -665,13 +705,19 @@ fetch('/api/product/getcid/' + res).then(function(response) {
         }
         return response2nd.json();
     }).then(function(response2ndAsJson) {
-        console.log(response2ndAsJson);
+        // console.log(response2ndAsJson);
         var category = response2ndAsJson;
-        console.log(category.status_gb);
+        // console.log(category.status_gb);
         var status = category.status_gb;
         // var image = '/api/' + category.pic_profile.path;
         var image = '/api/' + product[0].pic_product.path
-        console.log(image);
+        // var checkimg = $("<img src='/api/"+ product[0].pic_product.path +"' />")
+        // checkimg.on('load', function(e){
+        //     alert('Success!');
+        // }).on('error', function(e) {
+        //     alert('ERROR!');
+        // });
+        // console.log(checkimg);
         $('.joingbpage-list-product .image2nd-include .selected-product .img-product picture img').attr('src', image)
         //on add input button click
         $(AddButton).click(function(e) {
@@ -699,6 +745,7 @@ fetch('/api/product/getcid/' + res).then(function(response) {
                     console.log($(this).value)
                     var subtotal = 0;
                     var totalPrice = 0;
+                    var quantity = 0;
                     for (var p = 0; p < x + 1; p++) {
                         var priceSelect = Number($("#select_" + p).find(':selected').data('price'));
                         console.log("p3rd = " + p);
@@ -706,33 +753,38 @@ fetch('/api/product/getcid/' + res).then(function(response) {
                         console.log("temp3rd = " + temp)
                         var e = Number($("#quantity_" + p).val());
                         console.log("e3rd = " + e);
-                        subtotal += e
+                        subtotal = e
+                        quantity += e
                         console.log("subtotal3rd = " + subtotal);
                         totalPrice += subtotal * priceSelect
                     }
                     //     // $("#form_" + x + " .selected-product .w-20 select.select2-quantity").val();
                     //     // alert(this.value);
                     //     // pack += Number($(this).val());
-                    $('.joingb-details-order ul .quantity .t-right').html(subtotal);
-                    $('.joingb-details-order ul .subtotal .t-right').html(totalPrice);
+                    $('.joingb-details-order ul .quantity .t-right').html(quantity);
+                    $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
+                    $('.joingb-details-order ul .total .t-right').html(totalPrice + '$');
                 });
                 $('.joingb-details-order ul .pack .t-right').html(pack);
                 $("#form_" + x + " .selected-product .w-20 select").on('change', function(e) {
-
+                    console.log(e);
                     // console.log("x =" + x)
                     var subtotal = 0; // 
-                    var totalprice = 0;
+                    var quantity = 0;
+                    var totalPrice = 0;
                     for (var p = 0; p < x; p++) {
                         console.log("p = " + p);
                         temp = Number($(this).val()); //quantity have select
                         console.log("temp = " + temp)
                         var e = Number($("#quantity_" + p).val());
                         console.log("e = " + e);
-                        subtotal += e
+                        subtotal = e
+                        quantity += e
                         console.log("subtotal = " + subtotal);
+                        // totalPrice += subtotal
                         // totalprice = subtotal * price
                     }
-                    $('.joingb-details-order ul .quantity .t-right').html(subtotal);
+                    $('.joingb-details-order ul .quantity .t-right').html(quantity);
                 })
                 if (x < 1) {
                     $(".joingbpage-select-product .selected-product a.removeclass").css('visibility', 'hidden')
@@ -774,18 +826,6 @@ fetch('/api/product/getcid/' + res).then(function(response) {
                         console.log(idioma.id);
                         var y = '/api/' + x;
                         var href = a1 + '/api/' + x;
-
-                        // for (var i in product) {
-                        //     if (idioma.id == product[i].product_id) {
-                        //         $('.joingbpage-select-product .img-product picture img').attr("src", y)
-                        //     }
-                        // }
-
-                        // var ips = $("#form_"+ idData + ".selected-product .w-20 select").val();
-                        //     // totalPrice = priceData
-                        //     alert(ips)
-
-
                         var $span = $("<span style='font-weight: bold'><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
                         return $span;
                     }
@@ -828,7 +868,6 @@ fetch('/api/product/getcid/' + res).then(function(response) {
                     // var totalQuantity = 0;
                     var totalQuantity = 0;
                     var totalPrice = 0;
-                    // console.log(priceSelect)
 
                     for (var n2 = 0; n2 < x; n2++) {
                         var priceSelect = Number($('#select_' + n2).find(':selected').data('price'))
@@ -864,6 +903,7 @@ fetch('/api/product/getcid/' + res).then(function(response) {
                 for (var p = -1; p < x; p++) {
                     var subtotal = 0;
                     var totalPrice = 0;
+                    var quantity = 0;
                     for (var p = 0; p < x; p++) {
                         var priceSelect = Number($('.selected-product .w-100 select#select_' + p).find(':selected').data('price'));
                         if (p == idDel) {
@@ -875,12 +915,14 @@ fetch('/api/product/getcid/' + res).then(function(response) {
                             var e = Number($("#quantity_" + p).val());
                             console.log("e2nd = " + e);
                             subtotal = e
+                            quantity += e
                             console.log("subtotal2nd = " + subtotal);
                             totalPrice += subtotal * priceSelect
                         }
                     }
-                    $('.joingb-details-order ul .quantity .t-right').html(subtotal);
+                    $('.joingb-details-order ul .quantity .t-right').html(quantity);
                     $('.joingb-details-order ul .subtotal .t-right').html(totalPrice + '$');
+                    $('.joingb-details-order ul .total .t-right').html(totalPrice + '$');
 
                 }
 
@@ -901,75 +943,6 @@ fetch('/api/product/getcid/' + res).then(function(response) {
 
             return false;
         })
-
-
-
-
-
-        // $(".select2-product").select2({
-        //     templateResult: function(idioma) {
-        //         console.log($(this).parent().prev())
-        //         console.log(idioma);
-        //         console.log($(idioma.element).data('image'));
-        //         var x = $(idioma.element).data('image')
-        //         var y = '/api/' + x;
-        //         var href = a1 + '/api/' + x;
-        //         console.log(href)
-
-        //         var $span = $("<span><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
-
-        //         return $span;
-        //     },
-        //     templateSelection: function(idioma) {
-        //         console.log($(this).parent().prev().find('select option:selected').val());
-
-        //         console.log($(this).parent())
-        //         console.log(idioma.id)
-        //         var x = $(idioma.element).data('image')
-        //         console.log(x);
-        //         var y = '/api/' + x;
-        //         var href = a1 + '/api/' + x;
-        //         // for (var i in product) {
-        //         //     if (idioma.id == product[i].product_id) {
-        //         //         $('.joingbpage-select-product .img-product picture img').attr("src", y)
-        //         //     }
-        //         // }
-
-        //         var $span = $("<span><img style='width:40px;height:40px;object-fit: cover' src='" + y + "'/> " + idioma.text + "</span>");
-        //         return $span;
-        //     }
-        // });
-
-
-        // $('.select2-product').on('select2:select', function(e) {
-
-        //     console.log(e);
-        //     console.log(e.params)
-        //     console.log(e.params.data);
-        //     console.log(e.params.data['id']);
-        //     var idioma = e.params.data['id'];
-        //     var godfather = $(this).closest('.joingbpage-select-product').attr('id');
-        //     console.log(godfather);
-        //     for (var i in product) {
-        //         if (idioma == product[i].product_id) {
-        //             console.log(product[i].product_id);
-        //             $("#" + godfather + " .selected-product .img-product picture img").attr("src", '/api/' + product[i].pic_product.path)
-
-
-        //         }
-        //     }
-
-
-        //     console.log(this)
-        //     console.log($(this).closest('.joingbpage-select-product').attr('id'))
-        //     console.log($(this).parent('div').parent('div'));
-        //     console.log($(this).parent('div').parent('div').attr('id'));
-        //     var strChosen = $(this).attr('id');
-        //     console.log(strChosen);
-        // })
-
-
-
     }) //
 })
 

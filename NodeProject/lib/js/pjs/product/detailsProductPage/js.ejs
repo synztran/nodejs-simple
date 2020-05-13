@@ -5,6 +5,40 @@ $(document).ready(function() {
     //     }).listen('.img-zoomable')
     // })
     new Zooming().listen('.img-zoomable')
+    
+     var currentDataImage = $('#lightSlider li');
+     var currentImage = $('#lightSlider li img');
+     var currentImageSrc = $('#lightSlider li img').attr('src');
+     console.log(currentDataImage)
+     console.log(currentImage)
+     console.log(currentImageSrc)
+        
+    var imgElements = $('#lightSlider li img');
+    var imgLi = $('#lightSlider li');
+    console.log(imgLi);
+    console.log(imgLi.length)
+    var img, url, imageli;
+     
+
+    for (var i = 0; i < imgElements.length; i++) {   
+        img = imgElements[i];
+        console.log(img)
+        console.log(img.src); //already get src of img tag
+       // $('ul#lightSlider li').attr('data-thumb', img.src);
+       
+        //for(var j = 0;j < imgLi.length; j++){
+            //console.log(j);
+            imageli = imgLi[i];
+            console.log(imageli);
+            var sam = imageli.getAttribute('data-thumb');
+            imageli.setAttribute('data-thumb', img.src);
+            //console.log(sam);
+            //imageli.attr('data-thumb', img.src)
+        //}
+        
+       
+    }
+
 
 
     $('.btn-join').on('click', function(e){
@@ -16,6 +50,15 @@ $(document).ready(function() {
     var url = (window.location).href;
     var res = url.split("/").pop();
     console.log(res);
+
+    var $carousel = $('#lightSlider').slick({
+        dots: true,
+        arrows: false,
+        swipeToSlide: true,
+        infinite: false,
+        adaptiveHeight: true,
+    });
+    /*
     $('#lightSlider').lightSlider({
         autoWidth: false,
         gallery: true,
@@ -24,17 +67,19 @@ $(document).ready(function() {
         adaptiveHeight: true,
         slideMargin: 0,
         thumbItem: 9,
-        // enableDrag: false,
+        prevHtml: "<span class='left_V2'>&#8249;</span>",
+        nextHtml: "<span class='right_V2'>&#8250;</span>",
 
-        // gallery: true,
-        // item: 1,
-        // vertical: true,
-        // verticalHeight:295,
-        // vThumbWidth: 50,
-        // thumbItem: 9,
-        // thumbMargin: 4,
-        // slideMargin: 0
-    });
+        
+    });*/
+    var select = $("#c-profile");
+      $("#c-profile").change( function() {
+      //debugger;
+
+        goTo = select.val();
+            //$carousel.goToSlide(goTo);
+            $carousel.slick( "goTo", goTo );
+      });
 
     // $('#c-profile').val('');
 

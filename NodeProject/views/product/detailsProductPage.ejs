@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="/api/css/effect/preloading.css">
     <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css">
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="/package/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="/package/slick/slick-theme.css">
     <!--  -->
     <!--==================== SCRIPT =========================================== -->
     <script src="/api/js/pjs/modernizr.js"></script>
@@ -253,8 +255,8 @@ ul.item-timeline {
                                 <img src="http://sachinchoolur.github.io/lightslider/img/cS-1.jpg" />
                             </li> -->
                         <% for(var key in detailsProduct) {%>
-                        <li data-thumb="/api/<%= detailsProduct[key].pic_product.path %>">
-                            <img  style="width: 100%; height: 100%" src="/api/<%= detailsProduct[key].pic_product.path %>" />
+                        <li  data-thumb="" data-id="<%= key %>">
+                            <img  style="width: 100%; height: 100%" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= detailsProduct[key].pic_product.path %>" />
                         </li>
                         <% } %>
                     </ul>
@@ -293,7 +295,7 @@ ul.item-timeline {
                                         <label for="kit">Kit:</label>
                                         <select class="form-control select2" id="c-profile" name="profile">
                                             <% for( var i in detailsProduct){ %>
-                                            <option value="<%= detailsProduct[i].product_id %>">
+                                            <option value="<%=i%>">
                                                 <%= detailsProduct[i].product_name %>
                                             </option>
                                             <% } %>
@@ -350,11 +352,11 @@ ul.item-timeline {
                                 <span>
                                     <%= detailsProduct[j].product_name %> -
                                     <%= detailsProduct[j].replace_product_name %></span>
-                                <img class='img-zoomable' style="width: 100%" src="/api/<%= detailsProduct[j].pic_product.path %>">
+                                <img class='img-zoomable' style="width: 100%" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= detailsProduct[j].pic_product.path %>">
                                 <% }else{ %>
                                 <span>
                                     <%= detailsProduct[j].product_name %></span>
-                                <img class='img-zoomable' style="width: 100%" src="/api/<%= detailsProduct[j].pic_product.path %>">
+                                <img class='img-zoomable' style="width: 100%" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= detailsProduct[j].pic_product.path %>">
                                 <% } %>
                             </div>
                             <% } %>
@@ -374,7 +376,9 @@ ul.item-timeline {
 <script type="text/javascript" src="https://unpkg.com/zooming"></script>
 <script type="text/javascript" src="/api/js/pjs/product/detailsProductPage/js.ejs"></script>
 <script type="text/javascript">
+   
 
+    
 </script>
 
 </html>

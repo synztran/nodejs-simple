@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var AutoIncrement = require('mongoose-sequence')(mongoose);
 var date = new Date();
 
 var validateEmail = function(email) {
@@ -7,6 +8,9 @@ var validateEmail = function(email) {
 };
 
 var trackingSchema = mongoose.Schema({
+    seq:{
+        type: Number
+    },
     order_id:{
         type: String
     },
@@ -17,13 +21,6 @@ var trackingSchema = mongoose.Schema({
         validate: [validateEmail, 'Please fill a valid email address'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
-    category_id:{
-        type: String,
-        uppercase: true,
-    },
-    category_name:{
-        type: String
-    },
     list_product:[
         {
             product_id:{
@@ -32,31 +29,55 @@ var trackingSchema = mongoose.Schema({
             product_name:{
                 type: String
             },
+            product_quantity:{
+                type: Number
+            },
+            product_price:{
+                type: Number
+            }
         }
     ],
-    payments:{ 
-        type: Number
+    payment:{ 
+        type: String
     },
+    shipping_at: 
+    [
+        {
+            customer_city:{
+                type: String
+            },
+            customer_phone:{
+                type: String
+            },
+            customer_address: {
+                type: String
+            },
+            customer_country:{
+                type: String
+            },
+            customer_postal_code:{
+                type: String
+            },
+        }
+    ],
     status_payment:{ // 0 : Pending || 1: paid
         type: Boolean,
         default: false
+    },
+    customer_name:{
+        type: String
     },
     status_shipping:{ // 0: on hold || 1: Shipping || 2: Shipped
         type: Boolean,
         default: false
     },
-    tracking_number: {
+    tracking_number:{
         type: String,
         default: null
     },
     shipping_unit:{
-        type: String
-    },
-    address:{
-        type: String
-    },
-    zipcode:{
-        type: String
+        type: String,
+        default: null
     },
     date_shipping:{
         type: Date
@@ -64,12 +85,11 @@ var trackingSchema = mongoose.Schema({
     date_receipt:{
         type: Date
     },
-    date_paid:{
-        type: Date
-    },
     total:{
         type: Number
     }
 })
+
+trackingSchema.plugin(AutoIncrement, {id : 'tracking_sed', inc_field: 'seq'});
 let Tracking = mongoose.model('Tracking', trackingSchema);
 module.exports = Tracking;
