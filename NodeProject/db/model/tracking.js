@@ -43,6 +43,9 @@ var trackingSchema = mongoose.Schema({
     shipping_at: 
     [
         {
+            customer_name:{
+                type: String
+            },
             customer_city:{
                 type: String
             },
@@ -64,9 +67,6 @@ var trackingSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    customer_name:{
-        type: String
-    },
     status_shipping:{ // 0: on hold || 1: Shipping || 2: Shipped
         type: Boolean,
         default: false
@@ -80,10 +80,12 @@ var trackingSchema = mongoose.Schema({
         default: null
     },
     date_shipping:{
-        type: Date
+        type: Date,
+        default: null
     },
     date_receipt:{
-        type: Date
+        type: Date,
+        default: null
     },
     total:{
         type: Number

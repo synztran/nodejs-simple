@@ -685,16 +685,66 @@ router.post('/history', async(req, res)=>{
     }
 })
 
-router.post('/proxygb/payment/joingb', async(req, res)=>{
+router.post('/proxygb/payment/joingb', TokenUserCheckMiddleware, async(req, res)=>{
     console.log(req.body)
-    // try{
-    //     var account = await Account.findOne({email: req.body.email}).exec();
-    //     console.log(account);
+    
+    console.log(req.decoded);
+    var uemail = req.decoded['email']
+    console.log(req.body.product_id)
+    try{
+        console.log(1);
+        var account = await Account.findOne({email: uemail}).exec();
+        var checkProduct = await Product.find({product_id: req.body.product_id}).exec();
+        // console.log(checkProduct.length)
+        // console.log(checkProduct);
+        var totalPrice = 0;
+        for(var i=0;i<checkProduct.length;i++){
+            console.log(checkProduct[i].product_name);
+            for (const p in req.body.quantity) {
+                  console.log(p)
+            }
+            console.log(req.body.quantity)
+            console.log(checkProduct[i].price)
+             totalPrice += (req.body.quantity * checkProduct[i].price);
+            console.log(totalPrice)
+        
+        
+        // Couter.findOne({_id: 'tracking'}, function(err, docs){
+        //     console.log(docs);
+        //     var inc = docs['sed']+1;
+        //     console.log('incc = ' +inc)
+
+        //     db.collection('trackings').insertOne({
+        //         order_id: "ORD00" + inc,
+        //         email: uemail,
+        //         list_product:{
+        //             _id: (new mongoose.Types.ObjectId()).toString(),
+        //             product_id: req.body.product,
+        //             product_name: checkProduct[i].product_name,
+        //             product_quantity: req.body.quantity,
+        //             product_price: (checkProduct[i].price * req.body.quantity),
+        //         }
+        //         payment: req.body.payment,
+        //         shipping_at:{
+        //             customer_name: req.body.customer_name
+        //             customer_city: req.body.customer_city,
+        //             customer_phone:req.body.customer_phone,
+        //             customer_address: req.body.customer_address,
+        //             customer_country:req.body.customer_country,
+        //             customer_postal_code:req.body.customer_postal_code,
+                        
+
+        //         }
+
+        //     })
+        // })
+
+    }
         
 
-    // }catch(err){
-    //     res.status(500).send(err);
-    // }
+    }catch(err){
+        res.status(500).send(err);
+    }
 })
 
 // --------------------------------- PRODUCT CONFIG --------------------------------------------

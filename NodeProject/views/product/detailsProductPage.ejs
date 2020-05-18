@@ -187,10 +187,13 @@ ul.item-timeline {
 .w-75 {
     width: 75%;
 }
-
+*:focus{
+    outline: none;
+}
 /*.main{
     margin: 2% 2% !important
 }*/
+/* .slick-slide */
 </style>
 
 <body id="top">
@@ -260,6 +263,16 @@ ul.item-timeline {
                         </li>
                         <% } %>
                     </ul>
+                    <!-- <div > -->
+                        <ul class="2nd-slick">
+                            <% for(var key in detailsProduct) {%>
+                                <li  data-thumb="" data-id="<%= key %>">
+                                    <img  style="width: 100%; height: 47px" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= detailsProduct[key].pic_product.path %>" />
+                                </li>
+                                <% } %>
+                        </ul>
+                    <!-- </div> -->
+
                 </div>
                 <div class="col-md-6 product-info">
                     <h1><b>

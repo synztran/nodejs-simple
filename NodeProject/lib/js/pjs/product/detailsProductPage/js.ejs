@@ -51,15 +51,26 @@ $(document).ready(function() {
     var res = url.split("/").pop();
     console.log(res);
 
-    var $carousel = $('#lightSlider').slick({
-        dots: true,
+    var $carousel = 
+    $('#lightSlider').slick({
+        dots: false,
         arrows: false,
         swipeToSlide: true,
         infinite: false,
         adaptiveHeight: true,
+        //asNavFor: '.2nd-slick'
     });
-    /*
-    $('#lightSlider').lightSlider({
+    $('.2nd-slick').slick({
+      slidesToShow: 9,
+      slidesToScroll: 1,
+      asNavFor: '#lightSlider',
+      dots: false,
+      <!-- centerMode: true, -->
+      adaptiveHeight: true,
+      focusOnSelect: true,
+    });
+    
+    /*$('#lightSlider').lightSlider({
         autoWidth: false,
         gallery: true,
         item: 1,
@@ -67,22 +78,30 @@ $(document).ready(function() {
         adaptiveHeight: true,
         slideMargin: 0,
         thumbItem: 9,
-        prevHtml: "<span class='left_V2'>&#8249;</span>",
-        nextHtml: "<span class='right_V2'>&#8250;</span>",
-
         
     });*/
-    var select = $("#c-profile");
-      $("#c-profile").change( function() {
-      //debugger;
 
+
+
+
+    var select = $("#c-profile");
+    var selectQuantity = $("#c-profile > option")
+    $("#c-profile").change( function(e) {
+       /* for(var i=0;i<selectQuantity.length;i++){
+            //var lightIndex = $('#lightSlider').find('li.lslide').data('id')
+            console.log($(this).val());
+            
+        }*/
+   
         goTo = select.val();
-            //$carousel.goToSlide(goTo);
+        //$carousel.goToSlide(goTo);
+        //$carousel.goto(goTo)
+        //var l = $('li.lslide[data-id="+ goTo +"]')
+        //console.log(l)
+        //$('li.clone').css('display', 'none');
+
             $carousel.slick( "goTo", goTo );
       });
-
-    // $('#c-profile').val('');
-
 
     fetch('/api/product/getcid/' + res).then(function(response) {
         if (!response.ok) {
