@@ -262,9 +262,255 @@ body .socials > a:hover {
 	 background-image: linear-gradient(to right, #5e42a6, #b74e91); */
 }
 
+/*---------------------------- RESPONSIVE FOR MOBILE AND TABLET -------------------------------*/
+/* LANDSCAPE NGANG || PORTRAIT DỌC */
 
 
-@media (max-width: 767px) {
+@media only screen and (max-width: 1200px){
+    .col-small-1200{
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+    .col-large-1200{
+        flex: 0 0 70%;
+        max-width: 70%;
+    }
+}
+
+@media only screen and (max-width: 1000px){
+    .row{
+        display:block;
+    }
+    
+    .sidebar> .tabs{
+        display: flex;
+     }
+     .sidebar > .nav{
+        display: none;
+     }
+     .main > .col-md-4{
+         padding: 0;
+         height: 10vh!important;
+      }
+     .main > .col-md-3{
+        padding: 0;
+        max-width: unset;
+        width: 100%;
+        height: 10rem!important;
+     }
+     .main > .col-md-8{
+        padding: 0;
+        margin-top: 0;
+     }
+     .main > .col-md-9{
+         padding: 0;
+         margin-top: 0;
+         max-width: unset!important;
+      }
+     .row > .col-md-12{
+        /* display: block!important; */
+     } 
+     .shipping-info{
+        /* display: block!important; */
+     }
+     .col-md-6 input, .col-md-8 input{
+        height: 4rem;
+     }
+     .title-li{
+        margin-left: 3.5%;
+     }
+     .title-li > hr::before{
+        bottom: 7px;
+     }
+     .title-li > hr::after{
+        bottom: 7px;
+     }
+     .container{
+        padding: 0;
+     }
+     .checkbox-noti{
+        display: flex;
+     }
+     .row > .col-product{
+         padding: 0;
+     }
+     .change-password-form{
+         display: flex
+     }
+     html, body{
+         /* height: 100%; */
+         /* width: 100%; */
+         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
+         background-position: center center;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         background-size: cover; 
+     }
+}
+
+
+
+  /* for ipad */
+
+@media only screen 
+and (min-device-width  : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) { 
+    .row{
+        display:block;
+    }
+    
+    .sidebar> .tabs{
+        display: flex;
+     }
+     .sidebar > .nav{
+        display: none;
+     }
+     .main > .col-md-4{
+         padding: 0;
+         height: 10vh!important;
+      }
+     .main > .col-md-3{
+        padding: 0;
+        max-width: unset;
+        width: 100%;
+        height: 10rem!important;
+     }
+     .main > .col-md-8{
+        padding: 0;
+        margin-top: 0;
+     }
+     .main > .col-md-9{
+         padding: 0;
+         margin-top: 0;
+         max-width: unset!important;
+      }
+     .row > .col-md-12{
+        /* display: block!important; */
+     } 
+     .shipping-info{
+        /* display: block!important; */
+     }
+     .col-md-6 input, .col-md-8 input{
+        height: 4rem;
+     }
+     .title-li{
+        margin-left: 3.5%;
+     }
+     .title-li > hr::before{
+        bottom: 7px;
+     }
+     .title-li > hr::after{
+        bottom: 7px;
+     }
+     .container{
+        padding: 0;
+     }
+     .checkbox-noti{
+        display: flex;
+     }
+     .row > .col-product{
+         padding: 0;
+     }
+     .change-password-form{
+         display: flex
+     }
+     html, body{
+         /* height: 100%; */
+         /* width: 100%; */
+         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
+         background-position: center center;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         background-size: cover; 
+     }
+}
+
+@media only screen 
+and (min-device-width : 767px) 
+and (max-device-width  : 1024px)
+and (orientation : portrait){
+
+    .row{
+        display:block;
+    }
+    
+    .sidebar> .tabs{
+        display: flex;
+     }
+     .sidebar > .nav{
+        display: none;
+     }
+     .main > .col-md-4{
+         padding: 0;
+         height: 10vh!important;
+      }
+     .main > .col-md-3{
+        padding: 0;
+        max-width: unset;
+        width: 100%;
+        height: 10rem!important;
+     }
+     .main > .col-md-8{
+        padding: 0;
+        margin-top: 0;
+     }
+     .main > .col-md-9{
+         padding: 0;
+         margin-top: 0;
+         max-width: unset!important;
+      }
+     .row > .col-md-12{
+        /* display: block!important; */
+     } 
+     .shipping-info{
+        /* display: block!important; */
+     }
+     .col-md-6 input, .col-md-8 input{
+        height: 4rem;
+     }
+     .title-li{
+        margin-left: 3.5%;
+     }
+     .title-li > hr::before{
+        bottom: 7px;
+     }
+     .title-li > hr::after{
+        bottom: 7px;
+     }
+     .container{
+        padding: 0;
+     }
+     .checkbox-noti{
+        display: flex;
+     }
+     .row > .col-product{
+         padding: 0;
+     }
+     .change-password-form{
+         display: flex
+     }
+     html, body{
+         /* height: 100%; */
+         /* width: 100%; */
+         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
+         background-position: center center;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         background-size: cover; 
+     }
+}
+/* ---------------------------- */
+
+/* for IPHONE X */
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 812px)
+and (-webkit-device-pixel-ratio : 3)
+and (orientation : landscape) {
 	.sidebar> .tabs{
 	   display: flex;
 	}
@@ -288,10 +534,10 @@ body .socials > a:hover {
         margin-top: 10%;
      }
 	.row > .col-md-12{
-	   display: block!important;
+	   /* display: block!important; */
 	} 
 	.shipping-info{
-	   display: block!important;
+	   /* display: block!important; */
 	}
 	.col-md-6 input, .col-md-8 input{
 	   height: 4rem;
@@ -300,10 +546,10 @@ body .socials > a:hover {
 	   margin-left: 3.5%;
 	}
 	.title-li > hr::before{
-	   bottom: 6px;
+	   bottom: 7px;
 	}
 	.title-li > hr::after{
-	   bottom: 6px;
+	   bottom: 7px;
 	}
 	.container{
 	   padding: 0;
@@ -318,10 +564,557 @@ body .socials > a:hover {
         /* height: 100%; */
         /* width: 100%; */
         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
-        background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important;
+        /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
         background-position: center center;
         background-repeat: no-repeat;
          background-attachment: fixed;
         background-size: cover; 
     }
  }
+
+ @media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 812px) 
+and (-webkit-device-pixel-ratio : 3)
+and (orientation : portrait) {  
+        .sidebar> .tabs{
+        display: flex;
+     }
+     .sidebar > .nav{
+        display: none;
+     }
+     .main > .col-md-4{
+         padding: 0;
+         height: 10vh!important;
+      }
+     .main > .col-md-3{
+        padding: 0;
+        height: 10vh!important;
+     }
+     .main > .col-md-8{
+        padding: 0;
+        margin-top: 10%;
+     }
+     .main > .col-md-9{
+         padding: 0;
+         margin-top: 10%;
+      }
+     .row > .col-md-12{
+        display: block!important;
+     } 
+     .shipping-info{
+        display: block!important;
+     }
+     .col-md-6 input, .col-md-8 input{
+        height: 4rem;
+     }
+     .title-li{
+        margin-left: 3.5%;
+     }
+     .title-li > hr::before{
+        bottom: 6px;
+     }
+     .title-li > hr::after{
+        bottom: 6px;
+     }
+     .container{
+        padding: 0;
+     }
+     .checkbox-noti{
+        display: flex;
+     }
+     .row > .col-product{
+         padding: 0;
+     }
+     html, body{
+         /* height: 100%; */
+         /* width: 100%; */
+         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
+         background-position: center center;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         background-size: cover; 
+     }
+  }
+}
+
+/* ----------------------------------------------- */
+
+ /* for portrait : chiều dọc*/
+ @media only screen 
+ and (min-device-width : 375px) 
+ and (max-device-width : 812px) 
+ and (-webkit-device-pixel-ratio : 3)
+ and (orientation : portrait) {
+    .sidebar> .tabs{
+        display: flex;
+     }
+     .sidebar > .nav{
+        display: none;
+     }
+     .main > .col-md-4{
+         padding: 0;
+         height: 10vh!important;
+      }
+     .main > .col-md-3{
+        padding: 0;
+        height: 10vh!important;
+     }
+     .main > .col-md-8{
+        padding: 0;
+        margin-top: 10%;
+     }
+     .main > .col-md-9{
+         padding: 0;
+         margin-top: 10%;
+      }
+     .row > .col-md-12{
+        display: block!important;
+     } 
+     .shipping-info{
+        display: block!important;
+     }
+     .col-md-6 input, .col-md-8 input{
+        height: 4rem;
+     }
+     .title-li{
+        margin-left: 3.5%;
+     }
+     .title-li > hr::before{
+        bottom: 6px;
+     }
+     .title-li > hr::after{
+        bottom: 6px;
+     }
+     .container{
+        padding: 0;
+     }
+     .checkbox-noti{
+        display: flex;
+     }
+     .row > .col-product{
+         padding: 0;
+     }
+     html, body{
+         /* height: 100%; */
+         /* width: 100%; */
+         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
+         background-position: center center;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         background-size: cover; 
+     }
+  }
+  /* ----------------------------------- */
+
+
+/* FOR IPHONE 6, 7, 8 PLUS AND LANDSCAPE */
+@media only screen 
+and (max-device-width : 414px) 
+and (max-device-height : 736px) 
+and (orientation : landscape) {
+    .sidebar> .tabs{
+        display: flex;
+     }
+     .sidebar > .nav{
+        display: none;
+     }
+     .main > .col-md-4{
+         padding: 0;
+         height: 10vh!important;
+      }
+     .main > .col-md-3{
+        padding: 0;
+        height: 10vh!important;
+     }
+     .main > .col-md-8{
+        padding: 0;
+        margin-top: 10%;
+     }
+     .main > .col-md-9{
+         padding: 0;
+         margin-top: 10%;
+      }
+     .row > .col-md-12{
+        /* display: block!important; */
+     } 
+     .shipping-info{
+        /* display: block!important; */
+     }
+     .col-md-6 input, .col-md-8 input{
+        height: 4rem;
+     }
+     .title-li{
+        margin-left: 3.5%;
+     }
+     .title-li > hr::before{
+        bottom: 7px;
+     }
+     .title-li > hr::after{
+        bottom: 7px;
+     }
+     .container{
+        padding: 0;
+     }
+     .checkbox-noti{
+        display: flex;
+     }
+     .row > .col-product{
+         padding: 0;
+     }
+     html, body{
+         /* height: 100%; */
+         /* width: 100%; */
+         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
+         background-position: center center;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         background-size: cover; 
+     }
+}
+
+@media only screen 
+and (max-device-width : 414px) 
+and (max-device-height : 736px) 
+and (orientation : portrait) {
+    .sidebar> .tabs{
+        display: flex;
+     }
+     .sidebar > .nav{
+        display: none;
+     }
+     .main > .col-md-4{
+         padding: 0;
+         height: 10vh!important;
+      }
+     .main > .col-md-3{
+        padding: 0;
+        height: 10vh!important;
+     }
+     .main > .col-md-8{
+        padding: 0;
+        margin-top: 10%;
+     }
+     .main > .col-md-9{
+         padding: 0;
+         margin-top: 10%;
+      }
+     .row > .col-md-12{
+        display: block!important;
+     } 
+     .shipping-info{
+        display: block!important;
+     }
+     .col-md-6 input, .col-md-8 input{
+        height: 4rem;
+     }
+     .title-li{
+        margin-left: 3.5%;
+     }
+     .title-li > hr::before{
+        bottom: 7px;
+     }
+     .title-li > hr::after{
+        bottom: 7px;
+     }
+     .container{
+        padding: 0;
+     }
+     .checkbox-noti{
+        display: flex;
+     }
+     .row > .col-product{
+         padding: 0;
+     }
+     html, body{
+         /* height: 100%; */
+         /* width: 100%; */
+         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
+         background-position: center center;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         background-size: cover; 
+     }
+ }
+/* ---------------------------------------------- */
+
+/* for iphone 6, 7, 8 and landscape */
+@media only screen 
+and (max-device-height : 375px) 
+and (max-device-width : 667px) 
+and (orientation : landscape) {
+    .sidebar> .tabs{
+        display: flex;
+     }
+     .sidebar > .nav{
+        display: none;
+     }
+     .main > .col-md-4{
+         padding: 0;
+         height: 10vh!important;
+      }
+     .main > .col-md-3{
+        padding: 0;
+        height: 10vh!important;
+     }
+     .main > .col-md-8{
+        padding: 0;
+        margin-top: 10%;
+     }
+     .main > .col-md-9{
+         padding: 0;
+         margin-top: 10%;
+      }
+     .row > .col-md-12{
+        /* display: block!important; */
+     } 
+     .shipping-info{
+        /* display: block!important; */
+     }
+     .col-md-6 input, .col-md-8 input{
+        height: 4rem;
+     }
+     .title-li{
+        margin-left: 3.5%;
+     }
+     .title-li > hr::before{
+        bottom: 7px;
+     }
+     .title-li > hr::after{
+        bottom: 7px;
+     }
+     .container{
+        padding: 0;
+     }
+     .checkbox-noti{
+        display: flex;
+     }
+     .row > .col-product{
+         padding: 0;
+     }
+     html, body{
+         /* height: 100%; */
+         /* width: 100%; */
+         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
+         background-position: center center;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         background-size: cover; 
+     }
+}
+
+@media only screen 
+and (max-device-width : 375px) 
+and (max-device-height : 667px) 
+and (orientation : portrait) { 
+    .sidebar> .tabs{
+        display: flex;
+     }
+     .sidebar > .nav{
+        display: none;
+     }
+     .main > .col-md-4{
+         padding: 0;
+         height: 10vh!important;
+      }
+     .main > .col-md-3{
+        padding: 0;
+        height: 10vh!important;
+     }
+     .main > .col-md-8{
+        padding: 0;
+        margin-top: 10%;
+     }
+     .main > .col-md-9{
+         padding: 0;
+         margin-top: 10%;
+      }
+     .row > .col-md-12{
+        display: block!important;
+     } 
+     .shipping-info{
+        display: block!important;
+     }
+     .col-md-6 input, .col-md-8 input{
+        height: 4rem;
+     }
+     .title-li{
+        margin-left: 3.5%;
+     }
+     .title-li > hr::before{
+        bottom: 6px;
+     }
+     .title-li > hr::after{
+        bottom: 6px;
+     }
+     .container{
+        padding: 0;
+     }
+     .checkbox-noti{
+        display: flex;
+     }
+     .row > .col-product{
+         padding: 0;
+     }
+     html, body{
+         /* height: 100%; */
+         /* width: 100%; */
+         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
+         background-position: center center;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         background-size: cover; 
+     }
+ }
+/* ------------------------------- */
+
+/* for iphone 5 & 5S */
+@media only screen 
+and (max-device-width : 568px) 
+and (max-device-height : 320px) 
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation : landscape) { 
+    .seperator-wrapper .seperator{
+        animation: rotate 10s infinite linear!important;
+        -webkit-animation: rotate 10s infinite linear!important;
+    }
+    .sidebar> .tabs{
+        display: flex;
+     }
+     .sidebar > .nav{
+        display: none;
+     }
+     .main > .col-md-4{
+         padding: 0;
+         height: 10vh!important;
+      }
+     .main > .col-md-3{
+        padding: 0;
+        height: 10vh!important;
+     }
+     .main > .col-md-8{
+        padding: 0;
+        margin-top: 10%;
+     }
+     .main > .col-md-9{
+         padding: 0;
+         margin-top: 10%;
+      }
+     .row > .col-md-12{
+        /* display: block!important; */
+     } 
+     .shipping-info{
+        /* display: block!important; */
+     }
+     .col-md-6 input, .col-md-8 input{
+        height: 4rem;
+     }
+     .title-li{
+        margin-left: 3.5%;
+     }
+     .title-li > hr::before{
+        bottom: 7px;
+     }
+     .title-li > hr::after{
+        bottom: 7px;
+     }
+     .container{
+        padding: 0;
+     }
+     .checkbox-noti{
+        display: flex;
+     }
+     .row > .col-product{
+         padding: 0;
+     }
+     html, body{
+         /* height: 100%; */
+         /* width: 100%; */
+         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
+         background-position: center center;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         background-size: cover; 
+     }
+}
+
+@media only screen 
+and (max-device-width : 320px) 
+and (max-device-height : 568px) 
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation : portrait) {
+    .seperator-wrapper .seperator{
+        animation: rotate 10s infinite linear!important;
+        -webkit-animation: rotate 10s infinite linear!important
+    }
+    .sidebar> .tabs{
+        display: flex;
+     }
+     .sidebar > .nav{
+        display: none;
+     }
+     .main > .col-md-4{
+         padding: 0;
+         height: 10vh!important;
+      }
+     .main > .col-md-3{
+        padding: 0;
+        height: 10vh!important;
+     }
+     .main > .col-md-8{
+        padding: 0;
+        margin-top: 10%;
+     }
+     .main > .col-md-9{
+         padding: 0;
+         margin-top: 10%;
+      }
+     .row > .col-md-12{
+        display: block!important;
+     } 
+     .shipping-info{
+        display: block!important;
+     }
+     .col-md-6 input, .col-md-8 input{
+        height: 4rem;
+     }
+     .title-li{
+        margin-left: 3.5%;
+     }
+     .title-li > hr::before{
+        bottom: 6px;
+     }
+     .title-li > hr::after{
+        bottom: 6px;
+     }
+     .container{
+        padding: 0;
+     }
+     .checkbox-noti{
+        display: flex;
+     }
+     .row > .col-product{
+         padding: 0;
+     }
+     html, body{
+         /* height: 100%; */
+         /* width: 100%; */
+         /* background-image: url('/api/docs/background/UIBkAT.jpg'); */
+         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg')!important; */
+         background-position: center center;
+         background-repeat: no-repeat;
+          background-attachment: fixed;
+         background-size: cover; 
+     }
+}
+/* ----------------------------------- */
+
+
+

@@ -85,7 +85,7 @@
                         <%= item.k_plate_material %>
                         <% }else if(item.product_part == 3) { %>
                             <%= item.k_frame_material %>
-                        <% }else { %>
+                        <% }else if(item.product_part == 4) { %>
                             <% if(item.c_material == 0) { %>
                                     <span>ABS</span>
                             <% }else if(item.c_material == 1) { %>
@@ -95,10 +95,12 @@
                             <% }else if(item.c_material == 3) { %>
                                          <span>ETC</span>
                             <% } %>
+                        <% }else{ %>
+                            <span>—</span>
                         <% } %>
                     </td>
                     <td>
-                         <% if(item.product_part == 0 ) { %>
+                        <% if(item.product_part == 0 ) { %>
                         <%= item.k_top_color %>
                         <% }else if(item.product_part == 1) { %>
                         <%= item.k_bot_color %>
@@ -108,6 +110,8 @@
                             <%= item.k_frame_color %>
                         <% }else if(item.product_part == 4) { %>
                             <%= item.c_code_color %>
+                        <% }else{ %>
+                            <span>—</span>
                         <% } %>
                     </td>
                     <td>

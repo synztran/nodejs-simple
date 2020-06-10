@@ -93,8 +93,9 @@ div.product-card.flip180{
               transform: rotateY( 180deg );
 			   transition:  150ms ease-out; 			
 }
+/* disabled this for effect div move */
 .product-card.animate{
-	top:5px;
+	/* top:5px;
 	left:5px;
 	width:335px;
 	height:500px;
@@ -102,7 +103,7 @@ div.product-card.flip180{
 	-webkit-transition:  100ms ease-out; 
        -moz-transition:  100ms ease-out; 
          -o-transition:  100ms ease-out; 
-            transition:  100ms ease-out; 
+            transition:  100ms ease-out;  */
 }
 .stats-container{
 	background:#fff;	
@@ -118,6 +119,7 @@ div.product-card.flip180{
          -o-transition: all 200ms ease-out; 
             transition: all 200ms ease-out;
 }
+/* effect slide detail */
 .product-card.animate .stats-container{
 	top:250px;
 	-webkit-transition: all 200ms ease-out; 
@@ -197,7 +199,7 @@ div.product-card.flip180{
 	cursor:pointer;
 
 }
-.product-card.animate .view_details{
+/* .product-card.animate .view_details{
 	opacity:1;
 	width:152px;
 	font-size:15px;
@@ -207,7 +209,7 @@ div.product-card.flip180{
        -moz-transition: all 200ms ease-out; 
          -o-transition: all 200ms ease-out; 
             transition: all 200ms ease-out; 		
-}
+} */
 div.colors div{
 	margin-top:3px;
 	width:15px; 

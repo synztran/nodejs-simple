@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var AutoIncrement = require('mongoose-sequence')(mongoose);
+// var AutoIncrement = require('mongoose-sequence')(mongoose);
 var date = new Date();
 
 var validateEmail = function(email) {
@@ -8,9 +8,9 @@ var validateEmail = function(email) {
 };
 
 var trackingSchema = mongoose.Schema({
-    seq:{
-        type: Number
-    },
+    // seq:{
+    //     type: Number
+    // },
     order_id:{
         type: String
     },
@@ -24,16 +24,23 @@ var trackingSchema = mongoose.Schema({
     list_product:[
         {
             product_id:{
-                type: String
+                type: String,
+                default: null
             },
             product_name:{
-                type: String
+                type: String,
+                default: null
             },
             product_quantity:{
                 type: Number
             },
             product_price:{
-                type: Number
+                type: Number,
+                default: null
+            },
+            product_pictire:{
+                type: String,
+                default: null
             }
         }
     ],
@@ -65,11 +72,11 @@ var trackingSchema = mongoose.Schema({
     ],
     status_payment:{ // 0 : Pending || 1: paid
         type: Boolean,
-        default: false
+        default: 0,
     },
     status_shipping:{ // 0: on hold || 1: Shipping || 2: Shipped
         type: Boolean,
-        default: false
+        default: 0,
     },
     tracking_number:{
         type: String,
@@ -92,6 +99,6 @@ var trackingSchema = mongoose.Schema({
     }
 })
 
-trackingSchema.plugin(AutoIncrement, {id : 'tracking_sed', inc_field: 'seq'});
+// trackingSchema.plugin(AutoIncrement, {id : 'tracking_sed', inc_field: 'seq'});
 let Tracking = mongoose.model('Tracking', trackingSchema);
 module.exports = Tracking;

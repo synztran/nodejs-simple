@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     function setValueToTrue(cb){
         if(cb.checked){
             cb.value = "true"
@@ -16,6 +15,13 @@ $(document).ready(function() {
             .replace(/[^\d]/g, ''); // numbers and decimals only
 
     });
+
+    $('.address').on('click', function(){
+        window.location.href = './account/address'
+    })
+    $('.tracking').on('click', function(){
+        window.location.href = './account/tracking'
+    })
 
     // $('#checkbox-notification').prop('checked', true);
 

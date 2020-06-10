@@ -58,10 +58,19 @@
                         <%= item.category_name %>
                     </td>
                     <td>
-                        <%= (item.date_start).toLocaleDateString() %>
+                        <% if (item.date_start == null){ %>
+
+                        <% }else{ %>
+                            <%= (item.date_start).toLocaleDateString() %>    
+                        <%}%>
+                        
                     </td>
                     <td>
+                        <% if(item.date_end == null){ %>
+
+                        <%}else{ %>
                         <%= (item.date_end).toLocaleDateString() %>
+                        <% } %>
                     </td>
                     <td>
                         <%= (item.tax) %>
@@ -83,10 +92,19 @@
                         <% } %>
                     </td>
                     <td>
-                        <%= item.min_price %>
+                        <% if(item.min_price == null){ %>
+                            <span>—</span>
+                        <% }else{ %>
+                             <%= item.min_price %>
+                        <% } %>
+                       
                     </td>
                     <td>
-                        <%= item.max_price %>
+                        <% if(item.max_price == null){ %>
+                            <span>—</span>
+                        <% }else{ %>
+                            <%= item.max_price %>
+                        <% } %>
                     </td>
                     <!-- <td>
                         <%= item.password %>

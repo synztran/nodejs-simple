@@ -56,9 +56,11 @@ var userToken = require('./../db/model/token');
 var Tracking = require('./../db/model/tracking');
 var Product  = require('./../db/model/product');
 var Category = require('./../db/model/category')
+var Couter = require('./../db/model/couter')
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
 var TokenUserCheckMiddleware = require('./../lib/check/checktokenproduct.js')
 var SessionCheckMiddleware = require('./../lib/check/checksession');
+var CountMiddleware = require('./../lib/check/countproduct');
 
 app.use(session({
 	saveUninitialized: true, 
@@ -122,7 +124,8 @@ router.post("/login", async (req, res, next) => {
                 var accToken = new userToken({
                     email: (req.body.email).toLowerCase(),
                     token: response.token,
-                    refreshToken: response.refreshToken
+                    refreshToken: response.refreshToken,
+                    ip: req.ip
                 });
                 var result = accToken.save();
             }
@@ -566,7 +569,7 @@ router.post('/updateaccount', TokenUserCheckMiddleware ,async(req, res)=>{
 
 // ------------------------------------------ ADDRESS CONFIG-------------------------------------
 
-router.post('/addaddress', TokenUserCheckMiddleware, async(req, res)=>{
+router.post('/account/addaddress', TokenUserCheckMiddleware, async(req, res)=>{
 
     var uemail = req.decoded['email'];
     console.log(uemail)
@@ -687,61 +690,72 @@ router.post('/history', async(req, res)=>{
 
 router.post('/proxygb/payment/joingb', TokenUserCheckMiddleware, async(req, res)=>{
     console.log(req.body)
-    
-    console.log(req.decoded);
+    // console.log(req.decoded);
     var uemail = req.decoded['email']
-    console.log(req.body.product_id)
     try{
-        console.log(1);
         var account = await Account.findOne({email: uemail}).exec();
-        var checkProduct = await Product.find({product_id: req.body.product_id}).exec();
-        // console.log(checkProduct.length)
-        // console.log(checkProduct);
-        var totalPrice = 0;
-        for(var i=0;i<checkProduct.length;i++){
-            console.log(checkProduct[i].product_name);
-            for (const p in req.body.quantity) {
-                  console.log(p)
-            }
-            console.log(req.body.quantity)
-            console.log(checkProduct[i].price)
-             totalPrice += (req.body.quantity * checkProduct[i].price);
-            console.log(totalPrice)
+        var checkProduct = await Product.find({product_id: req.body.product_id}, {"category_id": "ETC2"}).exec();
+        // var checkProduct = await Product.find({product_id: {"$all": req.body.product_id}}, 
         
-        
-        // Couter.findOne({_id: 'tracking'}, function(err, docs){
-        //     console.log(docs);
-        //     var inc = docs['sed']+1;
-        //     console.log('incc = ' +inc)
+      
+               console.log(checkProduct)
 
-        //     db.collection('trackings').insertOne({
-        //         order_id: "ORD00" + inc,
-        //         email: uemail,
-        //         list_product:{
-        //             _id: (new mongoose.Types.ObjectId()).toString(),
-        //             product_id: req.body.product,
-        //             product_name: checkProduct[i].product_name,
-        //             product_quantity: req.body.quantity,
-        //             product_price: (checkProduct[i].price * req.body.quantity),
-        //         }
-        //         payment: req.body.payment,
-        //         shipping_at:{
-        //             customer_name: req.body.customer_name
-        //             customer_city: req.body.customer_city,
-        //             customer_phone:req.body.customer_phone,
-        //             customer_address: req.body.customer_address,
-        //             customer_country:req.body.customer_country,
-        //             customer_postal_code:req.body.customer_postal_code,
-                        
+        // var checkProduct = db.collection('products').aggregate([
+        //     {$math: {product_id: "SWPACK3"} },
+        //     {$count: "total"}
+        // ])
+        // console.log(checkProduct)
+            await Couter.findOne({_id: 'tracking'}, function(err, docs){
+                console.log('incc = ' + docs['seq'])
+            
+                // for(var i=0;i<checkProduct.length;i++){
+                //     (function(i){
 
-        //         }
+                // Object.keys(req.body.quantity).forEach(function(key){  
+                   
+                     
+                    // if(b.indexOf(checkProduct[key].product_name)){
 
-        //     })
-        // })
+                    // }else{
+                    //     b.push(checkProduct[key].product_name);
+                    // }
+                    
+                    // console.log(req.body.product_id);
+                    // console.log(checkProduct[key].product_name)
+                        db.collection('trackings').insertOne({
+                            order_id: "ORD00" + (docs['seq'] + 1),
+                            email: uemail,
+                            list_product:{
+                                _id: (new mongoose.Types.ObjectId()).toString(),
+                                product_id: req.body.product_id,
+                                product_name: req.body.productName,
+                                product_quantity: req.body.quantity,
+                                product_price: req.body.price,
+                                // product_picture: checkProduct[key].pic_product['path']
+                            },
+                            payment: req.body.payment,
+                            shipping_at:{
+                                customer_name: req.body.customer_name,
+                                customer_city: req.body.customer_city,
+                                customer_phone:req.body.customer_phone,
+                                customer_address: req.body.customer_address,
+                                customer_country:req.body.customer_country,
+                                customer_postal_code:req.body.customer_postal_code,
+                            },
+                            // total: totalPrice
+                        })
+                //     })(i);
+                // }
+            // )
+            // }
+                db.collection("couters").findAndModify({
+                        _id: "tracking"
+                    }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
 
-    }
-        
-
+                    function(err, docs) {
+                        console.log(docs);
+                    })
+            })
     }catch(err){
         res.status(500).send(err);
     }

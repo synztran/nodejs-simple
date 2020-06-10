@@ -141,10 +141,16 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30ff90', endColorstr='#30ff90',GradientType=1);
   /* IE6-9 */
 }
-/*  */
-
- 
-/*  */
+td{
+    line-height: 2.5;
+}
+.previous, .next{
+    cursor: pointer;
+}
+.current{
+    margin: 0 10px;
+    border: 1px solid wheat;
+}
     </style>
 </head>
 
@@ -224,15 +230,13 @@
                                 <% listTracking.forEach(function(item){ %>
                                 <tr class="align-middle">
                                     <td >
-                                        
                                             <% if(item.order_id < 10) { %>
-                                                <a id="order_id" href="/order/<%=item.order_id %>">#100<%-item.order_id %></a>
+                                                <a id="order_id" href="/order/<%=item.order_id %>">#<%-item.order_id %></a>
                                             <% }else if(item.order_id < 100) { %>
-                                                <a id="order_id" href="#">#10<%-item.order_id %></a>
+                                                <a id="order_id" href="#">#<%-item.order_id %></a>
                                             <% }else{ %>
-                                                <a id="order_id" href="#">#1<%-item.order_id %></a>
+                                                <a id="order_id" href="#">#<%-item.order_id %></a>
                                             <% } %>
-                                            
                                     </td>
                                     <td class="t-left">
                                         <% if(item.status_payment == true){ %>
@@ -242,18 +246,30 @@
                                         <% } %>
                                     </td>
                                     <td class="t-left">
-                                        <%= (item.date_receipt).toLocaleDateString() %>
+                                        <% if(item.date_receipt == null){ %>
+                                        
+                                        <% }else{ %>
+                                            <%= (item.date_receipt).toLocaleDateString() %>
+                                        <%}%>
                                     </td>
                                     <td class="t-left">
-                                        $ <%= item.total %>
+                                        <% if(item.total == null) {%>
+
+                                        <% }else{ %>
+                                            $ <%= item.total %>
+                                        <% } %>
+                                        
                                     </td>
                                     <td style="height: 60px;" class="t-left">
                                         <% if(item.tracking_number == null && item.status_payment == false){ %>
-                                            <div data-preset="rainbow" class="ldBar label-center" data-value="0"></div>
+                                            <!-- <div data-preset="rainbow" class="ldBar label-center" data-value="0"></div> -->
+                                            <label class="badge badge-danger">Pending</label>
                                         <% }else if(item.tracking_number == null && item.status_payment == true){ %>
-                                            <div data-preset="rainbow" class="ldBar label-center" data-value="50"></div>
+                                            <!-- <div data-preset="rainbow" class="ldBar label-center" data-value="50"></div> -->
+                                            <label class="badge badge-warning">In progress</label>
                                         <% }else if(item.tracking_number){ %>
-                                            <div data-preset="rainbow" class="ldBar label-center" data-value="100"></div>
+                                            <!-- <div data-preset="rainbow" class="ldBar label-center" data-value="100"></div> -->
+                                            <label class="badge badge-success">Completed</label>
                                         <% } %>
                                     </td>
                                     <!-- <td>
@@ -307,6 +323,8 @@ $('#pnumber').on('input', function() {
 
 });
 $('#data-table-list-tracking').dataTable({
+        "dom": 'lrtip',
+        "bLengthChange": false,
         "aoColumns": [
                 null,
                 null,
@@ -316,12 +334,14 @@ $('#data-table-list-tracking').dataTable({
                 null,
             ],
             "language": {
-                searchPlaceholder: 'Search...',
-                sSearch: ''
+                // searchPlaceholder: 'Search...',
+                // sSearch: ''
             },
             "columnDefs":[
                 {"targets": 0, "orderable": false},
                 {"targets": 4, "orderable": false},
+                {"targets": 2, "width": '25%'},
+                {"targets": 3, "width": '20%'}
 
             ],
     });

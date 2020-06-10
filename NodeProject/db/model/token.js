@@ -14,7 +14,8 @@ var tokenSchema = mongoose.Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     token: String,
-    refreshToken: String
+    refreshToken: String,
+    ip: String
  });
 let userToken = mongoose.model('userToken', tokenSchema);
 module.exports = userToken;

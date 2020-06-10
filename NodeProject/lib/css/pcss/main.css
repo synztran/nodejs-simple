@@ -2740,8 +2740,10 @@ html.no-csstransitions .home-content__main {
  *
  * ------------------------------------------------------------------- */
 .s-about {
-  padding-top: 18rem;
+  /* padding-top: 18rem; */
+  padding-top: 10rem;
   /* padding-bottom: 18rem; */
+  padding-bottom: 10rem;
   background-color: #121212;
   position: relative;
 }
@@ -3001,8 +3003,10 @@ html.no-csstransitions .home-content__main {
  *
  * ------------------------------------------------------------------- */
 .s-works {
-  padding-top: 18rem;
-  padding-bottom: 18rem;
+  /* padding-top: 18rem; */
+  padding-top: 10rem;
+  /* padding-bottom: 18rem; */
+  padding-bottom: 10rem;
   position: relative;
 }
 
@@ -3277,7 +3281,8 @@ html.no-csstransitions .home-content__main {
  *
  * ------------------------------------------------------------------- */
 .s-clients {
-  padding-top: 16.2rem;
+  /* padding-top: 16.2rem; */
+  padding-top: 10rem;
   padding-bottom: 15rem;
   position: relative;
 }
@@ -3619,7 +3624,8 @@ html.no-csstransitions .home-content__main {
  * ------------------------------------------------------------------- */
 .s-contact {
   padding-top: 16.2rem;
-  padding-bottom: 21rem;
+  /* padding-bottom: 21rem; */
+  padding-bottom: 15rem;
   background-color: #5e3080;
   color: rgba(255, 255, 255, 0.6);
   text-align: center;
