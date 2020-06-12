@@ -477,13 +477,15 @@ router.get('/clear_session', (req, res)=>{
 
 router.get('/verify', async(req, res) =>{
     console.log(req.query['id']);
+    var getTimeActive = new Date();
+    console.log(getTimeActive)
     try{
         var checkToken = await userToken.findOne({token: req.query['id']}).exec();
         var checkActive = await Account.findOne({email: checkToken['email']})
         console.log(checkToken);
         console.log(checkActive)
         if(checkToken && checkActive['active'] == false){
-            db.collection('accounts').updateOne({ email: (checkToken['email']).toLowerCase() }, { $set: { active: true } })
+            db.collection('accounts').updateOne({ email: (checkToken['email']).toLowerCase() }, { $set: { active: true , actived_date: getTimeActive} })
 
             res.redirect('/');
         }else{
