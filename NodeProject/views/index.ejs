@@ -25,8 +25,8 @@
     <script src="/api/js/pjs/modernizr.js"></script>
     <!-- favicons
     ================================================== -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
 </head>
 <style>
 
@@ -234,10 +234,6 @@
 		 transform: translate(-50%, -50%) scale(1) rotate(180deg);
 	}
 }
-
-.home-social > li > a > i{
-    /* color: #6b3792; */
-}
 </style>
 <body id="top">
     <!-- preloader
@@ -254,9 +250,18 @@
     <header class="s-header">
         <div class="header-logo">
             <a class="site-logo" href="index.html">
-                <img src="/api/docs/pimg/logo.svg" alt="Homepage">
+                <img src="./favicon/logo-sample.png" alt="Homepage">
             </a>
         </div> <!-- end header-logo -->
+        <div class="header-wraper" style="display: inline-block;width: 70%">
+           
+        </div>
+        <!-- <div class="header-login" style="display: inline-block;top: 19%;position: relative;">
+            <ul style="list-style: none;display: inline-flex;">
+                <li ><a style="color: white" href="#">Login</a></li>&nbsp;|
+                <li ><a style="color: white" href="#">Signup</a></li>
+            </ul>
+        </div> -->
         <nav class="header-nav">
             <a href="#0" class="header-nav__close" title="close"><span>Close</span></a>
             <h3>Navigate to</h3>
@@ -265,20 +270,24 @@
                     <div id="form-login" class="hidden">
                     </div>
                     <li><a href="./proxygb" title="Proxy Group Buy">PROXY GB</a></li>
-                    <li><a class="" href="#" title="Group Buy">GROUP BUY</a></li>
+                    <!-- <li><a class="" href="#" title="Group Buy">GROUP BUY</a></li> -->
                     <li><a href="./account" title="Account">ACCOUNT</a></li>
                     <li><a class="smoothscroll" href="#" title="works">GALLERY</a></li>
                     <li><a class="smoothscroll" href="#aboutus" title="aboutus">ABOUT US</a></li>
                     <li><a class="smoothscroll" href="#contact" title="contact">BLOG</a></li>
                     <li><a class="smoothscroll" href="#support" title="support">SUPPORT</a></li>
                     <br>
-                    <li><a id="login" href="#" title="login">
-                            <% if (user) { %>
-                            <i class="fas fa-user"></i>
-                            <span style="font-size: 14px;font-style: oblique;"><%= user %></span>
+                    <li>
+                        <% if (user) { %>
+                        <a id="login" href="./account" title="account">
+                            <i class="fas fa-user"></i>&nbsp;
+                            <span style="font-size: 14px;font-style: oblique;">
+                                <%= user %></span>
                         </a>
                         <% } else { %>
-                        <i class="fas fa-user"></i>LOGIN</a>
+                        <a id="login" href="./register" title="account">
+                            <i class="fas fa-user"></i>LOGIN</a>
+                        </a>
                         <% } %>
                     </li>
                     <!-- <li><a class="smoothscroll" href="#cart" title="cart"><i class="fas fa-shopping-cart"></i>Cart(0)</a></li> -->
@@ -433,56 +442,52 @@
             <div class="col-full">
                 <h3 class="subhead">Who We Are</h3>
                 <h1 class="display-1">
-                    We are Sublime, a design and branding agency with partners worldwide. We design thoughtful digital experiences
-                    and beautiful brand aesthetics.
-                </h1>
+                    We are Noobteam's member, a technicians and consultants have many years of experience with custom keyboard. We put responsibility and excellence first in our work
             </div>
         </div> <!-- end section-header -->
-        <div class="row bit-narrow" data-aos="fade-up">
+       <!--  <div class="row bit-narrow" data-aos="fade-up">
             <div class="col-full">
                 <p class="lead">
                     Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
                 </p>
             </div>
-        </div> <!-- end about-desc -->
+        </div>  -->
+        <!-- end about-desc -->
         <div class="row bit-narrow">
             <div class="about-process process block-1-2 block-tab-full">
-                <div class="col-block item-process" data-aos="fade-up">
-                    <div class="item-process__text">
-                        <h4 class="item-title">Define</h4>
-                        <p>
-                            Quos dolores saepe mollitia deserunt accusamus autem reprehenderit. Voluptas facere animi explicabo non quis magni recusandae.
-                            Numquam debitis pariatur omnis facere unde. Laboriosam minus amet nesciunt est. Et saepe eos maxime tempore quasi deserunt ab.
-                        </p>
+            <% if(listContent){%>
+                <% listContent.forEach(function(item){%>
+                    <% if(item.content_type == 1){%>
+                    <div class="col-block item-process" data-aos="fade-up">
+                        <div class="item-process__text">
+                            <h4 class="item-title">Consultation</h4>
+                                        <%- item.specs %>
+                        </div>
                     </div>
-                </div>
-                <div class="col-block item-process" data-aos="fade-up">
-                    <div class="item-process__text">
-                        <h4 class="item-title">Design</h4>
-                        <p>
-                            Quos dolores saepe mollitia deserunt accusamus autem reprehenderit. Voluptas facere animi explicabo non quis magni recusandae.
-                            Numquam debitis pariatur omnis facere unde. Laboriosam minus amet nesciunt est. Et saepe eos maxime tempore quasi deserunt ab.
-                        </p>
+                    <% }else if(item.content_type == 2){ %>
+                    <div class="col-block item-process" data-aos="fade-up">
+                        <div class="item-process__text">
+                            <h4 class="item-title">Assembled</h4>
+                                        <%- item.specs %>
+                        </div>
                     </div>
-                </div>
-                <div class="col-block item-process" data-aos="fade-up">
-                    <div class="item-process__text">
-                        <h4 class="item-title">Build</h4>
-                        <p>
-                            Quos dolores saepe mollitia deserunt accusamus autem reprehenderit. Voluptas facere animi explicabo non quis magni recusandae.
-                            Numquam debitis pariatur omnis facere unde. Laboriosam minus amet nesciunt est. Et saepe eos maxime tempore quasi deserunt ab.
-                        </p>
+                    <% }else if(item.content_type == 3){ %>
+                    <div class="col-block item-process" data-aos="fade-up">
+                        <div class="item-process__text">
+                            <h4 class="item-title">Lube Service</h4>
+                                     <%- item.specs %>
+                        </div>
                     </div>
-                </div>
-                <div class="col-block item-process" data-aos="fade-up">
-                    <div class="item-process__text">
-                        <h4 class="item-title">Launch</h4>
-                        <p>
-                            Quos dolores saepe mollitia deserunt accusamus autem reprehenderit. Voluptas facere animi explicabo non quis magni recusandae.
-                            Numquam debitis pariatur omnis facere unde. Laboriosam minus amet nesciunt est. Et saepe eos maxime tempore quasi deserunt ab.
-                        </p>
+                    <% }else if(item.content_type == 4){ %>
+                    <div class="col-block item-process" data-aos="fade-up"> 
+                        <div class="item-process__text">
+                            <h4 class="item-title">Support</h4>
+                                     <%- item.specs %>
+                        </div>
                     </div>
-                </div>
+                    <%}%>
+                <% }) %>
+            <%}%>
             </div> <!-- end process -->
         </div> <!-- end row -->
     </section> <!-- end s-about -->
@@ -579,13 +584,13 @@
             <div class="col-full">
                 <h3 class="subhead">Our Work</h3>
                 <h1 class="display-1">
-                    We assembled mechkey, products artisan keycap, and experiences that people love. Check out our recent works.
+                    We assembled mechkey, custom cable, and experiences that people love. Check out our recent works.
                 </h1>
             </div>
         </div> <!-- end section-header -->
         <div class="row masonry-wrap">
             <div class="masonry">
-                <div class="masonry__brick" data-aos="fade-up">
+                <!-- <div class="masonry__brick" data-aos="fade-up">
                     <div class="item-folio">
                         <div class="item-folio__thumb">
                             <a href="/api/docs/pimg/portfolio/gallery/b.jpg" class="thumb-link" title="Shutterbug" data-size="1050x700">
@@ -594,136 +599,52 @@
                         </div>
                         <div class="item-folio__text">
                             <h3 class="item-folio__title">
-                                Shutterbug
+                                TGR 910 RE Polycarbonate
                             </h3>
                             <p class="item-folio__cat">
-                                Branding
+                                TGR
                             </p>
                         </div>
                         <a href="https://www.behance.net/" class="item-folio__project-link" title="Project link">
                             <i class="icon-link"></i>
                         </a>
                         <div class="item-folio__caption">
-                            <p>Vero molestiae sed aut natus excepturi. Et tempora numquam. Temporibus iusto quo.Unde dolorem corrupti neque nisi.</p>
+                            <p>The famous product 65% keyboard from TGR team.</p>
                         </div>
                     </div>
-                </div> <!-- end masonry__brick -->
-                <div class="masonry__brick" data-aos="fade-up">
-                    <div class="item-folio">
-                        <div class="item-folio__thumb">
-                            <a href="/api/docs/pimg/portfolio/gallery/g-woodcraft.jpg" class="thumb-link" title="Woodcraft" data-size="1050x700">
-                                <img src="/api/docs/pimg/portfolio/woodcraft.jpg" srcset="/api/docs/pimg/portfolio/woodcraft.jpg 1x, /api/docs/pimg/portfolio/woodcraft@2x.jpg 2x" alt="">
-                            </a>
-                        </div>
-                        <div class="item-folio__text">
-                            <h3 class="item-folio__title">
-                                Woodcraft
-                            </h3>
-                            <p class="item-folio__cat">
-                                Web Design
-                            </p>
-                        </div>
-                        <a href="https://www.behance.net/" class="item-folio__project-link" title="Project link">
-                            <i class="icon-link"></i>
-                        </a>
-                        <div class="item-folio__caption">
-                            <p>Vero molestiae sed aut natus excepturi. Et tempora numquam. Temporibus iusto quo.Unde dolorem corrupti neque nisi.</p>
-                        </div>
-                    </div>
-                </div> <!-- end masonry__brick -->
-                <div class="masonry__brick" data-aos="fade-up">
-                    <div class="item-folio">
-                        <div class="item-folio__thumb">
-                            <a href="/api/docs/pimg/portfolio/gallery/c.jpg" class="thumb-link" title="The Beetle Car" data-size="1050x700">
-                                <img src="/api/docs/pimg/portfolio/c.jpg" srcset="/api/docs/pimg/portfolio/c.jpg 1x, /api/docs/pimg/portfolio/the-beetle@2x.jpg 2x" alt="">
-                            </a>
-                        </div>
-                        <div class="item-folio__text">
-                            <h3 class="item-folio__title">
-                                The Beetle
-                            </h3>
-                            <p class="item-folio__cat">
-                                Web Development
-                            </p>
-                        </div>
-                        <a href="https://www.behance.net/" class="item-folio__project-link" title="Project link">
-                            <i class="icon-link"></i>
-                        </a>
-                        <div class="item-folio__caption">
-                            <p>Vero molestiae sed aut natus excepturi. Et tempora numquam. Temporibus iusto quo.Unde dolorem corrupti neque nisi.</p>
-                        </div>
-                    </div>
-                </div> <!-- end masonry__brick -->
-                <div class="masonry__brick" data-aos="fade-up">
-                    <div class="item-folio">
-                        <div class="item-folio__thumb">
-                            <a href="/api/docs/pimg/portfolio/gallery/alfx2.jpg" class="thumb-link" title="Grow Green" data-size="1050x700">
-                                <img src="/api/docs/pimg/portfolio/alfx2.jpg" srcset="/api/docs/pimg/portfolio/alfx2.jpg 1x, /api/docs/pimg/portfolio/salad@2x.jpg 2x" alt="">
-                            </a>
-                        </div>
-                        <div class="item-folio__text">
-                            <h3 class="item-folio__title">
-                                Salad
-                            </h3>
-                            <p class="item-folio__cat">
-                                Branding
-                            </p>
-                        </div>
-                        <a href="https://www.behance.net/" class="item-folio__project-link" title="Project link">
-                            <i class="icon-link"></i>
-                        </a>
-                        <div class="item-folio__caption">
-                            <p>Vero molestiae sed aut natus excepturi. Et tempora numquam. Temporibus iusto quo.Unde dolorem corrupti neque nisi.</p>
-                        </div>
-                    </div>
-                </div> <!-- end masonry__brick -->
-                <div class="masonry__brick" data-aos="fade-up">
-                    <div class="item-folio">
-                        <div class="item-folio__thumb">
-                            <a href="/api/docs/pimg/portfolio/gallery/e6.5.jpg" class="thumb-link" title="Guitarist" data-size="1050x700">
-                                <img src="/api/docs/pimg/portfolio/e6.5.jpg" srcset="/api/docs/pimg/portfolio/e6.5.jpg 1x, /api/docs/pimg/portfolio/lamp@2x.jpg 2x" alt="">
-                            </a>
-                        </div>
-                        <div class="item-folio__text">
-                            <h3 class="item-folio__title">
-                                Lamp
-                            </h3>
-                            <p class="item-folio__cat">
-                                Web Design
-                            </p>
-                        </div>
-                        <a href="https://www.behance.net/" class="item-folio__project-link" title="Project link">
-                            <i class="icon-link"></i>
-                        </a>
-                        <div class="item-folio__caption">
-                            <p>Vero molestiae sed aut natus excepturi. Et tempora numquam. Temporibus iusto quo.Unde dolorem corrupti neque nisi.</p>
-                        </div>
-                    </div>
-                </div> <!-- end masonry__brick -->
-                <div class="masonry__brick" data-aos="fade-up">
-                    <div class="item-folio">
-                        <div class="item-folio__thumb">
-                            <a href="/api/docs/pimg/portfolio/gallery/art.jpg" class="thumb-link" title="Palmeira" data-size="1050x700">
-                                <img src="/api/docs/pimg/portfolio/art.jpg" srcset="/api/docs/pimg/portfolio/art.jpg 1x, /api/docs/pimg/portfolio/fuji@2x.jpg 2x" alt="">
-                            </a>
-                        </div>
-                        <div class="item-folio__text">
-                            <h3 class="item-folio__title">
-                                Fuji
-                            </h3>
-                            <p class="item-folio__cat">
-                                Web Design
-                            </p>
-                        </div>
-                        <a href="https://www.behance.net/" class="item-folio__project-link" title="Project link">
-                            <i class="icon-link"></i>
-                        </a>
-                        <div class="item-folio__caption">
-                            <p>Vero molestiae sed aut natus excepturi. Et tempora numquam. Temporibus iusto quo.Unde dolorem corrupti neque nisi.</p>
-                        </div>
-                    </div>
-                </div> <!-- end masonry__brick -->
-            </div> <!-- end masonry -->
+                </div> -->
+                <% if(listAdsProduct){ %>
+                    <% listAdsProduct.forEach(function(item){%>
+                        <% if(item.status != 0){ %>
+                            <div class="masonry__brick" data-aos="fade-up">
+                                <div class="item-folio">
+                                    <div class="item-folio__thumb">
+                                        <a href="/api/<%=item.pic_product.path%>" class="thumb-link" title="Shutterbug" data-size="1050x700">
+                                            <img src="/api/<%=item.pic_product.path%>" srcset="/api/<%=item.pic_product.path%> 1x, /api/<%=item.pic_product.path%> 2x" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="item-folio__text">
+                                        <h3 class="item-folio__title">
+                                            <%= item.product_name %>
+                                        </h3>
+                                        <p class="item-folio__cat">
+                                            <%= item.author_name %>
+                                        </p>
+                                    </div>
+                                    <a href="https://www.behance.net/" class="item-folio__project-link" title="Project link">
+                                        <i class="icon-link"></i>
+                                    </a>
+                                    <div class="item-folio__caption">
+                                        <p><%- item.specs %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% })%>
+                <% }else{ %>
+
+                <% } %>
+            </div> 
         </div> <!-- end masonry-wrap -->
     </section> <!-- end s-works -->
     <!-- clients
@@ -745,7 +666,7 @@
                     <li><a href="#0">GHTK</a></li>
                     <li><a href="#0">GHN</a></li>
                     <li><a href="#0">ViettlePost</a></li>
-                    <li><a href="#0">EMS</a></li>
+                    <li><a href="#0">J&T Express</a></li>
                     <li><a href="#0">DHL</a></li>
                     <li><a href="#0">VNMK</a></li>
                     <li><a href="#0">VKG</a></li>
@@ -819,14 +740,17 @@
                         <a href="https://www.facebook.com/noobassembly"><i class="fab fa-facebook"></i></a>
                     </li>
                     <li>
-                        <a href="#0"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/messenger/noobassembly"><i class="fab fa-facebook-messenger"></i></a>
                     </li>
+                    <!-- <li>
+                        <a href="#0"><i class="fab fa-twitter"></i></a>
+                    </li> -->
                     <li>
                         <a href="#0"><i class="fab fa-instagram"></i></a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="#0"><i class="fab fa-trello"></i></a>
-                    </li>
+                    </li> -->
                     <!-- <li>
                         <a href="#0"><i class="fab fa-dribbble"></i></a>
                     </li> -->
@@ -840,7 +764,7 @@
         <div class="row">
             <div class="col-full ss-copyright">
                 <span>© Copyright Noobteam 2017</span>
-                <span>Design by <a href="https://www.fb.com/NbelongtoS">Noobteam</a></span>
+                <span>Design by <a href="https://www.facebook.com/noobassembly">Noobteam</a></span>
             </div>
         </div>
         <div class="ss-go-top">
@@ -918,134 +842,130 @@ textArr.forEach((text, index) => {
                 var formLogin = $('.swal2-container').clone()[0]
                 $('#form-login').remove();
 
-                $('.home-social #login, #login').on('click', function(e) {
-                    e.preventDefault();
-                    // var formLogin = $('#form-login > form').clone()[0]
-                    if (responseAsJson['code'] != 200) {
-                        Swal.fire({
-                            title: 'Your profile',
-                            showConfirmButton: false,
-                            width: '600px',
-                            // background: '#fff url(/api/docs/background/UIBkAT.jpg) no-repeat' ,
 
-                            backdrop: `
-                        rgba(0,0,123,0.4)
-                        url("/api/docs/background/UIBkAT.jpg")
-                        left top
-                        no-repeat
-                    `,
-                            heightAuto: true,
-                            html: "<div  class='form-group form-info'><div class='row'><div  class='col-md-8'>   <div  class='col-md-2'>      <label >email:</label> <input id='email' type='email' value='" + user.session['email'] + "' disabled/>   </div>     <div  class='col-md-2'>      <label >first name:</label> <input id='email' type='text' value='" + user.session['fname'] + "' disabled/>   </div>  <div  class='col-md-2'>      <label >last name:</label> <input id='email' type='text' value='" + user.session['lname'] + "' disabled/>   </div>    <form id='updatepassword' >        <div  class='col-md-2'>          <label >current password:</label>   <input id='currentpw' required name='currentpw' type='password' value='' /> </div>           <div style='display:inline-flex' class='col-md-2'>          <label >new password:</label>   <input required id='newpw' name='newpw' type='password' value='' />            </div><div class='button-submit-changepw'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Change</button></div></form><div class='col-md-4'><div class='button-logout'><button type='submit' id='btn-logout' class='btn btn-primary btn-login'>Logout</button></div></div> </div></div></div>"
-                        })
-                        $('#btn-logout').on('click', function(e) {
-                            e.preventDefault();
-                            Swal.fire({
-                                title: 'Are you sure?',
-                                text: "You won't be able to revert this!",
-                                icon: 'warning',
-                                showCancelButton: true,
-                                backdrop: `
-                        rgba(0,0,123,0.4)
-                        url("/api/docs/background/UIBkAT.jpg")
-                        left top
-                        no-repeat
-                        `,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Yes, delete it!'
-                            }).then((result) => {
-                                if (result.value) {
-                                    // $.ajax({
-                                    //     tpye: 'GET',
-                                    //     url: '/del',
-                                    //     success: function(res) {
-                                    //         window.location.href = '/'
-                                    //     },
-                                    //     error: function(err) {
-                                    //         console.log(err);
-                                    //     },
-                                    // })
-                                    $.ajax({
-                                        tpye: 'GET',
-                                        url: '/del',
-                                        success: function(res) {
-                                            window.location.href = '/'
-                                        },
-                                        error: function(err) {
-                                            console.log(err);
-                                        },
-                                    })
+                // $('.home-social #login, #login').on('click', function(e) {
+                //     e.preventDefault();
+                //     // var formLogin = $('#form-login > form').clone()[0]
+                //     if (responseAsJson['code'] != 200) {
+                //         Swal.fire({
+                //             title: 'Your profile',
+                //             showConfirmButton: false,
+                //             width: '600px',
+                //             // background: '#fff url(/api/docs/background/UIBkAT.jpg) no-repeat' ,
+
+                //             backdrop: `
+                //         rgba(0,0,123,0.4)
+                //         url("/api/docs/background/UIBkAT.jpg")
+                //         left top
+                //         no-repeat
+                //     `,
+                //             heightAuto: true,
+                //             html: "<div  class='form-group form-info'><div class='row'><div  class='col-md-8'>   <div  class='col-md-2'>      <label >email:</label> <input id='email' type='email' value='" + user.session['email'] + "' disabled/>   </div>     <div  class='col-md-2'>      <label >first name:</label> <input id='email' type='text' value='" + user.session['fname'] + "' disabled/>   </div>  <div  class='col-md-2'>      <label >last name:</label> <input id='email' type='text' value='" + user.session['lname'] + "' disabled/>   </div>    <form id='updatepassword' >        <div  class='col-md-2'>          <label >current password:</label>   <input id='currentpw' required name='currentpw' type='password' value='' /> </div>           <div style='display:inline-flex' class='col-md-2'>          <label >new password:</label>   <input required id='newpw' name='newpw' type='password' value='' />            </div><div class='button-submit-changepw'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Change</button></div></form><div class='col-md-4'><div class='button-logout'><button type='submit' id='btn-logout' class='btn btn-primary btn-login'>Logout</button></div></div> </div></div></div>"
+                //         })
+                //         $('#btn-logout').on('click', function(e) {
+                        //     e.preventDefault();
+                        //     Swal.fire({
+                        //         title: 'Are you sure?',
+                        //         text: "You won't be able to revert this!",
+                        //         icon: 'warning',
+                        //         showCancelButton: true,
+                        //         backdrop: `
+                        // rgba(0,0,123,0.4)
+                        // url("/api/docs/background/UIBkAT.jpg")
+                        // left top
+                        // no-repeat
+                        // `,
+                        //         confirmButtonColor: '#3085d6',
+                        //         cancelButtonColor: '#d33',
+                        //         confirmButtonText: 'Yes, delete it!'
+                        //     }).then((result) => {
+                        //         if (result.value) {
+                        //             // $.ajax({
+                        //             //     tpye: 'GET',
+                        //             //     url: '/del',
+                        //             //     success: function(res) {
+                        //             //         window.location.href = '/'
+                        //             //     },
+                        //             //     error: function(err) {
+                        //             //         console.log(err);
+                        //             //     },
+                        //             // })
+                        //             $.ajax({
+                        //                 tpye: 'GET',
+                        //                 url: '/del',
+                        //                 success: function(res) {
+                        //                     window.location.href = '/'
+                        //                 },
+                        //                 error: function(err) {
+                        //                     console.log(err);
+                        //                 },
+                        //             })
                                     
-                                }
-                            })
-                        })
+                        //         }
+                        //     })
+                //         })
 
-                        $('#updatepassword').submit(function(e) {
-                            e.preventDefault();
-                            const curpw = $('#currentpw').val();
-                            const newpw = $('#newpw').val();
-                            const uemail = $('#email').val();
-                            console.log(curpw, newpw, uemail);
-                            if (newpw == '' || curpw == '') {
+                //         $('#updatepassword').submit(function(e) {
+                //             e.preventDefault();
+                //             const curpw = $('#currentpw').val();
+                //             const newpw = $('#newpw').val();
+                //             const uemail = $('#email').val();
+                //             console.log(curpw, newpw, uemail);
+                //             if (newpw == '' || curpw == '') {
 
-                            } else {
-                                $.ajax({
-                                    type: 'POST',
-                                    url: '/updatepassword',
-                                    data: { uemail: uemail, currentpw: curpw, newpw: newpw },
-                                    success: function(res) {
+                //             } else {
+                //                 $.ajax({
+                //                     type: 'POST',
+                //                     url: '/updatepassword',
+                //                     data: { uemail: uemail, currentpw: curpw, newpw: newpw },
+                //                     success: function(res) {
 
-                                        window.location.href = '/'
-                                    },
-                                    error: function(err) {
-                                        console.log(err);
-                                        console.log(err.responseJSON['message'])
-                                        if (err.status == 400) {
+                //                         window.location.href = '/'
+                //                     },
+                //                     error: function(err) {
+                //                         console.log(err);
+                //                         console.log(err.responseJSON['message'])
+                //                         if (err.status == 400) {
 
-                                            const Toast = Swal.mixin({
-                                                position: 'top-end',
-                                                toast: true,
-                                                // icon: 'error',
-                                                // title: 'The password is not correct',
-                                                showConfirmButton: false,
-                                                timerProgressBar: true,
-                                                timer: 1500,
-                                                onOpen: (toast) => {
-                                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                                }
-                                            })
+                //                             const Toast = Swal.mixin({
+                //                                 position: 'top-end',
+                //                                 toast: true,
+                //                                 // icon: 'error',
+                //                                 // title: 'The password is not correct',
+                //                                 showConfirmButton: false,
+                //                                 timerProgressBar: true,
+                //                                 timer: 1500,
+                //                                 onOpen: (toast) => {
+                //                                     toast.addEventListener('mouseenter', Swal.stopTimer)
+                //                                     toast.addEventListener('mouseleave', Swal.resumeTimer)
+                //                                 }
+                //                             })
 
-                                            Toast.fire({
-                                                icon: 'error',
-                                                title: 'The password is not correct'
-                                            })
-                                        }
-                                    },
-                                })
-                            }
-                        })
-                    } else {
-                        Swal.fire({
-                            title: 'Hi!',
-                            showConfirmButton: false,
-                            html: "<form action='./login' method='post'><div class='form-group'><label for='email'>Email address</label><input required type='email' name='email' value='rapsunl231@gmail.com' autocomplete='off' class='form-control' id='email' aria-describedby='emailHelp' placeholder='Enter email'></div><div class='form-group'><label for='password'>Password</label><input type='password' value='123456' required name='password' class='form-control' id='password' placeholder='Password'></div><div class='form-group'><small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small></br></br></div></br><div class='button-login'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Login</button></div><br><a class='btn-register' href='./register'> or Register here!!!</a></form>"
-                        })
+                //                             Toast.fire({
+                //                                 icon: 'error',
+                //                                 title: 'The password is not correct'
+                //                             })
+                //                         }
+                //                     },
+                //                 })
+                //             }
+                //         })
+                //     } else {
+                //         Swal.fire({
+                //             title: 'Hi!',
+                //             showConfirmButton: false,
+                //             html: "<form action='./login' method='post'><div class='form-group'><label for='email'>Email address</label><input required type='email' name='email' value='rapsunl231@gmail.com' autocomplete='off' class='form-control' id='email' aria-describedby='emailHelp' placeholder='Enter email'></div><div class='form-group'><label for='password'>Password</label><input type='password' value='123456' required name='password' class='form-control' id='password' placeholder='Password'></div><div class='form-group'><small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small></br></br></div></br><div class='button-login'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Login</button></div><br><a class='btn-register' href='./register'> or Register here!!!</a></form>"
+                //         })
                         
-                    }
+                //     }
 
-                });
+                // });
                 
 
             })
             .catch(function(error) {
                 console.log('Looks like there was a problem: \n', error);
             });
-
-
-        
-
-
     })
     </script>
 </body>

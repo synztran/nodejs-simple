@@ -201,8 +201,8 @@
     <nav class="before-breadcrumb" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Library</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data</li>
+            <!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
+            <li class="breadcrumb-item active" aria-current="page">Account</li>
         </ol>
     </nav>
     <section style="position: relative; top:1%" class="seperator-wrapper">
@@ -288,7 +288,7 @@
                     </div>
                     <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-address-default flip-form">
                         <div class="title-container-user-info col-md-12">
-                            <b>ADDRESS SHIPPING <a href="/address"><span><i class="fas fa-pencil-alt"></i>(Edit address)</span></a></b>
+                            <b>ADDRESS SHIPPING <a href="/account/address"><span><i class="fas fa-pencil-alt"></i>(Edit address)</span></a></b>
                         </div>
                         <div class="form-group d-flex shipping-info">
                             <div class='form-group col-md-6 '>
@@ -312,8 +312,11 @@
                                 <% if(user.shipping_at[0]) { %>
                                 <label for="">Address: <span><%= user.shipping_at[0].address%></span></label>
                                 <div></div>
-                                <label for="">City: <span><%= user.shipping_at[0].city%></span></label>
+                                <label for="">Country: <span><%= user.shipping_at[0].country%></span></label>
                                 <div></div>
+                                <label for="">City: <span><%= user.shipping_at[0].town_city%></span></label>
+                                <div></div>
+
                                 <label for="">Post code: <span><%= user.shipping_at[0].zip_code%></span></label>
                                 <div></div>
 
@@ -380,6 +383,7 @@ integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="ano
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <script src="/api/js/pjs/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="/api/js/datepicker/dist/datepicker.js"></script>
 <script type="text/javascript" src="/api/js/pjs/product/accountPage/js.ejs"></script>
 <script src="/package/intl-tel-input-master/build/js/intlTelInput.js"></script>

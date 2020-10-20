@@ -18,7 +18,7 @@
                 <% include sidebar%>
             </div>
             <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
-            <div class="col-md-9">
+                <div class="col-md-4">
                 <!-- <div class="row mainpg-row"> -->
                     <p class="col-md-2 pull-right visible-xs">
                         <button type="button" class="btn btn-primary btn-xs btn-move-list" data-toggle="offcanvas">LIST ACCOUNT</button>
@@ -44,9 +44,21 @@
                     <p class="col-md-2 pull-right visible-xs">
                         <button type="button" class="btn btn-primary btn-xs btn-move-token" data-toggle="offcanvas">LOG OUT</button>
                     </p>
-                <!-- </div> -->
+                </div>
+                <div class="col-md-4">
+                <!-- <div class="row mainpg-row"> -->
+                    <p class="col-md-2 pull-right visible-xs">
+                        <button type="button" class="btn btn-primary btn-xs btn-ads-product-list" data-toggle="offcanvas">LIST ADS PRODUCT</button>
+                    </p>
+                    <p class="col-md-2 pull-right visible-xs">
+                        <button type="button" class="btn btn-primary btn-xs btn-list-content" data-toggle="offcanvas">LIST CONTENT</button>
+                    </p>
+                    <p class="col-md-2 pull-right visible-xs">
+                        <button type="button" class="btn btn-primary btn-xs btn-product-onsale" data-toggle="offcanvas">LIST ON SALE</button>
+                    </p>
+                </div>
                 
-            </div>
+            <!-- </div> -->
             <!-- </div> -->
         </div>
         <!-- </div> -->
@@ -91,11 +103,11 @@ $(document).ready(function() {
     })
     $('.btn-product-list').on('click', function(e){
          e.preventDefault();
-        window.location.href= '/api/productlist'
+        window.location.href= '/api/product'
     })
     $('.btn-category-list').on('click', function(e){
          e.preventDefault();
-        window.location.href= '/api/categorylist'
+        window.location.href= '/api/category'
     })
     $('.btn-move-messenger').on('click', function(e){
          e.preventDefault();
@@ -104,6 +116,18 @@ $(document).ready(function() {
     $('.btn-move-list-room').on('click', function(e){
          e.preventDefault();
         window.location.href= '/api/list-room'
+    })
+    $('.btn-ads-product-list').on('click', function(e){
+         e.preventDefault();
+        window.location.href= '/api/adsproduct'
+    })
+    $('.btn-list-content').on('click', function(e){
+         e.preventDefault();
+        window.location.href= '/api/content'
+    })
+    $('.btn-product-onsale').on('click', function(e){
+         e.preventDefault();
+        window.location.href= '/api/product-onsale'
     })
      $('.btn-move-token').on('click', function(e){
          e.preventDefault();

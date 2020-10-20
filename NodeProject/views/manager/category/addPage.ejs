@@ -98,7 +98,8 @@ html {
                     </div>
                     <div class="form-group">
                         <label for="email">Proxy host:</label>
-                        <input type="text" name="host" class="form-control" id="host" aria-describedby="hostHelp">
+                        <input list="" type="text" name="host" class="form-control" id="host" aria-describedby="hostHelp">
+                        
                     </div>
                     <div class="form-group">
                         <label for="email">Category Type:</label>
@@ -342,6 +343,52 @@ $(document).ready(function() {
 
     //     // inputNameBrackets: false
     // });
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+
+    // $( "#host" ).autocomplete({
+    //             source: availableTags
+    //         });
+    var inputHost = $('#host').val();
+    if(inputHost.length < 1){
+        $("#host").on('keyup', function(e){
+        var keyCode = e.keyCode;
+        console.log(keyCode);
+        if(keyCode == 50){
+            $( "#host" ).autocomplete({
+                source: availableTags
+            });
+        }else{
+            console.log('fail')
+        }
+    })
+
+    }else{
+
+    }
+    
 
       $('.btn-cancel').on('click', function(e) {
         e.preventDefault();

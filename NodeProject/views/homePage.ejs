@@ -51,36 +51,6 @@ html, body
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script type="text/javascript">
-    // $(document).on('click', '.btn-move-list', function(e){
-    //     e.preventDefault();
-    //     window.location.href = './list' 
-    // })
-    // $(document).on('click', '.btn-profile', function(e){
-    //     e.preventDefault();
-    //     window.location.href = './profile' 
-    // })
-    
-    // $('.btn-move-list-created').on('click', function(e){
-    //      e.preventDefault();
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: '/created' ,
-    //         headers: {
-    //             // 'Authorization':'Basic xxxxxxxxxxxxx',
-    //             'x-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNudHQuaG9uZ2hhaUBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNTc1OTYyMjM2LCJleHAiOjE1NzU5NjMxMzZ9.V6lhLY3io1Mlk47C_slg-ye5CFhqHmaNcAPnmPlZZMw',
-    //             // 'Content-Type':'application/json'
-    //         },
-    //         success: function(res){
-    //             alert('updating');
-    //             window.location.href = '/profile';
-    //         },
-    //         error: function(err){
-    //             console.log(err);
-    //         },
-    //         dataType: "json"
-    //     })
-    // })
-
     $("form" ).on( "submit", function( event ) {
         event.preventDefault();
         console.log( $( this ).serialize() );
@@ -94,10 +64,17 @@ html, body
             url: '/api/login' ,
             data: {email:email, password: password},
             success: function(res, data){
-                // console.log(res);
-                // alert('updating');
-                window.location.href = '/api';
-            },
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Success',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                setTimeout(function(){
+                    window.location.href = '/api';
+                },1500)
+                
+            },                                               
             error: function(err, data){
                 Swal.fire({
                     icon: 'error',
@@ -108,7 +85,6 @@ html, body
                 $('#email').val('');
                 $('#password').val('');
             },
-            // dataType: "json"
         })
         
     })

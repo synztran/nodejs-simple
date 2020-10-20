@@ -208,9 +208,9 @@ ul.item-timeline {
         <div class="container">
             <a href="#" class="navbar-brand">
                 <!-- Logo Image -->
-                <img src="https://res.cloudinary.com/mhmd/image/upload/v1557368579/logo_iqjuay.png" width="45" alt="" class="d-inline-block align-middle mr-2">
+                <img src="/favicon/logo.png" width="100" height="50" alt="" class="d-inline-block align-middle mr-2">
                 <!-- Logo Text -->
-                <span class="text-uppercase font-weight-bold">Company</span>
+                <!-- <span class="text-uppercase font-weight-bold">Company</span> -->
             </a>
             <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
@@ -232,8 +232,8 @@ ul.item-timeline {
     <nav class="before-breadcrumb" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Library</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data</li>
+            <!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
+            <li class="breadcrumb-item active" aria-current="page">Product Details</li>
         </ol>
     </nav>
     <section style="position: relative;" class="seperator-wrapper">
@@ -259,7 +259,10 @@ ul.item-timeline {
                             </li> -->
                         <% for(var key in detailsProduct) {%>
                         <li  data-thumb="" data-id="<%= key %>">
-                            <img  style="width: 100%; height: 100%" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= detailsProduct[key].pic_product.path %>" />
+                            <!-- <a class="magnifier-thumb-wrapper" href="#"> -->
+                                <img  style="width: 100%; height: 100%" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= detailsProduct[key].pic_product.path %>" />
+                            <!-- </a> -->
+                            <!-- <div class="magnifier-preview" id="preview" style="width: 200px; height: 133px">Starry Night Over The Rhone<br>by Vincent van Gogh</div> -->
                         </li>
                         <% } %>
                     </ul>
@@ -365,6 +368,7 @@ ul.item-timeline {
                                 <span>
                                     <%= detailsProduct[j].product_name %> -
                                     <%= detailsProduct[j].replace_product_name %></span>
+                                
                                 <img class='img-zoomable' style="width: 100%" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= detailsProduct[j].pic_product.path %>">
                                 <% }else{ %>
                                 <span>

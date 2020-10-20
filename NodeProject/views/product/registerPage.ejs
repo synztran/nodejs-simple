@@ -7,91 +7,22 @@
     <!-- css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- ============= -->
-
     <!-- <link rel="stylesheet" href="/api/css/pcss/base.css"> -->
     <!-- <link rel="stylesheet" href="/api/css/pcss/vendor.css"> -->
     <link rel="stylesheet" href="/api/css/pcss/main.css">
     <link rel="stylesheet" href="/api/css/pcss/customize.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/effect/rgb-wrapper/style.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/pcss/registerPage/style.css">
     <!-- font-->
     <!-- ============= -->
-
     <!-- script
     ================================================== -->
     <script src="/api/js/pjs/modernizr.js"></script>
-    <title>NoobKey | Sign Up</title>
-    <style>
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    html, body{
-        height: 100%;
-        width: 100%;
-        background-image: url('/api/docs/background/UIBkAT.jpg');
-        background-repeat: no-repeat;
-    }
-    .center{
-        text-align: center;
-    }
-  
-    nav.navbar{
-        z-index: 1;
-        position: sticky;
-        top: 0;
-        background-image: url('/api/docs/background/UIBkAT.jpg');
-        background-repeat: no-repeat;
-        /* clip-path: polygon(0 13%, 99% 24%, 100% 92%, 17% 86%); */
-
-    }
-    .bg-dark{
-        background-color: transparent!important;
-        /* clip-path: polygon(50% 0%, 100% 0, 100% 61%, 30% 86%, 0 52%, 0 0); */
-
-    }
-    
-    .before-breadcrumb {
-        opacity: 0.91;
-        position: relative;
-        top: 1%;
-        background-color: rgba(54, 58, 64, 0.3);
-        background-image: url('/api/docs/background/UIBkAT.jpg');
-        background-repeat: no-repeat;
-        filter: brightness(150%);
-        -webkit-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
-        -moz-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
-        box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
-    }
-    .breadcrumb{
-        max-width: 70%;
-        margin:0 auto;
-        background-image: url('/api/docs/background/UIBkAT.jpg');
-        background-repeat: no-repeat;
-        
-        
-    }
-    .container{
-        /* margin: 0;
-        padding: 0; */
-        height: 90%;
-    }
-    .row:first-child > .col-md-12{
-        display: flex;
-    }
-    .row{
-        height: 100%;
-        position: relative;
-        top: 5%;
-    }
-    .btn-submit{
-        border-radius: 50px;
-        min-width: 160px;
-    }
-    .footer-register{
-        height: 10%;
-    }
-    
-    </style>
+    <title>Sign Up | NoobStore</title>
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
 </head>
 
 <body id="top">
@@ -105,118 +36,160 @@
         </div>
     </div>
     <!-- <header class="top"> -->
-        
-        <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
-            <div class="container">
-              <a href="#" class="navbar-brand">
+    <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a href="./" class="navbar-brand">
                 <!-- Logo Image -->
-                <img src="https://res.cloudinary.com/mhmd/image/upload/v1557368579/logo_iqjuay.png" width="45" alt="" class="d-inline-block align-middle mr-2">
+                <img src="./favicon/logo.png" width="100" height="50" alt="" class="d-inline-block align-middle mr-2">
                 <!-- Logo Text -->
-                <span class="text-uppercase font-weight-bold">Company</span>
-              </a>
-          
-              <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
-          
-              <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                    <a href="./" class="nav-link">Home         
-                        <span class="sr-only">(current)</span>
-                    </a>
-                  </li>
-                  
-                  <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li>
-                  <li class="nav-item"><a href="#" class="nav-link">Group Buy</a></li>
-                  <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
-                  <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                <!-- <span class="text-uppercase font-weight-bold">Company</span> -->
+            </a>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="./" class="nav-link">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Group Buy</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
                 </ul>
-              </div>
             </div>
-        </nav>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <!-- <li class="nav-item">
+                        <a href="./" class="nav-link">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li> -->
+                </ul> 
+            </div>
+        </div>
+    </nav>
     <!-- </header> -->
     <nav class="before-breadcrumb" aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item"><a href="#">Library</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Data</li>
+            <li class="breadcrumb-item"><a href="./">Home</a></li>
+            <!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
+            <li class="breadcrumb-item active" aria-current="page">Login & Register</li>
         </ol>
     </nav>
-    <div class="container">
+    <section class="seperator-wrapper">
+        <div class="seperator gradient">
+        </div>
+    </section>
+    <div class="main-container">
         <div class="row">
-            <div style="height: 100%;padding-top: 0%;" class="col-md-6">
-                <form style="background-color: #ffffff;padding: 5%;" id='form-register' action='./account' method='POST' >
+            <div class="col-md-5 login-form">
+                <div class="title">
+                    <span>Login</span>
+                </div>
+                <div class="authentication-button">
+                    <a class="facebook-button btn-outline" href="#">
+                        <div class="btn-facebook-cover text-center">
+                                <span class="name">Login with Facebook</span>
+                        </div>
+                    </a>
+                    <br>
+                    <a class="google-button" href="#">
+                        <div class="btn-google-cover text-center">
+                            <span class="name">Login with Google</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="separator">Or</div>
+                <form id="form-login" class="form-not-mg" autocomplete="on" method="post">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input autocomplete="on" type="email" name="email" class="form-control" id="email" value="" aria-describedby="emailHelp" placeholder="Email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input autocomplete="on" type="password" name="password" class="form-control" id="password" value="" placeholder="Password">
+                    </div>
+                   
+                    <button type="submit" id="btn-login" class="btn btn-primary btn-login">Login</button>
+
+                </form>
+            </div>
+            <div class="col-md-6 reg-form">
+                <div class="title">
+                    <span>Register</span>
+                </div>
+                <form class="form-not-mg" id='form-register' method='POST'>
                     <div class='form-group row'>
                         <div class='col-md-12'>
                             <div class='col-md-6'>
                                 <label for='fname'>First name</label>
-                                <input required type='text' name='fname' class='form-control' id='fnam' aria-describedbsy='fnamelHelp' placeholder='Enter first name'>
-                            </div>  
+                                <input required type='text' name='fname' class='form-control' id='fnam' aria-describedbsy='fnamelHelp' placeholder='First name'>
+                            </div>
                             <div class='col-md-6'>
                                 <label for='lname'>Last name</label>
-                                <input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' placeholder='Enter last name'>
+                                <input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' placeholder='Last name'>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                     <div class='form-group row'>
                         <div class='col-md-12'>
                             <div class='form-group col-md-12'>
-                                <label for='email'>Email</label>
-                                <input required type='email' name='email' class='form-control' id='email' placeholder='Enter email'>
+                                <label for='reg_email'>Email</label>
+                                <input required type='email' name='email' class='form-control' id='reg_email' placeholder='Email'>
                                 <small id='Help' class='form-text text-muted'>
                                     Ideally, you should register your email with paypal email
                                 </small>
-                            </div>  
+                            </div>
                             <div class='form-group col-md-12'>
-                                <label 
-                                for='password'>Password</label>
-                                <input required type='password' name='password' class='form-control' id='password' placeholder='Password'>
+                                <label for='reg_password'>Password</label>
+                                <input required type='password' name='password' class='form-control' id='reg_password' placeholder='Password'>
+                            </div>
+                            <div class='form-group col-md-12'>
+                                <label for='re_password'>Confirm Password</label>
+                                <input required type='password' name='re_password' class='form-control' id='re_password' placeholder='Re-Password'>
                             </div>
                         </div>
                     </div>
-                   
-                    <div class=' row'>                     
-                        <div class='form-group col-md-12'>              
+                    <div class=' row'>
+                        <div class='form-group col-md-12'>
                             <div class='col-md-12 g-recaptcha' data-sitekey='6Lcti9UUAAAAADIUivaJtXit0OKia78-EQIbnDkc'>
-                            </div>            
-                        </div>          
-                    </div> 
-                           
-                    <div class=" col-md-12">
-                        <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Register</button>
-                        <!-- <button type='submit' id='btn-login' class='btn btn-primary btn-submit'>Register</button> -->
+                            </div>
+                        </div>
                     </div>
-                
-                <!-- <div class="center">
-                    <a class='btn-loginform' href='#'>Click here to login</a>
-                </div> -->
-            </form>
+                    <div class=" col-md-12">
+                        <button type='submit' id='btn-reg' class='btn btn-primary btn-register'>Register</button>
+                    </div>
+                </form>
+            </div>
             
-            </div>
-            <div style="background-color: transparent;height: 100%;" class="col-md-6">
-                
-            </div>
         </div>
     </div>
-    <div class="footer-register center">
-    </div>
-        
-    
+    <footer>
+            <div class="col-full ss-copyright">
+                <span>© Copyright Noobteam 2017</span>
+                <span>Design by <a href="https://www.facebook.com/noobassembly">Noobteam</a></span>
+            </div>
+    </footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="/api/js/pjs/main.js"></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src='/api/js/pjs/product/registerPage/js.ejs'></script>
 <script>
-    $('#datetimepicker').datetimepicker('show');
-</script>
-<script>
-    $(document).ready(function(){
-        $('#email').on('keypress', function(e) {
-            if (e.which == 32){
-                return false;
-            }
-        });
-    })
-</script>
-</html>
+$(document).ready(function() {
+    $('#email').on('keypress', function(e) {
+        if (e.which == 32) {
+            return false;
+        }
+    });
 
+    
+})
+</script>
+
+</html>

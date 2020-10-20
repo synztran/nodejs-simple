@@ -20,34 +20,52 @@
             <table id="data-table-list-account" class="table table-hover" id="dataTables1">
                 <thead>
                     <tr >
-                        <th> picture</th>
                         <th> id</th>
                         <th> email</th>
+                        <th> paypal </th>
+                        <th> name </th>
                         <th> created</th>
-                        <!-- <th> password</th> -->
+                        <th> active?</th>
                         <th></th>
                     </tr>
                 </thead>
                 <!-- <tbody></tbody> -->
                 <% listAccount.forEach(function(item){ %>
                 <tr class="align-middle">
-                    <td style="width: 120px; height: 120px;">
-                        <a id="single_image" href="<%= item.picture.path %>" data-fancybox="html5-video"><img style="max-width: 100%;width: 120px;height: 120px; object-fit: cover;" src="<%= item.picture.path %>"></a>
-                        
-                    </td>
                     <td>
                         <%= item._id %>
                     </td>
                     <td>
                         <%= item.email %>
                     </td>
+                    <td> 
+                        <%= item.paypal %>
+                    </td>
+                    <td>
+                        <%= item.fname %> - <%= item.lname %>
+                    </td>
                     <td>
                         <%= (item.created).toLocaleString() %>
                     </td>
-                    <!-- <td>
-                        <%= item.password %>
-                    </td> -->
-                    <td><a href="#" class="btn btn-danger btn-delete" data-id='<%=item._id %>'><div><i class="fas fa-trash"></i></div></a>&nbsp;<a href="account/edit/<%=item._id%>" class="btn btn-primary btn-edit" data-id='<%=item._id %>'><div><i class="fas fa-edit"></i></div></a></td>
+                    <td>
+                        <% if(item.active == true){%>
+                            <i style="color: #28a745" class="fas fa-check fa-2x"> Active</i>
+                        <% }else{%>
+                            <i style="color: #dc3545" class="fas fa-exclamation-circle fa-2x">Non Active</i> 
+                        <%}%>
+                    </td>
+                    <td>
+                        <!-- <a href="#" class="btn btn-danger btn-delete" data-id='<%=item._id %>'>
+                            <div>
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </a>&nbsp; -->
+                        <a href="account/edit/<%=item._id%>" class="btn btn-primary btn-edit" data-id='<%=item._id %>'>
+                            <div>
+                                <i class="fas fa-edit"></i>
+                            </div>
+                        </a>
+                    </td>
                     
                 </tr>
                 <%    }) %>
@@ -69,7 +87,8 @@ $(document).ready(function() {
                 null,
                 null,
                 null,
-                // null,
+                null,
+                null,
                 null,
             ],
             "language": {
@@ -77,8 +96,8 @@ $(document).ready(function() {
                 sSearch: ''
             },
             "columnDefs":[
-                {"targets": 0, "orderable": false},
-                {"targets": 4, "orderable": false},
+                // {"targets": 0, "orderable": false},
+                {"targets": 5, "orderable": false},
                
             ],
     });
