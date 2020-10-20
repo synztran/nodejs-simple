@@ -1672,8 +1672,8 @@ body.menu-is-open {
 }
 
 .header-logo img {
-  width: 155px;
-  height: 36px;
+  /*width: 155px;*/
+  height: 70px;
 }
 
 /* ------------------------------------------------------------------- 

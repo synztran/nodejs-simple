@@ -16,8 +16,8 @@
     color: #6b3792
 }
 .form-group input{
-    color: black;
-    -webkit-text-fill-color: black;
+    color: rgba(255,255,255,1);
+    -webkit-text-fill-color: rgba(255,255,255,1);
     transition: background-color 5000s ease-in-out 0s;
     margin:0;
     padding: 0;
@@ -93,6 +93,9 @@ input::-webkit-input-placeholder {
     box-shadow: unset !important;
     border-color: #000 !important;
     caret-color: black;
+}
+.form-not-mg{
+    margin: 0
 }
 
 /*.form-info .col-md-2{

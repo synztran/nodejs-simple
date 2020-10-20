@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+   
     // document.addEventListener('DOMContentLoaded', function() {
     //     new Zooming({
     //     }).listen('.img-zoomable')
@@ -58,6 +58,7 @@ $(document).ready(function() {
         swipeToSlide: true,
         infinite: false,
         adaptiveHeight: true,
+        draggable: false,
         //asNavFor: '.2nd-slick'
     });
     $('.2nd-slick').slick({
@@ -69,17 +70,17 @@ $(document).ready(function() {
       adaptiveHeight: true,
       focusOnSelect: true,
     });
-    
-    /*$('#lightSlider').lightSlider({
-        autoWidth: false,
-        gallery: true,
-        item: 1,
-        loop: true,
-        adaptiveHeight: true,
-        slideMargin: 0,
-        thumbItem: 9,
+     
+    <!--$('#lightSlider').lightSlider({
+     //   autoWidth: false,
+    //    gallery: true,
+    //    item: 1,
+    //    loop: true,
+    //    adaptiveHeight: true,
+    //    slideMargin: 0,
+     //   thumbItem: 9,
         
-    });*/
+    //});-->
 
 
 
@@ -87,21 +88,13 @@ $(document).ready(function() {
     var select = $("#c-profile");
     var selectQuantity = $("#c-profile > option")
     $("#c-profile").change( function(e) {
-       /* for(var i=0;i<selectQuantity.length;i++){
-            //var lightIndex = $('#lightSlider').find('li.lslide').data('id')
-            console.log($(this).val());
-            
-        }*/
+       
    
         goTo = select.val();
-        //$carousel.goToSlide(goTo);
-        //$carousel.goto(goTo)
-        //var l = $('li.lslide[data-id="+ goTo +"]')
-        //console.log(l)
-        //$('li.clone').css('display', 'none');
+       
 
             $carousel.slick( "goTo", goTo );
-      });
+      }); 
 
     fetch('/api/product/getcid/' + res).then(function(response) {
         if (!response.ok) {
@@ -112,15 +105,7 @@ $(document).ready(function() {
         console.log(responseAsJson);
         var product = responseAsJson;
 
-        // for (var key in product) {
-        //     console.log(product[0]);
-        //     $('#c-profile').val(product[0].product_name)
-        //     $('#c-profile').trigger('change');
-        // }
-
-        // if()
-
-        $('#c-profile').on('change', function() {
+        $('#c-profile').change(function() {
             // $('.product-details-price span').remove();
             for (var i in product) {
                 if (this.value == product[i].product_id) {

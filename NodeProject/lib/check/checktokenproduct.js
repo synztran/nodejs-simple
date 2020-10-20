@@ -19,14 +19,14 @@ const TokenUserCheckMiddleware = async (req, res, next) => {
         // return res.status(401).json({
         //   message: 'Unauthorized access.',
         // });
-        return res.redirect('/');
+        return res.redirect('/register');
       }
     } else {
       // Không tìm thấy token trong request
     //  return  res.status(403).send({
     //     message: 'No token provided.',
     //   });
-        return res.redirect('/');
+        return res.redirect('/register');
       
 
 
