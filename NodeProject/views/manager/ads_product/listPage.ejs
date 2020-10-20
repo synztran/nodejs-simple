@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Page | Ads Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/style.css">
+</head>
+
+<body>
+    <h1 class="text-middle">Ads Product List</h1>
+
+    <!-- <img src="1435.jpg"> -->
+    <% if(listAdsProduct!= null) { %>
+    <div class="box-body table-responsive no-padding tb-responsive-listaccount">
+        <div id="tableContainer tb-container-listaccount">
+            <table id="data-table-list-adsproduct" class="table table-hover" id="dataTables1">
+                <thead>
+                    <tr>
+                        <th> picture</th>
+                        <th> id</th>
+                        <th> name</th>
+                        <th> author</th>
+                        <th> date add</th>
+                        <th> status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <!-- <tbody></tbody> -->
+                <% listAdsProduct.forEach(function(item){ %>
+                <tr class="align-middle">
+                    <td style="width: 120px; height: 120px;">
+                        <a id="single_image" href="/api/<%= item.pic_product.path %>" data-fancybox="html5-video"><img style="max-width: 100%;width: 120px;height: 120px; object-fit: cover;" src="/api/<%= item.pic_product.path %>"></a>
+                    </td>
+                    <td>
+                        <%= item._id %>
+                    </td>
+                    <td>
+                        <%= item.product_name %>
+                    </td>
+                    <td>
+                        <%= item.author_name %>
+                    </td>
+                    <td>
+                        <% if (item.date_add == null){ %>
+
+                        <% }else{ %>
+                            <%= (item.date_add).toLocaleDateString() %>    
+                        <%}%>
+                    </td>
+                    <td> 
+                        <% if(item.status == 1){ %>
+                             <i style="color: #28a745" class="fas fa-check fa-2x"> Active</i>
+                        <%}else{%>
+                            <i style="color: #dc3545" class="fas fa-exclamation-circle fa-2x">Non Active</i> 
+                            
+                        <% }%>
+                        
+                    </td>
+                    
+                    <td><a href="#" class="btn btn-danger btn-delete" data-id='<%=item._id %>'>
+                            <div><i class="fas fa-trash"></i></div>
+                        </a>&nbsp;<a href="/api/adsproduct/edit/<%=item._id%>" class="btn btn-primary btn-edit" data-id='<%=item._id %>'>
+                            <div><i class="fas fa-edit"></i></div>
+                        </a></td>
+                </tr>
+                <%    }) %>
+            </table>
+        </div>
+    </div>
+    <% } %>
+    <div style="text-align: center;">
+        <button><a href="adsproduct/add">ADD</a></button>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/tabletools/2.2.4/js/dataTables.tableTools.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.print.min.js"></script> -->
+
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- <script src="js/listAccount.js"></script> -->
+<script type="text/javascript">
+$(document).ready(function() {
+
+
+
+    $('#data-table-list-adsproduct').dataTable({
+        dom: 'Bfrtip',
+        aoColumns: [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+        ],
+        language: {
+            searchPlaceholder: 'Search...',
+            sSearch: ''
+        },
+        columnDefs: [
+            // { "targets": 0, "orderable": false },
+            // { "targets": 11, "orderable": false },
+
+        ],
+        buttons: ['copy','csv','excel','pdf','print']
+       
+
+    });
+
+
+   
+    $('.btn-delete').on('click', function(e) {
+        e.preventDefault();
+        const id = $(this).attr('data-id');
+        console.log(id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            // backdrop: `
+            //             rgba(0,0,123,0.4)
+            //             url("/api/docs/background/UIBkAT.jpg")
+            //             left top
+            //             no-repeat
+            //             `,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: ' adsproduct/delete/' + id,
+                    success: function(res) {
+                        // alert('deleting');
+                        location.reload();
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                })
+
+            }
+        })
+
+    });
+    $("a#single_image").fancybox({
+        iframe: {
+            preload: false,
+
+        },
+
+    });
+
+
+});
+</script>
+
+</html>

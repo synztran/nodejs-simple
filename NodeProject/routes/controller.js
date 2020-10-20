@@ -29,8 +29,18 @@ const storage = multer.diskStorage({
         cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname)
     }
 });
+
+const adsProductStorage = multer.diskStorage({
+    destination: function(req, file,cb){
+        cb(null, 'docs/pimg/portfolio/gallery/')
+    },
+    filename: function(req, file,cb){
+        cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname)
+    }
+})
 var mongoose = require('mongoose');
 var db = mongoose.connection;
+
 const fileFilter = (req, file, cb) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
         cb(null, false);
@@ -47,6 +57,15 @@ const upload = multer({
     // fileFilter: fileFilter
 });
 
+const uploadAdsProduct = multer({
+    storage: adsProductStorage,
+    limits:{
+        fileSize: 1024 * 1024 * 1000
+    }
+})
+
+
+
 
 
 
@@ -57,6 +76,8 @@ var AdmAccount = require('./../db/model/accadmin');
 var Product = require('./../db/model/product');
 var Couter = require('./../db/model/couter')
 var Category = require('./../db/model/category');
+var AdsProduct = require('./../db/model/adsproduct');
+var PageContent = require('./../db/model/mainpage_content');
 var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
@@ -99,8 +120,9 @@ router.get("/signup", function(req, res) {
 
 router.get('/', TokenCheckMiddleware, function(req, res) {
     console.log(req.session.Admin);
+    console.log(req.decoded)
     if (!req.session.Admin) {
-        res.redirect('api/signin')
+        res.redirect('/api/signin')
     } else {
         var admin = req.session.Admin
         res.render('mainPage', {
@@ -154,7 +176,7 @@ router.get('/list',TokenCheckMiddleware, function(req, res) {
 
     // });
     try{
-        AdmAccount.find({}, function(err, docs) {
+        Account.find({}, function(err, docs) {
             console.log(docs);
             res.render('listAccount', {
                 "listAccount": docs
@@ -168,16 +190,6 @@ router.get('/list',TokenCheckMiddleware, function(req, res) {
     
   
     
-
-});
-
-
-router.get('/aaaz', function(req, res) {
-    Couter.find({}, function(err, docs) {
-        console.log(docs);
-
-    });
-
 
 });
 
@@ -231,8 +243,6 @@ router.get("/person/:id", async (req, res) => {
 /*------------------For mobile-------------------*/
 router.put("/account/edit/:id", async (req, res) => {
     try {
-        console.log(req.params);
-        console.log(req.body);
         var account = await Account.findById(req.params
             .id).exec();
         account.set(req.body);
@@ -240,7 +250,6 @@ router.put("/account/edit/:id", async (req, res) => {
         res.send(result);
 
     } catch (err) {
-        console.log(err);
         res.status(200).send(err);
     }
 });
@@ -248,7 +257,7 @@ router.put("/account/edit/:id", async (req, res) => {
 // load db on form
 router.get("/account/edit/:id", async (req, res) => {
     try {
-        AdmAccount.findById(req.params
+        Account.findById(req.params
             .id,
             function(err, account) {
                 res.render('editAccount', {
@@ -293,6 +302,7 @@ router.post("/account/edit/:id", upload.single('picture'), async (req, res) => {
 });
 
 router.post("/login", async (req, res, next) => {
+    // console.log(res)
     try {
         var account = await AdmAccount.findOne({ email: req.body.email }).exec();
         var active = await AdmAccount.findOne({ $and: [{ email: req.body.email }, { active: true }] });
@@ -481,9 +491,9 @@ router.post("/created", async (req, res) => {
 
 
 
-router.get('/product', async (req, res) => {
+router.get('/product',TokenCheckMiddleware, async (req, res) => {
     // res.render('manager/categoryPage')
-
+    console.log(res)
     Product.find({}, function(err, docs) {
         Category.find({}, function(err, docs2){
 
@@ -984,10 +994,7 @@ router.delete('/product/delete/:id', async (req, res) => {
 });
 
 router.get('/category', async (req, res) => {
-    // res.render('manager/categoryPage')
-
     Category.find({}, function(err, docs) {
-
         res.render('manager/category/categoryPage', {
             "listCategory": docs
         });
@@ -1026,13 +1033,7 @@ router.get('/category/add', function(req, res){
 
 router.post('/category/add',upload.single('picture'), async(req, res)=>{
     console.log((req.body));
-    
-
-    // console.log(res);
-    // console.log(req.body)
-    // console.log(req.file);
     try {
-        
         var check = await Category.find({ category_id: req.body.catid }, async (err, docs) => {
             if (docs.length) {
                 res.status(400).json({
@@ -1466,5 +1467,182 @@ router.delete('/category/delete/:id', async (req, res) => {
         res.status(500).send(err);
     }
 });
+
+// Get list Ads Product
+router.get('/adsproduct', async(req, res)=>{
+    AdsProduct.find({}, function(err, docs) {
+        res.render('manager/ads_product/listPage', {
+            "listAdsProduct": docs
+        });
+    });
+})
+router.get('/adsproduct/add', async(req, res)=>{
+    res.render('manager/ads_product/addPage', {
+        title: "Ads Product - Add New"
+    })
+})
+
+router.post('/adsproduct/add', uploadAdsProduct.single('picture'), async(req, res)=>{
+    try{
+        db.collection('adsproducts').insertOne({
+            product_name: req.body.adsproduct_name,
+            author_name: req.body.adsproduct_author,
+            status: req.body.adsproduct_status,
+            specs: req.body.adsproduct_specs,
+            pic_product: {
+                path: req.file.path,
+                size: req.file.size
+            },
+            date_add: new Date()
+            
+        })
+
+        setTimeout(function(){
+            res.redirect('/api/adsproduct');
+        }, 1500)
+
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
+
+router.get('/adsproduct/edit/:id', function(req, res){
+    AdsProduct.findById(req.params.id,function(err, docs){
+        res.render('manager/ads_product/editPage', {
+            title: "Ads Product - Edit #" + req.params.id,
+            'data': docs
+        })
+    })
+})
+
+router.post('/adsproduct/edit/:id', uploadAdsProduct.single('picture'), async(req, res)=>{
+    console.log(req.body)
+    try{
+        var checkAdsProduct = await AdsProduct.findById(req.params
+            .id).exec();
+        if(req.file){
+            checkAdsProduct.set({
+                product_name: req.body.adsproduct_name,
+                author_name: req.body.adsproduct_author,
+                specs: req.body.adsproduct_specs,
+                status: req.body.adsproduct_status,
+                pic_product:{
+                    path: req.file.path,
+                    size: req.file.size,
+                }
+            })
+        }else{
+            checkAdsProduct.set({
+                product_name: req.body.adsproduct_name,
+                author_name: req.body.adsproduct_author,
+                status: req.body.adsproduct_status,
+                specs: req.body.adsproduct_specs,
+
+            })
+        }
+        
+        var result = await checkAdsProduct.save();
+        return res.redirect('/api/adsproduct/');
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
+
+router.get('/adsproduct/get/:id', async(req, res) =>{
+    
+    try{
+        var checkAdsProduct = await AdsProduct.findById(req.params.id).exec();
+        res.send(checkAdsProduct).status(200);
+    }catch(err){
+        res.send(err).status(404)
+    }
+})
+
+router.delete('/adsproduct/delete/:id', async (req, res) => {
+    console.log(req.params.id)
+    try {
+        var checkAdsProduct = await AdsProduct.findById(req.params.id).exec();
+        console.log(checkAdsProduct)
+
+        // if(checkAdsProduct)
+
+        var deleteAdspProduct = await AdsProduct.deleteOne({ _id: req.params.id }).exec();
+        res.send({ deleteAdspProduct });
+       
+
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+// Content Page
+router.get('/content', (req, res)=>{
+    PageContent.find({}, function(err, docs){
+        res.render('manager/content/listPage', {
+            'listContent': docs,
+            title: 'Content - List'
+        })
+    })
+})
+router.get('/content/add', (req, res)=>{
+    res.render('manager/content/addPage', {
+        title: 'Content - Add New'
+    })
+})
+router.post('/content/add', (req, res)=>{
+    console.log(req.body)
+    try{
+        db.collection('mainpage_contents').insertOne({
+            content_type: req.body.content_type,
+            status: req.body.content_status,
+            specs: req.body.content_specs,
+            date_add: new Date()
+        })
+        setTimeout(function(){
+            res.redirect('/api/content');
+        }, 1500)
+
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
+router.get('/content/edit/:id', (req,res)=>{
+    try{
+        PageContent.findById(req.params.id, function(err,docs){
+            res.render('manager/content/editPage', {
+                title: 'Content - Edit #' + req.params.id,
+                'data': docs
+            })
+        })
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
+router.get('/content/get/:id', async(req, res) =>{
+    
+    try{
+        var checkContent = await PageContent.findById(req.params.id).exec();
+        res.send(checkContent).status(200);
+    }catch(err){
+        res.send(err).status(404)
+    }
+})
+router.post('/content/edit/:id', async(req, res)=>{
+    console.log(req.body)
+    try{
+        var checkContent = await PageContent.findById(req.params
+            .id).exec();
+        checkContent.set({
+            content_type: req.body.content_type,
+            status: req.body.content_status,
+            specs: req.body.content_specs,
+        })
+        
+        var result = await checkContent.save();
+        return res.redirect('/api/content/');
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
 
 module.exports = router;

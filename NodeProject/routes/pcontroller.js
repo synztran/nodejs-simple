@@ -55,6 +55,8 @@ var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
 var Tracking = require('./../db/model/tracking');
 var Product  = require('./../db/model/product');
+var AdsProduct = require('./../db/model/adsproduct');
+var PageContent = require('./../db/model/mainpage_content');
 var Category = require('./../db/model/category')
 var Couter = require('./../db/model/couter')
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
@@ -69,7 +71,7 @@ app.use(session({
     secret: config.secret, 
     cookie: { 
 		secure: false,
-		maxAge: 180000
+		maxAge: 1800000
 	}
 }));
 // app.use(livereload())
@@ -182,16 +184,25 @@ router.get("/", function(req, res) {
     //         user: null
     //     })
     // }
-    if(req.session.User == null){
-        res.render('index', {
-            user: null
+    AdsProduct.find({}, function(err, docs){
+        PageContent.find({}, function(ContentErr, ContentDocs){
+            if(req.session.User == null){
+            res.render('index', {
+                user: null,
+                listAdsProduct: docs,
+                listContent: ContentDocs
+            })
+            }else{
+                // const uemail = req.cookies.id['email'];
+                res.render('index', {
+                    user: req.session.User['email'],
+                    listAdsProduct: docs,
+                    listContent: ContentDocs
+                })
+            }
         })
-    }else{
-        // const uemail = req.cookies.id['email'];
-        res.render('index', {
-            user: req.session.User['email']
-        })
-    }
+    }).limit(5)
+    
 
     // if(req.decoded == null){
     //     res.render('index', {
@@ -318,22 +329,44 @@ router.post('/captcha', async(req, res)=>{
 });
 
 router.post("/account", async (req, res, next) => {
-
-
-    // console.log(req);
-    // console.log(req.body.fileuploader-list-picture);
-    console.log(req.body);
     try {
         var check = await Account.find({ email: req.body.email }, async (err, docs) => {
-            console.log(check);
-            if (docs.length) {
-                res.status(400).json({
+
+            if(req.body.email == config.admin || req.body.email == config.mod){
+               return res.status(400).send({
                     code: 400,
-                    message: "email already exists"
+                    message: "email already exits!!"
+                })
+            }
+            // if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
+            //         return res.status(400).sned({
+            //             code: 400,
+            //             message: "Please select captcha first"
+            //         });
+            // }
+
+            if (docs.length) {
+                // res.status(400).json({
+                //     code: 400,
+                //     message: "email already exists"
+                // })
+                return res.status(400).send({
+                    code: 400,
+                    message: "email already exits!!"
                 })
             } else {
+                // if(req.body.password !== req.body.re_password){
+                //     return res.status(400).send({
+                //         code: 400,
+                //         message: "Confirm Password is not math with Password"
+                //     })
+                // }
+
                 // if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
-                //     return res.json({"responseError": "Please select captcha first"});
+                //     return res.status(400).sned({
+                //         code: 400,
+                //         message: "Please select captcha first"
+                //     });
                 // }
 
                 // const secretKey = config.secretKey;
@@ -357,7 +390,7 @@ router.post("/account", async (req, res, next) => {
                     active: false
                 });
                 var result = account.save();
-
+                console.log(account)
 
                 const user = {
                     "email": (req.body.email),
@@ -400,11 +433,11 @@ router.post("/account", async (req, res, next) => {
                 });
                 var link = "http://"+req.get('host')+"/verify?id="+response.token
                 var mainOptions = {
-                    from: 'NoobAssembly',
+                    from: 'NoobStore',
                     to: (req.body.email),
-                    subject: '[TheGBKeeb] Please confirm your email address',
+                    subject: '[NoobStore] Please confirm your email address',
                     text: 'You received mess from ' + (req.body.email),
-                    html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Hey ' + req.body.lname + ' ' + req.body.fname + ' !</b></p><p>Thanks for joining TheGBKeeb.<br>To finish registration, please click the button below to verify your account.</p><p><div><a style="background: #007bff;padding: 9px;width: 200px;color: #fff;text-decoration: none;display: inline-block;font-weight: bold;text-align: center;letter-spacing: 0.5px;border-radius: 4px;" href='+link+'>Verify email address</a></div><br><p>Once verified, you can join and get notification from TheGBKeeb. If you have any problems, please contact us: noobassembly@gmail.com</p></p>'
+                    html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Hey ' + req.body.lname + ' ' + req.body.fname + ' !</b></p><p>Thanks for joining NoobStore.<br>To finish registration, please click the button below to verify your account.</p><p><div><a style="background: #007bff;padding: 9px;width: 200px;color: #fff;text-decoration: none;display: inline-block;font-weight: bold;text-align: center;letter-spacing: 0.5px;border-radius: 4px;" href='+link+'>Verify email address</a></div><br><p>Once verified, you can join and get notification from NoobStore. If you have any problems, please contact us: noobassembly@gmail.com</p></p>'
                 }
 
                 transporter.sendMail(mainOptions, function(err, info) {
@@ -588,14 +621,14 @@ router.post('/account/addaddress', TokenUserCheckMiddleware, async(req, res)=>{
                     email: (req.body.email).toLowerCase(),
                     phone_number: req.body.pnumber,
                     address: req.body.address,
-                    city: req.body.country,
+                    country: req.body.country,
                     town_city: req.body.towncity,
                     zip_code: req.body.postcode
                 }
             }
         })
         // res.status(200).status('ok')
-        res.redirect('/address')
+        res.redirect('/account/address')
        
     }catch(err){
         res.status(500).send(err);

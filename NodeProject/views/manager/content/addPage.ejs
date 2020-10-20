@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Content | Add New</title>
+    <!-- Font -->
+    <link rel="stylesheet" type="text/css" href="/api/js/fileuploader/font/font-fileuploader.css">
+    <!--  -->
+    <!-- CSS -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="/api/css/pcss/keysetcolorcode.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/api/js/fileuploader/jquery.fileuploader.min.css"> -->
+      <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.css" rel="stylesheet"> -->
+    <% include ./../../tips/cssPackage %>
+    <!--  -->
+</head>
+<style type="text/css">
+.for-keeb,
+.for-keyset {
+    display: none;
+}
+
+.select2-container {
+    width: 100% !important
+}
+
+.selection>.select2-selection--single {
+    height: calc(1.5em + .75rem + 2px);
+}
+
+.selection>.select2-selection--multiple {
+    height: calc(2.25em + .75rem + 2px);
+}
+
+.selection>.select2-selection {
+    height: auto;
+}
+
+.selection>.select2-selection>.select2-selection__rendered {
+    line-height: 36px
+}
+
+html {
+    overflow-x: hidden;
+}
+.dropdown-toggle::after{
+    display: none!important
+}
+</style>
+
+<body>
+    <% include ./../../header%>
+    <h1 style="text-align: center;">
+        <%= title %>
+    </h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
+            </div>
+            <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
+            <div class="col-md-6">
+                <!-- <p class="pull-right visible-xs">
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+                </p> -->
+                <!-- enctype="multipart/form-data" -->
+              
+                
+                <form action='/api/content/add' method="post" enctype="application/x-www-form-urlencoded">
+                <fieldset>
+                    <legend>Build your own form!</legend>
+                    <!-- <div class="form-group">
+                        <label for="email">GB status:</label>
+                        <select class="form-control" name="status">
+                            <option value="1">IC</option>
+                            <option value="2">Live</option>
+                            <option value="0">End</option>
+                        </select>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="email">Content Type:</label>
+                        <select class="form-control" id="content_type" name="content_type">
+                            <option value="1">Explain & Consultation</option>
+                            <option value="2">Assembled</option>
+                            <option value="3">Lube Service</option>
+                            <option value="4">Support</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Status:</label>
+                        <select class="form-control" id="content_status" name="content_status">
+                            <option value="1">Active</option>
+                            <option value="0">Non-Active</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="adsproduct_specs" class="form-control-label">Specs:</label>
+                        <textarea id="content_specs" name="content_specs" type="text" class="form-control" placeholder="Content"></textarea>
+                    </div>
+                    <br>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="footer" style="text-align: center;">
+        <% include ./../../footer%>
+    </div>
+</body>
+
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="/api/js/datepicker/dist/datepicker.js"></script>
+<script src="/api/js/fileuploader/jquery.fileuploader.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> -->
+<% include ./../../tips/jsPackage %>
+<script type="text/javascript">
+     
+$(document).ready(function() {
+    // window.dataLayer = window.dataLayer || [];
+    // window.dataStorage = window.dataStorage || {};
+    // $('input#fileupp').fileuploader({
+    //     limit: 1,
+    //     maxSize: 1024 * 1024 * 5,
+    //     fileMaxSize: 1024 * 1024 * 5,
+    //     extensions: ['jpg', 'jpeg', 'png'],
+    //     addMore: false,
+
+    //     // inputNameBrackets: false
+    // });
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $('.btn-cancel').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = '/api/content';
+
+    })
+    $('.select2').select2();
+    $('#content_specs').summernote({
+        placeholder: 'Hello Bootstrap 4',
+        tabsize: 2,
+        height:300
+    });
+    $(".select2").val('');
+});
+</script>
+
+</html>

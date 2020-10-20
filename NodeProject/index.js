@@ -71,7 +71,7 @@ app.use(session({
     secret: config.secret, 
     cookie: { 
 		secure: false,
-		maxAge: 180000 
+		maxAge: 1800000 
 	},
 	// store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl : 260}),
 
@@ -97,6 +97,7 @@ app.use('/api/docs/trash', express.static('docs/trash'))
 app.use('/product/img', express.static('docs/pimg'))
 app.use('/product/css', express.static('lib/css/pcss'))
 app.use('/nodemodules', express.static('node_modules'))
+app.use('/favicon', express.static('favicon'))
 
 
 
@@ -153,6 +154,13 @@ io.on('connection', function(socket){
 		var found = socket.handshake.headers.cookie.split(';').filter(c => c.trim().split("=")[0] === 'x-email');
 		return found.length > 0 ? found[0].split("=")[1].replace(regex, '@') : null;
 	}
+
+	function GetSession(){
+		console.log(req.session.User)
+	}
+
+	
+
 
 	io.emit('this', {will: 'be received by everyone'});
 	socket.on('private message', function(from, msg){

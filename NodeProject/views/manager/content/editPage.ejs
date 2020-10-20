@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css"> -->
+    <% include ./../../tips/cssPackage%>
+</head>
+<style type="text/css">
+    .dropdown-toggle::after{
+    display: none!important
+}
+</style>
+<body>
+    <% include ./../../header%>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
+            </div>
+            <% if(data){ %>
+            <div class="col-md-6">
+                <h1 class="text-center">
+                    <%= title %>
+                </h1>
+                
+                <form action='/api/content/edit/<%=data._id%>' method="post" enctype="application/x-www-form-urlencoded">
+                    <div class="form-group">
+                        <label for="email">Content Type:</label>
+                        <select class="form-control" id="content_type" name="content_type">
+                            <option value="1">Explain & Consultation</option>
+                            <option value="2">Assembled</option>
+                            <option value="3">Lube Service</option>
+                            <option value="4">Support</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Status:</label>
+                        <select class="form-control" id="content_status" name="content_status">
+                            <option value="1">Active</option>
+                            <option value="0">De-Active</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="adsproduct_specs" class="form-control-label">Specs:</label>
+                        <textarea id="content_specs" name="content_specs" type="text" class="form-control" placeholder="Content"></textarea>
+                    </div>
+                    <br>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                </form>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    <div class="footer" style="text-align: center;">
+        <% include ./../../footer%>
+    </div>
+</body>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+<% include ./../../tips/jsPackage %>
+<script type="text/javascript">
+$(document).ready(function() {
+    var url = (window.location).href;
+    console.log(url)
+    var res = url.split("/").pop();
+    console.log(res)
+
+    $('.select2').select2();
+ 
+    $('#content_specs').summernote({
+        tabsize: 2,
+        height:300
+    });
+    $('.btn-cancel').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = '/api/content';
+
+    })
+
+
+    fetch('/api/content/get/' + res).then(function(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json();
+    }).then(function(responseAsJson) {
+        console.log(responseAsJson);
+        var content_details = responseAsJson;
+        var specs = content_details.specs;
+        var status = content_details.status;
+        var type = content_details.content_type
+        console.log(specs);
+        console.log(status);
+        console.log(type)
+        $('#content_specs').summernote('code', specs);
+        $('#content_status').val(status);
+        $('#content_type').val(type)
+    })
+});
+</script>
+
+</html>

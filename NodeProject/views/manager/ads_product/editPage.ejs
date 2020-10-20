@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Page | Ads Product Edit</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css"> -->
+    <% include ./../../tips/cssPackage%>
+</head>
+<style type="text/css">
+    .dropdown-toggle::after{
+    display: none!important
+}
+</style>
+<body>
+    <% include ./../../header%>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
+            </div>
+            <% if(data){ %>
+            <div class="col-md-6">
+                <h1 class="text-center">
+                    <%= title %>
+                </h1>
+                
+                <form action='/api/adsproduct/edit/<%=data._id%>' method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="adsproduct_name">Ads Product Name:</label>
+                        <input type="text" name="adsproduct_name" class="form-control" id="adsproduct_name" value="<%= data.product_name %> " aria-describedby="adsproduct_nameHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="adsproduct_author">Design by:</label>
+                        <input type="text" name="adsproduct_author" class="form-control" value="<%= data.author_name %>" id="adsproduct_author" aria-describedby="adsproduct_authorHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Status:</label>
+                        <select class="form-control" id="adsproduct_status" name="adsproduct_status">
+                            <option value="1">Active</option>
+                            <option value="0">De-Active</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="adsproduct_specs" class="form-control-label">Specs:</label>
+                        <textarea id="adsproduct_specs" name="adsproduct_specs" type="text" class="form-control" value="<%= data.specs %>" placeholder="Content"></textarea>
+                    </div>
+                    <div className="input-group mb-3">
+                        <div className="custom-file">
+                            <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+                            <label className="custom-file-label" htmlFor="inputGroupFile01">
+                            </label>
+                            <img src="/api/<%= data.pic_product.path %>" id="profile-img-tag" width="200px" />
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                </form>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    <div class="footer" style="text-align: center;">
+        <% include ./../../footer%>
+    </div>
+</body>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+<% include ./../../tips/jsPackage %>
+<script type="text/javascript">
+$(document).ready(function() {
+    var url = (window.location).href;
+    console.log(url)
+    var res = url.split("/").pop();
+    console.log(res)
+
+    $('.select2').select2();
+
+    $('#specs').summernote({
+        tabsize: 2,
+        height:300
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                console.log(e.target.result)
+                $('#profile-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#inputGroupFile01').change(function() {
+        readURL(this);
+    });
+
+
+    $('.btn-cancel').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = '/api/adsproduct';
+
+    })
+
+
+    fetch('/api/adsproduct/get/' + res).then(function(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json();
+    }).then(function(responseAsJson) {
+        console.log(responseAsJson);
+        var adsproduct_details = responseAsJson;
+        var pic_path = adsproduct_details.pic_product['path'];
+        var specs = adsproduct_details.specs;
+        var status = adsproduct_details.status;
+        console.log(status);
+        $('#adsproduct_specs').summernote('code', specs);
+        $('#adsproduct_status').val(status);
+        $('#profile-img-tag').attr('src', '/api/' + pic_path)
+    })
+});
+</script>
+
+</html>
