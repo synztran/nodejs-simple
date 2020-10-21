@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- ============= -->
+    <!-- <link rel="stylesheet" href="/api/css/pcss/base.css"> -->
+    <!-- <link rel="stylesheet" href="/api/css/pcss/vendor.css"> -->
+    <link rel="stylesheet" href="/api/css/pcss/main.css">
+    <link rel="stylesheet" href="/api/css/pcss/customize.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/effect/rgb-wrapper/style.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/pcss/service/style.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/template/registerTemplate.css">
+    <link rel="stylesheet" href="/api/css/effect/radiobtn-effect/radiobtn-loading-time.css">
+    <% include ./../tips/cssPackage%>
+    <!-- font-->
+    <!-- ============= -->
+    <!-- script
+    ================================================== -->
+    <script src="/api/js/pjs/modernizr.js"></script>
+    <title>Service | NoobStore</title>
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+</head>
+
+<body id="top">
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader" class="dots-jump">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- <header class="top"> -->
+    <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a href="./" class="navbar-brand">
+                <!-- Logo Image -->
+                <img src="./favicon/logo.png" width="100" height="50" alt="" class="d-inline-block align-middle mr-2">
+                <!-- Logo Text -->
+                <!-- <span class="text-uppercase font-weight-bold">Company</span> -->
+            </a>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="./" class="nav-link">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Group Buy</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <!-- <li class="nav-item">
+                        <a href="./" class="nav-link">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li> -->
+                </ul> 
+            </div>
+        </div>
+    </nav>
+    <!-- </header> -->
+    <nav class="before-breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Home</a></li>
+            <!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
+            <li class="breadcrumb-item active" aria-current="page">Service</li>
+        </ol>
+    </nav>
+    <section class="seperator-wrapper">
+        <div class="seperator gradient">
+        </div>
+    </section>
+    <div class="main-container">
+        <div class="col-md-12 text-center">
+                <h1 class="w-100">Service Form</h1>
+            </div>
+        <div class="row">
+            <div class="col-md-5 lube-service">
+                <div class="title">
+                    <span>Lube Service Form</span>
+                </div>
+                <div class="form-group">
+                        <label for="email">Quantity:</label>
+                        <input name="lube_quantity" type="tel" value='' id="lube_quantity" maxlength="4">
+                </div>
+                <div class="form-group">
+                        <label for="email">Switch Type:</label>
+                        <select class="form-control disabled_searchbar black-input" id="lube_switch_type" name="lube_switch_type">
+                            <option value="cherry">Cherry MX & clone</option>
+                            <option value="kailh">KailhBox</option>
+                            <option value="albs" disabled>Albs (not support)</option>
+                        </select>
+                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+                <div class="form-group">
+                        <label for="email">Name Switch:</label>
+                        <div class="fake_select">
+                            <select class="form-control enable_select2" id="lube_name_switch" name="
+                        lube_name_switch">
+                            </select>
+                        </div>
+                        <div class="cherry">
+                            <select class="form-control enable_select2" id="lube_cherry_switch" name="
+                        lube_name_switch">
+                            <% include ./../tips/service/selectCherryMX%>
+                        </select>
+                        </div>
+                        <div class="kailhBox">
+                            <select class="form-control enable_select2" id="lube_kailh_switch" name="
+                        lube_name_switch">
+                            <% include ./../tips/service/selectKailhbox%>
+                        </select>
+                        </div>
+                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+                <div class="form-group">
+                        <label for="email">Grease:</label>
+                        <select class="form-control enable_select2" id="lube_grease" name="lube_grease">
+                            <% include ./../tips/service/selectGrease %>
+                        </select>
+                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+                <div class="form-group">
+                    <div class="d-flex">
+                        <label for="email">Film:</label>
+                        <label for="film" class="btn-radio ml-auto">
+                            <input type="checkbox" id="film" value="add_film">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                        <span>Yes</span>
+                        </label>
+                    </div>
+                    <select class="form-control enable_select2" id="lube_film_color" name="lube_film_color">
+                        <% include ./../tips/service/selectFilm %>
+                        </select>
+                </div>
+                <div class="form-group">
+                        <div class="d-flex">
+                            <label for="">Spring:</label>
+                            <label for="spring" class="btn-radio ml-auto">
+                                <input type="checkbox" id="spring" value="add_spring">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                                    <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                    <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                            <span>Yes</span>
+                            </label>
+                        </div>
+                        <div class="fake_select">
+                            <select class="form-control enable_select2" id="lube_spring_force" name="
+                        lube_spring_force">
+                            </select>
+                        </div>
+                        <div class="cherry_spring">
+                            <select class="form-control enable_select2" id="lube_cherry_spring_force" name="lube_spring_force">
+                            <% include ./../tips/service/selectCherrySpring %>
+                        </select>
+                        </div>
+                        <div class="box_spring">
+                            <select class="form-control enable_select2" id="lube_box_spring_force" name="lube_spring_force">
+                            <% include ./../tips/service/selectKailhboxSpring %>
+                        </select>
+                        </div>
+                        
+                </div>
+                <div class="form-group d-flex m-0">
+                        <label for="">Film, Have not?:</label>
+                            <label for="have_film" class="btn-radio ml-auto">
+                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                            <input type="checkbox" id="have_film" name="have_film" value="have_film">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <span>Yes</span>
+                            </label>
+                </div>
+                <div class="form-group d-flex m-0">
+                        <label for="">Spring, Have not?:</label>
+                            <label for="have_spring" class="btn-radio ml-auto">
+                            <input type="checkbox" id="have_spring" name="have_spring" value="have_spring">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <span>Yes</span>
+                            </label>
+                </div>
+                <div class="form-group">
+                        <label for="lube_relsease_time">EST Time:</label>
+                        <select class="form-control disabled_searchbar" id="lube_relsease_time" name="lube_relsease_time">
+                            <% include ./../tips/service/selectESTime %>
+                        </select>
+                </div>
+                <div class="form-group">
+                        <label for="lube_relsease_time">Note:</label>
+                        <textarea id="specs" name="specs" type="text" class="form-control min-h-10rem" placeholder="Note..."></textarea>
+                </div>
+                <div class="separator">Order Details</div>
+                <div class="form-group d-flex">
+                        <!-- <label for="email">Price Accessories</label> -->
+                        <span class="text-details">
+                            <strong>Price Accessories:</strong>
+                        </span>
+                        <span class="t-right d-block">0 VND</span>
+                </div>
+                <div class="form-group d-flex">
+                        <!-- <label for="email">Price Service</label> -->
+                        <span class="text-details">
+                            <strong>Price Service:</strong>
+                        </span>
+                        <span class="t-right d-block">0 VND</span>
+                </div>
+                <hr>
+                <div class="form-group d-flex">
+                        <!-- <label for="email">Total</label> -->
+                        <span class="text-details font-b">
+                            <strong>Total:</strong>
+                        </span>
+                        <span class="t-right fw-500 d-block">0 VND</span>
+                </div>
+            </div>
+
+            <div class="col-md-5 assemble-service">
+                
+            </div>
+            
+        </div>
+    </div>
+    <footer>
+            <div class="col-full ss-copyright">
+                <span>© Copyright Noobteam 2017</span>
+                <span>Design by <a href="https://www.facebook.com/noobassembly">Noobteam</a></span>
+            </div>
+    </footer>
+</body>
+<% include ./../tips/jsPackage %>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
+<script src="/api/js/pjs/main.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+$(document).ready(function() {
+    var type_sw;
+    $('.disabled_searchbar').select2({
+        minimumResultsForSearch: Infinity
+    })
+    $('.enable_select2').select2();
+    $('#lube_quantity').on('input', function() {
+        this.value = this.value
+            .replace(/[^\d]/g, ''); // numbers and decimals only
+
+    });
+    // $('#specs').summernote({
+    //     placeholder: 'Your note...',
+    //     tabsize: 2,
+    //     height:300
+    // });
+    $('#email').on('keypress', function(e) {
+        if (e.which == 32) {
+            return false;
+        }
+    });
+
+    
+    $('.cherry').hide();
+    $('.kailhBox').hide();
+    $('.cherry_spring').hide();
+    $('.box_spring').hide()
+    $("#lube_switch_type").each(function() {
+       type_sw = $('#lube_switch_type').val();
+        if(type_sw == 'cherry'){
+            $('.kailhBox').hide();
+            $('.fake_select').hide();
+            $('.cherry').show()
+            $('.cherry_spring').show()
+        }
+    });
+    $(document).on('change', '#lube_switch_type', function(){
+        type_sw = $(this).val();
+        if(type_sw == 'cherry'){
+            $('.kailhBox').hide();
+            $('.fake_select').hide();
+            $('.box_spring').hide()
+            $('.cherry').show()
+            $('.cherry_spring').show();
+
+        }else if(type_sw == 'kailh'){
+            $('.cherry').hide();
+            $('.fake_select').hide();
+            $('.cherry_spring').hide();
+            $('.kailhBox').show()
+            $('.box_spring').show()
+        }else if(type_sw == 'albs'){
+
+        }else{
+
+        }
+    })
+
+    $(document).on('change', '.lube-service', function(e){
+        console.log($(this).val());
+    })
+    
+
+
+    
+})
+</script>
+
+</html>

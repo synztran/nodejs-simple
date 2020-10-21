@@ -638,21 +638,17 @@ $(document).ready(function() {
         }
         return response.json();
     }).then(function(responseAsJson) {
-        console.log(responseAsJson);
         var product = responseAsJson;
         var MaxInputs = 10; //maximum extra input boxes allowed
         var InputsWrapper = $(".joingbpage-list-product .joingbpage-select-product"); //Input boxes wrapper ID
-        console.log(InputsWrapper);
         var AddButton = $("#addMore"); //Add button ID
         var x = (InputsWrapper.length); //initlal text box count
-        console.log("x = " + x);
         var FieldCount = 1; //to keep track of text box added
         var temp = 0;
         var sum = 0;
         var pack = 0;
         var dynamic = "";
         for (var i in product) {
-            console.log(i);
             dynamic += '<option data-price="' + product[i].price + '"  value="' + product[i].product_id + '" data-name="'+ product[i].product_name+'"  data-image="' + product[i].pic_product.path + '" data-id="' + (i) + '">' + product[i].product_name + " " + "(" + product[i].price + "$)" + '</option>'
         }
         var listquantity = "";

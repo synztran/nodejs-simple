@@ -855,6 +855,15 @@ router.get('/proxygb/payment/:id',TokenUserCheckMiddleware , async(req, res)=>{
         res.status(200).send(err);
     }
 })
+// ==================================================================== //
+router.get('/service', (req, res)=>{
+    res.render('product/servicePage',{
+        title: 'Service Page'
+    })
+})
+
+
+
 // ---------------------------------------------------------------------------------------------
 
 router.get('*',function(req, res){

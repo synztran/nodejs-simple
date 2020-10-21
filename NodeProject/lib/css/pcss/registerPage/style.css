@@ -182,9 +182,9 @@
     }
     footer{
         padding:1rem 0;
-         background: #4568DC;
-  background: -webkit-linear-gradient(to right, #B06AB3, #4568DC);
-  background: linear-gradient(to right, #B06AB3, #4568DC);
+        background: #4568DC;
+        background: -webkit-linear-gradient(to right, #B06AB3, #4568DC);
+        background: linear-gradient(to right, #B06AB3, #4568DC);
     }
     .seperator-wrapper{
         position: relative;

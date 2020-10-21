@@ -1,0 +1,62 @@
+.main-container{
+    margin: 2% 15%;
+}
+.main-container > .row > .lube-service{
+    padding: 2%;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    margin-right: 5px;
+    height: 100%;
+}
+.title{
+      font-size: 24px;
+      color: white;
+      font-weight: bolder;
+      /*text-align: center;*/
+}
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color:white;
+    margin:1rem 0;
+    font-size: 18px
+}
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px dotted #6b3792;
+    border-width: 2px;
+}
+.separator::before {
+    margin-right: .25em;
+}
+.separator::after {
+    margin-left: .25em;
+}
+.text-details{
+    display: block;
+    flex: 2 0
+}
+.select2-search__field{
+    color: black!important;
+    -webkit-text-fill-color: black!important;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #5897fb;
+    color: black!important;
+}
+.select2-results__option[aria-selected]{
+    color: black!important;
+}
+.select2-search--dropdown{
+    padding: 0!important;
+    height: 60px !important
+
+}
+.min-h-10rem{
+    min-height: 10rem!important;
+}
+.form-group > label, .form-group > .d-flex > label{
+    color: wheat!important
+}
