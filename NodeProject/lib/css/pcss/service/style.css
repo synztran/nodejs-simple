@@ -1,5 +1,5 @@
 .main-container{
-    margin: 2% 15%;
+    margin: 2% 7%;
 }
 .main-container > .row > .lube-service{
     padding: 2%;
@@ -14,6 +14,12 @@
       font-weight: bolder;
       /*text-align: center;*/
 }
+.form-group > label > span::before{
+    content: " *";
+    width: 5px;
+    height: 5px;
+    color: red;
+}
 .separator {
     display: flex;
     align-items: center;
@@ -22,16 +28,23 @@
     margin:1rem 0;
     font-size: 18px
 }
-.separator::before, .separator::after {
+.note-check-box{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+}
+.separator::before, .separator::after, .note-check-box::before, .note-check-box::after {
     content: '';
     flex: 1;
     border-bottom: 1px dotted #6b3792;
     border-width: 2px;
 }
-.separator::before {
+.separator::before, .note-check-box::before {
     margin-right: .25em;
 }
-.separator::after {
+.separator::after, .note-check-box::after {
     margin-left: .25em;
 }
 .text-details{
@@ -59,4 +72,7 @@
 }
 .form-group > label, .form-group > .d-flex > label{
     color: wheat!important
+}
+.select2{
+    width: 100%!important
 }

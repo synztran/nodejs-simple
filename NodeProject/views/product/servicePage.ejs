@@ -90,56 +90,44 @@
                 <h1 class="w-100">Service Form</h1>
             </div>
         <div class="row">
-            <div class="col-md-5 lube-service">
+            <div class="col-lg-5 col-md-12 lube-service">
                 <div class="title">
                     <span>Lube Service Form</span>
                 </div>
                 <div class="form-group">
-                        <label for="email">Quantity:</label>
+                        <label class="required_value" for="email">Quantity<span>:</span></label>
                         <input name="lube_quantity" type="tel" value='' id="lube_quantity" maxlength="4">
                 </div>
                 <div class="form-group">
                         <label for="email">Switch Type:</label>
-                        <select class="form-control disabled_searchbar black-input" id="lube_switch_type" name="lube_switch_type">
+                        <select class="form-control disabled_searchbar black-input col-md-12 " id="lube_switch_type" name="lube_switch_type">
                             <option value="cherry">Cherry MX & clone</option>
-                            <option value="kailh">KailhBox</option>
-                            <option value="albs" disabled>Albs (not support)</option>
+                            <option value="box">KailhBox</option>
+                            <option value="albs" disabled>Albs (coming soon)</option>
                         </select>
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                 </div>
                 <div class="form-group">
                         <label for="email">Name Switch:</label>
-                        <div class="fake_select">
-                            <select class="form-control enable_select2" id="lube_name_switch" name="
-                        lube_name_switch">
-                            </select>
-                        </div>
-                        <div class="cherry">
                             <select class="form-control enable_select2" id="lube_cherry_switch" name="
                         lube_name_switch">
                             <% include ./../tips/service/selectCherryMX%>
                         </select>
-                        </div>
-                        <div class="kailhBox">
-                            <select class="form-control enable_select2" id="lube_kailh_switch" name="
+                            <select class="form-control enable_select2" id="lube_box_switch" name="
                         lube_name_switch">
                             <% include ./../tips/service/selectKailhbox%>
                         </select>
-                        </div>
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                 </div>
                 <div class="form-group">
                         <label for="email">Grease:</label>
                         <select class="form-control enable_select2" id="lube_grease" name="lube_grease">
                             <% include ./../tips/service/selectGrease %>
                         </select>
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                 </div>
                 <div class="form-group">
                     <div class="d-flex">
-                        <label for="email">Film:</label>
+                        <label for="film">Film:</label>
                         <label for="film" class="btn-radio ml-auto">
-                            <input type="checkbox" id="film" value="add_film">
+                            <input type="checkbox" id="film" name="film" value="add_film" >
                             <svg width="20px" height="20px" viewBox="0 0 20 20">
                                 <circle cx="10" cy="10" r="9"></circle>
                                 <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -154,9 +142,9 @@
                 </div>
                 <div class="form-group">
                         <div class="d-flex">
-                            <label for="">Spring:</label>
+                            <label for="spring">Spring:</label>
                             <label for="spring" class="btn-radio ml-auto">
-                                <input type="checkbox" id="spring" value="add_spring">
+                                <input type="checkbox" id="spring" name="spring" value="add_spring" >
                                 <svg width="20px" height="20px" viewBox="0 0 20 20">
                                     <circle cx="10" cy="10" r="9"></circle>
                                     <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -165,46 +153,39 @@
                             <span>Yes</span>
                             </label>
                         </div>
-                        <div class="fake_select">
-                            <select class="form-control enable_select2" id="lube_spring_force" name="
-                        lube_spring_force">
-                            </select>
-                        </div>
-                        <div class="cherry_spring">
-                            <select class="form-control enable_select2" id="lube_cherry_spring_force" name="lube_spring_force">
+                        <select class="form-control enable_select2" id="lube_cherry_spring_force" name="lube_spring_force">
                             <% include ./../tips/service/selectCherrySpring %>
                         </select>
-                        </div>
-                        <div class="box_spring">
-                            <select class="form-control enable_select2" id="lube_box_spring_force" name="lube_spring_force">
+                        <select class="form-control enable_select2" id="lube_box_spring_force" name="lube_spring_force">
                             <% include ./../tips/service/selectKailhboxSpring %>
                         </select>
-                        </div>
                         
                 </div>
+                <small class="form-text text-center note-check-box">If you already have, please check the box.</small>        
+
                 <div class="form-group d-flex m-0">
                         <label for="">Film, Have not?:</label>
                             <label for="have_film" class="btn-radio ml-auto">
                             <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
-                            <input type="checkbox" id="have_film" name="have_film" value="have_film">
+                            <input type="checkbox" id="have_film" name="have_film" value="have_film" >
                             <svg width="20px" height="20px" viewBox="0 0 20 20">
                                 <circle cx="10" cy="10" r="9"></circle>
                                 <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
                                 <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
                             </svg>
-                            <span>Yes</span>
+                            <b>Yes</b>
                             </label>
                 </div>
                 <div class="form-group d-flex m-0">
                         <label for="">Spring, Have not?:</label>
                             <label for="have_spring" class="btn-radio ml-auto">
-                            <input type="checkbox" id="have_spring" name="have_spring" value="have_spring">
+                            <input type="checkbox" id="have_spring" name="have_spring" value="have_spring" >
                             <svg width="20px" height="20px" viewBox="0 0 20 20">
                                 <circle cx="10" cy="10" r="9"></circle>
                                 <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
                                 <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
                             </svg>
-                            <span>Yes</span>
+                            <b>Yes</b>
                             </label>
                 </div>
                 <div class="form-group">
@@ -214,18 +195,18 @@
                         </select>
                 </div>
                 <div class="form-group">
-                        <label for="lube_relsease_time">Note:</label>
-                        <textarea id="specs" name="specs" type="text" class="form-control min-h-10rem" placeholder="Note..."></textarea>
+                        <label for="specs">Note:</label>
+                        <textarea id="specs" name="specs" type="text" style="resize: none;" class="form-control min-h-10rem" placeholder="Note your requirement"></textarea>
                 </div>
                 <div class="separator">Order Details</div>
-                <div class="form-group d-flex">
+                <div class="form-group d-flex" id="price-accessories">
                         <!-- <label for="email">Price Accessories</label> -->
                         <span class="text-details">
                             <strong>Price Accessories:</strong>
                         </span>
                         <span class="t-right d-block">0 VND</span>
                 </div>
-                <div class="form-group d-flex">
+                <div class="form-group d-flex" id="price-service">
                         <!-- <label for="email">Price Service</label> -->
                         <span class="text-details">
                             <strong>Price Service:</strong>
@@ -233,7 +214,7 @@
                         <span class="t-right d-block">0 VND</span>
                 </div>
                 <hr>
-                <div class="form-group d-flex">
+                <div class="form-group d-flex" id="total-price">
                         <!-- <label for="email">Total</label> -->
                         <span class="text-details font-b">
                             <strong>Total:</strong>
@@ -242,7 +223,7 @@
                 </div>
             </div>
 
-            <div class="col-md-5 assemble-service">
+            <div class="col-lg-5 col-md-12 assemble-service">
                 
             </div>
             
@@ -263,7 +244,15 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
 $(document).ready(function() {
-    var type_sw;
+    var type_sw, cherry_spring, box_spring, cherry_name_switch, box_name_switch, add_spring;
+    var checkbox_film, checkbox_spring;
+    var checkbox_add_film, checkbox_add_spring;
+    var price_accessories = 0;
+    var price_service = 0;
+    var price_film = 150000;
+    var price_spring = 180000;
+    var price_service_with_accessories = 6000;
+    var price_service_without_accessories = 5000;
     $('.disabled_searchbar').select2({
         minimumResultsForSearch: Infinity
     })
@@ -271,57 +260,117 @@ $(document).ready(function() {
     $('#lube_quantity').on('input', function() {
         this.value = this.value
             .replace(/[^\d]/g, ''); // numbers and decimals only
-
     });
-    // $('#specs').summernote({
-    //     placeholder: 'Your note...',
-    //     tabsize: 2,
-    //     height:300
-    // });
     $('#email').on('keypress', function(e) {
         if (e.which == 32) {
             return false;
         }
     });
-
     
-    $('.cherry').hide();
-    $('.kailhBox').hide();
-    $('.cherry_spring').hide();
-    $('.box_spring').hide()
+    cherry_name_switch = $('#lube_cherry_switch')
+    cherry_name_switch.next(".select2-container").hide()
+
+    box_name_switch = $('#lube_box_switch')
+    box_name_switch.next(".select2-container").hide()
+
+    cherry_spring = $('#lube_cherry_spring_force')
+    cherry_spring.next(".select2-container").hide()
+
+    box_spring = $('#lube_box_spring_force')
+    box_spring.next(".select2-container").hide()
+    
+
+    $("#lube_film_color").next(".select2-container").hide()
     $("#lube_switch_type").each(function() {
        type_sw = $('#lube_switch_type').val();
         if(type_sw == 'cherry'){
-            $('.kailhBox').hide();
-            $('.fake_select').hide();
-            $('.cherry').show()
-            $('.cherry_spring').show()
+            cherry_name_switch.next(".select2-container").show();
         }
     });
     $(document).on('change', '#lube_switch_type', function(){
         type_sw = $(this).val();
+        add_spring = $("input[name='spring']:checked").val()
         if(type_sw == 'cherry'){
-            $('.kailhBox').hide();
-            $('.fake_select').hide();
-            $('.box_spring').hide()
-            $('.cherry').show()
-            $('.cherry_spring').show();
-
-        }else if(type_sw == 'kailh'){
-            $('.cherry').hide();
-            $('.fake_select').hide();
-            $('.cherry_spring').hide();
-            $('.kailhBox').show()
-            $('.box_spring').show()
+            cherry_name_switch.next(".select2-container").show();
+            box_name_switch.next(".select2-container").hide();
+            if(add_spring == "add_spring"){
+                cherry_spring.next(".select2-container").show();
+                box_spring.next(".select2-container").hide();
+            }else{
+                box_spring.next(".select2-container").hide();
+                cherry_spring.next(".select2-container").hide();
+            }
+        }else if(type_sw == 'box'){
+            cherry_name_switch.next(".select2-container").hide();
+            box_name_switch.next(".select2-container").show();
+            if(add_spring == "add_spring"){
+                cherry_spring.next(".select2-container").hide();
+                box_spring.next(".select2-container").show();
+            }else{
+                box_spring.next(".select2-container").hide();
+                cherry_spring.next(".select2-container").hide();
+            }
         }else if(type_sw == 'albs'){
 
         }else{
 
         }
     })
+    checkbox_film = $("#film").val();
+    checkbox_spring = $("#spring").val();
+    checkbox_add_spring = $("#have_film").val();
+    checkbox_add_spring = $("#have_spring").val();
 
-    $(document).on('change', '.lube-service', function(e){
-        console.log($(this).val());
+    $(document).on('change', '#have_film', function(){
+    })
+    $(document).on('change', '#have_spring', function(){
+    })
+
+    $("#film").click(function() {
+
+        var radioValue = $("input[name='film']:checked").val();
+        if (radioValue == 'add_film') {
+           $("#lube_film_color").next(".select2-container").show()
+           price_accessories = price_film
+        } else{
+           $("#lube_film_color").next(".select2-container").hide()
+           price_accessories = 0;
+        }
+    });
+    $("#spring").click(function() {
+
+        var radioSpringValue = $("input[name='spring']:checked").val();
+        var radioTypeSwitchValue = $("#lube_switch_type").val();
+        if (radioSpringValue == 'add_spring') {
+            price_accessories = price_spring
+            if(radioTypeSwitchValue == 'cherry'){
+                $("#lube_cherry_spring_force").next(".select2-container").show();
+                $("#lube_box_spring_force").next(".select2-container").hide();
+
+            }else if(radioTypeSwitchValue == 'box'){
+                $("#lube_cherry_spring_force").next(".select2-container").hide();
+                $("#lube_box_spring_force").next(".select2-container").show();
+            }
+        } else{
+            price_accessories = 0
+            $("#lube_cherry_spring_force").next(".select2-container").hide();
+            $("#lube_box_spring_force").next(".select2-container").hide();
+        }
+    });
+
+    $(document).on('change', '#lube_quantity', function(){
+        var quantitySwitch = $(this).val()
+        price_service = quantitySwitch * price_service_without_accessories;
+        price_accessories;
+        total_price = price_service + price_accessories
+        var formatPriceService = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_service)
+        var formatPriceAccessories = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_accessories)
+        var formatPriceTotal = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(total_price)
+        $('#price-service .t-right').html(formatPriceService)
+        $('#price-accessories .t-right').html(formatPriceAccessories)
+        $("#total-price .t-right").html(formatPriceTotal)
+
+
     })
     
 
