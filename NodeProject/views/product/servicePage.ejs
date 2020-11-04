@@ -249,8 +249,8 @@ $(document).ready(function() {
     var checkbox_add_film, checkbox_add_spring;
     var price_accessories = 0;
     var price_service = 0;
-    var price_film = 150000;
-    var price_spring = 180000;
+    var current_price_film = 150000;
+    var current_price_spring = 180000;
     var price_service_with_accessories = 6000;
     var price_service_without_accessories = 5000;
     $('.disabled_searchbar').select2({
@@ -322,19 +322,42 @@ $(document).ready(function() {
     checkbox_add_spring = $("#have_spring").val();
 
     $(document).on('change', '#have_film', function(){
+
     })
     $(document).on('change', '#have_spring', function(){
+
     })
+    $("#have_film").click(function() {
+
+        var radioValue = $("input[name='have_film']:checked").val();
+        if (radioValue == 'have_film') {
+           calcPrice()
+        } else{
+           calcPrice()
+        }
+    });
+
+    $("#have_spring").click(function() {
+
+        var radioValue = $("input[name='have_spring']:checked").val();
+        if (radioValue == 'have_spring') {
+           calcPrice()
+        } else{
+           calcPrice()
+        }
+    });
 
     $("#film").click(function() {
 
         var radioValue = $("input[name='film']:checked").val();
         if (radioValue == 'add_film') {
            $("#lube_film_color").next(".select2-container").show()
-           price_accessories = price_film
+           // price_accessories = price_film
+           calcPrice()
         } else{
            $("#lube_film_color").next(".select2-container").hide()
-           price_accessories = 0;
+           // price_accessories = 0;
+           calcPrice()
         }
     });
     $("#spring").click(function() {
@@ -342,7 +365,8 @@ $(document).ready(function() {
         var radioSpringValue = $("input[name='spring']:checked").val();
         var radioTypeSwitchValue = $("#lube_switch_type").val();
         if (radioSpringValue == 'add_spring') {
-            price_accessories = price_spring
+            // price_accessories = price_spring
+            calcPrice()
             if(radioTypeSwitchValue == 'cherry'){
                 $("#lube_cherry_spring_force").next(".select2-container").show();
                 $("#lube_box_spring_force").next(".select2-container").hide();
@@ -352,27 +376,86 @@ $(document).ready(function() {
                 $("#lube_box_spring_force").next(".select2-container").show();
             }
         } else{
-            price_accessories = 0
+            // price_accessories = 0
+            calcPrice()
             $("#lube_cherry_spring_force").next(".select2-container").hide();
             $("#lube_box_spring_force").next(".select2-container").hide();
         }
     });
 
     $(document).on('change', '#lube_quantity', function(){
-        var quantitySwitch = $(this).val()
-        price_service = quantitySwitch * price_service_without_accessories;
-        price_accessories;
-        total_price = price_service + price_accessories
-        var formatPriceService = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_service)
-        var formatPriceAccessories = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_accessories)
-        var formatPriceTotal = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(total_price)
-        $('#price-service .t-right').html(formatPriceService)
-        $('#price-accessories .t-right').html(formatPriceAccessories)
-        $("#total-price .t-right").html(formatPriceTotal)
+        calcPrice();
+        // var quantitySwitch = $(this).val()
+        // price_service = quantitySwitch * price_service_without_accessories;
+        // price_accessories;
+        // total_price = price_service + price_accessories
+        // var formatPriceService = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_service)
+        // var formatPriceAccessories = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_accessories)
+        // var formatPriceTotal = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(total_price)
+        // $('#price-service .t-right').html(formatPriceService)
+        // $('#price-accessories .t-right').html(formatPriceAccessories)
+        // $("#total-price .t-right").html(formatPriceTotal)
 
 
     })
     
+
+    var switchType, switchName, greaseName, filmColor, springForce;
+    var addFilm, addSrping, haveFilm, haveSpring;
+    var estTime, note;
+    var switchQuantity = 0;
+    var priceService = 0;
+    var priceAccessories = 0;
+    var priceTotal = 0;
+    var formatPriceService, formatPriceAccessories, formatPriceTotal;
+    var priceFilm, priceSpring
+
+    var calcPrice = function(){
+        // Input params
+        switchQuantity = $("#lube_quantity").val();
+        addFilm = $("input[name='film']:checked").val();
+        addSpring = $("input[name='spring']:checked").val();
+
+
+        if(addFilm == 'add_film'){
+            priceFilm = current_price_film
+        }else{
+            priceFilm = 0
+        }
+        if(addSpring == 'add_spring'){
+            priceSpring = current_price_spring
+        }else{
+            priceSpring = 0
+        }
+        haveFilm = $("input[name='have_film']:checked").val();
+        haveSpring = $("input[name='have_spring']:checked").val();
+        // if(haveFilm == 'have_film'){
+            
+        // }else{
+
+        // }
+        // if(haveSpring == 'have_spring'){
+
+        // }else{
+            
+        // }
+        // Calc Price
+        if(addFilm || addSpring){
+            price_service = switchQuantity * price_service_with_accessories;
+        }else{
+            price_service = switchQuantity * price_service_without_accessories;
+        }
+        price_accessories = priceFilm + priceSpring
+        total_price = price_service + price_accessories
+        // Format Price
+        formatPriceService = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_service)
+        formatPriceAccessories = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_accessories)
+        formatPriceTotal = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(total_price)
+        // Show Price
+        $('#price-service .t-right').html(formatPriceService)
+        $('#price-accessories .t-right').html(formatPriceAccessories)
+        $("#total-price .t-right").html(formatPriceTotal)
+    }
 
 
     
