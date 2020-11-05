@@ -28,7 +28,7 @@
     <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
 </head>
 
-<body id="top">
+<body id="top" class="bg-repeat">
     <!-- preloader
     ================================================== -->
     <div id="preloader">
@@ -223,13 +223,13 @@
                 </div>
                 <div class="form-group">
                     <div class="d-flex">
-                        <label for="assemble_switch_checkbox">Assembled Pcb Option:</label>
+                        <label for="">Assembled Pcb Option:</label>
                     </div>
                     <div class="form-group d-flex m-0">
-                        <label for="have_led">Leds, Have not?:</label>
-                        <label for="have_led" class="btn-radio ml-auto">
+                        <label class="col-lg-7 col-md-3 col-5" for="assembled_pcb_solder">Solder, Have not?:</label>
+                        <label for="assembled_pcb_solder" class="btn-radio ml-auto">
                             <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
-                            <input type="checkbox" id="have_led" name="have_led" value="have_led">
+                            <input type="checkbox" id="assembled_pcb_solder" name="assembled_pcb_solder" value="assembled_pcb_solder">
                             <svg width="20px" height="20px" viewBox="0 0 20 20">
                                 <circle cx="10" cy="10" r="9"></circle>
                                 <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -239,10 +239,9 @@
                         </label>
                     </div>
                     <div class="form-group d-flex m-0">
-                        <label for="have_led">Leds, Have not?:</label>
-                        <label for="have_led" class="btn-radio ml-auto">
-                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
-                            <input type="checkbox" id="have_led" name="have_led" value="have_led">
+                        <label class="col-lg-7 col-md-3 col-5" for="assembled_pcb_desolder">De-solder, Have not?:</label>
+                        <label for="assembled_pcb_desolder" class="btn-radio ml-auto">
+                            <input type="checkbox" id="assembled_pcb_desolder" name="assembled_pcb_desolder" value="assembled_pcb_desolder">
                             <svg width="20px" height="20px" viewBox="0 0 20 20">
                                 <circle cx="10" cy="10" r="9"></circle>
                                 <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -252,10 +251,9 @@
                         </label>
                     </div>
                     <div class="form-group d-flex m-0">
-                        <label for="have_led">Leds, Have not?:</label>
-                        <label for="have_led" class="btn-radio ml-auto">
-                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
-                            <input type="checkbox" id="have_led" name="have_led" value="have_led">
+                        <label class="col-lg-7 col-md-3 col-5" for="assembled_pcb_handlestab">Handle Stab, Have not?:</label>
+                        <label for="assembled_pcb_handlestab" class="btn-radio ml-auto">
+                            <input type="checkbox" id="assembled_pcb_handlestab" name="assembled_pcb_handlestab" value="assembled_pcb_handlestab">
                             <svg width="20px" height="20px" viewBox="0 0 20 20">
                                 <circle cx="10" cy="10" r="9"></circle>
                                 <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -264,41 +262,64 @@
                             <b>Yes</b>
                         </label>
                     </div>
-                    <div class="form-group d-flex m-0">
-                        <label for="have_led">Leds, Have not?:</label>
-                        <label for="have_led" class="btn-radio ml-auto">
-                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
-                            <input type="checkbox" id="have_led" name="have_led" value="have_led">
-                            <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                <circle cx="10" cy="10" r="9"></circle>
-                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                            </svg>
-                            <b>Yes</b>
-                        </label>
-                    </div>
-
                 </div>
                 <div class="form-group">
                     <div class="d-flex">
-                        <label for="assemble_led_checkbox">Assembled Led Option:</label>
-                        <label for="assemble_led_checkbox" class="btn-radio ml-auto">
-                            <input type="checkbox" id="assemble_led_checkbox" name="assemble_led_checkbox" value="assemble_led">
+                        <label for="add_led">Assembled Led Option:</label>
+                        <label for="add_led" class="btn-radio ml-auto">
+                            <input type="checkbox" id="add_led" name="add_led" value="add_led">
                             <svg width="20px" height="20px" viewBox="0 0 20 20">
                                 <circle cx="10" cy="10" r="9"></circle>
                                 <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
                                 <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
                             </svg>
-                            <span>Yes</span>
+                            <b>Yes</b>
                         </label>
                     </div>
-                    <select class="form-control enable_select2" id="assemble_led_option" name="assemble_led_option">
-                        <% include ./../tips/service/selectCherrySpring %>
-                    </select>
+                    <div class="form-group d-flex m-0">
+                        <label class="col-lg-7 col-md-3 col-5" for="assemble_led_type">Led Type:</label>
+                        <select class="form-control disabled_searchbar" id="assemble_led_type" name="
+                        assemble_led_type">
+                        <% include ./../tips/service/selectLed%>
+                        </select>    
+                    </div>
+                    <div class="form-group d-flex m-0">
+                        <label class="col-lg-7 col-md-3" for="assemble_led_color">Led Color:</label>
+                        <select class="form-control enable_select2" id="assemble_led_color" name="
+                        assemble_led_color">
+                        <% include ./../tips/service/selectLedColor%>
+                        </select>    
+                    </div>
+                    
+                    <div class="form-group d-flex m-0">
+                        <label class="col-lg-7 col-md-3 col-5" for="assembled_led_solder">Solder, Have not?:</label>
+                        <label for="assembled_led_solder" class="btn-radio ml-auto">
+                            <input type="checkbox" id="assembled_led_solder" name="assembled_led_solder" value="assembled_led_solder">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <b>Yes</b>
+                        </label>
+                    </div>
+                    <div class="form-group d-flex m-0">
+                        <label class="col-lg-7 col-md-3 col-5" for="assembled_led_desolder">De-solder, Have not?:</label>
+                        <label for="assembled_led_desolder" class="btn-radio ml-auto">
+                            <input type="checkbox" id="assembled_led_desolder" name="assembled_led_desolder" value="assembled_led_desolder">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <b>Yes</b>
+                        </label>
+                    </div>
+                    
                 </div>
                 <small class="form-text text-center note-check-box">If you already have, please check the box.</small>
                 <div class="form-group d-flex m-0">
-                    <label for="have_led">Leds, Have not?:</label>
+                    <label class="col-lg-7 col-md-3 col-5" for="have_led">Leds, Have not?:</label>
                     <label for="have_led" class="btn-radio ml-auto">
                         <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
                         <input type="checkbox" id="have_led" name="have_led" value="have_led">
@@ -321,7 +342,7 @@
                     <textarea id="assemble_specs" name="assemble_specs" type="text" style="resize: none;" class="form-control min-h-10rem fs-14" placeholder="Note your requirement"></textarea>
                 </div>
             </div>
-            <div class="col-md-3 price-form">
+            <div class="col-md-12 col-lg-3 price-form">
                 <div class="separator fs-24 mtb-0">Order Details</div>
                 <div class="form-group d-flex" id="price-accessories">
                     <!-- <label for="email">Price Accessories</label> -->
