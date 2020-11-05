@@ -8,6 +8,20 @@
     margin-right: 5px;
     height: 100%;
 }
+.main-container > .row > .assemble-service{
+    padding: 2%;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    margin-right: 5px;
+    height: 100%;
+}
+.main-container > .row > .price-form{
+    padding: 2%;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    margin-right: 5px;
+    height: 100%;
+}
 .title{
       font-size: 24px;
       color: white;
@@ -75,4 +89,13 @@
 }
 .select2{
     width: 100%!important
+}
+.fs-14{
+    font-size: 14px!important
+}
+.fs-24{
+    font-size: 24px!important
+}
+.t-color-wheat{
+    color: wheat!important
 }

@@ -858,7 +858,9 @@ router.get('/proxygb/payment/:id',TokenUserCheckMiddleware , async(req, res)=>{
 // ==================================================================== //
 router.get('/service', (req, res)=>{
     res.render('product/servicePage',{
-        title: 'Service Page'
+        title: 'Keyboard Service',
+        lubeTitle: 'Lube Service Form',
+        assemTitle: 'Assembled Service Form',
     })
 })
 

@@ -69,7 +69,7 @@
                         </a>
                     </li>
                     <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li> -->
-                </ul> 
+                </ul>
             </div>
         </div>
     </nav>
@@ -87,153 +87,287 @@
     </section>
     <div class="main-container">
         <div class="col-md-12 text-center">
-                <h1 class="w-100">Service Form</h1>
-            </div>
+            <h1 class="w-100">
+                <%= title %>
+            </h1>
+        </div>
         <div class="row">
-            <div class="col-lg-5 col-md-12 lube-service">
+            <div class="col-lg-4 col-md-12 lube-service">
                 <div class="title">
-                    <span>Lube Service Form</span>
+                    <span>
+                        <%= lubeTitle %></span>
                 </div>
                 <div class="form-group">
-                        <label class="required_value" for="email">Quantity<span>:</span></label>
-                        <input name="lube_quantity" type="tel" value='' id="lube_quantity" maxlength="4">
+                    <label class="required_value" for="email">Quantity<span>:</span></label>
+                    <input name="lube_quantity" type="tel" value='' id="lube_quantity" maxlength="4">
                 </div>
                 <div class="form-group">
-                        <label for="email">Switch Type:</label>
-                        <select class="form-control disabled_searchbar black-input col-md-12 " id="lube_switch_type" name="lube_switch_type">
-                            <option value="cherry">Cherry MX & clone</option>
-                            <option value="box">KailhBox</option>
-                            <option value="albs" disabled>Albs (coming soon)</option>
-                        </select>
+                    <label for="email">Switch Type:</label>
+                    <select class="form-control disabled_searchbar black-input col-md-12 " id="lube_switch_type" name="lube_switch_type">
+                        <option value="cherry">Cherry MX & clone</option>
+                        <option value="box">KailhBox</option>
+                        <option value="albs" disabled>Albs (coming soon)</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                        <label for="email">Name Switch:</label>
-                            <select class="form-control enable_select2" id="lube_cherry_switch" name="
+                    <label for="email">Name Switch:</label>
+                    <select class="form-control enable_select2" id="lube_cherry_switch" name="
                         lube_name_switch">
-                            <% include ./../tips/service/selectCherryMX%>
-                        </select>
-                            <select class="form-control enable_select2" id="lube_box_switch" name="
+                        <% include ./../tips/service/selectCherryMX%>
+                    </select>
+                    <select class="form-control enable_select2" id="lube_box_switch" name="
                         lube_name_switch">
-                            <% include ./../tips/service/selectKailhbox%>
-                        </select>
+                        <% include ./../tips/service/selectKailhbox%>
+                    </select>
                 </div>
                 <div class="form-group">
-                        <label for="email">Grease:</label>
-                        <select class="form-control enable_select2" id="lube_grease" name="lube_grease">
-                            <% include ./../tips/service/selectGrease %>
-                        </select>
+                    <label for="email">Grease:</label>
+                    <select class="form-control enable_select2" id="lube_grease" name="lube_grease">
+                        <% include ./../tips/service/selectGrease %>
+                    </select>
                 </div>
                 <div class="form-group">
                     <div class="d-flex">
                         <label for="film">Film:</label>
                         <label for="film" class="btn-radio ml-auto">
-                            <input type="checkbox" id="film" name="film" value="add_film" >
+                            <input type="checkbox" id="film" name="film" value="add_film">
                             <svg width="20px" height="20px" viewBox="0 0 20 20">
                                 <circle cx="10" cy="10" r="9"></circle>
                                 <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
                                 <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
                             </svg>
-                        <span>Yes</span>
+                            <span>Yes</span>
                         </label>
                     </div>
                     <select class="form-control enable_select2" id="lube_film_color" name="lube_film_color">
                         <% include ./../tips/service/selectFilm %>
-                        </select>
+                    </select>
                 </div>
                 <div class="form-group">
-                        <div class="d-flex">
-                            <label for="spring">Spring:</label>
-                            <label for="spring" class="btn-radio ml-auto">
-                                <input type="checkbox" id="spring" name="spring" value="add_spring" >
-                                <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                    <circle cx="10" cy="10" r="9"></circle>
-                                    <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                    <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                                </svg>
+                    <div class="d-flex">
+                        <label for="spring">Spring:</label>
+                        <label for="spring" class="btn-radio ml-auto">
+                            <input type="checkbox" id="spring" name="spring" value="add_spring">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
                             <span>Yes</span>
-                            </label>
-                        </div>
-                        <select class="form-control enable_select2" id="lube_cherry_spring_force" name="lube_spring_force">
-                            <% include ./../tips/service/selectCherrySpring %>
-                        </select>
-                        <select class="form-control enable_select2" id="lube_box_spring_force" name="lube_spring_force">
-                            <% include ./../tips/service/selectKailhboxSpring %>
-                        </select>
-                        
+                        </label>
+                    </div>
+                    <select class="form-control enable_select2" id="lube_cherry_spring_force" name="lube_spring_force">
+                        <% include ./../tips/service/selectCherrySpring %>
+                    </select>
+                    <select class="form-control enable_select2" id="lube_box_spring_force" name="lube_spring_force">
+                        <% include ./../tips/service/selectKailhboxSpring %>
+                    </select>
                 </div>
-                <small class="form-text text-center note-check-box">If you already have, please check the box.</small>        
-
+                <small class="form-text text-center note-check-box">If you already have, please check the box.</small>
                 <div class="form-group d-flex m-0">
-                        <label for="">Film, Have not?:</label>
-                            <label for="have_film" class="btn-radio ml-auto">
-                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
-                            <input type="checkbox" id="have_film" name="have_film" value="have_film" >
-                            <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                <circle cx="10" cy="10" r="9"></circle>
-                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                            </svg>
-                            <b>Yes</b>
-                            </label>
+                    <label for="">Film, Have not?:</label>
+                    <label for="have_film" class="btn-radio ml-auto">
+                        <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                        <input type="checkbox" id="have_film" name="have_film" value="have_film">
+                        <svg width="20px" height="20px" viewBox="0 0 20 20">
+                            <circle cx="10" cy="10" r="9"></circle>
+                            <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                            <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                        </svg>
+                        <b>Yes</b>
+                    </label>
                 </div>
                 <div class="form-group d-flex m-0">
-                        <label for="">Spring, Have not?:</label>
-                            <label for="have_spring" class="btn-radio ml-auto">
-                            <input type="checkbox" id="have_spring" name="have_spring" value="have_spring" >
-                            <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                <circle cx="10" cy="10" r="9"></circle>
-                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                            </svg>
-                            <b>Yes</b>
-                            </label>
+                    <label for="">Spring, Have not?:</label>
+                    <label for="have_spring" class="btn-radio ml-auto">
+                        <input type="checkbox" id="have_spring" name="have_spring" value="have_spring">
+                        <svg width="20px" height="20px" viewBox="0 0 20 20">
+                            <circle cx="10" cy="10" r="9"></circle>
+                            <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                            <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                        </svg>
+                        <b>Yes</b>
+                    </label>
                 </div>
                 <div class="form-group">
-                        <label for="lube_relsease_time">EST Time:</label>
-                        <select class="form-control disabled_searchbar" id="lube_relsease_time" name="lube_relsease_time">
-                            <% include ./../tips/service/selectESTime %>
-                        </select>
+                    <label for="lube_relsease_time">EST Time:</label>
+                    <select class="form-control disabled_searchbar" id="lube_relsease_time" name="lube_relsease_time">
+                        <% include ./../tips/service/selectESTime %>
+                    </select>
                 </div>
                 <div class="form-group">
-                        <label for="specs">Note:</label>
-                        <textarea id="specs" name="specs" type="text" style="resize: none;" class="form-control min-h-10rem" placeholder="Note your requirement"></textarea>
+                    <label for="lube_specs">Note:</label>
+                    <textarea id="lube_specs" name="lube_specs" type="text" style="resize: none;" class="form-control min-h-10rem fs-14" placeholder="Note your requirement"></textarea>
                 </div>
-                <div class="separator">Order Details</div>
-                <div class="form-group d-flex" id="price-accessories">
-                        <!-- <label for="email">Price Accessories</label> -->
-                        <span class="text-details">
-                            <strong>Price Accessories:</strong>
-                        </span>
-                        <span class="t-right d-block">0 VND</span>
-                </div>
-                <div class="form-group d-flex" id="price-service">
-                        <!-- <label for="email">Price Service</label> -->
-                        <span class="text-details">
-                            <strong>Price Service:</strong>
-                        </span>
-                        <span class="t-right d-block">0 VND</span>
-                </div>
-                <hr>
-                <div class="form-group d-flex" id="total-price">
-                        <!-- <label for="email">Total</label> -->
-                        <span class="text-details font-b">
-                            <strong>Total:</strong>
-                        </span>
-                        <span class="t-right fw-500 d-block">0 VND</span>
-                </div>
-            </div>
-
-            <div class="col-lg-5 col-md-12 assemble-service">
                 
             </div>
-            
+            <div class="col-lg-4 col-md-12 assemble-service">
+                <div class="title">
+                    <span>
+                        <%= assemTitle %></span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Keyboard Type:</label>
+                    <select class="form-control disabled_searchbar black-input col-md-12 " id="assemble_kb_type" name="assemble_kb_type">
+                        <option value="stock">Stock Keyboard (already assembled from Company)</option>
+                        <option value="custom">Custom Keyboard (kit keyboard from Team/Maker)</option>
+                        <option value="other" disabled>Other (coming soon)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="email">Keyboard Layout:</label>
+                    <select class="form-control enable_select2" id="assemble_kb_layout" name="
+                        assemble_kb_layout">
+                        <% include ./../tips/service/selectKeyboardLayout%>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="d-flex">
+                        <label for="assemble_switch_checkbox">Assembled Pcb Option:</label>
+                    </div>
+                    <div class="form-group d-flex m-0">
+                        <label for="have_led">Leds, Have not?:</label>
+                        <label for="have_led" class="btn-radio ml-auto">
+                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                            <input type="checkbox" id="have_led" name="have_led" value="have_led">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <b>Yes</b>
+                        </label>
+                    </div>
+                    <div class="form-group d-flex m-0">
+                        <label for="have_led">Leds, Have not?:</label>
+                        <label for="have_led" class="btn-radio ml-auto">
+                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                            <input type="checkbox" id="have_led" name="have_led" value="have_led">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <b>Yes</b>
+                        </label>
+                    </div>
+                    <div class="form-group d-flex m-0">
+                        <label for="have_led">Leds, Have not?:</label>
+                        <label for="have_led" class="btn-radio ml-auto">
+                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                            <input type="checkbox" id="have_led" name="have_led" value="have_led">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <b>Yes</b>
+                        </label>
+                    </div>
+                    <div class="form-group d-flex m-0">
+                        <label for="have_led">Leds, Have not?:</label>
+                        <label for="have_led" class="btn-radio ml-auto">
+                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                            <input type="checkbox" id="have_led" name="have_led" value="have_led">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <b>Yes</b>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="d-flex">
+                        <label for="assemble_led_checkbox">Assembled Led Option:</label>
+                        <label for="assemble_led_checkbox" class="btn-radio ml-auto">
+                            <input type="checkbox" id="assemble_led_checkbox" name="assemble_led_checkbox" value="assemble_led">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <span>Yes</span>
+                        </label>
+                    </div>
+                    <select class="form-control enable_select2" id="assemble_led_option" name="assemble_led_option">
+                        <% include ./../tips/service/selectCherrySpring %>
+                    </select>
+                </div>
+                <small class="form-text text-center note-check-box">If you already have, please check the box.</small>
+                <div class="form-group d-flex m-0">
+                    <label for="have_led">Leds, Have not?:</label>
+                    <label for="have_led" class="btn-radio ml-auto">
+                        <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                        <input type="checkbox" id="have_led" name="have_led" value="have_led">
+                        <svg width="20px" height="20px" viewBox="0 0 20 20">
+                            <circle cx="10" cy="10" r="9"></circle>
+                            <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                            <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                        </svg>
+                        <b>Yes</b>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="assemble_relsease_time">EST Time:</label>
+                    <select class="form-control disabled_searchbar" id="assemble_relsease_time" name="assemble_relsease_time">
+                        <% include ./../tips/service/selectESTime %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assemble_specs">Note:</label>
+                    <textarea id="assemble_specs" name="assemble_specs" type="text" style="resize: none;" class="form-control min-h-10rem fs-14" placeholder="Note your requirement"></textarea>
+                </div>
+            </div>
+            <div class="col-md-3 price-form">
+                <div class="separator fs-24 mtb-0">Order Details</div>
+                <div class="form-group d-flex" id="price-accessories">
+                    <!-- <label for="email">Price Accessories</label> -->
+                    <span class="text-details t-color-wheat">
+                        <strong>Price Accessories:</strong>
+                    </span>
+                    <span class="t-right d-block">0 VND</span>
+                </div>
+                <div class="form-group d-flex" id="price-service">
+                    <!-- <label for="email">Price Service</label> -->
+                    <span class="text-details t-color-wheat">
+                        <strong>Price Service:</strong>
+                    </span>
+                    <span class="t-right d-block">0 VND</span>
+                </div>
+                <hr style="border-color: #6b3792">
+                <div class="form-group d-flex" id="sub-total">
+                    <!-- <label for="email">Price Service</label> -->
+                    <span class="text-details t-color-wheat">
+                        <strong>Sub Total:</strong>
+                    </span>
+                    <span class="t-right d-block">0 VND</span>
+                </div>
+                <div class="form-group d-flex" id="discount-price">
+                    <!-- <label for="email">Price Service</label> -->
+                    <span class="text-details t-color-wheat">
+                        <strong>Discount:</strong>
+                    </span>
+                    <span class="t-right d-block">0 VND</span>
+                </div>
+                <hr style="border-color: #6b3792">
+                <div class="form-group d-flex" id="total-price">
+                    <!-- <label for="email">Total</label> -->
+                    <span class="text-details font-b t-color-wheat">
+                        <strong>Total:</strong>
+                    </span>
+                    <span class="t-right fw-500 d-block">0 VND</span>
+                </div>
+            </div>
         </div>
     </div>
     <footer>
-            <div class="col-full ss-copyright">
-                <span>© Copyright Noobteam 2017</span>
-                <span>Design by <a href="https://www.facebook.com/noobassembly">Noobteam</a></span>
-            </div>
+        <div class="col-full ss-copyright">
+            <span>© Copyright Noobteam 2017</span>
+            <span>Design by <a href="https://www.facebook.com/noobassembly">Noobteam</a></span>
+        </div>
     </footer>
 </body>
 <% include ./../tips/jsPackage %>
@@ -249,6 +383,7 @@ $(document).ready(function() {
     var checkbox_add_film, checkbox_add_spring;
     var price_accessories = 0;
     var price_service = 0;
+    var price_discount = 0;
     var current_price_film = 150000;
     var current_price_spring = 180000;
     var price_service_with_accessories = 6000;
@@ -266,7 +401,7 @@ $(document).ready(function() {
             return false;
         }
     });
-    
+
     cherry_name_switch = $('#lube_cherry_switch')
     cherry_name_switch.next(".select2-container").hide()
 
@@ -278,41 +413,41 @@ $(document).ready(function() {
 
     box_spring = $('#lube_box_spring_force')
     box_spring.next(".select2-container").hide()
-    
+
 
     $("#lube_film_color").next(".select2-container").hide()
     $("#lube_switch_type").each(function() {
-       type_sw = $('#lube_switch_type').val();
-        if(type_sw == 'cherry'){
+        type_sw = $('#lube_switch_type').val();
+        if (type_sw == 'cherry') {
             cherry_name_switch.next(".select2-container").show();
         }
     });
-    $(document).on('change', '#lube_switch_type', function(){
+    $(document).on('change', '#lube_switch_type', function() {
         type_sw = $(this).val();
         add_spring = $("input[name='spring']:checked").val()
-        if(type_sw == 'cherry'){
+        if (type_sw == 'cherry') {
             cherry_name_switch.next(".select2-container").show();
             box_name_switch.next(".select2-container").hide();
-            if(add_spring == "add_spring"){
+            if (add_spring == "add_spring") {
                 cherry_spring.next(".select2-container").show();
                 box_spring.next(".select2-container").hide();
-            }else{
+            } else {
                 box_spring.next(".select2-container").hide();
                 cherry_spring.next(".select2-container").hide();
             }
-        }else if(type_sw == 'box'){
+        } else if (type_sw == 'box') {
             cherry_name_switch.next(".select2-container").hide();
             box_name_switch.next(".select2-container").show();
-            if(add_spring == "add_spring"){
+            if (add_spring == "add_spring") {
                 cherry_spring.next(".select2-container").hide();
                 box_spring.next(".select2-container").show();
-            }else{
+            } else {
                 box_spring.next(".select2-container").hide();
                 cherry_spring.next(".select2-container").hide();
             }
-        }else if(type_sw == 'albs'){
+        } else if (type_sw == 'albs') {
 
-        }else{
+        } else {
 
         }
     })
@@ -320,20 +455,22 @@ $(document).ready(function() {
     checkbox_spring = $("#spring").val();
     checkbox_add_spring = $("#have_film").val();
     checkbox_add_spring = $("#have_spring").val();
+    $("#have_spring").prop('disabled', true);
+    $("#have_film").prop('disabled', true)
 
-    $(document).on('change', '#have_film', function(){
+    $(document).on('change', '#have_film', function() {
 
     })
-    $(document).on('change', '#have_spring', function(){
+    $(document).on('change', '#have_spring', function() {
 
     })
     $("#have_film").click(function() {
 
         var radioValue = $("input[name='have_film']:checked").val();
         if (radioValue == 'have_film') {
-           calcPrice()
-        } else{
-           calcPrice()
+            calcPrice()
+        } else {
+            calcPrice()
         }
     });
 
@@ -341,9 +478,9 @@ $(document).ready(function() {
 
         var radioValue = $("input[name='have_spring']:checked").val();
         if (radioValue == 'have_spring') {
-           calcPrice()
-        } else{
-           calcPrice()
+            calcPrice()
+        } else {
+            calcPrice()
         }
     });
 
@@ -351,13 +488,16 @@ $(document).ready(function() {
 
         var radioValue = $("input[name='film']:checked").val();
         if (radioValue == 'add_film') {
-           $("#lube_film_color").next(".select2-container").show()
-           // price_accessories = price_film
-           calcPrice()
-        } else{
-           $("#lube_film_color").next(".select2-container").hide()
-           // price_accessories = 0;
-           calcPrice()
+            $("#lube_film_color").next(".select2-container").show()
+            $("#have_film").prop('disabled', false);
+
+            // price_accessories = price_film
+            calcPrice()
+        } else {
+            $("#lube_film_color").next(".select2-container").hide()
+            $("#have_film").prop('disabled', true);
+            // price_accessories = 0;
+            calcPrice()
         }
     });
     $("#spring").click(function() {
@@ -365,40 +505,31 @@ $(document).ready(function() {
         var radioSpringValue = $("input[name='spring']:checked").val();
         var radioTypeSwitchValue = $("#lube_switch_type").val();
         if (radioSpringValue == 'add_spring') {
+            $("#have_spring").prop('disabled', false);
             // price_accessories = price_spring
             calcPrice()
-            if(radioTypeSwitchValue == 'cherry'){
+            if (radioTypeSwitchValue == 'cherry') {
                 $("#lube_cherry_spring_force").next(".select2-container").show();
                 $("#lube_box_spring_force").next(".select2-container").hide();
 
-            }else if(radioTypeSwitchValue == 'box'){
+            } else if (radioTypeSwitchValue == 'box') {
                 $("#lube_cherry_spring_force").next(".select2-container").hide();
                 $("#lube_box_spring_force").next(".select2-container").show();
             }
-        } else{
+        } else {
             // price_accessories = 0
+            $("#have_spring").prop('disabled', true);
             calcPrice()
             $("#lube_cherry_spring_force").next(".select2-container").hide();
             $("#lube_box_spring_force").next(".select2-container").hide();
         }
     });
 
-    $(document).on('change', '#lube_quantity', function(){
+    $(document).on('change', '#lube_quantity', function() {
         calcPrice();
-        // var quantitySwitch = $(this).val()
-        // price_service = quantitySwitch * price_service_without_accessories;
-        // price_accessories;
-        // total_price = price_service + price_accessories
-        // var formatPriceService = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_service)
-        // var formatPriceAccessories = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_accessories)
-        // var formatPriceTotal = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(total_price)
-        // $('#price-service .t-right').html(formatPriceService)
-        // $('#price-accessories .t-right').html(formatPriceAccessories)
-        // $("#total-price .t-right").html(formatPriceTotal)
-
 
     })
-    
+
 
     var switchType, switchName, greaseName, filmColor, springForce;
     var addFilm, addSrping, haveFilm, haveSpring;
@@ -407,58 +538,67 @@ $(document).ready(function() {
     var priceService = 0;
     var priceAccessories = 0;
     var priceTotal = 0;
-    var formatPriceService, formatPriceAccessories, formatPriceTotal;
+    var formatPriceService, formatPriceAccessories, formatPriceTotal, formatPriceSubTotal, formatDiscount;
     var priceFilm, priceSpring
 
-    var calcPrice = function(){
+    var calcPrice = function() {
         // Input params
         switchQuantity = $("#lube_quantity").val();
         addFilm = $("input[name='film']:checked").val();
         addSpring = $("input[name='spring']:checked").val();
 
 
-        if(addFilm == 'add_film'){
+        if (addFilm == 'add_film') {
             priceFilm = current_price_film
-        }else{
+        } else {
             priceFilm = 0
         }
-        if(addSpring == 'add_spring'){
+        if (addSpring == 'add_spring') {
             priceSpring = current_price_spring
-        }else{
+        } else {
             priceSpring = 0
         }
         haveFilm = $("input[name='have_film']:checked").val();
         haveSpring = $("input[name='have_spring']:checked").val();
-        // if(haveFilm == 'have_film'){
-            
-        // }else{
-
-        // }
-        // if(haveSpring == 'have_spring'){
-
-        // }else{
-            
-        // }
+        checkboxHaveFilm = $("#have_film");
+        checkboxHaveSpring = $("#have_spring");
+        // haveFilm == 'have_film' ? priceFilm = current_price_film : 0
+        // haveSpring == 'have_spring' ? priceSpring = current_price_spring : 0
+        if (document.getElementById('have_film').attributes.getNamedItem('disabled')) {} else if (haveFilm == 'have_film') {
+            priceFilm = 0
+        } else {
+            priceFilm = current_price_film
+        }
+        if (document.getElementById('have_spring').attributes.getNamedItem('disabled')) {} else if (haveSpring == 'have_spring') {
+            priceSpring = 0
+        } else {
+            priceSpring = current_price_spring
+        }
         // Calc Price
-        if(addFilm || addSpring){
+        if (addFilm || addSpring) {
             price_service = switchQuantity * price_service_with_accessories;
-        }else{
+        } else {
             price_service = switchQuantity * price_service_without_accessories;
         }
         price_accessories = priceFilm + priceSpring
-        total_price = price_service + price_accessories
+        subtotal_price = price_service + price_accessories
+        total_price = subtotal_price - price_discount
         // Format Price
         formatPriceService = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_service)
         formatPriceAccessories = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_accessories)
+        formatDiscount = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_discount)
+        formatPriceSubTotal = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(subtotal_price)
         formatPriceTotal = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(total_price)
         // Show Price
         $('#price-service .t-right').html(formatPriceService)
         $('#price-accessories .t-right').html(formatPriceAccessories)
+        $("#discount-price .t-right").html(formatDiscount)
+        $("#sub-total .t-right").html(formatPriceSubTotal)
         $("#total-price .t-right").html(formatPriceTotal)
     }
 
 
-    
+
 })
 </script>
 
