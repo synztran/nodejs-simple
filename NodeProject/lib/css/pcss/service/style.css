@@ -1,5 +1,20 @@
+html,body{
+    background-repeat: repeat!important;
+    height: auto!important
+}
+footer{
+    /*clear: both;
+    position: absolute;
+    width: 100%*/
+    bottom: 0;
+    top: 50vh;
+}
+.remove-bottom-0{
+    bottom: unset!important
+}
 .main-container{
     margin: 2% 7%;
+    height: 100%
 }
 .main-container > .row > .lube-service{
     padding: 2%;
@@ -99,9 +114,7 @@
 .t-color-wheat{
     color: wheat!important
 }
-html,body{
-    background-repeat: repeat!important;
-}
+
 @media only screen and (max-width: 991px) {
   .assemble-service, .price-form{
         margin-top: 1rem;

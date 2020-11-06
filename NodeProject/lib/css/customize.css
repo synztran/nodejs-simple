@@ -37,6 +37,9 @@
 .w-10{
 	width: 10%!important
 }
+.mtb-auto{
+	margin: auto 0 !important
+}
 .ml-auto{
 	margin-left: auto !important
 }

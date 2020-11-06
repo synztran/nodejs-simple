@@ -92,254 +92,302 @@
             </h1>
         </div>
         <div class="row">
+           <!--  <div class="col-lg-4 col-md-12 collapse-lube">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".lube-service" aria-expanded="true" aria-controls="collapseExample">
+                Button with data-target
+                </button>
+            </div>
+            <div class="col-lg-4 col-md-12 collapse-assem">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".assemble-service" aria-expanded="true" aria-controls="collapseExample">
+                Button with data-target
+                </button>
+            </div> -->
             <div class="col-lg-4 col-md-12 lube-service">
-                <div class="title">
-                    <span>
-                        <%= lubeTitle %></span>
-                </div>
-                <div class="form-group">
-                    <label class="required_value" for="email">Quantity<span>:</span></label>
-                    <input name="lube_quantity" type="tel" value='' id="lube_quantity" maxlength="4">
-                </div>
-                <div class="form-group">
-                    <label for="email">Switch Type:</label>
-                    <select class="form-control disabled_searchbar black-input col-md-12 " id="lube_switch_type" name="lube_switch_type">
-                        <option value="cherry">Cherry MX & clone</option>
-                        <option value="box">KailhBox</option>
-                        <option value="albs" disabled>Albs (coming soon)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="email">Name Switch:</label>
-                    <select class="form-control enable_select2" id="lube_cherry_switch" name="
-                        lube_name_switch">
-                        <% include ./../tips/service/selectCherryMX%>
-                    </select>
-                    <select class="form-control enable_select2" id="lube_box_switch" name="
-                        lube_name_switch">
-                        <% include ./../tips/service/selectKailhbox%>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="email">Grease:</label>
-                    <select class="form-control enable_select2" id="lube_grease" name="lube_grease">
-                        <% include ./../tips/service/selectGrease %>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <div class="d-flex">
-                        <label for="film">Film:</label>
-                        <label for="film" class="btn-radio ml-auto">
-                            <input type="checkbox" id="film" name="film" value="add_film">
-                            <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                <circle cx="10" cy="10" r="9"></circle>
-                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                            </svg>
-                            <span>Yes</span>
-                        </label>
+                <div class="d-flex">
+                    <div class="title">
+                        <span><%= lubeTitle %></span>
                     </div>
-                    <select class="form-control enable_select2" id="lube_film_color" name="lube_film_color">
-                        <% include ./../tips/service/selectFilm %>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <div class="d-flex">
-                        <label for="spring">Spring:</label>
-                        <label for="spring" class="btn-radio ml-auto">
-                            <input type="checkbox" id="spring" name="spring" value="add_spring">
-                            <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                <circle cx="10" cy="10" r="9"></circle>
-                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                            </svg>
-                            <span>Yes</span>
-                        </label>
-                    </div>
-                    <select class="form-control enable_select2" id="lube_cherry_spring_force" name="lube_spring_force">
-                        <% include ./../tips/service/selectCherrySpring %>
-                    </select>
-                    <select class="form-control enable_select2" id="lube_box_spring_force" name="lube_spring_force">
-                        <% include ./../tips/service/selectKailhboxSpring %>
-                    </select>
-                </div>
-                <small class="form-text text-center note-check-box">If you already have, please check the box.</small>
-                <div class="form-group d-flex m-0">
-                    <label for="">Film, Have not?:</label>
-                    <label for="have_film" class="btn-radio ml-auto">
-                        <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
-                        <input type="checkbox" id="have_film" name="have_film" value="have_film">
+                    <label for="add_lube_service" class="btn-radio ml-auto mtb-auto">
+                        <input type="checkbox" id="add_lube_service" name="add_lube_service" value="add_lube_service">
                         <svg width="20px" height="20px" viewBox="0 0 20 20">
                             <circle cx="10" cy="10" r="9"></circle>
                             <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
                             <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
                         </svg>
-                        <b>Yes</b>
+                        <span>Yes</span>
                     </label>
                 </div>
-                <div class="form-group d-flex m-0">
-                    <label for="">Spring, Have not?:</label>
-                    <label for="have_spring" class="btn-radio ml-auto">
-                        <input type="checkbox" id="have_spring" name="have_spring" value="have_spring">
-                        <svg width="20px" height="20px" viewBox="0 0 20 20">
-                            <circle cx="10" cy="10" r="9"></circle>
-                            <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                            <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                        </svg>
-                        <b>Yes</b>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label for="lube_relsease_time">EST Time:</label>
-                    <select class="form-control disabled_searchbar" id="lube_relsease_time" name="lube_relsease_time">
-                        <% include ./../tips/service/selectESTime %>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="lube_specs">Note:</label>
-                    <textarea id="lube_specs" name="lube_specs" type="text" style="resize: none;" class="form-control min-h-10rem fs-14" placeholder="Note your requirement"></textarea>
+                <div id="lube_form">
+                    <div class="form-group">
+                        <label class="required_value" for="email">Quantity<span>:</span></label>
+                        <input name="lube_quantity" type="tel" value='' id="lube_quantity" maxlength="4">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Switch Type:</label>
+                        <select class="form-control disabled_searchbar black-input col-md-12 " id="lube_switch_type" name="lube_switch_type">
+                            <option value="cherry">Cherry MX & clone</option>
+                            <option value="box">KailhBox</option>
+                            <option value="albs" disabled>Albs (coming soon)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Name Switch:</label>
+                        <select class="form-control enable_select2" id="lube_cherry_switch" name="
+                            lube_name_switch">
+                            <% include ./../tips/service/selectCherryMX%>
+                        </select>
+                        <select class="form-control enable_select2" id="lube_box_switch" name="
+                            lube_name_switch">
+                            <% include ./../tips/service/selectKailhbox%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Grease:</label>
+                        <select class="form-control enable_select2" id="lube_grease" name="lube_grease">
+                            <% include ./../tips/service/selectGrease %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="d-flex">
+                            <label for="film">Film:</label>
+                            <label for="film" class="btn-radio ml-auto">
+                                <input type="checkbox" id="film" name="film" value="add_film">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                                    <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                    <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>Yes</span>
+                            </label>
+                        </div>
+                        <select class="form-control enable_select2" id="lube_film_color" name="lube_film_color">
+                            <% include ./../tips/service/selectFilm %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="d-flex">
+                            <label for="spring">Spring:</label>
+                            <label for="spring" class="btn-radio ml-auto">
+                                <input type="checkbox" id="spring" name="spring" value="add_spring">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                                    <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                    <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>Yes</span>
+                            </label>
+                        </div>
+                        <select class="form-control enable_select2" id="lube_cherry_spring_force" name="lube_spring_force">
+                            <% include ./../tips/service/selectCherrySpring %>
+                        </select>
+                        <select class="form-control enable_select2" id="lube_box_spring_force" name="lube_spring_force">
+                            <% include ./../tips/service/selectKailhboxSpring %>
+                        </select>
+                    </div>
+                    <small class="form-text text-center note-check-box">If you already have, please check the box.</small>
+                    <div class="form-group d-flex m-0">
+                        <label for="">Film, Have not?:</label>
+                        <label for="have_film" class="btn-radio ml-auto">
+                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                            <input type="checkbox" id="have_film" name="have_film" value="have_film">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <b>Yes</b>
+                        </label>
+                    </div>
+                    <div class="form-group d-flex m-0">
+                        <label for="">Spring, Have not?:</label>
+                        <label for="have_spring" class="btn-radio ml-auto">
+                            <input type="checkbox" id="have_spring" name="have_spring" value="have_spring">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <b>Yes</b>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="lube_relsease_time">EST Time:</label>
+                        <select class="form-control disabled_searchbar" id="lube_relsease_time" name="lube_relsease_time">
+                            <% include ./../tips/service/selectESTime %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="lube_specs">Note:</label>
+                        <textarea id="lube_specs" name="lube_specs" type="text" style="resize: none;" class="form-control min-h-10rem fs-14" placeholder="Note your requirement"></textarea>
+                    </div>
                 </div>
                 
             </div>
             <div class="col-lg-4 col-md-12 assemble-service">
-                <div class="title">
-                    <span>
-                        <%= assemTitle %></span>
-                </div>
-                <div class="form-group">
-                    <label for="email">Keyboard Type:</label>
-                    <select class="form-control disabled_searchbar black-input col-md-12 " id="assemble_kb_type" name="assemble_kb_type">
-                        <option value="stock">Stock Keyboard (already assembled from Company)</option>
-                        <option value="custom">Custom Keyboard (kit keyboard from Team/Maker)</option>
-                        <option value="other" disabled>Other (coming soon)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="email">Keyboard Layout:</label>
-                    <select class="form-control enable_select2" id="assemble_kb_layout" name="
-                        assemble_kb_layout">
-                        <% include ./../tips/service/selectKeyboardLayout%>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <div class="d-flex">
-                        <label for="">Assembled Pcb Option:</label>
+                
+                <div class="d-flex">
+                    <div class="title">
+                        <span>
+                            <%= assemTitle %></span>
                     </div>
-                    <div class="form-group d-flex m-0">
-                        <label class="col-lg-7 col-md-3 col-5" for="assembled_pcb_solder">Solder, Have not?:</label>
-                        <label for="assembled_pcb_solder" class="btn-radio ml-auto">
-                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
-                            <input type="checkbox" id="assembled_pcb_solder" name="assembled_pcb_solder" value="assembled_pcb_solder">
-                            <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                <circle cx="10" cy="10" r="9"></circle>
-                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                            </svg>
-                            <b>Yes</b>
-                        </label>
-                    </div>
-                    <div class="form-group d-flex m-0">
-                        <label class="col-lg-7 col-md-3 col-5" for="assembled_pcb_desolder">De-solder, Have not?:</label>
-                        <label for="assembled_pcb_desolder" class="btn-radio ml-auto">
-                            <input type="checkbox" id="assembled_pcb_desolder" name="assembled_pcb_desolder" value="assembled_pcb_desolder">
-                            <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                <circle cx="10" cy="10" r="9"></circle>
-                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                            </svg>
-                            <b>Yes</b>
-                        </label>
-                    </div>
-                    <div class="form-group d-flex m-0">
-                        <label class="col-lg-7 col-md-3 col-5" for="assembled_pcb_handlestab">Handle Stab, Have not?:</label>
-                        <label for="assembled_pcb_handlestab" class="btn-radio ml-auto">
-                            <input type="checkbox" id="assembled_pcb_handlestab" name="assembled_pcb_handlestab" value="assembled_pcb_handlestab">
-                            <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                <circle cx="10" cy="10" r="9"></circle>
-                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                            </svg>
-                            <b>Yes</b>
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="d-flex">
-                        <label for="add_led">Assembled Led Option:</label>
-                        <label for="add_led" class="btn-radio ml-auto">
-                            <input type="checkbox" id="add_led" name="add_led" value="add_led">
-                            <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                <circle cx="10" cy="10" r="9"></circle>
-                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                            </svg>
-                            <b>Yes</b>
-                        </label>
-                    </div>
-                    <div class="form-group d-flex m-0">
-                        <label class="col-lg-7 col-md-3 col-5" for="assemble_led_type">Led Type:</label>
-                        <select class="form-control disabled_searchbar" id="assemble_led_type" name="
-                        assemble_led_type">
-                        <% include ./../tips/service/selectLed%>
-                        </select>    
-                    </div>
-                    <div class="form-group d-flex m-0">
-                        <label class="col-lg-7 col-md-3" for="assemble_led_color">Led Color:</label>
-                        <select class="form-control enable_select2" id="assemble_led_color" name="
-                        assemble_led_color">
-                        <% include ./../tips/service/selectLedColor%>
-                        </select>    
-                    </div>
-                    
-                    <div class="form-group d-flex m-0">
-                        <label class="col-lg-7 col-md-3 col-5" for="assembled_led_solder">Solder, Have not?:</label>
-                        <label for="assembled_led_solder" class="btn-radio ml-auto">
-                            <input type="checkbox" id="assembled_led_solder" name="assembled_led_solder" value="assembled_led_solder">
-                            <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                <circle cx="10" cy="10" r="9"></circle>
-                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                            </svg>
-                            <b>Yes</b>
-                        </label>
-                    </div>
-                    <div class="form-group d-flex m-0">
-                        <label class="col-lg-7 col-md-3 col-5" for="assembled_led_desolder">De-solder, Have not?:</label>
-                        <label for="assembled_led_desolder" class="btn-radio ml-auto">
-                            <input type="checkbox" id="assembled_led_desolder" name="assembled_led_desolder" value="assembled_led_desolder">
-                            <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                <circle cx="10" cy="10" r="9"></circle>
-                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                            </svg>
-                            <b>Yes</b>
-                        </label>
-                    </div>
-                    
-                </div>
-                <small class="form-text text-center note-check-box">If you already have, please check the box.</small>
-                <div class="form-group d-flex m-0">
-                    <label class="col-lg-7 col-md-3 col-5" for="have_led">Leds, Have not?:</label>
-                    <label for="have_led" class="btn-radio ml-auto">
-                        <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
-                        <input type="checkbox" id="have_led" name="have_led" value="have_led">
+                    <label for="add_assembled_service" class="btn-radio ml-auto mtb-auto">
+                        <input type="checkbox" id="add_assembled_service" name="add_assembled_service" value="add_assembled_service">
                         <svg width="20px" height="20px" viewBox="0 0 20 20">
                             <circle cx="10" cy="10" r="9"></circle>
                             <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
                             <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
                         </svg>
-                        <b>Yes</b>
+                        <span>Yes</span>
                     </label>
                 </div>
-                <div class="form-group">
-                    <label for="assemble_relsease_time">EST Time:</label>
-                    <select class="form-control disabled_searchbar" id="assemble_relsease_time" name="assemble_relsease_time">
-                        <% include ./../tips/service/selectESTime %>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="assemble_specs">Note:</label>
-                    <textarea id="assemble_specs" name="assemble_specs" type="text" style="resize: none;" class="form-control min-h-10rem fs-14" placeholder="Note your requirement"></textarea>
+                <div id="assembled_form">
+                    <div class="form-group">
+                        <label for="email">Keyboard Type:</label>
+                        <select class="form-control disabled_searchbar black-input col-md-12 " id="assemble_kb_type" name="assemble_kb_type">
+                            <option value="stock">Stock Keyboard (already assembled from Company)</option>
+                            <option value="custom">Custom Keyboard (kit keyboard from Team/Maker)</option>
+                            <option value="other" disabled>Other (coming soon)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Keyboard Layout:</label>
+                        <select class="form-control enable_select2" id="assemble_kb_layout" name="
+                            assemble_kb_layout">
+                            <% include ./../tips/service/selectKeyboardLayout%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="d-flex">
+                            <label for="add_pcb">Assembled Pcb Option:</label>
+                            <label for="add_pcb" class="btn-radio ml-auto">
+                                <input type="checkbox" id="add_pcb" name="add_pcb" value="add_pcb">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                                    <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                    <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <b>Yes</b>
+                            </label>
+                        </div>
+                        <div class="option_assembled_pcb">
+                            <div class="form-group d-flex m-0">
+                                <label class="col-lg-7 col-md-3 col-7" for="assembled_pcb_solder">Solder, Have not?:</label>
+                                <label for="assembled_pcb_solder" class="btn-radio ml-auto">
+                                    <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                                    <input type="checkbox" id="assembled_pcb_solder" name="assembled_pcb_solder" value="assembled_pcb_solder">
+                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                        <circle cx="10" cy="10" r="9"></circle>
+                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                    </svg>
+                                    <b>Yes</b>
+                                </label>
+                            </div>
+                            <div class="form-group d-flex m-0">
+                                <label class="col-lg-7 col-md-3 col-7" for="assembled_pcb_desolder">De-solder, Have not?:</label>
+                                <label for="assembled_pcb_desolder" class="btn-radio ml-auto">
+                                    <input type="checkbox" id="assembled_pcb_desolder" name="assembled_pcb_desolder" value="assembled_pcb_desolder">
+                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                        <circle cx="10" cy="10" r="9"></circle>
+                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                    </svg>
+                                    <b>Yes</b>
+                                </label>
+                            </div>
+                            <div class="form-group d-flex m-0">
+                                <label class="col-lg-7 col-md-3 col-7" for="assembled_pcb_handlestab">Handle Stab, Have not?:</label>
+                                <label for="assembled_pcb_handlestab" class="btn-radio ml-auto">
+                                    <input type="checkbox" id="assembled_pcb_handlestab" name="assembled_pcb_handlestab" value="assembled_pcb_handlestab">
+                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                        <circle cx="10" cy="10" r="9"></circle>
+                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                    </svg>
+                                    <b>Yes</b>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="d-flex">
+                            <label for="add_led">Assembled Led Option:</label>
+                            <label for="add_led" class="btn-radio ml-auto">
+                                <input type="checkbox" id="add_led" name="add_led" value="add_led">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                                    <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                    <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <b>Yes</b>
+                            </label>
+                        </div>
+                        <div class="option_assembled_led">
+                            <div class="form-group d-flex m-0">
+                                <label class="col-lg-5 col-md-3" for="assemble_led_type">Led Type:</label>
+                                <select class="form-control disabled_searchbar" id="assemble_led_type" name="
+                                assemble_led_type">
+                                <% include ./../tips/service/selectLed%>
+                                </select>    
+                            </div>
+                            <div class="form-group d-flex m-0">
+                                <label class="col-lg-5 col-md-3" for="assemble_led_color">Led Color:</label>
+                                <select class="form-control enable_select2" id="assemble_led_color" name="
+                                assemble_led_color">
+                                <% include ./../tips/service/selectLedColor%>
+                                </select>    
+                            </div>
+                            
+                            <div class="form-group d-flex m-0">
+                                <label class="col-lg-7 col-md-3 col-7" for="assembled_led_solder">Solder, Have not?:</label>
+                                <label for="assembled_led_solder" class="btn-radio ml-auto">
+                                    <input type="checkbox" id="assembled_led_solder" name="assembled_led_solder" value="assembled_led_solder">
+                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                        <circle cx="10" cy="10" r="9"></circle>
+                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                    </svg>
+                                    <b>Yes</b>
+                                </label>
+                            </div>
+                            <div class="form-group d-flex m-0">
+                                <label class="col-lg-7 col-md-3 col-7" for="assembled_led_desolder">De-solder, Have not?:</label>
+                                <label for="assembled_led_desolder" class="btn-radio ml-auto">
+                                    <input type="checkbox" id="assembled_led_desolder" name="assembled_led_desolder" value="assembled_led_desolder">
+                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                        <circle cx="10" cy="10" r="9"></circle>
+                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                    </svg>
+                                    <b>Yes</b>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="form-text text-center note-check-box">If you already have, please check the box.</small>
+                    <div class="form-group d-flex m-0">
+                        <label class="" for="have_led">Leds, Have not?:</label>
+                        <label for="have_led" class="btn-radio ml-auto">
+                            <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
+                            <input type="checkbox" id="have_led" name="have_led" value="have_led">
+                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="9"></circle>
+                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                            </svg>
+                            <b>Yes</b>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="assemble_relsease_time">EST Time:</label>
+                        <select class="form-control disabled_searchbar" id="assemble_relsease_time" name="assemble_relsease_time">
+                            <% include ./../tips/service/selectESTime %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="assemble_specs">Note:</label>
+                        <textarea id="assemble_specs" name="assemble_specs" type="text" style="resize: none;" class="form-control min-h-10rem fs-14" placeholder="Note your requirement"></textarea>
+                    </div>
                 </div>
             </div>
             <div class="col-md-12 col-lg-3 price-form">
@@ -422,7 +470,25 @@ $(document).ready(function() {
             return false;
         }
     });
-
+    $("#lube_form").hide();
+    $("#assembled_form").hide();
+    $("#add_lube_service").click(function(){
+        var radioValue = $("input[name='add_lube_service']:checked").val();
+        if (radioValue == 'add_lube_service') {
+            $("#lube_form").show();
+        } else {
+            $("#lube_form").hide();
+        }
+    })
+     $("#add_assembled_service").click(function(){
+        var radioValue = $("input[name='add_assembled_service']:checked").val();
+        if (radioValue == 'add_assembled_service') {
+            $("#assembled_form").show();
+        } else {
+            $("#assembled_form").hide();
+        }
+    })
+    // Lube Service
     cherry_name_switch = $('#lube_cherry_switch')
     cherry_name_switch.next(".select2-container").hide()
 
@@ -550,7 +616,28 @@ $(document).ready(function() {
         calcPrice();
 
     })
+    // 
 
+    // Assembled Service
+    $(".option_assembled_pcb").hide();
+    $("#add_pcb").click(function(){
+        var radioValue = $("input[name='add_pcb']:checked").val();
+         if (radioValue == 'add_pcb') {
+            $(".option_assembled_pcb").show();
+        } else {
+            $(".option_assembled_pcb").hide();
+        }
+    })
+    $(".option_assembled_led").hide();
+    $("#add_led").click(function(){
+        var radioValue = $("input[name='add_led']:checked").val();
+         if (radioValue == 'add_led') {
+            $(".option_assembled_led").show();
+        } else {
+            $(".option_assembled_led").hide();
+        }
+    })
+    // 
 
     var switchType, switchName, greaseName, filmColor, springForce;
     var addFilm, addSrping, haveFilm, haveSpring;
