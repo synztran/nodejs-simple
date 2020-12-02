@@ -85,8 +85,8 @@ app.use(session({
 // app.use(livereload())
 // app.use(express.cookieParser());
 // set static data for public folder to Application Server
-// app.use(express.static('public'));
-// app.use(express.static('docs'));
+// app.use(express.static(__dirname + '/public'))
+// app.set('views', path.join(__dirname, '/public'));
 app.use('/api/docs', express.static('docs'))
 app.use('/api/js', express.static('lib/js'))
 app.use('/api/css', express.static('lib/css'))
@@ -98,7 +98,6 @@ app.use('/product/img', express.static('docs/pimg'))
 app.use('/product/css', express.static('lib/css/pcss'))
 app.use('/nodemodules', express.static('node_modules'))
 app.use('/favicon', express.static('favicon'))
-
 
 
 // using libary ejs, ejs create html then back to browser

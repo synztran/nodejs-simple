@@ -110,6 +110,10 @@ router.get("/signin", function(req, res) {
     res.render("homePage");
 });
 
+// router.get("/nhomepage", function(req, res) {
+//     res.render("manager/adminPage");
+// });
+
 router.get("/test", function(req, res) {
     res.render("testPage");
 });
@@ -125,9 +129,10 @@ router.get('/', TokenCheckMiddleware, function(req, res) {
         res.redirect('/api/signin')
     } else {
         var admin = req.session.Admin
-        res.render('mainPage', {
+        res.render('manager/adminPage', {
             fname: admin['fname'],
-            lname: admin['lname']
+            lname: admin['lname'],
+            mail: admin['email']
         });
     }
 
