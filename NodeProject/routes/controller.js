@@ -13,6 +13,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const fileuploader = require('./../lib/fileuploader/fileuploader');
 router.use(cookieParser());
+const app = express();
+const i18n = require("i18n")
 // var token = jwt.sign({foo: 'bar'}, 'shhhhh');
 const tokenList = {};
 
@@ -64,11 +66,29 @@ const uploadAdsProduct = multer({
     }
 })
 
-
-
-
-
-
+i18n.configure({
+    locales:['en', 'vi'],
+    defaultLocale: 'en',
+    directory: path.join(__dirname, '/locales'),
+    autoReload: true,
+    cookie: 'lang',
+    api: {
+        __: '__', //now req.__ becomes req.__
+        __n: '__n', //and req.__n can be called as req.__n
+      },
+})
+router.use(i18n.init);
+app.use((req, res, next) => {
+  res.cookie('lang', req.params.lang, {maxAge: 900000});
+  next();
+});
+// router.use(function(req, res, next){
+//     if (req.cookies.locale === undefined) {
+//         res.cookie('locale', 'zh', { maxAge: 900000, httpOnly: true });
+//         req.setLocale('zh');
+//     }
+//     next();
+// })
 
 // var imgPath = 'docs/img_1435.JPG';
 var Account = require('./../db/model/account');
@@ -92,6 +112,13 @@ const options = {
         'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTU3NjA2MDk2NSwiZXhwIjoxNTc2MDYxMDI1fQ.obUYFFsvscovK0uq5o-PX3OCNP7a0NOdGqrNqm0KBFs'
     }
 };
+
+
+router.get('/change-lang/:lang', (req, res)=>{
+    console.log(req.params.lang)
+    res.cookie('lang', req.params.lang, {maxAge: 900000});
+    res.redirect('back');
+})
 
 function callback(error, response, body) {
     if (!error && response.statusCode == 200) {

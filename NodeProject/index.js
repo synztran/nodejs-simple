@@ -26,6 +26,8 @@ const Database = require('./db/database');
 const routes = require('./routes/controller');
 const proutes = require('./routes/pcontroller');
 const bcrypt = require("bcryptjs");
+const i18n = require("i18n")
+const hbs = require('hbs')
 // mongoose.connect('mongodb://localhost:27017/testmongodb');
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
 // var date = new Date();
@@ -49,8 +51,9 @@ del = function(req, res){
 	res.redirect('/api/signin');
 	
 }
-
-
+hbs.registerHelper('__', function () {
+   return i18n.__.apply(this, arguments);
+});
 
 // Check connection of db
 db.on('error', console.log.bind(console, "connection error")); 
@@ -100,6 +103,7 @@ app.use('/nodemodules', express.static('node_modules'))
 app.use('/favicon', express.static('favicon'))
 
 
+
 // using libary ejs, ejs create html then back to browser
 app.set("view engine", "ejs");
 
@@ -113,7 +117,35 @@ app.use('/', proutes);
 
 
 
+i18n.configure({
+	locales:['en', 'vi'],
+	defaultLocale: 'en',
+	directory: path.join(__dirname, '/locales'),
+	autoReload: true,
+	cookie: 'lang',
+	api: {
+	    __: '__', //now req.__ becomes req.__
+	    __n: '__n', //and req.__n can be called as req.__n
+	  },
+})
 
+app.use(i18n.init);
+// app.use(function(req, res, next){
+// 	if (req.cookies.locale === undefined) {
+// 	    res.cookie('locale', 'en', { maxAge: 900000, httpOnly: true });
+// 	    req.setLocale('en');
+// 	}
+// 	next();
+// })
+
+// app.use('/change-lang/:lang', (req, res)=>{
+//     res.cookie('lang', req.params.lang, {maxAge: 900000});
+//     res.redirect('back');
+// })
+app.use((req, res, next) => {
+  res.cookie('lang', req.params.lang, {maxAge: 900000});
+  next();
+});
 
 // io.emit('some event', {someProperty: 'some value', otherProperty: 'other value'});
 
@@ -261,7 +293,7 @@ server.listen(port, function(){
 // exports.user = User;
 // exports.account = Account;
 module.exports = {
-	app: express()
+	app: express(),
 }
 
 /*----------------------------------------------*/

@@ -34,7 +34,7 @@
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
           <ul class="navbar-nav">
-            <!-- <li class="nav-item font-weight-semibold d-none d-lg-block">Help : +050 2992 709</li> -->
+            <li class="nav-item font-weight-semibold d-none d-lg-block moment-realtime text-center"></li>
             <li class="nav-item dropdown language-dropdown">
               <a class="nav-link dropdown-toggle px-2 d-flex align-items-center" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <div class="d-inline-flex mr-0 mr-md-3">
@@ -45,12 +45,12 @@
                 <span class="profile-text font-weight-medium d-none d-md-block">English</span>
               </a>
               <div class="dropdown-menu dropdown-menu-left navbar-dropdown py-2" aria-labelledby="LanguageDropdown">
-                <a class="dropdown-item">
+                <a href="api/change-lang/en" class="dropdown-item">
                   <div class="flag-icon-holder">
                     <i class="flag-icon flag-icon-us"></i>
                   </div>English
                 </a>
-                <a class="dropdown-item">
+                <a href="api/change-lang/vi" class="dropdown-item">
                   <div class="flag-icon-holder">
                     <i class="flag-icon flag-icon-vn"></i>
                   </div>Vietnam
@@ -196,7 +196,7 @@
             <li class="nav-item">
               <a class="nav-link" href="index.html">
                 <i class="menu-icon typcn typcn-document-text"></i>
-                <span class="menu-title">Dashboard</span>
+                <span class="menu-title"><%= __('Home') %></span>
               </a>
             </li>
             <li class="nav-item">
@@ -890,6 +890,13 @@
             $(".main-panel").css("margin-left",width_sidebar)
           }
         })
+        var interval = setInterval(function() {
+            var momentNow = moment();
+            $('.moment-realtime').html(momentNow.format('YYYY MMMM DD') + ' '
+                                + momentNow.format('dddd')
+                                 .substring(0,3).toUpperCase() + '<br>' + momentNow.format('A hh:mm:ss'));
+            // $('#time-part').html(momentNow.format('A hh:mm:ss'));
+        }, 100);
       // })
     </script>
 </html>

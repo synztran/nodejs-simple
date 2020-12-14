@@ -14,6 +14,7 @@ const session = require('express-session');
 const livereload = require('connect-livereload');
 const app = express();
 router.use(cookieParser());
+const i18n = require("i18n")
 // var token = jwt.sign({foo: 'bar'}, 'shhhhh');
 const tokenList = {};
 
@@ -64,6 +65,13 @@ var TokenUserCheckMiddleware = require('./../lib/check/checktokenproduct.js')
 var SessionCheckMiddleware = require('./../lib/check/checksession');
 var CountMiddleware = require('./../lib/check/countproduct');
 
+
+// i18n.configure({
+//     locales:['en', 'vi'],
+//     directory: __dirname + '/locales',
+//     cookie: 'lang',
+// })
+
 app.use(session({
 	saveUninitialized: true, 
 	name: "mycookie",
@@ -74,9 +82,17 @@ app.use(session({
 		maxAge: 1800000
 	}
 }));
+
+app.use('/change-lang/:lang', (req, res)=>{
+    console.log(req.params.lang)
+    res.cookie('lang', req.params.lang, {maxAge: 900000});
+    res.redirect('back');
+})
+
 // app.use(livereload())
 
 router.post("/login", async (req, res, next) => {
+    res.cookie('lang', 'en', {maxAge: 900000});
     console.log(req.ip);
     try {
         var account = await Account.findOne({ email: (req.body.email).toLowerCase() }).exec();
@@ -137,7 +153,7 @@ router.post("/login", async (req, res, next) => {
         // res.cookie('uid', account._id, {maxAge: 6000000})
         // res.cookie('uemail', account.email, {maxAge: 6000000})
         res.cookie('x-refresh-token', response.refreshToken, {maxAge: 6000000});
-
+        res.cookie('lang', 'vi', { maxAge: 900000 });
         req.session.User = {
             email: account['email'],
             fname: account['fname'],
@@ -161,7 +177,6 @@ router.post("/login", async (req, res, next) => {
         res.status(500).send(err);
     }
 });
-
 
 
 router.get("/", function(req, res) {
