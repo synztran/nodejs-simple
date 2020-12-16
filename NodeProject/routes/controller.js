@@ -152,6 +152,7 @@ router.get("/signup", function(req, res) {
 router.get('/', TokenCheckMiddleware, function(req, res) {
     console.log(req.session.Admin);
     console.log(req.decoded)
+    console.log(req.cookies.lang)
     if (!req.session.Admin) {
         res.redirect('/api/signin')
     } else {
@@ -159,7 +160,8 @@ router.get('/', TokenCheckMiddleware, function(req, res) {
         res.render('manager/adminPage', {
             fname: admin['fname'],
             lname: admin['lname'],
-            mail: admin['email']
+            mail: admin['email'],
+            lang: req.cookies.lang
         });
     }
 
