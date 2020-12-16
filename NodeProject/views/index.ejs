@@ -29,216 +29,273 @@
     <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
 </head>
 <style>
-
 .home-social .container {
-	 position: relative;
-	 width: 400px;
-	 height: 400px;
-     
+    position: relative;
+    width: 400px;
+    height: 400px;
+
 }
-.home-social .container .text-container, .container .shadow-container {
-	 position: absolute;
-	 top: 0;
-	 left: 0;
-	 width: 100%;
-	 height: 100%;
+
+.home-social .container .text-container,
+.container .shadow-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
+
 .home-social .container .text {
-	 position: absolute;
-	 top: 50%;
-	 font-size: 12rem;
-	 font-family: "Bebas Neue";
-	 font-weight: bold;
-	 -webkit-text-stroke: 2px #161618;
-	 letter-spacing: 4px;
-	 user-select: none;
-	 pointer-events: none;
+    position: absolute;
+    top: 50%;
+    font-size: 12rem;
+    font-family: "Bebas Neue";
+    font-weight: bold;
+    -webkit-text-stroke: 2px #161618;
+    letter-spacing: 4px;
+    user-select: none;
+    pointer-events: none;
 }
+
 .home-social .container .text .icon {
-	 position: absolute;
-	 width: 1vw;
-	 height: 1vw;
-	 stroke-width: 25px;
-	 stroke: #161618;
-	 transform: translate(-50%, -50%);
-	 animation: scaleUpdown 2000ms ease-in-out infinite;
+    position: absolute;
+    width: 1vw;
+    height: 1vw;
+    stroke-width: 25px;
+    stroke: #161618;
+    transform: translate(-50%, -50%);
+    animation: scaleUpdown 2000ms ease-in-out infinite;
 }
+
 .home-social .container .text .icon:nth-child(1) {
-	 top: 30%;
-	 left: 2.5%;
-	 animation-delay: 0;
+    top: 30%;
+    left: 2.5%;
+    animation-delay: 0;
 }
+
 .home-social .container .text .icon:nth-child(2) {
-	 top: 62%;
-	 left: 24.5%;
-	 animation-delay: -200ms;
+    top: 62%;
+    left: 24.5%;
+    animation-delay: -200ms;
 }
+
 .home-social .container .text .icon:nth-child(3) {
-	 top: 13%;
-	 left: 70%;
-	 animation-delay: -480ms;
+    top: 13%;
+    left: 70%;
+    animation-delay: -480ms;
 }
+
 .home-social .container .text .icon:nth-child(4) {
-	 top: 56%;
-	 left: 99.5%;
-	 animation-delay: -940ms;
+    top: 56%;
+    left: 99.5%;
+    animation-delay: -940ms;
 }
+
 .home-social .container .text-container {
-	 z-index: 6;
+    z-index: 6;
 }
+
 .home-social .container .text-container .text .icon {
-	 fill: #f2f2f2;
+    fill: #f2f2f2;
 }
+
 .home-social .container .text-container .text:nth-child(1) {
-	 opacity: 0;
-	 left: 42.5%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 1));
-	 z-index: -1;
+    opacity: 0;
+    left: 42.5%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 1));
+    z-index: -1;
 }
+
 .home-social .container .text-container .text:nth-child(2) {
-	 opacity: 0;
-	 left: 45%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 2));
-	 z-index: -2;
+    opacity: 0;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 2));
+    z-index: -2;
 }
+
 .home-social .container .text-container .text:nth-child(3) {
-	 opacity: 0;
-	 left: 47.5%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 3));
-	 z-index: -3;
+    opacity: 0;
+    left: 47.5%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 3));
+    z-index: -3;
 }
+
 .home-social .container .text-container .text:nth-child(4) {
-	 opacity: 0;
-	 left: 50%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 4));
-	 z-index: -4;
+    opacity: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 4));
+    z-index: -4;
 }
+
 .home-social .container .text-container .text:nth-child(5) {
-	 opacity: 0;
-	 left: 52.5%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 5));
-	 z-index: -5;
+    opacity: 0;
+    left: 52.5%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 5));
+    z-index: -5;
 }
+
 .home-social .container .text-container .text:nth-child(6) {
-	 opacity: 0;
-	 left: 55%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 6));
-	 z-index: -6;
+    opacity: 0;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 6));
+    z-index: -6;
 }
+
 .home-social .container .text-container .text:nth-child(7) {
-	 opacity: 0;
-	 left: 57.5%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 7));
-	 z-index: -7;
+    opacity: 0;
+    left: 57.5%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 7));
+    z-index: -7;
 }
+
 .home-social .container .shadow-container {
-	 z-index: 0;
+    z-index: 0;
 }
+
 .home-social .container .shadow-container .text {
-	 -webkit-text-stroke: 0;
-	 letter-spacing: -2px;
-	 color: #6d7881;
-	 top: 54%;
+    -webkit-text-stroke: 0;
+    letter-spacing: -2px;
+    color: #6d7881;
+    top: 54%;
 }
+
 .home-social .container .shadow-container .text:nth-child(1) {
-	 opacity: 0;
-	 left: 37.5%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 1));
-	 z-index: - 8;
+    opacity: 0;
+    left: 37.5%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 1));
+    z-index: - 8;
 }
+
 .home-social .container .shadow-container .text:nth-child(2) {
-	 opacity: 0;
-	 left: 40%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 2));
-	 z-index: - 9;
+    opacity: 0;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 2));
+    z-index: - 9;
 }
+
 .home-social .container .shadow-container .text:nth-child(3) {
-	 opacity: 0;
-	 left: 42.5%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 3));
-	 z-index: - 10;
+    opacity: 0;
+    left: 42.5%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 3));
+    z-index: - 10;
 }
+
 .home-social .container .shadow-container .text:nth-child(4) {
-	 opacity: 0;
-	 left: 45%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 4));
-	 z-index: - 11;
+    opacity: 0;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 4));
+    z-index: - 11;
 }
+
 .home-social .container .shadow-container .text:nth-child(5) {
-	 opacity: 0;
-	 left: 47.5%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 5));
-	 z-index: - 12;
+    opacity: 0;
+    left: 47.5%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 5));
+    z-index: - 12;
 }
+
 .home-social .container .shadow-container .text:nth-child(6) {
-	 opacity: 0;
-	 left: 50%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 6));
-	 z-index: - 13;
+    opacity: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 6));
+    z-index: - 13;
 }
+
 .home-social .container .shadow-container .text:nth-child(7) {
-	 opacity: 0;
-	 left: 52.5%;
-	 transform: translate(-50%, -50%);
-	 animation: upDown 2000ms ease-in-out infinite;
-	 animation-delay: calc(0s + (0.1s * 7));
-	 z-index: - 14;
+    opacity: 0;
+    left: 52.5%;
+    transform: translate(-50%, -50%);
+    animation: upDown 2000ms ease-in-out infinite;
+    animation-delay: calc(0s + (0.1s * 7));
+    z-index: - 14;
 }
+
 .home-social .container .shadow-container .text .icon {
-	 fill: #6d7881;
-	 stroke-width: 0;
+    fill: #6d7881;
+    stroke-width: 0;
 }
- @keyframes upDown {
-	 0%, 100% {
-		 opacity: 1;
-		 transform: translate(-50%, -70%);
-	}
-	 50% {
-		 transform: translate(-50%, -30%);
-	}
+
+@keyframes upDown {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -70%);
+    }
+
+    50% {
+        transform: translate(-50%, -30%);
+    }
 }
- @keyframes scaleUpdown {
-	 0% {
-		 transform: translate(-50%, -50%) scale(1) rotate(0);
-	}
-	 50% {
-		 transform: translate(-50%, -50%) scale(1.4) rotate(90deg);
-	}
-	 100% {
-		 transform: translate(-50%, -50%) scale(1) rotate(180deg);
-	}
+
+@keyframes scaleUpdown {
+    0% {
+        transform: translate(-50%, -50%) scale(1) rotate(0);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.4) rotate(90deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(180deg);
+    }
 }
+
 @keyframes animatedBackground_a {
-    0% { background-position: 0 0 }
-    100% { background-position: -500px 0 }
+    0% {
+        background-position: 0 0
+    }
+
+    100% {
+        background-position: -500px 0
+    }
+}
+@media only screen and (max-width: 414px){
+    .main-content-homepage{
+        padding-top: 5rem!important;
+    }
+    .main-content-homepage > h2{
+        font-size: 30px!important;
+    }
+    .main-content-homepage > h2, .main-content-homepage > p{
+        padding: 0 0!important
+    }
+    .main-content-homepage > p{
+        font-size: 26px!important
+    }
+    .home-content__scroll{
+        display: none
+    }
 }
 </style>
+
 <body id="top">
     <!-- preloader
     ================================================== -->
@@ -258,7 +315,6 @@
             </a>
         </div> <!-- end header-logo -->
         <div class="header-wraper" style="display: inline-block;width: 70%">
-           
         </div>
         <!-- <div class="header-login" style="display: inline-block;top: 19%;position: relative;">
             <ul style="list-style: none;display: inline-flex;">
@@ -350,11 +406,34 @@
                 <section class="u-content-space u-overlay__inner text-white text-center">
                     <div class="container">
                         <div class="row justify-content-center">
-                            <div class="col-lg-8" style="float:unset!important">
-                                <header class="mb-8">
+                            <div class="col-lg-8" style="">
+                                <header class="mb-8 main-content-homepage">
                                     <!-- <h2 class="display-5 display-sm-4 font-weight-light mb-4">We are coming soon!</h2>
                                     <p class="lead">Currently we are working on our brand new website and will be lunching soon. Do not miss it, subscribe below to keep updated.</p> -->
-                                    <h2 class="display-5 display-sm-4 font-weight-light mb-4" style="font-weight: bold;font-size: 50px;text-shadow: #A3A3A3 1px 7px 1px;-webkit-text-stroke: 1.5px #000000;"><span style="color:#ff4600">T</span><span style="color:#ff8b00">H</span><span style="color:#ffd100">E</span><span style="color: transparent;text-shadow: none;">&nbsp;</span><span style="color:#a2ff00">G</span><span style="color:#5dff00">B</span><span style="color: transparent;text-shadow: none;">&nbsp;</span><span style="color:#00ff2e">O</span><span style="color:#00ff74">F</span><span style="color: transparent;text-shadow: none;">&nbsp;</span><span style="color:#00ffff">L</span><span style="color:#00b9ff">I</span><span style="color:#0074ff">N</span><span style="color: transparent;text-shadow: none;">&nbsp;</span><span style="color:#1700ff">W</span><span style="color:#5d00ff">H</span><span style="color:#a200ff">A</span><span style="color:#e800ff">L</span><span style="color:#ff00d1">E</span><span style="color: transparent;text-shadow: none;">&nbsp;</span><span style="color:#ff0046">7</span><span style="color:#ff0000">5</span></h2>
+                                    <h2 class="display-5 display-sm-4 font-weight-light mb-4" style="font-weight: bold;font-size: 50px;text-shadow: #A3A3A3 1px 7px 1px;-webkit-text-stroke: 1.5px #000000;">
+                                        <span style="color:#ff4600">T</span>
+                                        <span style="color:#ff8b00">H</span>
+                                        <span style="color:#ffd100">E</span>
+                                        <span style="color: transparent;text-shadow: none;">&nbsp;</span>
+                                        <span style="color:#a2ff00">G</span>
+                                        <span style="color:#5dff00">B</span>
+                                        <span style="color: transparent;text-shadow: none;">&nbsp;</span>
+                                        <span style="color:#00ff2e">O</span>
+                                        <span style="color:#00ff74">F</span>
+                                        <span style="color: transparent;text-shadow: none;">&nbsp;</span>
+                                        <span style="color:#00ffff">L</span>
+                                        <span style="color:#00b9ff">I</span>
+                                        <span style="color:#0074ff">N</span>
+                                        <span style="color: transparent;text-shadow: none;">&nbsp;</span>
+                                        <span style="color:#1700ff">W</span>
+                                        <span style="color:#5d00ff">H</span>
+                                        <span style="color:#a200ff">A</span>
+                                        <span style="color:#e800ff">L</span>
+                                        <span style="color:#ff00d1">E</span>
+                                        <span style="color: transparent;text-shadow: none;">&nbsp;</span>
+                                        <span style="color:#ff0046">7</span>
+                                        <span style="color:#ff0000">5</span>
+                                    </h2>
                                     <p class="lead" style="background-image: -webkit-linear-gradient(left, #f00, #ff2b00, #f50, #ff8000, #fa0, #ffd500, #ff0, #d4ff00, #af0, #80ff00, #5f0, #2bff00, #0f0, #00ff2a, #0f5, #00ff80, #0fa, #00ffd5, #0ff, #00d5ff, #0af, #0080ff, #05f, #002aff, #00f, #2b00ff, #50f, #8000ff, #a0f, #d400ff, #f0f, #ff00d4, #f0a, #ff0080, #f05, #ff002b, #f00);    -webkit-animation: animatedBackground_a 5s linear infinite alternate;    background-clip: text;    -webkit-background-clip: text;    -webkit-text-fill-color: #0000;font-weight: 700">Click link below to join.</p>
                                 </header>
                                 <div class="js-timer u-timer"></div>
@@ -383,42 +462,39 @@
                 </a>
             </div>
         </div> <!-- end home-content -->
-        
         <ul class="home-social">
-                <% if(user!= null) { %>
-                <li>
-                    <a id="login" href="#"><i class="fas fa-user"></i><span>
-                            <%= user %></span></a>
-                </li>
-                <% }else{ %>
-                <li>
-                    <a id="login" href="#"><i class="fas fa-user"></i><span>Signin</span></a>
-                </li>
-                <% } %>
-                <li>
-                    <a href="/proxygb"><i class="fas fa-flag"></i><span>ProxyGB</span></a>
-                </li>
-                
-                <li>
-                    <a href="#0">  <i class="fas fa-users"></i><span>GroupBuy</span></a>
-                </li>
-    
-                <li>
-                    <a href="#0"><i class="fas fa-images"></i><span>Gallery</span></a>
-                </li>
-                <li>
-                    <a class="video-link" href="https://player.vimeo.com/video/117310401?color=01aef0&title=0&byline=0&portrait=0" data-lity>
-                        <!-- <span class="video-icon"></span> -->
-                        <i class="fas fa-video"></i>
-                        <span class="video-text">Intro</span>
-                    </a>
-                </li>
+            <% if(user!= null) { %>
+            <li>
+                <a id="login" href="#"><i class="fas fa-user"></i><span>
+                        <%= user %></span></a>
+            </li>
+            <% }else{ %>
+            <li>
+                <a id="login" href="#"><i class="fas fa-user"></i><span>Signin</span></a>
+            </li>
+            <% } %>
+            <li>
+                <a href="/proxygb"><i class="fas fa-flag"></i><span>ProxyGB</span></a>
+            </li>
+            <li>
+                <a href="#0"> <i class="fas fa-users"></i><span>GroupBuy</span></a>
+            </li>
+            <li>
+                <a href="#0"><i class="fas fa-images"></i><span>Gallery</span></a>
+            </li>
+            <li>
+                <a class="video-link" href="https://player.vimeo.com/video/117310401?color=01aef0&title=0&byline=0&portrait=0" data-lity>
+                    <!-- <span class="video-icon"></span> -->
+                    <i class="fas fa-video"></i>
+                    <span class="video-text">Intro</span>
+                </a>
+            </li>
         </ul> <!-- end home-social -->
         <!-- <ul style="bottom:20rem;" class="home-social">
             <li>
                 <a id="login" href="#"><i class="fas fa-user"></i><span>Signin</span></a>
             </li> -->
-            <!-- <div class="container">
+        <!-- <div class="container">
                 <div class="text-container"><span class="text">VIBES<div class="icon--container"><svg class="icon star">
                                 <use xlink:href="#star"></use>
                             </svg><svg class="icon star">
@@ -443,9 +519,7 @@
                     <path d="m 128.07699,246.6702 16.62278,44.87778 c 0.62488,1.68958 2.24042,2.81007 4.04647,2.81007 1.80605,0 3.42159,-1.12049 4.04646,-2.81007 l 16.62278,-44.87778 c 13.45522,-36.3312 42.2174,-64.97071 78.70166,-78.36601 l 45.06998,-16.55188 c 1.69428,-0.62221 2.81958,-2.23087 2.81958,-4.02922 0,-1.79835 -1.1253,-3.40699 -2.81958,-4.0292 l -45.07253,-16.5519 C 211.63034,113.74417 182.86815,85.107178 169.41548,48.778514 L 152.7927,3.900743 c -0.62487,-1.6870583 -2.24041,-2.8075483 -4.04646,-2.8075483 -1.80605,0 -3.42159,1.12049 -4.04647,2.8075483 L 128.07699,48.778514 C 114.62179,85.107178 85.862143,113.74417 49.375346,127.14199 l -45.0725171,16.5519 c -1.694284,0.62221 -2.819573,2.23085 -2.819573,4.0292 0,1.79835 1.125289,3.40701 2.819573,4.02922 l 45.0699771,16.55188 c 36.486798,13.3953 65.248984,42.03228 78.704184,78.36601 z"></path>
                 </symbol>
             </svg> -->
-            
         <!-- </ul> end home-social -->
-        
     </section> <!-- end s-home -->
     <!-- about
     ================================================== -->
@@ -457,7 +531,7 @@
                     We are Noobteam's member, a technicians and consultants have many years of experience with custom keyboard. We put responsibility and excellence first in our work
             </div>
         </div> <!-- end section-header -->
-       <!--  <div class="row bit-narrow" data-aos="fade-up">
+        <!--  <div class="row bit-narrow" data-aos="fade-up">
             <div class="col-full">
                 <p class="lead">
                     Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
@@ -467,39 +541,39 @@
         <!-- end about-desc -->
         <div class="row bit-narrow">
             <div class="about-process process block-1-2 block-tab-full">
-            <% if(listContent){%>
+                <% if(listContent){%>
                 <% listContent.forEach(function(item){%>
-                    <% if(item.content_type == 1){%>
-                    <div class="col-block item-process" data-aos="fade-up">
-                        <div class="item-process__text">
-                            <h4 class="item-title">Consultation</h4>
-                                        <%- item.specs %>
-                        </div>
+                <% if(item.content_type == 1){%>
+                <div class="col-block item-process" data-aos="fade-up">
+                    <div class="item-process__text">
+                        <h4 class="item-title">Consultation</h4>
+                        <%- item.specs %>
                     </div>
-                    <% }else if(item.content_type == 2){ %>
-                    <div class="col-block item-process" data-aos="fade-up">
-                        <div class="item-process__text">
-                            <h4 class="item-title">Assembled</h4>
-                                        <%- item.specs %>
-                        </div>
+                </div>
+                <% }else if(item.content_type == 2){ %>
+                <div class="col-block item-process" data-aos="fade-up">
+                    <div class="item-process__text">
+                        <h4 class="item-title">Assembled</h4>
+                        <%- item.specs %>
                     </div>
-                    <% }else if(item.content_type == 3){ %>
-                    <div class="col-block item-process" data-aos="fade-up">
-                        <div class="item-process__text">
-                            <h4 class="item-title">Lube Service</h4>
-                                     <%- item.specs %>
-                        </div>
+                </div>
+                <% }else if(item.content_type == 3){ %>
+                <div class="col-block item-process" data-aos="fade-up">
+                    <div class="item-process__text">
+                        <h4 class="item-title">Lube Service</h4>
+                        <%- item.specs %>
                     </div>
-                    <% }else if(item.content_type == 4){ %>
-                    <div class="col-block item-process" data-aos="fade-up"> 
-                        <div class="item-process__text">
-                            <h4 class="item-title">Support</h4>
-                                     <%- item.specs %>
-                        </div>
+                </div>
+                <% }else if(item.content_type == 4){ %>
+                <div class="col-block item-process" data-aos="fade-up">
+                    <div class="item-process__text">
+                        <h4 class="item-title">Support</h4>
+                        <%- item.specs %>
                     </div>
-                    <%}%>
+                </div>
+                <%}%>
                 <% }) %>
-            <%}%>
+                <%}%>
             </div> <!-- end process -->
         </div> <!-- end row -->
     </section> <!-- end s-about -->
@@ -626,37 +700,38 @@
                     </div>
                 </div> -->
                 <% if(listAdsProduct){ %>
-                    <% listAdsProduct.forEach(function(item){%>
-                        <% if(item.status != 0){ %>
-                            <div class="masonry__brick" data-aos="fade-up">
-                                <div class="item-folio">
-                                    <div class="item-folio__thumb">
-                                        <a href="/api/<%=item.pic_product.path%>" class="thumb-link" title="Shutterbug" data-size="1050x700">
-                                            <img src="/api/<%=item.pic_product.path%>" srcset="/api/<%=item.pic_product.path%> 1x, /api/<%=item.pic_product.path%> 2x" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="item-folio__text">
-                                        <h3 class="item-folio__title">
-                                            <%= item.product_name %>
-                                        </h3>
-                                        <p class="item-folio__cat">
-                                            <%= item.author_name %>
-                                        </p>
-                                    </div>
-                                    <a href="https://www.behance.net/" class="item-folio__project-link" title="Project link">
-                                        <i class="icon-link"></i>
-                                    </a>
-                                    <div class="item-folio__caption">
-                                        <p><%- item.specs %></p>
-                                    </div>
-                                </div>
-                            </div>
-                        <% } %>
-                    <% })%>
-                <% }else{ %>
-
+                <% listAdsProduct.forEach(function(item){%>
+                <% if(item.status != 0){ %>
+                <div class="masonry__brick" data-aos="fade-up">
+                    <div class="item-folio">
+                        <div class="item-folio__thumb">
+                            <a href="/api/<%=item.pic_product.path%>" class="thumb-link" title="Shutterbug" data-size="1050x700">
+                                <img src="/api/<%=item.pic_product.path%>" srcset="/api/<%=item.pic_product.path%> 1x, /api/<%=item.pic_product.path%> 2x" alt="">
+                            </a>
+                        </div>
+                        <div class="item-folio__text">
+                            <h3 class="item-folio__title">
+                                <%= item.product_name %>
+                            </h3>
+                            <p class="item-folio__cat">
+                                <%= item.author_name %>
+                            </p>
+                        </div>
+                        <a href="https://www.behance.net/" class="item-folio__project-link" title="Project link">
+                            <i class="icon-link"></i>
+                        </a>
+                        <div class="item-folio__caption">
+                            <p>
+                                <%- item.specs %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
                 <% } %>
-            </div> 
+                <% })%>
+                <% }else{ %>
+                <% } %>
+            </div>
         </div> <!-- end masonry-wrap -->
     </section> <!-- end s-works -->
     <!-- clients
@@ -682,7 +757,7 @@
                     <li><a href="#0">DHL</a></li>
                     <li><a href="#0">VNMK</a></li>
                     <li><a href="#0">VKG</a></li>
-                   <!--  <li><a href="#0">Mozilla</a></li>
+                    <!--  <li><a href="#0">Mozilla</a></li>
                     <li><a href="#0">Apple</a></li>
                     <li><a href="#0">Google</a></li>
                     <li><a href="#0">Asus</a></li> -->
@@ -827,10 +902,10 @@
     <script>
     $(function() {
         const textArr = document.querySelectorAll('.text')
-const colorArr = ["#fefefe", "#ff9b00", "#ff3434", "#db38f0", "#0096fb", "#00c500", "#ffd200"]
-textArr.forEach((text, index) => {
-	text.style.color = colorArr[index]
-})
+        const colorArr = ["#fefefe", "#ff9b00", "#ff3434", "#db38f0", "#0096fb", "#00c500", "#ffd200"]
+        textArr.forEach((text, index) => {
+            text.style.color = colorArr[index]
+        })
         var x = document.cookie;
         console.log(x);
         const ggcaptchasitekey = '6Lcti9UUAAAAADIUivaJtXit0OKia78-EQIbnDkc';
@@ -875,46 +950,46 @@ textArr.forEach((text, index) => {
                 //             html: "<div  class='form-group form-info'><div class='row'><div  class='col-md-8'>   <div  class='col-md-2'>      <label >email:</label> <input id='email' type='email' value='" + user.session['email'] + "' disabled/>   </div>     <div  class='col-md-2'>      <label >first name:</label> <input id='email' type='text' value='" + user.session['fname'] + "' disabled/>   </div>  <div  class='col-md-2'>      <label >last name:</label> <input id='email' type='text' value='" + user.session['lname'] + "' disabled/>   </div>    <form id='updatepassword' >        <div  class='col-md-2'>          <label >current password:</label>   <input id='currentpw' required name='currentpw' type='password' value='' /> </div>           <div style='display:inline-flex' class='col-md-2'>          <label >new password:</label>   <input required id='newpw' name='newpw' type='password' value='' />            </div><div class='button-submit-changepw'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Change</button></div></form><div class='col-md-4'><div class='button-logout'><button type='submit' id='btn-logout' class='btn btn-primary btn-login'>Logout</button></div></div> </div></div></div>"
                 //         })
                 //         $('#btn-logout').on('click', function(e) {
-                        //     e.preventDefault();
-                        //     Swal.fire({
-                        //         title: 'Are you sure?',
-                        //         text: "You won't be able to revert this!",
-                        //         icon: 'warning',
-                        //         showCancelButton: true,
-                        //         backdrop: `
-                        // rgba(0,0,123,0.4)
-                        // url("/api/docs/background/UIBkAT.jpg")
-                        // left top
-                        // no-repeat
-                        // `,
-                        //         confirmButtonColor: '#3085d6',
-                        //         cancelButtonColor: '#d33',
-                        //         confirmButtonText: 'Yes, delete it!'
-                        //     }).then((result) => {
-                        //         if (result.value) {
-                        //             // $.ajax({
-                        //             //     tpye: 'GET',
-                        //             //     url: '/del',
-                        //             //     success: function(res) {
-                        //             //         window.location.href = '/'
-                        //             //     },
-                        //             //     error: function(err) {
-                        //             //         console.log(err);
-                        //             //     },
-                        //             // })
-                        //             $.ajax({
-                        //                 tpye: 'GET',
-                        //                 url: '/del',
-                        //                 success: function(res) {
-                        //                     window.location.href = '/'
-                        //                 },
-                        //                 error: function(err) {
-                        //                     console.log(err);
-                        //                 },
-                        //             })
-                                    
-                        //         }
-                        //     })
+                //     e.preventDefault();
+                //     Swal.fire({
+                //         title: 'Are you sure?',
+                //         text: "You won't be able to revert this!",
+                //         icon: 'warning',
+                //         showCancelButton: true,
+                //         backdrop: `
+                // rgba(0,0,123,0.4)
+                // url("/api/docs/background/UIBkAT.jpg")
+                // left top
+                // no-repeat
+                // `,
+                //         confirmButtonColor: '#3085d6',
+                //         cancelButtonColor: '#d33',
+                //         confirmButtonText: 'Yes, delete it!'
+                //     }).then((result) => {
+                //         if (result.value) {
+                //             // $.ajax({
+                //             //     tpye: 'GET',
+                //             //     url: '/del',
+                //             //     success: function(res) {
+                //             //         window.location.href = '/'
+                //             //     },
+                //             //     error: function(err) {
+                //             //         console.log(err);
+                //             //     },
+                //             // })
+                //             $.ajax({
+                //                 tpye: 'GET',
+                //                 url: '/del',
+                //                 success: function(res) {
+                //                     window.location.href = '/'
+                //                 },
+                //                 error: function(err) {
+                //                     console.log(err);
+                //                 },
+                //             })
+
+                //         }
+                //     })
                 //         })
 
                 //         $('#updatepassword').submit(function(e) {
@@ -968,11 +1043,11 @@ textArr.forEach((text, index) => {
                 //             showConfirmButton: false,
                 //             html: "<form action='./login' method='post'><div class='form-group'><label for='email'>Email address</label><input required type='email' name='email' value='rapsunl231@gmail.com' autocomplete='off' class='form-control' id='email' aria-describedby='emailHelp' placeholder='Enter email'></div><div class='form-group'><label for='password'>Password</label><input type='password' value='123456' required name='password' class='form-control' id='password' placeholder='Password'></div><div class='form-group'><small id='emailHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small></br></br></div></br><div class='button-login'><button type='submit' id='btn-submit' class='btn btn-primary btn-login'>Login</button></div><br><a class='btn-register' href='./register'> or Register here!!!</a></form>"
                 //         })
-                        
+
                 //     }
 
                 // });
-                
+
 
             })
             .catch(function(error) {

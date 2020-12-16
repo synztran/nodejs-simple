@@ -76,7 +76,7 @@ body {
 
 body {
   background: #121212;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif!important;
   font-size: 1.7rem;
   font-style: normal;
   font-weight: normal;
@@ -3994,7 +3994,8 @@ footer a {
   font-size: 2rem;
   font-weight: bold;
   font-style: normal;
-  font-family: 'Mansalva', cursive;
+  /* font-family: 'Mansalva', cursive; */
+  font-family: 'Montserrat', sans-serif;
   line-height: 1;
   font-size: 80.21px !important;
 }
@@ -4005,7 +4006,8 @@ footer a {
   font-size: 13px;
   font-weight: bold;
   font-style: normal;
-  font-family: 'Mansalva', cursive;
+  /* font-family: 'Mansalva', cursive; */
+  font-family: 'Montserrat', sans-serif;
   font-size: 20.05px;
   text-transform: uppercase;
 }
