@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+    <title>Admin Page | NoobStore</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="/package/admin_cms/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/package/admin_cms/assets/vendors/iconfonts/ionicons/dist/css/ionicons.css">
@@ -21,7 +21,9 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="/package/admin_cms/assets/css/demo_1/style.css">
     <!-- End Layout styles -->
-    <link rel="shortcut icon" href="/package/admin_cms/assets/images/favicon.ico" />
+    <!-- <link rel="shortcut icon" href="/package/admin_cms/assets/images/favicon.ico" /> -->
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -222,13 +224,75 @@
                             </div>
                         </a>
                     </li>
-                    <li class="nav-item nav-category">Main Menu</li>
+                    <li class="nav-item nav-category"><%= __('Main Menu') %></li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">
                             <i class="menu-icon typcn typcn-document-text"></i>
                             <span class="menu-title">
                                 <%= __('Home') %></span>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#user-management" aria-expanded="false" aria-controls="user-management">
+                            <i class="menu-icon typcn typcn-coffee"></i>
+                            <span class="menu-title"><%= __('User') %></span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="user-management">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/list"><%= __('List') %></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#category-management" aria-expanded="false" aria-controls="category-management">
+                            <i class="menu-icon typcn typcn-coffee"></i>
+                            <span class="menu-title"><%= __('Category') %></span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="category-management">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/category"><%= __('List') %></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/category/add"><%= __('Create') %></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#product-management" aria-expanded="false" aria-controls="product-management">
+                            <i class="menu-icon typcn typcn-coffee"></i>
+                            <span class="menu-title"><%= __('Product') %></span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="product-management">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/product"><%= __('List') %></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/product/add"><%= __('Create') %></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#adsproduct-management" aria-expanded="false" aria-controls="adsproduct-management">
+                            <i class="menu-icon typcn typcn-coffee"></i>
+                            <span class="menu-title"><%= __('ads Product') %></span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="adsproduct-management">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/product"><%= __('List') %></a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
