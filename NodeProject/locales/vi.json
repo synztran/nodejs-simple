@@ -1,14 +1,15 @@
 {
-	"Home": "Trang chủ",
+	"Admin": "Admin",
+	"Dashboard": "Trang chủ",
 	"My Account": "Tài khoản",
 	"Shopping Cart": "Giỏ hàng",
 	"CheckOut": "Thanh toán",
 	"User": "Khách hàng",
 	"Category": "Danh mục",
+	"Content": "Nội dung",
 	"Product": "Sản phẩm",
 	"ads Product": "Sản phẩm ads",
 	"List": "Danh sách",
 	"Create": "Tạo",
-	"Main Menu": "Mục công cụ",
-	"Produc": "Produc"
+	"Main Menu": "Mục công cụ"
 }

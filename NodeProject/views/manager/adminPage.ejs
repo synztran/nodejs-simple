@@ -226,22 +226,29 @@
                     </li>
                     <li class="nav-item nav-category"><%= __('Main Menu') %></li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
-                            <i class="menu-icon typcn typcn-document-text"></i>
-                            <span class="menu-title">
-                                <%= __('Home') %></span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#user-management" aria-expanded="false" aria-controls="user-management">
+                        <a class="nav-link" data-toggle="collapse" href="#admin-management" aria-expanded="false" aria-controls="admin-management">
                             <i class="menu-icon typcn typcn-coffee"></i>
-                            <span class="menu-title"><%= __('User') %></span>
+                            <span class="menu-title"><%= __('Admin') %></span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="user-management">
+                        <div class="collapse" id="admin-management">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="api/list"><%= __('List') %></a>
+                                    <a class="nav-link" href="api/content"><%= __('List') %></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#content-management" aria-expanded="false" aria-controls="content-management">
+                            <i class="menu-icon typcn typcn-coffee"></i>
+                            <span class="menu-title"><%= __('Content') %></span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="content-management">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/content"><%= __('List') %></a>
                                 </li>
                             </ul>
                         </div>
@@ -262,6 +269,13 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="menu-icon typcn typcn-document-text"></i>
+                            <span class="menu-title">
+                                <%= __('Dashboard') %></span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#product-management" aria-expanded="false" aria-controls="product-management">
@@ -294,6 +308,23 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#user-management" aria-expanded="false" aria-controls="user-management">
+                            <i class="menu-icon typcn typcn-coffee"></i>
+                            <span class="menu-title"><%= __('User') %></span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="user-management">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/list"><%= __('List') %></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    
+                    
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                             <i class="menu-icon typcn typcn-coffee"></i>
@@ -940,8 +971,8 @@
                 <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="container-fluid clearfix">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © NooobTeam 2017</span>
+                        <!-- <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span> -->
                     </div>
                 </footer>
                 <!-- partial -->

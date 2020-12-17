@@ -9,5 +9,10 @@
 	"User": "User",
 	"List": "List",
 	"Product": "Product",
-	"ads Product": "ads Product"
+	"ads Product": "ads Product",
+	"Category": "Category",
+	"Create": "Create",
+	"Content": "Content",
+	"Dashboard": "Dashboard",
+	"Admin": "Admin"
 }
