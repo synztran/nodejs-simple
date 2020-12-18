@@ -25,6 +25,11 @@
     <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
 </head>
+<style>
+  .nav-profile{
+    display: none;
+  }
+</style>
 
 <body>
     <div class="container-scroller">
@@ -226,6 +231,13 @@
                     </li>
                     <li class="nav-item nav-category"><%= __('Main Menu') %></li>
                     <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="menu-icon typcn typcn-document-text"></i>
+                            <span class="menu-title">
+                                <%= __('Dashboard') %></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#admin-management" aria-expanded="false" aria-controls="admin-management">
                             <i class="menu-icon typcn typcn-coffee"></i>
                             <span class="menu-title"><%= __('Admin') %></span>
@@ -270,13 +282,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">
-                            <i class="menu-icon typcn typcn-document-text"></i>
-                            <span class="menu-title">
-                                <%= __('Dashboard') %></span>
-                        </a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#product-management" aria-expanded="false" aria-controls="product-management">
                             <i class="menu-icon typcn typcn-coffee"></i>

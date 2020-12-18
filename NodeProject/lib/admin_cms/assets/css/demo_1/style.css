@@ -377,12 +377,23 @@
     margin-top: 0.5rem; } }
 
 /* Sidebar */
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
 .sidebar {
+  height: 30rem;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
   position: fixed;
   min-height: calc(100vh - 63px);
   background: linear-gradient(to top, #5768f3, #1c45ef);
   font-family: "roboto", sans-serif;
-  padding: 0;
+  /*padding: 0;*/
+  overflow-y: scroll;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  padding-left: 0;
+  padding-right: 0;
   width: 270px;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
