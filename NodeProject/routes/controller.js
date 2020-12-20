@@ -595,11 +595,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                 console.log(part)
                 if(part == 0){ //for top case
                  await Couter.findOne({ _id: "p_top_case" }, function(err, docs) {
-                        console.log(docs);
-                        console.log(docs['seq'])
                         var inc = docs['seq'] + 1;
-                        console.log("incc"+inc)
-                     
                         db.collection('products').insertOne({
                             product_id: "PTOP" + inc,
                             product_name: (req.body.pname),
@@ -628,10 +624,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                     )
                 }else if(part == 1){ //for bot case
                     await Couter.findOne({ _id: "p_bottom_case" }, function(err, docs) {
-                        console.log(docs);
-                        console.log(docs['seq'])
                         var inc = docs['seq'] + 1;
-                        console.log("incc"+inc)
                      
                         db.collection('products').insertOne({
                             product_id: "PBOT" + inc,
@@ -659,10 +652,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                     )
                 }else if(part == 2){ // for plate
                     await Couter.findOne({ _id: "p_plate" }, function(err, docs) {
-                        console.log(docs);
-                        console.log(docs['seq'])
                         var inc = docs['seq'] + 1;
-                        console.log("incc"+inc)
                      
                         db.collection('products').insertOne({
                             product_id: "PLATE" + inc,
@@ -691,10 +681,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                     )
                 }else if(part == 3){ // for frame
                     await Couter.findOne({ _id: "p_frame" }, function(err, docs) {
-                        console.log(docs);
-                        console.log(docs['seq'])
                         var inc = docs['seq'] + 1;
-                        console.log("incc"+inc)
                      
                         db.collection('products').insertOne({
                             product_id: "FRAME" + inc,
@@ -724,10 +711,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                     )
                 }else if(part == 4) { // keycap
                     await Couter.findOne({ _id: "p_keycap" }, function(err, docs) {
-                        console.log(docs);
-                        console.log(docs['seq'])
                         var inc = docs['seq'] + 1;
-                        console.log("incc"+inc)
                      
                         db.collection('products').insertOne({
                             product_id: "KEYKIT" + inc,
@@ -757,10 +741,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                     )
                 } else if(part == 5){ // for swithces
                     await Couter.findOne({ _id: "p_switches" }, function(err, docs) {
-                        console.log(docs);
-                        console.log(docs['seq'])
                         var inc = docs['seq'] + 1;
-                        console.log("incc"+inc)
                      
                         db.collection('products').insertOne({
                             product_id: "SWPACK" + inc,
@@ -779,6 +760,35 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                     })
                     db.collection("couters").findAndModify({
                             _id: "p_switches"
+                        }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+
+                        function(err, docs) {
+                            console.log(docs);
+                        }
+                    )
+                }else if(part == 7){ // for artisan
+                    await Couter.findOne({ _id: "p_artisan"}, function(err, docs){
+                        console.log(docs);
+                        console.log(docs['seq'])
+                        var inc = docs['seq'] + 1;
+                        console.log("incc" + inc)
+
+                        db.collection('products').insertOne({
+                            product_id: "ARTACC" + inc,
+                            product_name: (req.body.pname),
+                            replace_product_name: req.body.replace_product_name,
+                            category_id: req.body.catid,
+                            product_part: (req.body.p_part),
+                            outstock: req.body.outstock,
+                            price: (req.body.artisan_price),
+                            pic_product: {
+                                path: req.file.path,
+                                size: req.file.size
+                            }
+                        })
+                    })
+                    db.collection("couters").findAndModify({
+                            _id: "p_artisan"
                         }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
 
                         function(err, docs) {
