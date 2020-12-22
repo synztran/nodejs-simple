@@ -18,7 +18,7 @@ const fs = require('fs');
 const path = require('path')
 
 const uri = "'mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'}"
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 80;
 const methodOverride = require('method-override');
 
 // var router = express.Router();
