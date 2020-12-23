@@ -1620,13 +1620,33 @@ router.delete('/adsproduct/delete/:id', async (req, res) => {
 });
 
 // Content Page
-router.get('/content', (req, res)=>{
+
+router.get('/oldcontent', (req, res)=>{
     PageContent.find({}, function(err, docs){
-        res.render('manager/content/listPage', {
-            'listContent': docs,
-            title: 'Content - List'
+            res.render('manager/content/listPage', {
+                'listContent': docs,
+                title: 'Content',
+            })
         })
-    })
+})
+
+router.get('/content', TokenCheckMiddleware, (req, res)=>{
+    var admin = req.session.Admin
+    if(admin){
+        PageContent.find({}, function(err, docs){
+            res.render('manager/content/new_listPage', {
+                fname: admin['fname'],
+                lname: admin['lname'],
+                mail: admin['mail'],
+                'listContent': docs,
+                title: 'Content',
+                lang: req.cookies.lang
+            })
+        })
+    }else{
+        return res.redirect('/api/signin');
+    }
+    
 })
 router.get('/content/add', (req, res)=>{
     res.render('manager/content/addPage', {

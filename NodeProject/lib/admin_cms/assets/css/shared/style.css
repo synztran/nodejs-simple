@@ -313,7 +313,8 @@ svg {
   vertical-align: middle; }
 
 table {
-  border-collapse: collapse; }
+  /*border-collapse: collapse; */
+}
 
 caption {
   padding-top: 12px 15px;
@@ -1271,7 +1272,8 @@ pre {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #212529; }
+  color: #212529; 
+}
   .table th,
   .table td {
     padding: 12px 15px;
