@@ -1,2 +1,1 @@
-# nodejs-simple
-project simple using nodejs and mongodb
+NoobStore offical website
