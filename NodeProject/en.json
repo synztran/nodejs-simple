@@ -2,5 +2,6 @@
    "Home" : "Home",  
    "My Account": "My Account", 
    "Shopping Cart": "My Account", 
-   "CheckOut" : "My Account" 
+   "CheckOut" : "My Account",
+   "abc": "abc"
  }
