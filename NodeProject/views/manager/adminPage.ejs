@@ -264,6 +264,13 @@
                                 </li>
                             </ul>
                         </div>
+                        <div class="collapse" id="content-management">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/content/add"><%= __('Create') %></a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#category-management" aria-expanded="false" aria-controls="category-management">
@@ -311,6 +318,23 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="api/product"><%= __('List') %></a>
                                 </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#eventproduct-management" aria-expanded="false" aria-controls="eventproduct-management">
+                            <i class="menu-icon typcn typcn-coffee"></i>
+                            <span class="menu-title"><%= __('event Product') %></span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="eventproduct-management">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/eventproduct"><%= __('List') %></a>
+                                </li>
+                               <!--  <li class="nav-item">
+                                    <a class="nav-link" href="api/eventproduct/add"><%= __('Create') %></a>
+                                </li> -->
                             </ul>
                         </div>
                     </li>

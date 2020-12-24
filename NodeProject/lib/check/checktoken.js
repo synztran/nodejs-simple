@@ -23,6 +23,7 @@ const TokenCheckMiddleware = async (req, res, next) => {
         }
         // Lưu thông tin giãi mã được vào đối tượng req, dùng cho các xử lý ở sau
         req.decoded = decoded;
+        req.admin = {email: req.decoded['email'], fname: req.decoded['fname'], lname: req.decoded['lname'], lang: req.cookies.lang}
         next();
       } catch (err) {
         // Giải mã gặp lỗi: Không đúng, hết hạn...
