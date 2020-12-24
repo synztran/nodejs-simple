@@ -109,6 +109,8 @@ app.set("view engine", "ejs");
 
 // url of view folder to Application Server
 app.set("views", "./views");
+//app.set("view", __dirname);
+//app.set("view", path.join(__dirname, '../view'));
 app.get('/del', del);
 
 
