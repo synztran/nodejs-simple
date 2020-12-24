@@ -28,6 +28,8 @@ const proutes = require('./routes/pcontroller');
 const bcrypt = require("bcryptjs");
 const i18n = require("i18n")
 const hbs = require('hbs')
+const moment = require("moment");
+
 // mongoose.connect('mongodb://localhost:27017/testmongodb');
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
 // var date = new Date();
@@ -39,6 +41,7 @@ const server = http.Server(app);
 const io = require('socket.io')(server);
 const db = mongoose.connection;
 var date = new Date();
+app.locals.moment = require('moment');
 
 del = function(req, res){
 	res.clearCookie('x-token');

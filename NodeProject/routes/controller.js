@@ -15,6 +15,8 @@ const fileuploader = require('./../lib/fileuploader/fileuploader');
 router.use(cookieParser());
 const app = express();
 const i18n = require("i18n")
+const moment = require("moment")
+
 // var token = jwt.sign({foo: 'bar'}, 'shhhhh');
 const tokenList = {};
 
@@ -97,6 +99,7 @@ var Product = require('./../db/model/product');
 var Couter = require('./../db/model/couter')
 var Category = require('./../db/model/category');
 var AdsProduct = require('./../db/model/adsproduct');
+var EventProduct = require('./../db/model/eventproduct');
 var PageContent = require('./../db/model/mainpage_content');
 var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
@@ -150,20 +153,17 @@ router.get("/signup", function(req, res) {
 });
 
 router.get('/', TokenCheckMiddleware, function(req, res) {
-    console.log(req.session.Admin);
-    console.log(req.decoded)
-    console.log(req.cookies.lang)
-    if (!req.session.Admin) {
-        res.redirect('/api/signin')
-    } else {
-        var admin = req.session.Admin
+    // if (!req.session.Admin) {
+    //     res.redirect('/api/signin')
+    // } else {
+        // var admin = req.session.Admin
         res.render('manager/adminPage', {
-            fname: admin['fname'],
-            lname: admin['lname'],
-            mail: admin['email'],
+            fname: req.decoded['fname'],
+            lname: req.decoded['lname'],
+            mail: req.decoded['email'],
             lang: req.cookies.lang
         });
-    }
+    
 
 });
 
@@ -526,19 +526,13 @@ router.post("/created", async (req, res) => {
 
 
 router.get('/product',TokenCheckMiddleware, async (req, res) => {
-    // res.render('manager/categoryPage')
-    console.log(res)
     Product.find({}, function(err, docs) {
         Category.find({}, function(err, docs2){
-
-       
-        // console.log(docs);
-        // console.log(docs2);
-        res.render('manager/product/productPage', {
-            "listProduct": docs,
-            "listCategory": docs2,
+            res.render('manager/product/productPage', {
+                "listProduct": docs,
+                "listCategory": docs2,
+            });
         });
-    });
     });
 })
 
@@ -1050,22 +1044,7 @@ router.get('/mounting', function(req, res){
 })
 
 router.get('/category/add', function(req, res){
-    // var c = __dirname+req.path.replace(/\//g, '\\');
-    
-    // var z = path.resolve(c);
-    
-    // var x = fs.existsSync(c)?res.sendFile(path.resolve(c)):(res.statusCode=404)
-    // console.log("c")
-    // console.log(c);
-    // console.log("z")
-    // console.log(z);
-    // console.log("x")
-    // console.log(x);
-
-    // var m = fs.existsSync(c);
-    // console.log(m)
-
-    res.render('manager/category/addPage', {
+        res.render('manager/category/addPage', {
         title: "Add new CATEGORY"
     })
 })
@@ -1619,6 +1598,132 @@ router.delete('/adsproduct/delete/:id', async (req, res) => {
     }
 });
 
+// Event Product
+router.get('/eventproduct', TokenCheckMiddleware, async(req, res)=>{
+    EventProduct.find({}, function(err, docs) {
+        res.render('manager/event_product/new_listPage', {
+            "listEventProduct": docs,
+            lang: req.cookies.lang,
+            fname: req.decoded['fname'],
+            lname: req.decoded['lname'],
+            mail: req.decoded['email'],
+            title: 'Event Product Management'
+        });
+    });
+})
+router.get('/eventproduct/add',TokenCheckMiddleware,  async(req, res)=>{
+    Product.find({}, function(err, docs) {
+        Category.find({}, function(err, docs2){
+            res.render('manager/event_product/new_addPage', {
+                moment: moment,
+                lang: req.cookies.lang,
+                fname: req.decoded['fname'],
+                lname: req.decoded['lname'],
+                mail: req.decoded['email'],
+                "listProduct": docs,
+                "listCategory": docs2,
+                title: "Event Product - Add New"
+            });
+        });
+    });
+})
+
+router.post('/eventproduct/add', uploadAdsProduct.single('picture'), async(req, res)=>{
+    console.log(req.body)
+    try{
+        db.collection('eventproducts').insertOne({
+            event_product_name: req.body.event_product_name,
+            date_create: new Date(),
+            date_start: (req.body.date_start).toString(),
+            date_end: (req.body.date_end).toString(),
+            event_product_url_1: "asdas",
+            status: req.body.event_product_status,
+            event_product_image: {
+                path: req.file.path,
+                size: req.file.size
+            },
+            
+        })
+
+        setTimeout(function(){
+            res.redirect('/api/eventproduct');
+        }, 1500)
+
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
+
+router.get('/eventproduct/edit/:id', function(req, res){
+    EventProduct.findById(req.params.id,function(err, docs){
+        res.render('manager/ads_product/new_editPage', {
+            title: "Event Product - Edit #" + req.params.id,
+            'data': docs
+        })
+    })
+})
+
+router.post('/eventproduct/edit/:id', uploadAdsProduct.single('picture'), async(req, res)=>{
+    console.log(req.body)
+    try{
+        var checkEventProduct = await EventProduct.findById(req.params
+            .id).exec();
+        if(req.file){
+            checkEventProduct.set({
+                product_name: req.body.adsproduct_name,
+                author_name: req.body.adsproduct_author,
+                specs: req.body.adsproduct_specs,
+                status: req.body.adsproduct_status,
+                pic_product:{
+                    path: req.file.path,
+                    size: req.file.size,
+                }
+            })
+        }else{
+            checkEventProduct.set({
+                product_name: req.body.adsproduct_name,
+                author_name: req.body.adsproduct_author,
+                status: req.body.adsproduct_status,
+                specs: req.body.adsproduct_specs,
+
+            })
+        }
+        
+        var result = await checkAdsProduct.save();
+        return res.redirect('/api/eventproduct/');
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
+
+router.get('/adsproduct/get/:id', async(req, res) =>{
+    
+    try{
+        var checkAdsProduct = await AdsProduct.findById(req.params.id).exec();
+        res.send(checkAdsProduct).status(200);
+    }catch(err){
+        res.send(err).status(404)
+    }
+})
+
+router.delete('/adsproduct/delete/:id', async (req, res) => {
+    console.log(req.params.id)
+    try {
+        var checkAdsProduct = await AdsProduct.findById(req.params.id).exec();
+        console.log(checkAdsProduct)
+
+        // if(checkAdsProduct)
+
+        var deleteAdspProduct = await AdsProduct.deleteOne({ _id: req.params.id }).exec();
+        res.send({ deleteAdspProduct });
+       
+
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+
 // Content Page
 
 router.get('/oldcontent', (req, res)=>{
@@ -1631,27 +1736,37 @@ router.get('/oldcontent', (req, res)=>{
 })
 
 router.get('/content', TokenCheckMiddleware, (req, res)=>{
-    var admin = req.session.Admin
-    if(admin){
+    
+    // if(admin){
         PageContent.find({}, function(err, docs){
             res.render('manager/content/new_listPage', {
-                fname: admin['fname'],
-                lname: admin['lname'],
-                mail: admin['mail'],
+                fname: req.decoded['fname'],
+                lname: req.decoded['lname'],
+                mail: req.decoded['mail'],
                 'listContent': docs,
                 title: 'Content',
                 lang: req.cookies.lang
             })
         })
-    }else{
-        return res.redirect('/api/signin');
-    }
+    // }else{
+        // return res.redirect('/api/signin');
+    // }
     
 })
-router.get('/content/add', (req, res)=>{
-    res.render('manager/content/addPage', {
-        title: 'Content - Add New'
-    })
+router.get('/content/add', TokenCheckMiddleware, (req, res)=>{
+
+    // if(admin){
+        res.render('manager/content/new_addPage', {
+            title: 'Content - Add New',
+            lang: req.cookies.lang,
+            fname: req.decoded['fname'],
+            lname: req.decoded['lname'],
+            mail: req.decoded['mail'],
+        })
+    // }else{
+         // return res.redirect('/api/signin');
+    // }
+    
 })
 router.post('/content/add', (req, res)=>{
     console.log(req.body)
