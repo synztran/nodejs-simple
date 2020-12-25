@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin Page | NoobStore</title>
     <!-- plugins:css -->
+    <!-- <% include ./../../views/tips/cssPackage %> -->
+
     <link rel="stylesheet" href="/package/admin_cms/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/package/admin_cms/assets/vendors/iconfonts/ionicons/dist/css/ionicons.css">
     <link rel="stylesheet" href="/package/admin_cms/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
@@ -250,6 +252,7 @@
                                 </li>
                             </ul>
                         </div>
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#content-management" aria-expanded="false" aria-controls="content-management">
@@ -262,10 +265,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="api/content"><%= __('List') %></a>
                                 </li>
-                            </ul>
-                        </div>
-                        <div class="collapse" id="content-management">
-                            <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
                                     <a class="nav-link" href="api/content/add"><%= __('Create') %></a>
                                 </li>
@@ -317,6 +316,23 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
                                     <a class="nav-link" href="api/product"><%= __('List') %></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#eventproduct-management" aria-expanded="false" aria-controls="eventproduct-management">
+                            <i class="menu-icon typcn typcn-coffee"></i>
+                            <span class="menu-title"><%= __('event Product') %></span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="eventproduct-management">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/eventproduct"><%= __('List') %></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="api/eventproduct/add"><%= __('Create') %></a>
                                 </li>
                             </ul>
                         </div>
@@ -1029,6 +1045,7 @@
 <script src="/package/admin_cms/assets/js/demo_1/dashboard.js"></script>
 <!-- End custom js for this page-->
 <!-- <script src="/package/admin_cms/assets/js/shared/jquery.cookie.js" type="text/javascript"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>/ -->
 <script>
 // $(document).ready(fucntion(){
 if ($(window).width() < 991) {

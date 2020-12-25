@@ -1637,7 +1637,7 @@ router.post('/eventproduct/add', uploadAdsProduct.single('picture'), async(req, 
             date_start: (req.body.date_start).toString(),
             date_end: (req.body.date_end).toString(),
             event_product_url_1: "asdas",
-            status: req.body.event_product_status,
+            status: parseInt(req.body.event_product_status),
             event_product_image: {
                 path: req.file.path,
                 size: req.file.size
@@ -1706,16 +1706,16 @@ router.get('/adsproduct/get/:id', async(req, res) =>{
     }
 })
 
-router.delete('/adsproduct/delete/:id', async (req, res) => {
+router.delete('/eventproduct/delete/:id', async (req, res) => {
     console.log(req.params.id)
     try {
-        var checkAdsProduct = await AdsProduct.findById(req.params.id).exec();
-        console.log(checkAdsProduct)
+        var checkEventProduct = await EventProduct.findById(req.params.id).exec();
+        console.log(checkEventProduct)
 
         // if(checkAdsProduct)
 
-        var deleteAdspProduct = await AdsProduct.deleteOne({ _id: req.params.id }).exec();
-        res.send({ deleteAdspProduct });
+        var deleteEventProduct = await EventProduct.deleteOne({ _id: req.params.id }).exec();
+        res.send({ deleteEventProduct });
        
 
     } catch (err) {

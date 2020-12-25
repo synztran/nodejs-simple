@@ -321,6 +321,23 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#eventproduct-management" aria-expanded="false" aria-controls="eventproduct-management">
+                            <i class="menu-icon typcn typcn-coffee"></i>
+                            <span class="menu-title"><%= __('event Product') %></span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="eventproduct-management">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./eventproduct"><%= __('List') %></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./eventproduct/add"><%= __('Create') %></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#user-management" aria-expanded="false" aria-controls="user-management">
                             <i class="menu-icon typcn typcn-coffee"></i>
                             <span class="menu-title">
@@ -1075,6 +1092,7 @@ $('#data-table-list-eventproduct').dataTable({
         null,
         null,
         null,
+        null,
     ],
     language: {
         searchPlaceholder: 'Search...',
@@ -1106,7 +1124,7 @@ $('.btn-delete').on('click', function(e) {
         if (result.value) {
             $.ajax({
                 type: 'DELETE',
-                url: ' content/delete/' + id,
+                url: ' eventproduct/delete/' + id,
                 success: function(res) {
                     // alert('deleting');
                     location.reload();

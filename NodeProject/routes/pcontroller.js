@@ -57,6 +57,7 @@ var userToken = require('./../db/model/token');
 var Tracking = require('./../db/model/tracking');
 var Product  = require('./../db/model/product');
 var AdsProduct = require('./../db/model/adsproduct');
+var EventProduct = require('./../db/model/eventproduct')
 var PageContent = require('./../db/model/mainpage_content');
 var Category = require('./../db/model/category')
 var Couter = require('./../db/model/couter')
@@ -199,22 +200,45 @@ router.get("/", function(req, res) {
     //         user: null
     //     })
     // }
+
+
+    
+
     AdsProduct.find({}, function(err, docs){
         PageContent.find({}, function(ContentErr, ContentDocs){
-            if(req.session.User == null){
-            res.render('index', {
-                user: null,
-                listAdsProduct: docs,
-                listContent: ContentDocs
-            })
-            }else{
-                // const uemail = req.cookies.id['email'];
-                res.render('index', {
-                    user: req.session.User['email'],
-                    listAdsProduct: docs,
-                    listContent: ContentDocs
+            EventProduct.find({status: 1}, function(EProductErr, EProductDocs){
+                EProductDocs.forEach(function(item){
+                    console.log(item.date_start)
+                    var imgUrl = item.event_product_image.path
+                    // var replaceIcon = 'api/docs/pimg/portfolio/gallery/2020-12-25T07-11-02.411Z9p664opxzi551.jpg'
+                    // var replaceIcon = 
+                    var replaceIcon = imgUrl.replace(/\\/g, "/");
+                    var imgBg = 'api/'+ replaceIcon
+                    
+                    console.log(replaceIcon)
+                    // console.log(path2);
+                    if(req.session.User == null){
+                        res.render('index', {
+                            user: null,
+                            listAdsProduct: docs,
+                            listContent: ContentDocs,
+                            EventProduct: EProductDocs,
+                            images: imgBg,
+                            date_start: item.date_start,
+                        })
+                    }else{
+                        // const uemail = req.cookies.id['email'];
+                        res.render('index', {
+                            user: req.session.User['email'],
+                            listAdsProduct: docs,
+                            listContent: ContentDocs,
+                            EventProduct: EProductDocs,
+                            images: imgBg,
+                            date_start: item.date_start,
+                        })
+                    }
                 })
-            }
+            })
         })
     }).limit(5)
     
@@ -229,6 +253,14 @@ router.get("/", function(req, res) {
     //     })
     // }
 });
+
+router.get("/time_event", function(req, res){
+    EventProduct.find({status: 1}, function(EProductErr, EProductDocs){
+        EProductDocs.forEach(function(item){
+              res.send(item.date_end);
+        })
+    })
+})
 
 router.get('/register', async(req, res)=>{
     res.render("product/registerPage");

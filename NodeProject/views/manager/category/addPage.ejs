@@ -233,15 +233,18 @@ html {
                     <!---------------------------- for etc ------------------------->
                     <div class="form-group">
                         <label for="email">Date start (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker" class="span2" type="text" name="date_start">
+                        <input style="width: 100%" data-field="date" id="datepicker" class="span2" type="text" name="date_start">
+                        <div id="date_start"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Date end (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker1" class="span2" type="text" name="date_end">
+                        <input style="width: 100%" data-field="date" id="datepicker1" class="span2" type="text" name="date_end">
+                        <div id="date_end"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Date payment (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker2" class="span2" type="text" name="date_payment">
+                        <input style="width: 100%" data-field="date" id="datepicker2" class="span2" type="text" name="date_payment">
+                        <div id="date_payment"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Min price:</label>
@@ -421,10 +424,9 @@ $(document).ready(function() {
    
 
     var a = $('.layout').val();
-    console.log(a);
 
     $('.layout').on('change', function() {
-        console.log(this.value);
+        // console.log(this.value);
     })
     $('.category-type').on('change', function() {
         console.log(this.value);
@@ -448,9 +450,13 @@ $(document).ready(function() {
             .replace(/[^\d]/g, ''); // numbers and decimals only
 
     });
-    $('#datepicker').datepicker();
-    $('#datepicker1').datepicker();
-    $('#datepicker2').datepicker();
+    // $('#datepicker').datepicker();
+    // $('#datepicker1').datepicker();
+    // $('#datepicker2').datepicker();
+    $("#date_start, #date_end, #date_payment").DateTimePicker({
+
+        dateFormat: "yyyy-MM-dd"
+    })
 
     $(".position_value").hide();
     $(".category-type").val('');
