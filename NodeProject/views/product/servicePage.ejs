@@ -125,6 +125,7 @@
                     <div class="form-group">
                         <label for="email">Switch Type:</label>
                         <select class="form-control disabled_searchbar black-input col-md-12 " id="lube_switch_type" name="lube_switch_type">
+                             <option></option>
                             <option value="cherry">Cherry MX & clone</option>
                             <option value="box">KailhBox</option>
                             <option value="albs" disabled>Albs (coming soon)</option>
@@ -244,6 +245,7 @@
                     <div class="form-group">
                         <label for="email">Keyboard Type:</label>
                         <select class="form-control disabled_searchbar black-input col-md-12 " id="assemble_kb_type" name="assemble_kb_type">
+                            <option></option>
                             <option value="stock">Stock Keyboard (already assembled from Company)</option>
                             <option value="custom">Custom Keyboard (kit keyboard from Team/Maker)</option>
                             <option value="other" disabled>Other (coming soon)</option>
@@ -299,6 +301,18 @@
                                 <label class="col-lg-7 col-md-3 col-7" for="assembled_pcb_handlestab">Handle Stab, Have not?:</label>
                                 <label for="assembled_pcb_handlestab" class="btn-radio ml-auto">
                                     <input type="checkbox" id="assembled_pcb_handlestab" name="assembled_pcb_handlestab" value="assembled_pcb_handlestab">
+                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                        <circle cx="10" cy="10" r="9"></circle>
+                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                    </svg>
+                                    <b>Yes</b>
+                                </label>
+                            </div>
+                            <div class="form-group d-flex m-0">
+                                <label class="col-lg-7 col-md-3 col-7" for="assembled_pcb_solder_hotswap">Solder Hotswap, Have not?:</label>
+                                <label for="assembled_pcb_solder_hotswap" class="btn-radio ml-auto">
+                                    <input type="checkbox" id="assembled_pcb_solder_hotswap" name="assembled_pcb_solder_hotswap" value="assembled_pcb_solder_hotswap">
                                     <svg width="20px" height="20px" viewBox="0 0 20 20">
                                         <circle cx="10" cy="10" r="9"></circle>
                                         <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -392,17 +406,32 @@
             </div>
             <div class="col-md-12 col-lg-3 price-form">
                 <div class="separator fs-24 mtb-0">Order Details</div>
-                <div class="form-group d-flex" id="price-accessories">
+                <div class="form-group d-flex" id="lube-accessories">
                     <!-- <label for="email">Price Accessories</label> -->
                     <span class="text-details t-color-wheat">
-                        <strong>Price Accessories:</strong>
+                        <strong>Lube Accessories:</strong>
                     </span>
                     <span class="t-right d-block">0 VND</span>
                 </div>
-                <div class="form-group d-flex" id="price-service">
+                <div class="form-group d-flex" id="lube-service">
                     <!-- <label for="email">Price Service</label> -->
                     <span class="text-details t-color-wheat">
-                        <strong>Price Service:</strong>
+                        <strong>Lube Service:</strong>
+                    </span>
+                    <span class="t-right d-block">0 VND</span>
+                </div>
+                <hr style="border-color: #6b3792">
+                <div class="form-group d-flex" id="assembled-accessories">
+                    <!-- <label for="email">Price Accessories</label> -->
+                    <span class="text-details t-color-wheat">
+                        <strong>Assembled Accessories:</strong>
+                    </span>
+                    <span class="t-right d-block">0 VND</span>
+                </div>
+                <div class="form-group d-flex" id="assembled-service">
+                    <!-- <label for="email">Price Service</label> -->
+                    <span class="text-details t-color-wheat">
+                        <strong>Assembled Service:</strong>
                     </span>
                     <span class="t-right d-block">0 VND</span>
                 </div>
@@ -440,274 +469,277 @@
     </footer>
 </body>
 <% include ./../tips/jsPackage %>
+<script src="/api/js/pjs/product/service/js.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
 <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
 <script src="/api/js/pjs/main.js"></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-$(document).ready(function() {
-    var type_sw, cherry_spring, box_spring, cherry_name_switch, box_name_switch, add_spring;
-    var checkbox_film, checkbox_spring;
-    var checkbox_add_film, checkbox_add_spring;
-    var price_accessories = 0;
-    var price_service = 0;
-    var price_discount = 0;
-    var current_price_film = 150000;
-    var current_price_spring = 180000;
-    var price_service_with_accessories = 6000;
-    var price_service_without_accessories = 5000;
-    $('.disabled_searchbar').select2({
-        minimumResultsForSearch: Infinity
-    })
-    $('.enable_select2').select2();
-    $('#lube_quantity').on('input', function() {
-        this.value = this.value
-            .replace(/[^\d]/g, ''); // numbers and decimals only
-    });
-    $('#email').on('keypress', function(e) {
-        if (e.which == 32) {
-            return false;
-        }
-    });
-    $("#lube_form").hide();
-    $("#assembled_form").hide();
-    $("#add_lube_service").click(function(){
-        var radioValue = $("input[name='add_lube_service']:checked").val();
-        if (radioValue == 'add_lube_service') {
-            $("#lube_form").show();
-        } else {
-            $("#lube_form").hide();
-        }
-    })
-     $("#add_assembled_service").click(function(){
-        var radioValue = $("input[name='add_assembled_service']:checked").val();
-        if (radioValue == 'add_assembled_service') {
-            $("#assembled_form").show();
-        } else {
-            $("#assembled_form").hide();
-        }
-    })
-    // Lube Service
-    cherry_name_switch = $('#lube_cherry_switch')
-    cherry_name_switch.next(".select2-container").hide()
+// $(document).ready(function() {
+//     var type_sw, cherry_spring, box_spring, cherry_name_switch, box_name_switch, add_spring;
+//     var checkbox_film, checkbox_spring;
+//     var checkbox_add_film, checkbox_add_spring;
+//     var price_accessories = 0;
+//     var price_service = 0;
+//     var price_discount = 0;
+//     var current_price_film = 150000;
+//     var current_price_spring = 180000;
+//     var price_service_with_accessories = 6000;
+//     var price_service_without_accessories = 5000;
+//     $('.disabled_searchbar').select2({
+//         minimumResultsForSearch: Infinity
+//     })
+//     $('.enable_select2').select2();
+//     $('#lube_quantity').on('input', function() {
+//         this.value = this.value
+//             .replace(/[^\d]/g, ''); // numbers and decimals only
+//     });
+//     $('#email').on('keypress', function(e) {
+//         if (e.which == 32) {
+//             return false;
+//         }
+//     });
+//     $("#lube_form").hide();
+//     $("#assembled_form").hide();
+//     $("#add_lube_service").click(function(){
+//         var radioValue = $("input[name='add_lube_service']:checked").val();
+//         if (radioValue == 'add_lube_service') {
+//             $("#lube_form").show();
+//         } else {
+//             $("#lube_quantity").val(0)
+//             calcPrice();
+//             $("#lube_form").hide();
+//         }
+//     })
+//      $("#add_assembled_service").click(function(){
+//         var radioValue = $("input[name='add_assembled_service']:checked").val();
+//         if (radioValue == 'add_assembled_service') {
+//             $("#assembled_form").show();
+//         } else {
+//             $("#assembled_form").hide();
+//         }
+//     })
+//     // Lube Service
+//     cherry_name_switch = $('#lube_cherry_switch')
+//     cherry_name_switch.next(".select2-container").hide()
 
-    box_name_switch = $('#lube_box_switch')
-    box_name_switch.next(".select2-container").hide()
+//     box_name_switch = $('#lube_box_switch')
+//     box_name_switch.next(".select2-container").hide()
 
-    cherry_spring = $('#lube_cherry_spring_force')
-    cherry_spring.next(".select2-container").hide()
+//     cherry_spring = $('#lube_cherry_spring_force')
+//     cherry_spring.next(".select2-container").hide()
 
-    box_spring = $('#lube_box_spring_force')
-    box_spring.next(".select2-container").hide()
-
-
-    $("#lube_film_color").next(".select2-container").hide()
-    $("#lube_switch_type").each(function() {
-        type_sw = $('#lube_switch_type').val();
-        if (type_sw == 'cherry') {
-            cherry_name_switch.next(".select2-container").show();
-        }
-    });
-    $(document).on('change', '#lube_switch_type', function() {
-        type_sw = $(this).val();
-        add_spring = $("input[name='spring']:checked").val()
-        if (type_sw == 'cherry') {
-            cherry_name_switch.next(".select2-container").show();
-            box_name_switch.next(".select2-container").hide();
-            if (add_spring == "add_spring") {
-                cherry_spring.next(".select2-container").show();
-                box_spring.next(".select2-container").hide();
-            } else {
-                box_spring.next(".select2-container").hide();
-                cherry_spring.next(".select2-container").hide();
-            }
-        } else if (type_sw == 'box') {
-            cherry_name_switch.next(".select2-container").hide();
-            box_name_switch.next(".select2-container").show();
-            if (add_spring == "add_spring") {
-                cherry_spring.next(".select2-container").hide();
-                box_spring.next(".select2-container").show();
-            } else {
-                box_spring.next(".select2-container").hide();
-                cherry_spring.next(".select2-container").hide();
-            }
-        } else if (type_sw == 'albs') {
-
-        } else {
-
-        }
-    })
-    checkbox_film = $("#film").val();
-    checkbox_spring = $("#spring").val();
-    checkbox_add_spring = $("#have_film").val();
-    checkbox_add_spring = $("#have_spring").val();
-    $("#have_spring").prop('disabled', true);
-    $("#have_film").prop('disabled', true)
-
-    $(document).on('change', '#have_film', function() {
-
-    })
-    $(document).on('change', '#have_spring', function() {
-
-    })
-    $("#have_film").click(function() {
-
-        var radioValue = $("input[name='have_film']:checked").val();
-        if (radioValue == 'have_film') {
-            calcPrice()
-        } else {
-            calcPrice()
-        }
-    });
-
-    $("#have_spring").click(function() {
-
-        var radioValue = $("input[name='have_spring']:checked").val();
-        if (radioValue == 'have_spring') {
-            calcPrice()
-        } else {
-            calcPrice()
-        }
-    });
-
-    $("#film").click(function() {
-
-        var radioValue = $("input[name='film']:checked").val();
-        if (radioValue == 'add_film') {
-            $("#lube_film_color").next(".select2-container").show()
-            $("#have_film").prop('disabled', false);
-
-            // price_accessories = price_film
-            calcPrice()
-        } else {
-            $("#lube_film_color").next(".select2-container").hide()
-            $("#have_film").prop('disabled', true);
-            // price_accessories = 0;
-            calcPrice()
-        }
-    });
-    $("#spring").click(function() {
-
-        var radioSpringValue = $("input[name='spring']:checked").val();
-        var radioTypeSwitchValue = $("#lube_switch_type").val();
-        if (radioSpringValue == 'add_spring') {
-            $("#have_spring").prop('disabled', false);
-            // price_accessories = price_spring
-            calcPrice()
-            if (radioTypeSwitchValue == 'cherry') {
-                $("#lube_cherry_spring_force").next(".select2-container").show();
-                $("#lube_box_spring_force").next(".select2-container").hide();
-
-            } else if (radioTypeSwitchValue == 'box') {
-                $("#lube_cherry_spring_force").next(".select2-container").hide();
-                $("#lube_box_spring_force").next(".select2-container").show();
-            }
-        } else {
-            // price_accessories = 0
-            $("#have_spring").prop('disabled', true);
-            calcPrice()
-            $("#lube_cherry_spring_force").next(".select2-container").hide();
-            $("#lube_box_spring_force").next(".select2-container").hide();
-        }
-    });
-
-    $(document).on('change', '#lube_quantity', function() {
-        calcPrice();
-
-    })
-    // 
-
-    // Assembled Service
-    $(".option_assembled_pcb").hide();
-    $("#add_pcb").click(function(){
-        var radioValue = $("input[name='add_pcb']:checked").val();
-         if (radioValue == 'add_pcb') {
-            $(".option_assembled_pcb").show();
-        } else {
-            $(".option_assembled_pcb").hide();
-        }
-    })
-    $(".option_assembled_led").hide();
-    $("#add_led").click(function(){
-        var radioValue = $("input[name='add_led']:checked").val();
-         if (radioValue == 'add_led') {
-            $(".option_assembled_led").show();
-        } else {
-            $(".option_assembled_led").hide();
-        }
-    })
-    // 
-
-    var switchType, switchName, greaseName, filmColor, springForce;
-    var addFilm, addSrping, haveFilm, haveSpring;
-    var estTime, note;
-    var switchQuantity = 0;
-    var priceService = 0;
-    var priceAccessories = 0;
-    var priceTotal = 0;
-    var formatPriceService, formatPriceAccessories, formatPriceTotal, formatPriceSubTotal, formatDiscount;
-    var priceFilm, priceSpring
-
-    var calcPrice = function() {
-        // Input params
-        switchQuantity = $("#lube_quantity").val();
-        addFilm = $("input[name='film']:checked").val();
-        addSpring = $("input[name='spring']:checked").val();
+//     box_spring = $('#lube_box_spring_force')
+//     box_spring.next(".select2-container").hide()
 
 
-        if (addFilm == 'add_film') {
-            priceFilm = current_price_film
-        } else {
-            priceFilm = 0
-        }
-        if (addSpring == 'add_spring') {
-            priceSpring = current_price_spring
-        } else {
-            priceSpring = 0
-        }
-        haveFilm = $("input[name='have_film']:checked").val();
-        haveSpring = $("input[name='have_spring']:checked").val();
-        checkboxHaveFilm = $("#have_film");
-        checkboxHaveSpring = $("#have_spring");
-        // haveFilm == 'have_film' ? priceFilm = current_price_film : 0
-        // haveSpring == 'have_spring' ? priceSpring = current_price_spring : 0
-        if (document.getElementById('have_film').attributes.getNamedItem('disabled')) {} else if (haveFilm == 'have_film') {
-            priceFilm = 0
-        } else {
-            priceFilm = current_price_film
-        }
-        if (document.getElementById('have_spring').attributes.getNamedItem('disabled')) {} else if (haveSpring == 'have_spring') {
-            priceSpring = 0
-        } else {
-            priceSpring = current_price_spring
-        }
-        // Calc Price
-        if (addFilm || addSpring) {
-            price_service = switchQuantity * price_service_with_accessories;
-        } else {
-            price_service = switchQuantity * price_service_without_accessories;
-        }
-        price_accessories = priceFilm + priceSpring
-        subtotal_price = price_service + price_accessories
-        total_price = subtotal_price - price_discount
-        // Format Price
-        formatPriceService = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_service)
-        formatPriceAccessories = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_accessories)
-        formatDiscount = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_discount)
-        formatPriceSubTotal = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(subtotal_price)
-        formatPriceTotal = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(total_price)
-        // Show Price
-        $('#price-service .t-right').html(formatPriceService)
-        $('#price-accessories .t-right').html(formatPriceAccessories)
-        $("#discount-price .t-right").html(formatDiscount)
-        $("#sub-total .t-right").html(formatPriceSubTotal)
-        $("#total-price .t-right").html(formatPriceTotal)
-    }
+//     $("#lube_film_color").next(".select2-container").hide()
+//     $("#lube_switch_type").each(function() {
+//         type_sw = $('#lube_switch_type').val();
+//         if (type_sw == 'cherry') {
+//             cherry_name_switch.next(".select2-container").show();
+//         }
+//     });
+//     $(document).on('change', '#lube_switch_type', function() {
+//         type_sw = $(this).val();
+//         add_spring = $("input[name='spring']:checked").val()
+//         if (type_sw == 'cherry') {
+//             cherry_name_switch.next(".select2-container").show();
+//             box_name_switch.next(".select2-container").hide();
+//             if (add_spring == "add_spring") {
+//                 cherry_spring.next(".select2-container").show();
+//                 box_spring.next(".select2-container").hide();
+//             } else {
+//                 box_spring.next(".select2-container").hide();
+//                 cherry_spring.next(".select2-container").hide();
+//             }
+//         } else if (type_sw == 'box') {
+//             cherry_name_switch.next(".select2-container").hide();
+//             box_name_switch.next(".select2-container").show();
+//             if (add_spring == "add_spring") {
+//                 cherry_spring.next(".select2-container").hide();
+//                 box_spring.next(".select2-container").show();
+//             } else {
+//                 box_spring.next(".select2-container").hide();
+//                 cherry_spring.next(".select2-container").hide();
+//             }
+//         } else if (type_sw == 'albs') {
+
+//         } else {
+
+//         }
+//     })
+//     checkbox_film = $("#film").val();
+//     checkbox_spring = $("#spring").val();
+//     checkbox_add_spring = $("#have_film").val();
+//     checkbox_add_spring = $("#have_spring").val();
+//     $("#have_spring").prop('disabled', true);
+//     $("#have_film").prop('disabled', true)
+
+//     $(document).on('change', '#have_film', function() {
+
+//     })
+//     $(document).on('change', '#have_spring', function() {
+
+//     })
+//     $("#have_film").click(function() {
+
+//         var radioValue = $("input[name='have_film']:checked").val();
+//         if (radioValue == 'have_film') {
+//             calcPrice()
+//         } else {
+//             calcPrice()
+//         }
+//     });
+
+//     $("#have_spring").click(function() {
+
+//         var radioValue = $("input[name='have_spring']:checked").val();
+//         if (radioValue == 'have_spring') {
+//             calcPrice()
+//         } else {
+//             calcPrice()
+//         }
+//     });
+
+//     $("#film").click(function() {
+
+//         var radioValue = $("input[name='film']:checked").val();
+//         if (radioValue == 'add_film') {
+//             $("#lube_film_color").next(".select2-container").show()
+//             $("#have_film").prop('disabled', false);
+
+//             // price_accessories = price_film
+//             calcPrice()
+//         } else {
+//             $("#lube_film_color").next(".select2-container").hide()
+//             $("#have_film").prop('disabled', true);
+//             // price_accessories = 0;
+//             calcPrice()
+//         }
+//     });
+//     $("#spring").click(function() {
+
+//         var radioSpringValue = $("input[name='spring']:checked").val();
+//         var radioTypeSwitchValue = $("#lube_switch_type").val();
+//         if (radioSpringValue == 'add_spring') {
+//             $("#have_spring").prop('disabled', false);
+//             // price_accessories = price_spring
+//             calcPrice()
+//             if (radioTypeSwitchValue == 'cherry') {
+//                 $("#lube_cherry_spring_force").next(".select2-container").show();
+//                 $("#lube_box_spring_force").next(".select2-container").hide();
+
+//             } else if (radioTypeSwitchValue == 'box') {
+//                 $("#lube_cherry_spring_force").next(".select2-container").hide();
+//                 $("#lube_box_spring_force").next(".select2-container").show();
+//             }
+//         } else {
+//             // price_accessories = 0
+//             $("#have_spring").prop('disabled', true);
+//             calcPrice()
+//             $("#lube_cherry_spring_force").next(".select2-container").hide();
+//             $("#lube_box_spring_force").next(".select2-container").hide();
+//         }
+//     });
+
+//     $(document).on('change', '#lube_quantity', function() {
+//         calcPrice();
+
+//     })
+//     // 
+
+//     // Assembled Service
+//     $(".option_assembled_pcb").hide();
+//     $("#add_pcb").click(function(){
+//         var radioValue = $("input[name='add_pcb']:checked").val();
+//          if (radioValue == 'add_pcb') {
+//             $(".option_assembled_pcb").show();
+//         } else {
+//             $(".option_assembled_pcb").hide();
+//         }
+//     })
+//     $(".option_assembled_led").hide();
+//     $("#add_led").click(function(){
+//         var radioValue = $("input[name='add_led']:checked").val();
+//          if (radioValue == 'add_led') {
+//             $(".option_assembled_led").show();
+//         } else {
+//             $(".option_assembled_led").hide();
+//         }
+//     })
+//     // 
+
+//     var switchType, switchName, greaseName, filmColor, springForce;
+//     var addFilm, addSrping, haveFilm, haveSpring;
+//     var estTime, note;
+//     var switchQuantity = 0;
+//     var priceService = 0;
+//     var priceAccessories = 0;
+//     var priceTotal = 0;
+//     var formatPriceService, formatPriceAccessories, formatPriceTotal, formatPriceSubTotal, formatDiscount;
+//     var priceFilm, priceSpring
+
+//     var calcPrice = function() {
+//         // Input params
+//         switchQuantity = $("#lube_quantity").val();
+//         addFilm = $("input[name='film']:checked").val();
+//         addSpring = $("input[name='spring']:checked").val();
+
+
+//         if (addFilm == 'add_film') {
+//             priceFilm = current_price_film
+//         } else {
+//             priceFilm = 0
+//         }
+//         if (addSpring == 'add_spring') {
+//             priceSpring = current_price_spring
+//         } else {
+//             priceSpring = 0
+//         }
+//         haveFilm = $("input[name='have_film']:checked").val();
+//         haveSpring = $("input[name='have_spring']:checked").val();
+//         checkboxHaveFilm = $("#have_film");
+//         checkboxHaveSpring = $("#have_spring");
+//         // haveFilm == 'have_film' ? priceFilm = current_price_film : 0
+//         // haveSpring == 'have_spring' ? priceSpring = current_price_spring : 0
+//         if (document.getElementById('have_film').attributes.getNamedItem('disabled')) {} else if (haveFilm == 'have_film') {
+//             priceFilm = 0
+//         } else {
+//             priceFilm = current_price_film
+//         }
+//         if (document.getElementById('have_spring').attributes.getNamedItem('disabled')) {} else if (haveSpring == 'have_spring') {
+//             priceSpring = 0
+//         } else {
+//             priceSpring = current_price_spring
+//         }
+//         // Calc Price
+//         if (addFilm || addSpring) {
+//             price_service = switchQuantity * price_service_with_accessories;
+//         } else {
+//             price_service = switchQuantity * price_service_without_accessories;
+//         }
+//         price_accessories = priceFilm + priceSpring
+//         subtotal_price = price_service + price_accessories
+//         total_price = subtotal_price - price_discount
+//         // Format Price
+//         formatPriceService = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_service)
+//         formatPriceAccessories = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_accessories)
+//         formatDiscount = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(price_discount)
+//         formatPriceSubTotal = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(subtotal_price)
+//         formatPriceTotal = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(total_price)
+//         // Show Price
+//         $('#price-service .t-right').html(formatPriceService)
+//         $('#price-accessories .t-right').html(formatPriceAccessories)
+//         $("#discount-price .t-right").html(formatDiscount)
+//         $("#sub-total .t-right").html(formatPriceSubTotal)
+//         $("#total-price .t-right").html(formatPriceTotal)
+//     }
 
 
 
-})
+// })
 </script>
 
 </html>
