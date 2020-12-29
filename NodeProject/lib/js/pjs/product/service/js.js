@@ -5,16 +5,30 @@ $(document).ready(function() {
     // for lube service
     var lube_accessories = 0;
     var lube_service = 0;
+    var assembled_service = 0;
+    var assembled_accessories = 0;
     var current_price_film = 150000;
     var current_price_spring = 180000;
+    var solder_led_18 = 1500;
+    var solder_led_234 = 3500;
+    var desolder_led = 2500; 
     var lube_service_with_accessories = 6000;
     var lube_service_without_accessories = 5000;
     // for assem service
+    var assemble_kb_type, assemble_kb_layout;
     var assembled_accessories = 0;
     var assembled_service = 0;
     var price_discount = 0;
     var kb_type = 0;
     var kb_layout = 0;
+
+    $('#lube-service .t-right').html(new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(0))
+    $('#assembled-service .t-right').html(new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(0))
+    $('#lube-accessories .t-right').html(new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(0))
+    $('#assembled-accessories .t-right').html(new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(0))
+    $("#discount-price .t-right").html(new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(0))
+    $("#sub-total .t-right").html(new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(0))
+    $("#total-price .t-right").html(new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(0))
 
     
     
@@ -183,10 +197,10 @@ $(document).ready(function() {
         calcPrice();
 
     })
-    // 
 
     // Assembled Service
     $(".option_assembled_pcb").hide();
+
     $("#add_pcb").click(function(){
         var radioValue = $("input[name='add_pcb']:checked").val();
          if (radioValue == 'add_pcb') {
@@ -265,59 +279,321 @@ $(document).ready(function() {
     })
 
     // For Led
+    $("#assembled_led_solder").click(function(){
+        var radioValue = $("input[name='assembled_led_solder']:checked").val();
+        if(radioValue == 'assembled_led_solder'){
+            calcPrice()
+        }else{
+            calcPrice()
+        }
+    })
+    $("#assembled_led_desolder").click(function(){
+        var radioValue = $("input[name='assembled_led_desolder']:checked").val();
+        if(radioValue == 'assembled_led_desolder'){
+            calcPrice()
+        }else{
+            calcPrice()
+        }
+    })
     // 
 
     var switchType, switchName, greaseName, filmColor, springForce;
     var addFilm, addSrping, haveFilm, haveSpring;
     var estTime, note;
+    // lUBE SERVICE
     var switchQuantity = 0;
     var priceService = 0;
     var priceAccessories = 0;
     var priceTotal = 0;
+
+    // ASSENBKED SERVUCE
+    var priceAssembled_Solder = 0;
+    var priceKeyboard_Type = 0;
+    var priceKeyboard_Layout = 0;
+    var priceAssembled_Desolder = 0;
+    var priceAssembled_HandleStab = 0;
+    var priceAssembled_SolderHotswap = 0;
+
+    var priceAssembled_LedSolder_18 = 0;
+    var priceAssembled_LedSolder_234 = 0
+    var priceAssembled_LedDesolder = 0;
+
+
+
     var formatLubeService, formatLubeAccessories, formatAssembledService, formatAssembledAccessories, formatPriceTotal, formatPriceSubTotal, formatDiscount;
     var priceFilm, priceSpring
 
     var calcPrice = function() {
         // Input params
-        switchQuantity = $("#lube_quantity").val();
-        addFilm = $("input[name='film']:checked").val();
-        addSpring = $("input[name='spring']:checked").val();
+            // lube service
+             var   switchQuantity = $("#lube_quantity").val();
+              var  addFilm = $("input[name='film']:checked").val();
+              var  addSpring = $("input[name='spring']:checked").val();
+            // assembled service
+              var  assemble_kb_layout = $("#assemble_kb_layout").val();
+              var  assemble_kb_type = $("assemble_kb_type").val();
+              var  assembled_pcb_solder = $("input[name='assembled_pcb_solder']:checked").val();
+               var assembled_pcb_desolder = $("input[name='assembled_pcb_desolder']:checked").val();;
+              var  assembled_pcb_handlestab= $("input[name='assembled_pcb_handlestab']:checked").val();;
+               var assembled_pcb_solder_hotswap = $("input[name='assembled_pcb_solder_hotswap']:checked").val();;
+              var  assembled_led_solder = $("input[name='assembled_led_solder']:checked").val();;
+              var  assembled_led_desolder = $("input[name='assembled_led_desolder']:checked").val();;
+            var assemble_led_type = $("#assemble_led_type").val();
+
+        //  lube service
+            if (addFilm == 'add_film') {priceFilm = current_price_film} else {priceFilm = 0}
+            if (addSpring == 'add_spring') {priceSpring = current_price_spring} else {priceSpring = 0}
+
+            haveFilm = $("input[name='have_film']:checked").val();
+            haveSpring = $("input[name='have_spring']:checked").val();
+            checkboxHaveFilm = $("#have_film");
+            checkboxHaveSpring = $("#have_spring");
+            // haveFilm == 'have_film' ? priceFilm = current_price_film : 0
+            // haveSpring == 'have_spring' ? priceSpring = current_price_spring : 0
+            if (document.getElementById('have_film').attributes.getNamedItem('disabled')) {} else if (haveFilm == 'have_film') {
+                priceFilm = 0
+            } else {
+                priceFilm = current_price_film
+            }
+            if (document.getElementById('have_spring').attributes.getNamedItem('disabled')) {} else if (haveSpring == 'have_spring') {
+                priceSpring = 0
+            } else {
+                priceSpring = current_price_spring
+            }
+
+        // assembled service
+            assemble_kb_type == "stock" ?  priceKeyboardType = 50000 : priceKeyboardType = 0;
+            assemble_kb_layout == "60" ? calcPriceAssembled60() :  0;
+            assemble_kb_layout == "65" ? calcPriceAssembled65() :  0;
+            assemble_kb_layout == "87" ? calcPriceAssembled87() :  0;
+            assemble_kb_layout == "108" ? calcPriceAssembled108() :  0;
+            // assemble_kb_layout == "1800" ? calcPriceAssembled1800() : return 0;
+
+            function calcPriceAssembled60(){
+                var current_price_solder = 150000
+                if(assembled_pcb_solder == 'assembled_pcb_solder'){
+                    priceAssembled_Solder = parseInt(current_price_solder)
+                }else{
+                    priceAssembled_Solder = 0
+                }
+
+                if(assembled_pcb_desolder == 'assembled_pcb_desolder'){
+                    priceAssembled_Desolder = parseInt(current_price_solder + 30000)
+                }else{
+                    priceAssembled_Desolder = 0
+                }
+
+                if(assembled_pcb_handlestab == 'assembled_pcb_handlestab'){
+                    priceAssembled_HandleStab = parseInt(150000)
+                }else{
+                    priceAssembled_HandleStab = 0
+                }
+
+                if(assembled_pcb_solder_hotswap == 'assembled_pcb_solder_hotswap'){
+                    priceAssembled_SolderHotswap = parseInt(priceAssembled_Desolder - 10000)
+                }else{
+                    priceAssembled_SolderHotswap = 0
+                }
+
+                if(assemble_led_type === "1.8"){
+                    assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_18 = parseInt(70*solder_led_18) : priceAssembled_LedSolder_18 = 0;
+                }else if(assemble_led_type === "2x3x4"){
+                    assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_234 = parseInt(70*solder_led_234) : priceAssembled_LedSolder_234 = 0;
+                }else{
+
+                }
+                if(assembled_led_desolder == 'assembled_led_desolder'){
+                    priceAssembled_LedDesolder = parseInt(70*desolder_led)
+                }else{
+                    priceAssembled_LedDesolder = 0
+                }
+                
+            }
+            function calcPriceAssembled65(){
+                var current_price_solder = 180000
+                if(assembled_pcb_solder == 'assembled_pcb_solder'){
+                    priceAssembled_Solder = parseInt(current_price_solder)
+                }else{
+                    priceAssembled_Solder = 0
+                }
+
+                if(assembled_pcb_desolder == 'assembled_pcb_desolder'){
+                    priceAssembled_Desolder = parseInt(current_price_solder + 30000)
+                }else{
+                    priceAssembled_Desolder = 0
+                }
+
+                if(assembled_pcb_handlestab == 'assembled_pcb_handlestab'){
+                    priceAssembled_HandleStab = parseInt(150000)
+                }else{
+                    priceAssembled_HandleStab = 0
+                }
+
+                if(assembled_pcb_solder_hotswap == 'assembled_pcb_solder_hotswap'){
+                    priceAssembled_SolderHotswap = parseInt(priceAssembled_Desolder - 10000)
+                }else{
+                    priceAssembled_SolderHotswap = 0
+                }
+                
+                if(assemble_led_type === "1.8"){
+                    assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_18 = parseInt(70*solder_led_18) : priceAssembled_LedSolder_18 = 0;
+                }else if(assemble_led_type === "2x3x4"){
+                    assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_234 = parseInt(70*solder_led_234) : priceAssembled_LedSolder_234 = 0;
+                }else{
+
+                }
+                if(assembled_led_desolder == 'assembled_led_desolder'){
+                    priceAssembled_LedDesolder = parseInt(70*desolder_led)
+                }else{
+                    priceAssembled_LedDesolder = 0
+                }
+
+                // assembled_pcb_solder == 'assembled_pcb_solder' ? priceAssembled_Solder = parseInt(180000) : priceAssembled_Solder = 0;
+                // assembled_pcb_desolder == 'assembled_pcb_desolder' ? priceAssembled_Desolder = parseInt(priceAssembled_Solder + 30000) : priceAssembled_Desolder = 0
+                // assembled_pcb_handlestab == 'assembled_pcb_handlestab' ? priceAssembled_HandleStab = parseInt(150000) ? priceAssembled_HandleStab = 0
+                // assembled_pcb_solder_hotswap == 'assembled_pcb_solder_hotswap' ? priceAssembled_SolderHotswap = parseInt(priceAssembled_Desolder - 10000) ? priceAssembled_SolderHotswap = 0
+                
+                // if(assemble_led_type == "1.8"){
+                //     assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_18 = parseInt(70*solder_led_18) : priceAssembled_LedSolder_18 = 0;
+                // }else if(assemble_led_type == "2x3x4"){
+                //     assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_234 = parseInt(70*solder_led_234) : priceAssembled_LedSolder_234 = 0;
+                // }else{
+                    
+                // }
+                // assembled_led_desolder == 'assembled_led_desolder' ? priceAssembled_LedDesolder = parseInt(70*desolder_led) : priceAssembled_LedDesolder = 0
+            }
+            function calcPriceAssembled87(){
+                var current_price_solder = 220000
+                if(assembled_pcb_solder == 'assembled_pcb_solder'){
+                    priceAssembled_Solder = parseInt(current_price_solder)
+                }else{
+                    priceAssembled_Solder = 0
+                }
+
+                if(assembled_pcb_desolder == 'assembled_pcb_desolder'){
+                    priceAssembled_Desolder = parseInt(current_price_solder + 30000)
+                }else{
+                    priceAssembled_Desolder = 0
+                }
+
+                if(assembled_pcb_handlestab == 'assembled_pcb_handlestab'){
+                    priceAssembled_HandleStab = parseInt(180000)
+                }else{
+                    priceAssembled_HandleStab = 0
+                }
+
+                if(assembled_pcb_solder_hotswap == 'assembled_pcb_solder_hotswap'){
+                    priceAssembled_SolderHotswap = parseInt(priceAssembled_Desolder - 10000)
+                }else{
+                    priceAssembled_SolderHotswap = 0
+                }
+                
+                if(assemble_led_type === "1.8"){
+                    assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_18 = parseInt(90*solder_led_18) : priceAssembled_LedSolder_18 = 0;
+                }else if(assemble_led_type === "2x3x4"){
+                    assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_234 = parseInt(90*solder_led_234) : priceAssembled_LedSolder_234 = 0;
+                }else{
+
+                }
+                if(assembled_led_desolder == 'assembled_led_desolder'){
+                    priceAssembled_LedDesolder = parseInt(90*desolder_led)
+                }else{
+                    priceAssembled_LedDesolder = 0
+                }
 
 
-        if (addFilm == 'add_film') {
-            priceFilm = current_price_film
-        } else {
-            priceFilm = 0
-        }
-        if (addSpring == 'add_spring') {
-            priceSpring = current_price_spring
-        } else {
-            priceSpring = 0
-        }
-        haveFilm = $("input[name='have_film']:checked").val();
-        haveSpring = $("input[name='have_spring']:checked").val();
-        checkboxHaveFilm = $("#have_film");
-        checkboxHaveSpring = $("#have_spring");
-        // haveFilm == 'have_film' ? priceFilm = current_price_film : 0
-        // haveSpring == 'have_spring' ? priceSpring = current_price_spring : 0
-        if (document.getElementById('have_film').attributes.getNamedItem('disabled')) {} else if (haveFilm == 'have_film') {
-            priceFilm = 0
-        } else {
-            priceFilm = current_price_film
-        }
-        if (document.getElementById('have_spring').attributes.getNamedItem('disabled')) {} else if (haveSpring == 'have_spring') {
-            priceSpring = 0
-        } else {
-            priceSpring = current_price_spring
-        }
+                // assembled_pcb_solder == 'assembled_pcb_solder' ? priceAssembled_Solder = parseInt(220000) : priceAssembled_Solder = 0;
+                // assembled_pcb_desolder == 'assembled_pcb_desolder' ? priceAssembled_Desolder = parseInt(priceAssembled_Solder + 30000) : priceAssembled_Desolder = 0
+                // assembled_pcb_handlestab == 'assembled_pcb_handlestab' ? priceAssembled_HandleStab = parseInt(180000) ? priceAssembled_HandleStab = 0
+                // assembled_pcb_solder_hotswap == 'assembled_pcb_solder_hotswap' ? priceAssembled_SolderHotswap = parseInt(priceAssembled_Desolder - 10000) ? priceAssembled_SolderHotswap = 0
+                
+                // if(assemble_led_type == "1.8"){
+                //     assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_18 = parseInt(90*solder_led_18) : priceAssembled_LedSolder_18 = 0;
+                // }else if(assemble_led_type == "2x3x4"){
+                //     assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_234 = parseInt(90*solder_led_234) : priceAssembled_LedSolder_234 = 0;
+                // }else{
+                    
+                // }
+                // assembled_led_desolder == 'assembled_led_desolder' ? priceAssembled_LedDesolder = parseInt(90*desolder_led) : priceAssembled_LedDesolder = 0
+            }
+            function calcPriceAssembled108(){
+                var current_price_solder = 280000
+                if(assembled_pcb_solder == 'assembled_pcb_solder'){
+                    priceAssembled_Solder = parseInt(current_price_solder)
+                }else{
+                    priceAssembled_Solder = 0
+                }
+
+                if(assembled_pcb_desolder == 'assembled_pcb_desolder'){
+                    priceAssembled_Desolder = parseInt(current_price_solder + 30000)
+                }else{
+                    priceAssembled_Desolder = 0
+                }
+
+                if(assembled_pcb_handlestab == 'assembled_pcb_handlestab'){
+                    priceAssembled_HandleStab = parseInt(210000)
+                }else{
+                    priceAssembled_HandleStab = 0
+                }
+
+                if(assembled_pcb_solder_hotswap == 'assembled_pcb_solder_hotswap'){
+                    priceAssembled_SolderHotswap = parseInt(priceAssembled_Desolder - 10000)
+                }else{
+                    priceAssembled_SolderHotswap = 0
+                }
+                
+                if(assemble_led_type === "1.8"){
+                    assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_18 = parseInt(110*solder_led_18) : priceAssembled_LedSolder_18 = 0;
+                }else if(assemble_led_type === "2x3x4"){
+                    assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_234 = parseInt(110*solder_led_234) : priceAssembled_LedSolder_234 = 0;
+                }else{
+
+                }
+                if(assembled_led_desolder == 'assembled_led_desolder'){
+                    priceAssembled_LedDesolder = parseInt(110*desolder_led)
+                }else{
+                    priceAssembled_LedDesolder = 0
+                }
+
+                // assembled_pcb_solder == 'assembled_pcb_solder' ? priceAssembled_Solder = parseInt(280000) : priceAssembled_Solder = 0;
+                // assembled_pcb_desolder == 'assembled_pcb_desolder' ? priceAssembled_Desolder = parseInt(priceAssembled_Solder + 30000) : priceAssembled_Desolder = 0
+                // assembled_pcb_handlestab == 'assembled_pcb_handlestab' ? priceAssembled_HandleStab = parseInt(210000) ? priceAssembled_HandleStab = 0
+                // assembled_pcb_solder_hotswap == 'assembled_pcb_solder_hotswap' ? priceAssembled_SolderHotswap = parseInt(priceAssembled_Desolder - 10000) ? priceAssembled_SolderHotswap = 0
+                
+                // if(assemble_led_type == "1.8"){
+                //     assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_18 = parseInt(110*solder_led_18) : priceAssembled_LedSolder_18 = 0;
+                // }else if(assemble_led_type == "2x3x4"){
+                //     assembled_led_solder == 'assembled_led_solder' ? priceAssembled_LedSolder_234 = parseInt(110*solder_led_234) : priceAssembled_LedSolder_234 = 0;
+                // }else{
+                    
+                // }
+                // assembled_led_desolder == 'assembled_led_desolder' ? priceAssembled_LedDesolder = parseInt(110*desolder_led) : priceAssembled_LedDesolder = 0
+            }
+            // calcPriceAssembled1800(){
+            //     priceAssembled_Solder = parseInt(150000);
+            //     priceAssembled_Desolder = parseInt(priceAssembled_Solder + 30000);
+            //     priceAssembled_HandleStab = parseInt(150000);
+            //     priceAssembled_SolderHotswap = parseInt(priceAssembled_Desolder - 10000);
+
+            //     priceAssembled_LedSolder_18 = parseInt(60*solder_led_18);
+            //     priceAssembled_LedSolder_234 = parseInt(60*solder_led_234);
+            //     priceAssembled_LedDesolder = parseInt(60*desolder_led)
+            // }
+
+
         // Calc Price
-        if (addFilm || addSpring) {
-            lube_service = switchQuantity * lube_service_with_accessories;
-        } else {
-            lube_service = switchQuantity * lube_service_without_accessories;
-        }
-        lube_accessories = priceFilm + priceSpring
-        subtotal_price = lube_service + lube_accessories
+            // LUBE SERVICE
+                if (addFilm || addSpring) {
+                    lube_service = switchQuantity * lube_service_with_accessories;
+                } else {
+                    lube_service = switchQuantity * lube_service_without_accessories;
+                }
+                lube_accessories = priceFilm + priceSpring
+            // ASSEMBLED SERVICE
+                assembled_service = parseInt(priceAssembled_Solder + priceAssembled_Desolder + priceAssembled_HandleStab + priceAssembled_SolderHotswap + priceAssembled_LedSolder_18 + priceAssembled_LedSolder_234 + priceAssembled_LedDesolder + priceKeyboardType);
+                assembled_accessories = 0;
+
+        subtotal_price = lube_service + lube_accessories + assembled_service + assembled_accessories
         total_price = subtotal_price - price_discount
         // Format Price
         formatLubeService = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(lube_service)
@@ -336,6 +612,8 @@ $(document).ready(function() {
         $("#sub-total .t-right").html(formatPriceSubTotal)
         $("#total-price .t-right").html(formatPriceTotal)
     }
+
+    $("")
 
 
 
