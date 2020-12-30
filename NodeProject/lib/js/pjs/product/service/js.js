@@ -613,7 +613,11 @@ $(document).ready(function() {
         $("#total-price .t-right").html(formatPriceTotal)
     }
 
-    $("")
+    $("#submit-order").on('click', function(){
+        $.ajax({
+
+        })
+    })
 
 
 

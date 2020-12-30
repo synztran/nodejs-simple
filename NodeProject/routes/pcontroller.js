@@ -475,7 +475,7 @@ router.post("/account", async (req, res, next) => {
                     service: 'Gmail',
                     auth: {
                         user: 'noobassembly@gmail.com',
-                        pass: '123456Ban'
+                        pass: 'gsrfewqfnplyltcz'
                     }
                 });
                 var link = "http://"+req.get('host')+"/verify?id="+response.token
