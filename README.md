@@ -1,2 +1,2 @@
-NoobStore offical website 
-==============
+NoobStore offical website and blog
+===============
