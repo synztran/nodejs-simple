@@ -15,7 +15,7 @@ function generateInvoice(invoice, filename, success, error) {
         }
     };
 
-    var file = fs.createWriteStream(filename);
+    var file = fs.createWriteStream('invoice/'+filename);
 
     var req = https.request(options, function(res) {
         res.on('data', function(chunk) {

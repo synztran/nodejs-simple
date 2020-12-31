@@ -12,6 +12,8 @@ const utils = require('./../lib/comon/utils');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const livereload = require('connect-livereload');
+const moment = require('moment');
+const https = require('https');
 const app = express();
 router.use(cookieParser());
 const i18n = require("i18n")
@@ -55,7 +57,7 @@ var Account = require('./../db/model/account');
 var Image = require('./../db/model/image');
 var userToken = require('./../db/model/token');
 var Tracking = require('./../db/model/tracking');
-var Product  = require('./../db/model/product');
+var Product = require('./../db/model/product');
 var AdsProduct = require('./../db/model/adsproduct');
 var EventProduct = require('./../db/model/eventproduct')
 var PageContent = require('./../db/model/mainpage_content');
@@ -74,26 +76,26 @@ var CountMiddleware = require('./../lib/check/countproduct');
 // })
 
 app.use(session({
-	saveUninitialized: true, 
-	name: "mycookie",
-	resave: true,
-    secret: config.secret, 
-    cookie: { 
-		secure: false,
-		maxAge: 1800000
-	}
+    saveUninitialized: true,
+    name: "mycookie",
+    resave: true,
+    secret: config.secret,
+    cookie: {
+        secure: false,
+        maxAge: 1800000
+    }
 }));
 
-app.use('/change-lang/:lang', (req, res)=>{
+app.use('/change-lang/:lang', (req, res) => {
     console.log(req.params.lang)
-    res.cookie('lang', req.params.lang, {maxAge: 900000});
+    res.cookie('lang', req.params.lang, { maxAge: 900000 });
     res.redirect('back');
 })
 
 // app.use(livereload())
 
 router.post("/login", async (req, res, next) => {
-    res.cookie('lang', 'en', {maxAge: 900000});
+    res.cookie('lang', 'en', { maxAge: 900000 });
     console.log(req.ip);
     try {
         var account = await Account.findOne({ email: (req.body.email).toLowerCase() }).exec();
@@ -150,25 +152,25 @@ router.post("/login", async (req, res, next) => {
             }
         }).exec();
 
-        res.cookie('x-token', response.token, {maxAge: 6000000});
+        res.cookie('x-token', response.token, { maxAge: 6000000 });
         // res.cookie('uid', account._id, {maxAge: 6000000})
         // res.cookie('uemail', account.email, {maxAge: 6000000})
-        res.cookie('x-refresh-token', response.refreshToken, {maxAge: 6000000});
+        res.cookie('x-refresh-token', response.refreshToken, { maxAge: 6000000 });
         res.cookie('lang', 'vi', { maxAge: 900000 });
         req.session.User = {
             email: account['email'],
             fname: account['fname'],
             lname: account['lname'],
-            id : account['_id']
+            id: account['_id']
         }
 
         req.session.save(function(err) {
             // session saved
-            if(!err) {
+            if (!err) {
                 //Data get lost here
                 res.redirect("/");
             }
-          })
+        })
         // return res.status(200).json({status: 'success'})
         // res.redirect('/');
         // setTimeout(() => res.redirect('/'), 1000)
@@ -202,22 +204,22 @@ router.get("/", function(req, res) {
     // }
 
 
-    
 
-    AdsProduct.find({}, function(err, docs){
-        PageContent.find({}, function(ContentErr, ContentDocs){
-            EventProduct.find({status: 1}, function(EProductErr, EProductDocs){
-                EProductDocs.forEach(function(item){
+
+    AdsProduct.find({}, function(err, docs) {
+        PageContent.find({}, function(ContentErr, ContentDocs) {
+            EventProduct.find({ status: 1 }, function(EProductErr, EProductDocs) {
+                EProductDocs.forEach(function(item) {
                     console.log(item.date_start)
                     var imgUrl = item.event_product_image.path
                     // var replaceIcon = 'api/docs/pimg/portfolio/gallery/2020-12-25T07-11-02.411Z9p664opxzi551.jpg'
                     // var replaceIcon = 
                     var replaceIcon = imgUrl.replace(/\\/g, "/");
-                    var imgBg = 'api/'+ replaceIcon
-                    
+                    var imgBg = 'api/' + replaceIcon
+
                     console.log(replaceIcon)
                     // console.log(path2);
-                    if(req.session.User == null){
+                    if (req.session.User == null) {
                         res.render('index', {
                             user: null,
                             listAdsProduct: docs,
@@ -226,7 +228,7 @@ router.get("/", function(req, res) {
                             images: imgBg,
                             date_start: item.date_start,
                         })
-                    }else{
+                    } else {
                         // const uemail = req.cookies.id['email'];
                         res.render('index', {
                             user: req.session.User['email'],
@@ -241,7 +243,7 @@ router.get("/", function(req, res) {
             })
         })
     }).limit(5)
-    
+
 
     // if(req.decoded == null){
     //     res.render('index', {
@@ -254,19 +256,19 @@ router.get("/", function(req, res) {
     // }
 });
 
-router.get("/time_event", function(req, res){
-    EventProduct.find({status: 1}, function(EProductErr, EProductDocs){
-        EProductDocs.forEach(function(item){
-              res.send(item.date_end);
+router.get("/time_event", function(req, res) {
+    EventProduct.find({ status: 1 }, function(EProductErr, EProductDocs) {
+        EProductDocs.forEach(function(item) {
+            res.send(item.date_end);
         })
     })
 })
 
-router.get('/register', async(req, res)=>{
+router.get('/register', async (req, res) => {
     res.render("product/registerPage");
 })
 
-router.get('/account', TokenUserCheckMiddleware, async( req, res) =>{
+router.get('/account', TokenUserCheckMiddleware, async (req, res) => {
     // console.log(req.session.User)
     // console.log(req.cookies)
     // if(req.session.User == null){
@@ -282,55 +284,55 @@ router.get('/account', TokenUserCheckMiddleware, async( req, res) =>{
     //     }) 
     // }                                             
     console.log(req.cookies['uemail'])
-    if(req.cookies['x-token'] == null){
+    if (req.cookies['x-token'] == null) {
         res.render("product/registerPage");
-    }else{
+    } else {
         console.log(req.decoded)
         // console.log(req.session.User);
         // const uemail = req.session.User['email'];
-        var account = await Account.findOne({email: req.decoded['email']}).exec();
+        var account = await Account.findOne({ email: req.decoded['email'] }).exec();
         // console.log(account);
         // console.log(account.fname)
         res.render('product/accountPage', {
             user: account
-        }) 
+        })
     }
 })
 
-router.get('/chucnang', async(req, res)=>{
+router.get('/chucnang', async (req, res) => {
     console.log(req.session.User)
     res.render('product/accountPage');
 
-    
+
 })
 
-router.get('/account/address', async(req, res)=>{
+router.get('/account/address', async (req, res) => {
     // res.render('product/addressPage');
 
-    if(!req.session.User){
+    if (!req.session.User) {
         res.redirect('/')
-    }else{
+    } else {
         console.log(req.session.User['email']);
-        Account.find({email: req.session.User['email']}, function(err, docs){
+        Account.find({ email: req.session.User['email'] }, function(err, docs) {
             console.log(docs);
             var address = docs[0].shipping_at;
             // console.log(docs[0].shipping_at);
             console.log(address)
-            if(address == null || address == "undefined" ){
+            if (address == null || address == "undefined") {
                 console.log(1)
                 res.render('product/addressPage', {
                     "listAddress": null
                 })
-            }else{
+            } else {
                 console.log(2)
-                res.render('product/addressPage',{
+                res.render('product/addressPage', {
                     "listAddress": docs
                 })
             }
         })
         // var address = await Account.findOne({email: req.session.User['email']}).exec();
         // console.log(address);
-       
+
         // console.log(address.shipping_at.length);
         // console.log(JSON.stringify(address))
         // var addressL = address.shipping_at.length;
@@ -348,39 +350,39 @@ router.get('/account/address', async(req, res)=>{
         // }
 
     }
-    
+
 })
 
-router.get('/proxygb', (req, res)=>{
+router.get('/proxygb', (req, res) => {
     // if(req.session.User == null){
     //     res.render("product/proxyPage");
     // }else{
-        // console.log(req.session.User);
-        Category.find({}, function(err, docs) {
-            // console.log(docs);
-            res.render("product/proxyPage", {
-                "listCategory": docs
-            });
+    // console.log(req.session.User);
+    Category.find({}, function(err, docs) {
+        // console.log(docs);
+        res.render("product/proxyPage", {
+            "listCategory": docs
         });
-        
-        
-        // const uemail = req.session.User['email'];
-        // res.render('index', {
-        //     user: uemail 
-        // })
+    });
+
+
+    // const uemail = req.session.User['email'];
+    // res.render('index', {
+    //     user: uemail 
+    // })
     // }
 })
 
-router.post('/captcha', async(req, res)=>{
-    
+router.post('/captcha', async (req, res) => {
+
 });
 
 router.post("/account", async (req, res, next) => {
     try {
         var check = await Account.find({ email: req.body.email }, async (err, docs) => {
 
-            if(req.body.email == config.admin || req.body.email == config.mod){
-               return res.status(400).send({
+            if (req.body.email == config.admin || req.body.email == config.mod) {
+                return res.status(400).send({
                     code: 400,
                     message: "email already exits!!"
                 })
@@ -417,9 +419,9 @@ router.post("/account", async (req, res, next) => {
                 // }
 
                 // const secretKey = config.secretKey;
-                
+
                 // const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress
-            
+
                 // request(verificationURL, function(error, response, body){
                 //     body = JSON.parse(body);
                 //     if(body.success !== undefined && !body.success){
@@ -478,13 +480,13 @@ router.post("/account", async (req, res, next) => {
                         pass: 'gsrfewqfnplyltcz'
                     }
                 });
-                var link = "http://"+req.get('host')+"/verify?id="+response.token
+                var link = "http://" + req.get('host') + "/verify?id=" + response.token
                 var mainOptions = {
                     from: 'NoobStore',
                     to: (req.body.email),
                     subject: '[NoobStore] Please confirm your email address',
                     text: 'You received mess from ' + (req.body.email),
-                    html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Hey ' + req.body.lname + ' ' + req.body.fname + ' !</b></p><p>Thanks for joining NoobStore.<br>To finish registration, please click the button below to verify your account.</p><p><div><a style="background: #007bff;padding: 9px;width: 200px;color: #fff;text-decoration: none;display: inline-block;font-weight: bold;text-align: center;letter-spacing: 0.5px;border-radius: 4px;" href='+link+'>Verify email address</a></div><br><p>Once verified, you can join and get notification from NoobStore. If you have any problems, please contact us: noobassembly@gmail.com</p></p>'
+                    html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Hey ' + req.body.lname + ' ' + req.body.fname + ' !</b></p><p>Thanks for joining NoobStore.<br>To finish registration, please click the button below to verify your account.</p><p><div><a style="background: #007bff;padding: 9px;width: 200px;color: #fff;text-decoration: none;display: inline-block;font-weight: bold;text-align: center;letter-spacing: 0.5px;border-radius: 4px;" href=' + link + '>Verify email address</a></div><br><p>Once verified, you can join and get notification from NoobStore. If you have any problems, please contact us: noobassembly@gmail.com</p></p>'
                 }
 
                 transporter.sendMail(mainOptions, function(err, info) {
@@ -511,123 +513,122 @@ router.post("/account", async (req, res, next) => {
 
 router.get('/get_session', (req, res) => {
     //check session
-    if(req.session.User){
-        return res.status(200).json({status: 'success', session: req.session.User})
+    if (req.session.User) {
+        return res.status(200).json({ status: 'success', session: req.session.User })
     }
-    return res.status(200).json({status: 'error', session: 'No session', code: 200})
+    return res.status(200).json({ status: 'error', session: 'No session', code: 200 })
 })
 
-router.get('/get_noti', TokenUserCheckMiddleware, async(req, res)=>{
+router.get('/get_noti', TokenUserCheckMiddleware, async (req, res) => {
     // console.log(req.session.User);
     // console.log(req.decoded);
-    var account = await Account.findOne({email: req.decoded['email']}).exec();
+    var account = await Account.findOne({ email: req.decoded['email'] }).exec();
     // console.log(account)
     return res.status(200).json({
         status: 'success',
-        noti : {
-          get_noti:  account.get_noti
+        noti: {
+            get_noti: account.get_noti
         }
     })
 });
 
-router.get('/get_cookie' ,async(req, res) =>{
-    
-        if(req.cookies['x-token'] && req.session.User){
-        var account = await Account.findOne({email: req.session.User['email']}).exec();
+router.get('/get_cookie', async (req, res) => {
+
+    if (req.cookies['x-token'] && req.session.User) {
+        var account = await Account.findOne({ email: req.session.User['email'] }).exec();
         // console.log(account)
         return res.status(200).json({
             status: 'success',
             session: {
-                id : account._id,
+                id: account._id,
                 email: account.email,
                 fname: account.fname,
                 lname: account.lname
             }
         })
     }
-    return res.status(200).json({status: 'error', session: 'No session', code: 200})
+    return res.status(200).json({ status: 'error', session: 'No session', code: 200 })
 })
 
-router.get('/clear_session', (req, res)=>{
+router.get('/clear_session', (req, res) => {
 
-    req.session.destroy(function(err){
-        return res.status(200).json({status: 'success', session: 'cannot access session here'})
+    req.session.destroy(function(err) {
+        return res.status(200).json({ status: 'success', session: 'cannot access session here' })
     })
 })
 
-router.get('/verify', async(req, res) =>{
+router.get('/verify', async (req, res) => {
     console.log(req.query['id']);
     var getTimeActive = new Date();
     console.log(getTimeActive)
-    try{
-        var checkToken = await userToken.findOne({token: req.query['id']}).exec();
-        var checkActive = await Account.findOne({email: checkToken['email']})
+    try {
+        var checkToken = await userToken.findOne({ token: req.query['id'] }).exec();
+        var checkActive = await Account.findOne({ email: checkToken['email'] })
         console.log(checkToken);
         console.log(checkActive)
-        if(checkToken && checkActive['active'] == false){
-            db.collection('accounts').updateOne({ email: (checkToken['email']).toLowerCase() }, { $set: { active: true , actived_date: getTimeActive} })
+        if (checkToken && checkActive['active'] == false) {
+            db.collection('accounts').updateOne({ email: (checkToken['email']).toLowerCase() }, { $set: { active: true, actived_date: getTimeActive } })
 
             res.redirect('/');
-        }else{
+        } else {
             res.redirect('/');
         }
-    }catch(err){
+    } catch (err) {
         res.status(500).send(err);
     }
 });
 
-router.post('/updateaccount', TokenUserCheckMiddleware ,async(req, res)=>{
+router.post('/updateaccount', TokenUserCheckMiddleware, async (req, res) => {
     // const uemail = req.session.User['email'];
     console.log(req.body)
     const uemail = req.decoded['email']
     console.log(uemail);
-    try{
-        
+    try {
+
         var account = await Account.findOne({ email: uemail }).exec();
 
         // console.log(account)
 
         // console.log(account.shipping_at[0]);
         // console.log(account.shipping_at[0]['address'])
-        if(!account){
+        if (!account) {
             return res.status(400).send({
                 status: "error",
                 message: "The user does not exist "
             });
         }
 
-        
 
-       
 
-        if(req.body.currentpw == '' & req.body.newpw == ''){
-            db.collection('accounts').updateOne({ 
-                email: uemail 
-            }, 
-                { $set: 
-                    { 
-                        fname: req.body.fname, 
-                        lname: req.body.lname,
-                        birth_date: req.body.dob,
-                        paypal: req.body.paypal,
-                        fb_url: req.body.fburl,
-                        // shipping_at:[{
-                        //     address: req.body.address,
-                        //     city: req.body.city,
-                        //     zip_code: req.body.zipcode
-                        // }
-                        // phone_area_code: req.body.phonearea,
-                        phone_number: req.body.pnumber,
-                        get_noti: req.body.get_noti
-                            
-                        
-                    } 
-                })
 
-                // res.status(200).status('ok')
-                res.redirect('/account');
-        }else{
-             if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
+
+        if (req.body.currentpw == '' & req.body.newpw == '') {
+            db.collection('accounts').updateOne({
+                email: uemail
+            }, {
+                $set: {
+                    fname: req.body.fname,
+                    lname: req.body.lname,
+                    birth_date: req.body.dob,
+                    paypal: req.body.paypal,
+                    fb_url: req.body.fburl,
+                    // shipping_at:[{
+                    //     address: req.body.address,
+                    //     city: req.body.city,
+                    //     zip_code: req.body.zipcode
+                    // }
+                    // phone_area_code: req.body.phonearea,
+                    phone_number: req.body.pnumber,
+                    get_noti: req.body.get_noti
+
+
+                }
+            })
+
+            // res.status(200).status('ok')
+            res.redirect('/account');
+        } else {
+            if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
                 return res.status(400).send({
                     status: "error",
                     message: "The password is not correct"
@@ -641,9 +642,9 @@ router.post('/updateaccount', TokenUserCheckMiddleware ,async(req, res)=>{
 
         }
 
-        
 
-    }catch(err){
+
+    } catch (err) {
         res.status(500).send(err);
     }
 
@@ -651,16 +652,16 @@ router.post('/updateaccount', TokenUserCheckMiddleware ,async(req, res)=>{
 
 // ------------------------------------------ ADDRESS CONFIG-------------------------------------
 
-router.post('/account/addaddress', TokenUserCheckMiddleware, async(req, res)=>{
+router.post('/account/addaddress', TokenUserCheckMiddleware, async (req, res) => {
 
     var uemail = req.decoded['email'];
     console.log(uemail)
-    try{
+    try {
         db.collection('accounts').update({
             email: uemail
-        },{
+        }, {
             $addToSet: {
-                shipping_at:{
+                shipping_at: {
                     _id: (new mongoose.Types.ObjectId()).toString(),
                     lname: req.body.lname,
                     fname: req.body.fname,
@@ -676,33 +677,32 @@ router.post('/account/addaddress', TokenUserCheckMiddleware, async(req, res)=>{
         })
         // res.status(200).status('ok')
         res.redirect('/account/address')
-       
-    }catch(err){
+
+    } catch (err) {
         res.status(500).send(err);
     }
 })
 
 
 
-router.delete('/delete-address/:id' , async(req, res)=>{
+router.delete('/delete-address/:id', async (req, res) => {
     // console.log(req.decoded['email']);
     var uemail = "rapsunl231@gmail.com"
     // console.log(req.params.id)
-    try{
-        var address = db.collection('accounts').update(
-            {
-                'email': uemail
-            },{
-                "$pull": {
-                    "shipping_at":{
-                        "_id": req.params.id
-                    }
+    try {
+        var address = db.collection('accounts').update({
+            'email': uemail
+        }, {
+            "$pull": {
+                "shipping_at": {
+                    "_id": req.params.id
                 }
-            });
+            }
+        });
 
         res.send(address);
-        
-    }catch(err){
+
+    } catch (err) {
         res.status(500).send(err);
     }
 })
@@ -734,155 +734,155 @@ router.post('/updatepassword', async (req, res) => {
 })
 
 
-router.get('/account/tracking', function(req,res){
+router.get('/account/tracking', function(req, res) {
     var email = 'rapsunl231@gmail.com'
-    try{
-        Tracking.find({email: email}, function(err, docs){
+    try {
+        Tracking.find({ email: email }, function(err, docs) {
             console.log(docs);
-            res.render('product/trackingPage',{
-                'listTracking' : docs
+            res.render('product/trackingPage', {
+                'listTracking': docs
             })
         })
-    }catch(err){
-        res.status(400 ).send(err);
+    } catch (err) {
+        res.status(400).send(err);
     }
 })
 
-router.get('/order/:id', function(req, res){
-    try{
+router.get('/order/:id', function(req, res) {
+    try {
 
-    }catch(err){
+    } catch (err) {
         res.status(400).send(err);
     }
 })
 
 
-router.post('/history', async(req, res)=>{
-    try{
-        var account = await Account.findOne({_id: req.body.id}).exec();
+router.post('/history', async (req, res) => {
+    try {
+        var account = await Account.findOne({ _id: req.body.id }).exec();
         console.log(account);
-        var checkTracking = await Tracking.find({email: account['email']}).exec();
+        var checkTracking = await Tracking.find({ email: account['email'] }).exec();
         console.log(checkTracking);
         res.send(checkTracking);
 
-    }catch(err){
+    } catch (err) {
         res.status(500).send(err);
     }
 })
 
-router.post('/proxygb/payment/joingb', TokenUserCheckMiddleware, async(req, res)=>{
+router.post('/proxygb/payment/joingb', TokenUserCheckMiddleware, async (req, res) => {
     console.log(req.body)
     // console.log(req.decoded);
     var uemail = req.decoded['email']
-    try{
-        var account = await Account.findOne({email: uemail}).exec();
-        var checkProduct = await Product.find({product_id: req.body.product_id}, {"category_id": "ETC2"}).exec();
+    try {
+        var account = await Account.findOne({ email: uemail }).exec();
+        var checkProduct = await Product.find({ product_id: req.body.product_id }, { "category_id": "ETC2" }).exec();
         // var checkProduct = await Product.find({product_id: {"$all": req.body.product_id}}, 
-        
-      
-               console.log(checkProduct)
+
+
+        console.log(checkProduct)
 
         // var checkProduct = db.collection('products').aggregate([
         //     {$math: {product_id: "SWPACK3"} },
         //     {$count: "total"}
         // ])
         // console.log(checkProduct)
-            await Couter.findOne({_id: 'tracking'}, function(err, docs){
-                console.log('incc = ' + docs['seq'])
-            
-                // for(var i=0;i<checkProduct.length;i++){
-                //     (function(i){
+        await Couter.findOne({ _id: 'tracking' }, function(err, docs) {
+            console.log('incc = ' + docs['seq'])
 
-                // Object.keys(req.body.quantity).forEach(function(key){  
-                   
-                     
-                    // if(b.indexOf(checkProduct[key].product_name)){
+            // for(var i=0;i<checkProduct.length;i++){
+            //     (function(i){
 
-                    // }else{
-                    //     b.push(checkProduct[key].product_name);
-                    // }
-                    
-                    // console.log(req.body.product_id);
-                    // console.log(checkProduct[key].product_name)
-                        db.collection('trackings').insertOne({
-                            order_id: "ORD00" + (docs['seq'] + 1),
-                            email: uemail,
-                            list_product:{
-                                _id: (new mongoose.Types.ObjectId()).toString(),
-                                product_id: req.body.product_id,
-                                product_name: req.body.productName,
-                                product_quantity: req.body.quantity,
-                                product_price: req.body.price,
-                                // product_picture: checkProduct[key].pic_product['path']
-                            },
-                            payment: req.body.payment,
-                            shipping_at:{
-                                customer_name: req.body.customer_name,
-                                customer_city: req.body.customer_city,
-                                customer_phone:req.body.customer_phone,
-                                customer_address: req.body.customer_address,
-                                customer_country:req.body.customer_country,
-                                customer_postal_code:req.body.customer_postal_code,
-                            },
-                            // total: totalPrice
-                        })
-                //     })(i);
-                // }
+            // Object.keys(req.body.quantity).forEach(function(key){  
+
+
+            // if(b.indexOf(checkProduct[key].product_name)){
+
+            // }else{
+            //     b.push(checkProduct[key].product_name);
+            // }
+
+            // console.log(req.body.product_id);
+            // console.log(checkProduct[key].product_name)
+            db.collection('trackings').insertOne({
+                order_id: "ORD00" + (docs['seq'] + 1),
+                email: uemail,
+                list_product: {
+                    _id: (new mongoose.Types.ObjectId()).toString(),
+                    product_id: req.body.product_id,
+                    product_name: req.body.productName,
+                    product_quantity: req.body.quantity,
+                    product_price: req.body.price,
+                    // product_picture: checkProduct[key].pic_product['path']
+                },
+                payment: req.body.payment,
+                shipping_at: {
+                    customer_name: req.body.customer_name,
+                    customer_city: req.body.customer_city,
+                    customer_phone: req.body.customer_phone,
+                    customer_address: req.body.customer_address,
+                    customer_country: req.body.customer_country,
+                    customer_postal_code: req.body.customer_postal_code,
+                },
+                // total: totalPrice
+            })
+            //     })(i);
+            // }
             // )
             // }
-                db.collection("couters").findAndModify({
-                        _id: "tracking"
-                    }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
+            db.collection("couters").findAndModify({
+                    _id: "tracking"
+                }, {}, { $inc: { "seq": 1 } }, { new: true, upsert: true },
 
-                    function(err, docs) {
-                        console.log(docs);
-                    })
-            })
-    }catch(err){
+                function(err, docs) {
+                    console.log(docs);
+                })
+        })
+    } catch (err) {
         res.status(500).send(err);
     }
 })
 
 // --------------------------------- PRODUCT CONFIG --------------------------------------------
-router.get('/proxygb/product/:id' , async(req, res)=>{
+router.get('/proxygb/product/:id', async (req, res) => {
     // console.log(req.params.id);
-    try{   
-            Product.find({category_id: req.params.id}, function(err, docs){
-                // console.log(docs);
-                if(docs[0]){
-                    Category.findOne({category_id: docs[0].category_id},function(err, docs2){
+    try {
+        Product.find({ category_id: req.params.id }, function(err, docs) {
+            // console.log(docs);
+            if (docs[0]) {
+                Category.findOne({ category_id: docs[0].category_id }, function(err, docs2) {
 
-                        // console.log(docs);
-                        // console.log(docs2);
-                        res.render('product/detailsProductPage',{
-                            title: 'aaaa',
-                            "detailsProduct": docs,
-                            "Category": docs2,
-                        })
+                    // console.log(docs);
+                    // console.log(docs2);
+                    res.render('product/detailsProductPage', {
+                        title: 'aaaa',
+                        "detailsProduct": docs,
+                        "Category": docs2,
                     })
-                    
-                }else{
-                    res.redirect('/404Page')
-                }
-            })
-    }catch(err){
+                })
+
+            } else {
+                res.redirect('/404Page')
+            }
+        })
+    } catch (err) {
         res.status(400).send(err);
     }
 })
 
-router.get('/proxygb/payment/:id',TokenUserCheckMiddleware , async(req, res)=>{
+router.get('/proxygb/payment/:id', TokenUserCheckMiddleware, async (req, res) => {
     // console.log(req.params.id)
     // console.log(req.decoded['email']);
-    try{
-        Product.find({category_id: req.params.id}, function(errdocs, docs){
-            if(docs[0]){
-                Category.findOne({category_id: docs[0].category_id},function(errdocs2, docs2){
-                    Account.findOne({email: req.decoded['email']}, function(erruser, docs3){
+    try {
+        Product.find({ category_id: req.params.id }, function(errdocs, docs) {
+            if (docs[0]) {
+                Category.findOne({ category_id: docs[0].category_id }, function(errdocs2, docs2) {
+                    Account.findOne({ email: req.decoded['email'] }, function(erruser, docs3) {
                         // console.log(user)
-                    
-                    // console.log(docs);
-                    // console.log(docs2);
-                        res.render('product/joingbPage',{
+
+                        // console.log(docs);
+                        // console.log(docs2);
+                        res.render('product/joingbPage', {
                             title: 'Payment',
                             "User": docs3,
                             "Payment": docs,
@@ -891,31 +891,206 @@ router.get('/proxygb/payment/:id',TokenUserCheckMiddleware , async(req, res)=>{
                     })
                 })
 
-            }else{
+            } else {
                 res.redirect('/404Page')
             }
-           
+
         })
 
 
-    }catch(err){
+    } catch (err) {
         res.status(200).send(err);
     }
 })
 // ==================================================================== //
-router.get('/service', (req, res)=>{
-    res.render('product/servicePage',{
+router.get('/service', (req, res) => {
+    res.render('product/servicePage', {
         title: 'Keyboard Service',
         lubeTitle: 'Lube Service Form',
         assemTitle: 'Assembled Service Form',
     })
 })
 
+// function generateInvoice(invoice, filename, success, error) {
+//     var postData = JSON.stringify(invoice);
+//     var options = {
+//         hostname  : "invoice-generator.com",
+//         port      : 443,
+//         path      : "/",
+//         method    : "POST",
+//         headers   : {
+//             "Content-Type": "application/json",
+//             "Content-Length": Buffer.byteLength(postData)
+//         }
+//     };
+
+//     var file = fs.createWriteStream(filename);
+
+//     var req = https.request(options, function(res) {
+//         res.on('data', function(chunk) {
+//             file.write(chunk);
+//         })
+//         .on('end', function() {
+//             file.end();
+
+//             if (typeof success === 'function') {
+//                 success();
+//             }
+//         });
+//     });
+//     req.write(postData);
+//     req.end();
+
+//     if (typeof error === 'function') {
+//         req.on('error', error);
+//     }
+// }
+// var invoice = {
+//     // logo: "http://invoiced.com/img/logo-invoice.png",
+//     // logo: "logo.png",
+//     logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
+//     from: "Invoiced\nNoobStore\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
+//     to: "Khiem Le",
+//     currency: "vnd",
+//     number: "INV-0024",
+//     payment_terms: "Auto-Billed - Do Not Pay",
+//     // date : (new Date(Date.now()).toLocaleDateString()),
+//     // due_date: (new Date()).toLocaleDateString(),
+//     due_date: moment().add(1, 'M').format('MMM DD, YYYY'),
+//     items: [
+//         {
+//             name: "Assembled Service - PCB Canoe Gen 2",
+//             quantity: 1,
+//             unit_cost: 200000,
+//             description: "- Soldered Mill-max hotswap"
+//         },
+//         // {
+//         //     name: "Assembled Service - UTD 360C",
+//         //     quantity: 1,
+//         //     unit_cost: 400000,
+//         //     description: "- Soldered Switches (220) \n - Handle Stabilizer (180) \n - Soldered Cable"
+//         // },
+//         {
+//             name: "Lube Service - Mauve switches x70",
+//             quantity: 1,
+//             unit_cost: 570000,
+//             description: "- Housing/Stem w/ Ghv4 (420) \n - Film clear(white/pink) TX (150) \n - Spring w/ GPL 105"
+//         }
+//     ],
+//     fields: {
+//         tax: "%",
+//         discounts: true,
+//         shipping: true,
+//     },
+//     discounts: 0,
+//     shipping:0,
+//     tax: 0,
+//     amount_paid: 0,
+//     notes: "Thanks for being an awesome customer!",
+//     terms: "No need to submit payment. You will be auto-billed for this invoice."
+// };
+// generateInvoice(invoice, invoice.number+'.pdf', function() {
+//     console.log("Saved invoice to invoice.pdf");
+// }, function(error) {
+//     console.error(error);
+// });
+
+
+
+router.post('/service/invoice', (req, res) => {
+    console.log(req.body)
+    try {
+        function generateInvoice(invoice, filename, success, error) {
+            var postData = JSON.stringify(invoice);
+            var options = {
+                hostname: "invoice-generator.com",
+                port: 443,
+                path: "/",
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Content-Length": Buffer.byteLength(postData)
+                }
+            };
+
+            var file = fs.createWriteStream('./invoice/' + filename);
+
+            var req = https.request(options, function(res) {
+                res.on('data', function(chunk) {
+                        file.write(chunk);
+                    })
+                    .on('end', function() {
+                        file.end();
+
+                        if (typeof success === 'function') {
+                            success();
+                        }
+                    });
+            });
+            req.write(postData);
+            req.end();
+
+            if (typeof error === 'function') {
+                req.on('error', error);
+            }
+        }
+        var invoice = {
+            logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
+            from: "Invoiced\nNoobStore\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
+            to: "Khiem Le",
+            currency: "vnd",
+            number: "INV-0024",
+            payment_terms: "Auto-Billed - Do Not Pay",
+            due_date: moment().add(1, 'M').format('MMM DD, YYYY'),
+            items: [{
+                    name: "Assembled Service - PCB Canoe Gen 2",
+                    quantity: 1,
+                    unit_cost: 200000,
+                    description: "- Soldered Mill-max hotswap"
+                },
+                // {
+                //     name: "Assembled Service - UTD 360C",
+                //     quantity: 1,
+                //     unit_cost: 400000,
+                //     description: "- Soldered Switches (220) \n - Handle Stabilizer (180) \n - Soldered Cable"
+                // },
+                {
+                    name: "Lube Service - Mauve switches x70",
+                    quantity: 1,
+                    unit_cost: 570000,
+                    description: "- Housing/Stem w/ Ghv4 (420) \n - Film clear(white/pink) TX (150) \n - Spring w/ GPL 105"
+                }
+            ],
+            fields: {
+                tax: "%",
+                discounts: true,
+                shipping: true,
+            },
+            discounts: 0,
+            shipping: 0,
+            tax: 0,
+            amount_paid: 0,
+            notes: "Thanks for being an awesome customer!",
+            terms: "No need to submit payment. You will be auto-billed for this invoice."
+        };
+
+        generateInvoice(invoice, invoice.number + '.pdf', function() {
+            console.log("Saved invoice to invoice.pdf");
+        }, function(error) {
+            console.error(error);
+        });
+        return file
+
+    } catch (err) {
+        res.status(200).send(err);
+    }
+
+})
 
 
 // ---------------------------------------------------------------------------------------------
 
-router.get('*',function(req, res){
+router.get('*', function(req, res) {
     res.status(404).render('404Page')
 })
 

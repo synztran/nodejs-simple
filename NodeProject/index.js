@@ -187,9 +187,9 @@ io.on('connection', function(socket){
 
 	var online = 0;
 	function GetCookieValue() {
-		var regex = /%40/gi;
-		var found = socket.handshake.headers.cookie.split(';').filter(c => c.trim().split("=")[0] === 'x-email');
-		return found.length > 0 ? found[0].split("=")[1].replace(regex, '@') : null;
+		// var regex = /%40/gi;
+		// var found = socket.handshake.headers.cookie.split(';').filter(c => c.trim().split("=")[0] === 'x-email');
+		// return found.length > 0 ? found[0].split("=")[1].replace(regex, '@') : null;
 	}
 
 	function GetSession(){

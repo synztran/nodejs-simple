@@ -612,10 +612,38 @@ $(document).ready(function() {
         $("#sub-total .t-right").html(formatPriceSubTotal)
         $("#total-price .t-right").html(formatPriceTotal)
     }
-
     $("#submit-order").on('click', function(){
         $.ajax({
+            type: 'POST',
+            url: '/service/invoice',
+            dataType: "json",
+            data: {
+                switches_quanity: $("#lube_quantity").val(),
+                sw_quantity : $("#lube_quantity").val(),
+                 grease : $("#lube_grease").val(),
+                 film_color : $("#lube_film_color").val(),
+                 box_spring_force : $("#lube_box_spring_force").val(),
+                 spring_force :  $("#lube_spring_force").val(),
+                 keeb_type : $("#assemble_kb_type").val(),
+                 keeb_layout : $("#assemble_kb_layout").val(),
 
+                 pcb_solder : $("#assembled_pcb_solder").val(),
+                 pcb_desolder : $("#assembled_pcb_desolder").val(),
+                 pcb_handlestab : $("#assembled_pcb_handlestab").val(),
+                 pcb_solderhotswap : $("#assembled_pcb_solder_hotswap").val(),
+
+                 led_solder : $("#assembled_led_solder").val(),
+                 led_desolder : $("#assembled_led_desolder").val(),
+                 price_lube_accessories = $("#").val(),
+                 price_lube_service = $("#").val(),
+                 price_assembled_accessories = $("#").val()
+            },
+            success: function(res){
+                console.log(res)
+            },
+            error: function(err){
+                console.log(err)
+            }
         })
     })
 
