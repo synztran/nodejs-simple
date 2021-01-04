@@ -634,9 +634,10 @@ $(document).ready(function() {
 
                  led_solder : $("#assembled_led_solder").val(),
                  led_desolder : $("#assembled_led_desolder").val(),
-                 price_lube_accessories = $("#").val(),
-                 price_lube_service = $("#").val(),
-                 price_assembled_accessories = $("#").val()
+                 price_lube_accessories : lube_accessories,
+                 price_lube_service : lube_service,
+                 price_assembled_service: assembled_service,
+                 price_assembled_accessories : assembled_accessories
             },
             success: function(res){
                 console.log(res)

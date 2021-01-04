@@ -1027,7 +1027,12 @@ router.post('/service/invoice', (req, res) => {
                         }
                     });
             });
+            // const genFile = file.path;
+            console.log(file)
+            console.log(file.path)
+            console.log(genFile)
             req.write(postData);
+            res.download(genFile);
             req.end();
 
             if (typeof error === 'function') {
@@ -1079,7 +1084,7 @@ router.post('/service/invoice', (req, res) => {
         }, function(error) {
             console.error(error);
         });
-        return file
+        // res.download(file)
 
     } catch (err) {
         res.status(200).send(err);
