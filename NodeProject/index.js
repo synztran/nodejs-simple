@@ -104,6 +104,7 @@ app.use('/product/img', express.static('docs/pimg'))
 app.use('/product/css', express.static('lib/css/pcss'))
 app.use('/nodemodules', express.static('node_modules'))
 app.use('/favicon', express.static('favicon'))
+app.use('/invoice', express.static('invoice'))
 app.use('/eventproduct', express.static('docs/pimg/portfolio/gallery/'))
 
 

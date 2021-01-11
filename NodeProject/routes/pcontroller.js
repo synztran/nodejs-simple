@@ -15,6 +15,7 @@ const session = require('express-session');
 const livereload = require('connect-livereload');
 const moment = require('moment');
 const https = require('https');
+const http = require('http');
 const app = express();
 router.use(cookieParser());
 const i18n = require("i18n")
@@ -1000,6 +1001,10 @@ router.get('/service', (req, res) => {
 
 router.post('/service/invoice', (req, res) => {
     console.log(req.body)
+    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    var customUrl = req.protocol + '://' + req.get('host') + "/invoice/"
+    console.log(fullUrl)
+    console.log(customUrl)
     try {
         function generateInvoice(invoice, filename, success, error) {
             var postData = JSON.stringify(invoice);
@@ -1013,9 +1018,10 @@ router.post('/service/invoice', (req, res) => {
                     "Content-Length": Buffer.byteLength(postData)
                 }
             };
-
-            var file = fs.createWriteStream('./invoice/' + filename);
-
+             var file = fs.createWriteStream('./invoice/' + filename);
+            var url = customUrl + filename;
+            // var filePath = '/invoice/'+ filename
+            console.log(url)
             var req = https.request(options, function(res) {
                 res.on('data', function(chunk) {
                         file.write(chunk);
@@ -1027,13 +1033,34 @@ router.post('/service/invoice', (req, res) => {
                             success();
                         }
                     });
-            // const genFile = file.path;
-            // res.download(filename)
             });
+             var filePath = path.join(__dirname, '..', 'invoice', filename)
+            // console.log(path.join(__dirname, '..', 'invoice', filename))
+            // fs.readFile(filePath, function (err,data){
+            //     console.log(data)
+            //     // res.contentType("application/pdf");
+            //     res.send(data);
+            // });
+            // return res.status(200).json({
+            //     data: url,
+            //     file: filename
+            // });
 
             req.write(postData);
-
             req.end();
+            // console.log(__dirname + filePath)
+            console.log(filePath, filename)
+            // var file = fs.createReadStream('./src/test-data/service/print/notes.pdf');
+            var stat = fs.statSync('./invoice/' + filename);
+            res.setHeader('Content-Length', stat.size);
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', 'attachment; filename=agreement.pdf');
+            res.status(200).json({
+                data: url,
+                file: filename
+            })
+            // return res.download(filePath, filename);
+
 
             if (typeof error === 'function') {
                 req.on('error', error);
@@ -1044,7 +1071,7 @@ router.post('/service/invoice', (req, res) => {
             from: "Invoiced\nNoobStore\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
             to: "Khiem Le",
             currency: "vnd",
-            number: "INV-0024",
+            number: "INV-0025",
             payment_terms: "Auto-Billed - Do Not Pay",
             due_date: moment().add(1, 'M').format('MMM DD, YYYY'),
             items: [{
@@ -1080,23 +1107,20 @@ router.post('/service/invoice', (req, res) => {
         };
 
         generateInvoice(invoice, invoice.number + '.pdf', function() {
-            
-        
-            // res.attachment(path.join(__dirname, invoice.number+ '.pdf'));
             console.log("Saved invoice to invoice.pdf");
-            // console.log(invoice.number+'.pdf');
-            // console.log(path.join(__dirname, '..', 'invoice', invoice.number+ '.pdf'))
             console.log('./invoice/'+ invoice.number+'.pdf')
-            var data = fs.readFileSync('./invoice/'+ invoice.number+'.pdf');
-            res.contentType("application/pdf");
-            res.send(data);
+
             // res.download(path.join(__dirname, '..', 'invoice', invoice.number+ '.pdf'))
         }, function(error) {
             console.error(error);
         });
-
+        // res.send('http://localhost/invoice/INV-0024.pdf')
+        // return res.status(200).json({
+        //     data: url,
+        //     file: filename});
 
     } catch (err) {
+        console.log("eror" + err)
         res.status(200).send(err);
     }
 
