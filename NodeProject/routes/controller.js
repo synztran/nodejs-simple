@@ -42,6 +42,15 @@ const adsProductStorage = multer.diskStorage({
         cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname)
     }
 })
+
+const eventProductStorage = multer.diskStorage({
+    destination: function(req, file,cb){
+        cb(null, 'docs/pimg/eventproduct/')
+    },
+    filename: function(req, file,cb){
+        cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname)
+    }
+})
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 
@@ -63,6 +72,13 @@ const upload = multer({
 
 const uploadAdsProduct = multer({
     storage: adsProductStorage,
+    limits:{
+        fileSize: 1024 * 1024 * 1000
+    }
+})
+
+const uploadEventProduct = multer({
+    storage: eventProductStorage,
     limits:{
         fileSize: 1024 * 1024 * 1000
     }
@@ -1654,57 +1670,61 @@ router.post('/eventproduct/add', uploadAdsProduct.single('picture'), async(req, 
     }
 })
 
-router.get('/eventproduct/edit/:id', function(req, res){
+router.get('/eventproduct/edit/:id', TokenCheckMiddleware, function(req, res){
     EventProduct.findById(req.params.id,function(err, docs){
-        res.render('manager/ads_product/new_editPage', {
+        res.render('manager/event_product/new_editPage', {
+            moment: moment,
             title: "Event Product - Edit #" + req.params.id,
+            lang: req.cookies.lang,
+            fname: req.decoded['fname'],
+            lname: req.decoded['lname'],
+            mail: req.decoded['email'],
             'data': docs
         })
     })
 })
 
-router.post('/eventproduct/edit/:id', uploadAdsProduct.single('picture'), async(req, res)=>{
+router.get('/eventproduct/get/:id', TokenCheckMiddleware, async(req, res)=>{
+    console.log(req.params.id)
+    try{
+        var checkEventProduct = await EventProduct.findById(req.params.id).exec();
+        res.send(checkEventProduct).status(200);
+    }catch(err){
+        res.send(err).status(404)
+    }
+})
+
+router.post('/eventproduct/edit/:id', uploadEventProduct.single('picture'), async(req, res)=>{
     console.log(req.body)
+    console.log(req.file)
     try{
         var checkEventProduct = await EventProduct.findById(req.params
             .id).exec();
         if(req.file){
             checkEventProduct.set({
-                product_name: req.body.adsproduct_name,
-                author_name: req.body.adsproduct_author,
-                specs: req.body.adsproduct_specs,
-                status: req.body.adsproduct_status,
-                pic_product:{
+                date_start: req.body.date_start,
+                date_end : req.body.date_end,
+                status: parseInt(req.body.eventproduct_status),
+                event_product_image:{
                     path: req.file.path,
                     size: req.file.size,
                 }
             })
         }else{
             checkEventProduct.set({
-                product_name: req.body.adsproduct_name,
-                author_name: req.body.adsproduct_author,
-                status: req.body.adsproduct_status,
-                specs: req.body.adsproduct_specs,
-
+                date_start: req.body.date_start,
+                date_end : req.body.date_end,
+                status: parseInt(req.body.eventproduct_status)
             })
         }
         
-        var result = await checkAdsProduct.save();
+        var result = await checkEventProduct.save();
         return res.redirect('/api/eventproduct/');
     }catch(err){
         res.status(500).send(err)
     }
 })
 
-router.get('/adsproduct/get/:id', async(req, res) =>{
-    
-    try{
-        var checkAdsProduct = await AdsProduct.findById(req.params.id).exec();
-        res.send(checkAdsProduct).status(200);
-    }catch(err){
-        res.send(err).status(404)
-    }
-})
 
 router.delete('/eventproduct/delete/:id', async (req, res) => {
     console.log(req.params.id)

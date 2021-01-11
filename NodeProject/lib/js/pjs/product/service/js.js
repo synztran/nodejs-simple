@@ -640,7 +640,12 @@ $(document).ready(function() {
                  price_assembled_accessories : assembled_accessories
             },
             success: function(res){
-                console.log(res)
+                var blob=new Blob([data]);
+                var link=document.createElement('a');
+                console.log(link)
+                // link.href=window.URL.createObjectURL(blob);
+                // link.download="<FILENAME_TO_SAVE_WITH_EXTENSION>";
+                // link.click();
             },
             error: function(err){
                 console.log(err)

@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const fs = require('fs');
 const readline = require('readline');
 const jwt = require('jsonwebtoken');
+const path = require('path')
 const reqHeader = require('request');
 const nodemailer = require('nodemailer');
 const config = require('./../lib/comon/config');
@@ -1026,13 +1027,12 @@ router.post('/service/invoice', (req, res) => {
                             success();
                         }
                     });
-            });
             // const genFile = file.path;
-            console.log(file)
-            console.log(file.path)
-            console.log(genFile)
+            // res.download(filename)
+            });
+
             req.write(postData);
-            res.download(genFile);
+
             req.end();
 
             if (typeof error === 'function') {
@@ -1080,11 +1080,21 @@ router.post('/service/invoice', (req, res) => {
         };
 
         generateInvoice(invoice, invoice.number + '.pdf', function() {
+            
+        
+            // res.attachment(path.join(__dirname, invoice.number+ '.pdf'));
             console.log("Saved invoice to invoice.pdf");
+            // console.log(invoice.number+'.pdf');
+            // console.log(path.join(__dirname, '..', 'invoice', invoice.number+ '.pdf'))
+            console.log('./invoice/'+ invoice.number+'.pdf')
+            var data = fs.readFileSync('./invoice/'+ invoice.number+'.pdf');
+            res.contentType("application/pdf");
+            res.send(data);
+            // res.download(path.join(__dirname, '..', 'invoice', invoice.number+ '.pdf'))
         }, function(error) {
             console.error(error);
         });
-        // res.download(file)
+
 
     } catch (err) {
         res.status(200).send(err);
