@@ -617,6 +617,7 @@ $(document).ready(function() {
             type: 'POST',
             url: '/service/invoice',
             dataType: "json",
+            headers: function(xhr){xhr.setRequestHeader('X-Test-Header', 'test-value');},
             data: {
                 switches_quanity: $("#lube_quantity").val(),
                 sw_quantity : $("#lube_quantity").val(),
@@ -640,12 +641,23 @@ $(document).ready(function() {
                  price_assembled_accessories : assembled_accessories
             },
             success: function(res){
-                var blob=new Blob([data]);
-                var link=document.createElement('a');
-                console.log(link)
-                // link.href=window.URL.createObjectURL(blob);
-                // link.download="<FILENAME_TO_SAVE_WITH_EXTENSION>";
-                // link.click();
+                console.log(res)
+                var url= res.data;
+                var link = document.createElement('a');
+                link.href = url;
+                link.download = url.split("/").pop();
+                link.dispatchEvent(new MouseEvent('click'));
+
+                // console.log(res)
+                // var a = document.createElement('a');
+                // var url = res.data;
+                // a.href = url;
+                // a.download = res.file;
+                // document.body.append(a);
+                // a.click();
+                // a.remove();
+                // window.URL.revokeObjectURL(url);
+               
             },
             error: function(err){
                 console.log(err)

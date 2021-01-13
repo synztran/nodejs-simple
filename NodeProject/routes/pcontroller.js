@@ -999,125 +999,139 @@ router.get('/service', (req, res) => {
 
 
 
-router.post('/service/invoice', (req, res) => {
+router.post('/service/invoice', async(req, res) => {
     console.log(req.body)
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     var customUrl = req.protocol + '://' + req.get('host') + "/invoice/"
-    console.log(fullUrl)
-    console.log(customUrl)
     try {
-        function generateInvoice(invoice, filename, success, error) {
-            var postData = JSON.stringify(invoice);
-            var options = {
-                hostname: "invoice-generator.com",
-                port: 443,
-                path: "/",
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Content-Length": Buffer.byteLength(postData)
-                }
-            };
-             var file = fs.createWriteStream('./invoice/' + filename);
-            var url = customUrl + filename;
-            // var filePath = '/invoice/'+ filename
-            console.log(url)
-            var req = https.request(options, function(res) {
-                res.on('data', function(chunk) {
-                        file.write(chunk);
+        await Couter.findOne({ _id: 'service_invoice' }, function(err, docs) {
+            console.log('incc = ' + docs['seq'])
+            function generateInvoice(invoice, filename, success, error) {
+                var postData = JSON.stringify(invoice);
+                var options = {
+                    hostname: "invoice-generator.com",
+                    port: 443,
+                    path: "/",
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Content-Length": Buffer.byteLength(postData)
+                    }
+                };
+                var file = fs.createWriteStream('./invoice/' + filename);
+                var url = customUrl + filename;
+                // var filePath = '/invoice/'+ filename
+                console.log(url)
+                var req = https.request(options, function(res) {
+                    res.on('data', function(chunk) {
+                            file.write(chunk);
+                        })
+                        .on('end', function() {
+                            file.end();
+
+                            if (typeof success === 'function') {
+                                success();
+                            }
+                        });
+                });
+                var filePath = path.join(__dirname, '..', 'invoice', filename)
+                req.write(postData);
+                req.end();
+                // console.log(filePath, filename)
+                // var file = fs.createReadStream('./src/test-data/service/print/notes.pdf');
+
+                    console.log('incc = ' + docs['seq'])
+                    db.collection('invoices').insertOne({
+                        invoice_id: "INV-"+(docs['seq']+1),
+                        // invoice_type:,
+                        invoice_details:{
+                            path: url
+                        },
+                        note: '',
                     })
-                    .on('end', function() {
-                        file.end();
 
-                        if (typeof success === 'function') {
-                            success();
-                        }
-                    });
-            });
-             var filePath = path.join(__dirname, '..', 'invoice', filename)
-            // console.log(path.join(__dirname, '..', 'invoice', filename))
-            // fs.readFile(filePath, function (err,data){
-            //     console.log(data)
-            //     // res.contentType("application/pdf");
-            //     res.send(data);
-            // });
-            // return res.status(200).json({
-            //     data: url,
-            //     file: filename
-            // });
+                    
+                    
 
-            req.write(postData);
-            req.end();
-            // console.log(__dirname + filePath)
-            console.log(filePath, filename)
-            // var file = fs.createReadStream('./src/test-data/service/print/notes.pdf');
-            var stat = fs.statSync('./invoice/' + filename);
-            res.setHeader('Content-Length', stat.size);
-            res.setHeader('Content-Type', 'application/pdf');
-            res.setHeader('Content-Disposition', 'attachment; filename=agreement.pdf');
-            res.status(200).json({
-                data: url,
-                file: filename
-            })
-            // return res.download(filePath, filename);
+                var stat = fs.statSync('./invoice/' + filename);
+                res.setHeader('Content-Length', stat.size);
+                res.setHeader('Content-Type', 'application/pdf');
+                res.setHeader('Content-Disposition', 'attachment; filename=agreement.pdf');
+                res.status(200).json({
+                    data: url,
+                    file: filename
+                })
 
 
-            if (typeof error === 'function') {
-                req.on('error', error);
-            }
-        }
-        var invoice = {
-            logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
-            from: "Invoiced\nNoobStore\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
-            to: "Khiem Le",
-            currency: "vnd",
-            number: "INV-0025",
-            payment_terms: "Auto-Billed - Do Not Pay",
-            due_date: moment().add(1, 'M').format('MMM DD, YYYY'),
-            items: [{
-                    name: "Assembled Service - PCB Canoe Gen 2",
-                    quantity: 1,
-                    unit_cost: 200000,
-                    description: "- Soldered Mill-max hotswap"
-                },
-                // {
-                //     name: "Assembled Service - UTD 360C",
-                //     quantity: 1,
-                //     unit_cost: 400000,
-                //     description: "- Soldered Switches (220) \n - Handle Stabilizer (180) \n - Soldered Cable"
-                // },
-                {
-                    name: "Lube Service - Mauve switches x70",
-                    quantity: 1,
-                    unit_cost: 570000,
-                    description: "- Housing/Stem w/ Ghv4 (420) \n - Film clear(white/pink) TX (150) \n - Spring w/ GPL 105"
+                if (typeof error === 'function') {
+                    req.on('error', error);
+                }else{
+                    
                 }
-            ],
-            fields: {
-                tax: "%",
-                discounts: true,
-                shipping: true,
-            },
-            discounts: 0,
-            shipping: 0,
-            tax: 0,
-            amount_paid: 0,
-            notes: "Thanks for being an awesome customer!",
-            terms: "No need to submit payment. You will be auto-billed for this invoice."
-        };
 
-        generateInvoice(invoice, invoice.number + '.pdf', function() {
-            console.log("Saved invoice to invoice.pdf");
-            console.log('./invoice/'+ invoice.number+'.pdf')
 
-            // res.download(path.join(__dirname, '..', 'invoice', invoice.number+ '.pdf'))
-        }, function(error) {
-            console.error(error);
-        });
-        // res.send('http://localhost/invoice/INV-0024.pdf')
-        // return res.status(200).json({
-        //     data: url,
-        //     file: filename});
+            }
+
+            var customerName = 'abc';
+
+            var invoice = {
+                logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
+                from: "Invoiced\nNoobStore\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
+                to: customerName,
+                currency: "vnd",
+                number: "INV-"+(docs['seq']+1),
+                payment_terms: "Auto-Billed - Do Not Pay",
+                due_date: moment().add(1, 'M').format('MMM DD, YYYY'),
+                items: [{
+                        name: "Assembled Service - PCB Canoe Gen 2",
+                        quantity: 1,
+                        unit_cost: 200000,
+                        description: "- Soldered Mill-max hotswap"
+                    },
+                    // {
+                    //     name: "Assembled Service - UTD 360C",
+                    //     quantity: 1,
+                    //     unit_cost: 400000,
+                    //     description: "- Soldered Switches (220) \n - Handle Stabilizer (180) \n - Soldered Cable"
+                    // },
+                    {
+                        name: "Lube Service - Mauve switches x70",
+                        quantity: 1,
+                        unit_cost: 570000,
+                        description: "- Housing/Stem w/ Ghv4 (420) \n - Film clear(white/pink) TX (150) \n - Spring w/ GPL 105"
+                    }
+                ],
+                fields: {
+                    tax: "%",
+                    discounts: true,
+                    shipping: true,
+                },
+                discounts: 0,
+                shipping: 0,
+                tax: 0,
+                amount_paid: 0,
+                notes: "Thanks for being an awesome customer!",
+                terms: "No need to submit payment. You will be auto-billed for this invoice."
+            };
+
+            generateInvoice(invoice, invoice.number + '.pdf', function() {
+                console.log("Saved invoice to invoice.pdf");
+                console.log('./invoice/'+ invoice.number+'.pdf')
+
+
+                // res.download(path.join(__dirname, '..', 'invoice', invoice.number+ '.pdf'))
+            }, function(error) {
+                console.error(error);
+            });
+
+        })
+            db.collection('couters').findAndModify({
+                _id: "service_invoice"
+            }, {}, {$inc: {"seq": 1 } }, {new: true, upsert: true},
+                function(err, docs){
+                    console.log(docs)
+                }
+            )
 
     } catch (err) {
         console.log("eror" + err)
