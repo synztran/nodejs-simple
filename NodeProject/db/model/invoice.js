@@ -16,7 +16,8 @@ var invoiceSchema = mongoose.Schema({
     //     require: true
     // },
     user_name:{
-        type: String
+        type: String,
+        default: "customer"
     }
     status_payment:{ // status: 0 = Unpay | 1 = Paid
         type: Number,

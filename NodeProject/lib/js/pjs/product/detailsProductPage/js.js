@@ -59,28 +59,18 @@ $(document).ready(function() {
         infinite: false,
         adaptiveHeight: true,
         draggable: false,
-        //asNavFor: '.2nd-slick'
     });
     $('.2nd-slick').slick({
       slidesToShow: 9,
       slidesToScroll: 1,
       asNavFor: '#lightSlider',
       dots: false,
-      <!-- centerMode: true, -->
+      
       adaptiveHeight: true,
       focusOnSelect: true,
     });
      
-    <!--$('#lightSlider').lightSlider({
-     //   autoWidth: false,
-    //    gallery: true,
-    //    item: 1,
-    //    loop: true,
-    //    adaptiveHeight: true,
-    //    slideMargin: 0,
-     //   thumbItem: 9,
-        
-    //});-->
+    
 
 
 

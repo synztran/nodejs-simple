@@ -597,10 +597,16 @@ router.get('/product/add' ,async (req, res) => {
     // })
 })
 
-router.post('/product/add', upload.single('picture') ,async (req, res) => {
+router.post('/product/add', upload.single('picture') ,async(req, res) => {
     console.log(req.body)
     // console.log(req.body.pid)
+
     try {
+             Category.findOne({category_id : req.body.catid}, async(err, CatData)=>{
+                console.log(CatData)
+                console.log(CatData['category_url_name'])
+                console.log("Cat url" + CatData.category_url_name)
+
                 var part = req.body.p_part;
                 console.log(part)
                 if(part == 0){ //for top case
@@ -609,7 +615,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                         db.collection('products').insertOne({
                             product_id: "PTOP" + inc,
                             product_name: (req.body.pname),
-                            
+                            category_url_name: CatData.category_url_name,
                             category_id: req.body.catid,
                             product_part: (req.body.p_part),
                             outstock: req.body.outstock,
@@ -640,6 +646,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                             product_id: "PBOT" + inc,
                             product_name: (req.body.pname),
                             category_id: req.body.catid,
+                            category_url_name: CatData.category_url_name,
                             product_part: (req.body.p_part),
                             outstock: req.body.outstock,
                             k_bot_color: (req.body.bot_color),
@@ -668,6 +675,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                             product_id: "PLATE" + inc,
                             product_name: (req.body.pname),
                             category_id: req.body.catid,
+                            category_url_name: CatData.category_url_name,
                             product_part: (req.body.p_part),
                             outstock: req.body.outstock,
                             k_plate_option: (req.body.bot_price),
@@ -696,8 +704,8 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                         db.collection('products').insertOne({
                             product_id: "FRAME" + inc,
                             product_name: (req.body.pname),
-                            
                             category_id: req.body.catid,
+                            category_url_name: CatData.category_url_name,
                             product_part: (req.body.p_part),
                             outstock: req.body.outstock,
                             k_top_color: (req.body.top_color),
@@ -728,6 +736,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                             product_name: (req.body.pname),
                             replace_product_name: req.body.replace_product_name,
                             category_id: req.body.catid,
+                            category_url_name: CatData.category_url_name,
                             product_part: (req.body.p_part),
                             outstock: req.body.outstock,
                             c_code_color: (req.body.code_color),
@@ -758,6 +767,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                             product_name: (req.body.pname),
                             replace_product_name: req.body.replace_product_name,
                             category_id: req.body.catid,
+                            category_url_name: CatData.category_url_name,
                             product_part: (req.body.p_part),
                             outstock: req.body.outstock,
                             price: (req.body.sw_price),
@@ -788,6 +798,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                             product_name: (req.body.pname),
                             replace_product_name: req.body.replace_product_name,
                             category_id: req.body.catid,
+                            category_url_name: CatData.category_url_name,
                             product_part: (req.body.p_part),
                             outstock: req.body.outstock,
                             price: (req.body.artisan_price),
@@ -806,6 +817,7 @@ router.post('/product/add', upload.single('picture') ,async (req, res) => {
                         }
                     )
                 }
+            })
                 setTimeout(function(){
                     res.redirect('/api/product');
                 }, 1500)
@@ -1082,6 +1094,8 @@ router.post('/category/add',upload.single('picture'), async(req, res)=>{
             } else {
 
                 var type = req.body.type;
+                var cat_url_name = (req.body.catname).replace(/ /g, '-')
+                console.log(cat_url_name)
                 // if type = keeb
                 if (type == 0) {
                     Couter.findOne({ _id: "keeb" }, function(err, docs) {
@@ -1099,6 +1113,7 @@ router.post('/category/add',upload.single('picture'), async(req, res)=>{
 
                         db.collection('categories').insertOne({
                             category_id: "KEEB" + inc,
+                            category_url_name: cat_url_name,
                             category_name: (req.body.catname),
                             author: req.body.author,
                             manufacturing: req.body.manufacturing,
@@ -1146,6 +1161,7 @@ router.post('/category/add',upload.single('picture'), async(req, res)=>{
 
                         db.collection('categories').insertOne({
                             category_id: "KSET" + inc,
+                            category_url_name: cat_url_name,
                             category_name: req.body.catname,
                             author: req.body.author,
                             manufacturing: req.body.manufacturing,
@@ -1188,6 +1204,7 @@ router.post('/category/add',upload.single('picture'), async(req, res)=>{
  
                          db.collection('categories').insertOne({
                              category_id: "ETC" + inc,
+                             category_url_name: cat_url_name,
                              category_name: req.body.catname,
                              author: req.body.author,
                              manufacturing: req.body.manufacturing,
@@ -1305,7 +1322,8 @@ router.get('/category/get/:id', async(req, res) =>{
 router.get('/category/getcid/:id', async(req, res) =>{
     // console.log("req.prams "+ req.params.id)
     try{
-        var check = await Category.findOne({category_id: req.params.id}).exec();
+        // var check = await Category.findOne({category_id: req.params.id}).exec();
+        var check = await Category.findOne({category_url_name: req.params.id}).exec();
         // console.log(check);
         res.send(check).status(200);
     }catch(err){
@@ -1323,11 +1341,15 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
 
             // console.log(check);
             var type = check.type;
+
             console.log("type = " + type);
+            var cat_url_name = (req.body.catname).replace(/ /g, '-')
+            console.log(cat_url_name)
             // for keeb
             if(type == 0){
                 if(req.file == null){
                     check.set({
+                        category_url_name:   cat_url_name,  
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,
@@ -1349,6 +1371,7 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
                     });
                 }else{
                     check.set({
+                        category_url_name:   cat_url_name,
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,
@@ -1383,6 +1406,7 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
             }else if(type == 1){// for keyset
                 if(req.file == null){
                     check.set({
+                        category_url_name:   cat_url_name,
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,
@@ -1402,6 +1426,7 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
                     });
                 }else{
                     check.set({
+                        category_url_name:   cat_url_name,
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,
@@ -1433,6 +1458,7 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
             }else if(type == 2){
                 if(req.file == null){
                     check.set({
+                        category_url_name:   cat_url_name,
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,
@@ -1449,6 +1475,7 @@ router.post("/category/edit/:id", upload.single('picture'),async (req, res) => {
                     });
                 }else{
                     check.set({
+                        category_url_name:   cat_url_name,
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,

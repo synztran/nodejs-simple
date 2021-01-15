@@ -13,6 +13,10 @@ var categorySchema = mongoose.Schema({
         uppercase: true,
         require: true,
     },
+    category_url_name:{
+        type: String,
+        lowercase: true
+    },
     category_name:{
         type: String
     },

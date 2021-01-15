@@ -178,7 +178,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input class="form-control" name="hns" type="tel" value="<%= category.hns %>" id="hns">
+                                <input class="form-control" name="hns" type="tel" value="<%= category.handle %>" id="hns">
                                 <div class="input-group-append">
                                     <span class="input-group-text">.00</span>
                                 </div>
@@ -309,7 +309,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input class="form-control" name="hns" type="tel" value="<%= category.hns %>" id="hns">
+                                <input class="form-control" name="hns" type="tel" value="<%= category.handle %>" id="hns">
                                 <div class="input-group-append">
                                     <span class="input-group-text">.00</span>
                                 </div>
@@ -364,15 +364,21 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Date start (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker" value="<%= (category.date_start).toLocaleDateString()%>" class="span2" type="text" name="date_start">
+                        <!-- <input style="width: 100%" id="datepicker" value="<%= (category.date_start).toLocaleDateString()%>" class="span2" type="text" name="date_start"> -->
+                        <input style="width: 100%" data-field="date" value="<%= (category.date_start).toLocaleDateString()%>" id="datepicker" class="span2" type="text" name="date_start">
+                        <div id="date_start"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Date end (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker1" value="<%= (category.date_end).toLocaleDateString()%>" class="span2" type="text" name="date_end">
+                        <!-- <input style="width: 100%" id="datepicker1" value="<%= (category.date_end).toLocaleDateString()%>" class="span2" type="text" name="date_end"> -->
+                        <input style="width: 100%" data-field="date" value="<%= (category.date_end).toLocaleDateString()%>" id="datepicker1" class="span2" type="text" name="date_end">
+                        <div id="date_end"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Date payment (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker2" value="<%= (category.date_payment).toLocaleDateString()%>" class="span2" type="text" name="date_payment">
+                        <!-- <input style="width: 100%" id="datepicker2" value="<%= (category.date_payment).toLocaleDateString()%>" class="span2" type="text" name="date_payment"> -->
+                        <input style="width: 100%" data-field="date" value="<%= (category.date_payment).toLocaleDateString()%>" id="datepicker2" class="span2" type="text" name="date_payment">
+                        <div id="date_payment"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Min price:</label>
@@ -413,7 +419,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
-                                <input class="form-control" name="hns" type="tel" value="<%= category.hns %>" id="hns">
+                                <input class="form-control" name="hns" type="tel" value="<%= category.handle %>" id="hns">
                                 <div class="input-group-append">
                                     <span class="input-group-text">.00</span>
                                 </div>
@@ -463,9 +469,13 @@ $(document).ready(function() {
     });
 
     // $('#k_color').select2("data", {k_color: [red]})
-    $('#datepicker').datepicker();
-    $('#datepicker1').datepicker();
-    $('#datepicker2').datepicker();
+    // $('#datepicker').datepicker();
+    // $('#datepicker1').datepicker();
+    // $('#datepicker2').datepicker();
+    $("#date_start, #date_end, #date_payment").DateTimePicker({
+
+        dateFormat: "yyyy-MM-dd"
+    })
 
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -518,7 +528,7 @@ $(document).ready(function() {
         $('#hns').val(category_details.handle);
         $('#status').trigger('change');
         $('#specs').summernote('code', specs);
-
+        console.log(pic_path)
         if (type == 0) {
             $('#keeb_flip').val(category_details.flip);
 

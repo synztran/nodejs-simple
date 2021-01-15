@@ -2206,13 +2206,20 @@ body.menu-is-open {
 /* ------------------------------------------------------------------- 
  * ## home buttons
  * ------------------------------------------------------------------- */
-.home-content__button {
+.home-content__button, .home-non-content__button{
   margin-top: 7.8rem;
   position: relative;
 }
 
 .home-content__button .btn {
   width: 30rem;
+  height: 7.2rem !important;
+  line-height: 6.8rem !important;
+  margin-right: 0;
+  position: absolute;
+}
+.home-non-content__button .btn{
+  width: 60rem;
   height: 7.2rem !important;
   line-height: 6.8rem !important;
   margin-right: 0;
@@ -2226,6 +2233,10 @@ body.menu-is-open {
 
 .home-content__button .btn:last-child {
   left: 50%;
+  right: auto;
+}
+.home-non-content__button .btn:first-child{
+  left: 25%;
   right: auto;
 }
 

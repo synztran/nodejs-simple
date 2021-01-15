@@ -228,7 +228,7 @@ html, body{
                                 <img style="width: 100%;
                 height: 100%;
                 object-fit: cover;" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" alt="" />
-                                 <a href="/proxygb/product/<%=item.category_id%>"><div class="image_overlay">
+                                 <a href="/proxygb/product/<%=item.category_url_name%>"><div class="image_overlay">
                                    
                                 </div></a>
                                 <!-- <div class="view_details">
@@ -255,13 +255,13 @@ html, body{
                                             <span><%= item.k_layout%></span>
                                             <strong>Mounting</strong>
                                             <span><%= item.k_mounting%></span>
-                                            <strong>COLORS</strong>
+                                            <!-- <strong>COLORS</strong>
                                             <div class="colors">
                                                 <% for (var key in item.k_color){%>
                                                 <div data-toggle="tooltip" title="<%= item.k_color[key] %>" class="c-<%=   item.k_color[key] %>"><span></span></div>
                                                 <%    } %>
                                                 
-                                            </div>
+                                            </div> -->
                                             </div>
 
                                             <div style="padding: 0" class="col-md-6">
@@ -303,14 +303,14 @@ html, body{
                                         <div class="product-options">
                                             <strong>Profile</strong>
                                             <span><%= item.c_profile %></span>
-                                            <strong>COLORS</strong>
+                                            <!-- <strong>COLORS</strong>
                                             <div class="colors">
                                                 <div class="c-blue"><span></span></div>
                                                 <div class="c-red"><span></span></div>
                                                 <div class="c-white"><span></span></div>
                                                 <div class="c-green"><span></span></div>
 
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -330,14 +330,14 @@ html, body{
                                         <div class="product-options">
                                             <strong>Material</strong>
                                             <span><%= item.c_profile %></span>
-                                            <strong>COLORS</strong>
+                                            <!-- <strong>COLORS</strong>
                                             <div class="colors">
                                                 <div class="c-blue"><span></span></div>
                                                 <div class="c-red"><span></span></div>
                                                 <div class="c-white"><span></span></div>
                                                 <div class="c-green"><span></span></div>
 
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div> 

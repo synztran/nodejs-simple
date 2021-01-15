@@ -127,14 +127,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div className="input-group mb-3">
+                        <!-- <div className="input-group mb-3">
                             <label>Image:</label>
                             <div className="custom-file">
                                 <input type="file" name="picture" className="custom-file-input" id="topCaseInputImg" aria-describedby="inputGroupFileAddon01" />
                                 <label className="custom-file-label" htmlFor="inputGroupFile01">
                                 <img src="" id="topCase-img-tag" width="200px" />
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-------------------------- for keeb bottom case ------------------------->
                     <div class="for-keeb-bottom">
@@ -166,7 +166,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div className="input-group mb-3">
+                        <!-- <div className="input-group mb-3">
                             <label>Image Profile:</label>
                             <div className="custom-file">
                                 <input type="file" name="picture" className="custom-file-input" id="botCaseInputImg" aria-describedby="inputGroupFileAddon01" />
@@ -174,7 +174,7 @@
                                 </label>
                                 <img src="" id="botCase-img-tag" width="200px" />
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-------------------------- for keeb plate ------------------------->
                     <div class="for-keeb-plate">
@@ -206,7 +206,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div className="input-group mb-3">
+                        <!-- <div className="input-group mb-3">
                             <label>Image Profile:</label>
                             <div className="custom-file">
                                 <input type="file" name="picture" className="custom-file-input" id="plateInputImg" aria-describedby="inputGroupFileAddon01" />
@@ -214,7 +214,7 @@
                                 </label>
                                 <img src="" id="plate-img-tag" width="200px" />
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-------------------------- for keeb FRAME ------------------------->
                     <div class="for-keeb-frame">
@@ -246,7 +246,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div className="input-group mb-3">
+                        <!-- <div className="input-group mb-3">
                             <label>Image Profile:</label>
                             <div className="custom-file">
                                 <input type="file" name="picture" className="custom-file-input" id="frameInputImg" aria-describedby="inputGroupFileAddon01" />
@@ -254,7 +254,7 @@
                                 </label>
                                 <img src="" id="frame-img-tag" width="200px" />
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!---------------------------- for keycap ---------------------------->
                     <div class="for-keyset">
@@ -300,7 +300,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div className="input-group mb-3">
+                        <!-- <div className="input-group mb-3">
                             <label>Image Profile:</label>
                             <div className="custom-file">
                                 <input type="file" name="picture" className="custom-file-input" id="keysetInputImg" aria-describedby="inputGroupFileAddon01" />
@@ -308,7 +308,7 @@
                                 </label>
                                 <img src="" id="keyset-img-tag" width="200px" />
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!---------------------------- for Switches pack ---------------------------->
                     <div class="for-switches">
@@ -334,7 +334,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div className="input-group mb-3">
+                        <!-- <div className="input-group mb-3">
                             <label>Image Profile:</label>
                             <div className="custom-file">
                                 <input type="file" name="picture" className="custom-file-input" id="switchesInputImg" aria-describedby="inputGroupFileAddon01" />
@@ -342,7 +342,7 @@
                                 </label>
                                 <img src="" id="swtiches-img-tag" width="200px" />
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!---------------------------- for artisan ---------------------------->
                     <div class="for-artisan">
@@ -361,10 +361,10 @@
                         <div className="input-group mb-3">
                             <label>Image Profile:</label>
                             <div className="custom-file">
-                                <input type="file" name="picture" className="custom-file-input" id="artisanInputImg" aria-describedby="inputGroupFileAddon01" />
+                                <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
                                 <label className="custom-file-label" htmlFor="inputGroupFile01">
                                 </label>
-                                <img src="" id="artisan-img-tag" width="200px" />
+                                <img src="" id="profile-img-tag" width="200px" />
                             </div>
                         </div>
                     </div>
@@ -382,9 +382,9 @@
         <% include ./../../footer%>
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="/api/js/datepicker/dist/datepicker.js"></script>
+<script src="/api/js/datepicker/dist/datepicker.js"></script> -->
 <% include ./../../tips/jsPackage %>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -408,13 +408,13 @@ $(document).ready(function() {
         if(input.files && input.files[0]){
             var reader = new FileReader();
             reader.onload = function(e){
-                $('#keyset-img-tag, #topCase-img-tag, #botCase-img-tag, #plate-img-tag, #frame-img-tag, #swtiches-img-tag').attr('src', e.target.result);
+                $('#profile-img-tag').attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
     }
 
-    $('#topCaseInputImg, #botCaseInputImg, #plateInputImg, #frameInputImg, #keysetInputImg, #switchesInputImg').change(function(){
+    $('#inputGroupFile01').change(function(){
         readURL(this);
     });
 
@@ -482,9 +482,7 @@ $(document).ready(function() {
             .replace(/[^\d]/g, ''); // numbers and decimals only
 
     });
-    $('#datepicker').datepicker();
-    $('#datepicker1').datepicker();
-    $('#datepicker2').datepicker();
+   
 
     // $("#add").click(function() { //when user clicks add
     //     let elem;

@@ -642,13 +642,12 @@ $(document).ready(function() {
             },
             success: function(res){
                 console.log(res)
-                var url= res.data;
-                var link = document.createElement('a');
-                link.href = url;
-                link.download = url.split("/").pop();
-                link.dispatchEvent(new MouseEvent('click'));
+                // var url= res.data;
+                // var link = document.createElement('a');
+                // link.href = url;
+                // link.download = url.split("/").pop();
+                // link.dispatchEvent(new MouseEvent('click'));
 
-                // console.log(res)
                 // var a = document.createElement('a');
                 // var url = res.data;
                 // a.href = url;
@@ -657,6 +656,9 @@ $(document).ready(function() {
                 // a.click();
                 // a.remove();
                 // window.URL.revokeObjectURL(url);
+
+                var url = res.data;
+                window.open(url, '_blank');
                
             },
             error: function(err){

@@ -211,37 +211,55 @@ router.get("/", function(req, res) {
     AdsProduct.find({}, function(err, docs) {
         PageContent.find({}, function(ContentErr, ContentDocs) {
             EventProduct.find({ status: 1 }, function(EProductErr, EProductDocs) {
-                EProductDocs.forEach(function(item) {
-                    console.log(item.date_start)
-                    var imgUrl = item.event_product_image.path
-                    // var replaceIcon = 'api/docs/pimg/portfolio/gallery/2020-12-25T07-11-02.411Z9p664opxzi551.jpg'
-                    // var replaceIcon = 
-                    var replaceIcon = imgUrl.replace(/\\/g, "/");
-                    var imgBg = 'api/' + replaceIcon
+                console.log(EProductDocs)
+                if(EProductDocs.length > 0){
+                    EProductDocs.forEach(function(item) {
+                        console.log(item.date_start)
+                        var imgUrl = item.event_product_image.path
+                        
+                        var replaceIcon = imgUrl.replace(/\\/g, "/");
+                        var imgBg = 'api/' + replaceIcon
 
-                    console.log(replaceIcon)
-                    // console.log(path2);
+                        console.log(replaceIcon)
+                        if (req.session.User == null) {
+                            res.render('index', {
+                                user: null,
+                                listAdsProduct: docs,
+                                listContent: ContentDocs,
+                                EventProduct: EProductDocs,
+                                images: imgBg,
+                                date_start: item.date_start,
+                            })
+                        } else {
+                            res.render('index', {
+                                user: req.session.User['email'],
+                                listAdsProduct: docs,
+                                listContent: ContentDocs,
+                                EventProduct: EProductDocs,
+                                images: imgBg,
+                                date_start: item.date_start,
+                            })
+                        }
+                    })
+
+                }else{
                     if (req.session.User == null) {
                         res.render('index', {
                             user: null,
                             listAdsProduct: docs,
                             listContent: ContentDocs,
-                            EventProduct: EProductDocs,
-                            images: imgBg,
-                            date_start: item.date_start,
+                            EventProduct: [],
                         })
                     } else {
-                        // const uemail = req.cookies.id['email'];
                         res.render('index', {
                             user: req.session.User['email'],
                             listAdsProduct: docs,
                             listContent: ContentDocs,
-                            EventProduct: EProductDocs,
-                            images: imgBg,
-                            date_start: item.date_start,
+                            EventProduct: [],
                         })
                     }
-                })
+                }
+                
             })
         })
     }).limit(5)
@@ -361,6 +379,10 @@ router.get('/proxygb', (req, res) => {
     // }else{
     // console.log(req.session.User);
     Category.find({}, function(err, docs) {
+        console.log(docs)
+        Product.find({}, function(err, productData){
+            console.log(productData)
+        })
         // console.log(docs);
         res.render("product/proxyPage", {
             "listCategory": docs
@@ -847,9 +869,9 @@ router.post('/proxygb/payment/joingb', TokenUserCheckMiddleware, async (req, res
 
 // --------------------------------- PRODUCT CONFIG --------------------------------------------
 router.get('/proxygb/product/:id', async (req, res) => {
-    // console.log(req.params.id);
+    console.log(req.params.id);
     try {
-        Product.find({ category_id: req.params.id }, function(err, docs) {
+        Product.find({ category_url_name: req.params.id }, function(err, docs) {
             // console.log(docs);
             if (docs[0]) {
                 Category.findOne({ category_id: docs[0].category_id }, function(err, docs2) {
@@ -1045,7 +1067,7 @@ router.post('/service/invoice', async(req, res) => {
                         invoice_id: "INV-"+(docs['seq']+1),
                         // invoice_type:,
                         invoice_details:{
-                            path: url
+                            path: file
                         },
                         note: '',
                     })
@@ -1114,7 +1136,7 @@ router.post('/service/invoice', async(req, res) => {
                 terms: "No need to submit payment. You will be auto-billed for this invoice."
             };
 
-            generateInvoice(invoice, invoice.number + '.pdf', function() {
+            generateInvoice(invoice, new Date().toISOString().replace(/:/g, '-') + invoice.number + '.pdf', function() {
                 console.log("Saved invoice to invoice.pdf");
                 console.log('./invoice/'+ invoice.number+'.pdf')
 
