@@ -14,6 +14,7 @@ $(document).ready(function() {
     var desolder_led = 2500; 
     var lube_service_with_accessories = 6000;
     var lube_service_without_accessories = 5000;
+    var lube_service_bonus = 0;
     // for assem service
     var assemble_kb_type, assemble_kb_layout;
     var assembled_accessories = 0;
@@ -84,12 +85,26 @@ $(document).ready(function() {
 
 
     $("#lube_film_color").next(".select2-container").hide()
-    $("#lube_switch_type").each(function() {
+    $(document).on('change', '#lube_switch_type', function(){
         type_sw = $('#lube_switch_type').val();
-        if (type_sw == 'cherry') {
-            cherry_name_switch.next(".select2-container").show();
+        if (type_sw == 'tactile') {
+                lube_service_bonus = 1000;
+                calcPrice();
+        }else{
+             lube_service_bonus = 0;
+                calcPrice();
         }
-    });
+    })
+    // $("#lube_switch_type").each(function() {
+    //     type_sw = $('#lube_switch_type').val();
+    //     if (type_sw == 'tactile') {
+    //         lube_service_bonus = 1000;
+    //         calcPrice();
+    //     }else{
+    //         lube_service_bonus = 0;
+    //         calcPrice()
+    //     }
+    // });
     $(document).on('change', '#lube_switch_type', function() {
         type_sw = $(this).val();
         add_spring = $("input[name='spring']:checked").val()
@@ -584,9 +599,9 @@ $(document).ready(function() {
         // Calc Price
             // LUBE SERVICE
                 if (addFilm || addSpring) {
-                    lube_service = switchQuantity * lube_service_with_accessories;
+                    lube_service = switchQuantity * (lube_service_with_accessories+lube_service_bonus);
                 } else {
-                    lube_service = switchQuantity * lube_service_without_accessories;
+                    lube_service = switchQuantity * (lube_service_without_accessories+lube_service_bonus);
                 }
                 lube_accessories = priceFilm + priceSpring
             // ASSEMBLED SERVICE
@@ -611,6 +626,12 @@ $(document).ready(function() {
         $("#discount-price .t-right").html(formatDiscount)
         $("#sub-total .t-right").html(formatPriceSubTotal)
         $("#total-price .t-right").html(formatPriceTotal)
+
+        return  item = {
+            lube_service_price_with_accessories: parseInt(lube_service+lube_accessories),
+            assembled_service_price: parseInt(assembled_service),
+            lube_service_price_without_accesscories: parseInt(lube_service),
+        }
     }
     $("#submit-order").on('click', function(){
         $.ajax({
@@ -619,11 +640,13 @@ $(document).ready(function() {
             dataType: "json",
             headers: function(xhr){xhr.setRequestHeader('X-Test-Header', 'test-value');},
             data: {
+                price_bill: calcPrice(),
                 switches_quanity: $("#lube_quantity").val(),
-                sw_quantity : $("#lube_quantity").val(),
+                // sw_quantity : $("#lube_quantity").val(),
+                switch_type: $("#lube_switch_type").val(),
                  grease : $("#lube_grease").val(),
                  film_color : $("#lube_film_color").val(),
-                 box_spring_force : $("#lube_box_spring_force").val(),
+                 // box_spring_force : $("#lube_box_spring_force").val(),
                  spring_force :  $("#lube_spring_force").val(),
                  keeb_type : $("#assemble_kb_type").val(),
                  keeb_layout : $("#assemble_kb_layout").val(),
@@ -658,9 +681,11 @@ $(document).ready(function() {
                 // window.URL.revokeObjectURL(url);
 
                 var url = res.data;
+
                 window.open(url, '_blank');
                
             },
+            timeout: 3000,
             error: function(err){
                 console.log(err)
             }

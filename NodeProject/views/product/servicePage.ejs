@@ -126,22 +126,15 @@
                         <label for="email">Switch Type:</label>
                         <select class="form-control disabled_searchbar black-input col-md-12 " id="lube_switch_type" name="lube_switch_type">
                              <option></option>
-                            <option value="cherry">Cherry MX & clone</option>
-                            <option value="box">KailhBox</option>
+                           <!--  <option value="cherry">Cherry MX & clone</option>
+                            <option value="box">KailhBox</option> -->
+                            <option value="linear">Linear switch</option>
+                            <option value="tactile">Tactile switch</option>
                             <option value="albs" disabled>Albs (coming soon)</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Name Switch:</label>
-                        <select class="form-control enable_select2" id="lube_cherry_switch" name="
-                            lube_name_switch">
-                            <% include ./../tips/service/selectCherryMX%>
-                        </select>
-                        <select class="form-control enable_select2" id="lube_box_switch" name="
-                            lube_name_switch">
-                            <% include ./../tips/service/selectKailhbox%>
-                        </select>
-                    </div>
+
+                    
                     <div class="form-group">
                         <label for="email">Grease:</label>
                         <select class="form-control enable_select2" id="lube_grease" name="lube_grease">

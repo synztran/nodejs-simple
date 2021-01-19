@@ -1095,6 +1095,36 @@ router.post('/service/invoice', async(req, res) => {
             }
 
             var customerName = 'abc';
+            const assem_service = "Assembled Service"
+            const lube_service = "Lube Service"
+            const price_film = 0
+            const price_spring = 0
+            var lube_service_with_accessories = 6000;
+            var lube_service_without_accessories = 5000;
+            var price_lube_service = 0
+            var items = []
+
+            // req.body.switch_type == "tactile" ? 
+            console.log("this iss reqbody")
+            console.log(req.body.test['lube_service_price'])
+            if(req.body.film_color){
+                price_film = 150000
+            }
+            if(req.body.spring_force){
+                price_spring = 180000
+            }
+            if(req.body.switches_quanity){
+                items.push({
+                        name: lube_service + ' - ' + req.body.switch_type + ' x' + req.body.switches_quanity,
+                        quantity: req.body.switches_quanity,
+                        // unit_cost: parseInt(req.body.switches_quanity * ())
+                    })
+            }
+            if(req.body.grease){
+
+            }
+            
+
 
             var invoice = {
                 logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
@@ -1104,25 +1134,26 @@ router.post('/service/invoice', async(req, res) => {
                 number: "INV-"+(docs['seq']+1),
                 payment_terms: "Auto-Billed - Do Not Pay",
                 due_date: moment().add(1, 'M').format('MMM DD, YYYY'),
-                items: [{
-                        name: "Assembled Service - PCB Canoe Gen 2",
-                        quantity: 1,
-                        unit_cost: 200000,
-                        description: "- Soldered Mill-max hotswap"
-                    },
+                items: items,
+                //[{
+                //         name: "Assembled Service - PCB Canoe Gen 2",
+                //         quantity: 1,
+                //         unit_cost: 200000,
+                //         description: "- Soldered Mill-max hotswap"
+                //     },
                     // {
                     //     name: "Assembled Service - UTD 360C",
                     //     quantity: 1,
                     //     unit_cost: 400000,
                     //     description: "- Soldered Switches (220) \n - Handle Stabilizer (180) \n - Soldered Cable"
                     // },
-                    {
-                        name: "Lube Service - Mauve switches x70",
-                        quantity: 1,
-                        unit_cost: 570000,
-                        description: "- Housing/Stem w/ Ghv4 (420) \n - Film clear(white/pink) TX (150) \n - Spring w/ GPL 105"
-                    }
-                ],
+                //     {
+                //         name: "Lube Service - Mauve switches x70",
+                //         quantity: 1,
+                //         unit_cost: 570000,
+                //         description: "- Housing/Stem w/ Ghv4 (420) \n - Film clear(white/pink) TX (150) \n - Spring w/ GPL 105"
+                //     }
+                // ],
                 fields: {
                     tax: "%",
                     discounts: true,

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NoobKey | Details Product</title>
+    <title>Details Product</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <!--===================== google fornt ===================================== -->
@@ -21,7 +21,9 @@
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="/package/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="/package/slick/slick-theme.css">
-    <!--  -->
+    <!--================================================== -->
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
     <!--==================== SCRIPT =========================================== -->
     <script src="/api/js/pjs/modernizr.js"></script>
     <% include ./../tips/cssPackage %>
@@ -33,6 +35,9 @@
     padding: 0px;
     box-sizing: border-box;
 }
+p, h1, h2, h3, b, span{
+    color: white!important
+}
 
 html,
 body {
@@ -40,7 +45,8 @@ body {
     height: 100%;
     width: 100%;
     /*background-image: url('/api/docs/background/UIBkAT.jpg');*/
-    background-repeat: no-repeat;
+    background-image: url('/api/docs/background/bg-black.svg');
+    background-repeat: repeat;
     background-color: transparent;
     box-sizing: border-box;
 }
@@ -282,7 +288,7 @@ ul.item-timeline {
                             <%= Category.category_name %></b></h1>
                     <div class="form-group product-author-host">
                         <span>Design by</span>&nbsp;<a href="#" style="color: red;font-size: 22px">
-                            <%= Category.author %></a> - <span>Host by</span>&nbsp;<%- Category.proxy_host%>
+                            <%= Category.author %></a> - <span>Host by</span>&nbsp;<a href="#"><%- Category.proxy_host%></a>
                     </div>
                     <div class="form-group">
                         <a href="#">Shipping</a>&nbsp;<span>calculated at checkout.</span>
@@ -308,7 +314,7 @@ ul.item-timeline {
                             <form class="w-50">
                                 <div style="display: flex;  " class="form-group main-select">
                                     <div class="form-group w-100">
-                                        <label for="kit">Kit:</label>
+                                        <!-- <label for="kit">Kit:</label> -->
                                         <select class="form-control select2" id="c-profile" name="profile">
                                             <% for( var i in detailsProduct){ %>
                                             <option value="<%=i%>">
