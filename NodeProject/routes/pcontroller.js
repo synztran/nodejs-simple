@@ -1095,41 +1095,62 @@ router.post('/service/invoice', async(req, res) => {
             }
 
             var customerName = 'abc';
+            var customerMail = "test@abc.com"
             const assem_service = "Assembled Service"
             const lube_service = "Lube Service"
-            const price_film = 0
-            const price_spring = 0
+            const buy_service = "Buy Accesssories"
+            const price_film = 150000
+            const price_spring = 180000
             var lube_service_with_accessories = 6000;
             var lube_service_without_accessories = 5000;
             var price_lube_service = 0
             var items = []
+            var description_film, description_spring, description_grease
+            var replaceFilm, replaceSpring, replaceGrease
 
             // req.body.switch_type == "tactile" ? 
-            console.log("this iss reqbody")
-            console.log(req.body.test['lube_service_price'])
             if(req.body.film_color){
-                price_film = 150000
+                replaceFilm = (req.body.film_color.replace(/_/g, " ")).charAt(0).toUpperCase() + (req.body.film_color.replace(/_/g, " ")).slice(1)
+
+                items.push({
+                    name: buy_service + ' - ' + 'Tx Film' + ' ' + replaceFilm,
+                        quantity: 1,
+                        unit_cost: parseInt(req.body.price_bill['price_film']),
+                        description: "- 1 Pack Tx Film" + ' ' + replaceFilm
+                })
+                description_film = "\n - Film Tx" + ' ' + replaceFilm
             }
             if(req.body.spring_force){
-                price_spring = 180000
+                replaceSpring = (req.body.spring_force.replace(/_/g, " ")).charAt(0).toUpperCase() + (req.body.spring_force.replace(/_/g, " ")).slice(1)
+                items.push({
+                    name: buy_service + ' - ' + 'Springs' + ' ' + replaceSpring +"cn",
+                        quantity: 1,
+                        unit_cost: parseInt(req.body.price_bill['price_spring']),
+                        description: "- 1 Pack Springs" + ' ' + replaceSpring +"cn"
+                })
+            }
+            if(req.body.grease){
+                description_grease = (req.body.grease.replace(/_/g, " ")).charAt(0).toUpperCase() + (req.body.grease.replace(/_/g, " ")).slice(1);
+                // replaceGrease = req.body.grease.replace(/_/g, " ");
             }
             if(req.body.switches_quanity){
                 items.push({
                         name: lube_service + ' - ' + req.body.switch_type + ' x' + req.body.switches_quanity,
-                        quantity: req.body.switches_quanity,
-                        // unit_cost: parseInt(req.body.switches_quanity * ())
+                        quantity: 1,
+                        unit_cost: parseInt(req.body.price_bill['lube_service_price_without_accesscories']),
+                        description: "- Housing/Stem w/" + ' ' + description_grease +
+                                    description_film + 
+                                    "\n - Spring w/ GPL 105"
                     })
             }
-            if(req.body.grease){
-
-            }
+            
             
 
 
             var invoice = {
                 logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
-                from: "Invoiced\nNoobStore\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
-                to: customerName,
+                from: "NoobStore\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
+                to: customerName + '\n' + customerMail,
                 currency: "vnd",
                 number: "INV-"+(docs['seq']+1),
                 payment_terms: "Auto-Billed - Do Not Pay",
@@ -1164,7 +1185,17 @@ router.post('/service/invoice', async(req, res) => {
                 tax: 0,
                 amount_paid: 0,
                 notes: "Thanks for being an awesome customer!",
-                terms: "No need to submit payment. You will be auto-billed for this invoice."
+                terms: "No need to submit payment. You will be auto-billed for this invoice.",
+                // custom_fields: [
+                //     {
+                //       "name": "Gizmo",
+                //       "value": "PO-1234"
+                //     },
+                //     {
+                //       "name": "Account Number",
+                //       "value": "CUST-456"
+                //     }
+                //   ]
             };
 
             generateInvoice(invoice, new Date().toISOString().replace(/:/g, '-') + invoice.number + '.pdf', function() {

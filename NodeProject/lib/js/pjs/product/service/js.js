@@ -186,19 +186,21 @@ $(document).ready(function() {
     $("#spring").click(function() {
 
         var radioSpringValue = $("input[name='spring']:checked").val();
-        var radioTypeSwitchValue = $("#lube_switch_type").val();
+        // var radioTypeSwitchValue = $("#lube_switch_type").val();
         if (radioSpringValue == 'add_spring') {
             $("#have_spring").prop('disabled', false);
             // price_accessories = price_spring
             calcPrice()
-            if (radioTypeSwitchValue == 'cherry') {
-                $("#lube_cherry_spring_force").next(".select2-container").show();
-                $("#lube_box_spring_force").next(".select2-container").hide();
+            $("#lube_cherry_spring_force").next(".select2-container").show();
+            // $("#lube_box_spring_force").next(".select2-container").hide();
+            // if (radioTypeSwitchValue == 'cherry') {
+            //     $("#lube_cherry_spring_force").next(".select2-container").show();
+            //     $("#lube_box_spring_force").next(".select2-container").hide();
 
-            } else if (radioTypeSwitchValue == 'box') {
-                $("#lube_cherry_spring_force").next(".select2-container").hide();
-                $("#lube_box_spring_force").next(".select2-container").show();
-            }
+            // } else if (radioTypeSwitchValue == 'box') {
+            //     $("#lube_cherry_spring_force").next(".select2-container").hide();
+            //     $("#lube_box_spring_force").next(".select2-container").show();
+            // }
         } else {
             // price_accessories = 0
             $("#have_spring").prop('disabled', true);
@@ -631,6 +633,8 @@ $(document).ready(function() {
             lube_service_price_with_accessories: parseInt(lube_service+lube_accessories),
             assembled_service_price: parseInt(assembled_service),
             lube_service_price_without_accesscories: parseInt(lube_service),
+            price_film: parseInt(priceFilm),
+            price_spring: parseInt(priceSpring)
         }
     }
     $("#submit-order").on('click', function(){
@@ -647,7 +651,7 @@ $(document).ready(function() {
                  grease : $("#lube_grease").val(),
                  film_color : $("#lube_film_color").val(),
                  // box_spring_force : $("#lube_box_spring_force").val(),
-                 spring_force :  $("#lube_spring_force").val(),
+                 spring_force :  $("#lube_cherry_spring_force").val(),
                  keeb_type : $("#assemble_kb_type").val(),
                  keeb_layout : $("#assemble_kb_layout").val(),
 
