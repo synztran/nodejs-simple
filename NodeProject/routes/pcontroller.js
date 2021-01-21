@@ -1149,7 +1149,7 @@ router.post('/service/invoice', async(req, res) => {
 
             var invoice = {
                 logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
-                from: "NoobStore\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
+                from: "NoobStore\nnoobassembly@gmail.com\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
                 to: customerName + '\n' + customerMail,
                 currency: "vnd",
                 number: "INV-"+(docs['seq']+1),
