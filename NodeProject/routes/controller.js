@@ -1,21 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const req = require('request');
-const bcrypt = require("bcryptjs");
-const fs = require('fs');
-const readline = require('readline');
 const path = require('path')
-const jwt = require('jsonwebtoken');
-const reqHeader = require('request');
-const config = require('./../lib/comon/config');
-const utils = require('./../lib/comon/utils');
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const fileuploader = require('./../lib/fileuploader/fileuploader');
 router.use(cookieParser());
 const app = express();
 const i18n = require("i18n")
-const moment = require("moment")
 
 // var token = jwt.sign({foo: 'bar'}, 'shhhhh');
 const tokenList = {};
@@ -109,19 +98,16 @@ app.use((req, res, next) => {
 // })
 
 // var imgPath = 'docs/img_1435.JPG';
-var Account = require('./../db/model/account');
-var AdmAccount = require('./../db/model/accadmin');
-var Product = require('./../db/model/product');
-var Couter = require('./../db/model/couter')
-var Category = require('./../db/model/category');
-var AdsProduct = require('./../db/model/adsproduct');
-var EventProduct = require('./../db/model/eventproduct');
-var PageContent = require('./../db/model/mainpage_content');
-var Image = require('./../db/model/image');
-var userToken = require('./../db/model/token');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
 // example = require('./../lib/js/listAccount.js')
 
+const utilController = require('./controller/util');
+const accountController = require('./controller/account');
+const productController = require('./controller/product');
+const categoryController = require('./controller/category');
+const adsProductController = require('./controller/adsproduct');
+const eventProductController = require('./controller/eventproduct');
+const contentController = require('./controller/content');
 
 const options = {
 
@@ -131,13 +117,6 @@ const options = {
         'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImlhdCI6MTU3NjA2MDk2NSwiZXhwIjoxNTc2MDYxMDI1fQ.obUYFFsvscovK0uq5o-PX3OCNP7a0NOdGqrNqm0KBFs'
     }
 };
-
-
-router.get('/change-lang/:lang', (req, res)=>{
-    console.log(req.params.lang)
-    res.cookie('lang', req.params.lang, {maxAge: 900000});
-    res.redirect('back');
-})
 
 function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -152,166 +131,45 @@ function callback(error, response, body) {
 //     console.log(info);
 // })
 // init
-router.get("/signin", function(req, res) {
-    res.render("homePage");
-});
+router.get('/change-lang/:lang', utilController.changelang)
+
+router.get("/signin", utilController.signin);
 
 // router.get("/nhomepage", function(req, res) {
 //     res.render("manager/adminPage");
 // });
 
-router.get("/test", function(req, res) {
-    res.render("testPage");
-});
+router.get("/test", utilController.test);
 
-router.get("/signup", function(req, res) {
-    res.render("registerPage");
-});
+router.get("/signup", utilController.signupGet);
 
-router.get('/', TokenCheckMiddleware, function(req, res) {
-    // if (!req.session.Admin) {
-    //     res.redirect('/api/signin')
-    // } else {
-        // var admin = req.session.Admin
-        res.render('manager/adminPage', {
-            fname: req.decoded['fname'],
-            lname: req.decoded['lname'],
-            mail: req.decoded['email'],
-            lang: req.cookies.lang
-        });
-    
+router.get('/', TokenCheckMiddleware, utilController.tokencheck);
 
-});
+router.get('/messenger', TokenCheckMiddleware, utilController.messenger)
 
-router.get('/messenger', TokenCheckMiddleware, function(req, res) {
-    res.render('messengerPage');
-})
+router.get('/list-room', TokenCheckMiddleware, utilController.listroom)
 
-router.get('/list-room', TokenCheckMiddleware, function(req, res) {
-    res.render('listroomPage');
-})
-
-router.get('/listcreated', function(req, res) {
-    res.render('listCreated', {
-        // 'listCreated' : ''
-    });
-})
+router.get('/listcreated', utilController.listcreated)
 
 
-router.get("/success", function(req, res) {
+router.get("/success", utilController.success);
 
-    res.render("successPage");
+router.post("/signup", utilController.signupPost)
 
-});
+router.get('/list',TokenCheckMiddleware, utilController.list);
 
-router.post("/signup", function(req, res) {
-    var email = req.body.email;
-    var password = req.body.password;
+router.delete('/delete/:id', utilController.Delete);
 
-    var data = {
-        "email": email,
-        "password": password
-    }
+router.get("/people", utilController.people);
 
-    db.collection('accounts').insertOne(data, function(err, collection) {
-        if (err) throw err;
-        console.log("successfully");
-    });
-    return res.redirect('success');
-})
-
-router.get('/list',TokenCheckMiddleware, function(req, res) {
-    // Couter.find({}, function(err, docs) {
-    //     console.log(docs);
-
-    // });
-    try{
-        Account.find({}, function(err, docs) {
-            console.log(docs);
-            res.render('listAccount', {
-                "listAccount": docs
-            });
-            res.status(200)
-        });
-
-    }catch(err){
-        res.status(400).send(err);
-    }
-    
-  
-    
-
-});
-
-router.delete('/delete/:id', async (req, res) => {
-    try {
-        var result = await AdmAccount.deleteOne({ _id: req.params.id }).exec();
-        res.send(result);
-
-    } catch (err) {
-        res.status(500).send(err);
-    }
-});
-
-router.get("/people", async (req, res) => {
-    var resultArray = [];
-    try {
-        var result = await Account.find().exec();
-        // res.send(result);
-        resultArray.push(result);
-        res.status(200).send({
-            success: {
-                // status: "success",
-                internalMessage: "List user have been created",
-                code: 200
-            }
-        });
-    } catch (err) {
-        res.status(500).send({
-            error: {
-                internalMessage: "fail api",
-                code: 500
-            }
-        });
-
-    }
-    console.log(resultArray);
-});
-
-router.get("/person/:id", async (req, res) => {
-    console.log(req.params);
-    try {
-        var account = await Account.findById(req.params.id).exec();
-        res.send(account);
-    } catch (err) {
-        res.status(500).send(err);
-    }
-});
+router.get("/person/:id", utilController.person);
 
 
 
 /*------------------For mobile-------------------*/
-router.put("/account/edit/:id", async (req, res) => {
-    try {
-        var account = await Account.findById(req.params
-            .id).exec();
-        account.set(req.body);
-        var result = await account.save();
-        res.send(result);
-
-    } catch (err) {
-        res.status(200).send(err);
-    }
-});
+router.put("/account/edit/:id", accountController.editPut);
 /*-----------------------------------------------*/
 // load db on form
-
-const accountController = require('./controller/account');
-const productController = require('./controller/product');
-const categoryController = require('./controller/category');
-const adsProductController = require('./controller/adsproduct');
-const eventProductController = require('./controller/eventproduct');
-const contentController = require('./controller/content');
 
 router.get("/account/edit/:id", accountController.editGet);
 // update db to mongo

@@ -8,6 +8,19 @@ const tokenList = {};
 var Account = require('./../../db/model/account');
 var AdmAccount = require('./../../db/model/accadmin');
 
+async function editPut(req, res){
+    try {
+        var account = await Account.findById(req.params
+            .id).exec();
+        account.set(req.body);
+        var result = await account.save();
+        res.send(result);
+
+    } catch (err) {
+        res.status(200).send(err);
+    }
+};
+
 async function editGet(req, res){
     try {
         Account.findById(req.params
@@ -242,4 +255,4 @@ async function created(req, res){
     }
 };
 
-module.exports = {editGet, editPost, login, register, refresh_token, profile, created};
+module.exports = {editPut, editGet, editPost, login, register, refresh_token, profile, created};
