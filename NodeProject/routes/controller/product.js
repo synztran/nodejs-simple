@@ -491,6 +491,30 @@ async function editPost(req, res){
             // res.status(200).send(result)
             return res.redirect('/api/product');
 
+        }else if(part == 7){
+            console.log("for artisan")
+            if(req.file == null){
+                check.set({ 
+                    product_name: req.body.product_name,
+                    replace_product_name: req.body.replace_product_name,
+                    outstock: req.body.outstock,
+                    price: req.body.sw_price,
+                });
+            }else{
+                check.set({ 
+                    product_name: req.body.product_name,
+                    replace_product_name: req.body.replace_product_name,
+                    outstock: req.body.outstock,
+                    price: req.body.sw_price,
+                    pic_product:{
+                        path: req.file.path,
+                        size: req.file.size
+                    }
+                });
+            }
+            var result = await check.save();
+            // res.status(200).send(result)
+            return res.redirect('/api/product');
         }
         
 

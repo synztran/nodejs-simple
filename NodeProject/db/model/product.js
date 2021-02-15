@@ -21,7 +21,7 @@ var productSchema = mongoose.Schema({
         type: String
     },
     product_part:{
-        // product_accessory: 0 = Keeb Top Case | 1 = Keeb Bot case | 2 = Keeb Plate | 3 = Keeb Frame | 4 = keycap / 5 = switches
+        // product_accessory: 0 = Keeb Top Case | 1 = Keeb Bot case | 2 = Keeb Plate | 3 = Keeb Frame | 4 = keycap | 5 = switches | 7 = artisan
         type: Number,
         default: null
     },
