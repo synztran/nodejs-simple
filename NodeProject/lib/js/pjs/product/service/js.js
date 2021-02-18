@@ -210,10 +210,7 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('change', '#lube_quantity', function() {
-        calcPrice();
-
-    })
+    $(document).on('change', '#lube_quantity', function() {calcPrice()})
 
     // Assembled Service
     $(".option_assembled_pcb").hide();
@@ -226,6 +223,17 @@ $(document).ready(function() {
             $(".option_assembled_pcb").hide();
         }
     })
+    // $(document).on('change', '#assembled_pcb_solder', function(){
+    //     if( $(this).is(':checked') ) alert("checked");
+    // })
+    $(document).on('click', '#assembled_pcb_solder, #assembled_pcb_desolder, #assembled_pcb_handlestab, #assembled_pcb_solder_hotswap, #assembled_led_solder, #assembled_led_desolder', function(){
+        if($(this).is(':checked')) {
+            $(this).attr("value", "add")
+        } else {
+            $(this).attr("value", "")
+        }
+    })
+
     $(".option_assembled_led").hide();
     $("#add_led").click(function(){
         var radioValue = $("input[name='add_led']:checked").val();
@@ -264,7 +272,7 @@ $(document).ready(function() {
     // For pcb
     $("#assembled_pcb_solder").click(function(){
         var radioValue = $("input[name='assembled_pcb_solder']:checked").val();
-        if(radioValue == 'assembled_pcb_solder'){
+        if(radioValue == 'add'){
             calcPrice()
         }else{
             calcPrice()
@@ -272,7 +280,7 @@ $(document).ready(function() {
     })
     $("#assembled_pcb_desolder").click(function(){
         var radioValue = $("input[name='assembled_pcb_desolder']:checked").val();
-        if(radioValue == 'assembled_pcb_desolder'){
+        if(radioValue == 'add'){
             calcPrice()
         }else{
             calcPrice()
@@ -280,7 +288,7 @@ $(document).ready(function() {
     })
     $("#assembled_pcb_handlestab").click(function(){
         var radioValue = $("input[name='assembled_pcb_handlestab']:checked").val();
-        if(radioValue == 'assembled_pcb_handlestab'){
+        if(radioValue == 'add'){
             calcPrice()
         }else{
             calcPrice()
@@ -288,7 +296,7 @@ $(document).ready(function() {
     })
     $("#assembled_pcb_solder_hotswap").click(function(){
         var radioValue = $("input[name='assembled_pcb_solder_hotswap']:checked").val();
-        if(radioValue == 'assembled_pcb_solder_hotswap'){
+        if(radioValue == 'add'){
             calcPrice()
         }else{
             calcPrice()
@@ -298,7 +306,7 @@ $(document).ready(function() {
     // For Led
     $("#assembled_led_solder").click(function(){
         var radioValue = $("input[name='assembled_led_solder']:checked").val();
-        if(radioValue == 'assembled_led_solder'){
+        if(radioValue == 'add'){
             calcPrice()
         }else{
             calcPrice()
@@ -306,7 +314,7 @@ $(document).ready(function() {
     })
     $("#assembled_led_desolder").click(function(){
         var radioValue = $("input[name='assembled_led_desolder']:checked").val();
-        if(radioValue == 'assembled_led_desolder'){
+        if(radioValue == 'add'){
             calcPrice()
         }else{
             calcPrice()
@@ -637,6 +645,8 @@ $(document).ready(function() {
             price_spring: parseInt(priceSpring)
         }
     }
+
+
     $("#submit-order").on('click', function(){
         $.ajax({
             type: 'POST',
@@ -645,16 +655,20 @@ $(document).ready(function() {
             headers: function(xhr){xhr.setRequestHeader('X-Test-Header', 'test-value');},
             data: {
                 price_bill: calcPrice(),
+                //lube service
                 switches_quanity: $("#lube_quantity").val(),
-                // sw_quantity : $("#lube_quantity").val(),
                 switch_type: $("#lube_switch_type").val(),
                 grease : $("#lube_grease").val(),
                 film_color : $("#lube_film_color").val(),
-                 // box_spring_force : $("#lube_box_spring_force").val(),
                 spring_force :  $("#lube_cherry_spring_force").val(),
+                lube_service_est_time : $("#lube_relsease_time").val(),
                 lube_service_note: $("#lube_specs").val(),
+                // assembly service
                  keeb_type : $("#assemble_kb_type").val(),
                  keeb_layout : $("#assemble_kb_layout").val(),
+
+                led_type: $("#assemble_led_type").val(),
+                led_color: $("#assemble_led_color").val(),
 
                  pcb_solder : $("#assembled_pcb_solder").val(),
                  pcb_desolder : $("#assembled_pcb_desolder").val(),
@@ -663,34 +677,21 @@ $(document).ready(function() {
 
                  led_solder : $("#assembled_led_solder").val(),
                  led_desolder : $("#assembled_led_desolder").val(),
+                assembled_service_est_time: $("#assemble_relsease_time").val(),
+                assembled_service_note: $("#assemble_specs").val(),
+
                  price_lube_accessories : lube_accessories,
                  price_lube_service : lube_service,
                  price_assembled_service: assembled_service,
                  price_assembled_accessories : assembled_accessories
             },
             success: function(res){
-                console.log(res)
-                // var url= res.data;
-                // var link = document.createElement('a');
-                // link.href = url;
-                // link.download = url.split("/").pop();
-                // link.dispatchEvent(new MouseEvent('click'));
-
-                // var a = document.createElement('a');
-                // var url = res.data;
-                // a.href = url;
-                // a.download = res.file;
-                // document.body.append(a);
-                // a.click();
-                // a.remove();
-                // window.URL.revokeObjectURL(url);
-
                 var url = res.data;
-
-                window.open(url, '_blank');
-               
+                setTimeout(function(){ 
+                    window.open(url, '_blank');
+                }, 2000);
             },
-            timeout: 3000,
+            
             error: function(err){
                 console.log(err)
             }
