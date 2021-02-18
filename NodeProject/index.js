@@ -25,11 +25,45 @@ const methodOverride = require('method-override');
 const Database = require('./db/database');
 const routes = require('./routes/controller');
 const proutes = require('./routes/pcontroller');
+// const discord_routes = require('./routes/discord');
 const bcrypt = require("bcryptjs");
 const i18n = require("i18n")
 const hbs = require('hbs')
 const moment = require("moment");
 
+//FOR DISCORD SERVER
+const { Client, MessageAttachment } = require('discord.js');
+const client = new Client();
+
+client.on('ready', () => {
+    console.log('I am ready!');
+});
+
+client.on('message', message => {
+    if (message.content === '!rip') {
+        // Create the attachment using MessageAttachment
+        const attachment = new MessageAttachment('https://i.imgur.com/w3duR07.png');
+        // Send the attachment in the message channel
+        message.channel.send(attachment);
+    }
+
+    if(message.content === 'what is my avatar'){
+        message.reply(message.author.displayAvatarURL());
+    }
+    
+});
+
+client.on('guildMemberAdd', member => {
+    // Send the message to a designated channel on a server:
+    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+    // Do nothing if the channel wasn't found on this server
+    if (!channel) return;
+    // Send the message, mentioning the member
+    channel.send(`Welcome to the server, ${member}`);
+  });
+
+client.login('ODExOTcwOTgyMjg5MDgwMzMw.YC585w.tkv54B4zuqIT8CiK_CffOf9lvP0');
+// ----------------------------------------------------------------------- //
 // mongoose.connect('mongodb://localhost:27017/testmongodb');
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
 // var date = new Date();
