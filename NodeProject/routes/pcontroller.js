@@ -1224,6 +1224,13 @@ router.post('/service/invoice', async(req, res) => {
 
 })
 
+// test drawCanvas
+
+router.get("/drawCanvas", function(req, res){
+    res.render('drawCanvas/view/draw')
+
+})
+
 
 // ---------------------------------------------------------------------------------------------
 
