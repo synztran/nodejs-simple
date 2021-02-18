@@ -1105,7 +1105,7 @@ router.post('/service/invoice', async(req, res) => {
             var lube_service_without_accessories = 5000;
             var price_lube_service = 0
             var items = []
-            var description_film, description_spring, description_grease, description_lube_note, description_assembled_note
+            var description_film, description_spring, description_grease
             var replaceFilm, replaceSpring, replaceGrease
 
             // req.body.switch_type == "tactile" ? 
@@ -1135,7 +1135,7 @@ router.post('/service/invoice', async(req, res) => {
             }
             if(req.body.switches_quanity){
                 items.push({
-                        name: lube_service + ' - ' + req.body.switch_type + " switch" + ' x' + req.body.switches_quanity,
+                        name: lube_service + ' - ' + req.body.switch_type + ' x' + req.body.switches_quanity,
                         quantity: 1,
                         unit_cost: parseInt(req.body.price_bill['lube_service_price_without_accesscories']),
                         description: "- Housing/Stem w/" + ' ' + description_grease +
@@ -1145,35 +1145,7 @@ router.post('/service/invoice', async(req, res) => {
             }
             
             
-            if(req.body.pcb_solder == 'add'){
-                items.push({
-                    name: lube_service + ' - ' + req.body.switch_type + " switch" + ' x' + req.body.switches_quanity,
-                    quantity: 1,
-                    unit_cost: parseInt(req.body.price_bill['lube_service_price_without_accesscories']),
-                    description: "- Housing/Stem w/" + ' ' + description_grease +
-                                description_film + 
-                                "\n - Spring w/ GPL 105"
-                })
-            }
-            if(req.body.pcb_desolder == 'add'){}
-            if(req.body.pcb_handlestab == 'add'){}
-            if(req.body.pcb_solderhotswap == 'add'){}
-            if(req.body.led_solder == 'add'){}
-            if(req.body.led_desolder == 'add'){}
 
-            if(req.body.lube_service_note){
-                description_lube_note = req.body.lube_service_note
-            }else{
-                description_lube_note =  "Thanks for using lube service!"
-            }
-            if(req.body.assembled_service_note){
-                description_assembled_note = req.body.lube_service_note
-            }else{
-                description_assembled_note =  "Thanks for using assembly service!"
-            }
-            var default_desc = "Thanks for being a awesome customer"
-
-            var notes = description_lube_note + "\n" + description_assembled_note + "\n" + default_desc
 
             var invoice = {
                 logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
@@ -1212,8 +1184,8 @@ router.post('/service/invoice', async(req, res) => {
                 shipping: 0,
                 tax: 0,
                 amount_paid: 0,
-                notes: notes,
-                terms: "No need to submit payment. You will be auto-billed for this invoice!",
+                notes: "Thanks for being an awesome customer!",
+                terms: "No need to submit payment. You will be auto-billed for this invoice.",
                 // custom_fields: [
                 //     {
                 //       "name": "Gizmo",
@@ -1249,6 +1221,13 @@ router.post('/service/invoice', async(req, res) => {
         console.log("eror" + err)
         res.status(200).send(err);
     }
+
+})
+
+// test drawCanvas
+
+router.get("/drawCanvas", function(req, res){
+    res.render('drawCanvas/view/draw')
 
 })
 
