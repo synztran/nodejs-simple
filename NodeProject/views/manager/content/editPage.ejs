@@ -71,9 +71,24 @@ $(document).ready(function() {
 
     $('.select2').select2();
  
+    var gArrayFonts = ['Montserrat'];
     $('#content_specs').summernote({
+        fontNames: gArrayFonts,
+        fontNamesIgnoreCheck: gArrayFonts,
+        fontSizes: ['8', '9', '10', '11', '12', '13', '14', '15', '16', '18', '20', '22' , '24', '28', '32', '36', '40', '48'],
         tabsize: 2,
-        height:300
+        height:300,
+        toolbar: [
+        // [groupName, [list of button]]
+        ['style'],
+        ['style', ['clear', 'bold', 'italic', 'underline']],
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],       
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['view', ['codeview']]
+        ]
     });
     $('.btn-cancel').on('click', function(e) {
         e.preventDefault();

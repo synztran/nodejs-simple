@@ -1,4 +1,10 @@
 
+
+@font-face{
+    font-family: omegle;
+    src: url("/package/font/omegle/OMEGLE.ttf");
+}
+ 
 .main{
 	margin:2% 3%!important;
 }
@@ -130,6 +136,7 @@ div.product-card.flip180{
 .stats-container .product_name{
 	font-size:22px;
 	color:#393c45;	
+	font-family: "omegle"
 }
 .stats-container p{
 	font-size:16px;

@@ -170,17 +170,17 @@ html, body{
     </div>
     <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a href="#" class="navbar-brand">
+            <a href="./" class="navbar-brand">
                 <!-- Logo Image -->
-                <img src="./favicon/logo.png" width="100" height="50" alt="" class="d-inline-block align-middle mr-2">
+                <img src="./favicon/white_logo.png" alt="" class="d-inline-block align-middle mr-2">
                 <!-- Logo Text -->
                 <!-- <span class="text-uppercase font-weight-bold">Company</span> -->
             </a>
             <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
             <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a href="./" class="nav-link">Home
+                        <a href="./" class="nav-link text-decoration-none">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -195,7 +195,7 @@ html, body{
     <!-- </header> -->
     <nav class="before-breadcrumb" aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
             <!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
             <li class="breadcrumb-item active" aria-current="page">Proxy GB</li>
         </ol>
@@ -212,7 +212,7 @@ html, body{
         </div>
         <div style="" class="col-md-10">
             <div class="title-li">
-                <p style="">Product details</p>
+                <p class="font-hello_jones">Shop </p>
                 <hr>
             </div>
             <% if(listCategory != null) { %> 
@@ -240,7 +240,6 @@ html, body{
                                 <div class="stats">
                                     <div class="stats-container">
                                         <span class="product_price">
-                                            <% console.log(item.max_price) %>
                                             <% if(item.max_price == null){%>
                                                 <%= item.min_price %>$
                                             <% }else{ %>
@@ -248,7 +247,7 @@ html, body{
                                             <%} %>
 
                                             $</span>
-                                        <span class="product_name"><%= item.category_name %></span>
+                                        <b class="product_name"><%= item.category_name %></b>
                                         <p style="margin-bottom: 0" class="fake-text"> <%=item.author %> - <%= item.proxy_host %></p>
                                         <div style="display: flex;" class="product-options">
                                             <div style="padding: 0" class="col-md-6">
@@ -299,7 +298,7 @@ html, body{
                                                 <%= item.min_price %>$ - <%= item.max_price %>$
                                             <%} %>
                                         </span>
-                                        <span class="product_name"><%= item.category_name %></span>
+                                        <b class="product_name"><%= item.category_name %></b>
                                         <p style="margin-bottom: 0" class="fake-text"><%=item.author %> - <%= item.proxy_host %></p>
                                         <div class="product-options">
                                             <strong>Profile</strong>
@@ -326,7 +325,7 @@ html, body{
                                                 <%= item.min_price %>$ - <%= item.max_price %>$
                                             <%} %>
                                         </span>
-                                        <span class="product_name"><%= item.category_name %></span>
+                                        <b class="product_name"><%= item.category_name %></b>
                                         <p style="margin-bottom: 0" class="fake-text"><%=item.author %> - <%= item.proxy_host %></p>
                                         <div class="product-options">
                                             <strong>Material</strong>

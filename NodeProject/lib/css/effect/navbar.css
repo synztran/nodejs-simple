@@ -1,5 +1,25 @@
 /*  */
 
+@font-face{
+    font-family: 'hello_jones';
+    src: url("/package/font/hello_jones/Hello_Jones.woff2");
+}
+
+@font-face{
+    font-family: 'omegle';
+    src: url("/package/font/hello_jones/OMEGLE.ttf");
+    /*src: url('myfont.woff2') format('woff2'),
+       url('myfont.woff') format('woff'),
+       url('myfont.ttf') format('truetype');*/
+}
+
+.font-hello_jones{
+    font-family: 'hello_jones';
+}
+.font-omegle{
+    font-family: 'omegle'
+}
+
 .row {
     top: 1% !important
 }
@@ -1654,6 +1674,11 @@ body .socials>a:hover {
         background-attachment: fixed;
         background-size: cover;
     }
+}
+
+.navbar-brand > img{
+  max-width: 100%;
+  height: 50px
 }
 
 /* ----------------------------------- */

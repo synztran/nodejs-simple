@@ -1686,7 +1686,8 @@ body.menu-is-open {
   padding: 3.6rem 3rem 3.6rem 6rem;
   height: 100%;
   /*width: 50%;*/
-  width:21.85%;
+  width: 25%;
+  /*width:21.85%;*/
   background: #0C0C0C;
   color: rgba(255, 255, 255, 0.25);
   overflow-y: auto;
@@ -2090,7 +2091,7 @@ body.menu-is-open {
   content: "";
   width: 50%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  /*background-color: rgba(0, 0, 0, 0.3);*/
   opacity: .5;
   z-index: 3;
   position: absolute;
@@ -4099,3 +4100,4 @@ footer a {
     bottom: 16.4rem;
   }
 }
+ 
