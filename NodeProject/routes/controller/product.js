@@ -34,9 +34,13 @@ async function getcid(req, res){
     console.log("params"+req.params.id);
     try{
         // var check = await Product.findById(req.params.id).exec()
-        var check = await Product.find({category_id: req.params.id}, function(err, docs){
+        // var check = await Product.find({category_id: req.params.id}, function(err, docs){
+        var check = await Product.find({category_url_name: req.params.id}, function(err, docs){
+            // console.log(docs)
             // console.log(docs[0]);
         }).exec();
+        console.log("this is check")
+        console.log(check)
         
         res.send(check).status(200);
     }catch(err){

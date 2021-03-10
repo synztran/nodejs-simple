@@ -895,10 +895,11 @@ router.get('/proxygb/product/:id', async (req, res) => {
 })
 
 router.get('/proxygb/payment/:id', TokenUserCheckMiddleware, async (req, res) => {
-    // console.log(req.params.id)
+    console.log(req.params.id)
     // console.log(req.decoded['email']);
     try {
-        Product.find({ category_id: req.params.id }, function(errdocs, docs) {
+        // Product.find({ category_id: req.params.id }, function(errdocs, docs) {
+        Product.find({ category_url_name: req.params.id }, function(errdocs, docs) {
             if (docs[0]) {
                 Category.findOne({ category_id: docs[0].category_id }, function(errdocs2, docs2) {
                     Account.findOne({ email: req.decoded['email'] }, function(erruser, docs3) {

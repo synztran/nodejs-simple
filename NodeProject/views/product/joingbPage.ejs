@@ -22,8 +22,10 @@
     <link rel="stylesheet" href="/api/css/effect/preloading.css">
     <link rel="stylesheet" href="/api/css/effect/radiobtn-effect/radiobtn-loading-time.css">
     <link rel="stylesheet" href="/api/css/pcss/customize.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/effect/wallet-button/style.css">
     <!-- <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css"> -->
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="/package/css/pcss/navbar_config.css">
     <!--  -->
     <!--==================== SCRIPT =========================================== -->
     <script src="/api/js/pjs/modernizr.js"></script>
@@ -42,8 +44,8 @@ body {
     font-family: "Montserrat", sans-serif !important;
     height: 100%;
     width: 100%;
-    /*background-image: url('/api/docs/background/UIBkAT.jpg');*/
-    background-repeat: no-repeat;
+    background-image: url('/api/docs/background/bg-black.svg');
+    background-repeat:repeat;
     background-color: transparent;
     box-sizing: border-box;
 }
@@ -195,7 +197,8 @@ ul.item-timeline {
 .main {
     margin: 2% 15% !important
 }
-.truck-button{
+
+.truck-button {
     /*display: none;*/
 }
 </style>
@@ -212,7 +215,7 @@ ul.item-timeline {
         <div class="container">
             <a href="#" class="navbar-brand">
                 <!-- Logo Image -->
-                <img src="/favicon/logo.png" width="100" height="50" alt="" class="d-inline-block align-middle mr-2">
+                <img src="/favicon/white_logo.png" alt="" class="d-inline-block align-middle mr-2">
                 <!-- Logo Text -->
                 <!-- <span class="text-uppercase font-weight-bold">Company</span> -->
             </a>
@@ -302,7 +305,7 @@ ul.item-timeline {
                         </div>
                         <div class="form-group joingbpage-address-payment">
                             <div style="margin-right: 0.5%" class="col-md-6 payment-option">
-                                <h2>Paymnet Options</h2>
+                                <h2 class="font-hello_jones">Paymnet Options</h2>
                                 <hr>
                                 <div class="form-group cntr">
                                     <!-- <div>
@@ -314,8 +317,8 @@ ul.item-timeline {
                                         <input type="radio" id="paypal" name="payment" value="paypal"><span style="margin-left: 5%"><img src="/api/docs/trash/paypal.png"></span>
                                         <label for="paypal"></label>
                                     </div> -->
-                                        <div class="row col-md-12">
-                                            <label for="momo" class="btn-radio">
+                                    <div class="row col-md-12">
+                                        <label for="momo" class="btn-radio">
                                             <!-- <input type="radio" id="rdo-1" name="radio-grp"> -->
                                             <input type="radio" id="momo" name="payment" value="momo">
                                             <svg width="20px" height="20px" viewBox="0 0 20 20">
@@ -324,12 +327,11 @@ ul.item-timeline {
                                                 <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
                                             </svg>
                                             <span><img src="/api/docs/trash/momo.jfif"></span>
-                                            </label>
-                                        </div>
-                                        <hr style="margin-left: 5%">
-                                        <div class="row col-md-12">
-                                            <label for="paypal" class="btn-radio">
-                                            <!-- <input type="radio" id="rdo-2" name="radio-grp"> -->
+                                        </label>
+                                    </div>
+                                    <hr style="margin-left: 5%">
+                                    <!-- <div class="row col-md-12">
+                                        <label for="paypal" class="btn-radio">
                                             <input type="radio" id="paypal" name="payment" value="paypal">
                                             <svg width="20px" height="20px" viewBox="0 0 20 20">
                                                 <circle cx="10" cy="10" r="9"></circle>
@@ -337,136 +339,135 @@ ul.item-timeline {
                                                 <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
                                             </svg>
                                             <span><img src="/api/docs/trash/Paypal-icon.png"></span>
-                                            </label>
-                                        </div>
-                                      </div>
+                                        </label>
+                                    </div> -->
+                                </div>
                             </div>
                             <div style="margin-left: 0.5%" class="col-md-6 shipping-address">
-                                <h2>Shipping Address</h2>
+                                <h2 class="font-hello_jones">Shipping Address</h2>
                                 <hr>
                                 <div class="form-group cntr">
                                     <label for="already_address" class="btn-radio">
-                                    <input type="radio" id="already_address" name="address" value="already"/>
-                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                        <circle cx="10" cy="10" r="9"></circle>
-                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                                      </svg>
-                                      <span>Shipping to this address</span>
+                                        <input type="radio" id="already_address" name="address" value="already" />
+                                        <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                            <circle cx="10" cy="10" r="9"></circle>
+                                            <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                            <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                        </svg>
+                                        <span>Shipping to this address</span>
                                     </label>
-                                    
                                     <!-- <label for="new_address">Shipping to this address</label> -->
                                     <br>
                                     <!-- <form></form> -->
                                     <!-- <form id="form_already_address"> -->
-                                        <% if((User.shipping_at).length > 0) { %>
-                                        <div class="for-already-address">
-                                            <div class="form-group d-flex">
-                                                <label for='country' class="col-md-3">Country</label>
-                                                <div class="col-md-9">
-                                                    <select style="" id="country" name="country" class="form-control">
-                                                        <option value="<%- User.shipping_at[0].country %>">
-                                                            <%= User.shipping_at[0].country %>
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <label for='name' class="col-md-3">Name</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="name" name="customer_name" value="<%- User.shipping_at[0].fname %> <%- User.shipping_at[0].lname %>">
-                                                </div>
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <label for='address' class="col-md-3">Address</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="address" name="customer_address" value="<%- User.shipping_at[0].address %>">
-                                                </div>
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <label for='city' class="col-md-3">City</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="city" name="customer_city" value="<%- User.shipping_at[0].town_city %>">
-                                                </div>
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <label for='pcode' class="col-md-3">postal code</label>
-                                                <div class="col-md-9">
-                                                    <input type="tel" id="pcode" name="customer_postal_code" value="<%- User.shipping_at[0].zip_code %>">
-                                                </div>
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <label for='pnumber' class="col-md-3">phone</label>
-                                                <div class="col-md-9">
-                                                    <input type="tel" id="pnumber" name="customer_phone" value="<%- User.shipping_at[0].phone_number %>">
-                                                </div>
+                                    <% if((User.shipping_at).length > 0) { %>
+                                    <div class="for-already-address">
+                                        <div class="form-group d-flex">
+                                            <label for='country' class="col-md-3">Country</label>
+                                            <div class="col-md-9">
+                                                <select style="" id="country" name="country" class="form-control">
+                                                    <option value="<%- User.shipping_at[0].country %>">
+                                                        <%= User.shipping_at[0].country %>
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
-                                        <% }else{ %>
-                                        <a href="/address">Click here to setup your shipping address </a>
-                                        <%   } %>
+                                        <div class="form-group d-flex">
+                                            <label for='name' class="col-md-3">Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="name" name="customer_name" value="<%- User.shipping_at[0].fname %> <%- User.shipping_at[0].lname %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='address' class="col-md-3">Address</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="address" name="customer_address" value="<%- User.shipping_at[0].address %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='city' class="col-md-3">City</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="city" name="customer_city" value="<%- User.shipping_at[0].town_city %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='pcode' class="col-md-3">postal code</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" id="pcode" name="customer_postal_code" value="<%- User.shipping_at[0].zip_code %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='pnumber' class="col-md-3">phone</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" id="pnumber" name="customer_phone" value="<%- User.shipping_at[0].phone_number %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }else{ %>
+                                    <a href="/address">Click here to setup your shipping address </a>
+                                    <%   } %>
                                     <!-- </form> -->
                                     <hr style="margin-left: 5%">
                                     <label for="new_address" class="btn-radio">
-                                    <input type="radio" id="new_address" name="address" value="new"/>
-                                    <svg width="20px" height="20px" viewBox="0 0 20 20">
-                                        <circle cx="10" cy="10" r="9"></circle>
-                                        <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
-                                        <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
-                                      </svg>
-                                      <span>Use a new address</span>
+                                        <input type="radio" id="new_address" name="address" value="new" />
+                                        <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                            <circle cx="10" cy="10" r="9"></circle>
+                                            <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                            <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                        </svg>
+                                        <span>Use a new address</span>
                                     </label>
                                     <!-- <label for="already_address">Use a new address</label> -->
                                     <br>
                                     <!-- <form id="form_new_address"> -->
-                                        <div class="for-new-address">
-                                            <div class="form-group d-flex">
-                                                <label for='newCountry' class="col-md-3">Country</label>
-                                                <div class="col-md-9">
-                                                    <select style="" id="newCountry" name="country" class="form-control">
-                                                        <option value="Viet Nam">Việt Nam</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <label for='newName' class="col-md-3">Name</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="newName" name="customer_name">
-                                                </div>
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <label for='newAddress' class="col-md-3">Address</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="newAddress" name="customer_address">
-                                                </div>
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <label for='subAddress' class="col-md-3"></label>
-                                                <div class="col-md-9">
-                                                    <input type="text" name="customer_address_sub" id="subAddress" placeholder="(option)">
-                                                </div>
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <label for='newCity' class="col-md-3">City</label>
-                                                <div class="col-md-9">
-                                                    <select style="" id="newCity" name="town_city" class="form-control">
-                                                        <% include ./../tips/selectCity %>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <label for='newPcode' class="col-md-3">postal code</label>
-                                                <div class="col-md-9">
-                                                    <input type="tel" id="newPcode" name="customer_postal_code" placeholder="VN(70000)">
-                                                </div>
-                                            </div>
-                                            <div class="form-group d-flex">
-                                                <label for='newPnumber' class="col-md-3">phone</label>
-                                                <div class="col-md-9">
-                                                    <input type="tel" id="newPnumber" name="customer_phone">
-                                                </div>
+                                    <div class="for-new-address">
+                                        <div class="form-group d-flex">
+                                            <label for='newCountry' class="col-md-3">Country</label>
+                                            <div class="col-md-9">
+                                                <select style="" id="newCountry" name="country" class="form-control">
+                                                    <option value="Viet Nam">Việt Nam</option>
+                                                </select>
                                             </div>
                                         </div>
+                                        <div class="form-group d-flex">
+                                            <label for='newName' class="col-md-3">Name</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="newName" name="customer_name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='newAddress' class="col-md-3">Address</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="newAddress" name="customer_address">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='subAddress' class="col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <input type="text" name="customer_address_sub" id="subAddress" placeholder="(option)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='newCity' class="col-md-3">City</label>
+                                            <div class="col-md-9">
+                                                <select style="" id="newCity" name="town_city" class="form-control">
+                                                    <% include ./../tips/selectCity %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='newPcode' class="col-md-3">postal code</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" id="newPcode" name="customer_postal_code" placeholder="VN(70000)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group d-flex">
+                                            <label for='newPnumber' class="col-md-3">phone</label>
+                                            <div class="col-md-9">
+                                                <input type="tel" id="newPnumber" name="customer_phone">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- </form> -->
                                 </div>
                             </div>
@@ -475,7 +476,7 @@ ul.item-timeline {
                 </div><!-- end of col-md-9 -->
                 <div class="col-md-3 box-details">
                     <!-- right -->
-                    <h2 class="t-center">Order details</h2>
+                    <h2 class="t-center order-title">Order details</h2>
                     <hr>
                     <div class="joingb-details-order form-group">
                         <ul>
@@ -484,7 +485,7 @@ ul.item-timeline {
                                 <span class="t-right">0</span>
                             </li>
                             <li class="quantity">
-                                <span class="text-details"><strong>Qantity:</strong></span>
+                                <span class="text-details"><strong>Quantity:</strong></span>
                                 <span class="t-right">0</span>
                             </li>
                             <li class="subtotal">
@@ -524,7 +525,8 @@ ul.item-timeline {
                     </div>
                     <div class="button-payment">
                         <!-- <button class="btn-secondary btn-lg truck-fake-button" style="width: 100%">PLACE ORDER</button> -->
-                        <button type="submit" form="order_product" class="truck-button" id="2nd-truck-button">
+                        <!-- OLD BUTTON SUBMIT -->
+                        <!-- <button type="submit" form="order_product" class="truck-button" id="2nd-truck-button">
                             <span class="default">Complete Order</span>
                             <span class="success">
                                 Order Placed
@@ -538,8 +540,39 @@ ul.item-timeline {
                                 <div class="front"></div>
                                 <div class="box"></div>
                             </div>
+                        </button> -->
+                        <!-- THE NEW ONE -->
+                        <button type="submit" form="order_product" class="truck-button">
+                            <span class="button__text">
+                                <span class="text-uppercase">place order</span>
+                            </span>
+                            <svg class="button__svg" role="presentational" viewBox="0 0 600 600">
+                                <defs>
+                                    <clipPath id="myClip">
+                                        <rect x="0" y="0" width="100%" height="50%" />
+                                    </clipPath>
+                                </defs>
+                                <g clip-path="url(#myClip)">
+                                    <g id="money">
+                                        <path d="M441.9,116.54h-162c-4.66,0-8.49,4.34-8.62,9.83l.85,278.17,178.37,2V126.37C450.38,120.89,446.56,116.52,441.9,116.54Z" fill="#699e64" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+                                        <path d="M424.73,165.49c-10-2.53-17.38-12-17.68-24H316.44c-.09,11.58-7,21.53-16.62,23.94-3.24.92-5.54,4.29-5.62,8.21V376.54H430.1V173.71C430.15,169.83,427.93,166.43,424.73,165.49Z" fill="#699e64" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+                                    </g>
+                                    <g id="creditcard">
+                                        <path d="M372.12,181.59H210.9c-4.64,0-8.45,4.34-8.58,9.83l.85,278.17,177.49,2V191.42C380.55,185.94,376.75,181.57,372.12,181.59Z" fill="#a76fe2" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+                                        <path d="M347.55,261.85H332.22c-3.73,0-6.76-3.58-6.76-8v-35.2c0-4.42,3-8,6.76-8h15.33c3.73,0,6.76,3.58,6.76,8v35.2C354.31,258.27,351.28,261.85,347.55,261.85Z" fill="#ffdc67" />
+                                        <path d="M249.73,183.76h28.85v274.8H249.73Z" fill="#323c44" />
+                                    </g>
+                                </g>
+                                <g id="wallet">
+                                    <path d="M478,288.23h-337A28.93,28.93,0,0,0,112,317.14V546.2a29,29,0,0,0,28.94,28.95H478a29,29,0,0,0,28.95-28.94h0v-229A29,29,0,0,0,478,288.23Z" fill="#a4bdc1" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+                                    <path d="M512.83,382.71H416.71a28.93,28.93,0,0,0-28.95,28.94h0V467.8a29,29,0,0,0,28.95,28.95h96.12a19.31,19.31,0,0,0,19.3-19.3V402a19.3,19.3,0,0,0-19.3-19.3Z" fill="#a4bdc1" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+                                    <path d="M451.46,435.79v7.88a14.48,14.48,0,1,1-29,0v-7.9a14.48,14.48,0,0,1,29,0Z" fill="#a4bdc1" stroke="#323c44" stroke-miterlimit="10" stroke-width="14" />
+                                    <path d="M147.87,541.93V320.84c-.05-13.2,8.25-21.51,21.62-24.27a42.71,42.71,0,0,1,7.14-1.32l-29.36-.63a67.77,67.77,0,0,0-9.13.45c-13.37,2.75-20.32,12.57-20.27,25.77l.38,221.24c-1.57,15.44,8.15,27.08,25.34,26.1l33-.19c-15.9,0-28.78-10.58-28.76-25.93Z" fill="#7b8f91" />
+                                    <path d="M148.16,343.22a6,6,0,0,0-6,6v92a6,6,0,0,0,12,0v-92A6,6,0,0,0,148.16,343.22Z" fill="#323c44" />
+                                </g>
+                            </svg>
                         </button>
-                        <p class="t-center"><i class="fas fa-lock"></i>Secure Checkout</p>
+                        <p class="t-center"><i class="fas fa-lock"></i>&nbsp;Secure Checkout</p>
                     </div>
                 </div>
             </article>
@@ -567,35 +600,34 @@ $(document).ready(function() {
     var p = document.getElementsByName('payment');
     $('.joingb-details-order ul li.pack .t-right').on('DOMSubtreeModified', function(e) {
         productOrder = Number($('.joingb-details-order ul li.pack .t-right').text())
-        if(productOrder > 0){
-            if(addressOrder && paymentOrder){
-                     $('.button-payment button.truck-button').attr('disabled', false);
-                     // document.getElementById("2nd-truck-button").disabled = false;
-                         $('.button-payment button.truck-button').css('cursor', 'pointer');
-            }else{}
-        }else{}
+        if (productOrder > 0) {
+            if (addressOrder && paymentOrder) {
+                $('.button-payment button.truck-button').attr('disabled', false);
+                $('.button-payment button.truck-button').css('cursor', 'pointer');
+            } else {}
+        } else {}
     });
     $('input[type=radio][name=address]').change(function() {
-       addressOrder = (this.value)
-        if(productOrder > 0){
-            if(addressOrder && paymentOrder){
-                    $('.button-payment button.truck-button').attr('disabled', false);
-                    $('.button-payment button.truck-button').css('cursor', 'pointer');
-            }else{}
-        }else{}
+        addressOrder = (this.value)
+        if (productOrder > 0) {
+            if (addressOrder && paymentOrder) {
+                $('.button-payment button.truck-button').attr('disabled', false);
+                $('.button-payment button.truck-button').css('cursor', 'pointer');
+            } else {}
+        } else {}
     });
     $('input[type=radio][name=payment]').change(function() {
-       paymentOrder = (this.value)
-        if(productOrder > 0){
-            if(addressOrder && paymentOrder){
-                     $('.button-payment button.truck-button').attr('disabled', false);
-                         $('.button-payment button.truck-button').css('cursor', 'pointer');
-            }else{}
-        }else{}
+        paymentOrder = (this.value)
+        if (productOrder > 0) {
+            if (addressOrder && paymentOrder) {
+                $('.button-payment button.truck-button').attr('disabled', false);
+                $('.button-payment button.truck-button').css('cursor', 'pointer');
+            } else {}
+        } else {}
     });
-    $('.button-payment button.truck-button').on('click', function(e){
+    $('.button-payment button.truck-button').on('click', function(e) {
         $('body').waitMe({
-            effect : 'roundBounce',
+            effect: 'roundBounce',
             text: 'Please wait...',
             waitTime: 3000
         });
@@ -630,8 +662,19 @@ $(document).ready(function() {
     var url = (window.location).href;
     var a1 = window.location.hostname + ':5000'
     var res = url.split("/").pop();
+    console.log(res)
+    var lastCharRes = res.slice(-1);
+    console.log(lastCharRes)
+    var lengthRes = res.length
+    if (lastCharRes === "#") {
+        res = res.substring(0, lengthRes - 1);
+        console.log(res)
+    } else {
+
+    }
     $('.select2-product').val('');
     // $('.select2-quantity').select2();
+    console.log(res)
     fetch('/api/product/getcid/' + res).then(function(response) {
         if (!response.ok) {
             throw Error(response.statusText);
@@ -649,7 +692,7 @@ $(document).ready(function() {
         var pack = 0;
         var dynamic = "";
         for (var i in product) {
-            dynamic += '<option data-price="' + product[i].price + '"  value="' + product[i].product_id + '" data-name="'+ product[i].product_name+'"  data-image="' + product[i].pic_product.path + '" data-id="' + (i) + '">' + product[i].product_name + " " + "(" + product[i].price + "$)" + '</option>'
+            dynamic += '<option data-price="' + product[i].price + '"  value="' + product[i].product_id + '" data-name="' + product[i].product_name + '"  data-image="' + product[i].pic_product.path + '" data-id="' + (i) + '">' + product[i].product_name + " " + "(" + product[i].price + "$)" + '</option>'
         }
         var listquantity = "";
         for (var count = 1; count <= 10; count++) {
@@ -677,7 +720,7 @@ $(document).ready(function() {
                     FieldCount++; //text box added ncrement
                     //add input box
                     $('.joingbpage-list-product').append(
-                        '<div class="form-group image2nd-include joingbpage-select-product" id="form_' + x + '">                        <h3>Select Product</h3>                            <hr><div class="selected-product"  >                            <span class="img-product">                                <picture>                                    <img style="width: 90px;height: 90px;object-fit: cover" class="responsive carousel-image img-zoomable2nd" src="' + image + '">                                </picture>                            </span>                            <div class="form-margin-left w-100">                                <label for="">Product Type:</label>                                <select style="font-weight: bold" data-id="' + x + '" class="form-control select2 multiple-select select2-product" name="product_id" id="select_' + x + '">                                  ' + dynamic + '  </select>                            </div> <div class="form-price" style="visibility:hidden;width:0px">                                <label for="price">Price:</label>                                 <input class="form-control input-price-hidden" data-value="' + x + '" style="margin-top:0px" id="price_' + x + '" name="price" value="">                                </div> <div class="form-name" style="visibility:hidden;width:0px">                                <label for="name">Name:</label>                                 <input class="form-control input-name-hidden" data-value="' + x + '" style="margin-top:0px" id="name_' + x + '" name="productName" value="">                                </div>                     <div class="form-quantity-select w-20">                                <label for="quantity">Quantity:</label>                                 <select class="form-control select2-quantity" data-value="' + x + '" style="margin-top:0px;" id="quantity_' + x + '" name="quantity">                                       ' + listquantity + '                                     </select>                            </div>                        <a href="#" data-id="' + x + '" class="removeclass">Remove</a></div></div>'
+                        '<div class="form-group image2nd-include joingbpage-select-product" id="form_' + x + '">                        <h3 class="font-hello_jones">Select Product</h3>                            <hr><div class="selected-product"  >                            <span class="img-product">                                <picture>                                    <img style="width: 90px;height: 90px;object-fit: cover" class="responsive carousel-image img-zoomable2nd" src="' + image + '">                                </picture>                            </span>                            <div class="form-margin-left w-100">                                <label class="" for=""><b>Product Type:</b></label>                                <select style="font-weight: bold" data-id="' + x + '" class="form-control select2 multiple-select select2-product" name="product_id" id="select_' + x + '">                                  ' + dynamic + '  </select>                            </div> <div class="form-price" style="visibility:hidden;width:0px">                                <label for="price">Price:</label>                                 <input class="form-control input-price-hidden" data-value="' + x + '" style="margin-top:0px" id="price_' + x + '" name="price" value="">                                </div> <div class="form-name" style="visibility:hidden;width:0px">                                <label for="name">Name:</label>                                 <input class="form-control input-name-hidden" data-value="' + x + '" style="margin-top:0px" id="name_' + x + '" name="productName" value="">                                </div>                     <div class="form-quantity-select w-20">                                <label for="quantity"><b>Quantity:</b></label>                                 <select class="form-control select2-quantity" data-value="' + x + '" style="margin-top:0px;" id="quantity_' + x + '" name="quantity">                                       ' + listquantity + '                                     </select>                            </div>                        <a href="#" data-id="' + x + '" class="removeclass">Remove</a></div></div>'
                     );
                     // disable auto select for select2
                     // console.log("x = " + x);
@@ -788,7 +831,7 @@ $(document).ready(function() {
                             return $span;
                         }
                     });
-                    
+
                     // $('.select2-product').on('select2:select', function(e) {
                     $("#form_" + y + " .selected-product .w-100").on('select2:select', function(e) {
                         var totalQuantity = 0;
@@ -798,7 +841,7 @@ $(document).ready(function() {
                         console.log(e.target)
                         var idSelected = e.target.getAttribute('data-id');
                         console.log(idSelected)
-                        
+
                         // console.log((e.target).attr('data-id'));
                         console.log(e.params)
                         console.log(e.params.data);

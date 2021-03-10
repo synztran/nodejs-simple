@@ -59,6 +59,7 @@ async function addPost(req, res){
 
                 var type = req.body.type;
                 var cat_url_name = (req.body.catname).replace(/ /g, '-')
+                var lowerCat_url = cat_url_name.toLowerCase();
                 console.log(cat_url_name)
                 // if type = keeb
                 if (type == 0) {
@@ -77,7 +78,7 @@ async function addPost(req, res){
 
                         db.collection('categories').insertOne({
                             category_id: "KEEB" + inc,
-                            category_url_name: cat_url_name,
+                            category_url_name: lowerCat_url,
                             category_name: (req.body.catname),
                             author: req.body.author,
                             manufacturing: req.body.manufacturing,
@@ -125,7 +126,7 @@ async function addPost(req, res){
 
                         db.collection('categories').insertOne({
                             category_id: "KSET" + inc,
-                            category_url_name: cat_url_name,
+                            category_url_name: lowerCat_url,
                             category_name: req.body.catname,
                             author: req.body.author,
                             manufacturing: req.body.manufacturing,
@@ -168,7 +169,7 @@ async function addPost(req, res){
  
                          db.collection('categories').insertOne({
                              category_id: "ETC" + inc,
-                             category_url_name: cat_url_name,
+                             category_url_name: lowerCat_url,
                              category_name: req.body.catname,
                              author: req.body.author,
                              manufacturing: req.body.manufacturing,
@@ -284,12 +285,16 @@ async function get(req, res){
 }
 
 async function getcid(req, res){
-    // console.log("req.prams "+ req.params.id)
+    console.log("req.prams category "+ req.params.id)
     try{
         // var check = await Category.findOne({category_id: req.params.id}).exec();
-        var check = await Category.findOne({category_url_name: req.params.id}).exec();
-        // console.log(check);
-        res.send(check).status(200);
+        var checkCat = await Category.findOne({category_url_name:'og-1800-keycap'}).exec();
+        var check = await Category.findOne({category_url_name: (req.params.id).toString()}).exec();
+        console.log("this is category")
+        console.log(checkCat)
+        console.log(check);
+        // res.send(check).status(200);
+        res.send(checkCat).status(200);
     }catch(err){
         res.send(err).status(404)
     }
@@ -308,12 +313,13 @@ async function editPost(req, res){
 
             console.log("type = " + type);
             var cat_url_name = (req.body.catname).replace(/ /g, '-')
+            var lowerCat_url = cat_url_name.toLowerCase();
             console.log(cat_url_name)
             // for keeb
             if(type == 0){
                 if(req.file == null){
                     check.set({
-                        category_url_name:   cat_url_name,  
+                        category_url_name:   lowerCat_url,  
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,
@@ -335,7 +341,7 @@ async function editPost(req, res){
                     });
                 }else{
                     check.set({
-                        category_url_name:   cat_url_name,
+                        category_url_name:   lowerCat_url,
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,
@@ -370,7 +376,7 @@ async function editPost(req, res){
             }else if(type == 1){// for keyset
                 if(req.file == null){
                     check.set({
-                        category_url_name:   cat_url_name,
+                        category_url_name:   lowerCat_url,
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,
@@ -390,7 +396,7 @@ async function editPost(req, res){
                     });
                 }else{
                     check.set({
-                        category_url_name:   cat_url_name,
+                        category_url_name:   lowerCat_url,
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,
@@ -422,7 +428,7 @@ async function editPost(req, res){
             }else if(type == 2){
                 if(req.file == null){
                     check.set({
-                        category_url_name:   cat_url_name,
+                        category_url_name:   lowerCat_url,
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,
@@ -439,7 +445,7 @@ async function editPost(req, res){
                     });
                 }else{
                     check.set({
-                        category_url_name:   cat_url_name,
+                        category_url_name:   lowerCat_url,
                         category_name: req.body.catname,
                         author: req.body.author,
                         manufacturing: req.body.manufacturing,

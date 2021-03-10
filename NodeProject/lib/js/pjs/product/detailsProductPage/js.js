@@ -44,8 +44,10 @@ $(document).ready(function() {
     $('.btn-join').on('click', function(e){
         e.preventDefault();
         var id = $(this).attr('data-id');
+        var url = $(this).attr('data-url')
         console.log(id);
-        window.location.href = "/proxygb/payment/" + id;
+        // window.location.href = "/proxygb/payment/" + id;
+        window.location.href = "/proxygb/payment/" + url;
     })
     var url = (window.location).href;
     var res = url.split("/").pop();

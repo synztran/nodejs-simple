@@ -1,3 +1,17 @@
+@font-face{
+	font-family: hello_jones;
+	src: url(/package/font/hello_jones/Hello_Jones.woff2);
+}
+.font-hello_jones{
+	font-family: hello_jones
+}
+hr{
+	border-top: 1px solid #fff !important;
+}
+input, select{
+	background:#363a40 !important;
+	color: #fff!important
+}
 body{
 	background-color: #f0f0f0!important
 }
@@ -38,16 +52,21 @@ body{
 
 }
 .joingbpage-payment-product{
-	background-color: #fff;
+	background-color: #363a40;
+	/*background: rgba(192,192,192,0.5);*/
+	/*opacity: .5;*/
 	display: flex;
 	box-shadow: 0 1px 3px rgba(0,0,0,.1);
-	padding-right: 2%
+	padding-right: 2%;
+	position: relative;
+	color: #fff;
+
 }
 
 .joingbpage-payment-product h2{
 	margin: auto 0 auto 1%;
-	font-size: 18px;
-	font-weight: 400;
+	font-size: 20px;
+	font-weight: 700;
 	line-height: 27px;
 	display:block;
 	flex: 1 0;
@@ -57,7 +76,8 @@ body{
 }
 .joingbpage-select-product{
 	margin-top: 1%;
-	background-color: #fff;
+	color: #fff;
+	background-color: #363a40;
 	box-shadow: 0 1px 3px rgba(0,0,0,.1);
 }
 .joingbpage-select-product h3{
@@ -148,6 +168,7 @@ body{
 	box-shadow: unset;
 	border: 0;
 	outline: none;
+	/*background:;*/
 	/*height: 2rem !important;*/
 }
 .for-new-address > div:nth-child(1) > label{
@@ -161,8 +182,10 @@ body{
 	height: unset;
 }
 .shipping-address, .payment-option{
-	background-color: #fff;
-	padding: 2%
+	background-color: #363a40;
+	padding: 2%;
+	color: #fff;
+	border-radius: 15px;
 }
 
 input:disabled{
@@ -178,3 +201,21 @@ select{
 /*.joingb-details-order ul lis span.quantity{
 	flext-grow: 2;
 }*/
+.order-title{
+	font-family: hello_jones;
+}
+#addMore{
+	font-family: hello_jones
+
+}
+.box-details{
+	color: #fff;
+	background:#363a40;
+}
+.form-group label, .select2-selection__rendered span{
+	color: #fff!important
+}
+.sketchy{
+	background:#363a40!important;
+}
+.select2-search, .select2-search input, .select2-results, .select2-selection__rendered { background-color: #363a40; }
