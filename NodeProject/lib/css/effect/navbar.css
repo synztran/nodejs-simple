@@ -1680,5 +1680,11 @@ body .socials>a:hover {
   max-width: 100%;
   height: 50px
 }
+.nav-item > a{
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
 /* ----------------------------------- */

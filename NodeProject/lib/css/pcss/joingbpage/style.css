@@ -79,6 +79,7 @@ body{
 	color: #fff;
 	background-color: #363a40;
 	box-shadow: 0 1px 3px rgba(0,0,0,.1);
+	border-radius: 4px;
 }
 .joingbpage-select-product h3{
 	padding: 1rem 2% 0 2%
@@ -185,7 +186,7 @@ body{
 	background-color: #363a40;
 	padding: 2%;
 	color: #fff;
-	border-radius: 15px;
+	border-radius: 4px;
 }
 
 input:disabled{
@@ -211,8 +212,13 @@ select{
 .box-details{
 	color: #fff;
 	background:#363a40;
+	padding: 11px;
 }
-.form-group label, .select2-selection__rendered span{
+.form-group label, .select2-selection__rendered span, .select2-selection__rendered, .select2-results__option{
+	color: #fff!important
+}
+.select2-container--default .select2-results__option[aria-selected=true]{
+	background: #5086bd!important;
 	color: #fff!important
 }
 .sketchy{

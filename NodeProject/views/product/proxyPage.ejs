@@ -25,13 +25,14 @@
     <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css">
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="/package/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card.css">
     <!-- <link rel="stylesheet" href="/api/css/pcss/main.css"> -->
     <!-- script
     ================================================== -->
     <script src="/api/js/pjs/modernizr.js"></script>
     <!-- favicons
     ================================================== -->
-     <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
 </head>
 <style>
@@ -184,9 +185,9 @@ html, body{
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Group Buy</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+                    <li class="nav-item active"><a href="/proxygb" class="nav-link">shop</a></li>
+                    <li class="nav-item"><a href="/service" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
                 </ul>
             </div>
@@ -215,27 +216,22 @@ html, body{
                 <p class="font-hello_jones">Shop </p>
                 <hr>
             </div>
-            <% if(listCategory != null) { %> 
+            <% if(listCategory != null) { %>
             <article class="row">
-              <!-- <div class="row"> -->
-                
-                    <% listCategory.forEach(function(item){%>
-                        
-                <div  class="col-xs-6 col-sm-3 col-product">
-                    <div class="make-3D-space">
+                <!-- <div class="row"> -->
+                <% listCategory.forEach(function(item){%>
+                    <% listProduct.forEach(function(product){%>
+                <div class="col-xs-6 col-sm-3 col-product">
+                    <!-- <div class="make-3D-space">
                         <div class="product-card">
                             <div class="product-front">
                                 <div class="shadow"></div>
                                 <img style="width: 100%;
-                height: 100%;
-                object-fit: cover;" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" alt="" />
+                                    height: 100%;
+                                    object-fit: cover;" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" alt="" />
                                  <a href="/proxygb/product/<%=item.category_url_name%>"><div class="image_overlay">
                                    
                                 </div></a>
-                                <!-- <div class="view_details">
-                                    <a href="/proxygb/product/<%=item.category_id%>">View details</a>
-                                </div>  -->
-                                <!---------------- for keeb ------------>
                                 <% if(item.type == 0) { %>
                                 <div class="stats">
                                     <div class="stats-container">
@@ -255,13 +251,6 @@ html, body{
                                             <span><%= item.k_layout%></span>
                                             <strong>Mounting</strong>
                                             <span><%= item.k_mounting%></span>
-                                            <!-- <strong>COLORS</strong>
-                                            <div class="colors">
-                                                <% for (var key in item.k_color){%>
-                                                <div data-toggle="tooltip" title="<%= item.k_color[key] %>" class="c-<%=   item.k_color[key] %>"><span></span></div>
-                                                <%    } %>
-                                                
-                                            </div> -->
                                             </div>
 
                                             <div style="padding: 0" class="col-md-6">
@@ -287,7 +276,6 @@ html, body{
                                         </div>
                                     </div>
                                 </div>
-                                <!---------------- for keyset ------------>
                             <% } else if(item.type == 1) { %>
                                 <div class="stats">
                                     <div class="stats-container">
@@ -303,18 +291,9 @@ html, body{
                                         <div class="product-options">
                                             <strong>Profile</strong>
                                             <span><%= item.c_profile %></span>
-                                            <!-- <strong>COLORS</strong>
-                                            <div class="colors">
-                                                <div class="c-blue"><span></span></div>
-                                                <div class="c-red"><span></span></div>
-                                                <div class="c-white"><span></span></div>
-                                                <div class="c-green"><span></span></div>
-
-                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
-                                <!-- for etc -->
                             <% } else if(item.type == 2) { %>
                                <div class="stats">
                                     <div class="stats-container">
@@ -330,54 +309,55 @@ html, body{
                                         <div class="product-options">
                                             <strong>Material</strong>
                                             <span><%= item.c_profile %></span>
-                                            <!-- <strong>COLORS</strong>
-                                            <div class="colors">
-                                                <div class="c-blue"><span></span></div>
-                                                <div class="c-red"><span></span></div>
-                                                <div class="c-white"><span></span></div>
-                                                <div class="c-green"><span></span></div>
-
-                                            </div> -->
                                         </div>
                                     </div>
                                 </div> 
                             <% } %>
                             </div>
-                            <!-- <div class="product-back">
-                                <div class="shadow"></div>
-                                <div class="carousel">
-                                    <ul>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large.png" alt="" /></li>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large2.png" alt="" /></li>
-                                        <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/t-shirt-large3.png" alt="" /></li>
-                                    </ul>
-                                    <div class="arrows-perspective">
-                                        <div class="carouselPrev">
-                                            <div class="y"></div>
-                                            <div class="x"></div>
-                                        </div>
-                                        <div class="carouselNext">
-                                            <div class="y"></div>
-                                            <div class="x"></div>
-                                        </div>
+                        </div>
+                    </div> -->
+                    <div id="product-container">
+                        <a class="un-text-decorate" href="/proxygb/product/<%=item.category_url_name%>">
+                            <div id="img-container-and-badge">
+                                <img class="image-product" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" width="500" height="500"/>
+                                <div class="status-product-container">
+                                    <div class="status-product">
+                                        <span>out of stock</span>
                                     </div>
                                 </div>
-                                <div class="flip-back">
-                                    <div class="cy"></div>
-                                    <div class="cx"></div>
-                                </div>
-                            </div> -->
+                            </div> 
+                        </a>
+                        <div id="badge-oos_container">
+                            <div class="badge-oos">
+                            </div>
+                        </div>
+                        <a class="un-text-decorate" href="#">
+                            <div id="hosted">
+                                Host by <span><%=item.author %></span>
+                            </div>
+                        </a>
+                        <div id="product-info">
+                            <div class="info">
+                                <a class="cover_product-name" href="#">
+                                    <div class="product-name"><%= product.product_name %></div>
+                                </a>
+                                <div class="product-sub_name"><%= item.category_name %></div>
+                            </div>
+                            <div class="price">
+                                <b>
+                                    <% if(item.max_price == null){%>
+                                                $<%= item.min_price %>
+                                    <% }else{ %>
+                                        $<%= item.min_price %> - $<%= item.max_price %>
+                                    <%} %>
+                                </b>
+                            </div>
                         </div>
                     </div>
-                  </div>
-                        
-                    <%    }) %>
-                
-                  
-                  
-                  
+                </div>
+                <% }) %>
+                <%    }) %>
                 <!-- </div> -->
-                
             </article>
             <% }else{ %>
             <% window.location.href = '/proxygb';  %>

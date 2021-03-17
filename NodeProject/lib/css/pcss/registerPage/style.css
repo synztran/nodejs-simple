@@ -6,7 +6,7 @@
     html, body{
         height: 100%;
         width: 100%;
-        background-image: url('/api/docs/background/UIBkAT.jpg');
+        background-image: url('/api/docs/background/bg-black.svg');
         background-repeat: no-repeat;
     }
     .center{

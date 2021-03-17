@@ -382,11 +382,13 @@ router.get('/proxygb', (req, res) => {
         console.log(docs)
         Product.find({}, function(err, productData){
             console.log(productData)
-        })
+        
         // console.log(docs);
-        res.render("product/proxyPage", {
-            "listCategory": docs
-        });
+            res.render("product/proxyPage", {
+                "listCategory": docs,
+                "listProduct": productData,
+            });
+        })
     });
 
 

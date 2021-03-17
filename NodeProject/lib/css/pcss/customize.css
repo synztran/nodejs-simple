@@ -13,7 +13,7 @@
     margin-bottom: 5%;
 }
 .form-group label{
-    color: #6b3792
+    color: #fff
 }
 .form-group input{
     color: rgba(255,255,255,1);
@@ -22,7 +22,7 @@
     margin:0;
     padding: 0;
     height: 4rem;
-    border-bottom: 1px solid #6b3792;
+    border-bottom: 1px solid #fff;
     width: 100%;
 }
 .form-group label{
@@ -31,16 +31,16 @@
 a.btn-register:hover{
     font-size: 16px;
     font-weight: bold;
-    color: #6b3792;
+    color: #fff;
 }
 a.btn-loginform:hover{
     font-size: 16px;
     font-weight: bold;
-    color: #6b3792;
+    color: #fff;
 }
 .button-login button{
     width: 100%;
-    background-color: #6b3792;
+    background-color: #fff;
     color:white;
     border:0
 }
