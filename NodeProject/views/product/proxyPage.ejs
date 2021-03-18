@@ -25,7 +25,8 @@
     <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css">
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="/package/slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card.css"> -->
+    <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card_w_text.css">
     <!-- <link rel="stylesheet" href="/api/css/pcss/main.css"> -->
     <!-- script
     ================================================== -->
@@ -220,7 +221,7 @@ html, body{
             <article class="row">
                 <!-- <div class="row"> -->
                 <% listCategory.forEach(function(item){%>
-                    <% listProduct.forEach(function(product){%>
+                <% listProduct.forEach(function(product){%>
                 <div class="col-xs-6 col-sm-3 col-product">
                     <!-- <div class="make-3D-space">
                         <div class="product-card">
@@ -316,7 +317,7 @@ html, body{
                             </div>
                         </div>
                     </div> -->
-                    <div id="product-container">
+                    <!-- <div id="product-container">
                         <a class="un-text-decorate" href="/proxygb/product/<%=item.category_url_name%>">
                             <div id="img-container-and-badge">
                                 <img class="image-product" onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" width="500" height="500"/>
@@ -353,6 +354,24 @@ html, body{
                                 </b>
                             </div>
                         </div>
+                    </div> -->
+                    <div class="product-card-container">
+                        <div class="card-product u-clearfix">
+                            <!-- <div class="card-img"> -->
+                                <a href="#">
+                                    <img onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" alt="" class="product-card-media" width="300" height="300"/>
+                                </a>
+                            <!-- </div> -->
+                            <div class="product-card-body">
+                                <span class="product-card-number product-card-circle subtle product-status">01</span>
+                                <span class="product-card-author subtle">John Smith</span>
+                                <h2 class="product-card-title">New Brunch Recipe</h2>
+                                <span class="product-card-description subtle">These last few weeks I have been working hard on a new brunch recipe for you all.</span>
+                                <div class="product-card-read">Read</div>
+                                <span class="product-card-tag subtle product-price">$ 222.000</span>
+                            </div>
+                        </div>
+                        <div class="product-card-shadow"></div>
                     </div>
                 </div>
                 <% }) %>
