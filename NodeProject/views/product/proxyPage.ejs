@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="api/css/effect/preloading.css">
     <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css">
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/package/slick/slick.css">
     <!-- <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card.css"> -->
     <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card_w_text.css">
@@ -221,27 +222,50 @@ html, body{
             <article class="row">
                 <!-- <div class="row"> -->
                 <% listCategory.forEach(function(item){%>
+                    <%listProduct.forEach(function(iProduct){ %>
+                        <% if(iProduct){ %>
                 <div class="col-xs-6 col-sm-3 col-product">
                     
                     <div class="product-card-container">
                         <div class="card-product u-clearfix">
-                            <!-- <div class="card-img"> -->
+                            <!-- <div class="card-img">
                                 <a href="#">
                                     <img onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" alt="" class="product-card-media" width="300" height="300"/>
                                 </a>
-                            <!-- </div> -->
+                            </div> -->
                             <div class="product-card-body">
-                                <span class="product-card-number product-card-circle subtle product-status">01</span>
-                                <span class="product-card-author subtle">John Smith</span>
-                                <h2 class="product-card-title">New Brunch Recipe</h2>
-                                <span class="product-card-description subtle">These last few weeks I have been working hard on a new brunch recipe for you all.</span>
-                                <div class="product-card-read">Read</div>
+                                <div class="card_status-container">
+                                    <% if(item.status_gb == 0){ %>
+                                        <p class="product-status status-end" style="">sale end</p>
+                                    <% }else if(item.status_gb == 1){ %>
+                                        <p class="product-status status-ic" style="">Interest Check</p>
+                                    <% }else if(item.status_gb == 2){ %>
+                                        <p class="product-status status-live" style="">On Sale</p>
+                                        <% if(item.category_id == ePID){ %>
+                                            <div class="js-timer u-timer d-flex"></div>
+                                        <%}%>
+                                        
+                                    <% }else { %>
+
+                                    <% } %>
+                                </div>
+                                <span class="product-card_product-name subtle"><%= item.category_name %></span>
+                                <div class="card-img">
+                                    <a href="#">
+                                        <img onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" alt="" class="product-card-media" />
+                                        <!-- width="300" height="300" -->
+                                    </a>
+                                </div>
+                                <span class="product-card-description subtle"><%= item.product_belong %></span>
+                                <div class="product-card-read"><a href="#">more</a></div>
                                 <span class="product-card-tag subtle product-price">$ 222.000</span>
                             </div>
                         </div>
                         <div class="product-card-shadow"></div>
                     </div>
                 </div>
+                    <% } %>
+                <% }) %>
                 <%    }) %>
                 <!-- </div> -->
             </article>
@@ -260,5 +284,7 @@ html, body{
 <script type="text/javascript" src="/api/js/pjs/product/proxyPage/js.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="/api/js/pjs/main.js"></script>
+<script src="/api/js/pjs/vendors/jquery.countdown.js"></script>
+<script src="/package/vendors/jquery.countdown/jquery.countdown.min.js"></script>
 
 </html>

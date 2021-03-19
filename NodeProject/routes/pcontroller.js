@@ -379,15 +379,15 @@ router.get('/proxygb', (req, res) => {
     // }else{
     // console.log(req.session.User);
     Category.find({}, function(err, docs) {
-        console.log(docs)
-        Product.find({}, function(err, productData){
-            console.log(productData)
-        
-        // console.log(docs);
-            res.render("product/proxyPage", {
-                "listCategory": docs,
-                "listProduct": productData,
-            });
+        Product.find({}, function(err, pData){
+            EventProduct.findOne({}, function(err, epData){
+                console.log(epData)
+                res.render("product/proxyPage", {
+                    "listCategory": docs,
+                    "listProduct": pData,
+                    ePID: epData.event_product_name,
+                });
+            })
         })
     });
 

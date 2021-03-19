@@ -129,15 +129,21 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Date start (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker" class="span2" value="<%= (category.date_start).toLocaleDateString() %>" type="text" name="date_start">
+                        <!-- <input style="width: 100%" id="datepicker" value="<%= (category.date_start).toLocaleDateString()%>" class="span2" type="text" name="date_start"> -->
+                        <input style="width: 100%" data-field="date" value="<%= (category.date_start).toLocaleDateString()%>" id="datepicker" class="span2" type="text" name="date_start">
+                        <div id="date_start"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Date end (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker1" class="span2" value="<%= (category.date_end).toLocaleDateString() %>" type="text" name="date_end">
+                        <!-- <input style="width: 100%" id="datepicker1" value="<%= (category.date_end).toLocaleDateString()%>" class="span2" type="text" name="date_end"> -->
+                        <input style="width: 100%" data-field="date" value="<%= (category.date_end).toLocaleDateString()%>" id="datepicker1" class="span2" type="text" name="date_end">
+                        <div id="date_end"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Date payment (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker2" class="span2" type="text" name="date_payment" value="<%= (category.date_payment).toLocaleDateString() %>">
+                        <!-- <input style="width: 100%" id="datepicker2" value="<%= (category.date_payment).toLocaleDateString()%>" class="span2" type="text" name="date_payment"> -->
+                        <input style="width: 100%" data-field="date" value="<%= (category.date_payment).toLocaleDateString()%>" id="datepicker2" class="span2" type="text" name="date_payment">
+                        <div id="date_payment"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Min price:</label>
@@ -187,6 +193,10 @@
                     <div class="form-group">
                         <label class="form-control-label">Specs:</label>
                         <textarea id="specs" name="specs" type="text" class="form-control" placeholder="Content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Product belong:</label>
+                        <input type="text" class="form-control" name="product_belong" id="product_belong" value="<%= category.product_belong %>">
                     </div>
                     <div className="input-group mb-3">
                         <div className="custom-file">
@@ -260,15 +270,21 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Date start (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker" value="<%= (category.date_start).toLocaleDateString()%>" class="span2" type="text" name="date_start">
+                        <!-- <input style="width: 100%" id="datepicker" value="<%= (category.date_start).toLocaleDateString()%>" class="span2" type="text" name="date_start"> -->
+                        <input style="width: 100%" data-field="date" value="<%= (category.date_start).toLocaleDateString()%>" id="datepicker" class="span2" type="text" name="date_start">
+                        <div id="date_start"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Date end (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker1" value="<%= (category.date_end).toLocaleDateString()%>" class="span2" type="text" name="date_end">
+                        <!-- <input style="width: 100%" id="datepicker1" value="<%= (category.date_end).toLocaleDateString()%>" class="span2" type="text" name="date_end"> -->
+                        <input style="width: 100%" data-field="date" value="<%= (category.date_end).toLocaleDateString()%>" id="datepicker1" class="span2" type="text" name="date_end">
+                        <div id="date_end"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Date payment (mm/dd/yyyy):</label>
-                        <input style="width: 100%" id="datepicker2" value="<%= (category.date_payment).toLocaleDateString()%>" class="span2" type="text" name="date_payment">
+                        <!-- <input style="width: 100%" id="datepicker2" value="<%= (category.date_payment).toLocaleDateString()%>" class="span2" type="text" name="date_payment"> -->
+                        <input style="width: 100%" data-field="date" value="<%= (category.date_payment).toLocaleDateString()%>" id="datepicker2" class="span2" type="text" name="date_payment">
+                        <div id="date_payment"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Min price:</label>
@@ -319,6 +335,10 @@
                         <label class="form-control-label">Specs:</label>
                         <textarea id="specs" name="specs"  type="text" class="form-control" placeholder="Content"></textarea>
                     </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Product belong:</label>
+                        <input type="text" class="form-control" name="product_belong" id="product_belong" value="<%= category.product_belong %>">
+                    </div>
                     <div className="input-group mb-3">
                         <div className="custom-file">
                             <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
@@ -357,10 +377,6 @@
                     <div class="form-group">
                         <label for="email">Proxy host:</label>
                         <input type="text" name="host" value="<%=category.proxy_host%>" class="form-control" id="host" aria-describedby="hostHelp">
-                    </div>
-                    <!---------------------------- for keyset ------------------------->
-                    <div class="for-switches">
-                        
                     </div>
                     <div class="form-group">
                         <label for="email">Date start (mm/dd/yyyy):</label>
@@ -428,6 +444,10 @@
                     <div class="form-group">
                         <label class="form-control-label">Specs:</label>
                         <textarea id="specs" name="specs"  type="text" class="form-control" placeholder="Content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Product belong:</label>
+                        <input type="text" class="form-control" name="product_belong" id="product_belong" value="<%= category.product_belong %>">
                     </div>
                     <div className="input-group mb-3">
                         <div className="custom-file">

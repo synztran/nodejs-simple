@@ -110,6 +110,10 @@ var categorySchema = mongoose.Schema({
             
         }
     ],
+    product_belong:{
+        type: String,
+        default: null,
+    },
     specs:{
         type: String
     }

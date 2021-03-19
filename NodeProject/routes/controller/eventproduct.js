@@ -9,15 +9,27 @@ var EventProduct = require('./../../db/model/eventproduct');
 
 // Event Product
 async function eventproduct(req, res){
+    var getName, getId
     EventProduct.find({}, function(err, docs) {
-        res.render('manager/event_product/new_listPage', {
-            "listEventProduct": docs,
-            lang: req.cookies.lang,
-            fname: req.decoded['fname'],
-            lname: req.decoded['lname'],
-            mail: req.decoded['email'],
-            title: 'Event Product Management'
-        });
+        EventProduct.findOne({}, function(err, data){
+            getId = data.event_product_name;
+            Category.findOne({category_id: getId}, function(err, cData){
+                getName = cData.category_name
+                console.log(getName)
+
+    
+        
+                res.render('manager/event_product/new_listPage', {
+                "listEventProduct": docs,
+                lang: req.cookies.lang,
+                fname: req.decoded['fname'],
+                lname: req.decoded['lname'],
+                mail: req.decoded['email'],
+                title: 'Event Product Management',
+                cName: getName
+                });
+            })
+        })
     });
 }
 async function addGet(req, res){

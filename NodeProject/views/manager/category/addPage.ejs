@@ -10,11 +10,11 @@
     <!--  -->
     <!-- CSS -->
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css"> -->
     <link rel="stylesheet" type="text/css" href="/api/css/pcss/keysetcolorcode.css">
     <!-- <link rel="stylesheet" type="text/css" href="/api/js/fileuploader/jquery.fileuploader.min.css"> -->
-      <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.css" rel="stylesheet"> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote-bs4.min.css" rel="stylesheet"> -->
     <% include ./../../tips/cssPackage %>
     <!--  -->
 </head>
@@ -47,8 +47,9 @@
 html {
     overflow-x: hidden;
 }
-.dropdown-toggle::after{
-    display: none!important
+
+.dropdown-toggle::after {
+    display: none !important
 }
 </style>
 
@@ -67,92 +68,89 @@ html {
                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
                 </p> -->
                 <!-- enctype="multipart/form-data" -->
-              
-                
                 <form action='/api/category/add' method="post" enctype="multipart/form-data">
-                <fieldset>
-                    <legend>Build your own form!</legend>
-                    <div class="form-group">
-                        <label for="email">GB status:</label>
-                        <select class="form-control" name="status">
-                            <option value="1">IC</option>
-                            <option value="2">Live</option>
-                            <option value="0">End</option>
-                        </select>
-                    </div>
-                    <!-- <div class="form-group">
+                    <fieldset>
+                        <legend>Build your own form!</legend>
+                        <div class="form-group">
+                            <label for="email">GB status:</label>
+                            <select class="form-control" name="status">
+                                <option value="1">IC</option>
+                                <option value="2">Live</option>
+                                <option value="0">End</option>
+                            </select>
+                        </div>
+                        <!-- <div class="form-group">
                         <label for="email">ID:</label>
                         <input disabled type="text" name="catid" class="form-control" id="catid" aria-describedby="catidHelp">
                     </div> -->
-                    <div class="form-group">
-                        <label for="email">Name:</label>
-                        <input type="text" name="catname" class="form-control" id="catname" aria-describedby="catnameHelp">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Design by:</label>
-                        <input type="text" name="author" class="form-control" id="author" aria-describedby="authorHelp">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Manufacturing:</label>
-                        <input type="text" name="manufacturing" class="form-control" id="manufacturing" aria-describedby="authorHelp">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Proxy host:</label>
-                        <input list="" type="text" name="host" class="form-control" id="host" aria-describedby="hostHelp">
-                        
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Category Type:</label>
-                        <select class="form-control category-type" name="type">
-                            <option value="0">Kit Keyboard</option>
-                            <option value="1">Keyset</option>
-                            <option value="2">Etc</option>
-                        </select>
-                    </div>
-                    <!-------------------------- for keeb ---------------------------->
-                    <div class="for-keeb">
                         <div class="form-group">
-                            <label for="email">Flip top&bot:</label>
-                            <select class="form-control keeb-flip" name="flip">
-                                <option value="1"><span style="color: green">Yes! Flip it</span></option>
-                                <option value="0"><span style="color: red">NO!!!</span></option>
-                            </select>
+                            <label for="email">Name:</label>
+                            <input type="text" name="catname" class="form-control" id="catname" aria-describedby="catnameHelp">
                         </div>
                         <div class="form-group">
-                            <label for="">Keeb Layout:</label>
-                            <select class="form-control select2 multiple-select select2-klayout" name="k_layout[]" multiple="multiple">
-                                <option value="tbd">TBD</option>
-                                <option value="40%">40%</option>
-                                <option value="50%">50%</option>
-                                <option value="60%">60%</option>
-                                <option value="65%">65%</option>
-                                <option value="75%">75%</option>
-                                <option value="tkl">TKL</option>
-                                <option value="fs">Fullsize</option>
-                                <option value="980">980</option>
-                                <option value="1800">1800</option>
-                                <option value="etc">ETC</option>
-                            </select>
+                            <label for="email">Design by:</label>
+                            <input type="text" name="author" class="form-control" id="author" aria-describedby="authorHelp">
                         </div>
                         <div class="form-group">
-                            <label for="degree">Keeb Degree:</label>
-                            <select class="form-control select2 multiple-select select2-kdegree" name="k_degree[]" multiple="multiple">
-                                <option value="tbd">TBD</option>
-                                <option value="4">4°</option>
-                                <option value="4.5">4.5°</option>
-                                <option value="5">5°%</option>
-                                <option value="5.5">5.5°</option>
-                                <option value="6">6°</option>
-                                <option value="6.5">6.5°</option>
-                                <option value="7">7°</option>
-                                <option value="7.5">7.5°</option>
-                                <option value="8">8°</option>
-                                <option value="etc">ETC</option>
-                            </select>
+                            <label for="email">Manufacturing:</label>
+                            <input type="text" name="manufacturing" class="form-control" id="manufacturing" aria-describedby="authorHelp">
                         </div>
                         <div class="form-group">
-                            <label for="email">Keeb Mounting type:</label>
-                            <!--  <select class="form-control" id="keeb-mounting" name="k_mounting">
+                            <label for="email">Proxy host:</label>
+                            <input list="" type="text" name="host" class="form-control" id="host" aria-describedby="hostHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Category Type:</label>
+                            <select class="form-control category-type" name="type">
+                                <option value="0">Kit Keyboard</option>
+                                <option value="1">Keyset</option>
+                                <option value="2">Etc</option>
+                            </select>
+                        </div>
+                        <!-------------------------- for keeb ---------------------------->
+                        <div class="for-keeb">
+                            <div class="form-group">
+                                <label for="email">Flip top&bot:</label>
+                                <select class="form-control keeb-flip" name="flip">
+                                    <option value="1"><span style="color: green">Yes! Flip it</span></option>
+                                    <option value="0"><span style="color: red">NO!!!</span></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Keeb Layout:</label>
+                                <select class="form-control select2 multiple-select select2-klayout" name="k_layout[]" multiple="multiple">
+                                    <option value="tbd">TBD</option>
+                                    <option value="40%">40%</option>
+                                    <option value="50%">50%</option>
+                                    <option value="60%">60%</option>
+                                    <option value="65%">65%</option>
+                                    <option value="75%">75%</option>
+                                    <option value="tkl">TKL</option>
+                                    <option value="fs">Fullsize</option>
+                                    <option value="980">980</option>
+                                    <option value="1800">1800</option>
+                                    <option value="etc">ETC</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="degree">Keeb Degree:</label>
+                                <select class="form-control select2 multiple-select select2-kdegree" name="k_degree[]" multiple="multiple">
+                                    <option value="tbd">TBD</option>
+                                    <option value="4">4°</option>
+                                    <option value="4.5">4.5°</option>
+                                    <option value="5">5°%</option>
+                                    <option value="5.5">5.5°</option>
+                                    <option value="6">6°</option>
+                                    <option value="6.5">6.5°</option>
+                                    <option value="7">7°</option>
+                                    <option value="7.5">7.5°</option>
+                                    <option value="8">8°</option>
+                                    <option value="etc">ETC</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Keeb Mounting type:</label>
+                                <!--  <select class="form-control" id="keeb-mounting" name="k_mounting">
                                 <option value="TBD">TBD</option>
                                 <option value="tray">Tray mount</option>
                                 <option value="top">Top mount</option>
@@ -162,93 +160,81 @@ html {
                                 <option value="intergrated">Integrated plate</option>
                                 <option value="gasket">Gasket mount</option>
                             </select> -->
-                            <select class="form-control select2" id="keeb-mounting" name="k_mounting[]" multiple="multiple">
-                                <option value="TBD">TBD</option>
-                                <option value="tray">Tray mount</option>
-                                <option value="top">Top mount</option>
-                                <option value="bottom">Bottom mount</option>
-                                <option value="sandwich">Sandwich mount</option>
-                                <option value="plateless">Plateless mount</option>
-                                <option value="intergrated">Integrated plate</option>
-                                <option value="gasket">Gasket mount</option>
-                            </select>
+                                <select class="form-control select2" id="keeb-mounting" name="k_mounting[]" multiple="multiple">
+                                    <option value="TBD">TBD</option>
+                                    <option value="tray">Tray mount</option>
+                                    <option value="top">Top mount</option>
+                                    <option value="bottom">Bottom mount</option>
+                                    <option value="sandwich">Sandwich mount</option>
+                                    <option value="plateless">Plateless mount</option>
+                                    <option value="intergrated">Integrated plate</option>
+                                    <option value="gasket">Gasket mount</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Keeb Color:</label>
+                                <select class="form-control select2 multiple-select select2-kcolor" name="k_color[]" multiple="multiple">
+                                    <option value="red">Red</option>
+                                    <option value="green">Green</option>
+                                    <option value="blue">Blue</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Keeb Plate Option:</label>
+                                <select class="form-control select2 multiple-select select2-kplate" id="keeb-plate" name="k_plate[]" multiple="multiple">
+                                    <option value="full">Full Plate</option>
+                                    <option value="half">Half Plate</option>
+                                    <option value="none">None Plate</option>
+                                    <option value="tbd">TBD</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!---------------------------- for keyset ------------------------->
+                        <div class="for-keyset">
+                            <div class="form-group">
+                                <label for="email">Keyset Profile:</label>
+                                <select class="form-control select2" id="c-profile" name="profile">
+                                    <option value="tbd">TBD</option>
+                                    <option value="cherry">Cherry Profile</option>
+                                    <option value="oem">OEM profile</option>
+                                    <option value="sa">SA profile</option>
+                                    <option value="kat">KAT profile</option>
+                                    <option value="etc">ETC</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Keyset Material:</label>
+                                <select class="form-control multiple-select select2" style="margin-top:0px;" id="c-material" name="c_material">
+                                    <option value="abs">ABS</option>
+                                    <option value="pbt">PBT</option>
+                                    <option value="pom">POM</option>
+                                    <option value="etc">ETC</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Keyset Color:</label>
+                                <% include ./../../tips/resinColorSelect %>
+                            </div>
+                        </div>
+                        <!---------------------------- for etc ------------------------->
+                        <div class="form-group">
+                            <label for="email">Date start (mm/dd/yyyy):</label>
+                            <input style="width: 100%" data-field="date" id="datepicker" class="span2" type="text" name="date_start">
+                            <div id="date_start"></div>
                         </div>
                         <div class="form-group">
-                            <label for="email">Keeb Color:</label>
-                            <select class="form-control select2 multiple-select select2-kcolor" name="k_color[]" multiple="multiple">
-                                <option value="red">Red</option>
-                                <option value="green">Green</option>
-                                <option value="blue">Blue</option>
-                            </select>
+                            <label for="email">Date end (mm/dd/yyyy):</label>
+                            <input style="width: 100%" data-field="date" id="datepicker1" class="span2" type="text" name="date_end">
+                            <div id="date_end"></div>
                         </div>
                         <div class="form-group">
-                            <label for="">Keeb Plate Option:</label>
-                            <select class="form-control select2 multiple-select select2-kplate" id="keeb-plate" name="k_plate[]" multiple="multiple">
-                                <option value="full">Full Plate</option>
-                                <option value="half">Half Plate</option>
-                                <option value="none">None Plate</option>
-                                <option value="tbd">TBD</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!---------------------------- for keyset ------------------------->
-                    <div class="for-keyset">
-                        <div class="form-group">
-                            <label for="email">Keyset Profile:</label>
-                            <select class="form-control select2" id="c-profile" name="profile">
-                                <option value="tbd">TBD</option>
-                                <option value="cherry">Cherry Profile</option>
-                                <option value="oem">OEM profile</option>
-                                <option value="sa">SA profile</option>
-                                <option value="kat">KAT profile</option>
-                                <option value="etc">ETC</option>
-                            </select>
+                            <label for="email">Date payment (mm/dd/yyyy):</label>
+                            <input style="width: 100%" data-field="date" id="datepicker2" class="span2" type="text" name="date_payment">
+                            <div id="date_payment"></div>
                         </div>
                         <div class="form-group">
-                            <label for="email">Keyset Material:</label>
-                            <select class="form-control multiple-select select2" style="margin-top:0px;" id="c-material" name="c_material">
-                                <option value="abs">ABS</option>
-                                <option value="pbt">PBT</option>
-                                <option value="pom">POM</option>
-                                <option value="etc">ETC</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Keyset Color:</label>
-                            <!-- <button id="add-for-keyset-color">ADD</button>
-                            <div id="keyset-color-container">
-                            </div> -->
-                            <% include ./../../tips/resinColorSelect %>
-                            <!-- <div id="keyset-color-boxes">
-                                <div class="position_value">
-                                    <select class="form-control input-sm" style="margin-top:0px;" id="color" name="code_color">
-                                        <option value="red">Red</option>
-                                        <option value="green">Green</option>
-                                        <option value="blue">Blue</option>
-                                    </select>
-                                </div>
-                            </div> <-->
-                        </div>
-                    </div>
-                    <!---------------------------- for etc ------------------------->
-                    <div class="form-group">
-                        <label for="email">Date start (mm/dd/yyyy):</label>
-                        <input style="width: 100%" data-field="date" id="datepicker" class="span2" type="text" name="date_start">
-                        <div id="date_start"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Date end (mm/dd/yyyy):</label>
-                        <input style="width: 100%" data-field="date" id="datepicker1" class="span2" type="text" name="date_end">
-                        <div id="date_end"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Date payment (mm/dd/yyyy):</label>
-                        <input style="width: 100%" data-field="date" id="datepicker2" class="span2" type="text" name="date_payment">
-                        <div id="date_payment"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Min price:</label>
-                        <div class="input-group mb-3">
+                            <label for="email">Min price:</label>
+                            <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
@@ -257,10 +243,10 @@ html {
                                     <span class="input-group-text">.00</span>
                                 </div>
                             </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Max price:</label>
-                        <div class="input-group mb-3">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Max price:</label>
+                            <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
@@ -269,22 +255,22 @@ html {
                                     <span class="input-group-text">.00</span>
                                 </div>
                             </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Tax:</label>
-                        <div class="input-group mb-3">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Tax:</label>
+                            <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">%</span>
                                 </div>
                                 <input class="form-control" name="tax" type="tel" value="" id="maxprice">
-                               <!--  <div class="input-group-append">
+                                <!--  <div class="input-group-append">
                                     <span class="input-group-text">.00</span>
                                 </div> -->
                             </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Handle & Shipping:</label>
-                        <div class="input-group mb-3">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Handle & Shipping:</label>
+                            <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
                                 </div>
@@ -293,24 +279,27 @@ html {
                                     <span class="input-group-text">.00</span>
                                 </div>
                             </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label">Specs:</label>
-                        <textarea id="specs" name="specs" type="text" class="form-control" placeholder="Content"></textarea>
-                    </div>
-
-                    <div className="input-group mb-3">
-                        <div className="custom-file">
-                            <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
-                            <label className="custom-file-label" htmlFor="inputGroupFile01">
-                            </label>
-                            <img src="" id="profile-img-tag" width="200px" />
                         </div>
-                        <!-- <input type="file" name="files" class="files" id="fileupp"> -->
-                    </div>
-                    <br>
-                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
-                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                        <div class="form-group">
+                            <label class="form-control-label">Specs:</label>
+                            <textarea id="specs" name="specs" type="text" class="form-control" placeholder="Content"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Product belong:</label>
+                            <input type="text" class="form-control" name="product_belong" id="product_belong">
+                        </div>
+                        <div className="input-group mb-3">
+                            <div className="custom-file">
+                                <input type="file" name="picture" className="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" />
+                                <label className="custom-file-label" htmlFor="inputGroupFile01">
+                                </label>
+                                <img src="" id="profile-img-tag" width="200px" />
+                            </div>
+                            <!-- <input type="file" name="files" class="files" id="fileupp"> -->
+                        </div>
+                        <br>
+                        <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                        <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
                     </fieldset>
                 </form>
             </div>
@@ -322,7 +311,6 @@ html {
         <% include ./../../footer%>
     </div>
 </body>
-
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -333,7 +321,6 @@ html {
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> -->
 <% include ./../../tips/jsPackage %>
 <script type="text/javascript">
-     
 $(document).ready(function() {
     // window.dataLayer = window.dataLayer || [];
     // window.dataStorage = window.dataStorage || {};
@@ -347,81 +334,81 @@ $(document).ready(function() {
     //     // inputNameBrackets: false
     // });
     var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+        "C",
+        "C++",
+        "Clojure",
+        "COBOL",
+        "ColdFusion",
+        "Erlang",
+        "Fortran",
+        "Groovy",
+        "Haskell",
+        "Java",
+        "JavaScript",
+        "Lisp",
+        "Perl",
+        "PHP",
+        "Python",
+        "Ruby",
+        "Scala",
+        "Scheme"
     ];
 
     // $( "#host" ).autocomplete({
     //             source: availableTags
     //         });
     var inputHost = $('#host').val();
-    if(inputHost.length < 1){
-        $("#host").on('keyup', function(e){
-        var keyCode = e.keyCode;
-        console.log(keyCode);
-        if(keyCode == 50){
-            $( "#host" ).autocomplete({
-                source: availableTags
-            });
-        }else{
-            console.log('fail')
-        }
-    })
+    if (inputHost.length < 1) {
+        $("#host").on('keyup', function(e) {
+            var keyCode = e.keyCode;
+            console.log(keyCode);
+            if (keyCode == 50) {
+                $("#host").autocomplete({
+                    source: availableTags
+                });
+            } else {
+                console.log('fail')
+            }
+        })
 
-    }else{
+    } else {
 
     }
-    
 
-      $('.btn-cancel').on('click', function(e) {
+
+    $('.btn-cancel').on('click', function(e) {
         e.preventDefault();
         window.location.href = '/api/category';
 
     })
 
-    function readURL(input){
-        if(input.files && input.files[0]){
+    function readURL(input) {
+        if (input.files && input.files[0]) {
             var reader = new FileReader();
-            reader.onload = function(e){
+            reader.onload = function(e) {
                 $('#profile-img-tag').attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
     }
-    $('#inputGroupFile01').change(function(){
+    $('#inputGroupFile01').change(function() {
         readURL(this);
     });
     $('.select2').select2();
     $('#specs').summernote({
         placeholder: 'Hello Bootstrap 4',
         tabsize: 2,
-        height:300
+        height: 300
     });
-   
+
     $('#keeb-mounting').select2({
         placeholder: "Select keeb mounting type"
     })
-   
+
 
     var a = $('.layout').val();
 
@@ -439,7 +426,7 @@ $(document).ready(function() {
         } else if (this.value == 2) {
             $('.for-keeb').hide()
             $('.for-keyset').hide()
-        }else{
+        } else {
 
         }
     });
@@ -487,6 +474,63 @@ $(document).ready(function() {
     //         dataType: "json"
     //     })
     // })
+
+
+    $("#inputGroupFile01").on('change', function(e) {
+        e.preventDefault();
+        var iReduce = 1;
+        const data = new ClipboardEvent('').clipboardData || new DataTransfer();
+        
+        var eachImg = $(this)[0].files[0]
+        var input = document.getElementById('inputGroupFile01')
+        var tmp_files = new Array();
+        var reader = new FileReader();
+        reader.onload = (function(eReader) {
+            var oldBase64 = eReader.target.result;
+            console.log(oldBase64)
+            var img = new Image();
+            img.onload = (function(e) {
+                // if(this.width > this.height){
+                //     newDataUri =  imgReduce(this, '1792', '1343', eachImg.name, iReduce) 
+                // }else if (this.width < this.height){
+                //     newDataUri =  imgReduce(this, '1343', '1792', eachImg.name, iReduce) 
+                // }else{
+                //     newDataUri =  imgReduce(this, this.width, this.height, eachImg.name, iReduce) 
+                // }
+                newDataUri = imgReduce(this, '768', '768', eachImg.name, iReduce)
+
+                function imgReduce(img, width, height, filename, reduce) {
+                    var canvas = document.createElement('canvas'),
+                        ctx = canvas.getContext('2d');
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+                    var datauri = canvas.toDataURL('image/jpg', reduce);
+                    return datauri
+                }
+
+                function dataURLtoFile(datauri, filename) {
+                    var arr = datauri.split(','),
+                        mime = arr[0].match(/:(.*?);/)[1],
+                        bstr = atob(arr[1]),
+                        n = bstr.length,
+                        u8arr = new Uint8Array(n);
+                    while (n--) {
+                        u8arr[n] = bstr.charCodeAt(n);
+                    }
+                    return new File([u8arr], filename, { type: mime })
+                }
+                var file = dataURLtoFile(newDataUri, new Date().toISOString().replace(/:/g, '-') + '.jpg');
+                data.items.add(file);
+                input.files = data.files;
+            });
+            img.src = oldBase64
+        })
+        reader.readAsDataURL(eachImg);
+
+        console.log(eachImg)
+    })
+
 });
 </script>
 

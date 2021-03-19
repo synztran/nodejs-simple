@@ -47,7 +47,8 @@ async function addGet(req, res){
 // upload.single('picture'),'
 
 async function addPost(req, res){
-    console.log((req.body));
+    // console.log((req.body));
+    console.log(req.file)
     try {
         var check = await Category.find({ category_id: req.body.catid }, async (err, docs) => {
             if (docs.length) {
@@ -104,7 +105,8 @@ async function addPost(req, res){
                                 // size: (data.files[0].size2)
                                 path: req.file.path,
                                 size: req.file.size
-                            }
+                            },
+                            product_belong: req.body.product_belong
                         })
 
                     })
@@ -147,7 +149,8 @@ async function addPost(req, res){
                             pic_profile: {
                                 path: req.file.path,
                                 size: req.file.size
-                            }
+                            },
+                            product_belong: req.body.product_belong
                             
                         })
 
@@ -187,7 +190,8 @@ async function addPost(req, res){
                              pic_profile: {
                                  path: req.file.path,
                                  size: req.file.size
-                             }
+                             },
+                            product_belong: req.body.product_belong
                              
                          })
  
@@ -233,15 +237,8 @@ async function addPost(req, res){
 // , upload.single('picture') 
 
 async function editGet(req, res){
-    // console.log(req.params.id)
     try{
-        
-        // var unactive = await Category.findById(req.params.id);
-        // console.log(unactive)
-        
         await Category.findById(req.params.id,function(err, docs){
-            // console.log(docs);
-            // console.log(docs.type);
             var type = docs.type;
             if(type == 0){
                 res.render('manager/category/editPage',{
@@ -261,14 +258,8 @@ async function editGet(req, res){
                     "category": docs,
                     type: 2
                 })
-
             }
-            
-               
         })
-            // function(err, docs){
-            // console.log(docs);
-        // })
     }catch(err){
         res.status(400).send(err);
     }
@@ -337,7 +328,8 @@ async function editPost(req, res){
                         max_price: req.body.max_price,
                         tax: req.body.tax,
                         handle: req.body.hns,
-                        specs: req.body.specs
+                        specs: req.body.specs,
+                        product_belong: req.body.product_belong
                     });
                 }else{
                     check.set({
@@ -363,7 +355,8 @@ async function editPost(req, res){
                         pic_profile: {
                             path: req.file.path,
                             size: req.file.size
-                        }
+                        },
+                        product_belong: req.body.product_belong
                     });
 
                 }
@@ -392,7 +385,8 @@ async function editPost(req, res){
                         max_price: req.body.max_price,
                         tax: req.body.tax,
                         handle: req.body.hns,
-                        specs: req.body.specs
+                        specs: req.body.specs,
+                        product_belong: req.body.product_belong
                     });
                 }else{
                     check.set({
@@ -416,7 +410,8 @@ async function editPost(req, res){
                         pic_profile: {
                             path: req.file.path,
                             size: req.file.size
-                        }
+                        },
+                        product_belong: req.body.product_belong
                     });
                 }
                 
@@ -441,7 +436,8 @@ async function editPost(req, res){
                         max_price: req.body.max_price,
                         tax: req.body.tax,
                         handle: req.body.hns,
-                        specs: req.body.specs
+                        specs: req.body.specs,
+                        product_belong: req.body.product_belong
                     });
                 }else{
                     check.set({
@@ -462,7 +458,8 @@ async function editPost(req, res){
                         pic_profile: {
                             path: req.file.path,
                             size: req.file.size
-                        }
+                        },
+                        product_belong: req.body.product_belong
                     });
                 }
                 

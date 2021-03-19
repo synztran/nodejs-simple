@@ -66,7 +66,6 @@ async function addGet(req, res){
 }
 
 async function addPost(req, res){
-    console.log(req.body)
     // console.log(req.body.pid)
 
     try {
