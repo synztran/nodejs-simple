@@ -185,6 +185,7 @@ router.post("/login", async (req, res, next) => {
 
 
 router.get("/", function(req, res) {
+    var getName, getId;
     // console.log(req.decoded['email'])
     // console.log(req.session.User)
     // console.log(req.cookies)
@@ -211,54 +212,59 @@ router.get("/", function(req, res) {
     AdsProduct.find({}, function(err, docs) {
         PageContent.find({}, function(ContentErr, ContentDocs) {
             EventProduct.find({ status: 1 }, function(EProductErr, EProductDocs) {
-                console.log(EProductDocs)
-                if(EProductDocs.length > 0){
-                    EProductDocs.forEach(function(item) {
-                        console.log(item.date_start)
-                        var imgUrl = item.event_product_image.path
-                        
-                        var replaceIcon = imgUrl.replace(/\\/g, "/");
-                        var imgBg = 'api/' + replaceIcon
+                EventProduct.findOne({}, function(errOne, eProductData){
+                    getId = eProductData.event_product_name
+                    Category.findOne({category_id: getId}, function(errTwo, getNameCategoryData){
+                        getName = getNameCategoryData.category_name
+                        if(EProductDocs.length > 0){
+                            EProductDocs.forEach(function(item) {
+                                var imgUrl = item.event_product_image.path
+                                var replaceIcon = imgUrl.replace(/\\/g, "/");
+                                var imgBg = 'api/' + replaceIcon
 
-                        console.log(replaceIcon)
-                        if (req.session.User == null) {
-                            res.render('index', {
-                                user: null,
-                                listAdsProduct: docs,
-                                listContent: ContentDocs,
-                                EventProduct: EProductDocs,
-                                images: imgBg,
-                                date_start: item.date_start,
+                                console.log(replaceIcon)
+                                if (req.session.User == null) {
+                                    res.render('index', {
+                                        user: null,
+                                        listAdsProduct: docs,
+                                        listContent: ContentDocs,
+                                        EventProduct: EProductDocs,
+                                        images: imgBg,
+                                        date_start: item.date_start,
+                                        nameEventProduct: getName
+                                    })
+                                } else {
+                                    res.render('index', {
+                                        user: req.session.User['email'],
+                                        listAdsProduct: docs,
+                                        listContent: ContentDocs,
+                                        EventProduct: EProductDocs,
+                                        images: imgBg,
+                                        date_start: item.date_start,
+                                        nameEventProduct: getName
+                                    })
+                                }
                             })
-                        } else {
-                            res.render('index', {
-                                user: req.session.User['email'],
-                                listAdsProduct: docs,
-                                listContent: ContentDocs,
-                                EventProduct: EProductDocs,
-                                images: imgBg,
-                                date_start: item.date_start,
-                            })
+
+                        }else{
+                            if (req.session.User == null) {
+                                res.render('index', {
+                                    user: null,
+                                    listAdsProduct: docs,
+                                    listContent: ContentDocs,
+                                    EventProduct: [],
+                                })
+                            } else {
+                                res.render('index', {
+                                    user: req.session.User['email'],
+                                    listAdsProduct: docs,
+                                    listContent: ContentDocs,
+                                    EventProduct: [],
+                                })
+                            }
                         }
                     })
-
-                }else{
-                    if (req.session.User == null) {
-                        res.render('index', {
-                            user: null,
-                            listAdsProduct: docs,
-                            listContent: ContentDocs,
-                            EventProduct: [],
-                        })
-                    } else {
-                        res.render('index', {
-                            user: req.session.User['email'],
-                            listAdsProduct: docs,
-                            listContent: ContentDocs,
-                            EventProduct: [],
-                        })
-                    }
-                }
+                })
                 
             })
         })

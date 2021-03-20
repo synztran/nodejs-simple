@@ -12,21 +12,26 @@ async function eventproduct(req, res){
     var getName, getId
     EventProduct.find({}, function(err, docs) {
         EventProduct.findOne({}, function(err, data){
-            getId = data.event_product_name;
+            if(data){
+                getId = data.event_product_name;
+            }else{
+                getId = ""
+            }
+            
             Category.findOne({category_id: getId}, function(err, cData){
-                getName = cData.category_name
-                console.log(getName)
-
-    
-        
+                if(cData){
+                    getName = cData.category_name
+                }else{
+                    getName = ""
+                }
                 res.render('manager/event_product/new_listPage', {
-                "listEventProduct": docs,
-                lang: req.cookies.lang,
-                fname: req.decoded['fname'],
-                lname: req.decoded['lname'],
-                mail: req.decoded['email'],
-                title: 'Event Product Management',
-                cName: getName
+                    "listEventProduct": docs,
+                    lang: req.cookies.lang,
+                    fname: req.decoded['fname'],
+                    lname: req.decoded['lname'],
+                    mail: req.decoded['email'],
+                    title: 'Event Product Management',
+                    cName: getName
                 });
             })
         })
@@ -50,22 +55,20 @@ async function addGet(req, res){
 }
 
 async function addPost(req, res){
-    console.log(req.body)
     try{
+        var getCategoryName = await Category.findOne({category_id: req.body.event_product_name}).exec();
         db.collection('eventproducts').insertOne({
             event_product_name: req.body.event_product_name,
             date_create: new Date(),
             date_start: (req.body.date_start).toString(),
             date_end: (req.body.date_end).toString(),
-            event_product_url_1: "asdas",
+            event_product_url_1: "https://noobstore.xyz/proxygb/product/"+getCategoryName.category_url_name,
             status: parseInt(req.body.event_product_status),
             event_product_image: {
                 path: req.file.path,
                 size: req.file.size
             },
-            
         })
-
         setTimeout(function(){
             res.redirect('/api/eventproduct');
         }, 1500)
@@ -90,7 +93,6 @@ async function editGet(req, res){
 }
 
 async function get(req, res){
-    console.log(req.params.id)
     try{
         var checkEventProduct = await EventProduct.findById(req.params.id).exec();
         res.send(checkEventProduct).status(200);

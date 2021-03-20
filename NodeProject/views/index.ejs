@@ -440,7 +440,7 @@
                                                 <span style="text-transform: uppercase;">
                                                     on sale</span>
                                                 <span style="text-transform: uppercase;">
-                                                    <%= item.event_product_name %></span>
+                                                    <%= nameEventProduct %></span>
                                                 <!-- <span style="color:#00ffff">L</span>
                                                 <span style="color:#00b9ff">I</span>
                                                 <span style="color:#0074ff">N</span>
@@ -471,8 +471,9 @@
                         </div>
                     </section>
                     <% if(EventProduct.length > 0){%>
+                        <% EventProduct.forEach(function(item){%>
                         <div class="home-content__button">
-                            <a href="#" class="smoothscroll btn btn--primary btn--large">
+                            <a href="<%= item.event_product_url_1 %>" class="btn btn--primary btn--large">
                                 See More
                             </a>
                             <!--  <a href="https://geekhack.org/index.php?topic=109892.0" class="btn btn--primary btn--large" target="_blank">
@@ -485,6 +486,7 @@
                             The Reddit Post
                         </a> -->
                         </div>
+                        <% }) %>
                     <%}else{%>
                         <div class="home-non-content__button">
                             <a href="#contact" class="smoothscroll btn btn--primary btn--large">
