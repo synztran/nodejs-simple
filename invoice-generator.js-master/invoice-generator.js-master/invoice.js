@@ -40,41 +40,60 @@ function generateInvoice(invoice, filename, success, error) {
 var invoice = {
     // logo: "http://invoiced.com/img/logo-invoice.png",
     // logo: "logo.png",
-    logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
-    from: "Invoiced\nNoobStore\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
-    to: "Khiem Le",
+    // logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
+    logo: "https://noobstore.xyz/favicon/big_logo.png",
+    from: "NoobStore\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
+    to: "Kiên Lê",
     currency: "vnd",
-    number: "INV-0024",
+    number: "INV-0036",
     payment_terms: "Auto-Billed - Do Not Pay",
     // date : (new Date(Date.now()).toLocaleDateString()),
     // due_date: (new Date()).toLocaleDateString(),
     due_date: moment().add(1, 'M').format('MMM DD, YYYY'),
     items: [
-        {
-            name: "Assembled Service - PCB Canoe Gen 2",
-            quantity: 1,
-            unit_cost: 200000,
-            description: "- Soldered Mill-max hotswap"
-        },
         // {
-        //     name: "Assembled Service - UTD 360C",
+        //     name: "Buy - Stabilizer Pack",
         //     quantity: 1,
-        //     unit_cost: 400000,
-        //     description: "- Soldered Switches (220) \n - Handle Stabilizer (180) \n - Soldered Cable"
+        //     unit_cost: 150000,
+        //     description: ""
         // },
         {
-            name: "Lube Service - Mauve switches x70",
+            name: "Assembled Service - Filco MJ2 ",
             quantity: 1,
-            unit_cost: 570000,
-            description: "- Housing/Stem w/ Ghv4 (420) \n - Film clear(white/pink) TX (150) \n - Spring w/ GPL 105"
+            unit_cost: 450000,
+            description: "- De-Soldered (220) \n - Soldered (250)"
+        },
+        // {
+        //     name: "Support Service - Asus Claymore",
+        //     quantity: 1,
+        //     unit_cost: 120000,
+        //     description: "- Handle position 'X' and 'Left Shift' \n - Replace Switch"
+        // },
+        // {
+        //     name: "Cable Service - 5.Coil with Connector 2",
+        //     quantity: 1,
+        //     unit_cost: 450000,
+        //     description: "- Length: 35cm base + 17cm coiling \n - Jack Host: L \n - Jack Device: N/a \n - Colorway : Techflex Black \n - Connector: YC-8 \n - Position USB Hub: Middle \n - Type Connection: C - C"
+        // },
+        {
+            name: "Clean Service - Cherry red switch x87",
+            quantity: 1,
+            unit_cost: 250000,
+            description: "- Clean Housing + Stem w/ ultrasonic washing machine"
+        },
+        {
+            name: "Lube Service - Cherry red switch x87",
+            quantity: 1,
+            unit_cost: 425000,
+            description: "- Housing/Stem w/ Ghv4 (425) \n - Spring w/ GPL 105"
         }
     ],
     fields: {
         tax: "%",
-        discounts: true,
+        discounts: '%',
         shipping: true,
     },
-    discounts: 0,
+    discounts: 10,
     shipping:0,
     tax: 0,
     amount_paid: 0,
