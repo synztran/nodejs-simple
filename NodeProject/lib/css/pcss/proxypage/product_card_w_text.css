@@ -14,6 +14,7 @@
   --page-text-color: wheat;
   --page-classic-text-color: #fff;
   --page-background-color: #363a40;
+  --page-nude-color: #F5deb3;
 };
 *{
   margin: 0;
@@ -62,7 +63,7 @@
 
 .card-product {
   /*background-color: #fff;*/
-  padding: 30px;
+  /*padding: 30px;*/
   position: relative;
   box-shadow: 0 0 5px rgba(75, 75, 75, .07);
   z-index: 1;
@@ -99,6 +100,7 @@
 .product-card-number {
   /*margin-top: 15px;*/
 }
+.card_status-container{}
 .card_status-container .product-status{
   max-width: max-content
 }
@@ -115,7 +117,7 @@
 
 .product-card_product-name {
   display: block;
-  font-size: 12px;
+  font-size: 16px;
   letter-spacing: .5px;
   /*margin: 15px 0 0;*/
   text-transform: uppercase;
@@ -136,13 +138,14 @@
   display: inline-block;
   line-height: 22px;
   margin: 10px 0;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 1000;
   color: var(--pantone-yellow-color)
 }
 
 .product-card-read {
-  color: #fff;
+  /*color: #fff;*/
+
   cursor: pointer;
   font-size: 14px;
   font-weight: 700;
@@ -152,9 +155,13 @@
   text-align: right;
   text-transform: uppercase;
 }
+.product-card-read a{
+  color: var(--page-nude-color)!important;
+}
 .product-card-read a:hover{
   transform: scale(2.2);
-  text-decoration: none
+  text-decoration: none;
+  opacity: 0.5
 }
 
 .product-card-read:after {
@@ -189,7 +196,8 @@
 }
 .product-price{
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
+  color: var(--pantone-yellow-color)
 /*   color: # */
 }
 .card-img{
@@ -270,6 +278,37 @@
   position: absolute;
 }
 
+/* === Set time into img ===*/
+.status-product-container{
+    text-transform: none;
+    font-weight: 400;
+    font-size: 18px;
+    position: absolute;
+    transition: background .3s;
+    text-align: center;
+    left: 1em;
+    right: 1em;
+    padding: 0.25em 0;
+    top: 15.5em;
+    height: 10px;
+}
+.status-product-container:after{
+  content: '';
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  background:  #363a40;
+  top:.6rem;
+  left:0;
+  opacity: .5;
+  border-radius: 10px;
+}
+.status-product{
+    position: relative;
+    z-index: 1;
+    color: #fff;
+}
+
 
 /* === UI Countdown time === */
 .js-timer{
@@ -312,7 +351,7 @@
 .u-timer__period{
   display: block;
     color: #fff;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
     font-style: normal;
     /* font-family: 'Mansalva', cursive; */

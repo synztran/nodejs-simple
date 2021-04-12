@@ -379,7 +379,7 @@ router.get('/account/address', async (req, res) => {
 
 })
 
-router.get('/proxygb', (req, res) => {
+router.get('/shop', (req, res) => {
     // if(req.session.User == null){
     //     res.render("product/proxyPage");
     // }else{
@@ -403,6 +403,20 @@ router.get('/proxygb', (req, res) => {
     //     user: uemail 
     // })
     // }
+})
+
+router.get('/getshop', (req, res) => {
+    Category.find({}, function(err, docs) {
+        Product.find({}, function(err, pData){
+            EventProduct.findOne({}, function(err, epData){
+                res.send({
+                    "listCategory": docs,
+                    "listProduct": pData,
+                    ePID: epData.event_product_name,
+                }).status(200);
+            })
+        })
+    });
 })
 
 router.post('/captcha', async (req, res) => {
@@ -802,7 +816,7 @@ router.post('/history', async (req, res) => {
     }
 })
 
-router.post('/proxygb/payment/joingb', TokenUserCheckMiddleware, async (req, res) => {
+router.post('/shop/payment/joingb', TokenUserCheckMiddleware, async (req, res) => {
     console.log(req.body)
     // console.log(req.decoded);
     var uemail = req.decoded['email']
@@ -876,7 +890,7 @@ router.post('/proxygb/payment/joingb', TokenUserCheckMiddleware, async (req, res
 })
 
 // --------------------------------- PRODUCT CONFIG --------------------------------------------
-router.get('/proxygb/product/:id', async (req, res) => {
+router.get('/shop/product/:id', async (req, res) => {
     console.log(req.params.id);
     try {
         Product.find({ category_url_name: req.params.id }, function(err, docs) {
@@ -902,7 +916,7 @@ router.get('/proxygb/product/:id', async (req, res) => {
     }
 })
 
-router.get('/proxygb/payment/:id', TokenUserCheckMiddleware, async (req, res) => {
+router.get('/shop/payment/:id', TokenUserCheckMiddleware, async (req, res) => {
     console.log(req.params.id)
     // console.log(req.decoded['email']);
     try {

@@ -46,8 +46,8 @@ $(document).ready(function() {
         var id = $(this).attr('data-id');
         var url = $(this).attr('data-url')
         console.log(id);
-        // window.location.href = "/proxygb/payment/" + id;
-        window.location.href = "/proxygb/payment/" + url;
+        // window.location.href = "/shop/payment/" + id;
+        window.location.href = "/shop/payment/" + url;
     })
     var url = (window.location).href;
     var res = url.split("/").pop();

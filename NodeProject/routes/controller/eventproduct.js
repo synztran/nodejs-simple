@@ -62,7 +62,7 @@ async function addPost(req, res){
             date_create: new Date(),
             date_start: (req.body.date_start).toString(),
             date_end: (req.body.date_end).toString(),
-            event_product_url_1: "https://noobstore.xyz/proxygb/product/"+getCategoryName.category_url_name,
+            event_product_url_1: "https://noobstore.xyz/shop/product/"+getCategoryName.category_url_name,
             status: parseInt(req.body.event_product_status),
             event_product_image: {
                 path: req.file.path,

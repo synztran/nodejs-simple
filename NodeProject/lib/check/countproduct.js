@@ -45,7 +45,7 @@ const CountMiddleware = async (req, res, next) => {
     //  return  res.status(403).send({
     //     message: 'No token provided.',
     //   });
-        return res.redirect('/proxygb');
+        return res.redirect('/shop');
       
 
 

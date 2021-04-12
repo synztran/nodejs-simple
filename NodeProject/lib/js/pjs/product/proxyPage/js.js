@@ -10,8 +10,33 @@ $(document).ready(function() {
         $('div.carouselNext, div.carouselPrev').removeClass('visible');
     });
 
+    fetch('/getshop').then(function(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json();
+    }).then(function(responseAsJson) {
+        var data = responseAsJson.listCategory
+        for(var i=0;i<data.length;i++){
+            var minPrice_format =  new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'USD' }).format(data[i].min_price);
+            var maxPrice_format =  new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'USD' }).format(data[i].max_price);
+            fx.base = "USD";
+            fx.rates = {
+                "EUR" : 0.8, 
+                "GBP" : 0.7, 
+                "USD" : 1,        
+                "VND" : 24000
+            }
+            var minPrice_toVND = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(fx(minPrice_format).from("USD").to("VND"))
+            var maxPrice_toVND = new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(fx(maxPrice_format).from("USD").to("VND"))
+            $("#product_price_"+i).append(minPrice_format + ' - ' + maxPrice_format)
+            $("#product_price_"+i).attr("title", fx(minPrice_format).from("USD").to("VND") + ' - '+ fx(maxPrice_format).from("USD").to("VND"))
+            $("#product_price_"+i).attr("data-original-title",minPrice_toVND  + ' - '+ maxPrice_toVND)
+            
 
-
+        }
+    })
+    // console.log(new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'USD' }).format("150"))
     // Flip card to the back side
     // $('.view_details').click(function() {
     //     $('div.carouselNext, div.carouselPrev').removeClass('visible');

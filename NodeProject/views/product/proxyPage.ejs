@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="/package/slick/slick.css">
     <!-- <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card.css"> -->
     <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card_w_text.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css">
     <!-- <link rel="stylesheet" href="/api/css/pcss/main.css"> -->
     <!-- script
     ================================================== -->
@@ -114,8 +115,8 @@ html, body{
       width: 70%;
       margin: 0 auto;
       height: 5px;
-      animation: rotate 3s infinite linear;
-      -webkit-animation: rotate 3s infinite linear;
+      animation: rotate 3s infinite linear alternate;
+      -webkit-animation: rotate 3s infinite linear alternate;
     }
     @-webkit-keyframes rotate {
       from {
@@ -187,7 +188,7 @@ html, body{
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item active"><a href="/proxygb" class="nav-link">shop</a></li>
+                    <li class="nav-item active"><a href="/shop" class="nav-link">shop</a></li>
                     <li class="nav-item"><a href="/service" class="nav-link">Services</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
@@ -221,11 +222,9 @@ html, body{
             <% if(listCategory != null) { %>
             <article class="row">
                 <!-- <div class="row"> -->
-                <% listCategory.forEach(function(item){%>
-                   
-                <div class="col-xs-6 col-sm-3 col-product">
-                    
-                    <div class="product-card-container">
+                <% listCategory.forEach(function(item, key){%>
+                <div class="col-xs-6 col-sm-3 col-product ">
+                    <div class="product-card-container mx-0 my-0">
                         <div class="card-product u-clearfix">
                             <!-- <div class="card-img">
                                 <a href="#">
@@ -233,42 +232,53 @@ html, body{
                                 </a>
                             </div> -->
                             <div class="product-card-body">
-                                <div class="card_status-container">
+                                <div class="card_status-container mb-3">
                                     <% if(item.status_gb == 0){ %>
-                                        <p class="product-status status-end" style="">sale end</p>
+                                    <p class="product-status status-end" style="">sale end</p>
                                     <% }else if(item.status_gb == 1){ %>
-                                        <p class="product-status status-ic" style="">Interest Check</p>
+                                    <p class="product-status status-ic" style="">Interest Check</p>
                                     <% }else if(item.status_gb == 2){ %>
-                                        <p class="product-status status-live" style="">On Sale</p>
-                                        <% if(item.category_id == ePID){ %>
-                                            <div class="js-timer u-timer d-flex"></div>
-                                        <%}%>
-                                        
+                                    <p class="product-status status-live" style="">On Sale</p>
+                                  <!--   <% if(item.category_id == ePID){ %>
+                                    <div class="js-timer u-timer d-flex"></div>
+                                    <%}else{%>
+                                    <div class="w-100 my-3"></div>
+                                    <%}%> -->
                                     <% }else { %>
-
                                     <% } %>
                                 </div>
-                                <span class="product-card_product-name subtle"><%= item.category_name %></span>
                                 <div class="card-img">
-                                    <a href="/proxygb/product/<%= item.category_url_name%>">
-                                        <img onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" alt="" class="product-card-media" />
-                                        <!-- width="300" height="300" -->
+                                    <a href="/shop/product/<%= item.category_url_name%>">
+                                        <!-- https://resources.artkeyuniverse.com/upload/product/HxeCTl1oWBzQsPXEPLTvi42Zn8WTBDhIwgbSGQAR.jpeg -->
+                                        <!-- /api/docs/trash/image-not-found.png -->
+                                        <img onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found_768.png'" src="/api/<%= item.pic_profile.path %>" alt="" class="product-card-media" width="300" height="300" />
+                                        <% if(item.category_id == ePID){ %>
+                                            <div class="status-product-container">
+                                                <div class="status-product">
+                                                    <div class="js-timer u-timer d-flex"></div>
+                                                </div>
+                                            </div>
+                                        <%}else{%>
+                                        <%}%>
                                     </a>
                                 </div>
-                                <span class="product-card-description subtle"><%= item.product_belong %></span>
-                                <div class="product-card-read"><a href="#">more</a></div>
-                                <span class="product-card-tag subtle product-price">$ 222.000</span>
+                                <span class="product-card-description subtle">
+                                    <%= item.category_name %></span>
+                                <span class="product-card_product-name subtle">
+                                    <%= item.product_belong %></span>
+                                <div class="product-card-read"><a href="/shop/product/<%=item.category_url_name %>">more</a></div>
+                                <!-- $<%=item.min_price %> - $<%=item.max_price %> -->
+                                <a href="#" class="product-card-tag subtle product-price text-decorate-none" id="product_price_<%=key%>" data-toggle="tooltip" title=""></a>
                             </div>
                         </div>
                         <div class="product-card-shadow"></div>
                     </div>
                 </div>
-                   
                 <%    }) %>
                 <!-- </div> -->
             </article>
             <% }else{ %>
-            <% window.location.href = '/proxygb';  %>
+            <% window.location.href = '/shop';  %>
             <% } %>
         </div>
     </main>
@@ -284,5 +294,5 @@ html, body{
 <script src="/api/js/pjs/main.js"></script>
 <script src="/api/js/pjs/vendors/jquery.countdown.js"></script>
 <script src="/package/vendors/jquery.countdown/jquery.countdown.min.js"></script>
-
+<script src="/api/js/moneyExchange/money.min.js"></script>
 </html>
