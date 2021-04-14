@@ -251,7 +251,7 @@ html, body{
                                     <a href="/shop/product/<%= item.category_url_name%>">
                                         <!-- https://resources.artkeyuniverse.com/upload/product/HxeCTl1oWBzQsPXEPLTvi42Zn8WTBDhIwgbSGQAR.jpeg -->
                                         <!-- /api/docs/trash/image-not-found.png -->
-                                        <img onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found_768.png'" src="/api/<%= item.pic_profile.path %>" alt="" class="product-card-media" width="300" height="300" />
+                                        <img onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found_768.png'" src="/api/<%= item.pic_profile.path %>" alt="" class="product-card-media img-fix-scale" width="300" height="300" />
                                         <% if(item.category_id == ePID){ %>
                                             <div class="status-product-container">
                                                 <div class="status-product">
