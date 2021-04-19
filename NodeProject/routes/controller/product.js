@@ -341,6 +341,12 @@ async function editGet(req, res){
                     "product": docs,
                     type: 5
                 })
+            }else if(type == 7){
+                res.render('manager/product/editPage',{
+                    title: 'Edit Product : Artisan',
+                    "product": docs,
+                    type: 7
+                })
             }
             
                
