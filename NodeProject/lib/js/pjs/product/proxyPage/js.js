@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $("#tag-shop").addClass("active")
     $('[data-toggle="tooltip"]').tooltip();
     // Lift card and show stats on Mouseover
     $('.product-card').hover(function() {

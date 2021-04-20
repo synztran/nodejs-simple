@@ -91,7 +91,7 @@ input::-webkit-input-placeholder {
 .form-control:focus{
 
     box-shadow: unset !important;
-    border-color: #000 !important;
+    /*border-color: #000 !important;*/
     caret-color: black;
 }
 .form-not-mg{

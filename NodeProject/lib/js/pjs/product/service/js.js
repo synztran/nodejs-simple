@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    $("#tag-service").addClass("active")
+
+    // Tool cal
     var type_sw, cherry_spring, box_spring, cherry_name_switch, box_name_switch, add_spring;
     var checkbox_film, checkbox_spring;
     var checkbox_add_film, checkbox_add_spring;
