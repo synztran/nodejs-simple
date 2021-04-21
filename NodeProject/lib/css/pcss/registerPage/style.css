@@ -8,27 +8,34 @@
     }
     /* place holder*/
     ::placeholder {
-        font-size: :14px;
-      opacity: 0.7!important; /* Firefox */
+      font-size: :14px;
+      /*padding-left: 1rem;*/
+      opacity: 0.6!important; /* Firefox */
     }
     ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
       font-size: 14px;
-      opacity: 0.7!important
+       /*padding-left: 1rem;*/
+      opacity: 0.6!important
     }
     ::-moz-placeholder { /* Firefox 19+ */
       font-size: 14px;
-      opacity: 0.7!important
+       /*padding-left: 1rem;*/
+      opacity: 0.6!important
     }
     :-ms-input-placeholder { /* IE 10+ */
       font-size: 14px;
-      opacity: 0.7!important
+       /*padding-left: 1rem;*/
+      opacity: 0.6!important
     }
     :-moz-placeholder { /* Firefox 18- */
       font-size: 14px;
-      opacity: 0.7!important
+       /*padding-left: 1rem;*/
+      opacity: 0.6!important
     }
     input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus input:-webkit-autofill, textarea:-webkit-autofill, textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus, select:-webkit-autofill, select:-webkit-autofill:hover, select:-webkit-autofill:focus{
-
+      -webkit-text-fill-color: white;
+      transition: background-color 5000s ease-in-out 0s;
+      padding-left: 1rem;
     }
     label{
         color: var(--label-color)!important;
@@ -38,6 +45,8 @@
         font-size: 16px!important;
         height: 4rem!important;
         background: rgba(255, 255, 255, 0.05)!important;
+        border-radius: 10px!important;
+        padding-left: 1rem!important;
     }
     input:focus{
         border-color: var(--main-page-color)!important
@@ -52,7 +61,7 @@
         height: 100%;
         width: 100%;
         background-image: url('/api/docs/background/bg-black.svg');
-        background-repeat: no-repeat;
+        background-repeat: repeat;
     }
     .center{
         text-align: center;
@@ -274,7 +283,31 @@
       and (max-device-width: 667px) 
       and (-webkit-min-device-pixel-ratio: 2)
       and (orientation: portrait) { 
-
+        .main-container{
+            margin: 5rem 5rem
+        }
+        .reg-form{
+          margin-top: 3rem;
+        }
+        .btn-login, .btn-register{
+          float: none!important;
+          width: 100%;
+        }
+        .btn-area{
+          text-align: right;
+          margin-top: 3rem
+        }
+        .seperator-wrapper .seperator{
+          animation: rotate 7s infinite alternate;
+          -webkit-animation: rotate 7s infinite alternate;
+        }
+        .title{
+          text-align: center
+        }
+        .g-recaptcha > div > div > iframe{
+          width: 300px;
+          text-align: center;
+        }
     }
 
     /* Landscape */
@@ -284,7 +317,29 @@
       and (-webkit-min-device-pixel-ratio: 2)
       and (orientation: landscape) { 
         .main-container{
-            margin: 5rem 5rem
+            margin: 5rem 6rem
+        }
+        .reg-form{
+          margin-top: 3rem;
+        }
+        .btn-login, .btn-register{
+          float: none!important;
+          width: 100%;
+        }
+        .btn-area{
+          text-align: right;
+          margin-top: 3rem
+        }
+        .seperator-wrapper .seperator{
+          animation: rotate 7s infinite alternate;
+          -webkit-animation: rotate 7s infinite alternate;
+        }
+        .title{
+          text-align: center
+        }
+        .g-recaptcha > div > div > iframe{
+          /*width: 300px!important;*/
+          padding: 0 0 0 12.5px;            
         }
     }
 
@@ -305,10 +360,14 @@
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: portrait) { 
         .main-container{
-            margin: 5rem 5rem!important
+            margin: 5rem 4.5rem!important
         }
         .reg-form{
             margin-top: 3rem
+        }
+        .g-recaptcha > div > div > iframe{
+          /*width: 400px;*/
+          padding: 0 0 0 12.5px;          
         }
     }
 
@@ -319,7 +378,32 @@
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: landscape) { 
         .main-container{
-            margin: 5rem 5rem!important
+            margin: 5rem 7rem
+        }
+        .reg-form{
+          margin-top: 3rem;
+        }
+        .btn-login, .btn-register{
+          float: none!important;
+          width: 100%;
+        }
+        .btn-area{
+          text-align: right;
+          margin-top: 3rem
+        }
+        .seperator-wrapper .seperator{
+          animation: rotate 7s infinite alternate;
+          -webkit-animation: rotate 7s infinite alternate;
+        }
+        .title{
+          text-align: center
+        }
+        .g-recaptcha > div > div > iframe{
+          /*width: 300px!important;*/
+          padding: 0 0 0 12.5px;            
+        }
+        .form-group{
+          margin-bottom: 3%
         }
     }
 
@@ -348,7 +432,38 @@
       and (max-device-width: 812px) 
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: landscape) { 
-
+        .main-container{
+            margin: 5rem 7rem
+        }
+        .login-form, .reg-form{
+          width: 100%;
+          max-width: 100%;
+        }
+        .reg-form{
+          margin-top: 3rem;
+        }
+        .btn-login, .btn-register{
+          float: none!important;
+          width: 100%;
+        }
+        .btn-area{
+          text-align: right;
+          margin-top: 3rem
+        }
+        .seperator-wrapper .seperator{
+          animation: rotate 7s infinite alternate;
+          -webkit-animation: rotate 7s infinite alternate;
+        }
+        .title{
+          text-align: center
+        }
+        .g-recaptcha > div > div > iframe{
+          /*width: 300px!important;*/
+          padding: 0 0 0 12.5px;            
+        }
+        .form-group{
+          margin-bottom: 3%
+        }
     }
 
     /* ----------- iPhone Xr ----------- */
@@ -367,7 +482,9 @@
       and (max-device-width: 812px) 
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: portrait) { 
-
+        html, body {
+          background-repeat: repeat!important;
+        }
     }
 
     /* Landscape */
