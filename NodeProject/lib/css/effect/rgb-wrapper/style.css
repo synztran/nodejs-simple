@@ -45,3 +45,141 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30ff90', endColorstr='#30ff90',GradientType=1);
   /* IE6-9 */
 }
+
+/* === RESPONSIVE DEVICE ===*/
+
+    /* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 667px) 
+      and (-webkit-min-device-pixel-ratio: 2) { 
+        
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 667px) 
+      and (-webkit-min-device-pixel-ratio: 2)
+      and (orientation: portrait) { 
+        .seperator-wrapper .seperator{
+          animation: rotate 7s infinite alternate;
+          -webkit-animation: rotate 7s infinite alternate;
+        }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 667px) 
+      and (-webkit-min-device-pixel-ratio: 2)
+      and (orientation: landscape) { 
+        .seperator-wrapper .seperator{
+          animation: rotate 7s infinite alternate;
+          -webkit-animation: rotate 7s infinite alternate;
+        }
+    }
+
+    /* ----------- iPhone 6+, 7+ and 8+ ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 414px) 
+      and (max-device-width: 736px) 
+      and (-webkit-min-device-pixel-ratio: 3) { 
+
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 414px) 
+      and (max-device-width: 736px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: portrait) { 
+        .seperator-wrapper .seperator{
+          animation: rotate 10s infinite alternate !important;
+          -webkit-animation: rotate 10s infinite alternate !important;
+        }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 414px) 
+      and (max-device-width: 736px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: landscape) { 
+        .seperator-wrapper .seperator{
+          animation: rotate 10s infinite alternate !important;
+          -webkit-animation: rotate 10s infinite alternate !important;
+        }
+    }
+
+    /* ----------- iPhone X, Xs ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3) { 
+
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: portrait) { 
+        .seperator-wrapper .seperator{
+          animation: rotate 10s infinite alternate !important;
+          -webkit-animation: rotate 10s infinite alternate !important;
+        }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: landscape) { 
+        .seperator-wrapper .seperator{
+          animation: rotate 10s infinite alternate !important;
+          -webkit-animation: rotate 10s infinite alternate !important;
+        }
+    }
+
+    /* ----------- iPhone Xr ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3) { 
+
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: portrait) { 
+        .seperator-wrapper .seperator{
+          animation: rotate 10s infinite alternate !important;
+          -webkit-animation: rotate 10s infinite alternate !important;
+        }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: landscape) { 
+        .seperator-wrapper .seperator{
+          animation: rotate 10s infinite alternate !important;
+          -webkit-animation: rotate 10s infinite alternate !important;
+        }
+    }
