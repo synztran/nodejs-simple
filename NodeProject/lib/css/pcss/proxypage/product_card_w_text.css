@@ -50,7 +50,7 @@
 
 }
 .product-card-container {
-  margin: 25px auto 0;
+  margin: 0 auto 0;
   position: relative;
   /*width: 692px;*/
   max-width: max-content;

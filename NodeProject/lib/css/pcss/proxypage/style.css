@@ -953,5 +953,183 @@ div.shadow{
 		border-right:15px solid #a00000;
 	 }
   }
+  /* Setup Col-xs*/
+.col-xs-6{
+	position: relative;
+    width: 50%;
+}
+
   
-  /*  */
+  /* === RESPONSIVE DEVICE ===*/
+
+    /* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 667px) 
+      and (-webkit-min-device-pixel-ratio: 2) { 
+        
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 667px) 
+      and (-webkit-min-device-pixel-ratio: 2)
+      and (orientation: portrait) { 
+      	.row{
+      		display: flex;
+      	}
+      	.title-li{
+      		margin: 0;
+      	}
+        .sidebar-area{
+        	display: none
+        }
+        .product-card-container{
+        	margin: 0 auto;
+        }
+        .col-product:not(:first-child), .col-product:not(:nth-child(2)){
+        	margin-top: 1rem;
+        }
+        /* 2 item in 1 row*/
+        .product-card-body{
+        	width: 95%!important;
+        	padding: 0!important;
+        }
+        .product-status{
+        	margin: 0.5rem auto!important;
+        	font-size: 15px!important;
+        	text-align: center!important
+        }
+        .status-product-container{
+        	display: none;
+        }
+        .card_status-container .product-status{
+        	/*max-width: none!important;*/
+        }
+        .product-status.status-live:after, .product-status.status-ic:after{
+        	/*border-radius: 0!important*/
+        }
+        .product-card-read{
+        	margin-top: 0!important;
+        	margin-bottom: 0!important;
+        	display:none;
+        }
+        .product-card-description, .product-card_product-name{
+        	width: 100%;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    /*height: 45px;*/
+		    white-space: nowrap; 
+
+        }
+        .product-card-description{
+        	margin-top: 10px!important;
+        	padding: 0 10px!important;
+        }
+        .product-card_product-name, .product-price{
+        	padding: 0 10px!important;
+        	margin:0 0 !important;
+        }
+        .product-price{
+        	font-size: 16px!important;
+        	margin: 10px 0 5px!important;
+        }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 667px) 
+      and (-webkit-min-device-pixel-ratio: 2)
+      and (orientation: landscape) { 
+        
+    }
+
+    /* ----------- iPhone 6+, 7+ and 8+ ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 414px) 
+      and (max-device-width: 736px) 
+      and (-webkit-min-device-pixel-ratio: 3) { 
+
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 414px) 
+      and (max-device-width: 736px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: portrait) { 
+        
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 414px) 
+      and (max-device-width: 736px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: landscape) { 
+        
+    }
+
+    /* ----------- iPhone X, Xs ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3) { 
+
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: portrait) { 
+
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: landscape) { 
+        
+    }
+
+    /* ----------- iPhone Xr ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3) { 
+
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: portrait) { 
+        html, body {
+          background-repeat: repeat!important;
+        }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: landscape) { 
+
+    }
