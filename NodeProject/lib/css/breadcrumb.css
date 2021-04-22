@@ -1,0 +1,30 @@
+.before-breadcrumb {
+    opacity: 0.91;
+    position: relative;
+    top: 1%;
+    background-color: rgba(54, 58, 64, 0.3);
+    /*background-image: url('/api/docs/background/UIBkAT.jpg');*/
+    background-image: url('/api/docs/background/bg-black.svg');
+    background-repeat: repeat;
+    filter: brightness(150%);
+    /*-webkit-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);*/
+    /*-moz-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);*/
+    /*box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);*/
+}
+.breadcrumb{
+    max-width: 70%;
+    /*max-width: 85.5%;*/
+    margin:0 auto;
+    /*background-image: url('/api/docs/background/UIBkAT.jpg');*/
+    background-image: url('/api/docs/background/bg-black.svg');
+    background-repeat: repeat;
+    
+    
+}
+.container{
+    /* margin: 0;
+    padding: 0; */
+    height: 90%;
+    max-width: 70%;
+    padding: 0
+}

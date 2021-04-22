@@ -31,12 +31,14 @@
     ================================================= -->
     <!--  <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet"> -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!-- mobile specific metas
     ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSS
     ================================================== -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/api/css/pcss/main.css">
     <link rel="stylesheet" href="/api/css/effect/navbar.css">
     <link rel="stylesheet" href="api/css/effect/preloading.css">
     <link rel="stylesheet" type="text/css" href="product/css/proxypage/style.css">
@@ -45,6 +47,8 @@
     <link rel="stylesheet" type="text/css" href="/package/slick/slick.css">
     <!-- <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card.css"> -->
     <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card_w_text.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/effect/rgb-wrapper/style.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/breadcrumb.css">
     <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css">
     <!-- <link rel="stylesheet" href="/api/css/pcss/main.css"> -->
     <!-- script
@@ -86,28 +90,6 @@ html, body{
         background-color: transparent!important;
         /* clip-path: polygon(50% 0%, 100% 0, 100% 61%, 30% 86%, 0 52%, 0 0); */
     }
-    
-    .before-breadcrumb {
-        opacity: 0.91;
-        position: relative;
-        top: 1%;
-        background-color: rgba(54, 58, 64, 0.3);
-        background-image: url('/api/docs/background/UIBkAT.jpg');
-        background-repeat: no-repeat;
-        filter: brightness(150%);
-        /* -webkit-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
-        -moz-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
-        box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79); */
-    }
-    .breadcrumb{
-        max-width: 70%;
-        margin:0 auto;
-        background-image: url('/api/docs/background/UIBkAT.jpg');
-        background-repeat: no-repeat;
-        background-color: transparent;
-        
-    }
-    
     .row:first-child > .col-md-12{
         display: flex;
     }
@@ -119,55 +101,6 @@ html, body{
     .btn-submit{
         border-radius: 50px;
         min-width: 160px;
-    }
-    .footer-register{
-        height: 10%;
-    }
-    @import "compass/css3";
-    .seperator-wrapper {
-      width: 100%;
-    }
-
-        .seperator-wrapper .seperator {
-      width: 70%;
-      margin: 0 auto;
-      height: 5px;
-      animation: rotate 3s infinite linear alternate;
-      -webkit-animation: rotate 3s infinite linear alternate;
-    }
-    @-webkit-keyframes rotate {
-      from {
-        background-position: -3000px;
-      }
-      to {
-        background-position: 0px;
-      }
-    }
-    @keyframes rotate {
-      from {
-        background-position: -3000px;
-      }
-      to {
-        background-position: 0px;
-      }
-    }
-    .gradient {
-      background: #30ff90;
-      /* Old browsers */
-      background: -moz-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
-      /* FF3.6+ */
-      background: -webkit-gradient(linear, left top, right top, color-stop(0%, #30ff90), color-stop(25%, #ed2ded), color-stop(50%, #c99826), color-stop(75%, #30ffe6), color-stop(100%, #30ff90));
-      /* Chrome,Safari4+ */
-      background: -webkit-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
-      /* Chrome10+,Safari5.1+ */
-      background: -o-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
-      /* Opera 11.10+ */
-      background: -ms-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
-      /* IE10+ */
-      background: linear-gradient(to right, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
-      /* W3C */
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30ff90', endColorstr='#30ff90',GradientType=1);
-      /* IE6-9 */
     }
     .product-options > div:nth-child(2){
         text-align: right;
@@ -191,17 +124,7 @@ html, body{
     </div>
     <% include ./../tips/subs/navbar %>
     <!-- </header> -->
-    <nav class="before-breadcrumb" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
-            <!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
-            <li class="breadcrumb-item active" aria-current="page">Proxy GB</li>
-        </ol>
-    </nav>
-    <section style="position: relative; top:1%" class="seperator-wrapper">
-        <div class="seperator gradient">
-        </div>
-    </section>
+    <% include ./../tips/subs/breadcrumb %>
     <!-- Breakcum-->
     <main class="main row">
         <div style="height: 75vh;" class="col-md-2 sidebar-area">
@@ -217,7 +140,7 @@ html, body{
             <article class="row">
                 <!-- <div class="row"> -->
                 <% listCategory.forEach(function(item, key){%>
-                <div class="col-xs-6 col-sm-3 col-product ">
+                <div class="col-xs-6 col-lg-4 col-md-6 col-sm-3 col-product ">
                     <div class="product-card-container">
                         <div class="card-product u-clearfix">
                             <!-- <div class="card-img">
@@ -226,25 +149,50 @@ html, body{
                                 </a>
                             </div> -->
                             <div class="product-card-body">
-                                <div class="card_status-container mb-3">
+                                <div class="card_status-container">
                                     <% if(item.status_gb == 0){ %>
-                                    <p class="product-status status-end" style="">sale end</p>
+                                        <p class="product-status status-end" style="">sale end</p>
                                     <% }else if(item.status_gb == 1){ %>
-                                    <p class="product-status status-ic" style="">Interest Check</p>
+                                        <p class="product-status status-ic" style="">Interest Check</p>
                                     <% }else if(item.status_gb == 2){ %>
-                                    <p class="product-status status-live" style="">On Sale</p>
-                                  <!--   <% if(item.category_id == ePID){ %>
-                                    <div class="js-timer u-timer d-flex"></div>
-                                    <%}else{%>
-                                    <div class="w-100 my-3"></div>
-                                    <%}%> -->
+                                        <p class="product-status status-live" style="">On Sale</p>
+                                      <!--   <div class="product-status-fake" style="">
+                                            <div class="box box--1">
+                                                <div class="line">
+                                                    <span class="">On Sale</span>
+                                                </div>
+                                            </div>
+                                        </div> -->
                                     <% }else { %>
                                     <% } %>
                                 </div>
                                 <div class="card-img">
                                     <a href="/shop/product/<%= item.category_url_name%>">
-                                        <!-- https://resources.artkeyuniverse.com/upload/product/HxeCTl1oWBzQsPXEPLTvi42Zn8WTBDhIwgbSGQAR.jpeg -->
-                                        <!-- /api/docs/trash/image-not-found.png -->
+                                        <% if(item.status_gb == 0){ %>
+                                            <div class="ribbon up">
+                                                <div class="glow">&nbsp;</div>
+                                                <div class="content content-end">
+                                                    <svg width="24px" height="24px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512">
+                                                      <path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        <% }else if(item.status_gb == 1){ %>
+                                            <div class="ribbon">
+                                                <div class="glow">&nbsp;</div>
+                                                <div class="content content-ic">
+                                                    <svg width="24px" height="24px" aria-hidden="true" focusable="false" data-prefix="far" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                                      <path fill="currentColor" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        <% }else if(item.status_gb == 2){ %>
+                                            <div class="ribbon down">
+                                                <div class="glow">&nbsp;</div>
+                                                <div class="content content-on">🕓</div>
+                                            </div>
+                                        <% }else { %>
+                                        <% } %>
                                         <img onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found_768.png'" src="/api/<%= item.pic_profile.path %>" alt="" class="product-card-media img-fix-scale" width="300" height="300" />
                                         <% if(item.category_id == ePID){ %>
                                             <div class="status-product-container">
@@ -256,13 +204,15 @@ html, body{
                                         <%}%>
                                     </a>
                                 </div>
-                                <span class="product-card-description subtle">
-                                    <%= item.category_name %></span>
-                                <span class="product-card_product-name subtle">
-                                    <%= item.product_belong %></span>
-                                <div class="product-card-read"><a href="/shop/product/<%=item.category_url_name %>">more</a></div>
-                                <!-- $<%=item.min_price %> - $<%=item.max_price %> -->
-                                <a href="#" class="product-card-tag subtle product-price text-decorate-none" id="product_price_<%=key%>" data-toggle="tooltip" title=""></a>
+                                <div class="product-info">
+                                    <span class="product-card-description subtle">
+                                        <%= item.category_name %></span>
+                                    <span class="product-card_product-name subtle">
+                                        <%= item.product_belong %></span>
+                                    <div class="product-card-read"><a href="/shop/product/<%=item.category_url_name %>">more</a></div>
+                                    <!-- $<%=item.min_price %> - $<%=item.max_price %> -->
+                                    <a readonly href="#" class="product-card-tag subtle product-price text-decorate-none" id="product_price_<%=key%>" data-toggle="tooltip" title=""></a>
+                                </div>
                             </div>
                         </div>
                         <div class="product-card-shadow"></div>
@@ -277,8 +227,12 @@ html, body{
         </div>
     </main>
     <!-- main-->
-    <div class="footer-register center">
-    </div>
+    <footer>
+            <div class="col-full ss-copyright">
+                <span>© Copyright NoobStore 2017</span>
+                <span>Design by <a href="https://www.facebook.com/noobassembly">Noob Team</a></span>
+            </div>
+    </footer>
 </body>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -289,4 +243,18 @@ html, body{
 <script src="/api/js/pjs/vendors/jquery.countdown.js"></script>
 <script src="/package/vendors/jquery.countdown/jquery.countdown.min.js"></script>
 <script src="/api/js/moneyExchange/money.min.js"></script>
+<script>
+    const ribbons = document.querySelectorAll(".ribbon");
+    ribbons.forEach((ribbon) => {
+      ribbon.addEventListener('click', (e) => {
+         let target = e.target;
+        while (target !== ribbon) {
+          target = target.parentNode;
+        }
+        const types = ['', 'slant-up', 'slant-down', 'up', 'down', 'check'];
+        const type = types[Math.floor(Math.random() * types.length)];
+        target.className = `ribbon ${type}`;
+      });
+    });
+</script>
 </html>

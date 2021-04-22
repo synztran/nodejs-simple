@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="/api/css/pcss/customize.css">
     <link rel="stylesheet" type="text/css" href="/api/css/effect/rgb-wrapper/style.css">
     <link rel="stylesheet" type="text/css" href="/api/css/pcss/registerPage/style.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/breadcrumb.css">
     <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css">
 
     <!-- font-->
@@ -64,20 +65,10 @@
     <!-- Navbar -->
     <% include ./../tips/subs/navbar %>
     <!-- </header> -->
-    <nav class="before-breadcrumb" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item fs-20"><a href="./">Home</a></li>
-            <!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
-            <li class="breadcrumb-item fs-20 active" aria-current="page">Login & Register</li>
-        </ol>
-    </nav>
-    <section class="seperator-wrapper">
-        <div class="seperator gradient">
-        </div>
-    </section>
+    <% include ./../tips/subs/breadcrumb %>
     <div class="main-container">
         <div class="row">
-            <div class="col-md-5 col-xs-12 login-form">
+            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 login-form">
                 <div class="title">
                     <h2 class="my-3">Login</h2>
                 </div>
@@ -105,19 +96,19 @@
                         <label for="password">Password</label>
                         <input autocomplete="on" type="password" name="password" class="form-control" id="password" value="" placeholder="Password">
                     </div>
-                    <div class="form-group btn-area">
+                    <div class="btn-area">
                         <button type="submit" id="btn-login" class="btn btn-primary btn-login">Login</button>
                     </div>
 
                 </form>
             </div>
-            <div class="col-md-6 col-xs-12 reg-form">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 reg-form">
                 <div class="title">
                     <h2 class="my-3">Register</h2>
                 </div>
                 <form class="form-not-mg" id='form-register' method='POST' >
                     <div class='row'>
-                        <div class='col-md-12'>
+                        <div class='col-md-12 d-flex'>
                             <div class='col-md-6 form-group'>
                                 <label for='fname'>First name</label>
                                 <input required type='text' name='fname' class='form-control' id='fnam' aria-describedbsy='fnamelHelp' placeholder='First name'>
@@ -147,13 +138,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class='row'>
-                        <div class='form-group col-md-12'>
-                            <div class='g-recaptcha' data-sitekey='6Lcti9UUAAAAADIUivaJtXit0OKia78-EQIbnDkc'>
-                            </div>
+                    <div class='form-group col-md-12'>
+                        <div class='g-recaptcha' data-sitekey='6Lcti9UUAAAAADIUivaJtXit0OKia78-EQIbnDkc'>
                         </div>
                     </div>
-                    <div class="form-group col-md-12 btn-area">
+                    <div class="col-md-12 btn-area">
                         <button type='submit' id='btn-reg' class='btn btn-primary btn-register'>Register</button>
                     </div>
                 </form>

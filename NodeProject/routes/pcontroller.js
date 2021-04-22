@@ -291,7 +291,9 @@ router.get("/time_event", function(req, res) {
 })
 
 router.get('/register', async (req, res) => {
-    res.render("product/registerPage");
+    res.render("product/registerPage",{
+        currentPage: "Login"
+    });
 })
 
 router.get('/account', TokenUserCheckMiddleware, async (req, res) => {
@@ -392,12 +394,11 @@ router.get('/shop', (req, res) => {
                     "listCategory": docs,
                     "listProduct": pData,
                     ePID: epData.event_product_name,
+                    currentPage:  "Shop",
                 });
             })
         })
     });
-
-
     // const uemail = req.session.User['email'];
     // res.render('index', {
     //     user: uemail 

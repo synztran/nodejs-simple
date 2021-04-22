@@ -2,14 +2,19 @@
 .seperator-wrapper {
   width: 100%;
 }
+.seperator-wrapper {
+    position: relative;
+    top: 1%;
+}
 
 .seperator-wrapper .seperator {
   /*width: 70%;*/
-  width: 85.5%;
+  /*width: 85.5%;*/
+  width: 100%;
   margin: 0 auto;
   height: 5px;
-  animation: rotate 3s infinite linear;
-  -webkit-animation: rotate 3s infinite linear;
+  animation: rotate 3s infinite alternate;
+  -webkit-animation: rotate 3s infinite alternate;
 }
 @-webkit-keyframes rotate {
   from {

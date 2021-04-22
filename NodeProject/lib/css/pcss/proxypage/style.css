@@ -6,17 +6,21 @@
 }
  
 .main{
-	margin:2% 3%!important;
+	/*margin:5rem !important;*/
+	max-width: 70%;
+	margin: 5rem auto!important
+
 }
 .seperator-wrapper .seperator{
-	width: 85.5%!important
+	
 }
 .breadcrumb{
-	max-width: 85.5%!important
+	
 }
 .container{
-	max-width: 85.5%!important
+	/*max-width: 85.5%!important*/
 }
+
 /* --- Product Card ---- */
 #make-3D-space{
     position: relative;
@@ -461,6 +465,10 @@ div.shadow{
 /* .col-product:not(:nth-child(1)), .col-product:not(:nth-child(2)), .col-product:not(:nth-child(3)){
 	margin-top: 1%;
 } */
+.col-product{
+	/*padding-left: 0;
+	padding-right: 0;*/
+}
 .col-product:not(:first-child) + .col-product:not(:nth-child(2)) + .col-product:not(:nth-child(3)) + .col-product:not(:nth-child(4)) {
 	margin-top: 1%;
 }
@@ -707,7 +715,7 @@ div.shadow{
   }
   .title-li > hr:before{
 	  position: relative;
-	  bottom: 2px;
+	  bottom: 7px;
 	  content:" ";
 	display:inline-block;
 	width:15px;
@@ -717,9 +725,9 @@ div.shadow{
 	animation: KITTAnimBefore 1s infinite ease-in-out alternate;
    }
    .title-li > hr:after{
-	   position: relative;
-	  bottom: 2px;
-	  content:" ";
+	position: relative;
+	bottom: 7px;
+	content:" ";
 	display:inline-block;
 	width:15px;
 	height:15px;
@@ -776,6 +784,16 @@ div.shadow{
 	li.active .text{
 		color: white;
 	}
+	footer{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding:1rem 0;
+        background: #4568DC;
+        background: -webkit-linear-gradient(to right, #B06AB3, #4568DC);
+        background: linear-gradient(to right, #B06AB3, #4568DC);
+    }
   
 	/* amimation */
 	
@@ -1133,3 +1151,48 @@ div.shadow{
       and (orientation: landscape) { 
 
     }
+
+
+.box {
+	position: relative;
+  	display: inline-block;
+  	box-sizing: border-box;
+  	width: 100%;
+  	padding-bottom: 20%;
+  	/*margin: 0 2.5%;*/
+	/*background-color: #625AEE;*/
+}
+.box--1 span {
+	font-size: 1em;
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	animation: marquee 4s linear infinite;
+}
+.box--1 span &nth-child(1){
+	position: absolute;
+	left: -100%;
+	animation: marquee 4s 2s linear infinite;
+}
+.box--1 .line{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 34px;
+	overflow: hidden;
+	white-space: nowrap;
+	align-items: center;
+	justify-content: center;
+	background-color: #F1DF40;
+}
+@keyframes marquee {
+	0% {
+		left: 0;
+		transform: translateX(-100%);
+	}
+	100% {
+		left: 100px;
+		transform: translateX(200%))
+	}
+}
