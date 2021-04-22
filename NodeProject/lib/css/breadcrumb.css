@@ -18,7 +18,7 @@
     /*background-image: url('/api/docs/background/UIBkAT.jpg');*/
     background-image: url('/api/docs/background/bg-black.svg');
     background-repeat: repeat;
-    
+    background-color: unset!important
     
 }
 .container{
@@ -28,3 +28,137 @@
     max-width: 70%;
     padding: 0
 }
+
+/* === RESPONSIVE DEVICE ===*/
+
+    /* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 667px) 
+      and (-webkit-min-device-pixel-ratio: 2) { 
+        
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 667px) 
+      and (-webkit-min-device-pixel-ratio: 2)
+      and (orientation: portrait) { 
+        .breadcrumb{
+            max-width : 100%!important;
+        }
+        .container{
+            max-width: 100%!important
+        }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 667px) 
+      and (-webkit-min-device-pixel-ratio: 2)
+      and (orientation: landscape) { 
+        
+    }
+
+    /* ----------- iPhone 6+, 7+ and 8+ ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 414px) 
+      and (max-device-width: 736px) 
+      and (-webkit-min-device-pixel-ratio: 3) { 
+
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 414px) 
+      and (max-device-width: 736px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: portrait) { 
+        .breadcrumb{
+            max-width: 100%!important;
+        }
+        .container > button{
+          margin: 0!important
+        }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 414px) 
+      and (max-device-width: 736px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: landscape) { 
+        
+    }
+
+    /* ----------- iPhone X, Xs ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3) { 
+
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: portrait) { 
+        .breadcrumb{
+            max-width: 100%!important;
+        }
+         .container > button{
+          margin: 0!important
+        }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: landscape) { 
+        
+    }
+
+    /* ----------- iPhone Xr ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3) { 
+
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: portrait) { 
+        .breadcrumb{
+            max-width: 100%!important;
+        }
+         .container > button{
+          margin: 0!important
+        }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: landscape) { 
+
+    }

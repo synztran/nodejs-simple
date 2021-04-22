@@ -4009,7 +4009,7 @@ footer a {
   /* font-family: 'Mansalva', cursive; */
   font-family: 'Montserrat', sans-serif;
   line-height: 1;
-  font-size: 80.21px !important;
+  font-size: 80.21px;
 }
 
 .u-timer__period {

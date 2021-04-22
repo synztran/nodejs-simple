@@ -999,6 +999,9 @@ div.shadow{
       	.row{
       		display: flex;
       	}
+      	.main{
+      		max-width: 100%!important
+      	}
       	.title-li{
       		margin: 0;
       	}
@@ -1022,7 +1025,13 @@ div.shadow{
         	text-align: center!important
         }
         .status-product-container{
-        	display: none;
+        	/*display: none;*/
+        	top: 13.75rem!important;
+        	left: 0.25em!important;
+        	right: 0.25em!important;
+        }
+        .status-product-container:after{
+        	height: 30px!important;
         }
         .card_status-container .product-status{
         	/*max-width: none!important;*/
@@ -1054,6 +1063,47 @@ div.shadow{
         .product-price{
         	font-size: 16px!important;
         	margin: 10px 0 5px!important;
+        }
+        .product-status.status-live{
+        	margin: 0!important
+        }
+        .card_status-container{
+        	display: none!important
+        }
+        .product-info{
+        	padding: 5px!important
+        }
+        .product-card-description{
+        	font-size: 16px!important;
+        }
+        .product-card_product-name{
+        	font-size: 14px!important
+        }
+        .product-price{
+        	font-size: 12px!important
+        }
+        .col-product:nth-child(odd){
+        	padding-left: 1rem;
+        }
+        .col-product:nth-child(even){
+        	padding-right: 1rem
+        }
+        /* count time*/
+        .u-timer__section{
+        	padding: 0 2px!important
+        }
+        .u-timer__amount{
+        	font-size: 10px!important
+        }
+        .u-timer__period{
+        	font-size: 8px!important
+        }
+        .js-timer{
+        	padding: 10px 0 !important;
+        	padding-right: 5px;
+        }
+        .u-timer__amount{
+        	padding: 0 8px!important
         }
     }
 

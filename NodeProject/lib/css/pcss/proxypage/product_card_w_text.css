@@ -405,7 +405,7 @@
   /* font-family: 'Mansalva', cursive; */
   font-family: 'Montserrat', sans-serif;
   line-height: 1;
-  font-size: 16px !important;
+  font-size: 16px;
 }
 .u-timer__period{
   display: block;
