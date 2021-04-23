@@ -287,11 +287,16 @@
       and (max-device-width: 667px) 
       and (-webkit-min-device-pixel-ratio: 2)
       and (orientation: portrait) { 
+
         .main-container{
-            margin: 5rem 5rem
+            margin: 5rem 1rem;
+            width: 95%;
         }
         .reg-form{
           margin-top: 3rem;
+        }
+        .login-form, .reg-form{
+          padding: 2rem 2%!important;
         }
         .btn-login, .btn-register{
           float: none!important;
@@ -311,6 +316,9 @@
         .g-recaptcha > div > div > iframe{
           width: 300px;
           text-align: center;
+        }
+        footer{
+          position: relative;
         }
     }
 
@@ -364,7 +372,8 @@
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: portrait) { 
         .main-container{
-            margin: 5rem 4.5rem!important
+            margin: 5rem 1rem!important;
+            width: 95%
         }
         .reg-form{
             margin-top: 3rem
@@ -486,15 +495,43 @@
       and (max-device-width: 812px) 
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: portrait) { 
-        html, body {
-          background-repeat: repeat!important;
-        }
+       
     }
 
     /* Landscape */
     @media only screen 
       and (min-device-width: 375px) 
       and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: landscape) { 
+
+    }
+
+    /* ----------- iPhone Ipad ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 768px) 
+      and (max-device-width: 1200px) 
+      and (-webkit-min-device-pixel-ratio: 3) { 
+
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width : 768px) 
+      and (max-device-width : 1200px)  
+      and (orientation: portrait)
+    {
+      footer{
+        position: relative;
+      }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 768px) 
+      and (max-device-width: 1200px) 
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: landscape) { 
 

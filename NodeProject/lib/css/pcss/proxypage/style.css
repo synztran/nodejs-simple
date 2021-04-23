@@ -11,15 +11,52 @@
 	margin: 5rem auto!important
 
 }
-.seperator-wrapper .seperator{
-	
+.for-device{
+	display: none;
 }
-.breadcrumb{
-	
+.for-web{
+
 }
-.container{
-	/*max-width: 85.5%!important*/
+.hover-text {
+  /*position: relative;
+  display: inline-block;*/
+  border-bottom: 1px dotted;
+  line-height: 22px;
+  margin-bottom: 1rem!important;
+  cursor: context-menu;
 }
+.hover-text .tooltip-text {
+  visibility: hidden;
+  /*width: 120px;*/
+  max-width: max-content;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+  font-size: 12px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 1%;
+  right: 40%;
+  margin-left: -60px;
+}
+.hover-text .tooltip-text::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%; /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+
+.hover-text:hover .tooltip-text {
+  visibility: visible;
+}
+
 
 /* --- Product Card ---- */
 #make-3D-space{
@@ -1053,11 +1090,12 @@ div.shadow{
 
         }
         .product-card-description{
-        	margin-top: 10px!important;
-        	padding: 0 10px!important;
+        	/*margin-top: 10px!important;*/
+        	line-height: 20px
+        	/*padding: 0 10px!important;*/
         }
         .product-card_product-name, .product-price{
-        	padding: 0 10px!important;
+        	/*padding: 0 10px!important;*/
         	margin:0 0 !important;
         }
         .product-price{
@@ -1083,7 +1121,7 @@ div.shadow{
         	font-size: 12px!important
         }
         .col-product:nth-child(odd){
-        	padding-left: 1rem;
+        	padding-right: 1rem;
         }
         .col-product:nth-child(even){
         	padding-right: 1rem
@@ -1105,6 +1143,12 @@ div.shadow{
         .u-timer__amount{
         	padding: 0 8px!important
         }
+        .for-web{
+        	display: none;
+		}
+		.for-device{
+			display: unset;
+		}
     }
 
     /* Landscape */
@@ -1132,7 +1176,9 @@ div.shadow{
       and (max-device-width: 736px) 
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: portrait) { 
-        
+        .status-product-container{
+        	top: 14.75rem!important
+        }
     }
 
     /* Landscape */
