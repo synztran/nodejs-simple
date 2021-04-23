@@ -287,8 +287,19 @@
       and (max-device-width: 667px) 
       and (-webkit-min-device-pixel-ratio: 2)
       and (orientation: portrait) { 
+        .row{
+          padding: 0!important
+        }
+       
+        .container{
+          max-width: 100%!important;
+        }
+        .breadcrumb{
+          max-width: 100%!important;
+        }
         .main-container{
-            margin: 5rem 5rem
+            margin: 5rem 2rem;
+            width: 90%!important;
         }
         .reg-form{
           margin-top: 3rem;
@@ -311,6 +322,29 @@
         .g-recaptcha > div > div > iframe{
           width: 300px;
           text-align: center;
+        }
+        footer{
+          position: relative!important
+        }
+        .btn-facebook-cover{
+          padding:0.7rem;
+          height:50px;
+          border:1px solid #3b5998;
+          border-radius: 10px;
+          font-weight: 700;
+          background: url("/favicon/facebook-logo.svg") no-repeat 5px center;
+        }
+        .btn-google-cover{
+          padding:0.7rem;
+          height:50px;
+          font-weight: 700;
+          border:1px solid #db3236;
+          border-radius: 10px;
+          background: url("/favicon/google-logo.svg") no-repeat 15px center;
+          background-size: 30px 30px
+        }
+        .login-form, .reg-form{
+          padding: 2rem 2%!important;
         }
     }
 
@@ -364,7 +398,7 @@
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: portrait) { 
         .main-container{
-            margin: 5rem 4.5rem!important
+            margin: 5rem 2rem!important
         }
         .reg-form{
             margin-top: 3rem
