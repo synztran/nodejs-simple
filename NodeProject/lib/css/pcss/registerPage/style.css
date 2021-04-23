@@ -8,7 +8,7 @@
     }
     /* place holder*/
     ::placeholder {
-      font-size: :14px;
+      font-size:14px;
       /*padding-left: 1rem;*/
       opacity: 0.6!important; /* Firefox */
     }
@@ -293,7 +293,7 @@
        
         .container{
           max-width: 100%!important;
-        }
+        } 
         .breadcrumb{
           max-width: 100%!important;
         }
@@ -303,6 +303,9 @@
         }
         .reg-form{
           margin-top: 3rem;
+        }
+        .login-form, .reg-form{
+          padding: 2rem 2%!important;
         }
         .btn-login, .btn-register{
           float: none!important;
@@ -520,15 +523,43 @@
       and (max-device-width: 812px) 
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: portrait) { 
-        html, body {
-          background-repeat: repeat!important;
-        }
+       
     }
 
     /* Landscape */
     @media only screen 
       and (min-device-width: 375px) 
       and (max-device-width: 812px) 
+      and (-webkit-min-device-pixel-ratio: 3)
+      and (orientation: landscape) { 
+
+    }
+
+    /* ----------- iPhone Ipad ----------- */
+
+    /* Portrait and Landscape */
+    @media only screen 
+      and (min-device-width: 768px) 
+      and (max-device-width: 1200px) 
+      and (-webkit-min-device-pixel-ratio: 3) { 
+
+    }
+
+    /* Portrait */
+    @media only screen 
+      and (min-device-width : 768px) 
+      and (max-device-width : 1200px)  
+      and (orientation: portrait)
+    {
+      footer{
+        position: relative;
+      }
+    }
+
+    /* Landscape */
+    @media only screen 
+      and (min-device-width: 768px) 
+      and (max-device-width: 1200px) 
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: landscape) { 
 

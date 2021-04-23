@@ -211,7 +211,11 @@ html, body{
                                         <%= item.product_belong %></span>
                                     <div class="product-card-read"><a href="/shop/product/<%=item.category_url_name %>">more</a></div>
                                     <!-- $<%=item.min_price %> - $<%=item.max_price %> -->
-                                    <a readonly href="#" class="product-card-tag subtle product-price text-decorate-none" id="product_price_<%=key%>" data-toggle="tooltip" title=""></a>
+                                    <a href="#" class="product-card-tag subtle product-price text-decorate-none for-device" id="product_price_<%=key%>" data-toggle="tooltip" title=""></a>
+
+                                    <div class="hover-text product-card-tag subtle product-price hover-text text-right for-web">$<%=item.min_price %> - $<%=item.max_price %>
+                                        <span id="tooltip_price_<%=key%>" class="tooltip-text"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

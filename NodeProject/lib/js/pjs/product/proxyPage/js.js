@@ -33,6 +33,7 @@ $(document).ready(function() {
             $("#product_price_"+i).append(minPrice_format + ' - ' + maxPrice_format)
             $("#product_price_"+i).attr("title", fx(minPrice_format).from("USD").to("VND") + ' - '+ fx(maxPrice_format).from("USD").to("VND"))
             $("#product_price_"+i).attr("data-original-title",minPrice_toVND  + ' - '+ maxPrice_toVND)
+            $("#tooltip_price_"+i).html(minPrice_toVND  + ' - '+ maxPrice_toVND)
             
 
         }
