@@ -518,7 +518,7 @@ div.shadow{
  * # preloader - (_preloader-dots.scss)
  *
  * ------------------------------------------------------------------- */
- #preloader {
+ /*#preloader {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -566,7 +566,7 @@ div.shadow{
   
   #loader > div:nth-of-type(3) {
 	left: -15px;
-  }
+  }*/
   
   /* dots jump */
   .dots-jump > div {

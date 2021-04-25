@@ -50,6 +50,7 @@
     <link rel="stylesheet" type="text/css" href="/api/css/effect/rgb-wrapper/style.css">
     <link rel="stylesheet" type="text/css" href="/api/css/breadcrumb.css">
     <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/effect/preload.css">
     <!-- <link rel="stylesheet" href="/api/css/pcss/main.css"> -->
     <!-- script
     ================================================== -->
@@ -116,11 +117,25 @@ html, body{
         <span class="glyphicon glyphicon-repeat preload-icon rotating"></span>
     </div> -->
     <div id="preloader">
-        <div id="loader" class="dots-jump">
+        <!-- <div id="loader" class="dots-jump"> -->
+        <div id="loader">
+           <!--  <div></div>
             <div></div>
-            <div></div>
-            <div></div>
+            <div></div> -->
+            <!-- <div id="frame"> -->
+                <div id="circle"></div>
+                <div class="line left"></div>
+                <div class="line right"></div>
+                <div class="bracket left"></div>
+                <div class="bracket right"></div>
+                <div class="small top"><span class="upper">N</span>OOB</div>
+                <div id="big">Welcome</div>
+                <div class="small bottom"><span class="upper">S</span>tore</div>
+                <div class="hide top"></div>
+                <div class="hide bottom"></div>
+            <!-- </div> -->
         </div>
+
     </div>
     <% include ./../tips/subs/navbar %>
     <!-- </header> -->
