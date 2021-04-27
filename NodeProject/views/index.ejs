@@ -39,8 +39,10 @@
     <link rel="stylesheet" href="/api/css/pcss/main.css">
     <link rel="stylesheet" href="/api/css/pcss/customize.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/api/css/pcss/homePage/style.css">
     <link rel="stylesheet" type="text/css" href="/api/css/effect/preload.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css">
     <!-- script
     ================================================== -->
     <script src="/api/js/pjs/modernizr.js"></script>
@@ -117,7 +119,7 @@
                         <a id="login" href="./account" title="account">
                             <i class="fas fa-user"></i>&nbsp;
                             <span style="font-size: 14px;font-style: oblique;">
-                                <%= user %></span>
+                                <%= userName %></span>
                         </a>
                         <% } else { %>
                         <a id="login" href="./register" title="account">
@@ -127,7 +129,7 @@
                     </li>
                     <!-- <li><a class="smoothscroll" href="#cart" title="cart"><i class="fas fa-shopping-cart"></i>Cart(0)</a></li> -->
                 </ul>
-                <p>Perspiciatis hic praesentium nesciunt. Et neque a dolorum <a href='#0'>voluptatem</a> porro iusto sequi veritatis libero enim. Iusto id suscipit veritatis neque reprehenderit.</p>
+                <p>Feeling confused? For the first time visiting us. <br> Dont worry! Click on the link below, it will guide you around to know how to use us<br><a href='#0'>Click me please!!!</a></p>
                 <ul class="header-nav__social">
                     <li>
                         <a href="#0"><i class="fab fa-facebook"></i></a>
@@ -271,18 +273,18 @@
                 </div>
             </div> <!-- end home-content -->
             <ul class="home-social">
-                <% if(user!= null) { %>
+                <!-- <% if(user!= null) { %>
                 <li>
                     <a id="login" href="#"><i class="fas fa-user"></i><span>
-                            <%= user %></span></a>
+                            <%= userName %></span></a>
                 </li>
                 <% }else{ %>
                 <li>
                     <a id="login" href="#"><i class="fas fa-user"></i><span>Signin</span></a>
                 </li>
-                <% } %>
+                <% } %> -->
                 <li>
-                    <a href="/shop"><i class="fas fa-flag"></i><span>Shop</span></a>
+                    <a href="/shop"><i class="las la-store-alt fs-21"></i><span>Shop</span></a>
                 </li>
                 <li>
                     <a href="#0"> <i class="fas fa-users"></i><span>GroupBuy</span></a>

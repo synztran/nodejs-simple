@@ -215,6 +215,7 @@ router.get("/", function(req, res) {
                 EventProduct.findOne({}, function(errOne, eProductData){
                     getId = eProductData.event_product_name
                     Category.findOne({category_id: getId}, function(errTwo, getNameCategoryData){
+
                         getName = getNameCategoryData.category_name
                         if(EProductDocs.length > 0){
                             EProductDocs.forEach(function(item) {
@@ -234,14 +235,18 @@ router.get("/", function(req, res) {
                                         nameEventProduct: getName
                                     })
                                 } else {
-                                    res.render('index', {
-                                        user: req.session.User['email'],
-                                        listAdsProduct: docs,
-                                        listContent: ContentDocs,
-                                        EventProduct: EProductDocs,
-                                        images: imgBg,
-                                        date_start: item.date_start,
-                                        nameEventProduct: getName
+                                    Account.findOne({email:req.session.User['email']}, function(errAccount, getAccount){
+                                        console.log(getAccount)
+                                        res.render('index', {
+                                            user: req.session.User['email'],
+                                            userName: getAccount.fname + ' ' + getAccount.lname,
+                                            listAdsProduct: docs,
+                                            listContent: ContentDocs,
+                                            EventProduct: EProductDocs,
+                                            images: imgBg,
+                                            date_start: item.date_start,
+                                            nameEventProduct: getName
+                                        })
                                     })
                                 }
                             })

@@ -1,5 +1,10 @@
 $(document).ready(function(){
     // $("#tag-")
+    $('#reg_email, #email').on('keypress', function(e) {
+        if (e.which == 32) {
+            return false;
+        }
+    });
     $("#form-login" ).on( "submit", function( event ) {
         event.preventDefault();
     });
@@ -15,7 +20,8 @@ $(document).ready(function(){
                         icon: 'success',
                         title: 'Login Success',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 2000,
+                        allowOutsideClick: false
                     })
                     setTimeout(function(){
                         window.location.href = '/';
@@ -26,7 +32,8 @@ $(document).ready(function(){
                         icon: 'error',
                         title: 'Oops...',
                         text: 'Username or password is incorrect!',
-                        footer: '<a href="#">Why do I ha   ve this issue?</a>'
+                        footer: '<a href="#">Why do I ha   ve this issue?</a>',
+                        allowOutsideClick: false
                     })
             }
         })
@@ -48,7 +55,8 @@ $(document).ready(function(){
                 title: 'Oops...',
                 text: "Please fill your first name!!!",
                 showConfirmButton: false,
-                timer: 1000
+                timer: 1000,
+                allowOutsideClick: false
             })
         }
         if(lname == '' || lname == null){
@@ -58,7 +66,8 @@ $(document).ready(function(){
                 title: 'Oops...',
                 text: 'Please fill your last name!!!',
                 showConfirmButton: false,
-                timer: 1000
+                timer: 1000,
+                allowOutsideClick: false
             })
         }
         if(email == '' || email == null){
@@ -68,7 +77,8 @@ $(document).ready(function(){
                 title: 'Oops...',
                 text: 'Please fill your email!!!',
                 showConfirmButton: false,
-                timer: 1000
+                timer: 1000,
+                allowOutsideClick: false
             })
         }
         if(pw != cfpw){
@@ -78,7 +88,8 @@ $(document).ready(function(){
                 title: 'Oops...',
                 text: 'Password and Confirm Password not match!!!',
                 showConfirmButton: false,
-                timer: 1000
+                timer: 1000,
+                allowOutsideClick: false
             })     
         }
         if(grecaptcha && grecaptcha.getResponse().length > 0){
@@ -92,7 +103,8 @@ $(document).ready(function(){
                                 title: 'Register Success',
                                 text: 'Please check your email!!!',
                                 showConfirmButton: false,
-                                timer: 1500
+                                timer: 1500,
+                                allowOutsideClick: false
                             })
                             setTimeout(function(){
                                 window.location.href = '/';
@@ -105,7 +117,8 @@ $(document).ready(function(){
                             title: 'Oops...',
                             text: err.responseJSON.message,
                             showConfirmButton: false,
-                            timer: 1000
+                            timer: 1000,
+                            allowOutsideClick: false
                         })
                     }
                 })
@@ -115,7 +128,8 @@ $(document).ready(function(){
                 title: 'Oops...',
                text: 'Oops, you have to check the recaptcha !',
                showConfirmButton: false,
-               timer: 1000
+               timer: 1000,
+               allowOutsideClick: false
             })
         }
     })
