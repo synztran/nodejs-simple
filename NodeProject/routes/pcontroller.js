@@ -1265,9 +1265,37 @@ router.get("/fake_parent_select2", function(req, res){
 })
 router.get("/fake_parent_select2/:id", function(req, res){
     if(req.params.id == 1){
-        res.send([{id: 1, name: "Zone 1"}, {id:2,name:"Zone 2"}]);
+        res.send({
+          "results": [
+            {
+              "id": 1,
+              "text": "Zone 1"
+            },
+            {
+              "id": 2,
+              "text": "Zone 2"
+            }
+          ],
+          "pagination": {
+            "more": true
+          }
+        });
     }else{
-         res.send([{id: 3, name: "Zone 3"}, {id:4,name:"Zone 4"}]);
+        res.send({
+          "results": [
+            {
+              "id": 3,
+              "text": "Zone 3"
+            },
+            {
+              "id": 4,
+              "text": "Zone 4"
+            }
+          ],
+          "pagination": {
+            "more": true
+          }
+        });
     }
     
 })
