@@ -1260,6 +1260,18 @@ router.get("/drawCanvas", function(req, res){
 
 })
 
+router.get("/fake_parent_select2", function(req, res){
+    res.send([{id: 1, name: "Region 1"},{id: 2, name: "Region 2"}]);
+})
+router.get("/fake_parent_select2/:id", function(req, res){
+    if(req.params.id == 1){
+        res.send([{id: 1, name: "Zone 1"}, {id:2,name:"Zone 2"}]);
+    }else{
+         res.send([{id: 3, name: "Zone 3"}, {id:4,name:"Zone 4"}]);
+    }
+    
+})
+
 
 // ---------------------------------------------------------------------------------------------
 
