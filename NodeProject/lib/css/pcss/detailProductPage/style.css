@@ -1,0 +1,15 @@
+.select2-results__options li{
+	color: #000
+}
+.select2-selection__rendered{
+	color: #000
+}
+.select2-results__option--highlighted {
+    background: #575759;
+    color: #fff!important;
+}
+.main-container{
+	width: 70%;
+	margin: 5rem auto 2rem;
+	padding: 0 1rem;
+}

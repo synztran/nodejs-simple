@@ -394,7 +394,7 @@ router.get('/shop', (req, res) => {
     Category.find({}, function(err, docs) {
         Product.find({}, function(err, pData){
             EventProduct.findOne({}, function(err, epData){
-                console.log(epData)
+                // console.log(epData)
                 res.render("product/proxyPage", {
                     "listCategory": docs,
                     "listProduct": pData,
@@ -910,6 +910,7 @@ router.get('/shop/product/:id', async (req, res) => {
                         title: 'aaaa',
                         "detailsProduct": docs,
                         "Category": docs2,
+                        currentPage:  "Shop",
                     })
                 })
 

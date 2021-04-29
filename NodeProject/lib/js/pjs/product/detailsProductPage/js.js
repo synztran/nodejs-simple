@@ -4,7 +4,8 @@ $(document).ready(function() {
     //     new Zooming({
     //     }).listen('.img-zoomable')
     // })
-    new Zooming().listen('.img-zoomable')
+    $(".select2").select2({minimumResultsForSearch: -1})
+    new Zooming({bgColor: 'rgb(0,0,0)'}).listen('.img-zoomable')
     
      var currentDataImage = $('#lightSlider li');
      var currentImage = $('#lightSlider li img');
