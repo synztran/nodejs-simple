@@ -532,19 +532,20 @@ router.post("/account", async (req, res, next) => {
                         pass: 'gsrfewqfnplyltcz'
                     }
                 });
-                var link = "http://" + req.get('host') + "/verify?id=" + response.token
+                var link = "https://" + req.get('host') + "/verify?id=" + response.token;
+                var logo = "https://"+ req.get('host') + "/favicon/big_logo.png";
                 var mainOptions = {
-                    from: 'NoobStore',
+                    from: 'NoobStore <noobassembly@gmail.com>',
                     to: (req.body.email),
-                    subject: '[NoobStore] Please confirm your email address',
-                    text: 'You received mess from ' + (req.body.email),
-                    html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Hey ' + req.body.lname + ' ' + req.body.fname + ' !</b></p><p>Thanks for joining NoobStore.<br>To finish registration, please click the button below to verify your account.</p><p><div><a style="background: #007bff;padding: 9px;width: 200px;color: #fff;text-decoration: none;display: inline-block;font-weight: bold;text-align: center;letter-spacing: 0.5px;border-radius: 4px;" href=' + link + '>Verify email address</a></div><br><p>Once verified, you can join and get notification from NoobStore. If you have any problems, please contact us: noobassembly@gmail.com</p></p>'
+                    subject: '[NoobStore] Please verify your email address',
+                    text: 'You received message from ' + (req.body.email),
+                    html: "<img scr="+logo+" width='150' heigth='70'/><br><br><p style='font-family: 'Montserrat', sans-serif;font-weight: 600;font-size:18px'>Hi '+req.body.lname+',</p><br><p>We're happy you signed up for NoobStore.To finish registration, please confirm your email address.</p><br><p><div><a style='background: #007bff;padding: 9px;width: 200px;color: #fff;text-decoration: none;display: inline-block;font-weight: bold;text-align: center;letter-spacing: 0.5px;border-radius: 50px;' href=" + link + ">Verify now</a></div><br><br><p>Welcome to NoobStore!<br>The Noob Team</p><br><br><br><p>Once verified, you can join and get notification from NoobStore. If you have any problems, please contact us: noobassembly@gmail.com</p></p>"
                 }
 
                 transporter.sendMail(mainOptions, function(err, info) {
                     console.log(info)
                     if (err) {
-                        console.log(err);
+                        // console.log(err);
                         res.redirect('/');
                     } else {
                         console.log('Mess sent: ' + info.response);
