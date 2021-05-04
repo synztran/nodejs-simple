@@ -173,7 +173,7 @@
     * ------------------------------------------------------ */
     var ssSlickSlider = function() {
         
-        $('.testimonials__slider').slick({
+        $('.slick-slider').slick({
             arrows: false,
             dots: true,
             infinite: true,
@@ -226,7 +226,9 @@
     /* Active current Page
     * ------------------------------------------------------ */
     var activeNavbar = function() {
-        $("#tag-shop").addClass("active")
+        var getPage = window.location.pathname;
+        var formatPage = getPage.split("/");
+        $("#"+formatPage[1]).addClass("active")
     };
 
    /* Animate On Scroll

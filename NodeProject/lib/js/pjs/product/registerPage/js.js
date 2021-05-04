@@ -28,11 +28,12 @@ $(document).ready(function(){
                     },1500)
             },
             error: function(err, data){
+                var res = err.responseJSON
                 Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Username or password is incorrect!',
-                        footer: '<a href="#">Why do I ha   ve this issue?</a>',
+                        text: res.message,
+                        footer: '<a href="#">Why do I have this issue?</a>',
                         allowOutsideClick: false
                     })
             }

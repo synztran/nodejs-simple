@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/package/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="/package/slick/slick-theme.css">
     <!-- <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card.css"> -->
     <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card_w_text.css">
     <link rel="stylesheet" type="text/css" href="/api/css/effect/rgb-wrapper/style.css">
@@ -142,11 +143,11 @@ html, body{
     <% include ./../tips/subs/breadcrumb %>
     <!-- Breakcum-->
     <main class="main row">
-        <div style="height: 75vh;" class="col-md-2 sidebar-area">
+        <div style="height: 75vh;" class="col-xl-3 col-lg-3 col-md-2 sidebar-area">
             <sidebar class="sidebar">
             </sidebar>
         </div>
-        <div style="" class="col-md-10">
+        <div style="" class="col-xl-9 col-lg-9 col-md-12">
             <div class="title-li">
                 <p class="font-hello_jones">Shop </p>
                 <hr>
@@ -155,12 +156,12 @@ html, body{
             <article class="row">
                 <!-- <div class="row"> -->
                 <% listCategory.forEach(function(item, key){%>
-                <div class="col-xs-6 col-lg-4 col-md-6 col-sm-3 col-product ">
+                <div data-aos="fade-up" class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-product">
                     <div class="product-card-container">
                         <div class="card-product u-clearfix">
                             <!-- <div class="card-img">
                                 <a href="#">
-                                    <img onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" alt="" class="product-card-media" width="300" height="300"/>
+                                    <img onerror="this.onerror=null; this.src='/api/<data></data>ocs/trash/image-not-found.png'" src="/api/<%= item.pic_profile.path %>" alt="" class="product-card-media" width="300" height="300"/>
                                 </a>
                             </div> -->
                             <div class="product-card-body">
@@ -209,7 +210,9 @@ html, body{
                                         <% }else { %>
                                         <% } %>
                                         <img onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found_768.png'" src="/api/<%= item.pic_profile.path %>" alt="" class="product-card-media img-fix-scale" width="300" height="300" />
-                                        <% if(item.category_id == ePID){ %>
+                                        
+                                    </a>
+                                    <% if(item.category_id == ePID){ %>
                                             <div class="status-product-container">
                                                 <div class="status-product">
                                                     <div class="js-timer u-timer d-flex"></div>
@@ -217,7 +220,6 @@ html, body{
                                             </div>
                                         <%}else{%>
                                         <%}%>
-                                    </a>
                                 </div>
                                 <div class="product-info">
                                     <span class="product-card-description subtle">
@@ -258,6 +260,8 @@ html, body{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script type="text/javascript" src="/api/js/pjs/product/proxyPage/js.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/package/slick/slick.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="/api/js/pjs/main.js"></script>
 <script src="/api/js/pjs/vendors/jquery.countdown.js"></script>
 <script src="/package/vendors/jquery.countdown/jquery.countdown.min.js"></script>

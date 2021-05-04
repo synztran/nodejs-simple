@@ -38,9 +38,11 @@
     <link rel="stylesheet" type="text/css" href="/api/css/pcss/registerPage/style.css">
     <link rel="stylesheet" type="text/css" href="/api/css/breadcrumb.css">
     <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/effect/preload.css">
 
     <!-- font-->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css">
     <!-- ============= -->
     <!-- script
     ================================================== -->
@@ -55,13 +57,14 @@
 <body id="top">
     <!-- preloader
     ================================================== -->
-    <div id="preloader">
+    <!-- <div id="preloader">
         <div id="loader" class="dots-jump">
             <div></div>
             <div></div>
             <div></div>
         </div>
-    </div>
+    </div> -->
+    <% include ./../tips/subs/preload %>
     <!-- Navbar -->
     <% include ./../tips/subs/navbar %>
     <!-- </header> -->
@@ -88,13 +91,24 @@
                 <div class="separator px-6">Or</div>
                 <form id="form-login" class="form-not-mg px-6" autocomplete="on" method="post">
                     <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input autocomplete="on" type="email" name="email" class="form-control" id="email" value="" aria-describedby="emailHelp" placeholder="Email">
+                        <label for="email">Email</label>
+                        <!-- <input autocomplete="on" type="email" name="email" class="form-control" id="email" value="" aria-describedby="emailHelp" placeholder="Email"> -->
+                        <div class="input-group mb-3">
+                          <span class="input-group-text" id="emailHelp"><i class="las la-envelope la-2x"></i></span>
+                          <input autocomplete="on" type="email" name="email" class="form-control" id="email" value="" aria-describedby="emailHelp" placeholder="Email" aria-label="Email">
+                        </div>
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input autocomplete="on" type="password" name="password" class="form-control" id="password" value="" placeholder="Password">
+                        <!-- <input autocomplete="on" type="password" name="password" class="form-control" id="password" value="" placeholder="Password"> -->
+                        <div class="input-group mb-3">
+                          <span class="input-group-text" id="pwHelp"><i class="las la-lock la-2x"></i></span>
+                          <input autocomplete="on" type="password" name="password" class="form-control" id="password" value="" placeholder="Password" aria-describedby="pwHelp" aria-label="Password">
+                        </div>
+                        <div class="forgot-pw text-right">
+                            <a href="#">Forgot password?</a>
+                        </div>
                     </div>
                     <div class="btn-area">
                         <button type="submit" id="btn-login" class="btn btn-primary btn-login">Login</button>

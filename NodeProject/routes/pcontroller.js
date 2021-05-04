@@ -297,7 +297,8 @@ router.get("/time_event", function(req, res) {
 
 router.get('/register', async (req, res) => {
     res.render("product/registerPage",{
-        currentPage: "Login"
+        currentPage: "Login",
+        userName: null
     });
 })
 
@@ -395,12 +396,34 @@ router.get('/shop', (req, res) => {
         Product.find({}, function(err, pData){
             EventProduct.findOne({}, function(err, epData){
                 // console.log(epData)
-                res.render("product/proxyPage", {
-                    "listCategory": docs,
-                    "listProduct": pData,
-                    ePID: epData.event_product_name,
-                    currentPage:  "Shop",
-                });
+
+                if (req.session.User == null) {
+                    res.render('product/proxyPage', {
+                        user: null,
+                        userName: null,
+                        "listCategory": docs,
+                        "listProduct": pData,
+                        ePID: epData.event_product_name,
+                        currentPage:  "Shop",
+                    })
+                } else {
+                    Account.findOne({email:req.session.User['email']}, function(errAccount, getAccount){
+                        res.render('product/proxyPage', {
+                            user: req.session.User['email'],
+                            userName: getAccount.fname + ' ' + getAccount.lname,
+                            "listCategory": docs,
+                            "listProduct": pData,
+                            ePID: epData.event_product_name,
+                            currentPage:  "Shop",
+                        })
+                    })
+                }
+                // res.render("product/proxyPage", {
+                //     "listCategory": docs,
+                //     "listProduct": pData,
+                //     ePID: epData.event_product_name,
+                //     currentPage:  "Shop",
+                // });
             })
         })
     });
@@ -963,6 +986,7 @@ router.get('/service', (req, res) => {
         title: 'Keyboard Service',
         lubeTitle: 'Lube Service Form',
         assemTitle: 'Assembled Service Form',
+        currentPage: "Service"
     })
 })
 

@@ -7,7 +7,7 @@
  
 .main{
 	/*margin:5rem !important;*/
-	max-width: 70%;
+	max-width: 100%;
 	margin: 5rem auto!important
 
 }
@@ -503,6 +503,7 @@ div.shadow{
 	margin-top: 1%;
 } */
 .col-product{
+	margin-bottom: 3rem;
 	/*padding-left: 0;
 	padding-right: 0;*/
 }
@@ -822,7 +823,8 @@ div.shadow{
 		color: white;
 	}
 	footer{
-        position: fixed;
+        /*position: fixed;*/
+        position: relative;
         left: 0;
         bottom: 0;
         width: 100%;
@@ -1249,6 +1251,12 @@ div.shadow{
     }
 
 
+    /* responsive web*/
+    @media only screen and (max-width: 1px){
+
+    }
+
+
 .box {
 	position: relative;
   	display: inline-block;
@@ -1292,3 +1300,26 @@ div.shadow{
 		transform: translateX(200%))
 	}
 }
+
+
+/* responsvie */
+@media (min-width:768px){
+	.main{
+		/*max-width: 750px;*/
+	}
+}  
+@media (min-width: 992px){
+	/*.main{
+		max-width: 970px;
+	}*/
+}
+@media (min-width: 1200px) {
+	.main{
+		max-width: 1170px;
+	}
+}
+@media only screen and (max-width: 1024px){
+	.sidebar-area{
+		display: none;
+	}
+} 

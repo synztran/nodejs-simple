@@ -44,12 +44,26 @@
     input{
         font-size: 16px!important;
         height: 4rem!important;
-        background: rgba(255, 255, 255, 0.05)!important;
-        border-radius: 10px!important;
+        /*background: rgba(255, 255, 255, 0.05)!important;*/
+        background: transparent!important;
+        /*border-radius: 10px!important;*/
+        border-radius: 0!important;
         padding-left: 1rem!important;
+        caret-color: var(--label-color)!important;
+
     }
     input:focus{
         border-color: var(--main-page-color)!important
+    }
+    .input-group-text{
+      border: none;
+      border-radius: 0!important;
+      border-bottom: 1px solid #fff!important;
+      /*background: rgba(255,255,255,0.05);*/
+      background: transparent;
+    }
+    .input-group-text i{
+      color: #fff
     }
     *{
         margin: 0;
@@ -250,6 +264,13 @@
     }
     .btn-area{
         text-align: right;
+    }
+    .forgot-pw{
+      width: 100%;
+      
+    }
+    .forgot-pw a{
+      text-decoration: none
     }
 
     @media only screen and (max-width: 1180px){

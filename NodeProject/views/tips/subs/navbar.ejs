@@ -19,6 +19,16 @@
                     <!--<li id="tag-blog" class="nav-item"><a href="#" class="nav-link">Blog</a></li> -->
                     <li id="tag-contact" class="nav-item"><a href="https://www.facebook.com/messenger/noobassembly" target="_blank" class="nav-link">Contact</a></li>
                 </ul>
+                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <% if(userName){ %>
+                            <a class="nav-link text-decoration-none text-transform-lower" href="/account"><i class="las la-user"></i><%=userName%></a>
+                        <% }else{ %>
+                            <a class="nav-link text-decoration-none" href="/register"><i class="las la-user"></i>Login</a>
+                        <% } %>
+                       
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

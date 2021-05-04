@@ -12,7 +12,7 @@
     /*box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);*/
 }
 .breadcrumb{
-    max-width: 70%;
+    max-width: 100%;
     /*max-width: 85.5%;*/
     margin:0 auto;
     /*background-image: url('/api/docs/background/UIBkAT.jpg');*/
@@ -24,8 +24,10 @@
 .container{
     /* margin: 0;
     padding: 0; */
-    height: 90%;
-    max-width: 70%;
+    height: 100%;
+    /*max-width: 100%;*/
+    width: 100%;
+    max-width: 100%;
     padding: 0
 }
 
@@ -161,4 +163,21 @@
       and (-webkit-min-device-pixel-ratio: 3)
       and (orientation: landscape) { 
 
+    }
+
+
+    @media (min-width:768px){
+      .breadcrumb, .container{
+        max-width: 750px;
+      }
+    }  
+    @media (min-width: 992px){
+      .breadcrumb, .container{
+        max-width: 970px;
+      }
+    }
+    @media (min-width: 1200px) {
+      .breadcrumb, .container{
+        max-width: 1170px;
+      }
     }
