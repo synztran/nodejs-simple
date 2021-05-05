@@ -927,15 +927,31 @@ router.get('/shop/product/:id', async (req, res) => {
             // console.log(docs);
             if (docs[0]) {
                 Category.findOne({ category_id: docs[0].category_id }, function(err, docs2) {
-
-                    // console.log(docs);
-                    // console.log(docs2);
-                    res.render('product/detailsProductPage', {
-                        title: 'aaaa',
-                        "detailsProduct": docs,
-                        "Category": docs2,
-                        currentPage:  "Shop",
-                    })
+                    if (req.session.User == null) {
+                        res.render('product/detailsProductPage', {
+                            user: null,
+                            userName: null,
+                            "detailsProduct": docs,
+                            "Category": docs2,
+                            currentPage:  "Shop",
+                        })
+                    } else {
+                        Account.findOne({email:req.session.User['email']}, function(errAccount, getAccount){
+                            res.render('product/detailsProductPage', {
+                                user: req.session.User['email'],
+                                userName: getAccount.fname + ' ' + getAccount.lname,
+                                "detailsProduct": docs,
+                                "Category": docs2,
+                                currentPage:  "Shop",
+                            })
+                        })
+                    }
+                    // res.render('product/detailsProductPage', {
+                    //     title: 'aaaa',
+                    //     "detailsProduct": docs,
+                    //     "Category": docs2,
+                    //     currentPage:  "Shop",
+                    // })
                 })
 
             } else {
