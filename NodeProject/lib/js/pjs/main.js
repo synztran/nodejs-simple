@@ -173,7 +173,7 @@
     * ------------------------------------------------------ */
     var ssSlickSlider = function() {
         
-        $('.slick-slider').slick({
+        $('.testimonials__slider').slick({
             arrows: false,
             dots: true,
             infinite: true,
