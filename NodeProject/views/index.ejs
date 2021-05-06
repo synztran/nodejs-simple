@@ -637,7 +637,7 @@
                             <a href="https://www.facebook.com/noobassembly"><i class="fab fa-facebook"></i></a>
                         </li>
                         <li>
-                            <a href="https://www.facebook.com/messenger/noobassembly"><i class="fab fa-facebook-messenger"></i></a>
+                            <a href="https://m.me/noobassembly?ref=live-chat"><i class="fab fa-facebook-messenger"></i></a>
                         </li>
                         <!-- <li>
                         <a href="#0"><i class="fab fa-twitter"></i></a>
@@ -699,6 +699,33 @@
                 </div>
             </div>
         </div> <!-- end photoSwipe background -->
+        <!-- Messenger Plugin chat Code -->
+        <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
+      <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            xfbml            : true,
+            version          : 'v10.0'
+          });
+        };
+
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+      </script>
+
+      <!-- Your Plugin chat code -->
+      <div class="fb-customerchat"
+        attribution="page_inbox"
+        page_id="2148494311891572">
+      </div>
+
+          <!-- Your Plugin chat code -->
         <!-- Java Script
     ================================================== -->
         <script src="/api/js/pjs/jquery-3.2.1.min.js"></script>
@@ -711,4 +738,5 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
         <script src="/api/js/pjs/product/homePage/js.js"></script>
+        
 </body>

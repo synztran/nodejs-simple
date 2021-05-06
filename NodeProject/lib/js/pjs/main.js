@@ -228,7 +228,12 @@
     var activeNavbar = function() {
         var getPage = window.location.pathname;
         var formatPage = getPage.split("/");
-        $("#"+formatPage[1]).addClass("active")
+        if(formatPage.length > 2){
+            $("#"+formatPage[1]).addClass("active")
+        }else{
+
+        }
+        
     };
 
    /* Animate On Scroll
