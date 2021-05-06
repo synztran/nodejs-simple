@@ -253,10 +253,12 @@
         text-decoration: none;
     }
     footer{
-        position: fixed;
+        /*position: fixed;*/
+        position: relative;
         left: 0;
         bottom: 0;
         width: 100%;
+        margin-top: 5rem;
         padding:1rem 0;
         background: #4568DC;
         background: -webkit-linear-gradient(to right, #B06AB3, #4568DC);

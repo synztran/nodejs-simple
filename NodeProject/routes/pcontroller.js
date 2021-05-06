@@ -998,12 +998,28 @@ router.get('/shop/payment/:id', TokenUserCheckMiddleware, async (req, res) => {
 })
 // ==================================================================== //
 router.get('/service', (req, res) => {
-    res.render('product/servicePage', {
-        title: 'Keyboard Service',
-        lubeTitle: 'Lube Service Form',
-        assemTitle: 'Assembled Service Form',
-        currentPage: "Service"
-    })
+    if (req.session.User == null) {
+        res.render('product/servicePage', {
+            user: null,
+            userName: null,
+            title: 'Keyboard Service',
+            lubeTitle: 'Lube Service Form',
+            assemTitle: 'Assembled Service Form',
+            currentPage: "Service"
+        })
+    } else {
+        Account.findOne({email:req.session.User['email']}, function(errAccount, getAccount){
+            res.render('product/servicePage', {
+                user: req.session.User['email'],
+                userName: getAccount.fname + ' ' + getAccount.lname,
+                title: 'Keyboard Service',
+                lubeTitle: 'Lube Service Form',
+                assemTitle: 'Assembled Service Form',
+                currentPage: "Service"
+            })
+        })
+    }
+    
 })
 
 // function generateInvoice(invoice, filename, success, error) {
