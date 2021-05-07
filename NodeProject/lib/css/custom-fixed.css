@@ -17,6 +17,9 @@
   --ribbon-end-color: #911750;
   --ribbon-on-color: #57c443;
 
+  /*account*/
+  --account-green-color :#0AAF60;
+
 };
 .d-flex{
     display: flex;
@@ -603,11 +606,37 @@
     transform: translateZ(0);
 }
 /* navbar */
-.nav-item.active > a{
-    border-bottom: 1px solid var(--pantone-yellow-color)
+.nav-item.active > .nav-link:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--pantone-yellow-color)
+}
+.nav-item > .nav-link{
+    position: relative;
+}
+.nav-item > .nav-link:before{
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 1px;
+    /*border-bottom: 1px solid var(--pantone-yellow-color);*/
+    background-color: var(--pantone-yellow-color);
+    transition: width .5s cubic-bezier(0.25, 1, .25, 1);;
+}
+.nav-item > .nav-link:hover::before{
+    width: 100%;
+    left: 0;
+    right: auto;
 }
 .nav-item a:hover{
-    border-bottom: 1px solid var(--pantone-yellow-color)
+    /*border-bottom: 1px solid var(--pantone-yellow-color)*/
 }
 
 @media only screen and (min-width: 992px){
@@ -1034,4 +1063,38 @@ user-select: none;
 
 .text-transform-lower{
     text-transform: lowercase!important;
+}
+#sideBar-account{
+
+}
+#sideBar-account > li > .sideBar-title{
+    font-size: 22px;
+    font-style: italic;
+    color: #7E838D
+}
+#sideBar-account > li > .sideBar-balance{
+    font-size: 4rem;
+    font-weight: 1000;
+
+}
+#sideBar-account > li, #sideBar > li > a{
+    text-align: left;
+    color: #fff!important
+}
+#sideBar-account > li > a > span{
+    vertical-align: super;
+    padding-left: 3rem;
+    letter-spacing: .5rem;
+    font-weight: 400;
+}
+#sideBar-account > li:not(:first-child){
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+#sideBar-account > li.active > a{
+    color: var(--account-green-color)!important;
+    font-weight: 700;
+}
+#sideBar-account > li > a:hover{
+    color: var(--account-green-color)!important
 }

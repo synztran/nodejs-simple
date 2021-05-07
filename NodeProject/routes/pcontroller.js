@@ -316,21 +316,40 @@ router.get('/account', TokenUserCheckMiddleware, async (req, res) => {
     //     res.render('product/accountPage', {
     //         user: check.email
     //     }) 
-    // }                                             
-    console.log(req.cookies['uemail'])
-    if (req.cookies['x-token'] == null) {
-        res.render("product/registerPage");
+    // }            
+    if (req.session.User == null) {
+        // res.render('product/proxyPage', {
+        //     user: null,
+        //     userName: null,
+        //     "listCategory": docs,
+        //     "listProduct": pData,
+        //     ePID: epData.event_product_name,
+        //     currentPage:  "Shop",
+        // })
+        res.render("product/registerPage", {
+            user: null,
+            userName: null,
+            currentPage:  "Register",
+        });
     } else {
-        console.log(req.decoded)
-        // console.log(req.session.User);
-        // const uemail = req.session.User['email'];
-        var account = await Account.findOne({ email: req.decoded['email'] }).exec();
-        // console.log(account);
-        // console.log(account.fname)
-        res.render('product/accountPage', {
-            user: account
+        // var account = await Account.findOne({ email: req.decoded['email'] }).exec();
+        Account.findOne({email:req.session.User['email']}, function(errAccount, getAccount){
+            console.log(getAccount)
+            res.render('product/accountPage', {
+                user: getAccount,
+                userName: getAccount.fname + ' ' + getAccount.lname,
+                currentPage:  "Account",
+            })
         })
-    }
+    }                                 
+    // if (req.session.User == null) {
+    //     res.render("product/registerPage");
+    // } else {
+    //     var account = await Account.findOne({ email: req.decoded['email'] }).exec();
+    //     res.render('product/accountPage', {
+    //         user: account
+    //     })
+    // }
 })
 
 router.get('/chucnang', async (req, res) => {

@@ -14,12 +14,14 @@
     <link rel="stylesheet" href="/product/css/accountpage/style.css">
     <link rel="stylesheet" href="/package/intl-tel-input-master/build/css/intlTelInput.css">
     <link rel="stylesheet" href="/api/css/effect/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css">
     <!-- ============= -->
     <!-- font -->
     <link
       href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
       rel="stylesheet"
     />
+    <link rel="stylesheet" type="text/css" href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
@@ -42,10 +44,11 @@
         font-family: "Montserrat", sans-serif !important;
         /* height: 100%; */
         width: 100%;
-        background-image: url('/api/docs/background/UIBkAT.jpg');
+        /*background-image: url('/api/docs/background/UIBkAT.jpg');*/
+        background-image: url('/docs/background/bg-black.svg');
         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg'); */
         /* background-position: center center; */
-        background-repeat: no-repeat;
+        background-repeat:repeat;
         background-attachment: fixed;
         background-size: cover;
     }
@@ -166,53 +169,21 @@
 <body id="top">
     <!-- preloader
     ================================================== -->
-    <div id="preloader">
+    <!-- <div id="preloader">
         <div id="loader" class="dots-jump">
             <div></div>
             <div></div>
             <div></div>
         </div>
-    </div>
+    </div> -->
+    <% include ./../tips/subs/preload %>
     <!-- <header class="top"> -->
         
           
-    <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
-        <div class="container">
-            <a href="#" class="navbar-brand">
-                <!-- Logo Image -->
-                <img src="https://res.cloudinary.com/mhmd/image/upload/v1557368579/logo_iqjuay.png" width="45" alt="" class="d-inline-block align-middle mr-2">
-                <!-- Logo Text -->
-                <span class="text-uppercase font-weight-bold">Company</span>
-            </a>
-            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
-            <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="./" class="nav-link">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Proxy GrB</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Group Buy</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <% include ./../tips/subs/navbar %>
     <!-- </header> -->
    
-    <nav class="before-breadcrumb" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
-            <li class="breadcrumb-item active" aria-current="page">Account</li>
-        </ol>
-    </nav>
-    <section style="position: relative; top:1%" class="seperator-wrapper">
-        <div class="seperator gradient">
-        </div>
-    </section>
+    <% include ./../tips/subs/breadcrumb %>
     <!-- This is a reverse engineering of the "Hyperspace"
      design from HTML5 Up! https://html5up.net/hyperspace -->
     <main class="main row">
@@ -221,7 +192,7 @@
         </div>
         <div class="col-lg-9 col-md-9 col-large-1200">
             <div class="title-li">
-                <p style="">user details</p>
+                <p style="">Details</p>
                 <hr>
             </div>
             <article class="container">

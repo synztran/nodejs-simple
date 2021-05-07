@@ -1,4 +1,29 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+:root{
+  --pantone-yellow-color: #EFC050;
+  --pantone-classic-blue-color: #0F4C81;
+  --page-text-color: wheat;
+  --page-classic-text-color: #fff;
+  --page-background-color: #363a40;
+  --page-nude-color: #F5deb3;
+
+  /* for ribbon */
+  --default-right: 10px;
+  --default-top: -2px;
+  --default-color: #fd9c2e;
+  --default-width: 35px;
+  --default-height: 45px;
+
+  --ribbon-ic-color: #2ca7d8;
+  --ribbon-end-color: #911750;
+  --ribbon-on-color: #57c443;
+
+  /*account*/
+  --account-green-color :#0AAF60;
+
+};
+
+
 html, label, b {
     font-family: "Montserrat", sans-serif !important;
     /* min-height: 100%; */
@@ -108,9 +133,9 @@ html, body{
 .title-li p{
     line-height: 1;
     font-size: 32px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     margin-bottom:0rem;
-    color: wheat;
+    color: var(--account-green-color);
     font-weight: bolder;
 	letter-spacing: 3px;
 }
@@ -241,7 +266,8 @@ html, body{
   .title-container-user-info b{
   	font-size: 22px;
   	font-weight: bold;
-	color: white
+	   color: white;
+     border-bottom: 1px solid var(--pantone-yellow-color)
   }
   .title-container-user-info{
      color: white;
