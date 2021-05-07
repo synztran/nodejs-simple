@@ -86,7 +86,7 @@
 .product-card-body {
   display: inline-block;
   float: right;
-  width: 300px;
+  width: 100%;
   position: relative;
   /*padding: 10px;*/
   /*color: var(--pantone-classic-blue-color)*/
@@ -346,11 +346,13 @@
     position: absolute;
     transition: background .3s;
     text-align: center;
-    left: 1em;
-    right: 1em;
+    left: 0.5em;
+    right: 0.5em;
     /*padding: 0.25em 0;*/
-    top: 13.5em;
-    height: 10px;
+    /*top: 13.5em;*/
+    bottom: 0;
+    /*height: 10px;*/
+    height: 205px;
 }
 .status-product-container:after{
   content: '';
@@ -376,7 +378,7 @@
   justify-content: center;
 }
 .u-timer__section{
-  padding: 0 10px;
+  padding: 0 5px;
   text-align: center;
   display: inline-block;
   position: relative
@@ -445,6 +447,7 @@
 
 /* Ribbon Produdct */
 .ribbon{
+  display: none;
   position: absolute;
   right: var(--default-right);
   top: var(--default-top);

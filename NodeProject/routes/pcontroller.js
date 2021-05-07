@@ -297,7 +297,8 @@ router.get("/time_event", function(req, res) {
 
 router.get('/register', async (req, res) => {
     res.render("product/registerPage",{
-        currentPage: "Login"
+        currentPage: "Login",
+        userName: null
     });
 })
 
@@ -394,13 +395,35 @@ router.get('/shop', (req, res) => {
     Category.find({}, function(err, docs) {
         Product.find({}, function(err, pData){
             EventProduct.findOne({}, function(err, epData){
-                console.log(epData)
-                res.render("product/proxyPage", {
-                    "listCategory": docs,
-                    "listProduct": pData,
-                    ePID: epData.event_product_name,
-                    currentPage:  "Shop",
-                });
+                // console.log(epData)
+
+                if (req.session.User == null) {
+                    res.render('product/proxyPage', {
+                        user: null,
+                        userName: null,
+                        "listCategory": docs,
+                        "listProduct": pData,
+                        ePID: epData.event_product_name,
+                        currentPage:  "Shop",
+                    })
+                } else {
+                    Account.findOne({email:req.session.User['email']}, function(errAccount, getAccount){
+                        res.render('product/proxyPage', {
+                            user: req.session.User['email'],
+                            userName: getAccount.fname + ' ' + getAccount.lname,
+                            "listCategory": docs,
+                            "listProduct": pData,
+                            ePID: epData.event_product_name,
+                            currentPage:  "Shop",
+                        })
+                    })
+                }
+                // res.render("product/proxyPage", {
+                //     "listCategory": docs,
+                //     "listProduct": pData,
+                //     ePID: epData.event_product_name,
+                //     currentPage:  "Shop",
+                // });
             })
         })
     });
@@ -532,19 +555,20 @@ router.post("/account", async (req, res, next) => {
                         pass: 'gsrfewqfnplyltcz'
                     }
                 });
-                var link = "http://" + req.get('host') + "/verify?id=" + response.token
+                var link = "https://" + req.get('host') + "/verify?id=" + response.token;
+                var logo = "https://"+ req.get('host') + "/favicon/big_logo.png";
                 var mainOptions = {
-                    from: 'NoobStore',
+                    from: 'NoobStore <noobassembly@gmail.com>',
                     to: (req.body.email),
-                    subject: '[NoobStore] Please confirm your email address',
-                    text: 'You received mess from ' + (req.body.email),
-                    html: '<p style="font-size: 32px;line-heigth: 18px;border-bottom: 1px solid silver"><b>Hey ' + req.body.lname + ' ' + req.body.fname + ' !</b></p><p>Thanks for joining NoobStore.<br>To finish registration, please click the button below to verify your account.</p><p><div><a style="background: #007bff;padding: 9px;width: 200px;color: #fff;text-decoration: none;display: inline-block;font-weight: bold;text-align: center;letter-spacing: 0.5px;border-radius: 4px;" href=' + link + '>Verify email address</a></div><br><p>Once verified, you can join and get notification from NoobStore. If you have any problems, please contact us: noobassembly@gmail.com</p></p>'
+                    subject: '[NoobStore] Please verify your email address',
+                    text: 'You received message from ' + (req.body.email),
+                    html: "<img src='"+logo+"' width='150' height='70'/><br><br><p style='font-weight: 600;font-size:22px'>Hi <b>"+req.body.lname+"</b>,</p><br><p style='font-size:18px'>We're happy you signed up for NoobStore.To finish registration, please confirm your email address.</p><br><p><div><a style='background: #007bff;padding: 9px;width: 200px;color: #fff;text-decoration: none;display: inline-block;font-weight: bold;text-align: center;letter-spacing: 0.5px;border-radius: 50px;font-size:20px' href=" + link + ">Verify now</a></div><br><p style='font-size:18px'>Welcome to NoobStore!</p><br><br><p style='font-size:18px'>Once verified, you can join and get notification from NoobStore. If you have any problems, please contact us: noobassembly@gmail.com</p></p>"
                 }
 
                 transporter.sendMail(mainOptions, function(err, info) {
                     console.log(info)
                     if (err) {
-                        console.log(err);
+                        // console.log(err);
                         res.redirect('/');
                     } else {
                         console.log('Mess sent: ' + info.response);
@@ -903,14 +927,31 @@ router.get('/shop/product/:id', async (req, res) => {
             // console.log(docs);
             if (docs[0]) {
                 Category.findOne({ category_id: docs[0].category_id }, function(err, docs2) {
-
-                    // console.log(docs);
-                    // console.log(docs2);
-                    res.render('product/detailsProductPage', {
-                        title: 'aaaa',
-                        "detailsProduct": docs,
-                        "Category": docs2,
-                    })
+                    if (req.session.User == null) {
+                        res.render('product/detailsProductPage', {
+                            user: null,
+                            userName: null,
+                            "detailsProduct": docs,
+                            "Category": docs2,
+                            currentPage:  "Shop",
+                        })
+                    } else {
+                        Account.findOne({email:req.session.User['email']}, function(errAccount, getAccount){
+                            res.render('product/detailsProductPage', {
+                                user: req.session.User['email'],
+                                userName: getAccount.fname + ' ' + getAccount.lname,
+                                "detailsProduct": docs,
+                                "Category": docs2,
+                                currentPage:  "Shop",
+                            })
+                        })
+                    }
+                    // res.render('product/detailsProductPage', {
+                    //     title: 'aaaa',
+                    //     "detailsProduct": docs,
+                    //     "Category": docs2,
+                    //     currentPage:  "Shop",
+                    // })
                 })
 
             } else {
@@ -957,11 +998,28 @@ router.get('/shop/payment/:id', TokenUserCheckMiddleware, async (req, res) => {
 })
 // ==================================================================== //
 router.get('/service', (req, res) => {
-    res.render('product/servicePage', {
-        title: 'Keyboard Service',
-        lubeTitle: 'Lube Service Form',
-        assemTitle: 'Assembled Service Form',
-    })
+    if (req.session.User == null) {
+        res.render('product/servicePage', {
+            user: null,
+            userName: null,
+            title: 'Keyboard Service',
+            lubeTitle: 'Lube Service Form',
+            assemTitle: 'Assembled Service Form',
+            currentPage: "Service"
+        })
+    } else {
+        Account.findOne({email:req.session.User['email']}, function(errAccount, getAccount){
+            res.render('product/servicePage', {
+                user: req.session.User['email'],
+                userName: getAccount.fname + ' ' + getAccount.lname,
+                title: 'Keyboard Service',
+                lubeTitle: 'Lube Service Form',
+                assemTitle: 'Assembled Service Form',
+                currentPage: "Service"
+            })
+        })
+    }
+    
 })
 
 // function generateInvoice(invoice, filename, success, error) {
@@ -1258,6 +1316,46 @@ router.post('/service/invoice', async(req, res) => {
 router.get("/drawCanvas", function(req, res){
     res.render('drawCanvas/view/draw')
 
+})
+
+router.get("/fake_parent_select2", function(req, res){
+    res.send([{id: 1, name: "Region 1"},{id: 2, name: "Region 2"}]);
+})
+router.get("/fake_parent_select2/:id", function(req, res){
+    if(req.params.id == 1){
+        res.send({
+          "results": [
+            {
+              "id": 1,
+              "text": "Zone 1"
+            },
+            {
+              "id": 2,
+              "text": "Zone 2"
+            }
+          ],
+          "pagination": {
+            "more": true
+          }
+        });
+    }else{
+        res.send({
+          "results": [
+            {
+              "id": 3,
+              "text": "Zone 3"
+            },
+            {
+              "id": 4,
+              "text": "Zone 4"
+            }
+          ],
+          "pagination": {
+            "more": true
+          }
+        });
+    }
+    
 })
 
 

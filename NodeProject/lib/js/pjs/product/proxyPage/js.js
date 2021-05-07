@@ -130,7 +130,7 @@ $(document).ready(function() {
         setTimeout(function() { isAnimating = false; }, 300);
     });
 
-    $(window).load(function() {
+    $(window).on('load', function() {
         $('body').removeClass('preloading');
         $('#preload').delay(1000).fadeOut('fast');
     });

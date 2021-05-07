@@ -1,6 +1,13 @@
     :root {
       --label-color: wheat;
       --main-page-color: #6b3792;
+      --white: #FCFCFC;
+      --gray: #CBCDD3;
+      --dark: #777777;
+      --error: #EF8D9C;
+      --orange: #FFC39E;
+      --success: #B0DB7D;
+      --secondary: #99DBB4;
     }
     @font-face{
         font-family: 'hello_jones';
@@ -44,12 +51,26 @@
     input{
         font-size: 16px!important;
         height: 4rem!important;
-        background: rgba(255, 255, 255, 0.05)!important;
-        border-radius: 10px!important;
+        /*background: rgba(255, 255, 255, 0.05)!important;*/
+        background: transparent!important;
+        /*border-radius: 10px!important;*/
+        border-radius: 0!important;
         padding-left: 1rem!important;
+        caret-color: var(--label-color)!important;
+
     }
     input:focus{
         border-color: var(--main-page-color)!important
+    }
+    .input-group-text{
+      border: none;
+      border-radius: 0!important;
+      border-bottom: 1px solid #fff!important;
+      /*background: rgba(255,255,255,0.05);*/
+      background: transparent;
+    }
+    .input-group-text i{
+      color: #fff
     }
     *{
         margin: 0;
@@ -232,10 +253,12 @@
         text-decoration: none;
     }
     footer{
-        position: fixed;
+        /*position: fixed;*/
+        position: relative;
         left: 0;
         bottom: 0;
         width: 100%;
+        margin-top: 5rem;
         padding:1rem 0;
         background: #4568DC;
         background: -webkit-linear-gradient(to right, #B06AB3, #4568DC);
@@ -250,6 +273,46 @@
     }
     .btn-area{
         text-align: right;
+    }
+    .forgot-pw{
+      width: 100%;
+      
+    }
+    .forgot-pw a{
+      text-decoration: none
+    }
+    .swal2-show{
+      border-radius: 20px!important;
+    }
+    .swal2-styled{
+      padding: 0 3rem!important
+    }
+    .swal2-title{
+      width: 100%;
+      /*margin-bottom: 5rem!important;*/
+    }
+    .swal2-confirm, .swal2-cancel{
+      border-radius: 10px!important
+    }
+    .swal2-cancel{
+      text-transform: uppercase;
+      letter-spacing: 0.5rem;
+      background: #fff!important;
+      color: #e96075!important;
+      font-size: 18px!important;
+      box-shadow: 2px 2px 10px rgb(119 119 119 / 50%);
+      transition: all .5s ease-in-out;
+      outline: none!important;
+      border: none!important
+    }
+    .swal2-cancel:hover{
+      background: darken(var(--white), 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+    .swal2-toast > .swal2-header > .swal2-title{
+      font-size: 20px!important;
+      font-weight: 700;
     }
 
     @media only screen and (max-width: 1180px){
@@ -564,3 +627,114 @@
       and (orientation: landscape) { 
 
     }
+
+
+    /* custom sweetalert*/
+    .face {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: var(--white);
+  border-radius: 50%;
+  border: 1px solid var(--dark);
+  top: 21%;
+  left: 37.5%;
+  z-index: 2;
+  animation: bounce 1s ease-in infinite;
+}
+    .face2 {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: var(--white);
+  border-radius: 50%;
+  border: 1px solid var(--dark);
+  top: 21%;
+  left: 37.5%;
+  z-index: 2;
+  animation: roll 3s ease-in-out infinite;
+}
+
+.eye {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--dark);
+  border-radius: 50%;
+  top: 40%;
+  left: 20%;
+}
+
+.eright {
+  left: 68%;
+}
+
+.mouth {
+  position:absolute;
+  top: 43%;
+  left: 41%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.happy {
+  border: 2px solid;
+  border-color: transparent var(--dark) var(--dark) transparent;
+  transform: rotate(45deg);
+}
+.sad {
+  top: 49%;
+  border: 2px solid;
+  border-color: var(--dark) transparent transparent var(--dark);
+  transform: rotate(45deg);
+}
+.shadow {
+  position: absolute;
+  width: 40px;
+  height: 5px;
+  opacity: .5;
+  background: var(--dark);
+  left: 40%;
+  /*top: 43%;*/
+  bottom: -45px;
+  border-radius: 50%;
+  z-index: 1;
+}
+.move {
+  animation: move 3s ease-in-out infinite;
+}
+@keyframes bounce {
+  50% {
+     transform: translateY(-10px);
+  }
+}
+@keyframes scale {
+  50% {
+    transform: scale(0.9);
+  }
+}
+@keyframes roll {
+  0% {
+    transform: rotate(0deg);
+    left: 20%;
+  }
+  50% {
+    left: 60%;
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+    left: 20%;
+  }
+}
+@keyframes move {
+  0% {
+    left: 20%;
+  }
+  50% {
+    left: 60%;
+  }
+  100% {
+    left: 20%;
+  }
+}

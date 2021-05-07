@@ -17,22 +17,33 @@ $(document).ready(function(){
             data: {email: email, password: pw},
             success: function(res, data){
                 Swal.fire({
-                        icon: 'success',
-                        title: 'Login Success',
-                        showConfirmButton: false,
-                        timer: 2000,
-                        allowOutsideClick: false
-                    })
+                  position: 'bottom-end',
+                  title: '<div class="face"><div class="eye"></div><div class="eye eright"></div><div class="mouth happy"></div></div>',
+                  html: '<div class="" style="margin-top:5rem;text-transform: uppercase;letter-spacing: 0.5rem;font-size: 24px;color:#fff;line-height: 3rem;font-weight: 700">success!</div><br><div class="" style="font-size:18px;font-weight: 700;">Yay, Welcome to us!!!</div>',
+                  background: 'linear-gradient(to bottom right, var(--success) 40%, var(--secondary) 100%)',
+                  backdrop:`rgba(0,0,0,0.8)`,
+                  showConfirmButton: false,
+                  allowOutsideClick: false,
+                  timer: 2000
+                })
+                
                     setTimeout(function(){
                         window.location.href = '/';
                     },1500)
             },
             error: function(err, data){
+                var res = err.responseJSON
                 Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Username or password is incorrect!',
-                        footer: '<a href="#">Why do I ha   ve this issue?</a>',
+                        title: '<div class="face2"><div class="eye"></div><div class="eye eright"></div><div class="mouth sad"></div></div><div class="shadow move"></div>',
+                        html: '<div class="" style="margin-top:5rem;text-transform: uppercase;letter-spacing: 0.5rem;font-size: 24px;color:#fff;line-height: 3rem;font-weight: 700">error!</div><br><div class="" style="font-size:18px;font-weight: 700;">'+res.message+'</div>',
+                        padding: '3em',
+                        width: 400,
+                        text: res.message,
+                        background: 'linear-gradient(to bottom right, #EF8D9C 40%, #FFC39E 100%)',
+                        backdrop:`rgba(0,0,0,0.8)`,
+                        showConfirmButton: false,
+                        showCancelButton: true,
+                        cancelButtonText: `try again`,
                         allowOutsideClick: false
                     })
             }
