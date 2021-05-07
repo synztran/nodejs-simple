@@ -1,3 +1,23 @@
+:root{
+  --pantone-yellow-color: #EFC050;
+  --pantone-classic-blue-color: #0F4C81;
+  --page-text-color: wheat;
+  --page-classic-text-color: #fff;
+  --page-background-color: #363a40;
+  --page-nude-color: #F5deb3;
+
+  /* for ribbon */
+  --default-right: 10px;
+  --default-top: -2px;
+  --default-color: #fd9c2e;
+  --default-width: 35px;
+  --default-height: 45px;
+
+  --ribbon-ic-color: #2ca7d8;
+  --ribbon-end-color: #911750;
+  --ribbon-on-color: #57c443;
+
+};
 .d-flex{
     display: flex;
 }
@@ -581,4 +601,19 @@
     -ms-transform: translateZ(0); /* IE 9 */
     -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
     transform: translateZ(0);
+}
+/* navbar */
+.nav-item.active > a{
+    border-bottom: 1px solid var(--pantone-yellow-color)
+}
+.nav-item a:hover{
+    border-bottom: 1px solid var(--pantone-yellow-color)
+}
+
+@media only screen and (min-width: 992px){
+    .navbar-expand-lg .navbar-nav .nav-link{
+        margin-left: .5rem;
+        margin-right: .5rem;
+        padding: 0!important
+    }
 }
