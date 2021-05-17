@@ -18,7 +18,7 @@
   --ribbon-on-color: #57c443;
 
   /*account*/
-  --account-green-color :#0AAF60;
+  --account-green-color :#29e0a2;
 
 };
 .d-flex{
@@ -41,6 +41,12 @@
 }
 .w-10{
     width: 10%;
+}
+.w-unset{
+    width: unset!important
+}
+.h-unset{
+    height: unset!important;
 }
 .max-w-100{
     max-width: 100%;

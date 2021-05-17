@@ -16,7 +16,7 @@ $(document).ready(function() {
 
     });
 
-    $('.logout').on('click', function(e){
+    $('#logOut').on('click', function(e){
         e.preventDefault();
         Swal.fire({
             title: 'Are you sure?',
