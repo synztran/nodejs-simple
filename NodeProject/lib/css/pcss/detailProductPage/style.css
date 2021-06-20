@@ -13,3 +13,8 @@
 	margin: 5rem auto 2rem;
 	padding: 0 1rem;
 }
+.fixed-slider_product{
+	height: max-content;
+	position: sticky;
+	top: 10rem;
+}
