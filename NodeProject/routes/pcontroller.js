@@ -101,6 +101,7 @@ router.post("/login", async (req, res, next) => {
     console.log(req.ip);
     try {
         var account = await Account.findOne({ email: (req.body.email).toLowerCase() }).exec();
+        console.log(account)
         var active = await Account.findOne({ $and: [{ email: (req.body.email).toLowerCase() }, { active: true }] });
 
         // console.log(account);
@@ -163,7 +164,8 @@ router.post("/login", async (req, res, next) => {
             email: account['email'],
             fname: account['fname'],
             lname: account['lname'],
-            id: account['_id']
+            id: account['_id'],
+            shipping_at: account['shipping_at']
         }
 
         req.session.save(function(err) {
@@ -866,7 +868,6 @@ router.post('/history', async (req, res) => {
 })
 
 router.post('/shop/payment/joingb', TokenUserCheckMiddleware, async (req, res) => {
-    console.log(req.body)
     // console.log(req.decoded);
     var uemail = req.decoded['email']
     try {
@@ -1016,16 +1017,17 @@ router.get('/shop/payment/:id', TokenUserCheckMiddleware, async (req, res) => {
     }
 })
 // ==================================================================== //
-router.get('/service', (req, res) => {
+router.get('/service', TokenUserCheckMiddleware, (req, res) => {
     if (req.session.User == null) {
-        res.render('product/servicePage', {
-            user: null,
-            userName: null,
-            title: 'Keyboard Service',
-            lubeTitle: 'Lube Service Form',
-            assemTitle: 'Assembled Service Form',
-            currentPage: "Service"
-        })
+        // res.render('product/servicePage', {
+        //     user: null,
+        //     userName: null,
+        //     title: 'Keyboard Service',
+        //     lubeTitle: 'Lube Service Form',
+        //     assemTitle: 'Assembled Service Form',
+        //     currentPage: "Service"
+        // })
+         res.redirect('/register')
     } else {
         Account.findOne({email:req.session.User['email']}, function(errAccount, getAccount){
             res.render('product/servicePage', {
@@ -1127,8 +1129,10 @@ router.get('/service', (req, res) => {
 
 
 
-router.post('/service/invoice', async(req, res) => {
-    console.log(req.body)
+router.post('/service/invoice', TokenUserCheckMiddleware, async(req, res) => {
+    var userFirstName = req.session.User['fname'];
+    var userLastName = req.session.User['lname']
+    var userEmail = req.session.User['email'];
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     var customUrl = req.protocol + '://' + req.get('host') + "/invoice/"
     try {
@@ -1149,7 +1153,6 @@ router.post('/service/invoice', async(req, res) => {
                 var file = fs.createWriteStream('./invoice/' + filename);
                 var url = customUrl + filename;
                 // var filePath = '/invoice/'+ filename
-                console.log(url)
                 var req = https.request(options, function(res) {
                     res.on('data', function(chunk) {
                             file.write(chunk);
@@ -1200,8 +1203,8 @@ router.post('/service/invoice', async(req, res) => {
 
             }
 
-            var customerName = 'abc';
-            var customerMail = "test@abc.com"
+            var customerName = userLastName + ' ' + userLastName;
+            var customerMail = userEmail;
             const assem_service = "Assembled Service"
             const lube_service = "Lube Service"
             const buy_service = "Buy Accesssories"
