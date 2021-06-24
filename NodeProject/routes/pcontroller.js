@@ -1259,7 +1259,7 @@ router.post('/service/invoice', TokenUserCheckMiddleware, async(req, res) => {
             
 
             var invoice = {
-                logo: "https://noobstore.xyz/favicon/big_logo.png",
+                logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
                 from: "NoobStore\nnoobassembly@gmail.com\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
                 to: customerName + '\n' + customerMail,
                 currency: "vnd",
