@@ -1307,16 +1307,17 @@ router.post('/service/invoice', TokenUserCheckMiddleware, async(req, res) => {
                 //     }
                 //   ]
             };
+            setTimeout(function(){
+                generateInvoice(invoice, new Date().toISOString().replace(/:/g, '-') + invoice.number + '.pdf', function() {
+                    // console.log("Saved invoice to invoice.pdf");
+                    // console.log('./invoice/'+ invoice.number+'.pdf')
 
-            generateInvoice(invoice, new Date().toISOString().replace(/:/g, '-') + invoice.number + '.pdf', function() {
-                // console.log("Saved invoice to invoice.pdf");
-                // console.log('./invoice/'+ invoice.number+'.pdf')
 
-
-                // res.download(path.join(__dirname, '..', 'invoice', invoice.number+ '.pdf'))
-            }, function(error) {
-                console.error(error);
-            });
+                    // res.download(path.join(__dirname, '..', 'invoice', invoice.number+ '.pdf'))
+                }, function(error) {
+                    console.error(error);
+                });
+            }, 1000)
 
         })
             db.collection('couters').findAndModify({
