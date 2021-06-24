@@ -1018,7 +1018,6 @@ router.get('/shop/payment/:id', TokenUserCheckMiddleware, async (req, res) => {
 })
 // ==================================================================== //
 router.get('/service', TokenUserCheckMiddleware, (req, res) => {
-    // console.log(req.get('host'))
     if (req.session.User == null) {
         // res.render('product/servicePage', {
         //     user: null,
@@ -1131,8 +1130,8 @@ router.get('/service', TokenUserCheckMiddleware, (req, res) => {
 
 
 router.post('/service/invoice', TokenUserCheckMiddleware, async(req, res) => {
-    var logoInvoice = req.get('host') + '/' + 'favicon/big_logo.png'
-    console.log(logoInvoice)
+    // var logoInvoice = req.get('host') + '/' + 'favicon/big_logo.png'
+    // console.log(logoInvoice)
     var userFirstName = req.session.User['fname'];
     var userLastName = req.session.User['lname']
     var userEmail = req.session.User['email'];
@@ -1310,8 +1309,8 @@ router.post('/service/invoice', TokenUserCheckMiddleware, async(req, res) => {
             };
 
             generateInvoice(invoice, new Date().toISOString().replace(/:/g, '-') + invoice.number + '.pdf', function() {
-                console.log("Saved invoice to invoice.pdf");
-                console.log('./invoice/'+ invoice.number+'.pdf')
+                // console.log("Saved invoice to invoice.pdf");
+                // console.log('./invoice/'+ invoice.number+'.pdf')
 
 
                 // res.download(path.join(__dirname, '..', 'invoice', invoice.number+ '.pdf'))
@@ -1329,7 +1328,7 @@ router.post('/service/invoice', TokenUserCheckMiddleware, async(req, res) => {
             )
 
     } catch (err) {
-        console.log("eror" + err)
+        // console.log("eror" + err)
         res.status(200).send(err);
     }
 
