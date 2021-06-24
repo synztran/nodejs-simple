@@ -1132,9 +1132,9 @@ router.get('/service', TokenUserCheckMiddleware, (req, res) => {
 router.post('/service/invoice', TokenUserCheckMiddleware, async(req, res) => {
     // var logoInvoice = req.get('host') + '/' + 'favicon/big_logo.png'
     // console.log(logoInvoice)
-    var userFirstName = req.session.User['fname'];
-    var userLastName = req.session.User['lname']
-    var userEmail = req.session.User['email'];
+    // var userFirstName = req.session.User['fname'];
+    // var userLastName = req.session.User['lname']
+    // var userEmail = req.session.User['email'];
     var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     var customUrl = req.protocol + '://' + req.get('host') + "/invoice/"
     try {
@@ -1205,8 +1205,8 @@ router.post('/service/invoice', TokenUserCheckMiddleware, async(req, res) => {
 
             }
 
-            var customerName = userLastName + ' ' + userLastName;
-            var customerMail = userEmail;
+            // var customerName = userLastName + ' ' + userLastName;
+            // var customerMail = userEmail;
             const assem_service = "Assembled Service"
             const lube_service = "Lube Service"
             const buy_service = "Buy Accesssories"
@@ -1260,7 +1260,8 @@ router.post('/service/invoice', TokenUserCheckMiddleware, async(req, res) => {
             var invoice = {
                 logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
                 from: "NoobStore\nnoobassembly@gmail.com\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
-                to: customerName + '\n' + customerMail,
+                // to: customerName + '\n' + customerMail,
+                to: "Guest",
                 currency: "vnd",
                 number: "INV-"+(docs['seq']+1),
                 payment_terms: "Auto-Billed - Do Not Pay",
@@ -1307,8 +1308,8 @@ router.post('/service/invoice', TokenUserCheckMiddleware, async(req, res) => {
                 //     }
                 //   ]
             };
-            setTimeout(function(){
-                generateInvoice(invoice, new Date().toISOString().replace(/:/g, '-') + invoice.number + '.pdf', function() {
+            // setTimeout(function(){
+               generateInvoice(invoice, new Date().toISOString().replace(/:/g, '-') + invoice.number + '.pdf', function() {
                     // console.log("Saved invoice to invoice.pdf");
                     // console.log('./invoice/'+ invoice.number+'.pdf')
 
@@ -1317,7 +1318,7 @@ router.post('/service/invoice', TokenUserCheckMiddleware, async(req, res) => {
                 }, function(error) {
                     console.error(error);
                 });
-            }, 1000)
+            // }, 1000)
 
         })
             db.collection('couters').findAndModify({
