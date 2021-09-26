@@ -1,184 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    <title>Sign Up | NoobStore</title>
-    <meta name="robots" content="index, follow">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sign Up</title>
+    <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
-    <meta name="keywords" content="NoobStore Teamplate">
-    <meta name="description" content="NoobStore">
-    <meta name="author" content="NoobTeam">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="NoobStore Teamplate" />
+    <meta name="description" content="NoobStore" />
+    <meta name="author" content="NoobTeam" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
 
-    <link rel="shortcut icon" href="https://noobstore.xyz/favicon/white_logo.png">
-    <link rel="apple-touch-icon" href="https://noobstore.xyz/favicon/white_logo.png">
-    <link rel="apple-touch-icon" sizes="70x30" href="https://noobstore.xyz/favicon/white_logo.png">
-    <link rel="apple-touch-icon" sizes="110x70" href="https://noobstore.xyz/favicon/white_logo.png">
+    <link
+      rel="shortcut icon"
+      href="https://noobstore.xyz/favicon/white_logo.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://noobstore.xyz/favicon/white_logo.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="70x30"
+      href="https://noobstore.xyz/favicon/white_logo.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="110x70"
+      href="https://noobstore.xyz/favicon/white_logo.png"
+    />
 
+    <meta property="og:title" content="NOOBSTORE" />
+    <meta property="og:description" content="Welcome to NoobStore" />
+    <meta
+      property="og:image"
+      content="https://noobstore.xyz/favicon/big_logo.png"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="https://noobstore.xyz" />
+    <meta property="og:url" content="https://noobstore.xyz" />
+    <meta property="og:image:width" content="480" />
+    <meta property="og:image:height" content="432" />
+    <!--=== css ===-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/api/css/pcss/main.css" />
+    <link rel="stylesheet" href="/api/css/effect/navbar.css" />
+    <link rel="stylesheet" href="/api/css/pcss/customize.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/effect/rgb-wrapper/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/pcss/registerPage/style.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/api/css/breadcrumb.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/effect/preload.css" />
 
-    <meta property="og:title" content="NOOBSTORE">
-    <meta property="og:description" content="Welcome to NoobStore">
-    <meta property="og:image" content="https://noobstore.xyz/favicon/big_logo.png">
-    <meta property="og:type" content="article">
-    <meta property="og:site_name" content="https://noobstore.xyz">
-    <meta property="og:url" content="https://noobstore.xyz">
-    <meta property="og:image:width" content="480">
-    <meta property="og:image:height" content="432">
-    <!-- css -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- ============= -->
-    <!-- <link rel="stylesheet" href="/api/css/pcss/base.css"> -->
-    <!-- <link rel="stylesheet" href="/api/css/pcss/vendor.css"> -->
-    <link rel="stylesheet" href="/api/css/pcss/main.css">
-    <link rel="stylesheet" href="/api/css/effect/navbar.css">
-    <link rel="stylesheet" href="/api/css/pcss/customize.css">
-    <link rel="stylesheet" type="text/css" href="/api/css/effect/rgb-wrapper/style.css">
-    <link rel="stylesheet" type="text/css" href="/api/css/pcss/registerPage/style.css">
-    <link rel="stylesheet" type="text/css" href="/api/css/breadcrumb.css">
-    <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css">
-    <link rel="stylesheet" type="text/css" href="/api/css/effect/preload.css">
-
-    <!-- font-->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css">
-    <!-- ============= -->
-    <!-- script
-    ================================================== -->
+    <!--=== font ===-->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css"
+    />
+    <!--=== script ===-->
     <script src="/api/js/pjs/modernizr.js"></script>
-    
-    <!-- favicons
-    ================================================== -->
-    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
-</head>
 
-<body id="top">
-    <!-- preloader
-    ================================================== -->
-    <!-- <div id="preloader">
-        <div id="loader" class="dots-jump">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div> -->
+    <!--=== favicons ===-->
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
+  </head>
+
+  <body id="top">
+    <!--=== preloader ===-->
     <% include ./../tips/subs/preload %>
-    <!-- Navbar -->
+    <!--=== Navbar ===-->
     <% include ./../tips/subs/navbar %>
-    <!-- </header> -->
+    <!--=== </header> ===-->
     <% include ./../tips/subs/breadcrumb %>
     <div class="main-container">
-        <div class="row">
-            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 login-form">
-                <div class="title">
-                    <h2 class="my-3">Login</h2>
-                </div>
-                <div class="authentication-button px-6">
-                    <a class="facebook-button btn-outline" href="#">
-                        <div class="btn-facebook-cover text-center">
-                                <span class="name">Login with Facebook</span>
-                        </div>
-                    </a>
-                    <br>
-                    <a class="google-button" href="#">
-                        <div class="btn-google-cover text-center">
-                            <span class="name">Login with Google</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="separator px-6">Or</div>
-                <form id="form-login" class="form-not-mg px-6" autocomplete="on" method="post">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <!-- <input autocomplete="on" type="email" name="email" class="form-control" id="email" value="" aria-describedby="emailHelp" placeholder="Email"> -->
-                        <div class="input-group mb-3">
-                          <span class="input-group-text" id="emailHelp"><i class="las la-envelope la-2x"></i></span>
-                          <input autocomplete="on" type="email" name="email" class="form-control" id="email" value="" aria-describedby="emailHelp" placeholder="Email" aria-label="Email">
-                        </div>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <!-- <input autocomplete="on" type="password" name="password" class="form-control" id="password" value="" placeholder="Password"> -->
-                        <div class="input-group mb-3">
-                          <span class="input-group-text" id="pwHelp"><i class="las la-lock la-2x"></i></span>
-                          <input autocomplete="on" type="password" name="password" class="form-control" id="password" value="" placeholder="Password" aria-describedby="pwHelp" aria-label="Password">
-                        </div>
-                        <div class="forgot-pw text-right">
-                            <a href="#">Forgot password?</a>
-                        </div>
-                    </div>
-                    <div class="btn-area">
-                        <button type="submit" id="btn-login" class="btn btn-primary btn-login">Login</button>
-                    </div>
-
-                </form>
+      <div class="row">
+        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 login-form">
+          <div class="title">
+            <h2 class="my-3">Login</h2>
+          </div>
+          <div class="authentication-button px-6">
+            <a class="facebook-button btn-outline" href="#">
+              <div class="btn-facebook-cover text-center">
+                <span class="name">Login with Facebook</span>
+              </div>
+            </a>
+            <br />
+            <a class="google-button" href="#">
+              <div class="btn-google-cover text-center">
+                <span class="name">Login with Google</span>
+              </div>
+            </a>
+          </div>
+          <div class="separator px-6">Or</div>
+          <form
+            id="form-login"
+            class="form-not-mg px-6"
+            autocomplete="on"
+            method="post"
+          >
+            <div class="form-group">
+              <label for="email">Email</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="emailHelp"
+                  ><i class="las la-envelope la-2x"></i
+                ></span>
+                <input
+                  autocomplete="on"
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  id="email"
+                  value=""
+                  aria-describedby="emailHelp"
+                  placeholder="Email"
+                  aria-label="Email"
+                />
+              </div>
+              <small id="emailHelp" class="form-text text-muted"
+                >We'll never share your email with anyone else.</small
+              >
             </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 reg-form">
-                <div class="title">
-                    <h2 class="my-3">Register</h2>
-                </div>
-                <form class="form-not-mg" id='form-register' method='POST' >
-                    <div class='row'>
-                        <div class='col-md-12 d-flex'>
-                            <div class='col-md-6 form-group'>
-                                <label for='fname'>First name</label>
-                                <input required type='text' name='fname' class='form-control' id='fnam' aria-describedbsy='fnamelHelp' placeholder='First name'>
-                            </div>
-                            <div class='col-md-6 form-group'>
-                                <label for='lname'>Last name</label>
-                                <input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' placeholder='Last name'>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='row'>
-                        <div class='col-md-12'>
-                            <div class='form-group col-md-12'>
-                                <label for='reg_email'>Email</label>
-                                <input required type='email' name='email' class='form-control' id='reg_email' placeholder='Email'>
-                                <small id='Help' class='form-text text-muted'>
-                                    Ideally, you should register your email with paypal email
-                                </small>
-                            </div>
-                            <div class='form-group col-md-12'>
-                                <label for='reg_password'>Password</label>
-                                <input required type='password' name='password' class='form-control' id='reg_password' placeholder='Password'>
-                            </div>
-                            <div class='form-group col-md-12'>
-                                <label for='re_password'>Confirm Password</label>
-                                <input required type='password' name='re_password' class='form-control' id='re_password' placeholder='Re-Password'>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='form-group col-md-12'>
-                        <div class='g-recaptcha' data-sitekey='6Lcti9UUAAAAADIUivaJtXit0OKia78-EQIbnDkc'>
-                        </div>
-                    </div>
-                    <div class="col-md-12 btn-area">
-                        <button type='submit' id='btn-reg' class='btn btn-primary btn-register'>Register</button>
-                    </div>
-                </form>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="pwHelp"
+                  ><i class="las la-lock la-2x"></i
+                ></span>
+                <input
+                  autocomplete="on"
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  id="password"
+                  value=""
+                  placeholder="Password"
+                  aria-describedby="pwHelp"
+                  aria-label="Password"
+                />
+              </div>
+              <div class="forgot-pw text-right">
+                <a href="#">Forgot password?</a>
+              </div>
             </div>
-            
+            <div class="btn-area">
+              <button
+                type="submit"
+                id="btn-login"
+                class="btn btn-primary btn-login"
+              >
+                Login
+              </button>
+            </div>
+          </form>
         </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 reg-form">
+          <div class="title">
+            <h2 class="my-3">Register</h2>
+          </div>
+          <form class="form-not-mg" id="form-register" method="POST">
+            <div class="row">
+              <div class="col-md-12 d-flex">
+                <div class="col-md-6 form-group">
+                  <label for="fname">First name</label>
+                  <input
+                    type="text"
+                    name="fname"
+                    class="form-control"
+                    id="fnam"
+                    aria-describedbsy="fnamelHelp"
+                    placeholder="First name"
+                  />
+                </div>
+                <div class="col-md-6 form-group">
+                  <label for="lname">Last name</label>
+                  <input
+                    type="text"
+                    name="lname"
+                    class="form-control"
+                    id="lname"
+                    aria-describedbsy="lnameHelp"
+                    placeholder="Last name"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group col-md-12">
+                  <label for="reg_email">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    id="reg_email"
+                    placeholder="Email"
+                  />
+                  <small id="Help" class="form-text text-muted">
+                    Ideally, you should register your email with paypal email
+                  </small>
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="reg_password">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    id="reg_password"
+                    placeholder="Password"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="re_password">Confirm Password</label>
+                  <input
+                    type="password"
+                    name="re_password"
+                    class="form-control"
+                    id="re_password"
+                    placeholder="Re-Password"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-12">
+              <div
+                class="g-recaptcha"
+                data-sitekey="6Lcti9UUAAAAADIUivaJtXit0OKia78-EQIbnDkc"
+              ></div>
+            </div>
+            <div class="col-md-12 btn-area">
+              <button
+                type="button"
+                id="btn-reg"
+                class="btn btn-primary btn-register"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     <footer>
-            <div class="col-full ss-copyright">
-                <span>© Copyright NoobStore 2017</span>
-                <span>Design by <a href="https://www.facebook.com/noobassembly">Noob Team</a></span>
-            </div>
+      <div class="col-full ss-copyright">
+        <span>© Copyright NoobStore 2017</span>
+        <span
+          >Design by
+          <a href="https://www.facebook.com/noobassembly">Noob Team</a></span
+        >
+      </div>
     </footer>
-</body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="https://kenwheeler.github.io/slick/slick/slick.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>     
-<script src="/api/js/pjs/main.js"></script>
-<script src='https://www.google.com/recaptcha/api.js'></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<!-- <script src='/api/js/pjs/product/registerPage/js.ejs'></script> -->
-<script src='/api/js/pjs/product/registerPage/js.js'></script>
+  </body>
+  <script src="/share/jquery/jquery-3.6.0.min.js"></script>
+  <script src="/share/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/share/slickjs/slick.min.js"></script>
+  <script src="/share/aos/aos.js"></script>
+  <script src="/api/js/pjs/main.js"></script>
+  <script src="/share/google-capcha/api.js"></script>
+  <script src="/share/sweetalert/sweetalert2@9.js"></script>
+  <script src="/api/js/pjs/product/registerPage/js.js"></script>
 </html>
