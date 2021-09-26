@@ -72,7 +72,7 @@ client.on('guildMemberAdd', (member) => {
   channel.send(`Welcome to the server, ${member}`);
 });
 
-client.login('ODExOTcwOTgyMjg5MDgwMzMw.YC585w.kmeKTUAtXeZAJsAd8aZYeiaQwG8');
+client.login(config.bot_token);
 // ----------------------------------------------------------------------- //
 // mongoose.connect('mongodb://localhost:27017/testmongodb');
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
