@@ -31,7 +31,7 @@ const bcrypt = require('bcryptjs');
 const i18n = require('i18n');
 const hbs = require('hbs');
 const moment = require('moment');
-
+var userToken = require('./db/model/token');
 //FOR DISCORD SERVER
 const { Client, MessageAttachment, Intents } = require('discord.js');
 // const client = new Client();
@@ -72,7 +72,7 @@ client.on('guildMemberAdd', (member) => {
   channel.send(`Welcome to the server, ${member}`);
 });
 
-client.login(config.bot_token);
+// client.login(config.bot_token);
 // ----------------------------------------------------------------------- //
 // mongoose.connect('mongodb://localhost:27017/testmongodb');
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
@@ -106,6 +106,12 @@ db.on('error', console.log.bind(console, 'connection error'));
 db.once('open', function (callback) {
   console.log('connection succeeded');
 });
+(async () => {
+  var token_discord = await userToken
+    .findOne({ email: 'token_discord@gmail.com' })
+    .exec();
+  client.login(token_discord.token);
+})();
 
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
