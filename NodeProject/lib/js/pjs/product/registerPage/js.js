@@ -4,6 +4,9 @@ $(document).ready(function () {
       return false;
     }
   });
+  $('#form-login').on('submit', function (e) {
+    e.preventDefault();
+  });
   $('#btn-login').on('click', function () {
     var email = $('#email').val();
     var pw = $('#password').val();
