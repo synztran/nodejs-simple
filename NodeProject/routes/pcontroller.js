@@ -1343,6 +1343,10 @@ router.get("/drawCanvas", function(req, res){
 
 })
 
+router.get('http://demo.aris-vn.com:8080/v1/groups', function(req, res){
+    console.log(res)
+})
+
 router.get("/fake_parent_select2", function(req, res){
     res.send([{id: 1, name: "Region 1"},{id: 2, name: "Region 2"}]);
 })
