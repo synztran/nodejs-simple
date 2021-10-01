@@ -31,10 +31,13 @@ const bcrypt = require('bcryptjs');
 const i18n = require('i18n');
 const hbs = require('hbs');
 const moment = require('moment');
-
+var userToken = require('./db/model/token');
 //FOR DISCORD SERVER
-const { Client, MessageAttachment } = require('discord.js');
-const client = new Client();
+const { Client, MessageAttachment, Intents } = require('discord.js');
+// const client = new Client();
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+});
 
 client.on('ready', () => {
   console.log('I am ready!');
@@ -43,9 +46,14 @@ client.on('ready', () => {
 client.on('message', (message) => {
   if (message.content === '!rip') {
     // Create the attachment using MessageAttachment
+    // const attachment = new MessageAttachment(
+    //   'https://i.imgur.com/w3duR07.png',
+    //   'favicon.png'
+    // );
     const attachment = new MessageAttachment('https://i.imgur.com/w3duR07.png');
+
     // Send the attachment in the message channel
-    message.channel.send(attachment);
+    message.channel.send('Nothing at all');
   }
 
   if (message.content === 'what is my avatar') {
@@ -64,7 +72,7 @@ client.on('guildMemberAdd', (member) => {
   channel.send(`Welcome to the server, ${member}`);
 });
 
-client.login('ODExOTcwOTgyMjg5MDgwMzMw.YC585w.tkv54B4zuqIT8CiK_CffOf9lvP0');
+// client.login(config.bot_token);
 // ----------------------------------------------------------------------- //
 // mongoose.connect('mongodb://localhost:27017/testmongodb');
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
@@ -98,6 +106,12 @@ db.on('error', console.log.bind(console, 'connection error'));
 db.once('open', function (callback) {
   console.log('connection succeeded');
 });
+(async () => {
+  var token_discord = await userToken
+    .findOne({ email: 'token_discord@gmail.com' })
+    .exec();
+  client.login(token_discord.token);
+})();
 
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
