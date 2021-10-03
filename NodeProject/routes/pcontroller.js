@@ -1060,6 +1060,12 @@ router.post("/service/invoice", TokenUserCheckMiddleware, async (req, res) => {
   }
 });
 
+//Blogs
+
+router.get("/blogs", function (req, res) {
+  res.render("blog/indexPage");
+});
+
 // test drawCanvas
 
 router.get("/drawCanvas", function (req, res) {
