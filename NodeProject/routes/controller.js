@@ -104,6 +104,7 @@ const categoryController = require('./controller/category');
 const adsProductController = require('./controller/adsproduct');
 const eventProductController = require('./controller/eventproduct');
 const contentController = require('./controller/content');
+const blogController = require('./controller/blog');
 
 router.get('/change-lang/:lang', utilController.changelang);
 
@@ -271,5 +272,13 @@ router.post('/content/add', contentController.addPost);
 router.get('/content/edit/:id', contentController.editGet);
 router.get('/content/get/:id', contentController.get);
 router.post('/content/edit/:id', contentController.editPost);
+
+// Blog
+
+router.get('/blog/category',TokenCheckMiddleware, blogController.blogCategory);
+router.get('/blog/category/add',TokenCheckMiddleware, blogController.viewBlogCategory);
+router.post('/blog/category/add', TokenCheckMiddleware, blogController.addBlogCategory)
+router.get('/blog/post',TokenCheckMiddleware, blogController.blogPost);
+router.get('/blog/pose/add',TokenCheckMiddleware, blogController.addBlogPost);
 
 module.exports = router;

@@ -10,20 +10,14 @@ $(document).ready(function() {
      var currentDataImage = $('#lightSlider li');
      var currentImage = $('#lightSlider li img');
      var currentImageSrc = $('#lightSlider li img').attr('src');
-     console.log(currentDataImage)
-     console.log(currentImage)
-     console.log(currentImageSrc)
         
     var imgElements = $('#lightSlider li img');
     var imgLi = $('#lightSlider li');
-    console.log(imgLi);
-    console.log(imgLi.length)
     var img, url, imageli;
      
 
     for (var i = 0; i < imgElements.length; i++) {   
         img = imgElements[i];
-        console.log(img)
         console.log(img.src); //already get src of img tag
        // $('ul#lightSlider li').attr('data-thumb', img.src);
        
@@ -36,23 +30,16 @@ $(document).ready(function() {
             //console.log(sam);
             //imageli.attr('data-thumb', img.src)
         //}
-        
-       
     }
-
-
-
     $('.btn-join').on('click', function(e){
         e.preventDefault();
         var id = $(this).attr('data-id');
         var url = $(this).attr('data-url')
-        console.log(id);
         // window.location.href = "/shop/payment/" + id;
         window.location.href = "/shop/payment/" + url;
     })
     var url = (window.location).href;
     var res = url.split("/").pop();
-    console.log(res);
 
     var $carousel = 
     $('#lightSlider').slick({
@@ -62,16 +49,27 @@ $(document).ready(function() {
         infinite: false,
         adaptiveHeight: true,
         draggable: false,
+
     });
     $('.2nd-slick').slick({
       slidesToShow: 9,
       slidesToScroll: 1,
       asNavFor: '#lightSlider',
       dots: false,
-      
       adaptiveHeight: true,
       focusOnSelect: true,
     });
+    //  $('#product-slider').lightSlider({
+    //   gallery:true,
+    //   item:1,
+    //   vertical:true,
+    //   verticalHeight:295,
+    //   vThumbWidth:50,
+    //   thumbItem:8,
+    //   thumbMargin:4,
+    //   slideMargin:0,
+    //   currentPagerPosition:''
+    // });  
      
     
 
@@ -81,12 +79,8 @@ $(document).ready(function() {
     var select = $("#c-profile");
     var selectQuantity = $("#c-profile > option")
     $("#c-profile").change( function(e) {
-       
-   
         goTo = select.val();
-       
-
-            $carousel.slick( "goTo", goTo );
+        $carousel.slick( "goTo", goTo );
       }); 
 
     fetch('/api/product/getcid/' + res).then(function(response) {
@@ -130,14 +124,10 @@ $(document).ready(function() {
         }
         return response2nd.json();
     }).then(function(response2ndAsJson) {
-        console.log(response2ndAsJson);
         var category = response2ndAsJson;
-        console.log(category.status_gb);
         var status = category.status_gb;
-
         if(status == 0 || status == 1){
-          
-                        $("#btn-add, #btn-paypal").attr("disabled", true)
+            $("#btn-add, #btn-paypal").attr("disabled", true)
         }else{
 
         }

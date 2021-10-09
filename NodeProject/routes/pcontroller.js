@@ -1066,6 +1066,10 @@ router.get("/blogs", function (req, res) {
   res.render("blog/indexPage");
 });
 
+router.get("/blogs/create", function(req, res){
+  res.render("blog/createPage");
+})
+
 // test drawCanvas
 
 router.get("/drawCanvas", function (req, res) {
