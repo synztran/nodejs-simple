@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title><%= title %></title>
+	<!--=== Font ===-->
+	<link rel="stylesheet" type="text/css" href="/share/bootstrap/css/bootstrap.min.css">
+	<!--=== CSS ===-->
+	<% include ./../../tips/cssPackage %>
+</head>
+<body>
+	<% include ./../../header%>
+    <h1 style="text-align: center;">
+        <%= title %>
+    </h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 sidebar-offcanvas" id="sidebar">
+            </div>
+            <!-- <div class="row row-offcanvas row-offcanvas-right"> -->
+            <div class="col-md-6">
+                <!-- <p class="pull-right visible-xs">
+                    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+                </p> -->
+                <!-- enctype="multipart/form-data" -->
+              
+                
+                <form action='/api/blog/category/add' method="post" enctype="application/x-www-form-urlencoded">
+                <fieldset>
+                    <legend>Build your own form!</legend>
+                    <div class="form-group">
+                    	<label for="email">Category name:</label>
+                    	<input class="form-control" type="text" name="category_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="content_status">Status:</label>
+                        <select class="form-control" name="status">
+                            <option value="1">Show</option>
+                            <option value="0">Hide</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-submit">Submit</button>
+                    <button type="submit" id="btn-submit" class="btn btn-primary btn-cancel">Cancel</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="footer" style="text-align: center;">
+        <% include ./../../footer%>
+    </div>
+
+</body>
+<% include ./../../tips/jsPackage %>
+</html>
