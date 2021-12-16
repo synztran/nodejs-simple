@@ -187,7 +187,6 @@
 
 .product-card-read {
   /*color: #fff;*/
-
   cursor: pointer;
   font-size: 14px;
   font-weight: 700;
@@ -199,6 +198,8 @@
 }
 .product-card-read a{
   color: var(--page-nude-color)!important;
+  text-decoration: none!important;
+  margin-left: 1rem;
 }
 .product-card-read a:hover{
   transform: scale(2.2);
@@ -336,6 +337,8 @@
 }
 .product-info{
   padding: 15px;
+  z-index: 11;
+  position: relative;
 }
 
 /* === Set time into img ===*/

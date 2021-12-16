@@ -8,7 +8,7 @@
 .main{
 	/*margin:5rem !important;*/
 	max-width: 100%;
-	margin: 5rem auto!important
+	margin: 2% 1% auto!important
 
 }
 .for-device{
@@ -503,7 +503,7 @@ div.shadow{
 	margin-top: 1%;
 } */
 .col-product{
-	margin-bottom: 3rem;
+	margin-bottom: 1.5rem;
 	/*padding-left: 0;
 	padding-right: 0;*/
 }
@@ -512,6 +512,9 @@ div.shadow{
 }
 .col-md-9 .row{
 	top: 0;
+}
+#navbarSupportedContent ul li a{
+	max-width: max-content;
 }
 
 
@@ -824,16 +827,17 @@ div.shadow{
 	}
 	footer{
         /*position: fixed;*/
-        position: relative;
+        /*position: relative;*/
+        position: absolute;
         left: 0;
         bottom: 0;
+        height: 5.5rem;
         width: 100%;
         padding:1rem 0;
         background: #4568DC;
         background: -webkit-linear-gradient(to right, #B06AB3, #4568DC);
         background: linear-gradient(to right, #B06AB3, #4568DC);
     }
-  
 	/* amimation */
 	
 	/*-----------------Animation------------------*/
@@ -1147,10 +1151,14 @@ div.shadow{
         }
         .for-web{
         	display: none;
-		}
-		.for-device{
-			display: unset;
-		}
+				}
+				.for-device{
+					display: unset;
+				}
+				footer{
+					position: relative;
+					height: unset;
+				}
     }
 
     /* Landscape */
@@ -1315,7 +1323,8 @@ div.shadow{
 }
 @media (min-width: 1200px) {
 	.main{
-		max-width: 1170px;
+		/*max-width: 1170px;*/
+		max-width: 100%;
 	}
 }
 @media only screen and (max-width: 1024px){
