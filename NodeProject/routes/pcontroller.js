@@ -70,6 +70,8 @@ var TokenCheckMiddleware = require("./../lib/check/checktoken");
 var TokenUserCheckMiddleware = require("./../lib/check/checktokenproduct.js");
 var SessionCheckMiddleware = require("./../lib/check/checksession");
 var CountMiddleware = require("./../lib/check/countproduct");
+var BlogCategory = require('./../db/model/blogCategory');
+var BlogPost = require('./../db/model/blogPost')
 
 // i18n.configure({
 //     locales:['en', 'vi'],
@@ -798,7 +800,8 @@ router.get("/shop/product/:id", async (req, res) => {
           { category_id: docs[0].category_id },
           function (err, docs2) {
             if (req.session.User == null) {
-              res.render("product/detailsProductPage", {
+              // res.render("product/detailsProductPage", {
+              res.render("product/detailsProductPageV2",{
                 user: null,
                 userName: null,
                 detailsProduct: docs,
@@ -809,7 +812,8 @@ router.get("/shop/product/:id", async (req, res) => {
               Account.findOne(
                 { email: req.session.User["email"] },
                 function (errAccount, getAccount) {
-                  res.render("product/detailsProductPage", {
+                  // res.render("product/detailsProductPage", {
+                  res.render("product/detailsProductPageV2",{
                     user: req.session.User["email"],
                     userName: getAccount.fname + " " + getAccount.lname,
                     detailsProduct: docs,
@@ -1063,7 +1067,15 @@ router.post("/service/invoice", TokenUserCheckMiddleware, async (req, res) => {
 //Blogs
 
 router.get("/blogs", function (req, res) {
-  res.render("blog/indexPage");
+  BlogCategory.find({}, function(err, docsCategory){
+    BlogPost.find({}, function(errPost, docsPost) {
+      res.render('blog/indexPage', {
+        title: 'Blog',
+        listBlogCategory: docsCategory,
+        listBlogPost: docsPost
+      })
+    })
+  })
 });
 
 router.get("/blogs/create", function(req, res){
