@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>NoobStore</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="keywords" content="NoobStore Teamplate" />
+    <meta name="description" content="NoobStore" />
+    <meta name="author" content="NoobTeam" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://noobstore.xyz/favicon/white_logo.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://noobstore.xyz/favicon/white_logo.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="70x30"
+      href="https://noobstore.xyz/favicon/white_logo.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="110x70"
+      href="https://noobstore.xyz/favicon/white_logo.png"
+    />
+
+    <meta property="og:title" content="NOOBSTORE" />
+    <meta property="og:description" content="Welcome to NoobStore" />
+    <meta
+      property="og:image"
+      content="https://noobstore.xyz/favicon/big_logo.png"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="https://noobstore.xyz" />
+    <meta property="og:url" content="https://noobstore.xyz" />
+    <meta property="og:image:width" content="480" />
+    <meta property="og:image:height" content="432" />
+    <!--=== google font ===-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!--=== CSS ===-->
+    <link rel="stylesheet" href="/share/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/package/lightslider/src/css/lightslider.css"
+    />
+    <link rel="stylesheet" href="/api/css/pcss/keysetcolorcode.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css"> -->
+    <link rel="stylesheet" href="/api/css/pcss/main.css" />
+    <link rel="stylesheet" href="/api/css/effect/navbar.css" />
+    <link rel="stylesheet" href="/api/css/effect/preloading.css" />
+    <link rel="stylesheet" href="/product/css/detailProductPage/style.css" />
+    <link
+      rel="stylesheet"
+      href="/product/css/font-awesome/css/fontawesome-all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/package/slick/slick.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/package/slick/slick-theme.css"
+    />
+    <link href="/share/select2/select2.min.css" rel="stylesheet" />
+    <link href="/share/aos/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/effect/rgb-wrapper/style.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/api/css/breadcrumb.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/effect/preload.css" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/api/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/api/css/pcss/detailProductPage/styleV2.css">
+
+    <script src="/api/js/pjs/modernizr.js"></script>
+</head>
+<style>
+.nav-pills-custom .nav-link {
+  color: var(--base-color)!important;
+  /*background: #fff;*/
+  background: var(--text-color);
+  position: relative;
+}
+
+.nav-pills-custom .nav-link.active {
+  /*color: #45b649;*/
+  color:  var(--active-color)!important;
+  /*background: #fff;*/
+  background: var(--text-color);
+}
+.tab-pane{
+  background: var(--active-color);
+  /*background: #fff;*/
+}
+.tab-pane *{
+  padding: 0;
+  margin: 0;
+}
+.tab-list > div{
+  background: none;
+  margin: 0;
+}
+.block-price{
+  /*width: 50%;*/
+  line-height: 1.5;
+}
+.block-price_currency{
+  padding: 0;
+  margin: 0;
+  vertical-align: top;
+  color: var(--title-color);
+  font-size: 26px;
+  font-weight: 600;
+}
+.block-price_shipping{
+  padding: 0;
+  margin: 0;
+  color: var(--text-color);
+  font-size: 12px;
+}
+/*customize already have*/
+.before-breadcrumb, .before-breadcrumb > .breadcrumb{
+  background: none;
+}
+.breadcrumb > li.active{
+  font-weight: bold;
+  color:  var(--title-color);
+}
+.btn-atc{
+  width: 200px;
+  letter-spacing: 0;
+  line-height: inherit;
+  font-weight: bold;
+  background: var(--title-color);
+  border: var(--base-color);
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.01);
+  z-index: 12;
+  text-transform: none;
+}
+.btn-atc > span{
+  color: var(--base-color);
+}
+.btn-atc:hover{
+  background: var(--border-color);
+}
+.box-btn{
+  position: relative;
+  max-width: max-content;
+}
+.box-btn::after{
+   z-index: 11;
+  padding: 2rem;
+  position: absolute;
+  content: "";
+  top: 0px;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.9) translateZ(0);
+  filter: blur(15px);
+  background: linear-gradient(
+      to left,
+      #ff5770,
+      #e4428d,
+      #c42da8,
+      #9e16c3,
+      #6501de,
+      #9e16c3,
+      #c42da8,
+      #e4428d,
+      #ff5770
+    );
+  background-size: 200% 200%;
+  animation: animateGlow 1.25s linear infinite;
+}
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+</style>
+<body id="top">
+	<!-- preloader -->
+	<div id="preloader">
+      <div id="loader">
+        <div id="circle"></div>
+        <div class="line left"></div>
+        <div class="line right"></div>
+        <div class="bracket left"></div>
+        <div class="bracket right"></div>
+        <div class="small top"><span class="upper">N</span>OOB</div>
+        <div id="big">Welcome</div>
+        <div class="small bottom"><span class="upper">S</span>tore</div>
+        <div class="hide top"></div>
+        <div class="hide bottom"></div>
+      </div>
+    </div>
+    <!-- navbar & breadcrumb -->
+    <% include ./../tips/subs/navbar %> <% include ./../tips/subs/breadcrumb %>
+    <main class="main-container row d-flex justify-content-center"> 
+    		<article class="row col-lg-10 col-md-12 col-lg-offset-1">
+    			<!-- left -->
+    			<div class="col-md-6 col-xs-12">
+    				<ul id="lightSlider">
+              <% for(var key in detailsProduct) {%>
+              <li data-thumb="" data-id="<%= key %>">
+                <img
+                  style="width: 100%"
+                  onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'"
+                  src="/api/<%= detailsProduct[key].pic_product.path %>"
+                />
+              </li>
+              <% } %>
+            </ul>
+            <ul class="2nd-slick">
+              <% for(var key in detailsProduct) {%>
+              <li class="px-4" data-thumb="" data-id="<%= key %>">
+                <img
+                  style="width: 100%;border-radius: 10px;"
+                  onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'"
+                  src="/api/<%= detailsProduct[key].pic_product.path %>"
+                />
+              </li>
+              <% } %>
+            </ul>
+    			</div>
+    			<!-- right -->
+    			<div class="col-md-6 col-xs-12 pl-8">
+    				<section class="header">
+      <div class="container d-flex">
+          <div class="row col-lg-10 col-md-12 col-lg-offset-1">
+            <div class="col-md-12 ">
+              <h1 class="mt-0"><%= Category.category_name %></h1>
+              <h3 style="color: var(--border-color);" class="mt-0" id="product-name"><%= detailsProduct[0].product_name%></h3>
+              <span class="pl-8">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+              <div>By   <a class="fs-3" style="" href="#"><%= Category.author %></a></div>
+              <div>
+                <div class="mx-auto">
+                  <form  class="w-100">
+                    <div class="form-group py-4 align-items-center main-select " style="z-index: 10;">
+                      <div class="block-price">
+                        <p class="block-price_currency">  
+                          <% if(detailsProduct[0].outstock == 1){%>
+                             $<%=detailsProduct[0].price %> USD 
+                          <%}else{%>
+                            Out stock
+                          <%}%>
+                         
+                        </p>
+                        <p class="block-price_shipping">Shipping and taxes extra</p>
+                      </div>
+                      <div class="mt-8" style="width: 50%;">
+                        <label style="color:var(--active-color)" class="mr-4 fs-3">Options:</label>
+                        <select
+                          style="width: 100%;"
+                          class="form-control select2"
+                          id="c-profile"
+                          name="profile"
+                        >
+                          <% for( var i in detailsProduct){ %>
+                          <% console.log(detailsProduct[i].product_id)%>
+                          <option value="<%= i %>">
+                            <%= detailsProduct[i].product_name %>
+                          </option>
+                          <% } %>
+                        </select>
+                      </div>
+                      <div class="box-btn mt-8">
+                        <button
+                        type="submit"
+                        id="btn-add"
+                        class="d-flex my-0 py-2 px-8 justify-content-between align-items-center fs-4 btn-atc"
+                        data-id="<%= Category.category_id %>"
+                        data-url="<%= Category.category_url_name%>"
+                      >
+                        <span>Buy now</span> <svg style="fill: var(--base-color)" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"/></svg>
+                      </button>
+                      </div>
+
+                    </div>
+                
+                  <!-- <button
+                    type="submit"
+                    id="btn-paypal"
+                    class="btn btn-warning btn-lg btn-block btn-cancel"
+                  >
+                    <span
+                      >Buy with
+                      <svg
+                        style="height: 18px; width: 63.4737px"
+                        viewBox="0 0 67 19"
+                      >
+                        <path
+                          d="M8.44.57H3.29a.718.718 0 0 0-.707.61L.502 14.517c-.041.263.16.5.425.5h2.458a.718.718 0 0 0 .707-.61l.561-3.597a.717.717 0 0 1 .706-.611h1.63c3.391 0 5.349-1.658 5.86-4.944.23-1.437.01-2.566-.657-3.357C11.461 1.029 10.162.57 8.44.57zm.594 4.87C8.752 7.308 7.34 7.308 5.976 7.308h-.777l.545-3.485a.43.43 0 0 1 .424-.366h.356c.93 0 1.807 0 2.26.535.27.32.353.794.25 1.45zm14.796-.06h-2.466a.43.43 0 0 0-.424.367l-.109.696-.172-.252c-.534-.783-1.724-1.044-2.912-1.044-2.725 0-5.052 2.084-5.505 5.008-.235 1.46.1 2.854.919 3.827.75.894 1.826 1.267 3.105 1.267 2.195 0 3.412-1.426 3.412-1.426l-.11.692a.432.432 0 0 0 .424.502h2.22a.718.718 0 0 0 .707-.61l1.333-8.526a.43.43 0 0 0-.423-.5zm-3.437 4.849c-.238 1.422-1.356 2.378-2.782 2.378-.716 0-1.288-.232-1.655-.672-.365-.436-.503-1.058-.387-1.75.222-1.41 1.359-2.397 2.763-2.397.7 0 1.269.235 1.644.678.375.448.524 1.073.417 1.763zM36.96 5.38h-2.478a.716.716 0 0 0-.592.318l-3.417 5.085-1.448-4.887a.719.719 0 0 0-.687-.515h-2.435a.433.433 0 0 0-.407.573l2.73 8.09-2.567 3.66a.434.434 0 0 0 .35.684h2.475a.712.712 0 0 0 .588-.31l8.24-12.016a.434.434 0 0 0-.352-.681z"
+                          style="fill: rgb(37, 59, 128)"
+                        ></path>
+                        <path
+                          d="M45.163.57h-5.15a.717.717 0 0 0-.706.61l-2.082 13.337a.43.43 0 0 0 .423.5h2.642a.502.502 0 0 0 .494-.427l.591-3.78a.717.717 0 0 1 .706-.611h1.63c3.392 0 5.348-1.658 5.86-4.944.231-1.437.009-2.566-.657-3.357C48.183 1.029 46.886.57 45.163.57zm.593 4.87c-.28 1.867-1.692 1.867-3.057 1.867h-.777l.546-3.485a.429.429 0 0 1 .423-.366h.356c.93 0 1.807 0 2.26.535.27.32.353.794.25 1.45zm14.795-.06h-2.464a.428.428 0 0 0-.423.367l-.109.696-.173-.252c-.534-.783-1.723-1.044-2.911-1.044-2.724 0-5.05 2.084-5.504 5.008-.235 1.46.099 2.854.918 3.827.753.894 1.826 1.267 3.105 1.267 2.195 0 3.413-1.426 3.413-1.426l-.11.692a.432.432 0 0 0 .424.502h2.22a.717.717 0 0 0 .707-.61l1.333-8.526a.433.433 0 0 0-.426-.5zm-3.436 4.849c-.237 1.422-1.356 2.378-2.782 2.378-.714 0-1.288-.232-1.655-.672-.365-.436-.502-1.058-.387-1.75.223-1.41 1.359-2.397 2.763-2.397.7 0 1.269.235 1.644.678.377.448.526 1.073.417 1.763zM63.458.935l-2.113 13.582a.43.43 0 0 0 .423.5h2.124a.716.716 0 0 0 .707-.61L66.683 1.07a.432.432 0 0 0-.423-.5h-2.379c-.21 0-.39.156-.423.366z"
+                          style="fill: rgb(23, 155, 215)"
+                        ></path>
+                      </svg>
+                    </span>
+                  </button> -->
+                </form>
+        </div>
+      </div>
+            </div>
+              <div class="col-md-3 tab-list">
+                  <!-- Tabs nav -->
+                  <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                      <a class="nav-link mb-3 p-3 shadow active fs-4 text-start" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                        <i class="far fa-clipboard"></i>&nbsp;Summary</a>
+
+                      <a class="nav-link mb-3 p-3 shadow fs-4 text-start"  id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                        <i class="fas fa-tags"></i>&nbsp;Price</a>
+
+                      <a class="nav-link mb-3 p-3 shadow fs-4 text-start" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                          <i class="fa fa-star mr-2"></i>&nbsp;Specifications</a>
+
+                      <a class="nav-link mb-3 p-3 shadow fs-4 text-start" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+                          <i class="far fa-calendar-alt"></i>&nbsp;Timeline</a>
+                      </div>
+              </div>
+
+              
+              <div class="col-md-9">
+                <% if(Category){%>
+                  <!-- Tabs content -->
+                  <div class="tab-content" id="v-pills-tabContent">
+                      <div class="tab-pane fade shadow rounded show active p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                          <p class="font-italic mb-2"><%- Category.summary_content %></p>
+                      </div>
+                      
+                      <div class="tab-pane fade shadow rounded p-5" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                          <p class="font-italic mb-2"><%- Category.price_content %></p>
+                      </div>
+                      
+                      <div class="tab-pane fade shadow rounded p-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                          <p class="font-italic mb-2"> <%- Category.specs %></p>
+                      </div>
+                      
+                      <div class="tab-pane fade shadow rounded p-5" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                        <p class="font-italic mb-2"><%- Category.time_line%></p>
+                      </div>
+                  </div>
+                  <% } %>
+              </div>
+              
+          </div>
+      </div>
+  </section>
+    			</div>
+    		</article>
+    </main>
+   <!--  <footer>
+      <div class="col-full ss-copyright">
+        <span>© Copyright NoobStore 2017</span>
+        <span
+          >Design by
+          <a href="https://www.facebook.com/noobassembly">Noob Team</a></span
+        >
+      </div>
+    </footer> -->
+    <% include ./../tips/subs/botmessenger %>
+</body>
+  <script src="/share/jquery/jquery-3.6.0.min.js"></script>
+  <script src="/share/popperjs/popper.min.js"></script>
+  <script src="/share/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/share/select2/select2.min.js"></script>
+  <script src="/share/slickjs/slick.min.js"></script>
+  <script src="/share/aos/aos.js"></script>
+  <script src="/package/lightslider/src/js/lightslider.js"></script>
+  <script src="/share/zooming/zooming.js"></script>
+  <script src="/api/js/pjs/main.js"></script>
+  <script src="/api/js/pjs/product/detailsProductPage/js.js"></script>
+</html>

@@ -72,7 +72,7 @@ client.on('guildMemberAdd', (member) => {
   channel.send(`Welcome to the server, ${member}`);
 });
 
-// client.login(config.bot_token);
+client.login(config.bot_token);
 // ----------------------------------------------------------------------- //
 // mongoose.connect('mongodb://localhost:27017/testmongodb');
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
@@ -110,7 +110,7 @@ db.once('open', function (callback) {
   var token_discord = await userToken
     .findOne({ email: 'token_discord@gmail.com' })
     .exec();
-  client.login(token_discord.token);
+  // client.login(token_discord.token);
 })();
 
 app.use(bodyParser.json());
@@ -151,8 +151,10 @@ app.use('/product/img', express.static('docs/pimg'));
 app.use('/product/css', express.static('lib/css/pcss'));
 app.use('/nodemodules', express.static('node_modules'));
 app.use('/favicon', express.static('favicon'));
+app.use('/docs', express.static('docs'));
 app.use('/invoice', express.static('invoice'));
 app.use('/share', express.static('lib/share'));
+app.use('/lib', express.static('lib'));
 app.use('/eventproduct', express.static('docs/pimg/portfolio/gallery/'));
 
 // using libary ejs, ejs create html then back to browser

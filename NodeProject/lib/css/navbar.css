@@ -1,0 +1,9 @@
+.navbar{
+	/*width: 1200px;*/
+}
+.navbar-nav, .nav-link{
+  color:  var(--text-color)!important;
+}
+.nav-item > .nav-link:before{
+	border-bottom: 1px solid var(--title-color)!important;
+}

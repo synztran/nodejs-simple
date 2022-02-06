@@ -77,6 +77,9 @@ async function addPost(req, res) {
                 size: req.file.size,
               },
               product_belong: req.body.product_belong,
+              summary_content: req.body.summary_content,
+              price_content:  req.body.price_content,
+              time_line: req.body.time_line,
             });
           });
           db.collection('couters').findAndModify(
@@ -121,6 +124,9 @@ async function addPost(req, res) {
                 size: req.file.size,
               },
               product_belong: req.body.product_belong,
+              summary_content: req.body.summary_content,
+              price_content:  req.body.price_content,
+              time_line: req.body.time_line,
             });
           });
           db.collection('couters').findAndModify(
@@ -161,6 +167,9 @@ async function addPost(req, res) {
                 size: req.file.size,
               },
               product_belong: req.body.product_belong,
+              summary_content: req.body.summary_content,
+              price_content:  req.body.price_content,
+              time_line: req.body.time_line,
             });
           });
           db.collection('couters').findAndModify(
@@ -268,6 +277,9 @@ async function editPost(req, res) {
           handle: req.body.hns,
           specs: req.body.specs,
           product_belong: req.body.product_belong,
+          summary_content: req.body.summary_content,
+          price_content:  req.body.price_content,
+          time_line: req.body.time_line,
         });
       } else {
         check.set({
@@ -295,6 +307,9 @@ async function editPost(req, res) {
             size: req.file.size,
           },
           product_belong: req.body.product_belong,
+          summary_content: req.body.summary_content,
+          price_content:  req.body.price_content,
+          time_line: req.body.time_line,
         });
       }
       await check.save();
@@ -321,6 +336,9 @@ async function editPost(req, res) {
           handle: req.body.hns,
           specs: req.body.specs,
           product_belong: req.body.product_belong,
+          summary_content: req.body.summary_content,
+          price_content:  req.body.price_content,
+          time_line: req.body.time_line,
         });
       } else {
         check.set({
@@ -346,6 +364,9 @@ async function editPost(req, res) {
             size: req.file.size,
           },
           product_belong: req.body.product_belong,
+          summary_content: req.body.summary_content,
+          price_content:  req.body.price_content,
+          time_line: req.body.time_line,
         });
       }
 
@@ -369,6 +390,9 @@ async function editPost(req, res) {
           handle: req.body.hns,
           specs: req.body.specs,
           product_belong: req.body.product_belong,
+          summary_content: req.body.summary_content,
+          price_content:  req.body.price_content,
+          time_line: req.body.time_line,
         });
       } else {
         check.set({
@@ -391,6 +415,9 @@ async function editPost(req, res) {
             size: req.file.size,
           },
           product_belong: req.body.product_belong,
+          summary_content: req.body.summary_content,
+          price_content:  req.body.price_content,
+          time_line: req.body.time_line,
         });
       }
 

@@ -190,9 +190,21 @@
                                 </div>
                             </div>
                     </div>
+                     <div class="form-group">
+                        <label class="form-control-label">Summary content:</label>
+                        <textarea id="summary_content" name="summary_content" type="text" class="form-control" placeholder="Summary..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Price content:</label>
+                        <textarea id="price_content" name="price_content" type="text" class="form-control" placeholder="Price..."></textarea>
+                    </div>
                     <div class="form-group">
                         <label class="form-control-label">Specs:</label>
-                        <textarea id="specs" name="specs" type="text" class="form-control" placeholder="Content"></textarea>
+                        <textarea id="specs" name="specs"  type="text" class="form-control" placeholder="Content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Time line content:</label>
+                        <textarea id="time_line" name="time_line" type="text" class="form-control" placeholder="Timeline..."></textarea>
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Product belong:</label>
@@ -331,9 +343,21 @@
                                 </div>
                             </div>
                     </div>
+                     <div class="form-group">
+                        <label class="form-control-label">Summary content:</label>
+                        <textarea id="summary_content" name="summary_content" type="text" class="form-control" placeholder="Summary..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Price content:</label>
+                        <textarea id="price_content" name="price_content" type="text" class="form-control" placeholder="Price..."></textarea>
+                    </div>
                     <div class="form-group">
                         <label class="form-control-label">Specs:</label>
                         <textarea id="specs" name="specs"  type="text" class="form-control" placeholder="Content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Time line content:</label>
+                        <textarea id="time_line" name="time_line" type="text" class="form-control" placeholder="Timeline..."></textarea>
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Product belong:</label>
@@ -442,8 +466,20 @@
                             </div>
                     </div>
                     <div class="form-group">
+                        <label class="form-control-label">Summary content:</label>
+                        <textarea id="summary_content" name="summary_content" type="text" class="form-control" placeholder="Summary..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Price content:</label>
+                        <textarea id="price_content" name="price_content" type="text" class="form-control" placeholder="Price..."></textarea>
+                    </div>
+                    <div class="form-group">
                         <label class="form-control-label">Specs:</label>
                         <textarea id="specs" name="specs"  type="text" class="form-control" placeholder="Content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label">Time line content:</label>
+                        <textarea id="time_line" name="time_line" type="text" class="form-control" placeholder="Timeline..."></textarea>
                     </div>
                     <div class="form-group">
                         <label class="form-control-label">Product belong:</label>
@@ -487,11 +523,22 @@ $(document).ready(function() {
         tabsize: 2,
         height:300
     });
+     $('#summary_content').summernote({
+        placeholder: 'Summary content...',
+        tabsize: 2,
+        height: 300
+    });
+    $('#price_content').summernote({
+        placeholder: 'Price content...',
+        tabsize: 2,
+        height: 300
+    });
+    $('#time_line').summernote({
+        placeholder: 'Timeline...',
+        tabsize: 2,
+        height: 300
+    });
 
-    // $('#k_color').select2("data", {k_color: [red]})
-    // $('#datepicker').datepicker();
-    // $('#datepicker1').datepicker();
-    // $('#datepicker2').datepicker();
     $("#date_start, #date_end, #date_payment").DateTimePicker({
 
         dateFormat: "yyyy-MM-dd"
@@ -537,6 +584,9 @@ $(document).ready(function() {
         var type = category_details.type;
         var pic_path = category_details.pic_profile['path'];
         var specs = category_details.specs;
+        var summary_content = category_details.summary_content;
+        var price_content = category_details.price_content;
+        var time_line = category_details.time_line;
         var profile = category_details.c_profile;
         var c_color = category_details.c_code_color;
         var c_material = category_details.c_material
@@ -548,7 +598,10 @@ $(document).ready(function() {
         $('#hns').val(category_details.handle);
         $('#status').trigger('change');
         $('#specs').summernote('code', specs);
-        console.log(pic_path)
+        $('#summary_content').summernote('code', summary_content);
+        $('#price_content').summernote('code', price_content);
+        $('#time_line').summernote('code', time_line);
+
         if (type == 0) {
             $('#keeb_flip').val(category_details.flip);
 

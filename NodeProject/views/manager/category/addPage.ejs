@@ -281,8 +281,20 @@ html {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label">Specs:</label>
-                            <textarea id="specs" name="specs" type="text" class="form-control" placeholder="Content"></textarea>
+                            <label class="form-control-label">Summary content:</label>
+                            <textarea id="summary_content" name="summary_content" type="text" class="form-control" placeholder="Summary..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Price content:</label>
+                            <textarea id="price_content" name="price_content" type="text" class="form-control" placeholder="Price..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Specs content:</label>
+                            <textarea id="specs" name="specs" type="text" class="form-control" placeholder="Specs"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Time line content:</label>
+                            <textarea id="time_line" name="time_line" type="text" class="form-control" placeholder="Timeline..."></textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Product belong:</label>
@@ -311,14 +323,6 @@ html {
         <% include ./../../footer%>
     </div>
 </body>
-<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-<script src="/api/js/datepicker/dist/datepicker.js"></script>
-<script src="/api/js/fileuploader/jquery.fileuploader.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> -->
 <% include ./../../tips/jsPackage %>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -400,7 +404,22 @@ $(document).ready(function() {
     });
     $('.select2').select2();
     $('#specs').summernote({
-        placeholder: 'Hello Bootstrap 4',
+        placeholder: 'Specs content...',
+        tabsize: 2,
+        height: 300
+    });
+    $('#summary_content').summernote({
+        placeholder: 'Summary content...',
+        tabsize: 2,
+        height: 300
+    });
+    $('#price_content').summernote({
+        placeholder: 'Price content...',
+        tabsize: 2,
+        height: 300
+    });
+    $('#time_line').summernote({
+        placeholder: 'Timeline...',
         tabsize: 2,
         height: 300
     });

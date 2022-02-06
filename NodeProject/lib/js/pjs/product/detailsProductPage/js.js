@@ -31,7 +31,7 @@ $(document).ready(function() {
             //imageli.attr('data-thumb', img.src)
         //}
     }
-    $('.btn-join').on('click', function(e){
+    $('.btn-join, #btn-add').on('click', function(e){
         e.preventDefault();
         var id = $(this).attr('data-id');
         var url = $(this).attr('data-url')
@@ -41,14 +41,13 @@ $(document).ready(function() {
     var url = (window.location).href;
     var res = url.split("/").pop();
 
-    var $carousel = 
-    $('#lightSlider').slick({
+    var $carousel = $('#lightSlider').slick({
         dots: false,
         arrows: false,
         swipeToSlide: true,
         infinite: false,
-        adaptiveHeight: true,
-        draggable: false,
+        adaptiveHeight: false,
+        draggable: true,
 
     });
     $('.2nd-slick').slick({
@@ -58,6 +57,7 @@ $(document).ready(function() {
       dots: false,
       adaptiveHeight: true,
       focusOnSelect: true,
+      arrows: true,
     });
     //  $('#product-slider').lightSlider({
     //   gallery:true,
@@ -79,6 +79,7 @@ $(document).ready(function() {
     var select = $("#c-profile");
     var selectQuantity = $("#c-profile > option")
     $("#c-profile").change( function(e) {
+        // this goTo return id of img
         goTo = select.val();
         $carousel.slick( "goTo", goTo );
       }); 
@@ -91,19 +92,21 @@ $(document).ready(function() {
     }).then(function(responseAsJson) {
         console.log(responseAsJson);
         var product = responseAsJson;
-
+        if(product[0].outstock != 1){
+            $("#btn-add").attr("disabled", true)
+        }
         $('#c-profile').change(function() {
             // $('.product-details-price span').remove();
             for (var i in product) {
-                if (this.value == product[i].product_id) {
+                if (this.value == i) {
+                    $("#product-name").html(product[i].product_name)
                     if (product[i].outstock == 1) {
-                        $('.product-details-price').html("$" + product[i].price + " USD")
-                        // $("#btn-add, #btn-paypal").attr("disabled", false)
-                        // $("#btn-paypal").attr("disabled", false)
+                        $('.block-price_currency').html("$" + product[i].price + " USD")
+                        $("#btn-add").attr("disabled", false)
                     } else {
-                        $('.product-details-price').html("<span style='color: red'>Out stock</span>")
+                        $('.block-price_currency').html("<span style='color: red'>Out stock</span>")
 
-                        // $("#btn-add").attr("disabled", true)
+                        $("#btn-add").attr("disabled", true)
                         // $("#btn-paypal").attr("disabled", true)
                     }
 

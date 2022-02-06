@@ -114,10 +114,19 @@ var categorySchema = mongoose.Schema({
         type: String,
         default: null,
     },
+    summary_content:{
+        type: String
+    },
+    price_content:{
+        type: String
+    },
     specs:{
         type: String
+    },
+    time_line:{
+        type: String
     }
-    
+
 })
 
 categorySchema.plugin(AutoIncrement, {id : 'category_seq', inc_field: 'count'});
