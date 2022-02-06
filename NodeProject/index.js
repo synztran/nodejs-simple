@@ -33,46 +33,46 @@ const hbs = require('hbs');
 const moment = require('moment');
 var userToken = require('./db/model/token');
 //FOR DISCORD SERVER
-const { Client, MessageAttachment, Intents } = require('discord.js');
-// const client = new Client();
-const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
-});
+// const { Client, MessageAttachment, Intents } = require('discord.js');
+// // const client = new Client();
+// const client = new Client({
+//   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+// });
 
-client.on('ready', () => {
-  console.log('I am ready!');
-});
+// client.on('ready', () => {
+//   console.log('I am ready!');
+// });
 
-client.on('message', (message) => {
-  if (message.content === '!rip') {
-    // Create the attachment using MessageAttachment
-    // const attachment = new MessageAttachment(
-    //   'https://i.imgur.com/w3duR07.png',
-    //   'favicon.png'
-    // );
-    const attachment = new MessageAttachment('https://i.imgur.com/w3duR07.png');
+// client.on('message', (message) => {
+//   if (message.content === '!rip') {
+//     // Create the attachment using MessageAttachment
+//     // const attachment = new MessageAttachment(
+//     //   'https://i.imgur.com/w3duR07.png',
+//     //   'favicon.png'
+//     // );
+//     const attachment = new MessageAttachment('https://i.imgur.com/w3duR07.png');
 
-    // Send the attachment in the message channel
-    message.channel.send('Nothing at all');
-  }
+//     // Send the attachment in the message channel
+//     message.channel.send('Nothing at all');
+//   }
 
-  if (message.content === 'what is my avatar') {
-    message.reply(message.author.displayAvatarURL());
-  }
-});
+//   if (message.content === 'what is my avatar') {
+//     message.reply(message.author.displayAvatarURL());
+//   }
+// });
 
-client.on('guildMemberAdd', (member) => {
-  // Send the message to a designated channel on a server:
-  const channel = member.guild.channels.cache.find(
-    (ch) => ch.name === 'member-log'
-  );
-  // Do nothing if the channel wasn't found on this server
-  if (!channel) return;
-  // Send the message, mentioning the member
-  channel.send(`Welcome to the server, ${member}`);
-});
+// client.on('guildMemberAdd', (member) => {
+//   // Send the message to a designated channel on a server:
+//   const channel = member.guild.channels.cache.find(
+//     (ch) => ch.name === 'member-log'
+//   );
+//   // Do nothing if the channel wasn't found on this server
+//   if (!channel) return;
+//   // Send the message, mentioning the member
+//   channel.send(`Welcome to the server, ${member}`);
+// });
 
-client.login(config.bot_token);
+// client.login(config.bot_token);
 // ----------------------------------------------------------------------- //
 // mongoose.connect('mongodb://localhost:27017/testmongodb');
 // mongoose.connect('mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'});
