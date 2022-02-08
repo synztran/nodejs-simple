@@ -9,5 +9,5 @@ module.exports = {
   refreshTokenLife: 86400, // một ngày
   ggcaptchascretkey: '6Lcti9UUAAAAACHqUSwTrDulNlfUWEb4CqJyWYYj',
   ggcaptchasitekey: '6Lcti9UUAAAAADIUivaJtXit0OKia78-EQIbnDkc',
-  bot_token: 'ODExOTcwOTgyMjg5MDgwMzMw.YC585w.W0wEL2TsHu9PkezTsfazWBVk9dU',
+  bot_token: 'ODExOTcwOTgyMjg5MDgwMzMw.YC585w.3wGCUQ1H7mHfJEBq3O3Utl46Iqs',
 };
