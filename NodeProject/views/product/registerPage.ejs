@@ -50,6 +50,7 @@
     />
     <link rel="stylesheet" href="/api/css/pcss/main.css" />
     <link rel="stylesheet" href="/api/css/effect/navbar.css" />
+    <link rel="stylesheet" href="/api/css/effect/typing-text.css" />
     <link rel="stylesheet" href="/api/css/pcss/customize.css" />
     <link
       rel="stylesheet"
@@ -64,7 +65,7 @@
     <link rel="stylesheet" type="text/css" href="/api/css/breadcrumb.css" />
     <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css" />
     <link rel="stylesheet" type="text/css" href="/api/css/effect/preload.css" />
-
+    <link rel="stylesheet" href="/package/waitMe/waitMe.min.css" />
     <!--=== font ===-->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -91,170 +92,240 @@
     <!--=== </header> ===-->
     <% include ./../tips/subs/breadcrumb %>
     <div class="main-container">
-      <div class="row">
-        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 login-form">
-          <div class="title">
-            <h2 class="my-3">Login</h2>
+      <div class="row justify-content-center">
+        <div class="d-flex col-md-12" style="min-height: 600px">
+          <div class="col-md-7">
+            <div class="login-banner"></div>
           </div>
-          <div class="authentication-button px-6">
-            <a class="facebook-button btn-outline" href="#">
-              <div class="btn-facebook-cover text-center">
-                <span class="name">Login with Facebook</span>
-              </div>
-            </a>
-            <br />
-            <a class="google-button" href="#">
-              <div class="btn-google-cover text-center">
-                <span class="name">Login with Google</span>
-              </div>
-            </a>
-          </div>
-          <div class="separator px-6">Or</div>
-          <form
-            id="form-login"
-            class="form-not-mg px-6"
-            autocomplete="on"
-            method="post"
-          >
-            <div class="form-group">
-              <label for="email">Email</label>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="emailHelp"
-                  ><i class="las la-envelope la-2x"></i
-                ></span>
-                <input
-                  autocomplete="on"
-                  type="email"
-                  name="email"
-                  class="form-control"
-                  id="email"
-                  value=""
-                  aria-describedby="emailHelp"
-                  placeholder="Email"
-                  aria-label="Email"
-                />
-              </div>
-              <small id="emailHelp" class="form-text text-muted"
-                >We'll never share your email with anyone else.</small
+          <div class="col-md-5">
+            <div class="d-flex w-100 tabs-customize">
+              <span id="tab-sign-in" class="w-100 text-center active-tab mx-4"
+                ><a href="#" class="text-decoration-none"
+                  >Existing user</a
+                ></span
+              >
+              <span
+                class="w-1"
+                style="border: 1px solid var(--title-color)"
+              ></span>
+              <span id="tab-reg" class="w-100 text-center mx-4"
+                ><a href="#" class="text-decoration-none">New user</a></span
               >
             </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="pwHelp"
-                  ><i class="las la-lock la-2x"></i
-                ></span>
-                <input
-                  autocomplete="on"
-                  type="password"
-                  name="password"
-                  class="form-control"
-                  id="password"
-                  value=""
-                  placeholder="Password"
-                  aria-describedby="pwHelp"
-                  aria-label="Password"
-                />
+            <!-- login form -->
+            <div class="login-form">
+              <div class="d-flex justify-content-center title my-3">
+                <h2 class="effect-typing-text-sign-in">Sign in</h2>
               </div>
-              <div class="forgot-pw text-right">
-                <a href="#">Forgot password?</a>
+              <div class="authentication-button">
+                <a class="facebook-button btn-outline" href="#">
+                  <div class="btn-facebook-cover text-center">
+                    <span class="name">Login with Facebook</span>
+                  </div>
+                </a>
+                <br />
+                <a class="google-button" href="#">
+                  <div class="btn-google-cover text-center">
+                    <span class="name">Login with Google</span>
+                  </div>
+                </a>
               </div>
-            </div>
-            <div class="btn-area">
-              <button
-                type="submit"
-                id="btn-login"
-                class="btn btn-primary btn-login"
+              <div class="separator">Or</div>
+              <form
+                id="form-login"
+                class="form-not-mg"
+                autocomplete="on"
+                method="post"
               >
-                Login
-              </button>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="emailHelp"
+                      ><i class="las la-envelope la-2x"></i
+                    ></span>
+                    <input
+                      autocomplete="on"
+                      type="email"
+                      name="email"
+                      class="form-control"
+                      id="email"
+                      value=""
+                      aria-describedby="emailHelp"
+                      placeholder="Email"
+                      aria-label="Email"
+                      required
+                    />
+                  </div>
+                  <small id="emailHelp" class="form-text text-muted"
+                    >We'll never share your email with anyone else.</small
+                  >
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="pwHelp"
+                      ><i class="las la-lock la-2x"></i
+                    ></span>
+                    <input
+                      autocomplete="on"
+                      type="password"
+                      name="password"
+                      class="form-control"
+                      id="password"
+                      placeholder="Password"
+                      aria-describedby="pwHelp"
+                      aria-label="Password"
+                      required
+                    />
+                    <span
+                      id="sign_eye-pw__show"
+                      class="input-group-text"
+                      style="cursor: pointer"
+                      data-visible="visible"
+                      ><i class="las la-eye-slash la-2x"></i
+                    ></span>
+                    <span
+                      id="sign_eye-pw__hide"
+                      class="input-group-text hide-pw"
+                      style="cursor: pointer"
+                      data-visible="hidden"
+                      ><i class="las la-eye la-2x"></i
+                    ></span>
+                  </div>
+                  <div class="float-right forgot-pw position-relative">
+                    <a href="#">Forgot password?</a>
+                  </div>
+                </div>
+                <div class="btn-area">
+                  <button type="submit" id="btn-sign-in" class="btn-login">
+                    Login
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 reg-form">
-          <div class="title">
-            <h2 class="my-3">Register</h2>
+            <!-- reg-form -->
+            <div class="reg-form d-none">
+              <div class="d-flex justify-content-center my-3 title">
+                <h2 class="effect-typing-text-reg">Register</h2>
+              </div>
+              <form class="form-not-mg" id="form-register" method="POST">
+                <div class="form-group d-flex">
+                  <div class="mr-2 w-100">
+                    <label for="fname">First name</label>
+                    <input
+                      type="text"
+                      name="fname"
+                      class="form-control"
+                      id="fnam"
+                      aria-describedbsy="fnamelHelp"
+                      placeholder="First name"
+                    />
+                  </div>
+                  <div class="ml-2 w-100">
+                    <label for="lname">Last name</label>
+                    <input
+                      type="text"
+                      name="lname"
+                      class="form-control"
+                      id="lname"
+                      aria-describedbsy="lnameHelp"
+                      placeholder="Last name"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="reg_email">Email</label>
+                      <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        id="reg_email"
+                        placeholder="Email"
+                      />
+                      <small id="Help" class="form-text text-muted">
+                        Ideally, you should register your email with paypal
+                        email
+                      </small>
+                    </div>
+                    <div class="form-group">
+                      <label for="reg_password">Password</label>
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          name="password"
+                          class="form-control"
+                          id="reg_password"
+                          placeholder="Password"
+                        />
+                        <span
+                          id="eye-pw_show"
+                          class="input-group-text"
+                          style="cursor: pointer"
+                          data-visible="visible"
+                          ><i class="las la-eye-slash la-2x"></i
+                        ></span>
+                        <span
+                          id="eye-pw_hide"
+                          class="input-group-text hide-pw"
+                          style="cursor: pointer"
+                          data-visible="hidden"
+                          ><i class="las la-eye la-2x"></i
+                        ></span>
+                      </div>
+                      <small
+                        id="passwordHelp"
+                        class="form-text text-muted mt-2"
+                      >
+                        Add 9 charachters or more, lowercase letters, uppercase
+                        letters, numbers and symbols to make the password really
+                        strong!
+                      </small>
+                    </div>
+                    <div class="form-group">
+                      <label for="re_password">Confirm Password</label>
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          name="re_password"
+                          class="form-control"
+                          id="re_password"
+                          placeholder="Re-Password"
+                          type="password"
+                        />
+                        <span
+                          style="cursor: pointer"
+                          id="eye-pw-confirm_show"
+                          class="input-group-text"
+                          data-visible="visible"
+                          ><i class="las la-eye-slash la-2x"></i
+                        ></span>
+                        <span
+                          style="cursor: pointer"
+                          id="eye-pw-confirm_hide"
+                          data-visible="hidden"
+                          class="input-group-text hide-pw"
+                          ><i class="las la-eye la-2x"></i
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-md-12">
+                  <div
+                    class="g-recaptcha"
+                    data-sitekey="6Lexz1YUAAAAAJZknL3EkeY_xBlIKGKGfGwFHhjK"
+                  ></div>
+                </div>
+                <div class="btn-area">
+                  <button type="button" id="btn-reg" class="btn-register">
+                    Register
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-          <form class="form-not-mg" id="form-register" method="POST">
-            <div class="row">
-              <div class="col-md-12 d-flex">
-                <div class="col-md-6 form-group">
-                  <label for="fname">First name</label>
-                  <input
-                    type="text"
-                    name="fname"
-                    class="form-control"
-                    id="fnam"
-                    aria-describedbsy="fnamelHelp"
-                    placeholder="First name"
-                  />
-                </div>
-                <div class="col-md-6 form-group">
-                  <label for="lname">Last name</label>
-                  <input
-                    type="text"
-                    name="lname"
-                    class="form-control"
-                    id="lname"
-                    aria-describedbsy="lnameHelp"
-                    placeholder="Last name"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group col-md-12">
-                  <label for="reg_email">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    class="form-control"
-                    id="reg_email"
-                    placeholder="Email"
-                  />
-                  <small id="Help" class="form-text text-muted">
-                    Ideally, you should register your email with paypal email
-                  </small>
-                </div>
-                <div class="form-group col-md-12">
-                  <label for="reg_password">Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    class="form-control"
-                    id="reg_password"
-                    placeholder="Password"
-                  />
-                </div>
-                <div class="form-group col-md-12">
-                  <label for="re_password">Confirm Password</label>
-                  <input
-                    type="password"
-                    name="re_password"
-                    class="form-control"
-                    id="re_password"
-                    placeholder="Re-Password"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="form-group col-md-12">
-              <div
-                class="g-recaptcha"
-                data-sitekey="6Lcti9UUAAAAADIUivaJtXit0OKia78-EQIbnDkc"
-              ></div>
-            </div>
-            <div class="col-md-12 btn-area">
-              <button
-                type="button"
-                id="btn-reg"
-                class="btn btn-primary btn-register"
-              >
-                Register
-              </button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
@@ -276,4 +347,5 @@
   <script src="/share/google-capcha/api.js"></script>
   <script src="/share/sweetalert/sweetalert2@9.js"></script>
   <script src="/api/js/pjs/product/registerPage/js.js"></script>
+  <script type="text/javascript" src="/package/waitMe/waitMe.min.js"></script>
 </html>

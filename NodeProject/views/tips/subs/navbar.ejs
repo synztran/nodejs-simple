@@ -1,34 +1,63 @@
-<nav class="navbar navbar-expand-lg py-3 navbar-dark">
-        <div class="container" style="width: 1200px;">
-            <a href="/" class="navbar-brand">
-                <!-- Logo Image -->
-                <img src="/favicon/white_logo.png" alt="" class="d-inline-block align-middle mr-2">
-                <!-- Logo Text -->
-                <!-- <span class="text-uppercase font-weight-bold">Company</span> -->
-            </a>
-            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
-            <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link text-decoration-none">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li id="tag-shop" class="nav-item"><a href="/shop" class="nav-link">Shop</a></li>
-                    <li id="tag-service" class="nav-item"><a href="/service" class="nav-link">Services</a></li>
-                    <!--<li id="tag-blog" class="nav-item"><a href="#" class="nav-link">Blog</a></li> -->
-                    <li id="tag-contact" class="nav-item"><a href="https://www.facebook.com/messenger/noobassembly" target="_blank" class="nav-link">Contact</a></li>
-                </ul>
-                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <% if(userName){ %>
-                            <a class="nav-link text-decoration-none text-transform-lower" href="/account"><i class="las la-user"></i><%=userName%></a>
-                        <% }else{ %>
-                            <a class="nav-link text-decoration-none" href="/register"><i class="las la-user"></i>Login</a>
-                        <% } %>
-                       
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    <a href="/" class="navbar-brand">
+      <!-- Logo Image -->
+      <img
+        src="/favicon/white_logo.png"
+        alt=""
+        class="d-inline-block align-middle mr-2"
+      />
+      <!-- Logo Text -->
+      <!-- <span class="text-uppercase font-weight-bold">Company</span> -->
+    </a>
+    <button
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      class="navbar-toggler"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarSupportedContent" class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a href="/" class="nav-link text-decoration-none"
+            >Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li id="tag-shop" class="nav-item">
+          <a href="/shop" class="nav-link">Shop</a>
+        </li>
+        <!-- <li id="tag-service" class="nav-item"><a href="/service" class="nav-link">Services</a></li> -->
+        <!--<li id="tag-blog" class="nav-item"><a href="#" class="nav-link">Blog</a></li> -->
+        <li id="tag-contact" class="nav-item">
+          <a
+            href="https://www.facebook.com/noobassembly"
+            target="_blank"
+            class="nav-link"
+            >Contact</a
+          >
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <% if(currentPage !== 'Login'){ %> <% if(userName){ %>
+          <a
+            class="nav-link text-decoration-none text-transform-lower"
+            href="/account"
+            ><i class="las la-user"></i><%=userName%></a
+          >
+          <% }else{ %>
+          <a class="nav-link text-decoration-none" href="/register"
+            ><i class="las la-user"></i>Login</a
+          >
+          <% } %> <% } %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

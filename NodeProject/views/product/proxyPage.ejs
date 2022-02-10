@@ -108,22 +108,13 @@
       box-sizing: border-box;
     }
 
-    html,
-    body {
-      font-family: 'Montserrat', sans-serif !important;
-      width: 100%;
-      background-image: url('/api/docs/background/bg-black.svg');
-      background-repeat: repeat;
-      background-color: transparent;
-      box-sizing: border-box;
-    }
-    nav.navbar {
+    /* nav.navbar {
       z-index: 10;
       position: sticky;
       top: 0;
       background-image: url('/api/docs/background/UIBkAT.jpg');
       background-repeat: no-repeat;
-    }
+    } */
     .bg-dark {
       background-color: transparent !important;
     }
@@ -164,14 +155,14 @@
       </div>
     </div>
     <% include ./../tips/subs/navbar %> <% include ./../tips/subs/breadcrumb %>
-    <main class="main row" >
+    <main class="main row">
       <div class="col-xl-3 col-lg-3 col-md-2 sidebar-area">
         <!-- <sidebar class="sidebar"> </sidebar> -->
       </div>
       <div class="col-xl-9 col-lg-9 col-md-12">
         <div class="title-li">
           <p class="font-hello_jones">Shop</p>
-          <hr />
+          <hr style="opacity: unset" />
         </div>
         <% if(listCategory != null) { %>
         <article class="row">
@@ -277,28 +268,14 @@
                     </div>
                     <a
                       href="#"
-                      class="
-                        product-card-tag
-                        subtle
-                        product-price
-                        text-decorate-none
-                        for-device
-                      "
+                      class="product-card-tag subtle product-price text-decorate-none for-device"
                       id="product_price_<%=key%>"
                       data-toggle="tooltip"
                       title=""
                     ></a>
 
                     <div
-                      class="
-                        hover-text
-                        product-card-tag
-                        subtle
-                        product-price
-                        hover-text
-                        text-right
-                        for-web
-                      "
+                      class="hover-text product-card-tag subtle product-price hover-text text-right for-web"
                     >
                       $<%=item.min_price %> - $<%=item.max_price %>
                       <span
@@ -316,16 +293,17 @@
         </article>
         <% }else{ %> <% window.location.href = '/shop'; %> <% } %>
       </div>
+      <footer>
+        <div class="col-full ss-copyright">
+          <span>© Copyright NoobStore 2017</span>
+          <span
+            >Design by
+            <a href="https://www.facebook.com/noobassembly">Noob Team</a></span
+          >
+        </div>
+      </footer>
     </main>
-    <footer>
-      <div class="col-full ss-copyright">
-        <span>© Copyright NoobStore 2017</span>
-        <span
-          >Design by
-          <a href="https://www.facebook.com/noobassembly">Noob Team</a></span
-        >
-      </div>
-    </footer>
+
     <% include ./../tips/subs/botmessenger %>
   </body>
   <script src="/share/jquery/jquery-3.6.0.min.js"></script>

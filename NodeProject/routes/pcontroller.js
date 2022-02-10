@@ -1,46 +1,48 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const request = require("request");
-const bcrypt = require("bcryptjs");
-const fs = require("fs");
-const readline = require("readline");
-const jwt = require("jsonwebtoken");
-const path = require("path");
-const reqHeader = require("request");
-const nodemailer = require("nodemailer");
-const config = require("./../lib/comon/config");
-const utils = require("./../lib/comon/utils");
-const cookieParser = require("cookie-parser");
-const session = require("express-session");
-const livereload = require("connect-livereload");
-const moment = require("moment");
-const https = require("https");
-const http = require("http");
-const app = express();
+const request = require('request');
+const bcrypt = require('bcryptjs');
+const fs = require('fs');
+const readline = require('readline');
+const jwt = require('jsonwebtoken');
+const path = require('path');
+const reqHeader = require('request');
+const nodemailer = require('nodemailer');
+const config = require('./../lib/comon/config');
+const utils = require('./../lib/comon/utils');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const livereload = require('connect-livereload');
+const moment = require('moment');
+const https = require('https');
+const http = require('http');
+
 router.use(cookieParser());
-const i18n = require("i18n");
+const i18n = require('i18n');
+var cors = require('cors');
+const app = express();
 const tokenList = {};
 
 // jwt.sign({foo: 'bar'}, privateKey, {algorithm: 'RS256'}, function(err, token){
 //     console.log(token)
 // });
 
-const multer = require("multer");
+const multer = require('multer');
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "docs/upload/");
+    cb(null, 'docs/upload/');
   },
   filename: function (req, file, cb) {
-    cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+    cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname);
   },
 });
-var mongoose = require("mongoose");
+var mongoose = require('mongoose');
 var db = mongoose.connection;
 const fileFilter = (req, file, cb) => {
   if (
-    file.mimetype === "image/jpeg" ||
-    file.mimetype === "image/png" ||
-    file.mimetype === "image/jpg"
+    file.mimetype === 'image/jpeg' ||
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg'
   ) {
     cb(null, false);
   } else {
@@ -56,22 +58,22 @@ const upload = multer({
   // fileFilter: fileFilter
 });
 // var imgPath = 'docs/img_1435.JPG';
-var Account = require("./../db/model/account");
-var Image = require("./../db/model/image");
-var userToken = require("./../db/model/token");
-var Tracking = require("./../db/model/tracking");
-var Product = require("./../db/model/product");
-var AdsProduct = require("./../db/model/adsproduct");
-var EventProduct = require("./../db/model/eventproduct");
-var PageContent = require("./../db/model/mainpage_content");
-var Category = require("./../db/model/category");
-var Couter = require("./../db/model/couter");
-var TokenCheckMiddleware = require("./../lib/check/checktoken");
-var TokenUserCheckMiddleware = require("./../lib/check/checktokenproduct.js");
-var SessionCheckMiddleware = require("./../lib/check/checksession");
-var CountMiddleware = require("./../lib/check/countproduct");
+var Account = require('./../db/model/account');
+var Image = require('./../db/model/image');
+var userToken = require('./../db/model/token');
+var Tracking = require('./../db/model/tracking');
+var Product = require('./../db/model/product');
+var AdsProduct = require('./../db/model/adsproduct');
+var EventProduct = require('./../db/model/eventproduct');
+var PageContent = require('./../db/model/mainpage_content');
+var Category = require('./../db/model/category');
+var Couter = require('./../db/model/couter');
+var TokenCheckMiddleware = require('./../lib/check/checktoken');
+var TokenUserCheckMiddleware = require('./../lib/check/checktokenproduct.js');
+var SessionCheckMiddleware = require('./../lib/check/checksession');
+var CountMiddleware = require('./../lib/check/countproduct');
 var BlogCategory = require('./../db/model/blogCategory');
-var BlogPost = require('./../db/model/blogPost')
+var BlogPost = require('./../db/model/blogPost');
 
 // i18n.configure({
 //     locales:['en', 'vi'],
@@ -79,10 +81,15 @@ var BlogPost = require('./../db/model/blogPost')
 //     cookie: 'lang',
 // })
 
+var corsOptions = {
+  origin: 'http://example.com',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 app.use(
   session({
     saveUninitialized: true,
-    name: "mycookie",
+    name: 'mycookie',
     resave: true,
     secret: config.secret,
     cookie: {
@@ -92,13 +99,15 @@ app.use(
   })
 );
 
-app.use("/change-lang/:lang", (req, res) => {
-  res.cookie("lang", req.params.lang, { maxAge: 900000 });
-  res.redirect("back");
+app.use(cors());
+
+app.use('/change-lang/:lang', (req, res) => {
+  res.cookie('lang', req.params.lang, { maxAge: 900000 });
+  res.redirect('back');
 });
 
-router.post("/login", async (req, res, next) => {
-  res.cookie("lang", "en", { maxAge: 900000 });
+router.post('/login', async (req, res, next) => {
+  res.cookie('lang', 'en', { maxAge: 900000 });
   try {
     var account = await Account.findOne({
       email: req.body.email.toLowerCase(),
@@ -108,20 +117,20 @@ router.post("/login", async (req, res, next) => {
     });
     if (!account) {
       return res.status(400).send({
-        status: "error",
-        message: "The user does not exist ",
+        status: 'error',
+        message: 'The user does not exist ',
       });
     }
     if (!bcrypt.compareSync(req.body.password, account.password)) {
       return res.status(400).send({
-        status: "error",
-        message: "The password is not correct",
+        status: 'error',
+        message: 'The password is not correct',
       });
     }
     if (!active) {
       return res.status(400).send({
-        status: "error",
-        message: "Please active your account",
+        status: 'error',
+        message: 'Please active your account',
       });
     }
 
@@ -144,7 +153,7 @@ router.post("/login", async (req, res, next) => {
       .find({ email: req.body.email.toLowerCase() }, async (err, docs) => {
         if (docs.length) {
           // userToken.set(req.body);
-          db.collection("usertokens").updateOne(
+          db.collection('usertokens').updateOne(
             { email: req.body.email },
             {
               $set: {
@@ -165,24 +174,24 @@ router.post("/login", async (req, res, next) => {
       })
       .exec();
 
-    res.cookie("x-token", response.token, { maxAge: 6000000 });
+    res.cookie('x-token', response.token, { maxAge: 6000000 });
     // res.cookie('uid', account._id, {maxAge: 6000000})
     // res.cookie('uemail', account.email, {maxAge: 6000000})
-    res.cookie("x-refresh-token", response.refreshToken, { maxAge: 6000000 });
-    res.cookie("lang", "vi", { maxAge: 900000 });
+    res.cookie('x-refresh-token', response.refreshToken, { maxAge: 6000000 });
+    res.cookie('lang', 'vi', { maxAge: 900000 });
     req.session.User = {
-      email: account["email"],
-      fname: account["fname"],
-      lname: account["lname"],
-      id: account["_id"],
-      shipping_at: account["shipping_at"],
+      email: account['email'],
+      fname: account['fname'],
+      lname: account['lname'],
+      id: account['_id'],
+      shipping_at: account['shipping_at'],
     };
 
     req.session.save(function (err) {
       // session saved
       if (!err) {
         //Data get lost here
-        res.redirect("/");
+        res.redirect('/');
       }
     });
     // return res.status(200).json({status: 'success'})
@@ -193,7 +202,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.get("/", function (req, res) {
+router.get('/', function (req, res) {
   var getName, getId;
   const limit = 5;
 
@@ -209,11 +218,11 @@ router.get("/", function (req, res) {
               if (EProductDocs.length > 0) {
                 EProductDocs.forEach(function (item) {
                   var imgUrl = item.event_product_image.path;
-                  var replaceIcon = imgUrl.replace(/\\/g, "/");
-                  var imgBg = "api/" + replaceIcon;
+                  var replaceIcon = imgUrl.replace(/\\/g, '/');
+                  var imgBg = 'api/' + replaceIcon;
 
                   if (req.session.User == null) {
-                    res.render("index", {
+                    res.render('index', {
                       user: null,
                       listAdsProduct: docs,
                       listContent: ContentDocs,
@@ -224,11 +233,11 @@ router.get("/", function (req, res) {
                     });
                   } else {
                     Account.findOne(
-                      { email: req.session.User["email"] },
+                      { email: req.session.User['email'] },
                       function (errAccount, getAccount) {
-                        res.render("index", {
-                          user: req.session.User["email"],
-                          userName: getAccount.fname + " " + getAccount.lname,
+                        res.render('index', {
+                          user: req.session.User['email'],
+                          userName: getAccount.fname + ' ' + getAccount.lname,
                           listAdsProduct: docs,
                           listContent: ContentDocs,
                           EventProduct: EProductDocs,
@@ -242,15 +251,15 @@ router.get("/", function (req, res) {
                 });
               } else {
                 if (req.session.User == null) {
-                  res.render("index", {
+                  res.render('index', {
                     user: null,
                     listAdsProduct: docs,
                     listContent: ContentDocs,
                     EventProduct: [],
                   });
                 } else {
-                  res.render("index", {
-                    user: req.session.User["email"],
+                  res.render('index', {
+                    user: req.session.User['email'],
                     listAdsProduct: docs,
                     listContent: ContentDocs,
                     EventProduct: [],
@@ -265,7 +274,7 @@ router.get("/", function (req, res) {
   }).limit(limit);
 });
 
-router.get("/time_event", function (req, res) {
+router.get('/time_event', function (req, res) {
   EventProduct.find({ status: 1 }, function (EProductErr, EProductDocs) {
     EProductDocs.forEach(function (item) {
       res.send(item.date_end);
@@ -273,51 +282,51 @@ router.get("/time_event", function (req, res) {
   });
 });
 
-router.get("/register", async (req, res) => {
-  res.render("product/registerPage", {
-    currentPage: "Login",
+router.get('/register', async (req, res) => {
+  res.render('product/registerPage', {
+    currentPage: 'Login',
     userName: null,
   });
 });
 
-router.get("/account", TokenUserCheckMiddleware, async (req, res) => {
+router.get('/account', TokenUserCheckMiddleware, async (req, res) => {
   if (req.session.User == null) {
-    res.render("product/registerPage", {
+    res.render('product/registerPage', {
       user: null,
       userName: null,
-      currentPage: "Register",
+      currentPage: 'Register',
     });
   } else {
     Account.findOne(
-      { email: req.session.User["email"] },
+      { email: req.session.User['email'] },
       function (errAccount, getAccount) {
         console.log(getAccount);
-        res.render("product/accountPage", {
+        res.render('product/accountPage', {
           user: getAccount,
-          userName: getAccount.fname + " " + getAccount.lname,
-          currentPage: "Account",
+          userName: getAccount.fname + ' ' + getAccount.lname,
+          currentPage: 'Account',
         });
       }
     );
   }
 });
 
-router.get("/chucnang", async (req, res) => {
-  res.render("product/accountPage");
+router.get('/chucnang', async (req, res) => {
+  res.render('product/accountPage');
 });
 
-router.get("/account/address", async (req, res) => {
+router.get('/account/address', async (req, res) => {
   if (!req.session.User) {
-    res.redirect("/");
+    res.redirect('/');
   } else {
-    Account.find({ email: req.session.User["email"] }, function (err, docs) {
+    Account.find({ email: req.session.User['email'] }, function (err, docs) {
       var address = docs[0].shipping_at;
-      if (address == null || address == "undefined") {
-        res.render("product/addressPage", {
+      if (address == null || address == 'undefined') {
+        res.render('product/addressPage', {
           listAddress: null,
         });
       } else {
-        res.render("product/addressPage", {
+        res.render('product/addressPage', {
           listAddress: docs,
         });
       }
@@ -325,30 +334,30 @@ router.get("/account/address", async (req, res) => {
   }
 });
 
-router.get("/shop", (req, res) => {
+router.get('/shop', (req, res) => {
   Category.find({}, function (err, docs) {
     Product.find({}, function (err, pData) {
       EventProduct.findOne({}, function (err, epData) {
         if (req.session.User == null) {
-          res.render("product/proxyPage", {
+          res.render('product/proxyPage', {
             user: null,
             userName: null,
             listCategory: docs,
             listProduct: pData,
             ePID: epData.event_product_name,
-            currentPage: "Shop",
+            currentPage: 'Shop',
           });
         } else {
           Account.findOne(
-            { email: req.session.User["email"] },
+            { email: req.session.User['email'] },
             function (errAccount, getAccount) {
-              res.render("product/proxyPage", {
-                user: req.session.User["email"],
-                userName: getAccount.fname + " " + getAccount.lname,
+              res.render('product/proxyPage', {
+                user: req.session.User['email'],
+                userName: getAccount.fname + ' ' + getAccount.lname,
                 listCategory: docs,
                 listProduct: pData,
                 ePID: epData.event_product_name,
-                currentPage: "Shop",
+                currentPage: 'Shop',
               });
             }
           );
@@ -358,7 +367,7 @@ router.get("/shop", (req, res) => {
   });
 });
 
-router.get("/getshop", (req, res) => {
+router.get('/getshop', (req, res) => {
   Category.find({}, function (err, docs) {
     Product.find({}, function (err, pData) {
       EventProduct.findOne({}, function (err, epData) {
@@ -374,18 +383,18 @@ router.get("/getshop", (req, res) => {
   });
 });
 
-router.post("/captcha", async (req, res) => {});
+router.post('/captcha', async (req, res) => {});
 
 // API register
 // return code: 400 and message: with each case
-router.post("/account", async (req, res, next) => {
+router.post('/account', async (req, res, next) => {
   try {
     await Account.find({ email: req.body.email }, async (err, docs) => {
       // not using email of admin
       if (req.body.email == config.admin || req.body.email == config.mod) {
         return res.status(400).send({
           code: 400,
-          message: "Mail already exits!1!",
+          message: 'Mail already exits!!!',
         });
       }
       // if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null){
@@ -398,7 +407,7 @@ router.post("/account", async (req, res, next) => {
       if (docs.length) {
         return res.status(400).send({
           code: 400,
-          message: "Mail already exits!!!",
+          message: 'Mail already exits!!!',
         });
       } else {
         //dont forget remove comment when upload server
@@ -471,20 +480,20 @@ router.post("/account", async (req, res, next) => {
           .exec();
 
         var transporter = nodemailer.createTransport({
-          service: "Gmail",
+          service: 'Gmail',
           auth: {
-            user: "noobassembly@gmail.com",
-            pass: "gsrfewqfnplyltcz",
+            user: 'noobassembly@gmail.com',
+            pass: 'gsrfewqfnplyltcz',
           },
         });
         var link =
-          "https://" + req.get("host") + "/verify?id=" + response.token;
-        var logo = "https://" + req.get("host") + "/favicon/big_logo.png";
+          'https://' + req.get('host') + '/verify?id=' + response.token;
+        var logo = 'https://' + req.get('host') + '/favicon/big_logo.png';
         var mainOptions = {
-          from: "NoobStore <noobassembly@gmail.com>",
+          from: 'NoobStore <noobassembly@gmail.com>',
           to: req.body.email,
-          subject: "[NoobStore] Please verify your email address",
-          text: "You received message from " + req.body.email,
+          subject: '[NoobStore] Please verify your email address',
+          text: 'You received message from ' + req.body.email,
           html:
             "<img src='" +
             logo +
@@ -497,9 +506,9 @@ router.post("/account", async (req, res, next) => {
 
         transporter.sendMail(mainOptions, function (err, info) {
           if (err) {
-            res.redirect("/");
+            res.redirect('/');
           } else {
-            res.redirect("/");
+            res.redirect('/');
           }
         });
       }
@@ -509,35 +518,35 @@ router.post("/account", async (req, res, next) => {
   }
 });
 
-router.get("/get_session", (req, res) => {
+router.get('/get_session', (req, res) => {
   //check session
   if (req.session.User) {
     return res
       .status(200)
-      .json({ status: "success", session: req.session.User });
+      .json({ status: 'success', session: req.session.User });
   }
   return res
     .status(200)
-    .json({ status: "error", session: "No session", code: 200 });
+    .json({ status: 'error', session: 'No session', code: 200 });
 });
 
-router.get("/get_noti", TokenUserCheckMiddleware, async (req, res) => {
-  var account = await Account.findOne({ email: req.decoded["email"] }).exec();
+router.get('/get_noti', TokenUserCheckMiddleware, async (req, res) => {
+  var account = await Account.findOne({ email: req.decoded['email'] }).exec();
   return res.status(200).json({
-    status: "success",
+    status: 'success',
     noti: {
       get_noti: account.get_noti,
     },
   });
 });
 
-router.get("/get_cookie", async (req, res) => {
-  if (req.cookies["x-token"] && req.session.User) {
+router.get('/get_cookie', async (req, res) => {
+  if (req.cookies['x-token'] && req.session.User) {
     var account = await Account.findOne({
-      email: req.session.User["email"],
+      email: req.session.User['email'],
     }).exec();
     return res.status(200).json({
-      status: "success",
+      status: 'success',
       session: {
         id: account._id,
         email: account.email,
@@ -548,50 +557,50 @@ router.get("/get_cookie", async (req, res) => {
   }
   return res
     .status(200)
-    .json({ status: "error", session: "No session", code: 200 });
+    .json({ status: 'error', session: 'No session', code: 200 });
 });
 
-router.get("/clear_session", (req, res) => {
+router.get('/clear_session', (req, res) => {
   req.session.destroy(function (err) {
     return res
       .status(200)
-      .json({ status: "success", session: "cannot access session here" });
+      .json({ status: 'success', session: 'cannot access session here' });
   });
 });
 
-router.get("/verify", async (req, res) => {
+router.get('/verify', async (req, res) => {
   var getTimeActive = new Date();
   try {
-    var checkToken = await userToken.findOne({ token: req.query["id"] }).exec();
-    var checkActive = await Account.findOne({ email: checkToken["email"] });
-    if (checkToken && checkActive["active"] == false) {
-      db.collection("accounts").updateOne(
-        { email: checkToken["email"].toLowerCase() },
+    var checkToken = await userToken.findOne({ token: req.query['id'] }).exec();
+    var checkActive = await Account.findOne({ email: checkToken['email'] });
+    if (checkToken && checkActive['active'] == false) {
+      db.collection('accounts').updateOne(
+        { email: checkToken['email'].toLowerCase() },
         { $set: { active: true, actived_date: getTimeActive } }
       );
 
-      res.redirect("/");
+      res.redirect('/');
     } else {
-      res.redirect("/");
+      res.redirect('/');
     }
   } catch (err) {
     res.status(500).send(err);
   }
 });
 
-router.post("/updateaccount", TokenUserCheckMiddleware, async (req, res) => {
-  const uemail = req.decoded["email"];
+router.post('/updateaccount', TokenUserCheckMiddleware, async (req, res) => {
+  const uemail = req.decoded['email'];
   try {
     var account = await Account.findOne({ email: uemail }).exec();
     if (!account) {
       return res.status(400).send({
-        status: "error",
-        message: "The user does not exist ",
+        status: 'error',
+        message: 'The user does not exist ',
       });
     }
 
-    if ((req.body.currentpw == "") & (req.body.newpw == "")) {
-      db.collection("accounts").updateOne(
+    if ((req.body.currentpw == '') & (req.body.newpw == '')) {
+      db.collection('accounts').updateOne(
         {
           email: uemail,
         },
@@ -614,18 +623,18 @@ router.post("/updateaccount", TokenUserCheckMiddleware, async (req, res) => {
         }
       );
 
-      res.redirect("/account");
+      res.redirect('/account');
     } else {
       if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
         return res.status(400).send({
-          status: "error",
-          message: "The password is not correct",
+          status: 'error',
+          message: 'The password is not correct',
         });
       }
       req.body.newpw = bcrypt.hashSync(req.body.newpw, 10);
       account.set({ password: req.body.newpw });
       await account.save();
-      res.redirect("/account");
+      res.redirect('/account');
     }
   } catch (err) {
     res.status(500).send(err);
@@ -635,12 +644,12 @@ router.post("/updateaccount", TokenUserCheckMiddleware, async (req, res) => {
 // ------------------------------------------ ADDRESS CONFIG-------------------------------------
 
 router.post(
-  "/account/addaddress",
+  '/account/addaddress',
   TokenUserCheckMiddleware,
   async (req, res) => {
-    var uemail = req.decoded["email"];
+    var uemail = req.decoded['email'];
     try {
-      db.collection("accounts").update(
+      db.collection('accounts').update(
         {
           email: uemail,
         },
@@ -661,17 +670,17 @@ router.post(
           },
         }
       );
-      res.redirect("/account/address");
+      res.redirect('/account/address');
     } catch (err) {
       res.status(500).send(err);
     }
   }
 );
 
-router.delete("/delete-address/:id", async (req, res) => {
-  var uemail = "rapsunl231@gmail.com";
+router.delete('/delete-address/:id', async (req, res) => {
+  var uemail = 'rapsunl231@gmail.com';
   try {
-    var address = db.collection("accounts").update(
+    var address = db.collection('accounts').update(
       {
         email: uemail,
       },
@@ -692,14 +701,14 @@ router.delete("/delete-address/:id", async (req, res) => {
 
 // ---------------------------------------------------------------------------------------------
 
-router.post("/updatepassword", async (req, res) => {
-  const uemail = req.cookies["x-email"];
+router.post('/updatepassword', async (req, res) => {
+  const uemail = req.cookies['x-email'];
   try {
     var account = await Account.findOne({ email: uemail }).exec();
     if (!bcrypt.compareSync(req.body.currentpw, account.password)) {
       return res.status(400).send({
-        status: "error",
-        message: "The password is not correct",
+        status: 'error',
+        message: 'The password is not correct',
       });
     }
     req.body.newpw = bcrypt.hashSync(req.body.newpw, 10);
@@ -711,11 +720,11 @@ router.post("/updatepassword", async (req, res) => {
   }
 });
 
-router.get("/account/tracking", function (req, res) {
-  var email = "rapsunl231@gmail.com";
+router.get('/account/tracking', function (req, res) {
+  var email = 'rapsunl231@gmail.com';
   try {
     Tracking.find({ email: email }, function (err, docs) {
-      res.render("product/trackingPage", {
+      res.render('product/trackingPage', {
         listTracking: docs,
       });
     });
@@ -724,17 +733,17 @@ router.get("/account/tracking", function (req, res) {
   }
 });
 
-router.get("/order/:id", function (req, res) {
+router.get('/order/:id', function (req, res) {
   try {
   } catch (err) {
     res.status(400).send(err);
   }
 });
 
-router.post("/history", async (req, res) => {
+router.post('/history', async (req, res) => {
   try {
     var account = await Account.findOne({ _id: req.body.id }).exec();
-    var checkTracking = await Tracking.find({ email: account["email"] }).exec();
+    var checkTracking = await Tracking.find({ email: account['email'] }).exec();
     res.send(checkTracking);
   } catch (err) {
     res.status(500).send(err);
@@ -742,19 +751,19 @@ router.post("/history", async (req, res) => {
 });
 
 router.post(
-  "/shop/payment/joingb",
+  '/shop/payment/joingb',
   TokenUserCheckMiddleware,
   async (req, res) => {
-    var uemail = req.decoded["email"];
+    var uemail = req.decoded['email'];
     try {
       var account = await Account.findOne({ email: uemail }).exec();
       var checkProduct = await Product.find(
         { product_id: req.body.product_id },
-        { category_id: "ETC2" }
+        { category_id: 'ETC2' }
       ).exec();
-      await Couter.findOne({ _id: "tracking" }, function (err, docs) {
-        db.collection("trackings").insertOne({
-          order_id: "ORD00" + (docs["seq"] + 1),
+      await Couter.findOne({ _id: 'tracking' }, function (err, docs) {
+        db.collection('trackings').insertOne({
+          order_id: 'ORD00' + (docs['seq'] + 1),
           email: uemail,
           list_product: {
             _id: new mongoose.Types.ObjectId().toString(),
@@ -774,9 +783,9 @@ router.post(
             customer_postal_code: req.body.customer_postal_code,
           },
         });
-        db.collection("couters").findAndModify(
+        db.collection('couters').findAndModify(
           {
-            _id: "tracking",
+            _id: 'tracking',
           },
           {},
           { $inc: { seq: 1 } },
@@ -792,7 +801,7 @@ router.post(
 );
 
 // --------------------------------- PRODUCT CONFIG --------------------------------------------
-router.get("/shop/product/:id", async (req, res) => {
+router.get('/shop/product/:id', async (req, res) => {
   try {
     Product.find({ category_url_name: req.params.id }, function (err, docs) {
       if (docs[0]) {
@@ -801,24 +810,24 @@ router.get("/shop/product/:id", async (req, res) => {
           function (err, docs2) {
             if (req.session.User == null) {
               // res.render("product/detailsProductPage", {
-              res.render("product/detailsProductPageV2",{
+              res.render('product/detailsProductPageV2', {
                 user: null,
                 userName: null,
                 detailsProduct: docs,
                 Category: docs2,
-                currentPage: "Shop",
+                currentPage: 'Shop',
               });
             } else {
               Account.findOne(
-                { email: req.session.User["email"] },
+                { email: req.session.User['email'] },
                 function (errAccount, getAccount) {
                   // res.render("product/detailsProductPage", {
-                  res.render("product/detailsProductPageV2",{
-                    user: req.session.User["email"],
-                    userName: getAccount.fname + " " + getAccount.lname,
+                  res.render('product/detailsProductPageV2', {
+                    user: req.session.User['email'],
+                    userName: getAccount.fname + ' ' + getAccount.lname,
                     detailsProduct: docs,
                     Category: docs2,
-                    currentPage: "Shop",
+                    currentPage: 'Shop',
                   });
                 }
               );
@@ -826,7 +835,7 @@ router.get("/shop/product/:id", async (req, res) => {
           }
         );
       } else {
-        res.redirect("/404Page");
+        res.redirect('/404Page');
       }
     });
   } catch (err) {
@@ -834,120 +843,127 @@ router.get("/shop/product/:id", async (req, res) => {
   }
 });
 
-router.get("/shop/payment/:id", TokenUserCheckMiddleware, async (req, res) => {
-  try {
-    Product.find(
-      { category_url_name: req.params.id },
-      function (errdocs, docs) {
-        if (docs[0]) {
-          Category.findOne(
-            { category_id: docs[0].category_id },
-            function (errdocs2, docs2) {
-              Account.findOne(
-                { email: req.decoded["email"] },
-                function (erruser, docs3) {
-                  res.render("product/joingbPage", {
-                    title: "Payment",
-                    User: docs3,
-                    Payment: docs,
-                    Category: docs2,
-                  });
-                }
-              );
-            }
-          );
-        } else {
-          res.redirect("/404Page");
-        }
-      }
-    );
-  } catch (err) {
-    res.status(200).send(err);
-  }
+router.get('/shop/payment/:id', async (req, res) => {
+  // try {
+  //   // Product.find(
+  //   //   { category_url_name: req.params.id },
+  //   //   function (errdocs, docs) {
+  //   //     if (docs[0]) {
+  //   //       Category.findOne(
+  //   //         { category_id: docs[0].category_id },
+  //   //         function (errdocs2, docs2) {
+  //   //           Account.findOne(
+  //   //             { email: req.decoded['email'] },
+  //   //             function (erruser, docs3) {
+  //   //               // res.render('product/joingbPage', {
+  //   //               res.render('product/cartPage', {
+  //   //                 title: 'Payment',
+  //   //                 User: docs3,
+  //   //                 Payment: docs,
+  //   //                 Category: docs2,
+  //   //               });
+  //   //             }
+  //   //           );
+  //   //         }
+  //   //       );
+  //   //     } else {
+  //   //       res.redirect('/404Page');
+  //   //     }
+  //   //   }
+  //   // );
+  //   res.render('product/cartPage', {
+  //     title: 'Payment',
+  //   });
+  // } catch (err) {
+  //   res.status(200).send(err);
+  // }
+  res.render('product/cartPage', {
+    title: 'Payment',
+  });
 });
 // ==================================================================== //
-router.get("/service", TokenUserCheckMiddleware, (req, res) => {
+router.get('/service', TokenUserCheckMiddleware, (req, res) => {
   if (req.session.User == null) {
-    res.redirect("/register");
+    res.redirect('/register');
   } else {
     Account.findOne(
-      { email: req.session.User["email"] },
+      { email: req.session.User['email'] },
       function (errAccount, getAccount) {
-        res.render("product/servicePage", {
-          user: req.session.User["email"],
-          userName: getAccount.fname + " " + getAccount.lname,
-          title: "Keyboard Service",
-          lubeTitle: "Lube Service Form",
-          assemTitle: "Assembled Service Form",
-          currentPage: "Service",
+        res.render('product/servicePage', {
+          user: req.session.User['email'],
+          userName: getAccount.fname + ' ' + getAccount.lname,
+          title: 'Keyboard Service',
+          lubeTitle: 'Lube Service Form',
+          assemTitle: 'Assembled Service Form',
+          currentPage: 'Service',
         });
       }
     );
   }
 });
-router.post("/service/invoice", TokenUserCheckMiddleware, async (req, res) => {
-  var customUrl = req.protocol + "://" + req.get("host") + "/invoice/";
+router.post('/service/invoice', TokenUserCheckMiddleware, async (req, res) => {
+  var customUrl = req.protocol + '://' + req.get('host') + '/invoice/';
   try {
-    await Couter.findOne({ _id: "service_invoice" }, function (err, docs) {
+    await Couter.findOne({ _id: 'service_invoice' }, function (err, docs) {
       function generateInvoice(invoice, filename, success, error) {
         var postData = JSON.stringify(invoice);
         var options = {
-          hostname: "invoice-generator.com",
+          hostname: 'invoice-generator.com',
           port: 443,
-          path: "/",
-          method: "POST",
+          path: '/',
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
-            "Content-Length": Buffer.byteLength(postData),
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(postData),
           },
         };
-        var file = fs.createWriteStream("./invoice/" + filename);
+        var file = fs.createWriteStream('./invoice/' + filename);
         var url = customUrl + filename;
         var req = https.request(options, function (res) {
           res
-            .on("data", function (chunk) {
+            .on('data', function (chunk) {
               file.write(chunk);
             })
-            .on("end", function () {
+            .on('end', function () {
               file.end();
 
-              if (typeof success === "function") {
+              if (typeof success === 'function') {
                 success();
               }
             });
         });
-        var filePath = path.join(__dirname, "..", "invoice", filename);
+        var filePath = path.join(__dirname, '..', 'invoice', filename);
         req.write(postData);
         req.end();
-        db.collection("invoices").insertOne({
-          invoice_id: "INV-" + (docs["seq"] + 1),
+        db.collection('invoices').insertOne({
+          invoice_id: 'INV-' + (docs['seq'] + 1),
           invoice_details: {
             path: file,
           },
-          note: "",
+          note: '',
         });
 
-        var stat = fs.statSync("./invoice/" + filename);
-        res.setHeader("Content-Length", stat.size);
-        res.setHeader("Content-Type", "application/pdf");
+        var stat = fs.statSync('./invoice/' + filename);
+        res.setHeader('Content-Length', stat.size);
+        res.setHeader('Content-Type', 'application/pdf');
         res.setHeader(
-          "Content-Disposition",
-          "attachment; filename=agreement.pdf"
+          'Content-Disposition',
+          'attachment; filename=agreement.pdf'
         );
         res.status(200).json({
           data: url,
           file: filename,
         });
 
-        if (typeof error === "function") {
-          req.on("error", error);
+        if (typeof error === 'function') {
+          req.on('error', error);
         } else {
         }
       }
 
-      const assem_service = "Assembled Service";
-      const lube_service = "Lube Service";
-      const buy_service = "Buy Accesssories";
+      const assem_service = 'Assembled Service';
+      const lube_service = 'Lube Service';
+      const buy_service = 'Buy Accesssories';
       const price_film = 150000;
       const price_spring = 180000;
       var lube_service_with_accessories = 6000;
@@ -959,65 +975,65 @@ router.post("/service/invoice", TokenUserCheckMiddleware, async (req, res) => {
 
       if (req.body.film_color) {
         replaceFilm =
-          req.body.film_color.replace(/_/g, " ").charAt(0).toUpperCase() +
-          req.body.film_color.replace(/_/g, " ").slice(1);
+          req.body.film_color.replace(/_/g, ' ').charAt(0).toUpperCase() +
+          req.body.film_color.replace(/_/g, ' ').slice(1);
 
         items.push({
-          name: buy_service + " - " + "Tx Film" + " " + replaceFilm,
+          name: buy_service + ' - ' + 'Tx Film' + ' ' + replaceFilm,
           quantity: 1,
-          unit_cost: parseInt(req.body.price_bill["price_film"]),
-          description: "- 1 Pack Tx Film" + " " + replaceFilm,
+          unit_cost: parseInt(req.body.price_bill['price_film']),
+          description: '- 1 Pack Tx Film' + ' ' + replaceFilm,
         });
-        description_film = "\n - Film Tx" + " " + replaceFilm;
+        description_film = '\n - Film Tx' + ' ' + replaceFilm;
       }
       if (req.body.spring_force) {
         replaceSpring =
-          req.body.spring_force.replace(/_/g, " ").charAt(0).toUpperCase() +
-          req.body.spring_force.replace(/_/g, " ").slice(1);
+          req.body.spring_force.replace(/_/g, ' ').charAt(0).toUpperCase() +
+          req.body.spring_force.replace(/_/g, ' ').slice(1);
         items.push({
-          name: buy_service + " - " + "Springs" + " " + replaceSpring + "cn",
+          name: buy_service + ' - ' + 'Springs' + ' ' + replaceSpring + 'cn',
           quantity: 1,
-          unit_cost: parseInt(req.body.price_bill["price_spring"]),
-          description: "- 1 Pack Springs" + " " + replaceSpring + "cn",
+          unit_cost: parseInt(req.body.price_bill['price_spring']),
+          description: '- 1 Pack Springs' + ' ' + replaceSpring + 'cn',
         });
       }
       if (req.body.grease) {
         description_grease =
-          req.body.grease.replace(/_/g, " ").charAt(0).toUpperCase() +
-          req.body.grease.replace(/_/g, " ").slice(1);
+          req.body.grease.replace(/_/g, ' ').charAt(0).toUpperCase() +
+          req.body.grease.replace(/_/g, ' ').slice(1);
       }
       if (req.body.switches_quanity) {
         items.push({
           name:
             lube_service +
-            " - " +
+            ' - ' +
             req.body.switch_type +
-            " x" +
+            ' x' +
             req.body.switches_quanity,
           quantity: 1,
           unit_cost: parseInt(
-            req.body.price_bill["lube_service_price_without_accesscories"]
+            req.body.price_bill['lube_service_price_without_accesscories']
           ),
           description:
-            "- Housing/Stem w/" +
-            " " +
+            '- Housing/Stem w/' +
+            ' ' +
             description_grease +
             description_film +
-            "\n - Spring w/ GPL 105",
+            '\n - Spring w/ GPL 105',
         });
       }
 
       var invoice = {
-        logo: "https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG",
-        from: "NoobStore\noobassembly@gmail.com\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000",
-        to: "Guest",
-        currency: "vnd",
-        number: "INV-" + (docs["seq"] + 1),
-        payment_terms: "Auto-Billed - Do Not Pay",
-        due_date: moment().add(1, "M").format("MMM DD, YYYY"),
+        logo: 'https://drive.google.com/uc?export=view&id=1jtFwxaDyazQeytgNhsfqsXhGTFS5s-wG',
+        from: 'NoobStore\noobassembly@gmail.com\nalley 4, 10 st, Hiep Binh Chanh ward, Thu Duc district\nHo Chi Minh, Vietnam 700000',
+        to: 'Guest',
+        currency: 'vnd',
+        number: 'INV-' + (docs['seq'] + 1),
+        payment_terms: 'Auto-Billed - Do Not Pay',
+        due_date: moment().add(1, 'M').format('MMM DD, YYYY'),
         items: items,
         fields: {
-          tax: "%",
+          tax: '%',
           discounts: true,
           shipping: true,
         },
@@ -1025,9 +1041,9 @@ router.post("/service/invoice", TokenUserCheckMiddleware, async (req, res) => {
         shipping: 0,
         tax: 0,
         amount_paid: 0,
-        notes: "Thanks for being an awesome customer!",
+        notes: 'Thanks for being an awesome customer!',
         terms:
-          "No need to submit payment. You will be auto-billed for this invoice.",
+          'No need to submit payment. You will be auto-billed for this invoice.',
         // custom_fields: [
         //     {
         //       "name": "Gizmo",
@@ -1041,16 +1057,16 @@ router.post("/service/invoice", TokenUserCheckMiddleware, async (req, res) => {
       };
       generateInvoice(
         invoice,
-        new Date().toISOString().replace(/:/g, "-") + invoice.number + ".pdf",
+        new Date().toISOString().replace(/:/g, '-') + invoice.number + '.pdf',
         function () {},
         function (error) {
           console.error(error);
         }
       );
     });
-    db.collection("couters").findAndModify(
+    db.collection('couters').findAndModify(
       {
-        _id: "service_invoice",
+        _id: 'service_invoice',
       },
       {},
       { $inc: { seq: 1 } },
@@ -1066,45 +1082,73 @@ router.post("/service/invoice", TokenUserCheckMiddleware, async (req, res) => {
 
 //Blogs
 
-router.get("/blogs", function (req, res) {
-  BlogCategory.find({}, function(err, docsCategory){
-    BlogPost.find({}, function(errPost, docsPost) {
+router.get('/blogs', function (req, res) {
+  BlogCategory.find({}, function (err, docsCategory) {
+    BlogPost.find({}, function (errPost, docsPost) {
       res.render('blog/indexPage', {
         title: 'Blog',
         listBlogCategory: docsCategory,
-        listBlogPost: docsPost
-      })
-    })
-  })
+        listBlogPost: docsPost,
+      });
+    });
+  });
 });
 
-router.get("/blogs/create", function(req, res){
-  res.render("blog/createPage");
-})
+router.get('/blogs/create', function (req, res) {
+  res.render('blog/createPage');
+});
+
+// Contact
+
+router.get('/contact', (req, res) => {
+  res.render('product/contactPage');
+});
+
+router.post('/contact/create', async (req, res) => {
+  var email = req.body.mail;
+  var name = req.body.name;
+  var message = req.body.message;
+  try {
+    if (email !== '' && name !== '') {
+      await db.collection('contacts').insertOne({
+        name: name,
+        mail: email,
+        message: message,
+      });
+      res.send({
+        success: true,
+        status: 200,
+        message: 'Thanks for your contact. We will reponse ASAP',
+      });
+    }
+  } catch (err) {
+    res.status(404).send({ success: false, error: { message: err } });
+  }
+});
 
 // test drawCanvas
 
-router.get("/drawCanvas", function (req, res) {
-  res.render("drawCanvas/view/draw");
+router.get('/drawCanvas', function (req, res) {
+  res.render('drawCanvas/view/draw');
 });
 
-router.get("/fake_parent_select2", function (req, res) {
+router.get('/fake_parent_select2', function (req, res) {
   res.send([
-    { id: 1, name: "Region 1" },
-    { id: 2, name: "Region 2" },
+    { id: 1, name: 'Region 1' },
+    { id: 2, name: 'Region 2' },
   ]);
 });
-router.get("/fake_parent_select2/:id", function (req, res) {
+router.get('/fake_parent_select2/:id', function (req, res) {
   if (req.params.id == 1) {
     res.send({
       results: [
         {
           id: 1,
-          text: "Zone 1",
+          text: 'Zone 1',
         },
         {
           id: 2,
-          text: "Zone 2",
+          text: 'Zone 2',
         },
       ],
       pagination: {
@@ -1116,11 +1160,11 @@ router.get("/fake_parent_select2/:id", function (req, res) {
       results: [
         {
           id: 3,
-          text: "Zone 3",
+          text: 'Zone 3',
         },
         {
           id: 4,
-          text: "Zone 4",
+          text: 'Zone 4',
         },
       ],
       pagination: {
@@ -1132,8 +1176,8 @@ router.get("/fake_parent_select2/:id", function (req, res) {
 
 // ---------------------------------------------------------------------------------------------
 
-router.get("*", function (req, res) {
-  res.status(404).render("404Page");
+router.get('*', function (req, res) {
+  res.status(404).render('404Page');
 });
 
 module.exports = router;

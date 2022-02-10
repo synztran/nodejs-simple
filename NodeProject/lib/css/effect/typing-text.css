@@ -1,0 +1,39 @@
+/* .effect-typing-text {
+  width: 8ch;
+  animation: typing 1.5s steps(22), blink 0.5s step-end infinite alternate;
+  animation-delay: 1.5s;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  color: #646464;
+} */
+.effect-typing-text-sign-in {
+  width: 7ch;
+  animation: typing 1s steps(22), blink 0.5s step-end infinite alternate;
+  animation-delay: 1.5s;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  color: #646464;
+}
+.effect-typing-text-reg {
+  width: 8.5ch;
+  animation: typing 1s steps(22), blink 0.5s step-end infinite alternate;
+  animation-delay: 1.5s;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  color: #646464;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
