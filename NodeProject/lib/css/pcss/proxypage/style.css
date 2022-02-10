@@ -22,6 +22,7 @@ html, body{
 	min-height: 100vh;
 	position: relative;
 	background-color: var(--bg-color);
+	background-image: url(/favicon/bg-graffiti.png);
 }
 .main{
 	max-width: 100%;
