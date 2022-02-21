@@ -1,11 +1,11 @@
 /* @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap'); */
 @font-face {
-  font-family: 'Montserrat';
-  src: url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+  font-family: "Montserrat";
+  src: url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 }
 @font-face {
-  font-family: 'hello_jones';
-  src: url('/package/font/hello_jones/Hello_Jones.woff2');
+  font-family: "hello_jones";
+  src: url("/package/font/hello_jones/Hello_Jones.woff2");
 }
 :root {
   --label-color: wheat;
@@ -94,13 +94,13 @@ input:focus {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 html,
 body {
   min-height: 100%;
   width: 100%;
-  background-image: url('/favicon/bg-graffiti.png');
+  background-image: url("/favicon/bg-graffiti.png");
   /* background-repeat: repeat; */
   color: var(--text-color);
   background-color: #f6f6f6;
@@ -147,7 +147,7 @@ body {
   font-weight: bolder;
 }
 .title h2 {
-  font-family: 'hello_jones';
+  font-family: "hello_jones";
   letter-spacing: 5px;
 }
 .authentication-button > div > a {
@@ -178,7 +178,7 @@ body {
   border: 1px solid #3b5998;
   border-radius: 10px;
   font-weight: 700;
-  background: url('/favicon/facebook-logo.svg') no-repeat 5px center;
+  background: url("/favicon/facebook-logo.svg") no-repeat 5px center;
 }
 .btn-google-cover {
   padding: 0.7rem;
@@ -186,7 +186,7 @@ body {
   font-weight: 700;
   border: 1px solid #db3236;
   border-radius: 10px;
-  background: url('/favicon/google-logo.svg') no-repeat 15px center;
+  background: url("/favicon/google-logo.svg") no-repeat 15px center;
   background-size: 30px 30px;
 }
 .separator {
@@ -198,7 +198,7 @@ body {
 }
 .separator::before,
 .separator::after {
-  content: '';
+  content: "";
   flex: 1;
   border-bottom: 1px dotted #6b3792;
   border-width: 2px;
@@ -219,7 +219,7 @@ body {
   margin: 0;
   padding: 2rem 1.5rem;
   line-height: 0;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   height: 0rem;
   box-shadow: 3px 3px rgba(0, 0, 0, 0.5);
   transition: all 0.8s ease;
@@ -235,7 +235,7 @@ body {
   background-color: var(--mini-title-color);
   color: white;
   font-size: 16px;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   height: 0rem;
   padding: 2rem 1.5rem;
   margin: 0;
@@ -270,7 +270,7 @@ body {
 .login-banner {
   height: 100%;
   /* background: url('/favicon/only_logo.png') no-repeat; */
-  background: url('/favicon/giphy.gif') no-repeat;
+  background: url("/favicon/giphy.gif") no-repeat;
   background-size: cover;
   background-position: 50% 50%;
 }
@@ -309,6 +309,7 @@ footer {
     var(--mini-title-color),
     var(--title-color)
   );
+  height: unset !important;
   /* background: #4568dc; */
   /* background: -webkit-linear-gradient(to right, #b06ab3, #4568dc);
   background: linear-gradient(to right, #b06ab3, #4568dc); */
@@ -328,7 +329,7 @@ footer {
 }
 .forgot-pw::before {
   width: 0;
-  content: '';
+  content: "";
   height: 1px;
   position: absolute;
   bottom: 0px;
@@ -392,17 +393,9 @@ footer {
   }
 }
 @media only screen and (max-width: 991px) {
-  .reg-form {
-    margin-left: 0 !important;
-    margin-top: 3rem;
-  }
   .btn-login,
   .btn-register {
     width: 100%;
-  }
-  footer {
-    position: relative;
-    margin-top: 5rem;
   }
 }
 
@@ -419,7 +412,6 @@ footer {
   .row {
     padding: 0 !important;
   }
-
   .container {
     max-width: 100% !important;
   }
@@ -427,24 +419,13 @@ footer {
     max-width: 100% !important;
   }
   .main-container {
-    margin: 5rem 2rem;
+    margin: 2rem;
     width: 90% !important;
-  }
-  .reg-form {
-    margin-top: 3rem;
-  }
-  .login-form,
-  .reg-form {
-    padding: 2rem 2% !important;
   }
   .btn-login,
   .btn-register {
     float: none !important;
     width: 100%;
-  }
-  .btn-area {
-    text-align: right;
-    margin-top: 3rem;
   }
   .seperator-wrapper .seperator {
     animation: rotate 7s infinite alternate;
@@ -457,16 +438,13 @@ footer {
     width: 300px;
     text-align: center;
   }
-  footer {
-    position: relative !important;
-  }
   .btn-facebook-cover {
     padding: 0.7rem;
     height: 50px;
     border: 1px solid #3b5998;
     border-radius: 10px;
     font-weight: 700;
-    background: url('/favicon/facebook-logo.svg') no-repeat 5px center;
+    background: url("/favicon/facebook-logo.svg") no-repeat 5px center;
   }
   .btn-google-cover {
     padding: 0.7rem;
@@ -474,12 +452,14 @@ footer {
     font-weight: 700;
     border: 1px solid #db3236;
     border-radius: 10px;
-    background: url('/favicon/google-logo.svg') no-repeat 15px center;
+    background: url("/favicon/google-logo.svg") no-repeat 15px center;
     background-size: 30px 30px;
   }
-  .login-form,
-  .reg-form {
-    padding: 2rem 2% !important;
+  .btn-area {
+    position: relative;
+    width: 100%;
+    right: 0;
+    top: 2rem;
   }
 }
 
@@ -634,6 +614,19 @@ footer {
 @media only screen and (min-device-width: 768px) and (max-device-width: 1200px) and (orientation: portrait) {
   footer {
     position: relative;
+  }
+}
+
+/* Landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1200px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: landscape) {
+}
+
+/* ----------- Iphone 12 Pro ----------- */
+
+/* Portrait */
+@media only screen and (min-device-width: 390px) and (max-device-width: 844px) and (orientation: portrait) {
+  .container-banner {
+    display: none;
   }
 }
 
