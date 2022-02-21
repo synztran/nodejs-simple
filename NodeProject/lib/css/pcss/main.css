@@ -2183,7 +2183,7 @@ nav.navbar {
   overflow: hidden;
   position: relative;
   z-index: 4;
-  background-color: black;
+  /* background-color: black; */
 }
 
 .home-content h1 {
