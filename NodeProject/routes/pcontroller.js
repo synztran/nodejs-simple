@@ -19,7 +19,7 @@ const http = require('http');
 
 router.use(cookieParser());
 const i18n = require('i18n');
-var cors = require('cors');
+// var cors = require('cors');
 const app = express();
 const tokenList = {};
 
@@ -99,7 +99,7 @@ app.use(
   })
 );
 
-app.use(cors());
+// app.use(cors());
 
 app.use('/change-lang/:lang', (req, res) => {
   res.cookie('lang', req.params.lang, { maxAge: 900000 });
@@ -578,10 +578,100 @@ router.get('/verify', async (req, res) => {
         { email: checkToken['email'].toLowerCase() },
         { $set: { active: true, actived_date: getTimeActive } }
       );
-
       res.redirect('/');
     } else {
       res.redirect('/');
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+router.get('/reset-password', (req, res) => {
+  res.render('product/forgotPasswordPage', {
+    currentPage: 'forgot-password',
+    userName: '',
+    email: '',
+  });
+});
+
+router.get('/update-password', async (req, res) => {
+  const uid = req.query.uid;
+  try {
+    const curentTime = Math.floor(Date.now() / 1000);
+    var checkExpiredTime = await Account.findOne({
+      registration_token: uid,
+    }).exec();
+    if (curentTime < checkExpiredTime.expiration_token_date) {
+      res.redirect('/');
+    } else {
+      res.render('product/expiredPage', {
+        currentPage: 'forgot-password',
+        userName: '',
+        email: '',
+      });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+router.post('/forgot_password', async (req, res) => {
+  try {
+    var checkExist = await Account.findOne({ email: req.body.email });
+    if (checkExist) {
+      const user = {
+        email: req.body.email,
+      };
+      const token = jwt.sign(user, config.secret, {
+        expiresIn: config.tokenForgotPwLife,
+      });
+      const response = {
+        token,
+      };
+      await db.collection('accounts').updateOne(
+        {
+          email: req.body.email,
+        },
+        {
+          $set: {
+            registration_token: response.token,
+            expiration_token_date: config.tokenForgotPwLife,
+          },
+        }
+      );
+      var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+          user: 'noobassembly@gmail.com',
+          pass: 'gsrfewqfnplyltcz',
+        },
+      });
+      var link =
+        'https://' + req.get('host') + '/update-password?uid=' + response.token;
+      var logo = 'https://' + req.get('host') + '/favicon/big_logo.png';
+      var mainOptions = {
+        from: 'NoobStore <noobassembly@gmail.com>',
+        to: req.body.email,
+        subject: '[NoobStore] Password Reset ',
+        text: 'You received message from ' + req.body.email,
+        html:
+          "<img src='" +
+          logo +
+          "' width='150' height='70'/><br><br><p style='font-weight: 600;font-size:22px'>Hi <b>Strange mate</b>,</p><br><p style='font-size:18px'>Please click the following button to reset your password:</p><br><p><div><a style='background: #007bff;padding: 9px;width: 200px;color: #fff;text-decoration: none;display: inline-block;font-weight: bold;text-align: center;letter-spacing: 0.5px;border-radius: 50px;font-size:20px' href=" +
+          link +
+          ">Reset now</a></div><br><p style='font-size:18px'>Best Regards,<br>The Noob Team</p>",
+      };
+
+      transporter.sendMail(mainOptions, function (err, info) {
+        if (err) {
+          res.redirect('/register');
+        } else {
+          res.redirect('/');
+        }
+      });
+    } else {
+      res.status(404).send('Please re-check your email !');
     }
   } catch (err) {
     res.status(500).send(err);
@@ -641,7 +731,7 @@ router.post('/updateaccount', TokenUserCheckMiddleware, async (req, res) => {
   }
 });
 
-// ------------------------------------------ ADDRESS CONFIG-------------------------------------
+// ------------------------- ADDRESS CONFIG--------------------------------
 
 router.post(
   '/account/addaddress',
