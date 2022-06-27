@@ -1,38 +1,15 @@
-/*html {
-  background: #FAF7F2;
-  background-image: url(https://s3.postimg.org/s1n3ji1ur/paper_fibers_2_X.png);
-  box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-}*/
-
-:root {
-  --pantone-yellow-color: #efc050;
-  --pantone-classic-blue-color: #0f4c81;
+/*:root {
   --page-text-color: wheat;
   --page-classic-text-color: #fff;
   --page-background-color: #363a40;
   --page-nude-color: #f5deb3;
 
-  /* for ribbon */
-  --default-right: 10px;
-  --default-top: -2px;
-  --default-color: #fd9c2e;
-  --default-width: 35px;
-  --default-height: 45px;
-
-  --ribbon-ic-color: #2ca7d8;
-  --ribbon-end-color: #911750;
-  --ribbon-on-color: #57c443;
-
-  /* base */
   --bg-color: #f6f6f6;
   --bold-color: #1f1f1f;
   --text-color: #a6a6a6;
   --mini-title-color: #8db48e;
   --title-color: #4d724d;
-}
+}*/
 * {
   margin: 0;
   padding: 0;
@@ -80,8 +57,6 @@
 }
 
 .card-product {
-  /*background-color: #fff;*/
-  /*padding: 30px;*/
   position: relative;
   box-shadow: 0 0 5px rgba(75, 75, 75, 0.07);
   z-index: 1;
@@ -92,8 +67,6 @@
   float: right;
   width: 100%;
   position: relative;
-  /*padding: 10px;*/
-  /*color: var(--pantone-classic-blue-color)*/
   color: var(--page-classic-text-color);
 }
 .product-card-body:before {
@@ -392,10 +365,7 @@
   text-align: center;
   left: 0.5em;
   right: 0.5em;
-  /*padding: 0.25em 0;*/
-  /*top: 13.5em;*/
   bottom: 0;
-  /*height: 10px;*/
   height: 205px;
 }
 .status-product-container:after {
@@ -404,7 +374,7 @@
   height: 40px;
   position: absolute;
   background: #363a40;
-  top: 0.6rem;
+  top: 0.3rem;
   left: 0;
   opacity: 0.5;
   border-radius: 10px;

@@ -80,6 +80,7 @@ async function addPost(req, res) {
               summary_content: req.body.summary_content,
               price_content:  req.body.price_content,
               time_line: req.body.time_line,
+              category_intro: req.body.category_intro
             });
           });
           db.collection('couters').findAndModify(
@@ -127,6 +128,7 @@ async function addPost(req, res) {
               summary_content: req.body.summary_content,
               price_content:  req.body.price_content,
               time_line: req.body.time_line,
+              category_intro: req.body.category_intro
             });
           });
           db.collection('couters').findAndModify(
@@ -170,6 +172,7 @@ async function addPost(req, res) {
               summary_content: req.body.summary_content,
               price_content:  req.body.price_content,
               time_line: req.body.time_line,
+              category_intro: req.body.category_intro
             });
           });
           db.collection('couters').findAndModify(
@@ -280,6 +283,7 @@ async function editPost(req, res) {
           summary_content: req.body.summary_content,
           price_content:  req.body.price_content,
           time_line: req.body.time_line,
+          category_intro: req.body.category_intro
         });
       } else {
         check.set({
@@ -310,6 +314,7 @@ async function editPost(req, res) {
           summary_content: req.body.summary_content,
           price_content:  req.body.price_content,
           time_line: req.body.time_line,
+          category_intro: req.body.category_intro
         });
       }
       await check.save();
@@ -339,6 +344,7 @@ async function editPost(req, res) {
           summary_content: req.body.summary_content,
           price_content:  req.body.price_content,
           time_line: req.body.time_line,
+          category_intro: req.body.category_intro
         });
       } else {
         check.set({
@@ -367,6 +373,7 @@ async function editPost(req, res) {
           summary_content: req.body.summary_content,
           price_content:  req.body.price_content,
           time_line: req.body.time_line,
+          category_intro: req.body.category_intro
         });
       }
 
@@ -393,6 +400,7 @@ async function editPost(req, res) {
           summary_content: req.body.summary_content,
           price_content:  req.body.price_content,
           time_line: req.body.time_line,
+          category_intro: req.body.category_intro
         });
       } else {
         check.set({
@@ -418,6 +426,7 @@ async function editPost(req, res) {
           summary_content: req.body.summary_content,
           price_content:  req.body.price_content,
           time_line: req.body.time_line,
+          category_intro: req.body.category_intro
         });
       }
 

@@ -18,8 +18,6 @@ $(document).ready(function() {
         e.preventDefault();
 
         const id = $(this).attr('data-id');
-        console.log(id);
-
         Swal.fire({
                     title: 'Are you sure?',
                     text: "You won't be able to revert this!",

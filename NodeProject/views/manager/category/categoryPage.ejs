@@ -24,6 +24,7 @@
                         <th> picture</th>
                         <th> GB status</th>
                         <th> id</th>
+                        <th> intro </th>
                         <th> name</th>
                         <th> date live</th>
                         <th> date end</th>
@@ -32,7 +33,6 @@
                         <th> color</th>
                         <th> min price ($)</th>
                         <th> max price ($)</th>
-                        <!-- <th> password</th> -->
                         <th></th>
                     </tr>
                 </thead>
@@ -53,6 +53,9 @@
                     </td>
                     <td>
                         <%= item.category_id %>
+                    </td>
+                     <td>
+                        <%= item.category_intro %>
                     </td>
                     <td>
                         <%= item.category_name %>

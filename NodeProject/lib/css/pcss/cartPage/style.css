@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --base-color: #a6a6a6;
+  --main-color: #db7c96;
+  --radius-corner: 6px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form-underline{
+  width: 100%;
+  height: 1px;
+  border-bottom:  1px solid rgba(0, 0, 0, .4);
+}
+body,
+html {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Itim", cursive;
+  font-size: 16px;
+  background-color: #f6f6f6;
+  overflow-x: hidden;
+}
+body {
+  background-color: #f6f6f6;
+  background-image: url("/favicon/bg-graffiti.png");
+}
+
+/* Container */
+.main-container{
+  padding-bottom: 10rem;
+  min-height: 100vh;
+}
+.container > h1{
+  font-family: 'Fredoka One', auto;
+}
+
+/* Table */
+#table-cart input{
+  width: 5rem;
+}
+.separator{
+ height: 1rem;
+}
+.item-image{
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+}
+.item-image::after{
+  z-index: 2;
+  content: '';
+  display: block;
+  position: absolute;
+  border:  1px solid rgba(144, 144, 144, .9);
+  border-radius: 6px;
+  width: 150px;
+  height: 150px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.item-image img{
+  z-index: 1;
+  max-width: 150px;
+  height: 150px;
+  transform: scale(0.9);
+  border-radius: 6px;
+}
+.item-details div:nth-child(2) div a{
+  text-decoration: none;
+  color: var(--main-color);
+  transition: all .3s ease-in-out;
+}
+.item-details div:nth-child(2) div a:hover{
+  color: var(--pantone-yellow-color);
+}
+.item-quantity{
+  z-index: 3;
+  position: absolute;
+  color: #fff;
+  top: -10%;
+  right: -10%;
+  border-radius: 50%;
+  background-color: rgba(144, 144, 144, .9);
+  text-align: center;
+  min-width: 2rem;
+  height: 2rem;
+  transform: scale(0.9);
+  font-weight: 400;
+  font-family: "Itim", cursive;
+  padding: .25rem;
+  display: none;
+
+}
+.remove-item-cart{
+  text-decoration: none;
+  color: #fff;
+  margin-top: .5rem;
+  max-width: max-content;
+  padding: 0.25rem 1rem;
+  background-color: var(--main-color);
+  border-radius: var(--radius-corner);
+  transition: all .3s ease-in-out;
+}
+.remove-item-cart:hover{
+  background-color: var(--pantone-yellow-color);
+}
+.item-name{
+  white-space: normal;
+  font-size: 18px;
+  font-family: 'Itim', cursive;
+  font-weight: 400;
+}
+.item-price button{
+  padding: .25rem .5rem;
+  background-color: var(--main-color);
+  color: #fff;
+  border-radius: var(--radius-corner);
+  max-width: max-content;
+  transition: all .5s ease-in-out;
+  border:  0;
+  margin-top: .5rem;
+}
+.item-price button:hover{
+  background-color: var(--pantone-yellow-color);
+}
+.td-quantity button, .td-quantity input, .element-group-quantity button, .element-group-quantity input{
+  padding: .25rem .5rem;
+  text-align: center;
+  border-radius: var(--radius-corner);
+}
+.td-quantity *{
+  padding: 0 .25rem;
+}
+.item-total-price{
+  font-size: 18px;
+  text-align: right;
+  font-family: 'Itim', cursive;
+}
+.cart-edit-mobile, .btn-popup-mobile{
+  display: none;
+}
+.cart-edit-mobile .btn-remove-item, .cart-edit-mobile .btn-update-cart{
+  text-transform: uppercase;
+  border-radius: var(--radius-corner);
+  background-color: var(--main-color);
+  color: #fff;
+  border: 0;
+  max-width: max-content;
+}
+#empty-cart div{
+  margin: .5rem;
+}
+
+#empty-cart a{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-color: var(--main-color);
+  border-radius: var(--radius-corner);
+  padding: .5rem 1rem;
+  max-width: max-conte;
+  color: #fff;
+}
+#empty-cart div:nth-child(2) a i{
+  padding-left: 1rem;
+}
+#cart-calc-payment span:first-child{
+  font-size: 22px;
+  font-family: 'Fredoka One',auto;
+}
+#cart-calc-payment span:nth-child(2){
+  font-size: 20px;
+}
+#cart-calc-payment div:nth-child(2){
+  font-size: 18px;
+}
+#cart-calc-payment div:nth-child(3) button, #cart-calc-payment div:nth-child(3) a{
+  text-transform: uppercase;
+  padding: .5rem 1rem;
+  color: #fff;
+  margin: 0 0 0 .5rem;
+  border: 0;
+  border-radius: var(--radius-corner);
+  background-color: var(--main-color);
+  font-size: 18px;
+  transition: all .2s ease-in-out;
+  text-decoration: none;
+}
+#cart-calc-payment div:nth-child(3) button:hover, #cart-calc-payment div:nth-child(3) a:hover{
+  background-color: var(--pantone-yellow-color);
+}
+#cart-calc-payment div:nth-child(3){
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width:  767px){
+  .item-details div:nth-child(2) .form-underline{
+    display: none;
+  }
+  .item-quantity{
+    display: block;
+  }
+  .th-quantity, .td-quantity, .th-total, .item-total-price, .remove-item-cart{
+    display: none;
+  }
+  .item-price, .th-price{
+    text-align: right;
+  }
+  .item-price{
+    font-size: 20px;
+  }
+  .item-price button{
+    font-size: 16px;
+  }
+  .cart-edit-mobile, .btn-popup-mobile{
+    display: revert;
+  }
+  .cart-edit-mobile > td > div{
+    padding: .5rem 0;
+  }
+  #cart-calc-payment > div:nth-child(3){
+   justify-content: center;
+  }
+  #cart-calc-payment > div:nth-child(3) button{
+    display: none;
+  }
+  #cart-calc-payment > div:nth-child(3) a{
+    width: 300px;
+    text-align: center;
+  }
+}

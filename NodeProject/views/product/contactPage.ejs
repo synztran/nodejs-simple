@@ -46,9 +46,12 @@
     <meta property="og:image:width" content="480" />
     <meta property="og:image:height" content="432" />
     <!-- CSS Tag -->
+    <!-- Loading effect -->
     <link
-    rel="stylesheet"
-    href="/api/css/effect/preload/preload-store.css"  />
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/effect/preload/preload-signal.css"
+    />
     <!--=== favicons === -->
     <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
@@ -61,20 +64,7 @@
     }
   </style>
   <body>
-    <div id="preloader">
-      <div id="loader">
-        <div id="circle"></div>
-        <div class="line left"></div>
-        <div class="line right"></div>
-        <div class="bracket left"></div>
-        <div class="bracket right"></div>
-        <div class="small top"><span class="upper">N</span>OOB</div>
-        <div id="big">Welcome</div>
-        <div class="small bottom"><span class="upper">S</span>tore</div>
-        <div class="hide top"></div>
-        <div class="hide bottom"></div>
-      </div>
-    </div>
+    <% include ./../tips/effect/preload-signal %>
     <header class="text-gray-600 body-font">
       <div
         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
@@ -293,7 +283,14 @@
             $("html").addClass('ss-loaded');
         
         });
-    };
+      };
+      // preload effect
+      $('html,body').animate({ scrollTop: 0 }, 'normal');
+      $('.loading-text')
+        .delay(1000)
+        .fadeOut('slow', () => {
+          $('.loading').delay(500).fadeOut('slow');
+      });
     
       $('#mail').on('keypress', function (e) {
         if (e.which == 32) {

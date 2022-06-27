@@ -1,28 +1,22 @@
 //NOTE
 // If you change anything in index.js that you must re-run in cmd
-
-/*Call for using express*/
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const http = require('http');
 const session = require('express-session');
 const fileuploader = require('./lib/fileuploader/fileuploader');
-// const redis = require('redis');
-// const redisStore = require('connect-redis')(session);
-// const client  = redis.createClient();
 const livereload = require('connect-livereload');
-// const fileuploader = require('fileuploader');
 const config = require('./lib/comon/config');
 const fs = require('fs');
 const path = require('path');
+const ejs = require('ejs');
 
 const uri =
   "'mongodb+srv://admin:root@cluster0-u7ysm.mongodb.net/test?retryWrites=true&w=majority', {dbName: 'testmongodb'}";
 var port = process.env.PORT || 80;
 const methodOverride = require('method-override');
 
-// var router = express.Router();
 const Database = require('./db/database');
 const routes = require('./routes/controller');
 const proutes = require('./routes/pcontroller');
@@ -32,6 +26,10 @@ const i18n = require('i18n');
 const hbs = require('hbs');
 const moment = require('moment');
 var userToken = require('./db/model/token');
+const LocalStorage = require('node-localstorage').LocalStorage;
+
+// Init model
+var Account = require('./db/model/account.js');
 //FOR DISCORD SERVER
 const { Client, MessageAttachment, Intents } = require('discord.js');
 const client = new Client({
@@ -106,7 +104,7 @@ db.once('open', function (callback) {
   var token_discord = await userToken
     .findOne({ email: 'token_discord@gmail.com' })
     .exec();
-  client.login(token_discord.token);
+  // client.login(token_discord.token);
 })();
 
 app.use(bodyParser.json());
@@ -127,10 +125,17 @@ app.use(
       secure: false,
       maxAge: 1800000,
     },
-    // store: new redisStore({ host: 'localhost', port: 6379, client: client,ttl : 260}),
   })
 );
-
+localStorage = new LocalStorage('./scratch');
+const initAllUserLocalStorage = async () => {
+  if (Account) {
+    const allUser = await Account.find({}).exec();
+    allUser.map((user) => localStorage.setItem(`cart_${user._id}`, '[]'));
+  }
+};
+// initAllUserLocalStorage();
+// localStorage.setItem('cart', "[]");
 // app.use(livereload())
 // app.use(express.cookieParser());
 // set static data for public folder to Application Server
@@ -151,6 +156,7 @@ app.use('/docs', express.static('docs'));
 app.use('/invoice', express.static('invoice'));
 app.use('/share', express.static('lib/share'));
 app.use('/lib', express.static('lib'));
+app.use('/public', express.static('public'));
 app.use('/eventproduct', express.static('docs/pimg/portfolio/gallery/'));
 
 // using libary ejs, ejs create html then back to browser

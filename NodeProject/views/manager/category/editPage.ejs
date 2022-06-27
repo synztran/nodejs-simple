@@ -207,6 +207,10 @@
                         <textarea id="time_line" name="time_line" type="text" class="form-control" placeholder="Timeline..."></textarea>
                     </div>
                     <div class="form-group">
+                        <label class="form-control-label">Intro content:</label>
+                        <textarea id="category_intro" name="category_intro" type="text" class="form-control" placeholder="Intro..."></textarea>
+                    </div>
+                    <div class="form-group">
                         <label class="form-control-label">Product belong:</label>
                         <input type="text" class="form-control" name="product_belong" id="product_belong" value="<%= category.product_belong %>">
                     </div>
@@ -359,6 +363,10 @@
                         <label class="form-control-label">Time line content:</label>
                         <textarea id="time_line" name="time_line" type="text" class="form-control" placeholder="Timeline..."></textarea>
                     </div>
+                       <div class="form-group">
+                        <label class="form-control-label">Intro content:</label>
+                        <textarea id="category_intro" name="category_intro" type="text" class="form-control" placeholder="Intro..."></textarea>
+                    </div>
                     <div class="form-group">
                         <label class="form-control-label">Product belong:</label>
                         <input type="text" class="form-control" name="product_belong" id="product_belong" value="<%= category.product_belong %>">
@@ -481,6 +489,10 @@
                         <label class="form-control-label">Time line content:</label>
                         <textarea id="time_line" name="time_line" type="text" class="form-control" placeholder="Timeline..."></textarea>
                     </div>
+                       <div class="form-group">
+                        <label class="form-control-label">Intro content:</label>
+                        <textarea id="category_intro" name="category_intro" type="text" class="form-control" placeholder="Intro..."></textarea>
+                    </div>
                     <div class="form-group">
                         <label class="form-control-label">Product belong:</label>
                         <input type="text" class="form-control" name="product_belong" id="product_belong" value="<%= category.product_belong %>">
@@ -538,6 +550,11 @@ $(document).ready(function() {
         tabsize: 2,
         height: 300
     });
+     $('#category_intro').summernote({
+        placeholder: 'Intro...',
+        tabsize: 2,
+        height: 300
+    });
 
     $("#date_start, #date_end, #date_payment").DateTimePicker({
 
@@ -573,7 +590,6 @@ $(document).ready(function() {
         }
         return response.json();
     }).then(function(responseAsJson) {
-        console.log(responseAsJson);
         var category_details = responseAsJson;
         var color = category_details.k_color;
         console.log(color);
@@ -592,6 +608,7 @@ $(document).ready(function() {
         var c_material = category_details.c_material
         var tax = category_details.tax;
         var hns = category_details.hns;
+        var cat_intro = category_details.category_intro
 
         $('#status').val(category_details.status_gb);
         $('#tax').val(category_details.tax);
@@ -601,6 +618,7 @@ $(document).ready(function() {
         $('#summary_content').summernote('code', summary_content);
         $('#price_content').summernote('code', price_content);
         $('#time_line').summernote('code', time_line);
+        $('#category_intro').summernote('code', cat_intro)
 
         if (type == 0) {
             $('#keeb_flip').val(category_details.flip);

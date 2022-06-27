@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>NoobStore</title>
@@ -34,6 +33,12 @@
     <link rel="stylesheet" type="text/css" href="/api/css/pcss/homePage/style.css">
     <link rel="stylesheet" type="text/css" href="/api/css/effect/preload.css">
     <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css">
+     <!-- Loading effect -->
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="/api/css/effect/preload/preload-signal.css"
+    />
     <!--=== script ===-->
     <script src="/api/js/pjs/modernizr.js"></script>
     <!--=== favicons ===-->
@@ -45,7 +50,7 @@
 
 <body id="top">
     <!--=== preloader === -->
-    <div id="preloader">
+    <!-- <div id="preloader">
         <div id="loader">
                 <div id="circle"></div>
                 <div class="line left"></div>
@@ -58,7 +63,8 @@
                 <div class="hide top"></div>
                 <div class="hide bottom"></div>
         </div>
-    </div>
+    </div> -->
+    <% include ./tips/effect/preload-signal %>
     <!--=== header === -->
     <header class="s-header">
         <!--=== header-logo ===-->

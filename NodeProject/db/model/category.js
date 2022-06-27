@@ -125,6 +125,9 @@ var categorySchema = mongoose.Schema({
     },
     time_line:{
         type: String
+    },
+    category_intro:{
+        type: String
     }
 
 })

@@ -1,76 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-    
     <!-- css -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css">
-    <link rel="stylesheet" href="/api/css/pcss/main.css">
-    <link rel="stylesheet" href="/api/css/custom-fixed.css">
-    <link rel="stylesheet" href="/product/css/accountpage/style.css">
-    <link rel="stylesheet" href="/package/intl-tel-input-master/build/css/intlTelInput.css">
-    <link rel="stylesheet" href="/api/css/effect/navbar.css">
-    <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/api/css/datepicker/dist/datepicker.min.css" />
+    <link rel="stylesheet" href="/api/css/pcss/main.css" />
+    <link rel="stylesheet" href="/api/css/custom-fixed.css" />
+    <link rel="stylesheet" href="/product/css/accountpage/style.css" />
+    <link
+      rel="stylesheet"
+      href="/package/intl-tel-input-master/build/css/intlTelInput.css"
+    />
+    <link rel="stylesheet" href="/api/css/effect/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css" />
     <!-- ============= -->
     <!-- font -->
     <link
       href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
       rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/product/css/font-awesome/css/fontawesome-all.min.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="/product/css/font-awesome/css/fontawesome-all.min.css"
+    />
     <!-- ============ -->
     <!-- favicons
     ================================================== -->
-    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
     <!-- script
     ================================================== -->
     <script src="/api/js/pjs/modernizr.js"></script>
     <title>Account Page</title>
     <style>
-        *{
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-    }
-    html, body{
-        font-family: "Montserrat", sans-serif !important;
+      }
+      html,
+      body {
+        font-family: 'Montserrat', sans-serif !important;
         /* height: 100%; */
         width: 100%;
         /*background-image: url('/api/docs/background/UIBkAT.jpg');*/
         background-image: url('/docs/background/bg-black.svg');
         /* background-image: url('/api/docs/background/william-zhang-hqKPgEVEc-8-unsplash.jpg'); */
         /* background-position: center center; */
-        background-repeat:repeat;
+        background-repeat: repeat;
         background-attachment: fixed;
         background-size: cover;
-    }
-    .center{
+      }
+      .center {
         text-align: center;
-    }
-  
-    nav.navbar{
+      }
+
+      nav.navbar {
         z-index: 1;
         position: sticky;
         top: 0;
         background-image: url('/api/docs/background/UIBkAT.jpg');
         background-repeat: no-repeat;
         /* clip-path: polygon(0 13%, 99% 24%, 100% 92%, 17% 86%); */
-
-    }
-    .bg-dark{
-        background-color: transparent!important;
+      }
+      .bg-dark {
+        background-color: transparent !important;
         /* clip-path: polygon(50% 0%, 100% 0, 100% 61%, 30% 86%, 0 52%, 0 0); */
-    }
-    
-    .before-breadcrumb {
+      }
+
+      .before-breadcrumb {
         opacity: 0.91;
         position: relative;
         top: 1%;
@@ -81,92 +103,130 @@
         /* -webkit-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
         -moz-box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79);
         box-shadow: -4px 1px 30px 3px rgba(61,38,61,0.79); */
-    }
-    .breadcrumb{
+      }
+      .breadcrumb {
         max-width: 80%;
-        margin:0 auto;
+        margin: 0 auto;
         background-image: url('/api/docs/background/UIBkAT.jpg');
         background-repeat: no-repeat;
-        background-color: transparent!important;
-        
-    }
-    
-    .row:first-child > .col-md-12{
+        background-color: transparent !important;
+      }
+
+      .row:first-child > .col-md-12 {
         display: flex;
-    }
-    .row{
+      }
+      .row {
         /* height: 100%; */
         position: relative;
         top: 5%;
-    }
-    .btn-submit{
+      }
+      .btn-submit {
         border-radius: 50px;
         min-width: 160px;
-    }
-    .footer-register{
+      }
+      .footer-register {
         height: 10%;
-    }
-    @import "compass/css3";
-    .seperator-wrapper {
-  width: 100%;
-}
-.seperator-wrapper .seperator {
-  width: 80%;
-  margin: 0 auto;
-  height: 5px;
-  animation: rotate 3s infinite linear;
-  -webkit-animation: rotate 3s infinite linear;
-}
-@-webkit-keyframes rotate {
-  from {
-    background-position: -3000px;
-  }
-  to {
-    background-position: 0px;
-  }
-}
-@keyframes rotate {
-  from {
-    background-position: -3000px;
-  }
-  to {
-    background-position: 0px;
-  }
-}
-.gradient {
-  background: #30ff90;
-  /* Old browsers */
-  background: -moz-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #30ff90), color-stop(25%, #ed2ded), color-stop(50%, #c99826), color-stop(75%, #30ffe6), color-stop(100%, #30ff90));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(left, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
-  /* IE10+ */
-  background: linear-gradient(to right, #30ff90 0%, #ed2ded 25%, #c99826 50%, #30ffe6 75%, #30ff90 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30ff90', endColorstr='#30ff90',GradientType=1);
-  /* IE6-9 */
-}
-.ulMain > li{
-    cursor: pointer;
-    padding: 0;
-}
-.ulMain > li > .text{
-    text-align: center;
-}
-
-.col-
-
- 
-/*  */
+      }
+      @import 'compass/css3';
+      .seperator-wrapper {
+        width: 100%;
+      }
+      .seperator-wrapper .seperator {
+        width: 80%;
+        margin: 0 auto;
+        height: 5px;
+        animation: rotate 3s infinite linear;
+        -webkit-animation: rotate 3s infinite linear;
+      }
+      @-webkit-keyframes rotate {
+        from {
+          background-position: -3000px;
+        }
+        to {
+          background-position: 0px;
+        }
+      }
+      @keyframes rotate {
+        from {
+          background-position: -3000px;
+        }
+        to {
+          background-position: 0px;
+        }
+      }
+      .gradient {
+        background: #30ff90;
+        /* Old browsers */
+        background: -moz-linear-gradient(
+          left,
+          #30ff90 0%,
+          #ed2ded 25%,
+          #c99826 50%,
+          #30ffe6 75%,
+          #30ff90 100%
+        );
+        /* FF3.6+ */
+        background: -webkit-gradient(
+          linear,
+          left top,
+          right top,
+          color-stop(0%, #30ff90),
+          color-stop(25%, #ed2ded),
+          color-stop(50%, #c99826),
+          color-stop(75%, #30ffe6),
+          color-stop(100%, #30ff90)
+        );
+        /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(
+          left,
+          #30ff90 0%,
+          #ed2ded 25%,
+          #c99826 50%,
+          #30ffe6 75%,
+          #30ff90 100%
+        );
+        /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(
+          left,
+          #30ff90 0%,
+          #ed2ded 25%,
+          #c99826 50%,
+          #30ffe6 75%,
+          #30ff90 100%
+        );
+        /* Opera 11.10+ */
+        background: -ms-linear-gradient(
+          left,
+          #30ff90 0%,
+          #ed2ded 25%,
+          #c99826 50%,
+          #30ffe6 75%,
+          #30ff90 100%
+        );
+        /* IE10+ */
+        background: linear-gradient(
+          to right,
+          #30ff90 0%,
+          #ed2ded 25%,
+          #c99826 50%,
+          #30ffe6 75%,
+          #30ff90 100%
+        );
+        /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30ff90', endColorstr='#30ff90',GradientType=1);
+        /* IE6-9 */
+      }
+      .ulMain > li {
+        cursor: pointer;
+        padding: 0;
+      }
+      .ulMain > li > .text {
+        text-align: center;
+      }
     </style>
-</head>
+  </head>
 
-<body id="top">
+  <body id="top">
     <!-- preloader
     ================================================== -->
     <!-- <div id="preloader">
@@ -178,144 +238,251 @@
     </div> -->
     <% include ./../tips/subs/preload %>
     <!-- <header class="top"> -->
-        
-          
+
     <% include ./../tips/subs/navbar %>
     <!-- </header> -->
-   
+
     <% include ./../tips/subs/breadcrumb %>
     <!-- This is a reverse engineering of the "Hyperspace"
      design from HTML5 Up! https://html5up.net/hyperspace -->
     <main class="main row">
-        <div style="height: 75vh;" class="col-lg-3 col-md-3 col-small-1200">
-            <% include ./../tips/subs/navbarMain%>
+      <div style="height: 75vh" class="col-lg-3 col-md-3 col-small-1200">
+        <% include ./../tips/subs/navbarMain%>
+      </div>
+      <div class="col-lg-9 col-md-9 col-large-1200">
+        <div class="title-li">
+          <p style="">Details</p>
+          <hr />
         </div>
-        <div class="col-lg-9 col-md-9 col-large-1200">
-            <div class="title-li">
-                <p style="">Details</p>
-                <hr>
+        <article class="container">
+          <form
+            style="padding: 0"
+            id="form-register"
+            autocomplete="off"
+            action="./updateaccount"
+            method="POST"
+          >
+            <div
+              style="background-color: rgba(54, 58, 64, 0.5); padding: 2% 3%"
+              class="container-user-info"
+            >
+              <div class="title-container-user-info col-md-12">
+                <b>INFOMATION</b>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 d-flex">
+                  <div class="col-md-6">
+                    <label for="fname">First name</label>
+                    <input
+                      required
+                      type="text"
+                      name="fname"
+                      class="form-control"
+                      id="fname"
+                      aria-describedbsy="fnamelHelp"
+                      value="<%= user.fname%>"
+                      placeholder="Enter first name"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lname">Last name</label>
+                    <input
+                      required
+                      type="text"
+                      name="lname"
+                      class="form-control"
+                      id="lname"
+                      aria-describedbsy="lnameHelp"
+                      value="<%= user.lname%>"
+                      placeholder="Enter last name"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 d-flex">
+                  <div class="col-md-6">
+                    <label for="email">Email</label>
+                    <input
+                      autocomplete="off"
+                      disabled
+                      required
+                      type="email"
+                      name="email"
+                      class="form-control"
+                      id="email"
+                      value="<%= user.email%>"
+                      placeholder="Enter email"
+                    />
+                    <small id="Help" class="form-text">
+                      Ideally, you should register your email with paypal email
+                    </small>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="password">DoB</label>
+                    <% if((user.birth_date) == null){%>
+                    <input
+                      style="width: 100%"
+                      id="datepicker"
+                      class="span2"
+                      type="text"
+                      name="dob"
+                    />
+                    <% }else{ %> <input style="width: 100%" value='<%=
+                    (user.birth_date).toLocaleDateString('en-US')%>'
+                    id="datepicker" class="span2 datehavevalue" type="text"
+                    name="dob"> <% } %>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 d-flex">
+                  <div class="col-md-6">
+                    <label for="paypal">Paypal</label>
+                    <input
+                      required
+                      type="email"
+                      name="paypal"
+                      class="form-control"
+                      id="paypal"
+                      aria-describedbsy="paypalHelp"
+                      value="<%= user.paypal%>"
+                      placeholder="Enter paypal"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lname">Facebook URL</label>
+                    <input
+                      required
+                      type="text"
+                      name="fburl"
+                      class="form-control"
+                      id="fburl"
+                      aria-describedbsy="fburlHelp"
+                      value="<%= user.fb_url%>"
+                      placeholder="Enter facebook url"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12 d-flex">
+                  <div class="form-group col-md-6">
+                    <label for="pnumber">Phone number</label>
+                    <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
+                    <input
+                      name="pnumber"
+                      type="tel"
+                      value="<%= user.phone_number%>"
+                      id="pnumber"
+                    />
+                    <small id="Help" class="form-text">
+                      Please! Make sure your phone number is correct
+                    </small>
+                  </div>
+                  <div class="form-group col-md-6 checkbox-noti">
+                    <input
+                      class="checkbox w-unset h-unset"
+                      data-val="true"
+                      and
+                      value="true"
+                      name="get_noti"
+                      type="checkbox"
+                      id="checkbox-notification"
+                      aria-label="Get notifications about new Group Buy"
+                    /><span>Get notifications about Group Buy</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <article class="container">
-                <form style="padding: 0;" id='form-register' autocomplete="off" action='./updateaccount' method='POST'>
-                    <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-user-info">
-                        <div class="title-container-user-info col-md-12">
-                            <b>INFOMATION</b>
-                        </div>
-                        <div class='form-group row'>
-                            <div class='col-md-12 d-flex'>
-                                <div class='col-md-6'>
-                                    <label for='fname'>First name</label>
-                                    <input required type='text' name='fname' class='form-control' id='fname' aria-describedbsy='fnamelHelp' value='<%= user.fname%>' placeholder='Enter first name'>
-                                </div>
-                                <div class='col-md-6'>
-                                    <label for='lname'>Last name</label>
-                                    <input required type='text' name='lname' class='form-control' id='lname' aria-describedbsy='lnameHelp' value='<%= user.lname%>' placeholder='Enter last name'>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='form-group row'>
-                            <div class='col-md-12 d-flex'>
-                                <div class='col-md-6'>
-                                    <label for='email'>Email</label>
-                                    <input autocomplete="off" disabled required type='email' name='email' class='form-control' id='email' value='<%= user.email%>' placeholder='Enter email'>
-                                    <small id='Help' class='form-text'>
-                                        Ideally, you should register your email with paypal email
-                                    </small>
-                                </div>
-                                <div class='col-md-6'>
-                                    <label for='password'>DoB</label>
-                                    <% if((user.birth_date) == null){%>
-                                        <input style="width: 100%" id="datepicker" class="span2" type="text" name="dob">
-                                    <% }else{ %>
-                                        <input style="width: 100%" value='<%= (user.birth_date).toLocaleDateString('en-US')%>' id="datepicker" class="span2 datehavevalue" type="text" name="dob">
-                                    <% } %>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class='form-group row'>
-                            <div class='col-md-12 d-flex'>
-                                <div class='col-md-6'>
-                                    <label for='paypal'>Paypal</label>
-                                    <input required type='email' name='paypal' class='form-control' id='paypal' aria-describedbsy='paypalHelp' value='<%= user.paypal%>' placeholder='Enter paypal'>
-                                </div>
-                                <div class='col-md-6'>
-                                    <label for='lname'>Facebook URL</label>
-                                    <input required type='text' name='fburl' class='form-control' id='fburl' aria-describedbsy='fburlHelp' value='<%= user.fb_url%>' placeholder='Enter facebook url'>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='form-group row'>
-                            <div class='col-md-12 d-flex'>
-                                <div class='form-group col-md-6'>
-                                    <label for='pnumber'>Phone number</label>
-                                    <!-- <input required type='text' name='pnumber' class='form-control' id='pnumber' placeholder='Enter phone number'> -->
-                                    <input name="pnumber" type="tel" value='<%= user.phone_number%>' id="pnumber">
-                                    <small id='Help' class='form-text'>
-                                        Please! Make sure your phone number is correct
-                                    </small>
-                                </div>
-                                <div class='form-group col-md-6 checkbox-noti '>
-                                    <input class="checkbox w-unset h-unset" data-val="true" and value="true" name="get_noti" type="checkbox" id="checkbox-notification" aria-label="Get notifications about new Group Buy"><span>Get notifications about Group Buy</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-address-default flip-form">
-                        <div class="title-container-user-info col-md-12">
-                            <b>ADDRESS SHIPPING </b><a href="/account/address"><span><i class="fas fa-pencil-alt"></i>(Edit address)</span></a>
-                        </div>
-                        <div class="form-group d-flex shipping-info">
-                            <div class='form-group col-md-6 '>
-                                <% if(user.shipping_at[0]) { %>
-                                <label for="">Name: <span><%= user.shipping_at[0].fname%> <%= user.shipping_at[0].lname%></span></label>
-                                <div></div>
-                                <label for="">Mail: <span><%= user.shipping_at[0].email%></span></label>
-                                <div></div>
-                                <label for="">Phone: <span><%= user.shipping_at[0].phone_number%></span></label>
-                                <div></div>
-                                <% } else { %>
-                                <label for="">Name: <span></span></label>
-                                <div></div>
-                                <label for="">Mail: <span></span></label>
-                                <div></div>
-                                <label for="">Phone: <span></span></label>
-                                <div></div>
-                                <% } %>
-                            </div>
-                            <div class='form-group col-md-6'>
-                                <% if(user.shipping_at[0]) { %>
-                                <label for="">Address: <span><%= user.shipping_at[0].address%></span></label>
-                                <div></div>
-                                <label for="">Country: <span><%= user.shipping_at[0].country%></span></label>
-                                <div></div>
-                                <label for="">City: <span><%= user.shipping_at[0].town_city%></span></label>
-                                <div></div>
+            <div
+              style="background-color: rgba(54, 58, 64, 0.5); padding: 2% 3%"
+              class="container-address-default flip-form"
+            >
+              <div class="title-container-user-info col-md-12">
+                <b>ADDRESS SHIPPING </b
+                ><a href="/account/address"
+                  ><span
+                    ><i class="fas fa-pencil-alt"></i>(Edit address)</span
+                  ></a
+                >
+              </div>
+              <div class="form-group d-flex shipping-info">
+                <div class="form-group col-md-6">
+                  <% if(user.shipping_at[0]) { %>
+                  <label for=""
+                    >Name:
+                    <span
+                      ><%= user.shipping_at[0].fname%> <%=
+                      user.shipping_at[0].lname%></span
+                    ></label
+                  >
+                  <div></div>
+                  <label for=""
+                    >Mail: <span><%= user.shipping_at[0].email%></span></label
+                  >
+                  <div></div>
+                  <label for=""
+                    >Phone:
+                    <span><%= user.shipping_at[0].phone_number%></span></label
+                  >
+                  <div></div>
+                  <% } else { %>
+                  <label for="">Name: <span></span></label>
+                  <div></div>
+                  <label for="">Mail: <span></span></label>
+                  <div></div>
+                  <label for="">Phone: <span></span></label>
+                  <div></div>
+                  <% } %>
+                </div>
+                <div class="form-group col-md-6">
+                  <% if(user.shipping_at[0]) { %>
+                  <label for=""
+                    >Address:
+                    <span><%= user.shipping_at[0].address%></span></label
+                  >
+                  <div></div>
+                  <label for=""
+                    >Country:
+                    <span><%= user.shipping_at[0].country%></span></label
+                  >
+                  <div></div>
+                  <label for=""
+                    >City:
+                    <span><%= user.shipping_at[0].town_city%></span></label
+                  >
+                  <div></div>
 
-                                <label for="">Post code: <span><%= user.shipping_at[0].zip_code%></span></label>
-                                <div></div>
+                  <label for=""
+                    >Post code:
+                    <span><%= user.shipping_at[0].zip_code%></span></label
+                  >
+                  <div></div>
 
-                                <% } else { %>
-                                <label for="">Address: <span></span></label>
-                                <div></div>
-                                <label for="">City: <span></span></label>
-                                <div></div>
-                                <label for="">Post code: <span></span></label>
-                                <div></div>
-                                <% } %>
-                               
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                        </div>
-                        
-                    </div>
-                    <div style="background-color: rgba(54, 58, 64, 0.5);padding: 2% 3%;" class="container-password-change flip-form">
-                        <div class="title-container-user-info col-md-12">
-                            <b>PASSWORD CHANGE</b><span>(keep both empty if you dont wanna change password)</span>
-                        </div>
-                        <!-- <div class='form-group'>
+                  <% } else { %>
+                  <label for="">Address: <span></span></label>
+                  <div></div>
+                  <label for="">City: <span></span></label>
+                  <div></div>
+                  <label for="">Post code: <span></span></label>
+                  <div></div>
+                  <% } %>
+                </div>
+              </div>
+              <div class="form-group"></div>
+            </div>
+            <div
+              style="background-color: rgba(54, 58, 64, 0.5); padding: 2% 3%"
+              class="container-password-change flip-form"
+            >
+              <div class="title-container-user-info col-md-12">
+                <b>PASSWORD CHANGE</b
+                ><span
+                  >(keep both empty if you dont wanna change password)</span
+                >
+              </div>
+              <!-- <div class='form-group'>
                             <div class="form-group col-md-12">
                                 <label class='col-md-3 margin-ver '>current password:</label> 
                                 <input class='col-md-9' id='currentpw' required name='currentpw' type='password' value='' /> 
@@ -326,47 +493,69 @@
                             </div>
                             
                         </div> -->
-                        <div class='form-group change-password-form d-flex'>
-                            <div class='col-md-6'>
-                                <label for='paypal'>current password:</label>
-                                <!-- <label class='col-md-3 margin-ver '>current password:</label>  -->
-                                <input class='col-md-9' id='currentpw'  name='currentpw' type='password' value='' /> 
-                            </div>
-                            <div class='col-md-6'>
-                                <label for='paypal'>new password:</label>
-                                <!-- <label class='col-md-3 margin-ver'>new password:</label>  -->
-                                <input class='col-md-9'  id='newpw' name='newpw' type='password' value='' /> 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 flip-form">
-                        <button type='submit' id='btn-submit' class='btn btn-primary btn-submit'>Update</button>
-                        <!-- <button type='submit' id='btn-login' class='btn btn-primary btn-submit'>Register</button> -->
-                    </div>
-                    <!-- <div class="center">
+              <div class="form-group change-password-form d-flex">
+                <div class="col-md-6">
+                  <label for="paypal">current password:</label>
+                  <!-- <label class='col-md-3 margin-ver '>current password:</label>  -->
+                  <input
+                    class="col-md-9"
+                    id="currentpw"
+                    name="currentpw"
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="paypal">new password:</label>
+                  <!-- <label class='col-md-3 margin-ver'>new password:</label>  -->
+                  <input
+                    class="col-md-9"
+                    id="newpw"
+                    name="newpw"
+                    type="password"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 flip-form">
+              <button
+                type="submit"
+                id="btn-submit"
+                class="btn btn-primary btn-submit"
+              >
+                Update
+              </button>
+              <!-- <button type='submit' id='btn-login' class='btn btn-primary btn-submit'>Register</button> -->
+            </div>
+            <!-- <div class="center">
           <a class='btn-loginform' href='#'>Click here to login</a>
       </div> -->
-                </form>
-            </article>
-        </div>
+          </form>
+        </article>
+      </div>
     </main>
-    <div class="footer-register center">
-    </div>
-</body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" 
-integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <div class="footer-register center"></div>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"
+  ></script>
 
-<script src="/api/js/pjs/main.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="/api/js/datepicker/dist/datepicker.js"></script>
-<script type="text/javascript" src="/api/js/pjs/product/accountPage/js.js"></script>
-<script src="/package/intl-tel-input-master/build/js/intlTelInput.js"></script>
+  <script src="/api/js/pjs/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="/api/js/datepicker/dist/datepicker.js"></script>
+  <script
+    type="text/javascript"
+    src="/api/js/pjs/product/accountPage/js.js"
+  ></script>
+  <script src="/package/intl-tel-input-master/build/js/intlTelInput.js"></script>
 
-<script>
-
-
-
-</script>
-
+  <script></script>
 </html>

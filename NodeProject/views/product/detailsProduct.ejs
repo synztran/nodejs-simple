@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shop - <%- Category.category_name %></title>
+    <% include ./../tips/subs/meta %>
+    <!-- Library -->
+    <link rel="stylesheet" href="/share/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/package/lightslider/src/css/lightslider.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/package/slick/slick.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/package/slick/slick-theme.css"
+    />
+    <link href="/share/select2/select2.min.css" rel="stylesheet" />
+    <link href="/share/aos/aos.css" rel="stylesheet" />
+    <!-- Loading effect -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/effect/preload/preload-signal.css"
+    />
+    <!-- Base css -->
+    <link rel="stylesheet" type="text/css" href="/api/css/base/font.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/main.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/footer.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/base/breadcrumb.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/navbar.css" />
+    <!-- Customize CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/effect/rgb-wrapper/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/pcss/detailProductPage/new-style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/tips/collapse-tab.css"
+    />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
+
+    <script src="/api/js/pjs/modernizr.js"></script>
+  </head>
+  <body>
+    <% include ./../tips/effect/preload-signal %>
+    <div id="main-container">
+      <% include ./../tips/subs/sample-navbar %> <% include
+      ./../tips/subs/sample-breadcrumb%>
+      <div id="content-container" class="container w-100 h-100 col-12 col-md-9">
+        <div id="product-container" class="row g-3">
+          <div class="col-12 col-md-5">
+            <div id="select-product-container">
+              <div id="product-category-title">
+                <%- Category.category_name%>
+              </div>
+              <div id="product-category-summary" class="ms-2 my-2">
+                <%- Category.category_intro || 'TBA...' %>
+              </div>
+              <div id="icon-w-line" class="d-flex align-items-center my-2">
+                <i class="las la-chevron-right"></i>
+                <div class="w-100"></div>
+              </div>
+              <div class="d-inline my-2">
+                <!--   <div class="d-inline pe-2">
+                  <i class="lar la-heart la-2x"></i><span class="fs-4">9.6k</span>
+                </div>
+                <span class="ps-2">
+                  <% let starList = [] %> <% for(let i=0;i<5;i++){ %> <%
+                  starList.push('<i class="lar la-star la-2x"></i>')} %> <%-
+                  starList.join('') %>
+                </span> -->
+              </div>
+              <div id="product-price" class="d-flex my-2">
+                <div id="og-price" class=""></div>
+                <div id="oos-price" class="">Out of stock</div>
+              </div>
+              <div id="shipping-text" class="my-2">
+                <a href="#" target="_blank" class="text-decoration-none"
+                  ><span class="text-decoration-underline">Shipping</span>
+                  calculated at checkout.</a
+                >
+              </div>
+              <form id="form-add-cart">
+                <input
+                  hidden
+                  name="category_id"
+                  value="<%= Category.category_id%>"
+                />
+                <input hidden name="product_id" id="input-product-id" />
+                <div id="product-select" class="row my-2">
+                  <div
+                    id="product-options"
+                    class="row col-12 my-2 align-items-end pe-0"
+                  >
+                    <div class="col-12 col-md-8 d-flex flex-column pe-0">
+                      <label>Option/Product part/Color/Type:</label>
+                      <select class="select2" id="select-product">
+                        <% for( var i in detailsProduct){ %>
+                        <option
+                          value="<%-i%>"
+                          data-price="<%=detailsProduct[i].price%>"
+                          data-value="<%=detailsProduct[i].product_id%>"
+                          data-oos="<%=detailsProduct[i].outstock%> "
+                        >
+                          <%= detailsProduct[i].product_name %>
+                        </option>
+                        <% } %>
+                      </select>
+                    </div>
+                    <div
+                      id="product-quantity"
+                      class="d-flex flex-column col-12 col-md-4 pe-0"
+                    >
+                      <label>Quantity:</label>
+                      <select
+                        id="item-quantity"
+                        name="product_quantity"
+                        class="select2"
+                      >
+                        <% for (let count = 1; count <= 10; count++) { %>
+                        <option value="<%= count%>"><%= count %></option>
+                        <%}%>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="w-100 mt-2">
+                    <button type="submit" class="w-100" id="btn-atc">
+                      <span
+                        >Add to card <i class="las la-arrow-right"></i
+                      ></span>
+                      <div
+                        style="color: var(--main-color)"
+                        class="spinner-border text-light d-none"
+                        role="status"
+                      >
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-12 col-md-7">
+            <div id="product-image-container">
+              <div class="product-slider">
+                <ul id="lightSlider">
+                  <% for(var key in detailsProduct) {%>
+                  <li data-thumb="" data-id="<%= key %>">
+                    <img
+                      style="width: 100%; height: 100%"
+                      onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'"
+                      src="/api/<%= detailsProduct[key].pic_product.path %>"
+                      ;
+                    />
+                  </li>
+                  <% } %>
+                </ul>
+                <ul class="2nd-slick">
+                  <% for(var key in detailsProduct) {%>
+                  <li class="mx-2" data-thumb="" data-id="<%= key %>">
+                    <img
+                      class="rounded-2 text-center"
+                      style="width: 100%; height: 50px"
+                      onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found.png'"
+                      src="/api/<%= detailsProduct[key].pic_product.path %>"
+                    />
+                  </li>
+                  <% } %>
+                </ul>
+              </div>
+            </div>
+             <div id="product-information-tab">
+                <% include ./../tips/subs/collapse-tab %>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="position-fixed bottom-0 end-0 p-3 top-2 end-0"
+        style="z-index: 11"
+      >
+        <div
+          id="toastNoti"
+          class="toast"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          data-bs-autohide="false"
+          data-bs-delay="3000"
+        >
+          <div class="toast-header">
+            <img
+              src="/favicon/favicon.ico"
+              class="rounded me-2"
+              width="20"
+              height="20"
+            />
+            <strong class="me-auto">Noob store</strong>
+            <small>few seconds ago</small>
+            <button
+              type="button"
+              class="btn-close btn-close-toast"
+              data-bs-dismiss="toast"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="toast-body"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <%include ./../tips/subs/sample-footer%>
+  <!-- Library -->
+  <script src="/share/jquery/jquery-3.6.0.min.js"></script>
+  <script src="/share/popperjs/popper.min.js"></script>
+  <script src="/share/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/share/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/share/select2/select2.min.js"></script>
+  <script src="/share/slickjs/slick.min.js"></script>
+  <script src="/share/aos/aos.js"></script>
+  <script src="/package/lightslider/src/js/lightslider.js"></script>
+  <script src="/share/zooming/zooming.js"></script>
+  <script src="/api/js/moneyExchange/money.min.js"></script>
+  <script
+    type="text/javascript"
+    src="/share/sweetalert/sweetalert2@9.js"
+  ></script>
+  <!-- Base -->
+  <!-- Customize -->
+  <script src="/api/js/pjs/main.js"></script>
+  <script src="/api/js/pjs/product/detailsProductPage/js.js"></script>
+</html>

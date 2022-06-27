@@ -9,7 +9,6 @@ const TokenUserCheckMiddleware = async (req, res, next) => {
       // Xác thực mã token và kiểm tra thời gian hết hạn của mã
       try {
         const decoded = await utils.verifyJwtToken(token, config.secret);
-        // console.log(decoded);
         // Lưu thông tin giãi mã được vào đối tượng req, dùng cho các xử lý ở sau
         req.decoded = decoded;
         next();

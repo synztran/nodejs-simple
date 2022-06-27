@@ -16,6 +16,7 @@ const livereload = require('connect-livereload');
 const moment = require('moment');
 const https = require('https');
 const http = require('http');
+const LocalStorage = require('node-localstorage').LocalStorage;
 
 router.use(cookieParser());
 const i18n = require('i18n');
@@ -68,6 +69,7 @@ var EventProduct = require('./../db/model/eventproduct');
 var PageContent = require('./../db/model/mainpage_content');
 var Category = require('./../db/model/category');
 var Couter = require('./../db/model/couter');
+var MoneyRate = require('../db/model/money_rate');
 var TokenCheckMiddleware = require('./../lib/check/checktoken');
 var TokenUserCheckMiddleware = require('./../lib/check/checktokenproduct.js');
 var SessionCheckMiddleware = require('./../lib/check/checksession');
@@ -137,6 +139,7 @@ router.post('/login', async (req, res, next) => {
     const user = {
       email: req.body.email.toLowerCase(),
       password: req.body.password,
+      user_id: account._id,
     };
     const token = jwt.sign(user, config.secret, {
       expiresIn: config.tokenLife,
@@ -175,8 +178,6 @@ router.post('/login', async (req, res, next) => {
       .exec();
 
     res.cookie('x-token', response.token, { maxAge: 6000000 });
-    // res.cookie('uid', account._id, {maxAge: 6000000})
-    // res.cookie('uemail', account.email, {maxAge: 6000000})
     res.cookie('x-refresh-token', response.refreshToken, { maxAge: 6000000 });
     res.cookie('lang', 'vi', { maxAge: 900000 });
     req.session.User = {
@@ -194,9 +195,6 @@ router.post('/login', async (req, res, next) => {
         res.redirect('/');
       }
     });
-    // return res.status(200).json({status: 'success'})
-    // res.redirect('/');
-    // setTimeout(() => res.redirect('/'), 1000)
   } catch (err) {
     res.status(500).send(err);
   }
@@ -300,7 +298,6 @@ router.get('/account', TokenUserCheckMiddleware, async (req, res) => {
     Account.findOne(
       { email: req.session.User['email'] },
       function (errAccount, getAccount) {
-        console.log(getAccount);
         res.render('product/accountPage', {
           user: getAccount,
           userName: getAccount.fname + ' ' + getAccount.lname,
@@ -338,11 +335,24 @@ router.get('/shop', (req, res) => {
   Category.find({}, function (err, docs) {
     Product.find({}, function (err, pData) {
       EventProduct.findOne({}, function (err, epData) {
+        let arrayHaveChild = [];
+        pData.filter((prods) => {
+          for (let i = 0; i < docs.length; i++) {
+            if (prods.category_id === docs[i].category_id) {
+              let findIndex = arrayHaveChild.findIndex(
+                (child) => child.category_id === docs[i].category_id
+              );
+              if (findIndex === -1) {
+                arrayHaveChild.push(docs[i]);
+              }
+            }
+          }
+        });
         if (req.session.User == null) {
           res.render('product/proxyPage', {
             user: null,
             userName: null,
-            listCategory: docs,
+            listCategory: arrayHaveChild,
             listProduct: pData,
             ePID: epData.event_product_name,
             currentPage: 'Shop',
@@ -354,7 +364,7 @@ router.get('/shop', (req, res) => {
               res.render('product/proxyPage', {
                 user: req.session.User['email'],
                 userName: getAccount.fname + ' ' + getAccount.lname,
-                listCategory: docs,
+                listCategory: arrayHaveChild,
                 listProduct: pData,
                 ePID: epData.event_product_name,
                 currentPage: 'Shop',
@@ -777,7 +787,7 @@ router.delete('/delete-address/:id', async (req, res) => {
       {
         $pull: {
           shipping_at: {
-            _id: req.params.id,
+            cảt_id: req.params.id,
           },
         },
       }
@@ -893,82 +903,285 @@ router.post(
 // --------------------------------- PRODUCT CONFIG --------------------------------------------
 router.get('/shop/product/:id', async (req, res) => {
   try {
-    Product.find({ category_url_name: req.params.id }, function (err, docs) {
-      if (docs[0]) {
-        Category.findOne(
-          { category_id: docs[0].category_id },
-          function (err, docs2) {
-            if (req.session.User == null) {
-              // res.render("product/detailsProductPage", {
-              res.render('product/detailsProductPageV2', {
-                user: null,
-                userName: null,
-                detailsProduct: docs,
-                Category: docs2,
-                currentPage: 'Shop',
-              });
-            } else {
-              Account.findOne(
-                { email: req.session.User['email'] },
-                function (errAccount, getAccount) {
-                  // res.render("product/detailsProductPage", {
-                  res.render('product/detailsProductPageV2', {
-                    user: req.session.User['email'],
-                    userName: getAccount.fname + ' ' + getAccount.lname,
-                    detailsProduct: docs,
-                    Category: docs2,
-                    currentPage: 'Shop',
-                  });
-                }
-              );
+    Product.find(
+      { category_url_name: req.params.id },
+      function (err, products) {
+        if (products[0]) {
+          Category.findOne(
+            { category_id: products[0].category_id },
+            function (err, categories) {
+              if (req.session.User == null) {
+                res.render('product/detailsProduct', {
+                  user: null,
+                  userName: null,
+                  detailsProduct: products,
+                  Category: categories,
+                  currentPage: 'Shop',
+                });
+              } else {
+                Account.findOne(
+                  { email: req.session.User['email'] },
+                  function (errAccount, getAccount) {
+                    res.render('product/detailsProduct', {
+                      user: req.session.User['email'],
+                      userName: getAccount.fname + ' ' + getAccount.lname,
+                      detailsProduct: products,
+                      Category: categories,
+                      currentPage: 'Shop',
+                    });
+                  }
+                );
+              }
             }
-          }
-        );
-      } else {
-        res.redirect('/404Page');
+          );
+        } else {
+          res.redirect('/404Page');
+        }
       }
-    });
+    );
   } catch (err) {
     res.status(400).send(err);
   }
 });
 
 router.get('/shop/payment/:id', async (req, res) => {
-  // try {
-  //   // Product.find(
-  //   //   { category_url_name: req.params.id },
-  //   //   function (errdocs, docs) {
-  //   //     if (docs[0]) {
-  //   //       Category.findOne(
-  //   //         { category_id: docs[0].category_id },
-  //   //         function (errdocs2, docs2) {
-  //   //           Account.findOne(
-  //   //             { email: req.decoded['email'] },
-  //   //             function (erruser, docs3) {
-  //   //               // res.render('product/joingbPage', {
-  //   //               res.render('product/cartPage', {
-  //   //                 title: 'Payment',
-  //   //                 User: docs3,
-  //   //                 Payment: docs,
-  //   //                 Category: docs2,
-  //   //               });
-  //   //             }
-  //   //           );
-  //   //         }
-  //   //       );
-  //   //     } else {
-  //   //       res.redirect('/404Page');
-  //   //     }
-  //   //   }
-  //   // );
-  //   res.render('product/cartPage', {
-  //     title: 'Payment',
-  //   });
-  // } catch (err) {
-  //   res.status(200).send(err);
-  // }
-  res.render('product/cartPage', {
+  try {
+    Product.find(
+      { category_url_name: req.params.id },
+      function (errdocs, docs) {
+        if (docs[0]) {
+          Category.findOne(
+            { category_id: docs[0].category_id },
+            function (errdocs2, docs2) {
+              Account.findOne(
+                { email: 'rapsunl231@gmail.com' },
+                function (erruser, docs3) {
+                  res.render('product/joingbPage', {
+                    // res.render('product/cartPage', {
+                    title: 'Payment',
+                    User: docs3,
+                    Payment: docs,
+                    Category: docs2,
+                  });
+                }
+              );
+            }
+          );
+        } else {
+          res.redirect('/404Page');
+        }
+      }
+    );
+    // res.render('product/cartPage', {
+    //   title: 'Payment',
+    // });
+  } catch (err) {
+    res.status(200).send(err);
+  }
+  // res.render('product/cart', {
+  //   title: 'Cart',
+  //   currentPage: 'Cart',
+  // });
+});
+
+router.get('/cart', (req, res) => {
+  try {
+    if (!req.session.User) {
+      res.render('product/cart', {
+        user: null,
+        title: 'Cart',
+        currentPage: 'Cart',
+        // async: true,
+      });
+    } else {
+      Account.findOne(
+        { email: req.session.User['email'] },
+        function (_, account) {
+          res.render('product/cart', {
+            user: account,
+            title: 'Cart',
+            currentPage: 'Cart',
+            // async: true,
+          });
+        }
+      );
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get('/cart/delivery-information', async (req, res) => {
+  try {
+    const moneyRate = await MoneyRate.find({}).exec();
+    // const paymentMethod = [];
+    if (req.session.User == null) {
+      res.render('product/cartPayment', {
+        user: null,
+        title: 'Payment',
+        currentPage: 'Payment',
+        moneyRate: moneyRate.reduce((a, v) => ({ ...a, [v]: v })),
+      });
+    } else {
+      Account.findOne(
+        { email: req.session.User['email'] },
+        function (errAccount, account) {
+          res.render('product/cartPayment', {
+            user: account,
+            title: 'Payment',
+            currentPage: 'Payment',
+            moneyRate: moneyRate.reduce((a, v) => ({ ...a, [v]: v })),
+          });
+        }
+      );
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post('/cart/add', async (req, res) => {
+  let currentStorage = localStorage.getItem('cart');
+  const hanldeProductType = (type) => {
+    let typeLabel = '';
+    switch (type) {
+      case 0:
+        typeLabel = 'Keyboard top case';
+        break;
+      case 1:
+        typeLabel = 'Keyboard bottom case';
+        break;
+      case 2:
+        typeLabel = 'Keyboard plate';
+        break;
+      case 3:
+        typeLabel = 'Keyboard frame';
+        break;
+      case 4:
+        typeLabel = 'Keyset';
+        break;
+      case 5:
+        typeLabel = 'Switch pack';
+        break;
+      case 6:
+        typeLabel = 'Not defined';
+        break;
+      case 7:
+        typeLabel = 'Artisan';
+        break;
+      case 8:
+        typeLabel = 'Accesssories';
+        break;
+    }
+    return typeLabel;
+  };
+  try {
+    if (!req.session.User) {
+      res.json({ message: 'Please login first!', flag: 407 });
+    } else if (req.body) {
+      Product.find(
+        { product_id: req.body.product_id },
+        function (errdocs, products) {
+          if (products) {
+            let newItem = {
+              product_id: products[0].product_id,
+              product_image: products[0].pic_product.path,
+              product_name: products[0].product_name,
+              product_quantity: Number(req.body.product_quantity),
+              product_price: Number(products[0].price),
+              product_type: hanldeProductType(products[0].product_part),
+              product_url: products[0].category_url_name,
+            };
+            const cartLength = JSON.parse(localStorage.getItem('cart')).length;
+            // const cartLength = JSON.parse(req.body.cart).length
+            if (cartLength > 0) {
+              let currentCart = JSON.parse(localStorage.getItem('cart'));
+              // let currentCart = JSON.parse(req.body.cart)
+              const isAlready = currentCart.findIndex(
+                (item) => item.product_id == newItem.product_id
+              );
+              console.log('is', isAlready);
+              if (isAlready == -1) {
+                currentCart.push(newItem);
+                localStorage.setItem('cart', JSON.stringify(currentCart));
+              } else {
+                currentCart[isAlready].product_quantity +=
+                  newItem.product_quantity;
+                localStorage.setItem('cart', JSON.stringify(currentCart));
+              }
+              res.json({ message: 'Item Added', flag: 200 });
+              // res.json({message: 'Added', flag: 200, data: JSON.stringify(currentCart)})
+            } else {
+              localStorage.setItem('cart', JSON.stringify([newItem]));
+              res.json({ message: 'Added', flag: 200 });
+              // res.json({message: 'Added', flag: 200, data: JSON.stringify([newItem])})
+            }
+          }
+        }
+      );
+    }
+  } catch (err) {
+    res.json({ message: err, flag: 500 });
+  }
+});
+
+router.post('/cart/remove-item', async (req, res) => {
+  const cartLength = JSON.parse(localStorage.getItem('cart')).length;
+  if (req.body && cartLength > 0) {
+    let currentCart = JSON.parse(localStorage.getItem('cart'));
+    const isAlready = currentCart.findIndex(
+      (item) => item.product_id == req.body.product_id
+    );
+    if (isAlready != -1) {
+      await localStorage.setItem(
+        'cart',
+        JSON.stringify(
+          currentCart.filter((item) => item.product_id !== req.body.product_id)
+        )
+      );
+    } else {
+      res.json({ message: 'something wrong !', flag: 500 });
+    }
+    res.json({
+      message: 'Added',
+      flag: 200,
+      data: localStorage.getItem('cart'),
+    });
+  }
+});
+router.get('/cart/get', (req, res) => {
+  try {
+    const currentCart = JSON.parse(localStorage.getItem('cart'));
+    res.json({ message: 'Success', flag: 200, data: currentCart });
+  } catch (err) {
+    res.json({ message: err.message, flag: 500 });
+  }
+});
+router.post('/cart/update', async (req, res) => {
+  try {
+    const currentCart = JSON.parse(localStorage.getItem('cart'));
+    const dataReq = req.body.newQuantityArr;
+    console.log(dataReq);
+    for (let i in currentCart) {
+      currentCart[i].product_quantity = parseInt(dataReq[i], 10);
+      await localStorage.setItem('cart', JSON.stringify(currentCart));
+    }
+    res.json({ message: 'Update success', flag: 200 });
+  } catch (err) {
+    res.josn({ message: 'something wrong', flag: 500 });
+  }
+});
+
+router.get('/cart/payment', async (req, res) => {
+  const moneyRate = await MoneyRate.find({}).exec();
+  res.render('product/payment', {
+    user: null,
     title: 'Payment',
+    currentPage: 'Payment',
+    currencyCharge: moneyRate.reduce((prev, curr) => ({
+      ...prev,
+      [curr]: curr,
+    })),
   });
 });
 // ==================================================================== //
@@ -1161,9 +1374,7 @@ router.post('/service/invoice', TokenUserCheckMiddleware, async (req, res) => {
       {},
       { $inc: { seq: 1 } },
       { new: true, upsert: true },
-      function (err, docs) {
-        console.log(docs);
-      }
+      function (err, docs) {}
     );
   } catch (err) {
     res.status(200).send(err);

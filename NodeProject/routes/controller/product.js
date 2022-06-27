@@ -280,6 +280,41 @@ async function addPost(req, res) {
               console.log(docs);
             }
           );
+        }else if(part == 8){
+          // for etc
+          await Couter.findOne({ _id: 'p_etc' }, function (err, docs) {
+            console.log(docs);
+            console.log(docs['seq']);
+            var inc = docs['seq'] + 1;
+            console.log('incc' + inc);
+
+            db.collection('products').insertOne({
+              product_id: 'ETC' + inc,
+              product_name: req.body.pname,
+              replace_product_name: req.body.replace_product_name,
+              category_id: req.body.catid,
+              category_url_name: CatData.category_url_name,
+              product_part: req.body.p_part,
+              outstock: req.body.outstock,
+              price: req.body.artisan_price,
+              pic_product: {
+                path: req.file.path,
+                size: req.file.size,
+              },
+            });
+          });
+          db.collection('couters').findAndModify(
+            {
+              _id: 'p_etc',
+            },
+            {},
+            { $inc: { seq: 1 } },
+            { new: true, upsert: true },
+
+            function (err, docs) {
+              console.log(docs);
+            }
+          );
         }
       }
     );

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NoobStore</title>
+    <!-- Meta tag -->
+    <% include ./../tips/subs/meta %>
+    <!-- Loading effect -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/effect/preload/preload-signal.css"
+    />
+    <!-- Library -->
+    <link rel="stylesheet" href="/share/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css"
+    />
+    <!-- Base css -->
+    <link rel="stylesheet" type="text/css" href="/api/css/base/font.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/main.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/footer.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/base/breadcrumb.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/navbar.css" />
+    <!-- Customize CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/effect/rgb-wrapper/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/pcss/cartPage/style.css"
+    />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
+
+    <script src="/api/js/pjs/modernizr.js"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <% include ./../tips/subs/sample-navbar %> <% include
+      ./../tips/subs/sample-breadcrumb %>
+      <div class="container w-100 h-100 col-12 col-md-12 py-4">
+        <h1 class="text-center">Cart</h1>
+
+        <div class="w-100">
+          <% const currentCart = localStorage.getItem('cart') ?
+          JSON.parse(localStorage.getItem('cart')) : []; let totalItem =
+          currentCart.length > 0 ?
+          currentCart.map((item)=>item.product_quantity).reduce((prev, start) =>
+          prev + start) : 0; let subTotal = 0; if(currentCart.length > 0){
+          subTotal +=
+          currentCart.map((item)=>item.product_price*item.product_quantity).reduce((prev,
+          start) => prev + start) } let tax = 0; let discount = 0; const rates =
+          { EUR: 0.8, GBP: 0.7, USD: 1, VND: 24000, } %> <%
+          if(currentCart.length != 0){ %>
+          <hr />
+          <table class="w-100" id="table-cart">
+            <thead>
+              <th class="fs-4">Product</th>
+              <th class="th-price fs-4">Price</th>
+              <th class="th-quantity text-center fs-4">Quantity</th>
+              <th class="th-total text-end fs-4">Total</th>
+            </thead>
+            <tbody>
+              <% for (var i = 0; i < currentCart.length; i++) { -%>
+              <tr>
+                <td>
+                  <div class="item-details d-flex w-100">
+                    <div class="item-image">
+                      <img
+                        onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found_768.png'"
+                        src="/api/<%= currentCart[i].product_image%>"
+                      />
+                      <span class="item-quantity"
+                        ><%= currentCart[i].product_quantity%></span
+                      >
+                    </div>
+                    <div class="d-flex flex-column justify-content-center ps-2">
+                      <div class="w-100 fw-bold fs-5">
+                        <a
+                          href="/shop/product/<%= currentCart[i].product_url%>"
+                          target="_blank"
+                          ><%= currentCart[i].product_name%></a
+                        >
+                      </div>
+                      <div>Product type: <%= currentCart[i].product_type%></div>
+                      <div class="form-underline"></div>
+                      <a
+                        class="remove-item-cart"
+                        data-id="<%= currentCart[i].product_id%>"
+                        href="#"
+                        >Remove</a
+                      >
+                    </div>
+                  </div>
+                </td>
+                <td class="item-price">
+                  <%= new Intl.NumberFormat('en-IN', {style: 'currency',
+                  currency: 'USD'}).format(currentCart[i].product_price) %>
+                  <button
+                    class="btn-popup-mobile text-uppercase"
+                    data-id="<%=i%>"
+                  >
+                    <span>Edit</span>
+                    <span class="d-none">Cancel</span>
+                  </button>
+                </td>
+                <td class="td-quantity text-center">
+                  <button data-id="<%=i%>" data-type="subtract">-</button>
+                  <input
+                    readonly
+                    class="input-quantity_<%=i%>"
+                    min="1"
+                    type="number"
+                    value="<%= currentCart[i].product_quantity%>"
+                  />
+                  <button data-id="<%=i%>" data-type="plus">+</button>
+                </td>
+                <td class="item-total-price">
+                  <%= new Intl.NumberFormat('en-IN', {style: 'currency',
+                  currency: 'USD'}).format(currentCart[i].product_price *
+                  currentCart[i].product_quantity) %>
+                </td>
+              </tr>
+              <tr class="separator" colspan="2"></tr>
+              <tr class="cart-edit-mobile">
+                <td colspan="3">
+                  <div
+                    id="popup-edit-mobile_<%=i%>"
+                    class="d-none justify-content-between"
+                  >
+                    <button
+                      class="btn-remove-item"
+                      data-id="<%= currentCart[i].product_id%>"
+                    >
+                      remove
+                    </button>
+                    <div class="element-group-quantity">
+                      <button data-id="<%=i%>" data-type="subtract">-</button>
+                      <input
+                        readonly
+                        class="input-quantity_<%=i%>"
+                        min="1"
+                        type="number"
+                        value="<%= currentCart[i].product_quantity%>"
+                      />
+                      <button data-id="<%=i%>" data-type="plus">+</button>
+                    </div>
+                    <button class="btn-update-cart">update</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="separator" colspan="2"></tr>
+              <% } -%>
+            </tbody>
+          </table>
+          <hr class="mt-0" />
+          <div id="cart-calc-payment" class="w-100">
+            <div class="d-flex justify-content-end">
+              <span>Subtotal</span>
+              <span class="ps-5">
+                <% currentCart.length > 0 ? subTotal : 0%> <%= new
+                Intl.NumberFormat('en-IN', {style: 'currency', currency:
+                'USD'}).format(subTotal) %> ~ <%= new Intl.NumberFormat('vi-VN',
+                {style: 'currency', currency: 'VND'}).format(subTotal*rates.VND)
+                %>
+              </span>
+            </div>
+            <div class="d-flex justify-content-end mb-4">
+              Taxes and <a class="px-1" href="">shipping</a> calculated at
+              checkout
+            </div>
+            <div class="d-flex">
+              <a href="/shop">Continue shopping</a>
+              <button class="btn-update">Update</button>
+              <a href="/cart/delivery-information">Check out</a>
+            </div>
+          </div>
+          <%}else{%>
+          <div id="empty-cart" class="text-center">
+            <div class="fs-5">Your cart is currently empty</div>
+            <div class="d-flex justify-content-center fs-5">
+              <a href="/shop"
+                >continue shopping <i class="las la-long-arrow-alt-right"></i
+              ></a>
+            </div>
+          </div>
+          <%}%>
+        </div>
+      </div>
+    </div>
+    <%include ./../tips/subs/sample-footer%>
+  </body>
+  <script src="/share/jquery/jquery-3.6.0.min.js"></script>
+  <script src="/share/popperjs/popper.min.js"></script>
+  <script src="/share/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/api/js/pjs/main.js"></script>
+  <script src="/api/js/pjs/product/cartPage/js.js"></script>
+</html>

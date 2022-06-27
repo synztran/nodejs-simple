@@ -1,80 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
     <title>Sign Up</title>
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="keywords" content="NoobStore Teamplate" />
-    <meta name="description" content="NoobStore" />
-    <meta name="author" content="NoobTeam" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
-
-    <link
-      rel="shortcut icon"
-      href="https://noobstore.xyz/favicon/white_logo.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="https://noobstore.xyz/favicon/white_logo.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="70x30"
-      href="https://noobstore.xyz/favicon/white_logo.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="110x70"
-      href="https://noobstore.xyz/favicon/white_logo.png"
-    />
-
-    <meta property="og:title" content="NOOBSTORE" />
-    <meta property="og:description" content="Welcome to NoobStore" />
-    <meta
-      property="og:image"
-      content="https://noobstore.xyz/favicon/big_logo.png"
-    />
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="https://noobstore.xyz" />
-    <meta property="og:url" content="https://noobstore.xyz" />
-    <meta property="og:image:width" content="480" />
-    <meta property="og:image:height" content="432" />
-    <!--=== css ===-->
+    <!-- Meta -->
+    <% include ./../tips/subs/meta %>
+    <!-- Loading effect -->
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      type="text/css"
+      href="/api/css/effect/preload/preload-signal.css"
     />
-    <link rel="stylesheet" href="/api/css/pcss/main.css" />
-    <link rel="stylesheet" href="/api/css/effect/navbar.css" />
-    <link rel="stylesheet" href="/api/css/effect/typing-text.css" />
-    <link rel="stylesheet" href="/api/css/pcss/customize.css" />
+    <!-- Library -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/share/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/package/waitMe/waitMe.min.css" />
+    <!-- Base css -->
+    <link rel="stylesheet" type="text/css" href="/api/css/base/font.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/main.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/footer.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/base/breadcrumb.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/navbar.css" />
+    <!-- Customize CSS -->
     <link
       rel="stylesheet"
       type="text/css"
       href="/api/css/effect/rgb-wrapper/style.css"
     />
+    <link rel="stylesheet" href="/api/css/effect/typing-text.css" />
     <link
       rel="stylesheet"
       type="text/css"
       href="/api/css/pcss/registerPage/style.css"
-    />
-    <link rel="stylesheet" type="text/css" href="/api/css/breadcrumb.css" />
-    <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css" />
-    <link rel="stylesheet" type="text/css" href="/api/css/effect/preload.css" />
-    <link rel="stylesheet" href="/package/waitMe/waitMe.min.css" />
-    <!--=== font ===-->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/api/css/pcss/line-awesome-1.3.0/css/line-awesome.min.css"
     />
     <!--=== script ===-->
     <script src="/api/js/pjs/modernizr.js"></script>
@@ -83,256 +47,264 @@
     <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
   </head>
+  <style>
+    .abcRioButtonLightBlue {
+      width: 100% !important;
+    }
+  </style>
 
-  <body id="top">
-    <!--=== preloader ===-->
-    <% include ./../tips/subs/preload %>
-    <!--=== Navbar ===-->
-    <% include ./../tips/subs/navbar %>
-    <!--=== </header> ===-->
-    <% include ./../tips/subs/breadcrumb %>
+  <body>
+    <% include ./../tips/effect/preload-signal %> <% include
+    ./../tips/subs/sample-navbar %> <% include
+    ./../tips/subs/sample-breadcrumb%>
     <div class="main-container">
-      <div class="row justify-content-center">
+      <div class="row">
         <div
-          class="d-flex col-md-12"
-          style="min-height: 750px; max-height: 100%"
+          class="d-flex col-md-12 g-3 justify-content-between"
+          style="min-height: 650px; max-height: 100%"
         >
-          <div class="col-md-7 col-xs-12 container-banner">
+          <div class="col-md-7 col-xs-12 px-4 container-banner">
             <div class="login-banner"></div>
           </div>
-          <div class="col-md-5 col-xs-12 container-form">
-            <div class="d-flex w-100 tabs-customize">
-              <span id="tab-sign-in" class="w-100 text-center active-tab mx-4"
-                ><a href="#" class="text-decoration-none"
-                  >Existing user</a
-                ></span
-              >
-              <span
-                class="w-1"
-                style="border: 1px solid var(--title-color)"
-              ></span>
-              <span id="tab-reg" class="w-100 text-center mx-4"
-                ><a href="#" class="text-decoration-none">New user</a></span
-              >
+          <div class="col-md-5 col-xs-12 px-4 container-form">
+            <div class="rainbow">
+              <span></span>
+              <span></span>
             </div>
-            <!-- login form -->
-            <div class="login-form">
-              <div class="d-flex justify-content-center title my-3">
-                <h2 class="effect-typing-text-sign-in">Sign in</h2>
+            <div id="form-group-container">
+              <div class="d-flex w-100 tabs-customize">
+                <span id="tab-sign-in" class="w-100 text-center active-tab mx-4"
+                  ><a href="#" class="text-decoration-none"
+                    >Existing user</a
+                  ></span
+                >
+                <span
+                  class="w-1"
+                  style="border: 1px solid var(--title-color)"
+                ></span>
+                <span id="tab-reg" class="w-100 text-center mx-4"
+                  ><a href="#" class="text-decoration-none">New user</a></span
+                >
               </div>
-              <div class="authentication-button">
-                <a class="facebook-button btn-outline" href="#">
-                  <div class="btn-facebook-cover text-center">
-                    <span class="name">Login with Facebook</span>
-                  </div>
-                </a>
-                <br />
-                <a class="google-button" href="#">
-                  <div class="btn-google-cover text-center">
-                    <span class="name">Login with Google</span>
-                  </div>
-                </a>
-              </div>
-              <div class="separator">Or</div>
-              <form
-                id="form-login"
-                class="form-not-mg"
-                autocomplete="on"
-                method="post"
-              >
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="emailHelp"
-                      ><i class="las la-envelope la-2x"></i
-                    ></span>
-                    <input
-                      autocomplete="on"
-                      type="email"
-                      name="email"
-                      class="form-control"
-                      id="email"
-                      value=""
-                      aria-describedby="emailHelp"
-                      placeholder="Email"
-                      aria-label="Email"
-                      required
-                    />
-                  </div>
-                  <small id="emailHelp" class="form-text text-muted"
-                    >We'll never share your email with anyone else.</small
-                  >
+              <!-- login form -->
+              <div class="login-form">
+                <div class="d-flex justify-content-center title my-3">
+                  <h2 class="effect-typing-text-sign-in">Sign in</h2>
                 </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text" id="pwHelp"
-                      ><i class="las la-lock la-2x"></i
-                    ></span>
-                    <input
-                      autocomplete="on"
-                      type="password"
-                      name="password"
-                      class="form-control"
-                      id="password"
-                      placeholder="Password"
-                      aria-describedby="pwHelp"
-                      aria-label="Password"
-                      required
-                    />
-                    <span
-                      id="sign_eye-pw__show"
-                      class="input-group-text"
-                      style="cursor: pointer"
-                      data-visible="visible"
-                      ><i class="las la-eye-slash la-2x"></i
-                    ></span>
-                    <span
-                      id="sign_eye-pw__hide"
-                      class="input-group-text hide-pw"
-                      style="cursor: pointer"
-                      data-visible="hidden"
-                      ><i class="las la-eye la-2x"></i
-                    ></span>
-                  </div>
-                  <div class="float-right forgot-pw position-relative">
-                    <a href="#">Forgot password?</a>
-                  </div>
+                <!-- <div class="authentication-button">
+                  <a class="facebook-button btn-outline" href="#">
+                    <div class="btn-facebook-cover text-center">
+                      <span class="name">Login with Facebook</span>
+                    </div>
+                  </a>
+                  <br />
+                  <a class="google-button" href="#">
+                    <div class="btn-google-cover text-center">
+                      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    </div>
+                  </a>
                 </div>
-                <div class="btn-area">
-                  <button type="submit" id="btn-sign-in" class="btn-login">
-                    Login
-                  </button>
-                </div>
-              </form>
-            </div>
-            <!-- reg-form -->
-            <div class="reg-form d-none">
-              <div class="d-flex justify-content-center my-3 title">
-                <h2 class="effect-typing-text-reg">Register</h2>
-              </div>
-              <form class="form-not-mg" id="form-register" method="POST">
-                <div class="form-group d-flex">
-                  <div class="mr-2 w-100">
-                    <label for="fname">First name</label>
-                    <input
-                      type="text"
-                      name="fname"
-                      class="form-control"
-                      id="fnam"
-                      aria-describedbsy="fnamelHelp"
-                      placeholder="First name"
-                    />
-                  </div>
-                  <div class="ml-2 w-100">
-                    <label for="lname">Last name</label>
-                    <input
-                      type="text"
-                      name="lname"
-                      class="form-control"
-                      id="lname"
-                      aria-describedbsy="lnameHelp"
-                      placeholder="Last name"
-                    />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="reg_email">Email</label>
+                <div class="separator">Or</div> -->
+                <form
+                  id="form-login"
+                  class="form-not-mg"
+                  autocomplete="on"
+                  method="post"
+                >
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-group mb-3 align-items-end">
+                      <span class="input-group-text" id="emailHelp"
+                        ><i class="las la-envelope la-2x"></i
+                      ></span>
                       <input
+                        autocomplete="on"
                         type="email"
                         name="email"
                         class="form-control"
-                        id="reg_email"
+                        id="email"
+                        value=""
+                        aria-describedby="emailHelp"
                         placeholder="Email"
+                        aria-label="Email"
+                        required
                       />
-                      <small id="Help" class="form-text text-muted">
-                        Ideally, you should register your email with paypal
-                        email
-                      </small>
                     </div>
-                    <div class="form-group">
-                      <label for="reg_password">Password</label>
-                      <div class="input-group">
+                    <small id="emailHelp" class="form-text text-muted"
+                      >We'll never share your email with anyone else.</small
+                    >
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group mb-3 align-items-end">
+                      <span class="input-group-text" id="pwHelp"
+                        ><i class="las la-lock la-2x"></i
+                      ></span>
+                      <input
+                        autocomplete="on"
+                        type="password"
+                        name="password"
+                        class="form-control"
+                        id="password"
+                        placeholder="Password"
+                        aria-describedby="pwHelp"
+                        aria-label="Password"
+                        required
+                      />
+                      <span
+                        id="sign_eye-pw__show"
+                        class="input-group-text"
+                        style="cursor: pointer"
+                        data-visible="visible"
+                        ><i class="las la-eye-slash la-2x"></i
+                      ></span>
+                      <span
+                        id="sign_eye-pw__hide"
+                        class="input-group-text hide-pw"
+                        style="cursor: pointer"
+                        data-visible="hidden"
+                        ><i class="las la-eye la-2x"></i
+                      ></span>
+                    </div>
+                    <div class="forgot-pw position-relative">
+                      <a href="/reset-password">Forgot password?</a>
+                    </div>
+                  </div>
+                  <div class="btn-area">
+                    <button type="submit" id="btn-sign-in" class="btn-login">
+                      Login
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <!-- reg-form -->
+              <div class="reg-form d-none">
+                <div class="d-flex justify-content-center my-3 title">
+                  <h2 class="effect-typing-text-reg">Register</h2>
+                </div>
+                <form class="form-not-mg" id="form-register" method="POST">
+                  <div class="form-group d-flex">
+                    <div class="mr-2 w-100">
+                      <label for="fname">First name</label>
+                      <input
+                        type="text"
+                        name="fname"
+                        class="form-control"
+                        id="fnam"
+                        aria-describedbsy="fnamelHelp"
+                        placeholder="First name"
+                      />
+                    </div>
+                    <div class="ml-2 w-100">
+                      <label for="lname">Last name</label>
+                      <input
+                        type="text"
+                        name="lname"
+                        class="form-control"
+                        id="lname"
+                        aria-describedbsy="lnameHelp"
+                        placeholder="Last name"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="reg_email">Email</label>
                         <input
-                          type="password"
-                          name="password"
+                          type="email"
+                          name="email"
                           class="form-control"
-                          id="reg_password"
-                          placeholder="Password"
+                          id="reg_email"
+                          placeholder="Email"
                         />
-                        <span
-                          id="eye-pw_show"
-                          class="input-group-text"
-                          style="cursor: pointer"
-                          data-visible="visible"
-                          ><i class="las la-eye-slash la-2x"></i
-                        ></span>
-                        <span
-                          id="eye-pw_hide"
-                          class="input-group-text hide-pw"
-                          style="cursor: pointer"
-                          data-visible="hidden"
-                          ><i class="las la-eye la-2x"></i
-                        ></span>
+                        <small id="Help" class="form-text text-muted">
+                          Ideally, you should register your email with paypal
+                          email
+                        </small>
                       </div>
-                      <small
-                        id="passwordHelp"
-                        class="form-text text-muted mt-2"
-                      >
-                        Add 9 charachters or more, lowercase letters, uppercase
-                        letters, numbers and symbols to make the password really
-                        strong!
-                      </small>
-                    </div>
-                    <div class="form-group">
-                      <label for="re_password">Confirm Password</label>
-                      <div class="input-group">
-                        <input
-                          type="password"
-                          name="re_password"
-                          class="form-control"
-                          id="re_password"
-                          placeholder="Re-Password"
-                          type="password"
-                        />
-                        <span
-                          style="cursor: pointer"
-                          id="eye-pw-confirm_show"
-                          class="input-group-text"
-                          data-visible="visible"
-                          ><i class="las la-eye-slash la-2x"></i
-                        ></span>
-                        <span
-                          style="cursor: pointer"
-                          id="eye-pw-confirm_hide"
-                          data-visible="hidden"
-                          class="input-group-text hide-pw"
-                          ><i class="las la-eye la-2x"></i
-                        ></span>
+                      <div class="form-group">
+                        <label for="reg_password">Password</label>
+                        <div class="input-group">
+                          <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            id="reg_password"
+                            placeholder="Password"
+                          />
+                          <span
+                            id="eye-pw_show"
+                            class="input-group-text"
+                            style="cursor: pointer"
+                            data-visible="visible"
+                            ><i class="las la-eye-slash la-2x"></i
+                          ></span>
+                          <span
+                            id="eye-pw_hide"
+                            class="input-group-text hide-pw"
+                            style="cursor: pointer"
+                            data-visible="hidden"
+                            ><i class="las la-eye la-2x"></i
+                          ></span>
+                        </div>
+                        <small
+                          id="passwordHelp"
+                          class="form-text text-muted mt-2"
+                        >
+                          Add 9 charachters or more, lowercase letters,
+                          uppercase letters, numbers and symbols to make the
+                          password really strong!
+                        </small>
+                      </div>
+                      <div class="form-group">
+                        <label for="re_password">Confirm Password</label>
+                        <div class="input-group">
+                          <input
+                            type="password"
+                            name="re_password"
+                            class="form-control"
+                            id="re_password"
+                            placeholder="Re-Password"
+                            type="password"
+                          />
+                          <span
+                            style="cursor: pointer"
+                            id="eye-pw-confirm_show"
+                            class="input-group-text"
+                            data-visible="visible"
+                            ><i class="las la-eye-slash la-2x"></i
+                          ></span>
+                          <span
+                            style="cursor: pointer"
+                            id="eye-pw-confirm_hide"
+                            data-visible="hidden"
+                            class="input-group-text hide-pw"
+                            ><i class="las la-eye la-2x"></i
+                          ></span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="form-group col-md-12">
-                  <div
-                    class="g-recaptcha"
-                    data-sitekey="6Lexz1YUAAAAAJZknL3EkeY_xBlIKGKGfGwFHhjK"
-                  ></div>
-                </div>
-                <div class="btn-area">
-                  <button type="button" id="btn-reg" class="btn-register">
-                    Register
-                  </button>
-                </div>
-              </form>
+                  <div class="form-group col-md-12">
+                    <div
+                      class="g-recaptcha"
+                      data-sitekey="6Lexz1YUAAAAAJZknL3EkeY_xBlIKGKGfGwFHhjK"
+                    ></div>
+                  </div>
+                  <div class="btn-area mb-1">
+                    <button type="button" id="btn-reg" class="btn-register">
+                      Register
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <footer>
+    <!-- <footer>
       <div class="col-full ss-copyright">
         <span>© Copyright NoobStore 2017</span>
         <span
@@ -340,8 +312,9 @@
           <a href="https://www.facebook.com/noobassembly">Noob Team</a></span
         >
       </div>
-    </footer>
+    </footer> -->
   </body>
+  <%include ./../tips/subs/sample-footer%>
   <script src="/share/jquery/jquery-3.6.0.min.js"></script>
   <script src="/share/bootstrap/js/bootstrap.min.js"></script>
   <script src="/share/slickjs/slick.min.js"></script>
@@ -350,5 +323,7 @@
   <script src="/share/google-capcha/api.js"></script>
   <script src="/share/sweetalert/sweetalert2@9.js"></script>
   <script src="/api/js/pjs/product/registerPage/js.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script type="text/javascript" src="/package/waitMe/waitMe.min.js"></script>
+  <script src="/api/js/base/init.js"></script>
 </html>

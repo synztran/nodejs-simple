@@ -1,0 +1,48 @@
+ <% if(Category){%>
+<div id="aspect-content" class="mt-4">
+    <% for (var i = 0; i < 4; i++) { %>
+    <div id="collapse-tab_<%=i%>" class="aspect-tab" tab-id="<%=i%>">
+        <input id="item-<%=i%>" type="checkbox" class="aspect-input" name="aspect">
+        <label for="item-<%=i%>" class="aspect-label"></label>
+        <div class="aspect-content">
+            <div class="aspect-stat">
+                <div class="all-opinions">
+                    <span class="all-opinions-count mr-auto"> 
+
+                        <% if(i===0){%>
+                        <i class="las la-stream"></i>&nbsp;Details 
+                        <% }else if (i===1){%>
+                         <i class="las la-calendar"></i>&nbsp;Timeline 
+                        <% }else if(i===2){%>
+                         <i class="las la-file-alt"></i>&nbsp;Specs
+                        <% }else{%>
+                         <i class="las la-tag"></i>&nbsp;Price
+                        <% }%>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="aspect-tab-content">
+            <div class="sentiment-wrapper">
+                    <div>
+                        <div class="positive-count opinion-header">
+                            <span>
+                                <% if(i==0){ %>
+                                <%- Category.summary_content %>
+                                <%}else if(i==1){%>
+                                <%- Category.time_line%>
+                                <%}else if(i==2){%>
+                                 <%- Category.specs %>
+                                <%}else{ %>
+                                <%- Category.price_content %>
+                                <%}%>
+                            </span>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+  
+</div>
+<%}%>

@@ -1,70 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
     <title>Shop</title>
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="keywords" content="NoobStore Teamplate" />
-    <meta name="description" content="NoobStore" />
-    <meta name="author" content="NoobTeam" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1"
-    />
-
+    <% include ./../tips/subs/meta %>
+    <!-- Loading effect -->
     <link
-      rel="shortcut icon"
-      href="https://noobstore.xyz/favicon/white_logo.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="https://noobstore.xyz/favicon/white_logo.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="70x30"
-      href="https://noobstore.xyz/favicon/white_logo.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="110x70"
-      href="https://noobstore.xyz/favicon/white_logo.png"
-    />
-
-    <meta property="og:title" content="NOOBSTORE" />
-    <meta property="og:description" content="Welcome to NoobStore" />
-    <meta
-      property="og:image"
-      content="https://noobstore.xyz/favicon/big_logo.png"
-    />
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="https://noobstore.xyz" />
-    <meta property="og:url" content="https://noobstore.xyz" />
-    <meta property="og:image:width" content="480" />
-    <meta property="og:image:height" content="432" />
-    <!--=== google fornt ===-->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700"
       rel="stylesheet"
       type="text/css"
+      href="/api/css/effect/preload/preload-signal.css"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <!--=== mobile specific metas ===-->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--=== CSS === -->
+    <!-- Library -->
     <link rel="stylesheet" href="share/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/api/css/pcss/main.css" />
-    <link rel="stylesheet" href="/api/css/effect/navbar.css" />
-    <link rel="stylesheet" href="/api/css/effect/preloading.css" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="product/css/proxypage/style.css"
-    />
     <link
       rel="stylesheet"
       href="/product/css/font-awesome/css/fontawesome-all.min.css"
@@ -80,7 +26,22 @@
       type="text/css"
       href="/package/slick/slick-theme.css"
     />
-    <!-- <link rel="stylesheet" type="text/css" href="/api/css/pcss/proxypage/product_card.css"> -->
+    <!-- Base css -->
+    <link rel="stylesheet" type="text/css" href="/api/css/base/font.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/main.css" />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/footer.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/api/css/base/breadcrumb.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/api/css/base/navbar.css" />
+    <!-- Customize CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="product/css/proxypage/style.css"
+    />
     <link
       rel="stylesheet"
       type="text/css"
@@ -91,9 +52,7 @@
       type="text/css"
       href="/api/css/effect/rgb-wrapper/style.css"
     />
-    <link rel="stylesheet" type="text/css" href="/api/css/breadcrumb.css" />
     <link rel="stylesheet" type="text/css" href="/api/css/custom-fixed.css" />
-    <link rel="stylesheet" type="text/css" href="/api/css/effect/preload.css" />
     <!--=== script === -->
     <script src="/api/js/pjs/modernizr.js"></script>
     <!--=== favicons === -->
@@ -107,24 +66,12 @@
       padding: 0px;
       box-sizing: border-box;
     }
-
-    /* nav.navbar {
-      z-index: 10;
-      position: sticky;
-      top: 0;
-      background-image: url('/api/docs/background/UIBkAT.jpg');
-      background-repeat: no-repeat;
-    } */
-    .bg-dark {
-      background-color: transparent !important;
-    }
     .row:first-child > .col-md-12 {
       display: flex;
     }
     .row {
       height: unset;
       position: relative;
-      top: 5%;
     }
     .btn-submit {
       border-radius: 50px;
@@ -140,172 +87,153 @@
   </style>
 
   <body id="top">
-    <div id="preloader">
-      <div id="loader">
-        <div id="circle"></div>
-        <div class="line left"></div>
-        <div class="line right"></div>
-        <div class="bracket left"></div>
-        <div class="bracket right"></div>
-        <div class="small top"><span class="upper">N</span>OOB</div>
-        <div id="big">Welcome</div>
-        <div class="small bottom"><span class="upper">S</span>tore</div>
-        <div class="hide top"></div>
-        <div class="hide bottom"></div>
-      </div>
-    </div>
-    <% include ./../tips/subs/navbar %> <% include ./../tips/subs/breadcrumb %>
-    <main class="main row">
-      <div class="col-xl-3 col-lg-3 col-md-2 sidebar-area">
-        <!-- <sidebar class="sidebar"> </sidebar> -->
-      </div>
-      <div class="col-xl-9 col-lg-9 col-md-12">
-        <div class="title-li">
-          <p class="font-hello_jones">Shop</p>
-          <hr style="opacity: unset" />
+    <% include ./../tips/effect/preload-signal %> <% include
+    ./../tips/subs/sample-navbar %>
+    <div class="main">
+      <% include ./../tips/subs/sample-breadcrumb%>
+      <div style="padding-bottom: 5rem" class="container d-flex pt-4">
+        <div class="col-xl-3 col-lg-3 col-md-2 sidebar-area">
+          <!-- <sidebar class="sidebar"> </sidebar> -->
         </div>
-        <% if(listCategory != null) { %>
-        <article class="row">
-          <% listCategory.forEach(function(item, key){%>
-          <div
-            data-aos="fade-up"
-            class="col-xxl-3 col-xl-4 col-lg-4 col-md-4 col-sm-6 col-product"
-          >
-            <div class="product-card-container">
-              <div class="card-product u-clearfix">
-                <div class="product-card-body">
-                  <div class="card_status-container">
-                    <% if(item.status_gb == 0){ %>
-                    <p class="product-status status-end">sale end</p>
-                    <% }else if(item.status_gb == 1){ %>
-                    <p class="product-status status-ic">Interest Check</p>
-                    <% }else if(item.status_gb == 2){ %>
-                    <p class="product-status status-live">On Sale</p>
-                    <% }else { %> <% } %>
-                  </div>
-                  <div class="card-img">
-                    <a href="/shop/product/<%= item.category_url_name%>">
+        <div class="col-xl-9 col-lg-9 col-md-12">
+          <div class="title-li">
+            <p style="color: var(--main-color)">Shop</p>
+            <hr style="opacity: unset" />
+          </div>
+          <% if(listCategory != null) { %>
+          <article class="row">
+            <% listCategory.forEach(function(item, key){%>
+            <div
+              data-aos="fade-up"
+              class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 col-product"
+            >
+              <div class="product-card-container">
+                <div class="card-product u-clearfix">
+                  <div class="product-card-body">
+                    <div class="card_status-container">
                       <% if(item.status_gb == 0){ %>
-                      <div class="ribbon up">
-                        <div class="glow">&nbsp;</div>
-                        <div class="content content-end">
-                          <svg
-                            width="24px"
-                            height="24px"
-                            aria-hidden="true"
-                            focusable="false"
-                            data-prefix="fas"
-                            data-icon="times"
-                            class="svg-inline--fa fa-times fa-w-11"
-                            role="img"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 352 512"
-                          >
-                            <path
-                              fill="currentColor"
-                              d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
-                            ></path>
-                          </svg>
-                        </div>
-                      </div>
+                      <p class="product-status status-end">sale end</p>
                       <% }else if(item.status_gb == 1){ %>
-                      <div class="ribbon">
-                        <div class="glow">&nbsp;</div>
-                        <div class="content content-ic">
-                          <svg
-                            width="24px"
-                            height="24px"
-                            aria-hidden="true"
-                            focusable="false"
-                            data-prefix="far"
-                            data-icon="star"
-                            class="svg-inline--fa fa-star fa-w-18"
-                            role="img"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 576 512"
-                          >
-                            <path
-                              fill="currentColor"
-                              d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z"
-                            ></path>
-                          </svg>
+                      <p class="product-status status-ic">Interest Check</p>
+                      <% }else if(item.status_gb == 2){ %>
+                      <p class="product-status status-live">On Sale</p>
+                      <% }else { %> <% } %>
+                    </div>
+                    <div class="card-img">
+                      <a href="/shop/product/<%= item.category_url_name%>">
+                        <% if(item.status_gb == 0){ %>
+                        <div class="ribbon up">
+                          <div class="glow">&nbsp;</div>
+                          <div class="content content-end">
+                            <svg
+                              width="24px"
+                              height="24px"
+                              aria-hidden="true"
+                              focusable="false"
+                              data-prefix="fas"
+                              data-icon="times"
+                              class="svg-inline--fa fa-times fa-w-11"
+                              role="img"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 352 512"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                        <% }else if(item.status_gb == 1){ %>
+                        <div class="ribbon">
+                          <div class="glow">&nbsp;</div>
+                          <div class="content content-ic">
+                            <svg
+                              width="24px"
+                              height="24px"
+                              aria-hidden="true"
+                              focusable="false"
+                              data-prefix="far"
+                              data-icon="star"
+                              class="svg-inline--fa fa-star fa-w-18"
+                              role="img"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 576 512"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z"
+                              ></path>
+                            </svg>
+                          </div>
+                        </div>
+                        <% }else if(item.status_gb == 2){ %>
+                        <div class="ribbon down">
+                          <div class="glow">&nbsp;</div>
+                          <div class="content content-on">🕓</div>
+                        </div>
+                        <% }else { %> <% } %>
+                        <img
+                          onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found_768.png'"
+                          src="/api/<%= item.pic_profile.path %>"
+                          alt=""
+                          class="product-card-media img-fix-scale"
+                          width="300"
+                          height="300"
+                        />
+                      </a>
+                      <% if(item.category_id == ePID){ %>
+                      <div class="status-product-container">
+                        <div class="status-product">
+                          <div class="js-timer u-timer d-flex"></div>
                         </div>
                       </div>
-                      <% }else if(item.status_gb == 2){ %>
-                      <div class="ribbon down">
-                        <div class="glow">&nbsp;</div>
-                        <div class="content content-on">🕓</div>
-                      </div>
-                      <% }else { %> <% } %>
-                      <img
-                        onerror="this.onerror=null; this.src='/api/docs/trash/image-not-found_768.png'"
-                        src="/api/<%= item.pic_profile.path %>"
-                        alt=""
-                        class="product-card-media img-fix-scale"
-                        width="300"
-                        height="300"
-                      />
-                    </a>
-                    <% if(item.category_id == ePID){ %>
-                    <div class="status-product-container">
-                      <div class="status-product">
-                        <div class="js-timer u-timer d-flex"></div>
-                      </div>
+                      <%}else{%> <%}%>
                     </div>
-                    <%}else{%> <%}%>
-                  </div>
-                  <div class="product-info">
-                    <span class="product-card-description subtle">
-                      <%= item.category_name %></span
-                    >
-                    <span class="product-card_product-name subtle">
-                      <%= item.product_belong %></span
-                    >
-                    <div class="product-card-read">
-                      <a href="/shop/product/<%=item.category_url_name %>"
-                        >more</a
+                    <div class="product-info">
+                      <span class="product-card-description subtle">
+                        <%= item.category_name %></span
                       >
-                    </div>
-                    <a
-                      href="#"
-                      class="product-card-tag subtle product-price text-decorate-none for-device"
-                      id="product_price_<%=key%>"
-                      data-toggle="tooltip"
-                      title=""
-                    ></a>
+                      <span class="product-card_product-name subtle">
+                        <%= item.product_belong %></span
+                      >
+                      <div class="product-card-read">
+                        <a href="/shop/product/<%=item.category_url_name %>"
+                          >more</a
+                        >
+                      </div>
+                      <a
+                        href="#"
+                        class="product-card-tag subtle product-price text-decorate-none for-device"
+                        id="product_price_<%=key%>"
+                        data-toggle="tooltip"
+                        title=""
+                      ></a>
 
-                    <div
-                      class="hover-text product-card-tag subtle product-price hover-text text-right for-web"
-                    >
-                      $<%=item.min_price %> - $<%=item.max_price %>
-                      <span
-                        id="tooltip_price_<%=key%>"
-                        class="tooltip-text"
-                      ></span>
+                      <div
+                        class="hover-text product-card-tag subtle product-price hover-text text-right for-web"
+                      >
+                        $<%=item.min_price %> - $<%=item.max_price %>
+                        <span
+                          id="tooltip_price_<%=key%>"
+                          class="tooltip-text"
+                        ></span>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div class="product-card-shadow"></div>
               </div>
-              <div class="product-card-shadow"></div>
             </div>
-          </div>
-          <% }) %>
-        </article>
-        <% }else{ %> <% window.location.href = '/shop'; %> <% } %>
-      </div>
-      <footer>
-        <div class="col-full ss-copyright">
-          <span>© Copyright NoobStore 2017</span>
-          <span
-            >Design by
-            <a href="https://www.facebook.com/noobassembly">Noob Team</a></span
-          >
+            <% }) %>
+          </article>
+          <% }else{ %> <% window.location.href = '/shop'; %> <% } %>
         </div>
-      </footer>
-    </main>
-
-    <% include ./../tips/subs/botmessenger %>
+      </div>
+    </div>
   </body>
+  <%include ./../tips/subs/sample-footer%> <% include
+  ./../tips/subs/botmessenger %>
   <script src="/share/jquery/jquery-3.6.0.min.js"></script>
   <script src="/share/popperjs/popper.min.js"></script>
   <script

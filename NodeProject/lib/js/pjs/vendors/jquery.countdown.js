@@ -7,7 +7,6 @@
           url: '/time_event',
           // dataType: 'json',
           success: function(res) {
-              console.log(res)
               $('.js-timer').countdown(res, function(event) {
 
                   var $this = $(this).html(event.strftime('' +
