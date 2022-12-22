@@ -39,7 +39,7 @@
     "https": "^1.0.0",
     "i18n": "^0.13.2",
     "jsdom": "^15.2.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "method-override": "^3.0.0",
     "mime-types": "^2.1.25",
     "moment": "^2.29.1",
